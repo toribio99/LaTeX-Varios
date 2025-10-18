@@ -1,0 +1,106 @@
+\usepackage[T1]{fontenc}
+\usepackage[left=1cm, right=1cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage[spanish,es-tabla,es-noquoting]{babel}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{comment}
+\usepackage{verbatim}
+% =====================================================
+% PAQUETES  LIBRERIAS PARA GRÁFICAS
+% =====================================================
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor} % u otra opción
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{3d}
+\usetikzlibrary{babel, patterns, patterns.meta, arrows.meta, calc, positioning, shapes.geometric, shapes.misc, shapes.symbols, fadings, shadings, shadows, backgrounds}
+\usetikzlibrary{backgrounds}
+\tikzset{help lines/.style={very thin, draw=gray!30}}
+
+\usepackage{pgfplots}
+\usepackage{pgfmath} % LATEX
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{statistics,groupplots,fillbetween,dateplot}
+%\input pgfmath.tex % plain TEX
+%\usemodule[pgfmath] % ConTEXt
+\usepackage{dirtree}
+
+% =====================================================
+% COLORES PERSONALIZADOS (sin cambios)
+% =====================================================
+\definecolor{azulTitulo}{RGB}{0,51,102}
+\definecolor{verdeEjemplo}{RGB}{0,128,0}
+\definecolor{rojoError}{RGB}{178,34,34}
+\definecolor{fondoCodigo}{RGB}{248,248,248}
+\definecolor{comentario}{RGB}{0,128,0}
+\definecolor{keyword}{RGB}{0,0,255}
+\definecolor{string}{RGB}{163,21,21}
+
+% =====================================================
+% PLANO CARTESIANO #1 PARA GRÁFICAS
+% =====================================================
+
+\newcommand{\planoCartesiano}[4]{%
+	\begin{tikzpicture}
+		\begin{scope}[on background layer]
+			\fill[#1] (-#3,-#4) rectangle (#3,#4);
+		\end{scope}
+		
+		\begin{scope}
+			\draw[step=.25, draw = #2!25, line width =.3pt] (-#3,-#4) grid (#3,#4);  
+			\draw[<->, >=Stealth, ultra thick, #2] (0,-#4) -- (0,#4) ; 
+			\draw[<->, >=Stealth, ultra thick, #2] (-#3,0) -- (#3,0) ;
+			
+			% Marcas y números para eje X
+			\foreach \x in {1,2,...,#3}
+			{
+				\draw[black, thick] (\x,-0.1) -- (\x,0.1);
+				\node[black, below] at (\x,-0.3) {\x};
+			}
+			
+			\foreach \x in {-1,-2,...,-#3}
+			{
+				\draw[black, thick] (\x,-0.1) -- (\x,0.1);
+				\node[black, below] at (\x,-0.3) {\x};
+			}
+			
+			% Marcas y números para eje Y
+			\foreach \y in {1,2,...,#4}
+			{
+				\draw[black, thick] (-0.1,\y) -- (0.1,\y);
+				\node[black, left] at (-0.3,\y) {\y};
+			}
+			
+			\foreach \y in {-1,-2,...,-#4}
+			{
+				\draw[black, thick] (-0.1,\y) -- (0.1,\y);
+				\node[black, left] at (-0.3,\y) {\y};
+			}
+			
+			% Grid mayor (cada 1 unidad) - líneas más gruesas
+			\draw[step=1, draw = #2!50, line width =.5pt] (-#3,-#4) grid (#3,#4);
+			
+		\end{scope}
+	\end{tikzpicture}
+}
+
+% =====================================================
+% TÍTULO AUTOR
+% =====================================================
+\title{Aplicación Crear Gráficas Con Tikz-PGFPlots}
+\author{Toribio}
+
+
+% =====================================================
+% PARA LA VERIFICACIÓN RÁPIDA DEL CÓDIGO
+% =====================================================
+\usepackage{syntonly}
+%\syntaxonly  % Activa el modo solo-sintaxis

@@ -1,0 +1,15 @@
+
+Contenido que aparece o desaparece según configuración
+
+\begin{verbatim}
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor} % u otra opción
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{3d}
+\usetikzlibrary{babel, patterns, patterns.meta, arrows.meta, calc, positioning, shapes.geometric, shapes.misc, shapes.symbols, fadings, shadings, shadows, backgrounds}
+\usetikzlibrary{backgrounds}
+\tikzset{help lines/.style={very thin, draw=gray!30}}
+contenidos...
+\end{verbatim}

@@ -1,0 +1,21 @@
+\documentclass[12pt,a4paper]{article}
+
+\input{Preambulos/Preambulo_1/preambulo.tex}
+
+\includeonly{Cap_1/Cap_1.tex}
+
+% =====================================================
+% INICIO DEL DOCUMENTO
+% =====================================================
+\begin{document}
+	
+	\maketitle
+	\lipsum[1] \\[2mm]
+	
+	\tikz \draw (0,) -- (7,2);
+	
+	\tikz \draw (0,0) -- (7,2) -- (10,-3)  -- cycle; \\[2mm]
+	
+	\include{Cap_1/Cap_1.tex}
+
+\end{document}

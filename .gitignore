@@ -1,0 +1,29 @@
+# Archivos auxiliares de LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.idx
+*.ilg
+*.ind
+*.listing
+
+# PDFs (opcional - descomenta si quieres versionar PDFs)
+# *.pdf
+
+# Archivos de sistema
+.DS_Store
+*~
+*.swp
+__MACOSX/
+
+# Otros
+general.idx
+*.zip

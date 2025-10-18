@@ -1,0 +1,1831 @@
+\documentclass[12pt,a4paper]{article}
+
+% ========== PAQUETES ==========
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% Matemáticas
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% Tablas y colores
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+
+% Cajas y entornos destacados
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Listas y enumeraciones
+\usepackage{enumitem}
+
+% Código verbatim
+\usepackage{fancyvrb}
+
+% Gráficos (para logos, aunque no incluiremos imágenes)
+\usepackage{graphicx}
+
+% Enlaces
+\usepackage[hidelinks]{hyperref}
+
+% ========== CONFIGURACIÓN DE COLORES ==========
+\definecolor{azuloscuro}{RGB}{41,72,137}
+\definecolor{rojoclaro}{RGB}{220,80,80}
+\definecolor{verdeclaro}{RGB}{100,180,100}
+\definecolor{fondogris}{RGB}{240,240,240}
+\definecolor{fondorosa}{RGB}{255,230,240}
+\definecolor{fondoverde}{RGB}{230,255,240}
+\definecolor{fondoazul}{RGB}{230,240,255}
+
+% ========== COMANDOS PERSONALIZADOS ==========
+\newcommand{\seccion}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+
+% ========== TÍTULO DEL DOCUMENTO ==========
+\title{\textbf{Guía 82: Exploremos el mundo de los números reales}}
+\author{Fe y Alegría Colombia}
+\date{}
+
+% ========== INICIO DEL DOCUMENTO ==========
+\begin{document}
+
+% ========== PORTADA ==========
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+
+    {\Huge\textbf{CH-FyA-0498}}
+
+    \vspace{1cm}
+
+    {\LARGE Guía 82: Exploremos el mundo de los números reales}
+
+    \vspace{2cm}
+
+    {\Large Fe y Alegría Colombia}
+
+    \vfill
+
+    {\large Código: CH-FyA-0498}
+
+    \vspace{1cm}
+\end{titlepage}
+
+% ========== PÁGINA 2 - INFORMACIÓN ==========
+%%%\newpage
+\begin{center}
+    {\LARGE\textbf{GUÍA DEL ESTUDIANTE}}
+
+    \vspace{1cm}
+
+    {\Huge\textbf{EXPLOREMOS EL MUNDO DE\\LOS NÚMEROS REALES}}
+
+    \vspace{2cm}
+\end{center}
+
+\begin{flushright}
+    \begin{tabular}{c}
+        \textbf{N} \\[0.3cm]
+        \textbf{Z} \\[0.3cm]
+        \textbf{Q} \\[0.3cm]
+        \textbf{R}
+    \end{tabular}
+\end{flushright}
+
+\begin{flushright}
+    \fbox{\begin{minipage}{3cm}
+        \centering
+        \textit{Guía}\\
+        \textbf{82}\\
+        \textit{Meta 28}\\
+        \textbf{GRADO 9}
+    \end{minipage}}
+\end{flushright}
+
+% ========== PÁGINA 3 - CRÉDITOS ==========
+%%%\newpage
+\seccion{Guías de Aprendizaje de Cualificar Matemáticas\\Fe y Alegría Colombia}
+
+\subsection*{Fe y Alegría Colombia}
+\textbf{Víctor Murillo}\\
+Director Nacional
+
+\subsection*{Desarrollo de contenidos pedagógicos y educativos}
+Jaime Benjumea - Marcela Vega
+
+\subsection*{Autores de la guía 82}
+Erika Johanna García, I.E Monseñor Jaime Prieto Amaya\\
+Heidi Alejandra Jimenez Bermudez, Colegio Antonio Nariño
+
+\subsection*{Coordinación pedagógica}
+Francy Paola González Castelblanco\\
+Andrés Forero Cuervo\\
+GRUPO LEMA \url{www.grupolema.org}
+
+\subsection*{Revisores}
+Jaime Benjumea\\
+Rafael Eduardo Romero Zapata, I. E. D. Quinto Centenario\\
+Francy Paola González Castelblanco\\
+Andrés Forero Cuervo
+
+% ========== PÁGINA 4 - ESTRUCTURA Y METAS ==========
+%%%\newpage
+
+\begin{center}
+    \fbox{\begin{minipage}{3cm}
+        \centering
+        \textit{Guía}\\
+        \textbf{82}\\
+        \textbf{GRADO 9}
+    \end{minipage}}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+    {\Large\textbf{EXPLOREMOS EL MUNDO DE\\LOS NÚMEROS REALES}}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+\noindent\fbox{\parbox{\textwidth}{
+\centering
+\textbf{GRADO 9 - META 28 - PENSAMIENTO: Numérico Variacional}
+
+\vspace{0.3cm}
+
+\begin{tabular}{|p{0.30\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+\hline
+\cellcolor{fondorosa}\textbf{Guía 82} & \cellcolor{fondorosa}\textbf{Guía 83} & \cellcolor{fondorosa}\textbf{Guía 84} \\
+\cellcolor{fondorosa}(Duración 13 h) & \cellcolor{fondorosa}(Duración 13 h) & \cellcolor{fondorosa}(Duración 13 h) \\
+\hline
+\textbf{ACTIVIDAD 1}
+\begin{itemize}[leftmargin=*,topsep=0pt]
+\item Magnitudes conmensurables y no conmensurables
+\item Expansión decimal no periódica y los números irracionales.
+\item Propiedades de las operaciones de los reales y equivalencias entre expresiones numéricas.
+\item Aproximación y truncamiento irracionales y graficación en la recta.
+\end{itemize}
+
+\textbf{ACTIVIDAD 2}
+\begin{itemize}[leftmargin=*,topsep=0pt]
+\item Notación científica.
+\item Propiedades de los exponentes.
+\item Radicación y sus propiedades.
+\item Logaritmación y sus propiedades; logaritmos en distintas bases.
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*,topsep=0pt]
+\item Secuencias con figuras y patrones.
+\item Expresa patrones en tablas y con expresiones algebraicas.
+\item Números figurados.
+\item Sistemas de ecuaciones lineales de dos incógnitas.
+\item Resuelve problemas planteando y resolviendo sistemas de ecuaciones lineales.
+\item Expresa intervalos en la recta con desigualdades, con notación de conjuntos, en la recta y con notación de intervalos.
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*,topsep=0pt]
+\item Relaciones y funciones.
+\item Funciones lineales ($y=mx+b$) y funciones de proporcionalidad ($y=mx$).
+\item Pendiente de una recta.
+\item Función cuadrática, expresiones algebraicas, tabla y gráfica.
+\item Estrategias para factorizar una cuadrática.
+\item Vértice, puntos de corte, amplitud, simetría, crecimiento y decrecimiento de la parábola.
+\item Función de proporcionalidad inversa.
+\item Funciones exponenciales.
+\end{itemize}
+\\
+\hline
+\end{tabular}
+}}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{META DE APRENDIZAJE N°28:},fonttitle=\bfseries]
+Reconozco procesos de aproximación y truncamiento de números irracionales para explicar cómo es su expansión decimal en contextos geométricos y numéricos (secuencias y sucesiones) que involucren números figurados y mediciones de magnitudes inconmensurables. También interpreto situaciones en contextos contables y de finanzas en los que se requiera plantear un sistema de ecuaciones lineales de una incógnita o analizar funciones lineales calculando capital inicial y final, porcentaje de intereses anuales, precios de venta, problemas en los que se quiera estimar la ganancia máxima (función cuadrática) o analizar cómo crece un capital de forma exponencial y funciones de proporcionalidad inversa con ayuda de un software o applets de Geogebra.
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,title=\textbf{PREGUNTAS ESENCIALES:},fonttitle=\bfseries]
+\textbf{Actividad 1}
+\begin{itemize}
+\item ¿De qué manera intervienen las magnitudes conmensurables e inconmensurables en el contexto social financiero?
+\item ¿Por qué y en qué situaciones de la vida financiera podemos hacer aproximaciones y encontrar números decimales no periódicos?
+\item ¿Cómo en mi escuela puedo realizar graficación en la recta teniendo en cuenta mi lugar de trabajo en clase?
+\end{itemize}
+
+\textbf{Actividad 2}
+\begin{itemize}
+\item ¿Cómo se relacionan la potenciación, la radicación y el logaritmo?
+\item ¿Cómo puedes expresar números con notación científica sin el uso de calculadora?
+\item ¿De qué manera interviene la notación científica en el cálculo de costos y consumos de los presupuestos públicos?
+\end{itemize}
+\end{tcolorbox}
+
+% ========== PÁGINA 5 - EVIDENCIAS DE APRENDIZAJE ==========
+%%%\newpage
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,title=\textbf{EVIDENCIAS DE APRENDIZAJE},fonttitle=\bfseries]
+
+\textbf{Actividad 1}
+\begin{itemize}
+\item Utilizo sucesiones de decimales o de fracciones para expresar la expansión decimal infinita de un número y si es posible trata de encontrar patrones.
+\item Reconozco el uso de las propiedades para resolver diferentes tipos de ejercicios y tiene en cuenta los diferentes subconjuntos de ellos.
+\item Realizo procesos de aproximación y/o truncamientos para representar números racionales y dada la expresión numérica aproximada puede desarrollarla poniendo más cifras decimales justificando mayor precisión según se requiera en situaciones problema.
+\end{itemize}
+
+\textbf{Actividad 2}
+\begin{itemize}
+\item Expreso cantidades muy grandes y muy pequeñas utilizando la notación científica en contextos de medidas atómicas y astronómicas, entre otros.
+\item Reconozco la jerarquía de las operaciones con potencias, raíces y logaritmos.
+\item Utilizo las propiedades de los exponentes para simplificar expresiones que tengan potencias.
+\item Reconozco y utilizo las propiedades de la logaritmación, puede deducirlas a partir de las propiedades de los exponentes.
+\end{itemize}
+
+\end{tcolorbox}
+
+% ========== PÁGINA 6 - ACTIVIDAD 1 ==========
+%%%\newpage
+
+\begin{center}
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,width=4cm]
+\centering
+\textbf{GUÍA 82}
+
+\textbf{GRADO 9}
+
+\vspace{0.3cm}
+
+\textbf{ACTIVIDAD}
+
+{\Huge\textbf{1}}
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{ACTIVIDAD 1: NÚMEROS REALES},fonttitle=\bfseries,width=\textwidth]
+\centering
+Aprendamos a utilizar los números reales mediante los conjuntos y propiedades, además de comprender e identificar las conversiones de decimales a fracciones y viceversa.
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.5cm}
+
+\subsection*{A) Activando saberes previos}
+
+\subsubsection*{APRENDE DE MEDIDAS EN TU VIDA COTIDIANA}
+
+\begin{enumerate}
+\item Completa el siguiente cuadro con las estaturas y talla de los zapatos de los integrantes de tu familia.
+
+\vspace{0.5cm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\setlength{\extrarowheight}{3pt}
+\begin{tabular}{|p{0.3\textwidth}|p{0.3\textwidth}|p{0.3\textwidth}|}
+\hline
+\textbf{FAMILIARES} & \textbf{ESTATURA} & \textbf{TALLA DE ZAPATO} \\
+\hline
+ & & \\[1cm]
+\hline
+ & & \\[1cm]
+\hline
+ & & \\[1cm]
+\hline
+ & & \\[1cm]
+\hline
+ & & \\[1cm]
+\hline
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+\setlength{\extrarowheight}{0pt}
+\end{center}
+
+\vspace{0.5cm}
+
+\item A partir de los datos registrados en la tabla identifica si son datos conmensurables e inconmensurables
+
+\item Los datos obtenidos en la tabla ¿a qué conjuntos de números pertenecen? (racionales, irracionales, enteros, naturales)
+
+\item En la vida cotidiana ¿dónde puedo aplicar las medidas?
+
+\item ¿Cómo construir una sola pajarita, a partir de las seis piezas de dos pajaritas iguales más pequeñas? (te sugerimos construir las piezas en cartulina.)
+
+\end{enumerate}
+
+\vspace{0.5cm}
+
+% ========== PÁGINA 7 - RECUERDA QUE ==========
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,title=\textbf{RECUERDA QUE...},fonttitle=\bfseries]
+
+Dos números reales no nulos $x, y$, son \textbf{conmensurables} cuando su razón es un número racional. Es decir, $x/y$ es un número racional. Por ejemplo, 3 y 5 son conmensurables, así como $1/2$ y $2/5$, y $\pi$ y $3\pi$.
+
+Para que dos números puedan ser considerados conmensurables deben pertenecer al conjunto de los números reales, es decir, a aquél en el cual se encuentran tanto los racionales (los negativos, el cero y los positivos) como los irracionales. Antes de pasar a definir los números irracionales se debe tener en cuenta que el resultado de la razón debe ser un número racional; de lo contrario, si es irracional, entonces hablamos de \textbf{inconmensurabilidad}.
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\subsubsection*{PRACTICA}
+
+Esta tabla muestra la altura, la masa y la edad de un grupo de profesores.
+
+\begin{enumerate}
+\item Lee con atención los datos de la tabla.
+\end{enumerate}
+
+% ========== PÁGINA 8 - TABLA DE PROFESORES ==========
+%%%\newpage
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\setlength{\extrarowheight}{4pt}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{PROFESOR} & \textbf{ALTURA} & \textbf{MASA} & \textbf{EDAD} \\
+\hline
+Claudia & $1m + \frac{120}{5}$cm & 48,5 kg & 50 \\
+\hline
+Andrea & $\frac{150}{10}$m & 50,5 kg & 42 \\
+\hline
+Olga & $1m + \frac{170}{5}$cm & 70,6 kg & 47 \\
+\hline
+Merly & $1m + \frac{128}{2}$cm & 51,3kg & 42 \\
+\hline
+Carlos & $\frac{173}{10}$m & 68,9 kg & 61 \\
+\hline
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+\setlength{\extrarowheight}{0pt}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item Teniendo en cuenta los datos de la tabla, responde las siguientes preguntas.
+
+\begin{itemize}
+\item ¿A qué conjunto numérico pertenecen los números que se usan para indicar la edad?
+\item ¿A qué conjunto numérico pertenecen los números que se usan para indicar la masa?
+\item ¿A qué conjunto numérico pertenecen los números que se usan para indicar la altura?
+\item ¿Los datos de la tabla se consideran mensurables o inmensurables?
+\end{itemize}
+
+\end{enumerate}
+
+\vspace{1cm}
+
+\subsection*{B) Conceptos}
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,breakable]
+
+Dos números reales son \textbf{CONMENSURABLES} cuando su razón es un número racional. Para que dos números puedan ser considerados conmensurables deben pertenecer al conjunto de los números reales, es decir, a aquél en el cual se encuentran tanto los racionales (los negativos, el cero y los positivos) como los irracionales. Antes de pasar a definir los números irracionales se debe tener en cuenta que el resultado de la razón debe ser un número racional; de lo contrario, si es irracional, entonces hablamos de inconmensurabilidad.
+
+\vspace{0.5cm}
+
+Todos los pares productos que se ofrecen en un mercado son conmensurables mediante el dinero. Al ingresar a una tienda de ropa, por citar un caso, supongamos que un pantalón se vende a 40000 pesos y una chaqueta a 50000 pesos. La división $40000 / 50000$ da $4/5$, que es racional. Así, los precios son conmensurables.
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+Conozcamos más sobre los números reales y la historia que esto conlleva para la agrupación de axiomas trabajados en el diario vivir, para realizar operaciones numéricas.
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,breakable]
+
+Los griegos creían que todos los fenómenos del universo se podían reducir a razones entre números enteros. Pero uno de ellos, Hippasus de Metapontum, descubrió una magnitud irracional: \textbf{la diagonal de un cuadrado de lado 1}, por esto se dice que fue arrojado al mar, pues esto echaba por tierra todo lo que los pitagóricos creían.
+
+\vspace{0.5cm}
+
+El pensamiento griego se mantuvo casi intacto por más de un millar de años y la geometría era la base sobre la cual se construían las matemáticas. Pero en el renacimiento, algunos matemáticos objetaban el uso de los números irracionales de manera descuidada, ya que carecían de rigor y fundamentación lógica.
+
+\end{tcolorbox}
+
+% ========== PÁGINA 9 - CONTINUACIÓN ==========
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,breakable]
+
+Matemáticos como Euler demostraron que algunos números eran irracionales, pero es hasta el siglo XIX que varios matemáticos se dan a la tarea de hacer una construcción formal para los números reales. Empezando el siglo XX, Hilbert considera que las construcciones dadas en el siglo pasado, las cuales se basan en los racionales, son valiosas pedagógicamente hablando, pero considera que su método debe prevalecer. Por tanto propone su propia construcción, la cual se conoce como \textbf{método axiomático}.
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\begin{enumerate}
+\item Realiza una breve comparación de la biografía de los matemáticos que se mencionan en la lectura y con tus palabras comenta ¿cuál te llamó más la atención, y el porqué?
+
+\item ¿Con tus palabras explica la relación tienen los aportes de estos matemáticos a los números reales?
+
+\item ¿Según los aportes dados por HILBERT qué significa mediciones conmensurables e inconmensurables?
+
+\item Plantea un ejemplo en el que uses los naturales, los enteros y los racionales.
+\end{enumerate}
+
+\vspace{1cm}
+
+\subsubsection*{DAVID HILBERT}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,breakable]
+
+Hilbert supone que existe un conjunto no vacío $\mathbb{R}$ de elementos, llamados los números reales, que satisfacen 10 axiomas (principios fundamentales). Estos axiomas se dividen en tres clases o tipos: axiomas de cuerpo, axiomas de orden y axioma de completitud, los cuales se van a mostrar a continuación:
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\subsubsection*{PROPIEDAD DE CUERPO}
+
+Hay 2 operaciones: la suma y el producto. La suma y el producto son conmutativas y asociativas. Además, hay distributividad del producto respecto a la suma. En símbolos:
+
+\begin{enumerate}
+\item $a+(b+c) = (a+b)+c$
+\item $a+b = b+a$
+\item $a\cdot(b\cdot c) = (a\cdot b)\cdot c$
+\item $a\cdot(b+c) = a\cdot b+a\cdot c$
+\item $(a+b)\cdot c = a\cdot c+b\cdot c$
+\item $a\cdot b =b\cdot a$
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item ¿Las anteriores propiedades te son familiares? ¿Con qué nombres las conoces? ¿En tu vida cotidiana se pueden aplicar estas propiedades? ¿Cómo?
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsubsection*{PROPIEDAD DE ORDEN}
+
+Es el resultado que se obtiene al comparar dos números $a, b$, que pertenezcan a los números reales ($\mathbb{R}$), que cumplan con una y solo una de las condiciones siguientes: i) $a < b$ ; ii) $a > b$ ; iii) $a = b$.
+
+\begin{enumerate}
+\item Da dos ejemplos con números reales de la propiedad enunciada anteriormente.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsubsection*{PROPIEDAD DE COMPLETITUD: NO HAY HUECOS}
+
+Este axioma es el que diferencia a los reales de los demás conjuntos ordenados, como los racionales, los enteros o los irracionales. Enunciarlo, por el lenguaje que se usa, no resulta fácil, pero mencionar la implicación más importante resulta algo sencillo. ¿Qué entendemos por completitud? ¡Investiga un poco!
+
+% ========== PÁGINA 10 - PRACTICA ==========
+%%%\newpage
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item Da un ejemplo de una relación biyectiva.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsubsection*{PRACTICA}
+
+Observa y analiza el diagrama dado, que muestra la relación de contenencia entre los conjuntos numéricos y basándose en el diagrama complete las expresiones dadas con los signos $\subset$ (contenido) o = (igual) según la relación entre los conjuntos dados sea de contenencia o de igualdad.
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{llllll}
+a) $\mathbb{N}$ \underline{\hspace{1cm}} $\mathbb{Z}$ &
+d) $\mathbb{I}$ \underline{\hspace{1cm}} $\mathbb{R}$ &
+g) $\mathbb{Q}$ \underline{\hspace{1cm}} $\mathbb{R}$ \\[0.3cm]
+b) $\mathbb{Z}$ \underline{\hspace{1cm}} $\mathbb{Q}$ &
+e) $\mathbb{Z}$ \underline{\hspace{1cm}} $\mathbb{R}$ &
+h) $\mathbb{N}$ \underline{\hspace{1cm}} $\mathbb{R}$ \\[0.3cm]
+c) $\mathbb{Z}$ \underline{\hspace{1cm}} $\mathbb{Z}$ &
+f) $\mathbb{N}$ \underline{\hspace{1cm}} $\mathbb{Q}$ &
+i) $\mathbb{N}$ \underline{\hspace{1cm}} $\mathbb{N}$ \\
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\subsubsection*{RELACIÓN DE ORDEN DE LOS NÚMEROS REALES}
+
+Para establecer la relación de orden entre los números reales debes tener en cuenta dos propiedades.
+
+\subsubsection*{PROPIEDAD 1}
+
+Completa las siguientes oraciones con las palabras menor o mayor según el caso:
+
+\begin{itemize}
+\item Si en tu casa son tres hermanos, así Juan, Pedro y Julia y si Juan es menor que Julia, pero a su vez Julia es menor que Pedro, es porque Juan es \underline{\hspace{2cm}} que Pedro o Pedro es \underline{\hspace{2cm}} que Juan.
+
+\item Si un kilómetro es mayor que un decámetro y el decámetro es mayor que un metro entonces el kilómetro debe ser \underline{\hspace{2cm}} que al metro o el metro es \underline{\hspace{2cm}} que el kilómetro.
+
+\item Si Mario es más alto que Carla y Carla es más alta que Juanita entonces Mario es \underline{\hspace{2cm}} que Juanita o Juanita es más \underline{\hspace{2cm}} Mario.
+\end{itemize}
+
+\vspace{0.5cm}
+
+Este tipo de relación la podemos llevar al conjunto de los números reales comparando tres números reales $a,b,c$ esta relación de orden recibe el nombre de propiedad transitiva.
+
+\begin{itemize}
+\item Indica con tus palabras que entiendes en esta propiedad
+\item Propón dos ejemplos con números reales de esta propiedad.
+\end{itemize}
+
+\vspace{1cm}
+
+\subsubsection*{PROPIEDAD 2}
+
+\begin{itemize}
+\item Ahora, si fueras a comparar dos números según su valor, ¿cuántas relaciones se pueden encontrar?
+\item Relaciona según su valor los siguientes números:
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{cc}
+25 es \underline{\hspace{3cm}} 5 \\
+30 es \underline{\hspace{3cm}} 30 \\
+3 es \underline{\hspace{3cm}} 12 \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+A las anteriores relaciones entre dos números las unimos en una propiedad que se llama \textbf{tricotomía}:
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,breakable]
+\textbf{PROPIEDAD O LEY DE LA TRICOTOMÍA:} Permite comparar 2 números reales $a$ y $b$ para lo cual existen tres posibilidades, así:
+
+\begin{itemize}
+\item $a$ es menor que $b$ ($a < b$)
+\item $b$ es mayor que $b$ ($a> b$)
+\item $a$ es igual que $a$ ($a=a$)
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{1cm}
+
+\subsubsection*{Decimales periódicos mixtos a fracción}
+
+Tal vez el siguiente método te parezca un poco complicado pero es muy efectivo. Con seguridad, cuando aprendas más conceptos matemáticos, comprenderás por qué esto es así.
+
+Observa el siguiente ejemplo: el decimal periódico mixto es: $74,634444...$
+
+\textbf{Paso 1:} Se escribe el número en su notación simplificada con la barra: $74,63\overline{4}$
+
+\textbf{Paso 2:} El numerador será el decimal completo: $74634$, menos la parte entera seguida de la parte decimal que no se repite: $7463$. Todo escrito sin comas ni barras:
+
+$$74634 - 7463$$
+
+\textbf{Paso 3:} El denominador será tantos nueves como cifras tenga la parte que se repite periódicamente, seguidos de tantos ceros como tenga la parte decimal que no se repite.
+
+En este caso solo hay una cifra que se repite periódicamente, el 4 por lo tanto habrá solo un nueve. La parte decimal que no se repite tiene dos cifras: 6 y 3, por lo tanto el nueve va seguido de dos ceros.
+
+% ========== PÁGINA 12 - CONTINUACIÓN ==========
+
+\textbf{Paso 4:} Ahora se debe realizar la resta $74634 - 7463= 67171$. Al obtener la fracción se procede a simplificar. Si esta es irreducible, como en este caso, se deja como está:
+
+$$\frac{74634 - 7463}{900} = \frac{67171}{900}$$
+
+El resultado anterior quiere decir que $\frac{67171}{900} = 74,63\overline{4}$. Si quieres comprobarlo, realiza la división $67171\div 900$, te darás cuenta que da como resultado es: $74,634444...$
+
+\vspace{1cm}
+
+\subsubsection*{PRACTICA}
+
+\begin{enumerate}
+\item Clasifica y obtén la fracción generatriz de este decimal periódico mixto: $7,3201111...$
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Parte Entera & \\
+\hline
+Anteperiodo & \\
+\hline
+Periodo & \\
+\hline
+Fracción Generatriz & \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{enumerate}
+
+\vspace{1cm}
+
+\subsubsection*{APRENDAMOS ALGO NUEVO}
+
+Más de los $75 /100$ de la producción de café en Colombia son destinados a las exportaciones. ¿Cuál es la expresión decimal de la fracción $75 / 100$? Por lo tanto, la expresión decimal de $75/ 100$ se encuentra como sigue: $75 \div 100 = 0,75$.
+
+¿Qué relación observan entre el número de ceros del denominador de la fracción y el número de cifras de su correspondiente expresión decimal?
+
+La \textbf{EXPRESIÓN DECIMAL} de un número racional se obtiene al dividir el numerador entre el denominador. Una expresión decimal consta de parte entera y parte decimal, la parte entera va antes de la coma y la parte decimal después de la coma.
+
+% ========== PÁGINA 13 - PARTE C: RESUELVE Y PRACTICA ==========
+%%\newpage
+
+\subsection*{C) Resuelve y practica}
+
+A nivel mundial, Colombia es el tercer país productor de café y el mayor productor de café suave en el mundo. En la siguiente tabla, se muestra el precio (en dólares) de la libra de café colombiano durante la semana del 5 al 9 de abril de 2010.
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Fecha} & \textbf{Precio de una libra (en dólares)} \\
+\hline
+5 de abril de 2010 & 2,02 \\
+\hline
+6 de abril de 2010 & 2,05 \\
+\hline
+7 de abril de 2010 & 2,03 \\
+\hline
+8 de abril de 2010 & 2,03 \\
+\hline
+9 de abril de 2010 & 2,01 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\textbf{Precio del café colombiano en dólares}
+
+\begin{itemize}
+\item ¿Cómo se expresa el valor del precio del café en dólares?
+\item ¿En qué día de esa semana se presentó el mayor precio del café? ¿Y el menor?
+\item Si se sabe que un dólar es equivalente a 100 centavos de dólar, ¿qué se debe entender de la expresión 2,02?
+\item Más de los $75/ 100$ de la producción de café en Colombia son destinados a las exportaciones. ¿Cuál es la expresión decimal de la fracción $75/ 100$?
+\item Encuentren la expresión decimal de los siguientes números racionales. Luego contesten las preguntas. $3/4$; $8/3$; $4/9$; $5/ 16$; $13/ 90$
+\item ¿Cuántas cifras decimales tienen los números $3/ 4$ y $5 /16$?
+\end{itemize}
+
+\vspace{1cm}
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,breakable]
+\textbf{RECUERDA QUE:}
+
+En el caso, que se tengan expresiones decimales que no sean ni exactas, periódicas puras o periódicas mixtas no se consideran que corresponda a números racionales.
+
+\vspace{0.5cm}
+
+\textbf{LAS EXPRESIONES DECIMALES SE CLASIFICAN EN:}
+
+\begin{itemize}
+\item \textbf{EXACTAS:} El número de cifras decimales es finito, es decir, hay un número definido de las cifras después de la coma decimal 4,58 = 0,04
+
+\item \textbf{PERIÓDICAS PURAS:} Hay un grupo de cifras decimales se repiten indefinidamente, ese grupo de cifras se llama período y no tiene antecedente. Por ejemplo: $65,232323... = 65,\overline{23}$; $3,5\overline{15}$
+
+\item \textbf{PERIÓDICAS MIXTAS:} Se identifica un período antecedido por cifras decimales que no se repiten. Ejemplo: $8,532$. Todas estas expresiones corresponden a racionales positivos excepto la última son expresiones decimales negativas que corresponde a racionales negativos.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{1cm}
+
+\subsubsection*{RESUELVA LAS SIGUIENTES SITUACIONES}
+
+\begin{itemize}
+\item Javier dice que los racionales que generan las expresiones decimales $5,6$ y $5,\overline{6}$ son respectivamente $28/ 5$ y $46/ 90$. ¿Javier tiene razón? Expliquen su respuesta.
+
+\item ¿Cuál es la expresión decimal que le corresponde al número racional $3/8$? ¿Es exacta, periódica pura o periódica mixta?
+
+\item ¿Cuál es la racional generatriz de $25,43$? ¿Qué clase de expresión decimal está?
+
+\item En la siguiente tabla, se muestran algunas variedades de café y su contenido de cafeína por taza. ¿Cuál es el orden de estas variedades de menor a mayor contenido de cafeína?
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Contenidos de cafeína de algunas variedades de café}
+
+\begin{center}
+\small
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Variedad} & \textbf{Arábiga fuerte} & \textbf{Arábiga suave} & \textbf{Robusta suave} & \textbf{Robusta fuerte} \\
+\hline
+Contenido de cafeína (g) & 0,075 & 0,025 & 0,15 & 0,225 \\
+\hline
+\end{tabular}
+
+\vspace{0.3cm}
+
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Variedad} & \textbf{Café soluble} & \textbf{Café descafeinado} \\
+\hline
+Contenido de cafeína (g) & 0,1 & 0,0125 \\
+\hline
+\end{tabular}
+\normalsize
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\item Liliana debe recorrer 1,075 km desde su casa a la escuela. ¿Cuál es la aproximación de esa distancia a la cifra de las décimas? ¿Y a la cifra de las unidades? Escribe la misma distancia en término de los hectómetros.
+\end{itemize}
+
+% ========== PÁGINA 14 - CONTINUACIÓN ==========
+%%\newpage
+
+\begin{itemize}
+\item Encontremos una fracción que represente el decimal $1,08976976976...$ Siguiendo el paso a paso explicado en la página 8 y 9.
+
+\item Antonio, Marcos y Ricardo hacen una estimación de la altura de un árbol. Si respectivamente dicen 9,69 m, 9,58 m y 9,73 m, ordena de mayor a menor las estimaciones dadas.
+\end{itemize}
+
+\vspace{1cm}
+
+En la siguiente tabla se registró la producción de una pequeña finca cafetera durante seis meses.
+
+\vspace{0.5cm}
+
+\textbf{Producción de café en una finca durante 6 meses:}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\textbf{Mes} & Enero & Febrero & Marzo & Abril & Mayo & Junio \\
+\hline
+\textbf{Producción (kg)} & 98,73 & 79,56 & 85,475 & 86,45 & 102,05 & 97,65 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\item ¿Cuántos kilogramos de café se produjeron de enero a marzo?
+\item ¿De cuántos kilogramos fue la producción de abril a junio?
+\item ¿Cuál fue la producción total durante los seis meses?
+\item Si se espera una producción de 300 kg para los seis meses, ¿cuánto sobra o falta para obtener la producción esperada?
+\item Si se sabe que el precio esperado era 100 kg para enero, ¿cuánto le faltó para completar lo esperado?
+\item Si para cumplir la meta esperada en mayo faltaron 48,3 kg, ¿cuánto era la meta esperada para mayo?
+\end{itemize}
+
+\vspace{1cm}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,breakable]
+Es innegable la utilidad de los números decimales para el desenvolvimiento social de las personas. Es el caso de la interpretación de los indicadores económicos, tales como el comportamiento del precio del dólar, las equivalencias entre monedas de diferentes países, el precio del café en el mercado internacional, o el índice de precios al consumidor. Situaciones tan comunes como el manejo de una calculadora, exigen cierta destreza en el uso de números decimales.
+\end{tcolorbox}
+
+\vspace{1cm}
+
+\begin{itemize}
+\item Calcula en tu cuaderno la fracción generatriz de los siguientes decimales periódicos mixtos, y luego comprueba el resultado como lo trabajaste en la sección B:
+
+\begin{enumerate}[label=\alph*)]
+\item $1',\overline{345}$
+\item $0',\overline{52}$
+\item $235',56\overline{78}$
+\item $7',96\overline{756}$
+\end{enumerate}
+
+\end{itemize}
+
+% ========== PÁGINA 15 - PARTE D: RESUMEN ==========
+%%\newpage
+
+\subsection*{D) Resumen}
+
+\begin{center}
+\textbf{RECORDEMOS LAS PROPIEDADES DE LOS NÚMEROS REALES}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|p{0.95\textwidth}|}
+\hline
+\cellcolor{fondoazul}\textbf{TIPOS DE NÚMEROS} \\
+\hline
+\textbullet\ Los \textbf{Números naturales (N)} son: 0, 1, 2, 3, ..., 10, 11,... \\
+\hline
+\textbullet\ Los \textbf{Números enteros (Z)} son: ..., -11, - 10, ..., -3, -2, -1, 0, 1, 2, 3,...,10, 11,... \\
+\hline
+\textbullet\ Los \textbf{Números fraccionarios (a/b)} donde a no es múltiplo de b \\
+\ \ \ - Decimales exactos: a,bc \\
+\ \ \ - Decimales periódicos puros: a,bcbcbc..... \\
+\ \ \ - Decimales periódicos mixtos: a,bcccc.... \\
+\hline
+\textbullet\ Los \textbf{Números racionales (Q)} : incluyen los enteros y los fraccionarios \\
+\hline
+\textbullet\ Los \textbf{Números irracionales (I)} : son aquellos que no son racionales: Decimales no periódicos $\pi, \sqrt{2}, \sqrt{7}$,... \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+\hline
+\cellcolor{fondoverde}\textbf{Aproximación de números decimales} & \cellcolor{fondorosa}\textbf{Truncamiento / Redondeo} \\
+\hline
+\textbf{Truncamiento:} Consiste en suprimir todos los decimales a partir de una cifra &
+\textbf{Redondeo:} Si la cifra siguiente a la que tenemos que aproximar es mayor o igual que 5, aproximamos una unidad a la cifra que estamos redondeando. Si es menor que 5, la cifra que queremos redondear.\\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\cellcolor{fondoazul}\textbf{Propiedad} & \cellcolor{fondoazul}\textbf{Adición} & \cellcolor{fondoazul}\textbf{Multiplicación} \\
+\hline
+Cerradura & $a + b \in \mathbb{R}$ & $a \cdot b \in \mathbb{R}$ \\
+\hline
+Conmutativa & $a + b = b + a$ & $a \cdot b = b \cdot a$ \\
+\hline
+Asociativa & $a + (b + c) = (a + b) + c$ & $a \cdot (b \cdot c) = (a \cdot b) \cdot c$ \\
+\hline
+Distributiva & \multicolumn{2}{c|}{$a \cdot (b + c) = (a \cdot b) + (a \cdot c)$} \\
+\hline
+Identidad & $a + 0 = a$ & $a \cdot 1 = a$ \\
+\hline
+Inverso & $a + (−a) = 0$ & $a \cdot \left(\frac{1}{a}\right) = 1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,breakable]
+\textbf{PASO DE FRACCIÓN A EXPRESIÓN DECIMAL}
+
+En una fracción dividimos numerador entre denominador. Puede ocurrir:
+
+\begin{itemize}
+\item \textbf{1 -} Que la división es exacta $\rightarrow$ Resto = 0 $\rightarrow$ Cociente = Números decimales EXACTOS
+
+\item \textbf{2 -} Que la división NO es exacta $\rightarrow$ A partir de la coma se repiten las cifras del cociente $\rightarrow$ Cociente = Números decimales PERIÓDICOS PUROS
+
+\item \textbf{3 -} Que la división NO es exacta $\rightarrow$ Tras la coma hay cifras que no se repiten y después cifras que se repiten $\rightarrow$ Cociente = Números decimales PERIÓDICOS MIXTOS
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\item Todo número fraccionario se puede escribir como número decimal.
+\item Los números racionales son números decimales exactos o periódicos.
+\item Todo número decimal periódico se puede escribir como fracción, llamada fracción GENERATRIZ.
+\end{itemize}
+\end{tcolorbox}
+
+% ========== PÁGINA 17 - PARTE E: VALORACIÓN ==========
+%%\newpage
+
+\subsection*{E) Valoración}
+
+\subsubsection*{i) Califica tu comprensión por tema en tu cuaderno}
+
+\begin{center}
+\small
+\begin{tabular}{|p{0.40\textwidth}|p{0.16\textwidth}|p{0.16\textwidth}|p{0.16\textwidth}|}
+\hline
+\textbf{Evidencias} & \textbf{$\bullet\circ\circ$} Todavía no entiendo & \textbf{$\bullet\bullet\circ$} Voy bien, quiero práctica & \textbf{$\bullet\bullet\bullet$} Comprendí muy bien \\
+\hline
+Utiliza sucesiones de decimales o de fracciones para expresar la expansión decimal infinita de un número y si es posible trata de encontrar patrones. & & & \\[0.8cm]
+\hline
+Reconoce el uso de las propiedades para resolver diferentes tipos de ejercicios y tiene en cuenta los diferentes subconjuntos de ellos. & & & \\[0.8cm]
+\hline
+\end{tabular}
+\normalsize
+\end{center}
+
+\vspace{1cm}
+
+\subsubsection*{ii) Valoración individual}
+
+\textbf{1. Responde las preguntas y explica cada respuesta.}
+
+\begin{itemize}
+\item El número 0, ¿es un número racional?
+\item Explica la diferencia entre los números enteros y los números racionales.
+\item ¿Todos los números enteros son racionales?
+\item ¿Todos los números racionales son enteros?
+\item ¿Se puede afirmar que el conjunto de los números enteros es subconjunto del conjunto de los números racionales? ¿Por qué?
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{2. Escribe verdadero (V) o falso (F) según las afirmaciones sean verdaderas o falsas. Justifica tu respuesta si respondiste falsa.}
+
+\begin{itemize}
+\item El opuesto de un número real es siempre un número real negativo.
+\item Los números reales negativos son menores que 0.
+\end{itemize}
+
+\vspace{1cm}
+
+\subsubsection*{iii) Resuelvo un problema}
+
+Un caficultor tiene una finca de 2.472 m$^2$, separada en cuatro parcelas para sembrar diferentes variedades de café de acuerdo con la siguiente distribución: Con café arábigo $1/9$ del terreno; con café Borbón, $5/12$; con café caturra, $1/4$ y el resto con variedad Colombia.
+
+\begin{itemize}
+\item ¿Cuántos m$^2$ no están sembrados de variedad Colombia?
+\item ¿Cuántos m$^2$ están sembrados de cada variedad de café?
+\end{itemize}
+
+% ========== PÁGINA 19 - ACTIVIDAD 2 ==========
+%%\newpage
+
+\begin{center}
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,width=4cm]
+\centering
+\textbf{GUÍA 82}
+
+\textbf{GRADO 9}
+
+\vspace{0.3cm}
+
+\textbf{ACTIVIDAD}
+
+{\Huge\textbf{2}}
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{ACTIVIDAD 2: LA NOTACIÓN CIENTÍFICA},fonttitle=\bfseries,width=\textwidth]
+\centering
+Aprendamos a expresar fácilmente valores muy grandes o muy pequeños usando la notación científica y comprendamos su relación con las potencias y las funciones inversas.
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.5cm}
+
+\subsection*{A) Activando saberes previos}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,title=\textbf{RECUERDA QUE...},fonttitle=\bfseries,breakable]
+
+\textbf{Las potencias:} representan las veces que se multiplica la base por ella misma, de acuerdo a la cantidad indicada por el exponente. Por ejemplo:
+
+$$4^3 = 4 \times 4 \times 4 = 64$$
+
+En este caso nuestra base es el número 4 y el exponente es el valor que se encuentra en la parte superior derecha, es decir el número 3, obteniendo como resultado la potencia 64. Otro posible ejemplo es:
+
+$$2^3 = 2 \cdot 2 \cdot 2 = 8$$
+
+\vspace{0.5cm}
+
+\textbf{OTROS CASOS:}
+
+\begin{itemize}
+\item En el caso de la base negativa se emplea exactamente el mismo proceso, por ejemplo:
+
+$$(-4)^3 = (-4) \times (-4) \times (-4) = -64$$
+
+\item En el caso de exponentes negativos, es el inverso de la base, por ejemplo:
+
+$$(8)^{-2} = \frac{1}{8^2} = \frac{1}{64}$$
+
+Es decir que en este caso nuestra base pasa a ser una fracción de numerador 1 y denominador correspondiente a la base y a nuestro exponente le cambia el signo.
+\end{itemize}
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,title=\textbf{La radicación},fonttitle=\bfseries,breakable]
+
+La radicación: es un proceso inverso a la potenciación, consiste en encontrar la base de la potencia conociendo el exponente que en este caso pasa a ser el índice de nuestra raíz.
+
+Recordemos que en el ejercicio anterior de potenciación teníamos $2^3 = 8$, para convertir este ejercicio a un ejercicio de radicación el 8 que fue nuestra potencia se convierte en el radicando, el 3 que era nuestro exponente pasa a ser el índice de nuestra raíz y finalmente el 2 que era nuestra base se convierte en la raíz hallada. Por ende, al tener raíz con índice 3 de ocho lo que debemos buscar es un número que elevado a la 3 nos de 8, que en este caso es 2.
+
+$$\sqrt[3]{8} = 2$$
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{Los logaritmos},fonttitle=\bfseries,breakable]
+
+Los logaritmos son también una operación inversa de la potenciación, pero en este caso deseamos conocer el exponente de la potencia conociendo la potencia y la base. Por ejemplo:
+
+Retomando el ejercicio anterior de potenciación, teníamos que $2^3 = 8$, para convertir este ejercicio a un ejercicio de logaritmo debemos reorganizarlo:
+
+$$\log_2 8 = 3$$
+
+Así, al tener un logaritmo en base dos de 8 debemos hallar un exponente al que elevemos 2 y nos de 8, que en este caso es 3.
+
+\end{tcolorbox}
+
+% ========== PÁGINA 20 - PRACTICA ==========
+
+\vspace{1cm}
+
+\subsubsection*{PRACTICA}
+
+\textbf{1) Completa las tablas:}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\cellcolor{fondoazul}\textbf{POTENCIA} & \textbf{Producto} & \textbf{Base} & \textbf{Exponente} & \textbf{Resultado o Potencia} \\
+\hline
+$7^2$ & & & & \\
+\hline
+& $9 \cdot 9 \cdot 9$ & & & \\
+\hline
+& & 8 & 5 & \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\cellcolor{fondoazul}\textbf{RAÍZ} & \textbf{Índice de la raíz} & \textbf{Radicando} & \textbf{Resultado o raíz} \\
+\hline
+$\sqrt{81}$ & & & \\
+\hline
+& 2 & 1024 & \\
+\hline
+$\sqrt[3]{33}$ & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\textbf{NOTA:} cuando la raíz no tiene un índice visible siempre es 2 y cuando el logaritmo no tiene una base visible siempre es 10.
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\cellcolor{fondoazul}\textbf{Logaritmación} & \textbf{Base} & \textbf{Número} & \textbf{Logaritmo} & \textbf{se lee} \\
+\hline
+$\log_3 27 = 3$ & & 27 & & \\
+\hline
+& 4 & & & \\
+\hline
+& 8 & 64 & & \\
+\hline
+$\log_5 125 = 3$ & & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\subsubsection*{Revisa siguiente ejercicio:}
+
+\textbf{PASO 1: Observa y reflexiona}
+
+Revisa estos dos tipos de ejercicio:
+
+\begin{enumerate}
+\item $(6)^{-4} = \frac{1}{6^4} = \frac{1}{6 \cdot 6 \cdot 6 \cdot 6} = \frac{1}{1296}$
+
+\item $\left(\frac{3}{2}\right)^{-4} = \frac{1}{\left(\frac{3}{2}\right)^4} = \frac{1}{\left(\frac{3}{2}\right)\left(\frac{3}{2}\right)\left(\frac{3}{2}\right)\left(\frac{3}{2}\right)} = \frac{1}{\frac{81}{16}} = \frac{1 \times 16}{81} = \frac{16}{81}$
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\textbf{PASO 2: Hazlo con ayuda}
+
+Completa el ejercicio:
+
+$$\left(\frac{6}{5}\right)^{-2} = \frac{1}{\left(\frac{6}{5}\right)^2} = \frac{1}{( )( )} = \frac{1}{\underline{\hspace{1cm}}} = \frac{1 \times 25}{36} = \underline{\hspace{1cm}}$$
+
+\vspace{0.5cm}
+
+\textbf{PASO 3: Hazlo tú mismo}
+
+Resuelve el ejercicio:
+
+$$(8)^{-3} = \underline{\hspace{3cm}} \qquad \left(\frac{4}{6}\right)^{-5} = \underline{\hspace{3cm}}$$
+
+% ========== PÁGINA 21 - RELACIONAR ==========
+%%\newpage
+
+\vspace{0.5cm}
+
+\textbf{2) Resuelve uniendo con una línea las expresiones correspondientes:}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{ccc}
+\textbf{Potenciación} & \textbf{Radicación} & \textbf{Logaritmación} \\[0.3cm]
+$5^3$ & $\sqrt[3]{6.561}$ & $\log_{10} 10.000$ \\[0.2cm]
+$10^4$ & $\sqrt{121}$ & $\log_{11} 121$ \\[0.2cm]
+$8^3$ & $\sqrt[3]{125}$ & $\log_8 512$ \\[0.2cm]
+$9^4$ & $\sqrt{2.187}$ & $\log_9 2.187$ \\[0.2cm]
+$11^2$ & $\sqrt{10.000}$ & $\log_9 6.561$ \\[0.2cm]
+$3^7$ & $\sqrt[3]{512}$ & $\log_8 125$ \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\textbf{3) ¿Cómo consideras que la potencia, la radicación y el logaritmo se relacionan?}
+
+\vspace{1cm}
+
+\textit{Verifica las respuestas de la sección A con tu profesor.}
+
+\vspace{1cm}
+
+\subsection*{B) Conceptos}
+
+\subsubsection*{Exploración: Hablemos de representaciones}
+
+Antes de comenzar discute en clase: \textbf{¿Cómo expresar de manera más sencilla un número exageradamente grande o muy pequeño?}
+
+\vspace{1cm}
+
+% ========== PÁGINA 22 - PRESUPUESTO ==========
+
+El Gobierno Nacional de Colombia presentó en el 2019 al Congreso de la República el proyecto del Presupuesto General de la Nación, ya que el congreso de la república es el encargado de aceptar o rechazar dicho presupuesto. Aun así, el congreso de la república solicitó que se representará de una manera diferente los valores presupuestados, para analizar con más claridad las cantidades de dinero destinado a cada sector.
+
+\vspace{0.5cm}
+
+Ante ello, el gobierno nacional reajustó la tabla que había presentado y exhibió la siguiente:
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor{fondoazul}\textbf{SECTOR} & \textbf{Presupuesto para el 2020} \\
+\hline
+Educación & 43'100.000.000.000 \\
+\hline
+Defensa y policía & 35'700.000.000.000 \\
+\hline
+Salud & 31'800.000.000.000 \\
+\hline
+Trabajo & 31'800.000.000.000 \\
+\hline
+Hacienda & 15'200.000.000.000 \\
+\hline
+Fiscalía & 4'100.000.000.000 \\
+\hline
+Inclusión social & 11'300.000.000.000 \\
+\hline
+Rama Judicial & 7'500.000.000.000 \\
+\hline
+Transporte & 4'800.000.000.000 \\
+\hline
+Vivienda & 4'300.000.000.000 \\
+\hline
+Otros & 22'200.000.000.000 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+El Congreso de la república notó que dicha tabla era extensa, engorrosa y fácilmente se podrían equivocar al revisar los valores y al transcribirlos en un documento legal. Así, se solicitó una nueva tabla con una representación más sencilla y con menos posibilidades de equivocación al leerse o transcribirse. Ante ello se sugirió una tabla con la representación del presupuesto usando notación científica.
+
+% ========== PÁGINA 23 - MINI EXPLICACIÓN NOTACIÓN CIENTÍFICA ==========
+%%\newpage
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{Mini Explicación: Identificando la notación científica},fonttitle=\bfseries,breakable]
+
+\textbf{Notación científica:} La notación científica es una manera rápida de representar un número utilizando potencias de base 10 (1, 10, 100, 1000, etc, así como 0,1, 0,01, 0,001, etc).
+
+Esta notación se utiliza para poder expresar muy fácilmente números muy grandes o muy pequeños.
+
+\vspace{0.5cm}
+
+Cuando los números son muy grandes podemos utilizar $10^n$, donde $n$ es el número de ceros. En la siguiente lista, cada número es 10 veces el anterior.
+
+\begin{itemize}
+\item $10^0 = 1$ (es 1 seguido por "cero" ceros, es decir, la unidad).
+\item $10^1 = 10$
+\item $10^2 = 100$ (es decir, $10 \times 10$)
+\item $10^3 = 1\,000$ (es decir, $10 \times 100$, o $10 \times 10 \times 10$)
+\item $10^4 = 10\,000$
+\item $10^5 = 100\,000$
+\item $10^6 = 1\,000\,000$ (así, diez a la 6 es igual a un millón)
+\item $10^7 = 10\,000\,000$
+\item $10^8 = 100\,000\,000$ (muchas formas: $10^4 \times 10^4$, o $10^3 \times 10^5$, etc.)
+\item $10^9 = 1\,000\,000\,000$
+\item $10^{10} = 10\,000\,000\,000$ (como $4+6=10$, este número es 10 mil millones).
+\end{itemize}
+
+Por ejemplo, $10^{20}$ (10 elevado a la 20) es $10 \cdot 10^{19}$.
+
+\begin{itemize}
+\item $10^{30} = 1\,000\,000\,000\,000\,000\,000\,000\,000\,000\,000$
+\end{itemize}
+
+\vspace{0.5cm}
+
+Por otro lado, cuando los valores son muy pequeños podemos utilizar también potencias en base diez pero en este caso elevado a una potencia entera negativa.
+
+\begin{itemize}
+\item $10^{-1} = 1/10 = 0,1$
+\item $10^{-2} = 1/100 = 0,01$
+\item $10^{-3} = 1/1\,000 = 0,001$ (es decir, 10 mil veces $10^{-3}$ nos da 1).
+\item $10^{-9} = 1/1\,000\,000\,000 = 0,000\,000\,001$
+\end{itemize}
+
+Por tanto, un número como 8000 puede ser expresado como $8 \times 1000 = 8 \times 10^3$.
+
+También, 98\,000 es igual a $9,8 \times 10\,000 = 9,8 \times 10^4$, cercano pero menor a $10^5$.
+
+Otro ejemplo: 156\,234\,000\,000\,000\,000\,000\,000\,000\,000 puede ser escrito como $1,56234 \times 10^{29}$, y un número pequeño como 0,000\,000\,000\,000\,000\,000\,000\,000\,000\,000\,000\,910\,939 kg (masa de un electrón) puede ser escrito como $9,10939 \times 10^{-31}$ kg.
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+A partir de esta mini-explicación el gobierno decidió transformar los valores del presupuesto a la notación científica, por lo que en el caso del sector de la educación que contaba con un presupuesto de 43'100.000.000.000 al contarse la cantidad de ceros, se obtuvieron 11 ceros y se contaron los valores diferentes a cero después del primer valor, en este caso eran dos, el número el 3 y el 1, obteniendo finalmente 13 valores después del 4, por lo que se representó de la siguiente manera: $4,31 \cdot 10^{13}$
+
+\vspace{0.5cm}
+
+Ayúdale al gobierno nacional a completar la tabla para finalmente presentar su presupuesto:
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\cellcolor{fondoazul}\textbf{SECTOR} & \textbf{Presupuesto para el 2020} \\
+\hline
+Educación & $4,31 \cdot 10^{13}$ \\
+\hline
+Defensa y policía & \\
+\hline
+Salud & $3,18 \cdot 10^{13}$ \\
+\hline
+Trabajo & \\
+\hline
+Hacienda & \\
+\hline
+Fiscalía & \\
+\hline
+Inclusión social & \\
+\hline
+Rama Judicial & \\
+\hline
+Transporte & \\
+\hline
+Vivienda & \\
+\hline
+Otros & \\
+\hline
+\end{tabular}
+\end{center}
+
+% ========== PÁGINA 24 - OPERACIONES CON NOTACIÓN CIENTÍFICA ==========
+%%\newpage
+
+Para que el Congreso de la República analizará el proyecto del Presupuesto General de la Nación se decidió disminuir las categorías del presupuesto nacional, uniendo algunas de ellas, como es el caso de Educación y salud- Defensa y policía con Fiscalía y la rama judicial-Trabajo con inclusión social- Hacienda con vivienda, para la nueva tabla, los presupuestos de las categorías que se unieron deben sumarse para obtener el presupuesto de estas nuevas categorías, es decir:
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\cellcolor{fondoazul}\textbf{SECTOR} & \textbf{Presupuesto para el 2020} \\
+\hline
+Educación-salud & $4,31 \cdot 10^{13} + 3,18 \cdot 10^{13} = 7,49 \cdot 10^{13}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+¿Pero como sumaremos $4,31 \cdot 10^{13} + 3,18 \cdot 10^{13}$?
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{Mini Explicación: operaciones con la notación científica - propiedades de potencias},fonttitle=\bfseries,breakable]
+
+Si lo notas, la notación científica realmente son potencias y las potencias poseen unas propiedades o reglas que nos permiten operarlas de una manera más sencilla, en el caso de querer sumar $4,31 \cdot 10^{13} + 3,18 \cdot 10^{13}$, aplicaremos factor común (es decir de ambos valores extraemos el término en común $10^{13}(4,31 + 3,18) = 7,49 \cdot 10^{13}$, es decir:
+
+\vspace{0.5cm}
+
+\textbf{1) Suma y resta de la notación científica:} Siempre que las potencias de 10 sean las mismas, se deben sumar los coeficientes (o restar si se trata de una resta), dejando la potencia de 10 con el mismo grado.
+
+$$2 \times 10^5 + 3 \times 10^5 = 5 \times 10^5$$
+
+\textbf{2) Multiplicación de la notación científica y potencias:} en este caso para ejercicios de potencia simple con igual base se suman los exponentes y dejamos la misma base.
+
+Para multiplicar cantidades escritas en notación científica se multiplican los coeficientes y se deja la misma base 10 pero se suman los exponentes.
+
+$$(4 \times 10^{12}) \times (2 \times 10^5) = 8 \times 10^{17}$$
+
+\textbf{3) División de la notación científica y potencias:} para ejercicios de potencia simple con igual base se restan los exponentes.
+
+Para dividir cantidades escritas en notación científica se dividen los coeficientes y se restan los exponentes.
+
+$$(48 \times 10^{-10})/(12 \times 10^{-1}) = 4 \times 10^{-9}$$
+
+\textbf{4) Potencia de una Potencia:} En el caso de tener la potencia de una potencia debemos multiplicar los exponentes.
+
+En el caso de la notación científica el exponente pasa a el coeficiente y a la potencia con base 10, es decir: $(3 \times 10^6)^2 = (3^2 \times 10^{6 \times 2})= 9 \times 10^{12}$
+
+\textbf{5) Potencias de exponente cero:} en este caso todos los números elevados a cero es 1
+
+$$a^0 = 1 \qquad 7^0 = 1$$
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\textbf{***Con esta información, completa la tabla:}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\cellcolor{fondoazul}\textbf{SECTOR} & \textbf{Presupuesto para el 2020} \\
+\hline
+Educación-salud & $4,31 \cdot 10^{13} + 3,18 \cdot 10^{13} = 7,49 \cdot 10^{13}$ \\
+\hline
+Defensa y policía-Fiscalía-Rama Judicial & \\
+\hline
+Trabajo-Inclusión social & \\
+\hline
+Hacienda-Vivienda & \\
+\hline
+Otros & \\
+\hline
+\end{tabular}
+\end{center}
+
+% ========== PÁGINA 27 - EJEMPLOS APLICADOS ==========
+%%\newpage
+
+En este ejercicio hemos logrado trabajar con la notación científica para facilitar la lectura de valores muy grandes, de la misma manera es posible trabajar con valores muy muy pequeños o aún mucho más grandes que los valores trabajados, por ejemplo revisa los siguientes problemas:
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\item La masa de un electrón es $9 \times 10^{-31}$ kg. Las masas tanto de un protón como de un neutrón son, aproximadamente, $1,67 \times 10^{-27}$ kg. Determina la masa de un átomo de azufre sabiendo que tiene 16 electrones, 16 protones y 16 neutrones.
+
+\vspace{0.5cm}
+
+\textbf{Solución:}
+
+Masa de un protón es $9 \times 10^{-31}$ kg, como un átomo tiene 16 electrones, entonces $(9 \times 10^{-31}) \times 16 = 144 \times 10^{-31}$ kg
+
+Masa de un protón y de un neutrón es de $1,67 \times 10^{-27}$ kg, como un átomo tiene 16 protones y 16 neutrones, entonces $(1,67 \times 10^{-27}) \times 32 = 53,44 \times 10^{-31}$ kg
+
+Por tanto la masa del electrón es:
+
+$$144 \times 10^{-31}\text{ kg} + 53,44 \times 10^{-31}\text{ kg} = 197,44 \times 10^{-31}$$
+
+\vspace{0.5cm}
+
+\item La masa del Sol es, aproximadamente, 330000 veces la de la Tierra. Si la masa de la Tierra es $6 \times 10^{24}$ kg, calcula la masa del Sol.
+
+\vspace{0.5cm}
+
+\textbf{Solución:}
+
+$$330.000 \times 6 \times 10^{24} = 3,3 \times 10^5 \times 6 \times 10^{24} =$$
+$$(3,3 \times 6)(10^{5+24}) = 19,8 \times 10^{29} = 1,98 \times 10^{30}$$
+\end{itemize}
+
+\vspace{1cm}
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{Mini Explicación: Propiedades de las raíces y los logaritmos},fonttitle=\bfseries,breakable]
+
+Si te das cuenta para la notación científica como las potencia existen propiedades que se destacan como: la multiplicación, la división, la potencia de una potencia, entre otras. ¿Pero qué sucede con las raíces y los logaritmos que son operaciones inversas de la potencia? ¿Aplicarán las mismas propiedades?
+
+Pues para las raíces se aplican las mismas propiedades pero con la variante de la raíz, observa la siguiente tabla y revisa los ejemplos propuestos:
+
+\vspace{0.5cm}
+
+\begin{center}
+\small
+\begin{tabular}{|p{0.55\textwidth}|p{0.35\textwidth}|}
+\hline
+\cellcolor{fondoverde}\textbf{Operación} & \textbf{Ejemplo} \\
+\hline
+Producto: $\sqrt[n]{a} \cdot \sqrt[n]{b} = \sqrt[n]{a \cdot b}$ & $\sqrt[3]{4} \cdot \sqrt[3]{6} = \sqrt[3]{24}$ \\
+\hline
+Cociente: $\sqrt[n]{a} : \sqrt[n]{b} = \sqrt[n]{a/b}$ & $\sqrt[3]{4} : \sqrt[3]{6} = \sqrt[3]{\frac{4}{6}}$ \\
+\hline
+Potencia: $(\sqrt[n]{a})^m = \sqrt[n]{a^m}$ & $(\sqrt[3]{4})^6 = \sqrt[3]{4^6}$ \\
+\hline
+Simplificar: $\sqrt[n]{a^n} = a$ & $\sqrt[3]{2^3} = 2$ \\
+\hline
+Divido el índice y el exponente del radicando por el mismo número & $\sqrt[6]{2^3} = \sqrt{2}$ \\
+\hline
+Raíz de raíz: $\sqrt[m]{\sqrt[n]{a}} = \sqrt[m \cdot n]{a}$ & $\sqrt[4]{\sqrt[2]{3}} = \sqrt[8]{3}$ \\
+\hline
+\end{tabular}
+\normalsize
+\end{center}
+
+\end{tcolorbox}
+
+% ========== PÁGINA 28 - PROPIEDADES LOGARITMOS ==========
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,title=\textbf{Propiedades de los logaritmos},fonttitle=\bfseries,breakable]
+
+En el caso de los logaritmos se aplican las mismas propiedades pero varían un poco más.
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\cellcolor{fondoverde}\textbf{Propiedades} & \textbf{Ejemplos} \\
+\hline
+$\log_a m + \log_a n = \log_a (m \cdot n)$ & $\log_3 5 + \log_3 10 = \log_3 50$ \\
+\hline
+$\log_a m - \log_a n = \log_a (m/n)$ & $\log_3 7 - \log_3 2 = \log_3 7/2$ \\
+\hline
+$\log_a m^n = n \log_a m$ & $\log_3 5^4 = 4 \log_3 5$ \\
+\hline
+$\log_a m = \log_a n$ si y sólo si $m=n$ & Si $\log_2 7 = \log_2 x$, entonces $x=7$ \\
+\hline
+Si $m > n$ entonces $\log_a m > \log_a n$ & Como $8 > 3$, $\log_5 8 > \log_5 3$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{tcolorbox}
+
+% ========== PÁGINA 29 - SECCIÓN C: RESUELVE Y PRACTICA ==========
+%%\newpage
+
+\subsection*{C) Resuelve y practica}
+
+\subsubsection*{Pongamos en práctica lo aprendido:}
+
+\textbf{1) Resuelve los siguientes ejercicios utilizando las propiedades de las potencias, raíces y logaritmos:}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|p{0.30\textwidth}|p{0.30\textwidth}|p{0.30\textwidth}|}
+\hline
+\cellcolor{fondoazul}\textbf{POTENCIAS} & \cellcolor{fondoazul}\textbf{RAÍCES} & \cellcolor{fondoazul}\textbf{LOGARITMOS} \\
+\hline
+$a) \frac{2^5 \cdot 3^7 \cdot 4^2}{2^3 \cdot 3^5}$ & $a) \sqrt{50} \times \sqrt{2} =$ & $a) \log_{216} 3 =$ \\[0.5cm]
+\hline
+$b) \frac{(2^3)^2 \cdot 3^2 \cdot 9^3}{2^4 \cdot 3^3 \cdot 4^2}$ & $b) \frac{(\sqrt[8]{5})^2}{\sqrt[4]{\sqrt[4]{5}}} =$ & $b) (\log 8 + \log 10) =$ \\[0.5cm]
+& & $c) (\log 100 - \log 10) =$ \\[0.5cm]
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\textbf{2) Completa la siguiente tabla:}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\cellcolor{fondoazul}\textbf{Número decimal} & \textbf{Dígito} & \textbf{Potencia} & \textbf{Número en notación científica} \\
+\hline
+6350000000 & 6.35 & $10^9$ & $6,35 \times 10^9$ \\
+\hline
+900000 & & & \\
+\hline
+0,000000032 & & & \\
+\hline
+0,0000000000022 & & & \\
+\hline
+0,0000121 & & & \\
+\hline
+856000000000000000 & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\textbf{1) Investiga un poco más: ¿En qué situaciones de nuestra vida podemos utilizar la notación científica?}
+
+\textbf{2) Señala una ventaja de utilizar la notación científica.}
+
+% ========== PÁGINA 30 - CONTINUACIÓN EJERCICIOS ==========
+%%\newpage
+
+\textbf{1) Neptuno es el último planeta de nuestro sistema solar, es decir el que está más alejado del sol, y también uno de los llamados gigantes gaseosos, su radio es aproximadamente $2,5 \cdot 10^7$ m, este planeta fue descubierto matemáticamente, los astrónomos mucho antes de verlo calcularon que debería haber un planeta en esa órbita por las perturbaciones que provocaba en sus planetas vecinos.}
+
+Si se sabe que aproximadamente el radio de la tierra es de 6'400\,000 metros ¿Cuántas veces mayor es el radio de neptuno?
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+¿Qué se quiere saber una vez resuelto el problema? & \\[1cm]
+\hline
+¿Qué datos tienes para resolverlo? & \\[1cm]
+\hline
+Crea un plan para resolverlo & \\[1cm]
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\begin{itemize}
+\item Ordena las raíces de menor a mayor y obtén el nombre del animal:
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+T & P & A & O & I & E & L & N \\
+\hline
+$\sqrt{625}$ & $\sqrt{169}$ & $\sqrt{1}$ & $\sqrt{729}$ & $\sqrt{36}$ & $\sqrt{400}$ & $\sqrt{49}$ & $\sqrt{9}$ \\
+\hline
+= & = & = & = & = & = & = & = \\
+\hline
+\end{tabular}
+\end{center}
+
+\item Escribe cada expresión en forma de potencia:
+
+\begin{enumerate}[label=\alph*.]
+\item $\log_2 4 = 2$ \underline{\hspace{3cm}}
+\item $\log_5 625 = 4$ \underline{\hspace{3cm}}
+\item $\log_{10} 1000 = 3$ \underline{\hspace{3cm}}
+\item $\log_7 343 = 3$ \underline{\hspace{3cm}}
+\item $\log_3 1 = 0$ \underline{\hspace{3cm}}
+\end{enumerate}
+
+\item Resuelve:
+
+$$\frac{(\log 200 - \log 2)}{(\log 10 + \log 10)} = \underline{\hspace{3cm}}$$
+
+\item Halla las siguientes potencias:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$21^2=$ & $24^2=$ & $25^2=$ \\
+\hline
+$10^2=$ & $5^3=$ & $30^3=$ \\
+\hline
+$12^2=$ & $2^8=$ & $9^4=$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\item Resuelve: Fernanda tuvo 2 hijos, cada uno de sus hijos tuvo dos hijos y cada uno de los hijos de los hijos de Fernanda tuvo otros dos ¿Cuántos nietos tiene Fernanda?
+
+\item Resuelve el siguiente ejercicio:
+
+\textit{Una tienda recibe 3 cajas de chicles. En cada caja hay 4 paquetes con 5 chicles cada uno.}
+
+A) ¿Cuántos chicles ha recibido en total?
+
+B) Si cada chicle lo vende a \$10 pesos, ¿cuánto dinero obtendrá por la venta de todos los chicles?
+
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{2) Resuelve:}
+
+$$\frac{(\sqrt[4]{100})(\sqrt[4]{3})}{\sqrt{\sqrt[2]{5}}} = \underline{\hspace{3cm}}$$
+
+\textbf{3) Resuelve:}
+
+$$\frac{3^2 \cdot 3^4}{(3^2)^2} + 6^0 = \underline{\hspace{3cm}}$$
+
+% ========== PÁGINA 31 - SECCIÓN D: RESUMEN ==========
+%%\newpage
+
+\subsection*{D) Resumen}
+
+Hemos trabajado varios temas como la notación científica, la potenciación, la radicación y el logaritmo.
+
+\vspace{0.5cm}
+
+\begin{center}
+\textbf{RESUMEN VISUAL}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,title=\textbf{Potenciación, Radicación y Logaritmación},fonttitle=\bfseries,breakable]
+
+\textbf{Potenciación:} ¿Cuánto da $b$ multiplicado por sí mismo $n$ veces?
+
+$$b^n = a$$
+
+\textbf{Radicación:} ¿Qué número elevado a la $n$ da como resultado $a$?
+
+$$\sqrt[n]{a} = b$$
+
+\textbf{Logaritmación:} ¿Cuántas veces hay que multiplicar $b$ por sí mismo para obtener $a$?
+
+$$\log_b a = n$$
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,title=\textbf{Notación Científica},fonttitle=\bfseries,breakable]
+
+\textbf{Expresar un número en notación científica:}
+
+\textbf{Números grandes:} $123\,000\,000 = 1,23 \times 10^8$
+
+\textbf{Números pequeños:} $0,000\,000\,004\,56 = 4,56 \times 10^{-9}$
+
+\vspace{0.5cm}
+
+Cuando corremos la coma a la izquierda, el exponente del 10 es positivo.
+
+Cuando corremos la coma a la derecha, el exponente del 10 es negativo.
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{Propiedades de las potencias},fonttitle=\bfseries,breakable]
+
+\textbf{Producto de la misma base: se suman los exponentes}
+
+$$a^m \cdot a^n = a^{m+n} \qquad 7^2 \cdot 7^3 = 7^5$$
+
+\textbf{Cociente de la misma base: se restan los exponentes}
+
+$$a^m : a^n = a^{m-n} \qquad 2^9 : 2^7 = 2^2$$
+
+\textbf{Potencia de una potencia: se multiplican los exponentes}
+
+$$(a^m)^n = a^{m \cdot n} \qquad (6^5)^2 = 6^{10}$$
+
+\textbf{Potencias de exponente cero}
+
+$$a^0 = 1 \qquad 7^0 = 1$$
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\begin{center}
+\textbf{PROPIEDADES DE LOS LOGARITMOS} \quad \textbf{PROPIEDADES DE LAS RAÍCES}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{minipage}[t]{0.48\textwidth}
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,breakable]
+\textbf{Propiedades}
+
+$\log_a m + \log_a n = \log_a(m \cdot n)$
+
+$\log_a m - \log_a n = \log_a(m/n)$
+
+$\log_a m^n = n \log_a m$
+
+Si $m > n$ entonces $\log_a m > \log_a n$
+\end{tcolorbox}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,breakable]
+\textbf{Propiedades}
+
+Producto: $\sqrt[n]{a} \cdot \sqrt[n]{b} = \sqrt[n]{a \cdot b}$
+
+Cociente: $\sqrt[n]{a} : \sqrt[n]{b} = \sqrt[n]{a:b}$
+
+Potencia: $(\sqrt[n]{a})^m = \sqrt[n]{a^m}$
+
+Raíz de raíz: $\sqrt[m]{\sqrt[n]{a}} = \sqrt[m \cdot n]{a}$
+\end{tcolorbox}
+\end{minipage}
+
+% ========== PÁGINA 32 - SECCIÓN E: VALORACIÓN ==========
+%%\newpage
+
+\subsection*{E) Valoración}
+
+\subsubsection*{i) Califica tu comprensión por tema en tu cuaderno}
+
+\vspace{0.5cm}
+
+\begin{center}
+\small
+\begin{tabular}{|p{0.25\textwidth}|p{0.20\textwidth}|p{0.20\textwidth}|p{0.20\textwidth}|}
+\hline
+\cellcolor{fondoazul}\textbf{Tema} & \textbf{$\bullet\circ\circ$} Todavía no entiendo & \textbf{$\bullet\bullet\circ$} Voy bien, quiero práctica & \textbf{$\bullet\bullet\bullet$} Comprendí muy bien \\
+\hline
+Notación científica & & & \\[0.5cm]
+\hline
+Potenciación & & & \\[0.5cm]
+\hline
+Radicación & & & \\[0.5cm]
+\hline
+Logaritmación & & & \\[0.5cm]
+\hline
+\end{tabular}
+\normalsize
+\end{center}
+
+\vspace{1cm}
+
+\subsubsection*{ii) Preguntas de comprensión}
+
+\begin{enumerate}
+\item El número 345.606'000.000, en notación científica se puede representar como: \underline{\hspace{4cm}}.
+
+\item ¿$\log_4 64 = 3$ es inverso a la potencia $64^4 = 3$?
+
+[ \ ] Sí. \qquad [ \ ] No.
+
+¿Por qué?: \underline{\hspace{5cm}}.
+
+\item ¿Qué valor tiene la $\sqrt[3]{125}$?: \underline{\hspace{3cm}}.
+
+\item Al representar el número 0,000235 en notación científica ¿posee un exponente negativo?
+
+[ \ ] Sí. \qquad [ \ ] No
+
+¿Cuál es?: \underline{\hspace{4cm}}.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\textit{(Verifica las respuestas con tu profesor)}
+
+\vspace{1cm}
+
+\subsubsection*{iii) Resuelvo un problema}
+
+La siguiente tabla muestra el tamaño aproximado de la matrícula de la universidad del Tolima cada cincuenta años. ¿Cuántos estudiantes más se inscribieron en 1950 que en 1900? Para el 2020 se triplicaron las matrículas que se realizaron en el 2000. ¿Cuántos estudiantes se matricularon? Expresa tu respuesta en notación científica.
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\cellcolor{fondoazul}\textbf{AÑO} & \textbf{TAMAÑO APROXIMADO DE MATRÍCULA} \\
+\hline
+1850 & $7,2 \times 10^1$ \\
+\hline
+1900 & $3,7 \times 10^3$ \\
+\hline
+1950 & $2,7 \times 10^4$ \\
+\hline
+2000 & $2,8 \times 10^4$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\subsubsection*{iv) Problema final}
+
+Expresa en notación decimal los siguientes números que se encuentran en notación científica:
+
+\begin{itemize}
+\item $7 \cdot 10^3$: \underline{\hspace{4cm}}
+\item $2,5 \cdot 10^4$: \underline{\hspace{4cm}}
+\item $5 \cdot 10^{-2}$: \underline{\hspace{4cm}}
+\end{itemize}
+
+\vspace{1cm}
+
+\subsubsection*{v) Reflexiona}
+
+¿De qué manera interviene la notación científica en el cálculo de costos y consumos de los presupuestos públicos?
+
+\vspace{2cm}
+
+\begin{center}
+\textbf{--- FIN DE LA GUÍA 82 ---}
+\end{center}
+
+\end{document}

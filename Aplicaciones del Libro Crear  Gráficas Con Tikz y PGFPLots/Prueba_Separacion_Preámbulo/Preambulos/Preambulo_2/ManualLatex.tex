@@ -1,0 +1,267 @@
+% ========================================================
+% PREÁMBULO ORDENADO POR FLUJO DE TRABAJO (pdfLaTeX)
+% ========================================================
+
+% 0) CLASE DEL DOCUMENTO VA EN main.tex (NO AQUÍ)
+% \documentclass[...]{}   ← en main.tex
+
+% --------------------------------------------------------
+% 1) Idioma, codificación y salida de fuentes
+%    - Orden recomendado: fontenc -> inputenc -> babel (pdfLaTeX)
+%    - T1: silabeo y copiar/pegar correcto en PDF
+%    - inputenc utf8: compatibilidad con fuentes en pdfLaTeX antiguo
+%    - babel[spanish,es-tabla]: localización en español
+% --------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+
+% --------------------------------------------------------
+% 2) Tipografía de texto y matemáticas + microtipografía
+%    - mathpazo: Palatino para texto + Pazo Math (matemáticas)
+%    - linespread: Palatino luce mejor con +interlineado
+%    - microtype: protrusión y expansión → mejor justificación
+% --------------------------------------------------------
+\usepackage{mathpazo}
+\linespread{1.05}
+\usepackage{microtype}
+
+% --------------------------------------------------------
+% 3) Página y márgenes (antes de cabeceras/pies)
+% --------------------------------------------------------
+\usepackage[margin=2.54cm]{geometry} % 1 inch = 2.54 cm
+
+% --------------------------------------------------------
+% 4) Gráficos y color
+%    - graphicx: inclusión de imágenes (PDF/PNG/JPG)
+%    - \graphicspath: ruta por defecto de imágenes
+%    - xcolor[table,xcdraw]: colores + ayudas en tablas
+% --------------------------------------------------------
+\usepackage{graphicx}
+\graphicspath{{figuras/}}
+\usepackage[table,xcdraw]{xcolor}
+
+% --------------------------------------------------------
+% 5) Bloques de código (verbatim mejorado)
+%    - fvextra extiende fancyvrb (lo carga internamente)
+%    - Define entornos preformateados listos para usar
+% --------------------------------------------------------
+\IfFileExists{fvextra.sty}{%
+	\usepackage{fvextra} % (carga fancyvrb por debajo)
+	
+	% Recuadro estándar con salto de línea automático
+	\DefineVerbatimEnvironment{codeblock}{Verbatim}{
+		breaklines, breakanywhere,
+		breaksymbol=\tiny\ensuremath{\hookrightarrow}\,,
+		breaksymbolindentleft=0pt,
+		fontsize=\small,
+		frame=single, framerule=0.4pt, rulecolor=\color{black!40},
+		tabsize=2
+	}
+	
+	% Variantes listas para usar
+	\DefineVerbatimEnvironment{codeplain}{Verbatim}{
+		breaklines, breakanywhere, fontsize=\small, frame=none, tabsize=2
+	}
+	\DefineVerbatimEnvironment{codefine}{Verbatim}{
+		breaklines, breakanywhere,
+		fontsize=\small, frame=single, framerule=0.2pt, rulecolor=\color{black!20},
+		tabsize=2
+	}
+	\DefineVerbatimEnvironment{codebg}{Verbatim}{
+		breaklines, breakanywhere,
+		fontsize=\small, frame=single, framerule=0.4pt, rulecolor=\color{black!30},
+		bgcolor=black!3, tabsize=2
+	}
+	\DefineVerbatimEnvironment{codelines}{Verbatim}{
+		breaklines, breakanywhere,
+		fontsize=\small, numbers=left, numberstyle=\tiny, numbersep=6pt,
+		frame=single, framerule=0.4pt, rulecolor=\color{black!40}, tabsize=2
+	}
+	\DefineVerbatimEnvironment{codenosymbol}{Verbatim}{
+		breaklines, breakanywhere, breaksymbol={}, fontsize=\small,
+		frame=single, framerule=0.4pt, rulecolor=\color{black!40}, tabsize=2
+	}
+	\DefineVerbatimEnvironment{codegobbletwo}{Verbatim}{
+		breaklines, breakanywhere, gobble=2,
+		fontsize=\small, frame=single, framerule=0.4pt, rulecolor=\color{black!40},
+		tabsize=2
+	}
+}{}
+
+% --------------------------------------------------------
+% 6) Tablas
+%    - booktabs: reglas tipográficas de calidad
+%    - longtable: tablas que atraviesan páginas
+%    - multirow: celdas que abarcan varias filas
+%      (Para varias columnas se usa \multicolumn, macro de tabular; no es paquete)
+% --------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+
+% --------------------------------------------------------
+% 7) Flotantes y subtítulos
+%    - float: opción [H] (fijar flotantes) — úsala con moderación
+%    - caption: formato de leyendas; aquí etiqueta en negrita
+% --------------------------------------------------------
+\usepackage{float}
+\usepackage{caption}
+\captionsetup{labelfont=bf}
+
+% --------------------------------------------------------
+% 8) Matemáticas
+%    - mathtools extiende amsmath (→ NO hace falta cargar amsmath aparte)
+%    - amssymb: símbolos adicionales (amsfonts)
+%    - Operadores en español + numeración por capítulo
+% --------------------------------------------------------
+\usepackage{mathtools} % (carga amsmath)
+\usepackage{amssymb}
+\DeclareMathOperator{\sen}{sen}
+\DeclareMathOperator*{\argmin}{arg\,min}
+% \DeclareMathOperator*{\argmax}{arg\,max}
+
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+% \numberwithin{equation}{chapter} % <- descomenta si quieres ecuaciones por capítulo
+
+% --------------------------------------------------------
+% 9) Paginación y maquetación multi-columna
+% --------------------------------------------------------
+\usepackage{lastpage}   % permite "Página X de Y"
+\usepackage{multicol}   % columnas múltiples en el texto
+
+% --------------------------------------------------------
+% 10) Listas y espaciado de párrafos
+% --------------------------------------------------------
+\usepackage{enumitem}
+\setlist{nosep}         % listas compactas
+\setlength{\parindent}{1em}
+\setlength{\parskip}{6pt}
+
+% --------------------------------------------------------
+% 11) Encabezados y pies (fancyhdr) — tras geometry/graphicx
+%     - Ajusta \headheight si insertas logos para evitar warnings
+%     - Se redefine también el estilo 'plain' (inicio de capítulo)
+% --------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{18pt}
+\fancyhf{} % limpia
+
+% Cabecera con logos (ajusta rutas de archivos)
+\fancyhead[LE]{\raisebox{-0.2\height}{%
+		\includegraphics[height=\dimexpr\headheight-2pt\relax,keepaspectratio]{Latex3}}}
+\fancyhead[RO]{\raisebox{-0.2\height}{%
+		\includegraphics[height=\dimexpr\headheight-2pt\relax,keepaspectratio]{Latex1}}}
+
+% Pie con "Página X de Y" y datos laterales
+\fancyfoot[C]{\thepage\ de \pageref{LastPage}}
+\fancyfoot[LE]{Toribio de J Arrieta F}
+\fancyfoot[RO]{Universidad de La Vida}
+
+\renewcommand{\headrulewidth}{1.4pt}
+\renewcommand{\footrulewidth}{0.1pt}
+
+% 'plain' (páginas de inicio de capítulo) con el mismo diseño
+\fancypagestyle{plain}{%
+	\fancyhf{}
+	\fancyhead[LE]{\raisebox{-0.2\height}{%
+			\includegraphics[height=\dimexpr\headheight-2pt\relax,keepaspectratio]{Latex3}}}
+	\fancyhead[RO]{\raisebox{-0.2\height}{%
+			\includegraphics[height=\dimexpr\headheight-2pt\relax,keepaspectratio]{Latex1}}}
+	\fancyfoot[C]{\thepage\ de \pageref{LastPage}}
+	\fancyfoot[LE]{Toribio de J Arrieta F}
+	\fancyfoot[RO]{Universidad de La Vida}
+	\renewcommand{\headrulewidth}{0.1pt}
+	\renewcommand{\footrulewidth}{0.1pt}
+}
+
+% --------------------------------------------------------
+% 12) Hipervínculos y marcadores — SIEMPRE al final del preámbulo
+%     - hyperref primero; bookmark después (optimiza marcadores PDF)
+%     - \pdfstringdefDisableCommands: adapta macros para metadatos/TOC PDF
+% --------------------------------------------------------
+\usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}
+
+\pdfstringdefDisableCommands{%
+	\def\texttt#1{#1}%
+	\def\backmatter{backmatter}%
+	\def\frontmatter{frontmatter}%
+	\def\mainmatter{mainmatter}%
+	\def\include#1{#1}%
+	\def\input#1{#1}%
+}
+
+% --------------------------------------------------------
+% 13) cleveref (opcional) con nombres en español
+%     - Debe ir DESPUÉS de hyperref para 'nameinlink'
+%     - Si no está instalado, se aplica un 'fallback' con autoref
+% --------------------------------------------------------
+\newif\ifhascleveref
+\IfFileExists{cleveref.sty}{\hasclevereftrue}{\hasclevereffalse}
+
+\ifhascleveref
+\usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+\crefname{chapter}{capítulo}{capítulos}
+\Crefname{chapter}{Capítulo}{Capítulos}
+\crefname{section}{sección}{secciones}
+\Crefname{section}{Sección}{Secciones}
+\crefname{figure}{figura}{figuras}
+\Crefname{figure}{Figura}{Figuras}
+\crefname{table}{tabla}{tablas}
+\Crefname{table}{Tabla}{Tablas}
+\crefname{equation}{ecuación}{ecuaciones}
+\Crefname{equation}{Ecuación}{Ecuaciones}
+\else
+% Fallback: usa autoref con nombres en español
+\renewcommand{\chapterautorefname}{Capítulo}
+\renewcommand{\sectionautorefname}{Sección}
+\renewcommand{\subsectionautorefname}{Subsección}
+\renewcommand{\subsubsectionautorefname}{Subsubsección}
+\renewcommand{\figureautorefname}{Figura}
+\renewcommand{\tableautorefname}{Tabla}
+\renewcommand{\equationautorefname}{Ecuación}
+\providecommand{\cref}[1]{\autoref{#1}}
+\providecommand{\Cref}[1]{\Autoref{#1}}
+\providecommand{\crefrange}[2]{\autoref{#1}--\autoref{#2}}
+\fi
+
+% --------------------------------------------------------
+% 14) Índice alfabético (imakeidx preferente; si no, makeidx)
+%     - Con imakeidx: \printindex imprime el índice 'general' en la ToC
+%     - Con makeidx: se simula un comportamiento parecido
+% --------------------------------------------------------
+\newif\ifhasimakeidx
+\IfFileExists{imakeidx.sty}{\hasimakeidxtrue}{\hasimakeidxfalse}
+
+\ifhasimakeidx
+\usepackage{imakeidx}
+\makeindex[intoc,name=general,title=Índice alfabético]
+\let\printdefaultindex\printindex
+\renewcommand{\printindex}{\printdefaultindex[general]}
+\else
+\usepackage{makeidx}
+\makeindex
+\newcommand{\manualindexname}{Índice alfabético}
+\AtBeginDocument{\renewcommand{\indexname}{\manualindexname}}
+\let\printdefaultindex\printindex
+\renewcommand{\printindex}{%
+	\cleardoublepage
+	\phantomsection
+	\addcontentsline{toc}{chapter}{\manualindexname}%
+	\printdefaultindex
+}
+\fi
+
+% --------------------------------------------------------
+% 15) Utilidades y metadatos
+% --------------------------------------------------------
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}} % línea horizontal para portada
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
+
+\title{Manual de \LaTeX}
+\author{Toribio de J Arrieta}
+\date{\today}

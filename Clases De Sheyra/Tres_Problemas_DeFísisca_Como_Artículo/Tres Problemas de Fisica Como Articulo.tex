@@ -1,0 +1,183 @@
+\documentclass[14pt,letterpaper]{extarticle} % 14pt reales (extsizes)
+
+% ====== Paquetes recomendados ======
+\usepackage[utf8]{inputenc}   % Codificación UTF-8
+\usepackage[T1]{fontenc}      % Salida de caracteres correcta
+\usepackage[spanish]{babel}   % Idioma español
+\usepackage{lmodern}          % Fuente moderna
+\usepackage{geometry}         % Márgenes
+\geometry{left=1cm,right=1cm,top=2cm,bottom=2cm}
+
+\usepackage{amsmath,amssymb}  % Matemáticas
+\usepackage{graphicx}         % Imágenes
+\usepackage{hyperref}         % Hipervínculos
+\usepackage{fancyhdr}         % Encabezados/pies
+\usepackage{enumitem}         % Listas cómodas
+
+% Carpeta donde estarán las imágenes
+\graphicspath{{imagenes/}}
+
+% Hipervínculos
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+  pdfauthor={Toribio De J Arrieta F},
+  pdftitle={Problemas de Física: MRU y MRUA con ilustraciones (extarticle 14pt)}
+}
+
+% Encabezado / Pie
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Problemas de Física — MRU/MRUA}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{\textit{Elaborado por Toribio Arrieta para Sheyra Celedón Villa}}
+
+% Título
+\title{\Huge Problemas de Física con Ilustraciones\\[2mm]
+\Large MRU y MRUA aplicados a situaciones cotidianas}
+\author{\Large Profesor Tutor: Toribio De J Arrieta F}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\listoffigures
+\bigskip
+
+% =======================================================
+\section{David y Juliana: ¿llega a tiempo? (MRUA)}
+
+\subsection{Planteamiento}
+David debe recoger a Juliana en 2 minutos. Juliana vive a 20 km de su casa y David acelera en su moto uniformemente a razón de \(4\,\text{m/s}^2\). ¿Alcanzará a recogerla a tiempo?
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.95\textwidth]{situacion_inicial_david.png}
+  \caption{Situación inicial: David en su moto, casa de Juliana a 20 km.}
+\end{figure}
+\noindent\textbf{Enlace de descarga:} \href{run:imagenes/situacion_inicial_david.png}{situacion\_inicial\_david.png}
+
+\subsection{Análisis y resolución}
+\begin{itemize}[leftmargin=1.3cm]
+  \item Distancia: \(d=20\,\text{km}=20\,000\,\text{m}\)
+  \item Tiempo disponible: \(t=2\,\text{min}=120\,\text{s}\)
+  \item Aceleración: \(a=4\,\text{m/s}^2\)
+  \item Velocidad inicial: \(v_0=0\) (desde el reposo)
+\end{itemize}
+
+\subsubsection*{Distancia que recorre en 120 s}
+\[
+d = v_0 t + \tfrac{1}{2} a t^2
+\quad\Rightarrow\quad
+d = \tfrac{1}{2}(4)(120)^2 = 28\,800\,\text{m}.
+\]
+
+\subsubsection*{¿Llega a tiempo?}
+Debe recorrer \(20\,000\,\text{m}\) y puede recorrer \(28\,800\,\text{m}\) en \(120\,\text{s}\).
+\textbf{Sí, llega a tiempo.}
+
+\subsubsection*{Tiempo para recorrer 20 km}
+\[
+d=\tfrac{1}{2} a t^2 \Rightarrow t=\sqrt{\tfrac{2d}{a}}
+=\sqrt{\tfrac{2\cdot 20\,000}{4}}=\sqrt{10\,000}=100\,\text{s}.
+\]
+\textbf{Le sobran 20 s} (dispone de 120 s).
+
+\subsection{Situación solución}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.95\textwidth]{situacion_solucion_david.png}
+  \caption{Solución: llega en \(100\,\text{s}\); sobran \(20\,\text{s}\).}
+\end{figure}
+\noindent\textbf{Enlace de descarga:} \href{run:imagenes/situacion_solucion_david.png}{situacion\_solucion\_david.png}
+
+\bigskip
+\hrule
+\bigskip
+
+% =======================================================
+\section{Peatón vs. vehículo (MRU): ¿será atropellado?}
+
+\subsection{Planteamiento}
+Un peatón se encuentra 120 m por delante de un vehículo y pretende cruzar una calle de 20 m de ancho con velocidad constante \(4\,\text{m/s}\). ¿Será atropellado?
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.95\textwidth]{situacion_inicial.png}
+  \caption{Situación inicial: peatón listo para cruzar; vehículo a 120 m del cruce.}
+\end{figure}
+\noindent\textbf{Enlace de descarga:} \href{run:imagenes/situacion_inicial.png}{situacion\_inicial.png}
+
+\subsection{Análisis y resolución}
+\textbf{Tiempo del peatón para cruzar:}
+\[
+t_p=\frac{20}{4}=5\,\text{s}.
+\]
+\textbf{Tiempo del vehículo para llegar al cruce:}
+\[
+t_v=\frac{120}{v}.
+\]
+Para que ocurra atropello, \(t_v\le 5\Rightarrow \frac{120}{v}\le 5 \Rightarrow v\ge 24\,\text{m/s}\) (\(\approx 86.4\,\text{km/h}\)).
+
+\subsection{Conclusión}
+El peatón \textbf{sólo sería atropellado} si \(v\ge 24\,\text{m/s}\).
+Si \(v<24\,\text{m/s}\), cruza antes de que llegue el vehículo.
+
+\subsection{Situación solución}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.95\textwidth]{situacion_solucion.png}
+  \caption{Solución ilustrada: comparación de tiempos de llegada al cruce.}
+\end{figure}
+\noindent\textbf{Enlace de descarga:} \href{run:imagenes/situacion_solucion.png}{situacion\_solucion.png}
+
+\bigskip
+\hrule
+\bigskip
+
+% =======================================================
+\section{Mazda: verificación de la aceleración anunciada (MRUA)}
+
+\subsection{Planteamiento}
+Mazda anuncia aceleración \(6\,\text{m/s}^2\).
+Un comprador parte del reposo y reporta \(v=280\,\text{m/s}\) en \(t=50\,\text{s}\).
+¿Coincide con la publicidad?
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.95\textwidth]{situacion_inicial_mazda.png}
+  \caption{Situación inicial: auto en reposo, listo para acelerar.}
+\end{figure}
+\noindent\textbf{Enlace de descarga:} \href{run:imagenes/situacion_inicial_mazda.png}{situacion\_inicial\_mazda.png}
+
+\subsection{Cálculo de la aceleración real}
+\[
+v = v_0 + a t \;\Rightarrow\; a=\frac{v-v_0}{t}
+=\frac{280-0}{50}=5.6\,\text{m/s}^2.
+\]
+
+\subsection{Conclusión}
+La aceleración medida (\(5.6\,\text{m/s}^2\)) es \textbf{menor} que la anunciada (\(6\,\text{m/s}^2\)).
+\textbf{No coincide exactamente} con la propaganda.
+
+\subsection{Situación solución}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.95\textwidth]{situacion_solucion_mazda.png}
+  \caption{Solución: aceleración real \(5.6\,\text{m/s}^2\) frente a \(6\,\text{m/s}^2\) anunciada.}
+\end{figure}
+\noindent\textbf{Enlace de descarga:} \href{run:imagenes/situacion_solucion_mazda.png}{situacion\_solucion\_mazda.png}
+
+\bigskip
+\hrule
+\bigskip
+
+% =======================================================
+\section*{Comentario final del profesor}
+Estos ejercicios muestran cómo las ecuaciones de MRU y MRUA permiten evaluar con precisión situaciones reales:  
+llegadas a tiempo, seguridad vial y verificación de datos de fabricantes.
+
+\end{document}

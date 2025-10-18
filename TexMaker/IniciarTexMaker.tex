@@ -1,0 +1,331 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[left=1cm, right=1cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage[spanish,es-tabla,es-noquoting]{babel}
+\usepackage{hyperref}
+\usepackage{lipsum}
+% =====================================================
+% PAQUETES  LIBRERIAS PARA GRÁFICAS
+% =====================================================
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor} % u otra opción
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{3d}
+\usetikzlibrary{babel,patterns,arrows.meta,calc,positioning,shapes.geometric,shapes.misc, shadows, angles, quotes, external}
+\usetikzlibrary{backgrounds}
+\tikzset{help lines/.style={very thin, draw=gray!30}}
+
+\usepackage{pgfplots}
+\usepackage{pgfmath} % LATEX
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{statistics,groupplots,fillbetween,dateplot}
+%\input pgfmath.tex % plain TEX
+%\usemodule[pgfmath] % ConTEXt
+
+% =====================================================
+% PLANO CARTESIANO #1 PARA GRÁFICAS
+% =====================================================
+
+\newcommand{\planoCartesiano}[4]{%
+	\begin{tikzpicture}
+		\begin{scope}[on background layer]
+			\fill[#1] (-#3,-#4) rectangle (#3,#4);
+		\end{scope}
+		
+		\begin{scope}
+			\draw[step=.25, draw = #2!25, line width =.3pt] (-#3,-#4) grid (#3,#4);  
+			\draw[<->, >=Stealth, ultra thick, #2] (0,-#4) -- (0,#4) ; 
+			\draw[<->, >=Stealth, ultra thick, #2] (-#3,0) -- (#3,0) ;
+			
+			% Marcas y números para eje X
+			\foreach \x in {1,2,...,#3}
+			{
+				\draw[black, thick] (\x,-0.1) -- (\x,0.1);
+				\node[black, below] at (\x,-0.3) {\x};
+			}
+			
+			\foreach \x in {-1,-2,...,-#3}
+			{
+				\draw[black, thick] (\x,-0.1) -- (\x,0.1);
+				\node[black, below] at (\x,-0.3) {\x};
+			}
+			
+			% Marcas y números para eje Y
+			\foreach \y in {1,2,...,#4}
+			{
+				\draw[black, thick] (-0.1,\y) -- (0.1,\y);
+				\node[black, left] at (-0.3,\y) {\y};
+			}
+			
+			\foreach \y in {-1,-2,...,-#4}
+			{
+				\draw[black, thick] (-0.1,\y) -- (0.1,\y);
+				\node[black, left] at (-0.3,\y) {\y};
+			}
+			
+			% Grid mayor (cada 1 unidad) - líneas más gruesas
+			\draw[step=1, draw = #2!50, line width =.5pt] (-#3,-#4) grid (#3,#4);
+			
+		\end{scope}
+	\end{tikzpicture}
+}
+
+
+% =====================================================
+% TÍTULO AUTOR
+% =====================================================
+\title{Aplicación Crear Gráficas Con Tikz-PGFPlots}
+\author{Toribio}
+
+% =====================================================
+% INICIO DEL DOCUMENTO
+% =====================================================
+\begin{document}
+	\maketitle
+	\lipsum[1] \\[2mm]
+	
+	\tikz \draw (0,) -- (7,2);
+	\tikz \draw (0,0) -- (7,2) -- (10,-3)  -- cycle; \\[2mm]
+	
+\begin{tikzpicture}
+		\draw (0,1) -- (7,2);
+		 \draw (0,0) -- (7,2) -- (10,-3)  -- cycle; \\[2mm]
+\end{tikzpicture} \\[2mm]
+	
+	\tikz \draw (0,0) rectangle (7,2); \\[2mm]
+	\tikz \draw (7,0) rectangle (14,-2); \\[2mm]
+	
+\begin{tikzpicture}
+	\draw (0,0) rectangle (7,2); \\[2mm]
+	\draw (7,0) rectangle (14,-2); \\[2mm]
+\end{tikzpicture} \\[2mm]
+		
+\begin{tikzpicture}
+	\draw[thin] (0,0) rectangle (1,1);
+	\draw[thick] (0,0) rectangle (2,2);
+	\draw[very thick] (0,0) rectangle (3,3);
+	\draw[ultra thick] (0,0) rectangle (4,4);  \\[2mm]
+	\draw[line width=2pt] (0,0) rectangle (5,5); 
+\end{tikzpicture} \\[2mm]
+	
+\begin{tikzpicture}
+	\draw[thin] (2,2) circle (1);
+	\draw[thick] (2,2) circle (2);
+	\draw[very thick] (2,2) circle (3);
+	\draw[dashed, ultra thick] (2,2) circle (4);
+	\draw[dashed, line width=2, color=red] (2,2) circle (5);
+\end{tikzpicture} \\[2mm]
+
+\begin{tikzpicture}
+	\draw[thin, color=brown, fill=brown!55] (2,2) ellipse (1 and 2);
+	\draw[thick] (2,2) ellipse (2 and 3);
+	\draw[very thick] (2,2) ellipse (3 and 4);
+	\draw[dashed, ultra thick] (2,2) ellipse (4 and 5);
+	\draw[dashed, line width=2pt] (2,2) ellipse (5 and 6);
+\end{tikzpicture}  \\[2mm]
+
+\begin{tikzpicture}[scale=.75]
+	\draw (0,0) rectangle (4,3);
+		% 1) Fondo marron
+	\fill[brown] (0,3) -- (2,5) -- (4,3) -- cycle;
+	% 2) Patrón de ladrillos blanco encima
+	\pattern[pattern=bricks, pattern color=white]
+	(0,3) -- (2,5) -- (4,3) -- cycle;
+	\draw (1.5,0) rectangle (2.5,1.5);
+	\draw[fill=red!15] (0.5,1.8) rectangle (1.3,2.5);
+	\draw[fill=violet!15] (2.7,1.8) rectangle (3.5,2.5);
+\end{tikzpicture}  \\[2mm]
+
+\begin{tikzpicture}
+	\def\mypath{(0,0) -- +(0,1) arc (180:0:3.5cm) -- +(0,-1)}
+	\fill [red] \mypath;
+	\pattern[pattern color=white,pattern=bricks] \mypath;
+\end{tikzpicture}  \\[2mm]
+
+\begin{tikzpicture}
+	% 1) Fondo rojo
+	\fill[fill=brown, draw=black] (0,3) -- (2,5) -- (4,3) -- cycle;
+	% 2) Patrón de ladrillos blanco encima
+	\pattern[pattern=bricks, pattern color=white]
+	(0,3) -- (2,5) -- (4,3) -- cycle;
+\end{tikzpicture}  \\[2mm]
+
+\begin{tikzpicture}
+	% 1) Fondo rojo
+\filldraw[fill=red, draw=black]
+(0,3) -- (2,5) -- (4,3) -- cycle;
+\pattern[pattern=bricks, pattern color=white]
+(0,3) -- (2,5) -- (4,3) -- cycle;
+\end{tikzpicture}  \\[2mm]
+
+\begin{tikzpicture}
+
+\draw[red, thick] (0,0) -- (5,0); \\[2mm]
+\draw[blue, thick] (0,0.5) -- (5,0.5); \\[2mm]
+\draw[green, thick] (0,1) -- (5,1); \\[2mm]
+\draw[brown, thick] (0,1.5) -- (5,1.5); \\[2mm]
+\draw[yellow, thick] (0,2) -- (5,2); \\[2mm]
+\draw[orange, thick] (0,2.5) -- (5,2.5); \\[2mm]
+\draw[purple, thick] (0,3) -- (5,3); \\[2mm]
+\draw[gray, thick] (0,3.5) -- (5,3.5); \\[2mm]
+
+\node[right] at (5.2,0) {Rojo}; \\[2mm]
+\node[right] at (5.2,0.5) {Azul}; \\[2mm]
+\node[right] at (5.2,1) {Verde}; \\[2mm]
+\node[right] at (5.2,1.5) {Marrón}; \\[2mm]
+\node[right] at (5.2,2) {Amarillo}; \\[2mm]
+\node[right] at (5.2,2.5) {Naranja}; \\[2mm]
+\node[right] at (5.2,3) {Violeta}; \\[2mm]
+\node[right] at (5.2,3.5) {Gris}; \\[2mm]
+
+\end{tikzpicture}  \\[2mm]
+
+\begin{tikzpicture}
+	\fill[red, pattern=dots] (6,0) rectangle (8,2);
+	
+	\draw[ultra thin, color=red, opacity=.15, ultra thick, fill=violet, opacity=.15] (0,0) rectangle (3,2) ;  \\[2mm]
+	
+	\draw[ultra thin, color=red, opacity=.15, ultra thick, fill=violet, opacity=.15] (0,0) rectangle (3,2) ;  
+\end{tikzpicture}  \\[2mm]
+
+\begin{tikzpicture}
+	\draw[red, line width=1] (0,0) grid (6,6); \\[2mm]
+	
+	\draw[<->, line width=3, red] (0,0) -- (2,-3) node [right] {\huge \textbf{simple}};
+\end{tikzpicture}
+
+\begin{tikzpicture}
+%\draw[help lines, gray!30] (-1,-1) grid (4,6);  \\[2mm]
+\draw[gray, thin] (-3,-3) -- (2,-3);  \\[2mm]
+
+\fill[red] (0:2) circle (2pt) node[right] {(0:2)};  \\[2mm]
+
+\foreach \a/\r in {0/2, 45/2, 90/2, 135/2,180/2, 270/2} 
+\draw[violet, dashed] (0,0) -- (\a:\r);  \\[2mm]
+
+\end{tikzpicture}  \\[2mm]
+
+
+\begin{tikzpicture}
+	\draw[thick, blue] (0,0) -- ++(2,0) -- ++(0,1.5) -- ++(-1,0) -- ++(0,-0.5);
+	 \fill[red] (0,0) circle (2pt) node[below] {inicio};
+	 \fill[red] (1,1) circle (2pt) node[right] {fin};
+\end{tikzpicture}  \\[2mm]
+
+
+\begin{tikzpicture}[scale=1]
+	% Caso con ++
+	\draw[thick, blue] (0,0) -- ++(2,0) -- ++(0,1.5) -- ++(-1,0) -- ++(0,-0.5);
+	\fill[red] (0,0) circle (2pt) node[below left]{Inicio};
+	
+	\begin{scope}[xshift=5cm] % separar los dos casos
+		% Caso con +
+		\draw[thick, blue] (0,0) -- +(2,0) -- +(0,1.5) -- +(-1,0) -- +(0,-0.5);
+		\fill[red] (0,0) circle (2pt) node[below left]{Inicio};
+	\end{scope}
+\end{tikzpicture}  \\[2mm]
+
+
+\begin{tikzpicture}
+	% Primer círculo en el origen
+	\draw[blue] (0,0) circle (1cm);
+	
+	% Segundo círculo dentro de un scope desplazado
+	\begin{scope}[xshift=3cm]
+		\draw[red] (0,0) circle (1cm);
+	\end{scope}
+	
+	\begin{scope}[xshift=6cm, scale=3]
+		\draw[green] (0,0) circle (0.5cm);
+	\end{scope}
+		% Tercer círculo (vuelve al origen)
+	\begin{scope}[xshift=0cm]
+		\draw[green] (0,0) circle (0.5cm);
+	\end{scope}
+\end{tikzpicture}  \\[2mm]
+
+\begin{tikzpicture}
+	\draw[draw = red, line width =2pt] (0,0) rectangle (2,2);
+	
+	\shadedraw[inner color = violet!65!gray, outer color = blue!65!red, red!45!green, line width =2pt] (3,0) rectangle (5,2);
+	
+	\shadedraw[left color=red, right color=blue, middle color=yellow!8] (6,0) rectangle (8,2);
+	
+\shadedraw[left color=red, right color=blue, middle color=yellow, shading angle=45] (10,0) rectangle (12,2);
+
+\end{tikzpicture}  \\[2mm]
+	
+\begin{tikzpicture}
+	
+	\begin{scope}[on background layer]
+		\fill[yellow!5] (-6,-6) rectangle (6,6);
+	\end{scope}
+	
+	\begin{scope}
+		\draw[step=.5, draw = red!25, line width =.3pt] (-6,-6) grid (6,6);  
+		\draw[<->, >=Stealth, ultra thick, red] (0,-6) -- (0,6) ; 
+		\draw[<->, >=Stealth, ultra thick, red] (-6,0) -- (6,0) ;
+		
+				% Marcas de unidades en el eje X
+		\foreach \x in {-6,-5,-4,-3,-2,-1,1,2,3,4,5,6}
+		\draw[black, thick] (\x,-0.1) -- (\x,0.1);
+		
+		% Marcas de unidades en el eje Y  
+		\foreach \y in {-6,-5,-4,-3,-2,-1,1,2,3,4,5,6}
+		\draw[black, thick] (-0.1,\y) -- (0.1,\y);
+		
+% Números en el eje X (sin el 0)
+\foreach \x in {-6,-5,-4,-3,-2,-1,1,2,3,4,5,6}
+\node[black, below] at (\x,-0.3) {\x};
+
+% Números en el eje Y (sin el 0)  
+\foreach \y in {-6,-5,-4,-3,-2,-1,1,2,3,4,5,6}
+\node[black, left] at (-0.3,\y) {\y};
+	\end{scope}
+		
+\end{tikzpicture} \\[2mm]
+
+\begin{tikzpicture}
+%\draw[draw = red, line width =2pt] (0,0) rectangle (2,2);
+%\draw[draw = red, line width =2pt, rotate=45] (0,0) rectangle (2,2);
+%\draw[draw = red, line width =2pt, rotate around={45:(2,0)}] (2,0) rectangle (4,2);
+%\draw[draw = red, line width =2pt] (0,0) rectangle (2,2);
+%\draw[draw = red, line width =2pt] (0,0) rectangle (2,2);
+
+	% Fondo amarillo del área 0..6 x 0..6
+	\fill[yellow!5] (0,0) rectangle (6,6);
+	
+	% Cuadrícula y flecha por encima del fondo
+	\draw[red, line width=1] (0,0) grid (6,6);
+	
+\end{tikzpicture} \\[2mm]
+
+\begin{tikzpicture}
+	\begin{scope}[on background layer]
+		\fill[yellow!5] (0,0) rectangle (6,6);
+	\end{scope}
+	
+	\draw[red, line width=1] (0,0) grid (6,6);
+
+\end{tikzpicture} \\[2mm]
+
+\planoCartesiano{green!5}{violet}{6}{5}
+
+
+
+
+
+
+
+
+\end{document}
