@@ -1,0 +1,1990 @@
+% !TEX program = lualatex
+% !TEX encoding = UTF-8
+%
+% Guía 83: Modelando mi mundo
+% Grado 9 - Meta 28
+% Fe y Alegría Colombia
+%
+% Compilar con: lualatex guia_83.tex
+%
+
+\documentclass[12pt,a4paper]{article}
+
+% ========== PAQUETES ==========
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% Matemáticas
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% Tablas y colores
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+
+% Cajas y entornos destacados
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Listas y enumeraciones
+\usepackage{enumitem}
+
+% Código verbatim
+\usepackage{fancyvrb}
+
+% Gráficos
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% Enlaces
+\usepackage[hidelinks]{hyperref}
+
+% ========== CONFIGURACIÓN DE COLORES ==========
+\definecolor{azuloscuro}{RGB}{41,72,137}
+\definecolor{rojoclaro}{RGB}{220,80,80}
+\definecolor{verdeclaro}{RGB}{100,180,100}
+\definecolor{fondogris}{RGB}{240,240,240}
+\definecolor{fondorosa}{RGB}{255,230,240}
+\definecolor{fondoverde}{RGB}{230,255,240}
+\definecolor{fondoazul}{RGB}{230,240,255}
+
+% ========== CONFIGURACIÓN DE ESPACIADO ==========
+% Reducir espacio entre secciones
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+% Reducir espacio antes y después de listas
+\setlist{nosep, topsep=0.5em, partopsep=0pt}
+
+% ========== COMANDOS PERSONALIZADOS ==========
+\newcommand{\seccion}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+
+% ========== TÍTULO DEL DOCUMENTO ==========
+\title{\textbf{Guía 83: Modelando mi mundo}}
+\author{Fe y Alegría Colombia}
+\date{}
+
+% ========== INICIO DEL DOCUMENTO ==========
+\begin{document}
+
+% ========== PORTADA ==========
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+
+    {\Huge\textbf{CH-FyA-0499}}
+
+    \vspace{1cm}
+
+    {\LARGE Guía 83: Modelando mi mundo}
+
+    \vspace{2cm}
+
+    {\Large Fe y Alegría Colombia}
+
+    \vfill
+
+    {\large Código: CH-FyA-0499}
+
+    \vspace{1cm}
+\end{titlepage}
+
+% ========== PÁGINA 2 - INFORMACIÓN ==========
+\newpage
+\begin{center}
+    {\large\textbf{Guía 83}}
+
+    {\large\textbf{Meta 28}}
+
+    {\large\textbf{GRADO 9}}
+
+    \vspace{1cm}
+
+    {\LARGE\textbf{GUÍA DEL ESTUDIANTE}}
+
+    \vspace{1cm}
+
+    {\Huge\textbf{MODELANDO MI MUNDO}}
+
+\end{center}
+
+% ========== PÁGINA 3 - CRÉDITOS ==========
+\newpage
+
+\seccion{Guías de Aprendizaje de Cualificar Matemáticas}
+
+\subsection*{Fe y Alegría Colombia}
+
+\textbf{Víctor Murillo} \\
+Director Nacional
+
+\subsection*{Desarrollo de contenidos pedagógicos y educativos}
+Jaime Benjumea - Marcela Vega
+
+\subsection*{Autores de la guía 83}
+Javier Andrés Poveda Zapata, Colegio Diego Maya Salazar \\
+Javier Alexander Tenorio Quiñones, Colegio Diego Maya Salazar
+
+\subsection*{Coordinación pedagógica}
+Francy Paola González Castelblanco \\
+Andrés Forero Cuervo \\
+GRUPO LEMA \url{www.grupolema.org}
+
+\subsection*{Revisores}
+Jaime Benjumea \\
+Francy Paola González Castelblanco \\
+Andrés Forero Cuervo
+
+% ========== PÁGINA 4 - ESTRUCTURA DE LAS GUÍAS ==========
+\newpage
+
+\seccion{MODELANDO MI MUNDO}
+
+\subsection*{GRADO 9 - META 28 - PENSAMIENTO: NUMÉRICO}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+\rowcolor{fondoazul}
+\textbf{Guía 82} & \textbf{Guía 83} & \textbf{Guía 84} \\
+\textbf{(Duración 13 h)} & \textbf{(Duración 13 h)} & \textbf{(Duración 13 h)} \\
+\hline
+• Magnitudes conmensurables y no conmensurables.
+
+• Expansión decimal no periódica y los números irracionales.
+
+• Propiedades de las operaciones de los reales y equivalencias entre expresiones numéricas.
+
+• Aproximación y truncamiento irracionales y graficación en la recta.
+
+• Notación científica.
+
+• Propiedades de los exponentes.
+
+• Radicación y sus propiedades.
+
+• Logaritmación y sus propiedades; logaritmos en distintas bases.
+&
+\textbf{ACTIVIDAD 1}
+
+• Secuencias con figuras y patrones.
+
+• Expresa patrones en tablas y con expresiones algebraicas.
+
+• Números figurados.
+
+• Sistemas de ecuaciones lineales de dos incógnitas.
+
+\textbf{ACTIVIDAD 2}
+
+• Resuelve problemas planteando y resolviendo sistemas de ecuaciones lineales.
+
+• Expresa intervalos en la recta con desigualdades, con notación de conjuntos, en la recta y con notación de intervalos.
+&
+• Relaciones y funciones.
+
+• Funciones lineales $(y=mx+b)$ y funciones de proporcionalidad $(y=mx)$.
+
+• Pendiente de una recta.
+
+• Función cuadrática, expresiones algebraicas, tabla y gráfica.
+
+• Estrategias para factorizar una cuadrática.
+
+• Vértice, puntos de corte, amplitud, simetría, crecimiento y decrecimiento de la parábola.
+
+• Función de proporcionalidad inversa.
+
+• Funciones exponenciales. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection*{META DE APRENDIZAJE N. 28:}
+
+Reconozco procesos de aproximación y truncamiento de números irracionales para explicar cómo es su expansión decimal en contextos geométricos y numéricos (secuencias y sucesiones) que involucren números figurados y mediciones de magnitudes inconmensurables. También interpreto situaciones en contextos contables y de finanzas en los que se requiera plantear un sistema de ecuaciones lineales de una incógnita o analizar funciones lineales calculando capital inicial y final, porcentaje de intereses anuales, precios de venta, problemas en los que se quiera estimar la ganancia máxima (función cuadrática) o analizar cómo crece un capital de forma exponencial y funciones de proporcionalidad inversa con ayuda de un software o applets de Geogebra.
+
+\subsection*{PREGUNTAS ESENCIALES:}
+
+\textbf{Actividad 1:}
+\begin{itemize}
+    \item ¿Por qué crees que hay patrones en muchas de las estructuras de la naturaleza?
+    \item ¿Cómo crees que los números pueden formar figuras y ayudarnos a entender nuestro mundo físico?
+    \item ¿Cuál es la importancia de modelar matemáticamente fenómenos físicos, sociales y económicos en el entorno donde habito diario?
+\end{itemize}
+
+\textbf{Actividad 2:}
+\begin{itemize}
+    \item ¿Qué relación existe entre las ecuaciones lineales de un sistema de ecuaciones asociado a una situación de la cotidianidad?
+    \item ¿Qué diferencias encuentras entre los sistemas de ecuaciones lineales platónicos y los de la vida real?
+\end{itemize}
+
+% ========== PÁGINA 5 - EVIDENCIAS DE APRENDIZAJE ==========
+\newpage
+
+\subsection*{EVIDENCIAS DE APRENDIZAJE}
+
+\textbf{Actividad 1:}
+\begin{itemize}
+    \item Dibujo secuencias de figuras en hojas cuadriculadas dado un patrón y dada la secuencia de figuras puede identificar el patrón con el que está formada.
+    \item Utilizo tablas y expresiones algebraicas para expresar los patrones en secuencias.
+    \item Dibujo números figurados sencillos, expresa verbalmente el patrón observado en estas secuencias y lo escribo con expresiones algebraicas.
+    \item Resuelvo sistemas de ecuaciones lineales de dos incógnitas utilizando estrategias como graficar las ecuaciones, eliminar una incógnita, igualar las ecuaciones y la sustitución.
+\end{itemize}
+
+\textbf{Actividad 2:}
+\begin{itemize}
+    \item Resuelvo sistemas de ecuaciones lineales de dos incógnitas utilizando estrategias como graficar las ecuaciones, eliminar una incógnita, igualar las ecuaciones y la sustitución.
+    \item Reconozco la utilidad de plantear y resolver sistemas de ecuaciones para resolver problemas.
+    \item Reconozco cuándo un sistema de ecuaciones lineales de dos incógnitas no tiene solución.
+    \item Interpreto y grafico intervalos en la recta como subconjuntos de los reales y los representa utilizando notación de intervalos y desigualdades.
+    \item Represento intervalos utilizando la notación de conjuntos y da sentido a esta notación graficándolos en la recta real.
+\end{itemize}
+
+% ========================================
+% ACTIVIDAD 1: PATRONES Y SISTEMAS DE ECUACIONES
+% ========================================
+
+\newpage
+\seccion{ACTIVIDAD 1: Patrones y sistemas de ecuaciones}
+
+Aprendamos a reconocer los diferentes métodos para la solución de sistemas de ecuaciones lineales con dos incógnitas, conozcamos de los patrones numéricos que aparecen en diversas situaciones cotidianas.
+
+\subsection*{A) Activando saberes previos}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,title=RECUERDA QUE...]
+
+\textbf{Recordemos el despeje de incógnitas en una ecuación}
+
+Recordemos que es una \textbf{igualdad}, cuando hablamos de igualdad hablamos de dos cantidades o expresiones algebraicas que poseen el mismo valor como por ejemplo: $a = b+c$, ahora bien, también es importante definir la \textbf{ecuación} y para ello diremos que la ecuación es una igualdad, en la que hay una o más cantidades desconocidas y a las cuales, se les llaman \textbf{incógnitas}, y que solo es verdadera para ciertos valores de las incógnitas, como por ejemplo: $3X - 5 = 2X - 3$, para este caso la igualdad se cumple para $X = 2$
+
+\textbf{¿Pero cómo llegamos a ese resultado de $X = 2$?}
+
+\begin{enumerate}
+    \item \textbf{Cualquier término de una ecuación se puede pasar de un miembro a otro cambiándole el signo} (o sea de un lado a otro teniendo en cuenta el símbolo de la igualdad).
+
+    En efecto: $3X - 5 = 2X - 3$
+
+    \textbf{Paso 1:} pasamos $2x$ al lado izquierdo de la ecuación cambiando su signo de positivo a negativo.
+
+    \textbf{Paso 2:} pasamos el $-5$ del lado izquierdo al derecho cambiando su signo a positivo.
+
+    Dando como resultado la siguiente ecuación: $3X - 2X = -3 + 5$
+
+    \textbf{Paso 3:} ahora realizamos suma de términos semejantes en ambos lados o miembros de la ecuación.
+
+    Dando como resultado el valor de la incógnita para nuestro ejemplo en particular.
+
+    $X = 2$
+
+    En efecto, si sustituimos la $X$ por 2, tenemos $3(2) - 5 = 2(2) - 3$, es decir realizando las operaciones tenemos $1 = 1$. Si damos a $X$ un valor distinto de 2, la igualdad no se verifica o no es verdadera.
+
+    \item \textbf{Cualquier término de una ecuación que esté multiplicando se puede pasar de un miembro a otro a dividir y viceversa.}
+
+    Ejemplo: $2X + 1 = 3$
+
+    $2X = 3 - 1$, $2X = 2$ ahora el 2 que está multiplicando pasa al otro lado de la ecuación a dividir.
+
+    $X = \frac{2}{2}$ por lo tanto $X = 1$, valor que satisface la ecuación.
+\end{enumerate}
+
+\end{tcolorbox}
+
+\subsection*{PRACTICA}
+
+Ahora vamos a practicar: resuelve los siguientes ejercicios, donde debes hallar el valor de $X$ para que se cumpla la igualdad.
+
+\begin{enumerate}[label=\alph*)]
+    \item $4X = 12$ \\
+    $X =$ \rule{2cm}{0.4pt}
+
+    \item $5X - 3 = 66 + 2X$ \\
+    $X =$ \rule{2cm}{0.4pt}
+
+    \item $9X - 5 = 3(X - 2) + 13$ \\
+    $X =$ \rule{2cm}{0.4pt}
+
+    \item $\frac{X}{6} - \frac{X-1}{2} = \frac{X-13}{9}$ \\
+    $X =$ \rule{2cm}{0.4pt}
+\end{enumerate}
+
+\begin{center}
+\url{https://www.superprof.es/apuntes/escolar/matematicas/algebra/ecuaciones/ejercicios-interactivos-de-ecuaciones.html}
+
+\textit{Verifica las respuestas de la sección A con tu profesor.}
+\end{center}
+
+% ========== SECCIÓN B: CONCEPTOS ==========
+\vspace{1.5cm}
+\subsection*{B) Conceptos: Sistemas de ecuaciones, secuencias, patrones y números figurados}
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=MINI-EXPLICACIONES: SECUENCIAS DE NÚMEROS,breakable]
+
+\textbf{¿Qué son las secuencias de números? ¿Cómo podemos averiguar el número que sigue?}
+
+En esta guía:
+
+Las \textbf{secuencias de números} son números ordenados según una regla fija.
+
+Lo más difícil es encontrar esa regla, ya que una vez que la encontremos tan solo tendremos que seguirla para hallar los siguientes números de la secuencia.
+
+Vamos a ver unos pasos que pueden ayudarnos a encontrar la regla de las secuencias numéricas.
+
+Lo primero es averiguar si la secuencia es \textbf{ascendente}, \textbf{descendente} o una \textbf{combinación de ambas}.
+
+\textbf{Secuencias de números ascendentes}
+
+Son secuencias donde cada número es mayor que el anterior. Suelen ser las más fáciles, ya que la forma de ascender es sumar o multiplicar, o una combinación de ambas.
+
+\begin{itemize}
+    \item \textbf{Secuencias de números de sumas:}
+
+    \[ 1 \quad 2 \quad 3 \quad 4 \quad \ldots \]
+
+    Esta secuencia es ascendente y para pasar de un número al siguiente tan solo tenemos que sumar 1.
+
+    Por lo tanto, el siguiente número de esta secuencia es $4 + 1 = 5$
+
+    \item \textbf{Secuencias de números de multiplicaciones:}
+
+    \[ 1 \quad 2 \quad 4 \quad 8 \quad \ldots \]
+
+    Esta secuencia también es ascendente pero ahora para pasar de un número al siguiente hemos ido multiplicando por 2.
+
+    Por lo tanto, el siguiente número de esta secuencia es $8 \times 2 = 16$.
+
+    \item \textbf{Secuencias de números de sumas y multiplicaciones:}
+
+    \[ 1 \quad 5 \quad 10 \quad 14 \quad \ldots \]
+
+    Esta secuencia también es ascendente pero ahora no estamos sumando un número ni estamos multiplicando por un número, sino que estamos alternando operaciones. Encuentra los números y operaciones y colócalos en los cuadros que aparecen a continuación:
+
+    \vspace{0.5cm}
+
+    Por lo tanto, el siguiente número de la secuencia es: \rule{2cm}{0.4pt}
+\end{itemize}
+
+\textbf{Secuencias de números descendentes}
+
+Son secuencias donde cada número es menor que el anterior. Las operaciones matemáticas que tendremos que buscar como reglas son las restas y las divisiones.
+
+\[ 14 \quad 11 \quad 8 \quad 5 \quad \ldots \]
+
+En el caso de esta secuencia los números son descendentes. Encuentra el número y operación y colócalos en los cuadros que aparecen a continuación:
+
+\vspace{0.5cm}
+
+Por lo tanto, el siguiente número de la secuencia es: \rule{2cm}{0.4pt}
+
+Te dejo una secuencia más para que intentes encontrar la regla:
+
+\[ 5 \quad 3 \quad 9 \quad 7 \quad 21 \quad \ldots \]
+
+\end{tcolorbox}
+
+\textit{Tomado de: \url{https://www.smartick.es/blog/matematicas/recursos-didacticos/secuencias-de-numeros/}}
+
+\vspace{1cm}
+
+\textbf{Observa la siguiente secuencia de figuras:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Figura 1: 2x1 (2 puntos)
+\begin{scope}[xshift=0cm]
+\node at (0.5, -1.2) {Figura 1};
+\foreach \x in {0,1} {
+    \fill[red] (\x*0.5, 0) circle (0.15);
+}
+\end{scope}
+
+% Figura 2: 3x2 (6 puntos)
+\begin{scope}[xshift=3cm]
+\node at (0.75, -1.2) {Figura 2};
+\foreach \x in {0,1,2} {
+    \fill[red] (\x*0.5, 0) circle (0.15);
+}
+\foreach \x in {0,1,2} {
+    \fill[blue] (\x*0.5, 0.5) circle (0.15);
+}
+\end{scope}
+
+% Figura 3: 4x3 (12 puntos)
+\begin{scope}[xshift=6.5cm]
+\node at (1, -1.2) {Figura 3};
+\foreach \x in {0,1,2,3} {
+    \fill[red] (\x*0.5, 0) circle (0.15);
+}
+\foreach \y in {1,2} {
+    \foreach \x in {0,1,2,3} {
+        \fill[blue] (\x*0.5, \y*0.5) circle (0.15);
+    }
+}
+\end{scope}
+
+% Figura 4: 5x4 (20 puntos)
+\begin{scope}[xshift=10.5cm]
+\node at (1.25, -1.2) {Figura 4};
+\foreach \x in {0,1,2,3,4} {
+    \fill[red] (\x*0.5, 0) circle (0.15);
+}
+\foreach \y in {1,2,3} {
+    \foreach \x in {0,1,2,3,4} {
+        \fill[blue] (\x*0.5, \y*0.5) circle (0.15);
+    }
+}
+\end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+\textbf{Contesta:}
+\begin{enumerate}[label=\alph*.]
+    \item ¿Cómo se forma cada figura de la secuencia?
+    \item ¿Cuál sería la figura de la posición 6?
+    \item ¿Cuántos puntos rojos y cuántos puntos azules tendrá la figura de la posición 10?
+    \item Cuenta el número total de puntos que tiene cada figura y forma con ellos una secuencia de números.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\textbf{Practiquemos más:} Calcula los 10 primeros términos de cada secuencia de acuerdo con su descripción:
+
+\begin{enumerate}[label=\alph*.]
+    \item Secuencia cuyo primer término es $-4$ y los restantes términos se obtienen adicionando 2 al término anterior y multiplicando el resultado por 5
+
+    \item Secuencia cuyo primer término es 24, y los restantes términos se obtienen multiplicando el término anterior por 10 y adicionando 5,3 unidades al resultado.
+
+    \item Secuencia cuyo tercer término es 8, en la que los otros términos se obtienen multiplicando por $-5$ el término anterior y adicionando 2 unidades.
+\end{enumerate}
+
+\textit{Tomado de: Secuencias matemáticas 9 editorial libros y libros S.A 2016}
+
+% ========== NÚMEROS FIGURADOS ==========
+\vspace{1cm}
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=MINI EXPLICACIÓN: NÚMEROS FIGURADOS Y SUS SECUENCIAS,breakable]
+
+\textbf{Números figurados y sus secuencias}
+
+En matemáticas, un \textbf{número figurado} es todo número natural que al ser representado por un conjunto de puntos equidistantes, puede formar una figura geométrica regular. Cuando esa representación forma un polígono regular tenemos un \textbf{número poligonal}, como el caso de los números triangulares, y cuando se puede formar un poliedro regular se denomina \textbf{número poliédrico}.
+
+\subsection*{Números poligonales}
+
+A esta categoría pertenecen: los números triangulares, los números cuadrados, los números pentagonales, los números hexagonales, los números heptagonales, y los números ortogonales entre otros.
+
+En la antigüedad la Aritmética y la Geometría iban de la mano. En sus investigaciones matemáticas, Pitágoras y sus discípulos utilizaban piedrecillas (en latín \textit{cálculus}) o marcas que disponían según determinadas formas geométricas. Así, podían asociar números y formas, cambiar estas y observar lo que ocurría con los respectivos números, relacionar unas formas con otras, unos números con otros, etc. En definitiva, trabajaban con la forma y el número a la vez. Los resultados fueron extraordinarios y permitieron descubrir importantes teoremas y relaciones. A lo largo de la historia ilustres matemáticos como Gauss o Euler también dedicaron su tiempo al estudio de los números figurados.
+
+También hay números poligonales centrados que representan polígonos regulares en torno a un punto central (como los mostrados en la segunda columna de la siguiente tabla).
+
+Veamos la definición y construcción de algunos números figurados, nos enfocaremos en los cuadrados y triangulares.
+
+\end{tcolorbox}
+
+\subsubsection*{Números Triangulares}
+
+Los números triangulares son unos de los números figurados más conocidos. Numéricamente se escriben como $1, 3, 6, 10, 15, \ldots$
+
+Se trata, como podemos ver, de lo que llamamos una sucesión y que se explicará más adelante. Esto mismo ocurre con todos los números figurados. Observemos la representación de los números triangulares.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+% Número triangular 1 (1 punto)
+\begin{scope}[xshift=0cm]
+\fill[blue] (0,0) circle (0.15);
+\node at (0, -1) {$T_1 = 1$};
+\end{scope}
+
+% Número triangular 2 (3 puntos)
+\begin{scope}[xshift=2.5cm]
+\fill[blue] (0,0) circle (0.15);
+\fill[blue] (-0.4,-0.5) circle (0.15);
+\fill[blue] (0.4,-0.5) circle (0.15);
+\node at (0, -1.3) {$T_2 = 3$};
+\end{scope}
+
+% Número triangular 3 (6 puntos)
+\begin{scope}[xshift=5.5cm]
+\fill[blue] (0,0) circle (0.15);
+\fill[blue] (-0.4,-0.5) circle (0.15);
+\fill[blue] (0.4,-0.5) circle (0.15);
+\fill[blue] (-0.8,-1) circle (0.15);
+\fill[blue] (0,-1) circle (0.15);
+\fill[blue] (0.8,-1) circle (0.15);
+\node at (0, -1.8) {$T_3 = 6$};
+\end{scope}
+
+% Número triangular 4 (10 puntos)
+\begin{scope}[xshift=9cm]
+\fill[blue] (0,0) circle (0.15);
+\fill[blue] (-0.4,-0.5) circle (0.15);
+\fill[blue] (0.4,-0.5) circle (0.15);
+\fill[blue] (-0.8,-1) circle (0.15);
+\fill[blue] (0,-1) circle (0.15);
+\fill[blue] (0.8,-1) circle (0.15);
+\fill[blue] (-1.2,-1.5) circle (0.15);
+\fill[blue] (-0.4,-1.5) circle (0.15);
+\fill[blue] (0.4,-1.5) circle (0.15);
+\fill[blue] (1.2,-1.5) circle (0.15);
+\node at (0, -2.3) {$T_4 = 10$};
+\end{scope}
+
+% Número triangular 5 (15 puntos)
+\begin{scope}[xshift=13cm]
+\fill[blue] (0,0) circle (0.15);
+\fill[blue] (-0.4,-0.5) circle (0.15);
+\fill[blue] (0.4,-0.5) circle (0.15);
+\fill[blue] (-0.8,-1) circle (0.15);
+\fill[blue] (0,-1) circle (0.15);
+\fill[blue] (0.8,-1) circle (0.15);
+\fill[blue] (-1.2,-1.5) circle (0.15);
+\fill[blue] (-0.4,-1.5) circle (0.15);
+\fill[blue] (0.4,-1.5) circle (0.15);
+\fill[blue] (1.2,-1.5) circle (0.15);
+\fill[blue] (-1.6,-2) circle (0.15);
+\fill[blue] (-0.8,-2) circle (0.15);
+\fill[blue] (0,-2) circle (0.15);
+\fill[blue] (0.8,-2) circle (0.15);
+\fill[blue] (1.6,-2) circle (0.15);
+\node at (0, -2.8) {$T_5 = 15$};
+\end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+\textbf{Completa el diagrama de puntos anterior con los números que siguen en la secuencia y dibújalos en tu cuaderno.}
+
+Si contamos el número de puntos de cada posición se obtiene la siguiente secuencia de números: $1, 3, 6, 10, 15, \ldots$
+
+Esta secuencia de números es lo que se conoce como una \textbf{sucesión}. Los números $1, 3, 6, 10, 15, \ldots$ son los \textbf{términos} de la sucesión y se identifican de acuerdo con su posición, usando una letra y un subíndice.
+
+\[ a_1 = 1 \quad a_2 = 3 \quad a_3 = 6 \quad a_4 = 10 \quad a_5 = 15 \ldots \]
+
+\subsection*{SUCESIONES}
+
+Antes de leer la explicación te invito a ver el siguiente video:
+
+\url{https://www.youtube.com/watch?v=FGoSqeFl5zg}
+
+Gracias a este detalle que acabamos de señalar, podemos construir una fórmula que permita calcular el término enésimo de los números triangulares. En la siguiente tabla lo veremos con más claridad.
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Número de término} & \textbf{Término} \\
+\hline
+1 & 1 \\
+2 & $3 = 1 + 2$ \\
+3 & $6 = 1 + 2 + 3$ \\
+4 & $10 = 1 + 2 + 3 + 4$ \\
+5 & $15 = 1 + 2 + 3 + 4 + 5$ \\
+6 & $21 = 1 + 2 + 3 + 4 + 5 + 6$ \\
+7 & $28 = 1 + 2 + 3 + 4 + 5 + 6 + 7$ \\
+8 & $36 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8$ \\
+\hline
+\end{tabular}
+\end{center}
+
+El segundo término se obtiene sumando dos al primero, el tercero sumando tres al segundo, el cuarto cuatro al quinto, etc. Siguiendo este patrón, el décimo término será:
+
+\[ 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 \]
+
+Es decir, la suma de los diez primeros números naturales. Por tanto, el enésimo término de la sucesión de números triangulares lo podemos hallar con la siguiente fórmula:
+
+\textbf{Término general de los números triangulares:}
+
+\[ a_n = \left( \frac{n^2 + n}{2} \right) \]
+
+\subsubsection*{Números Cuadrados}
+
+Los números cuadrados son un tipo de números figurados muy conocidos. Numéricamente, la sucesión de los números cuadrados puede escribirse de dos formas, como simples números y como una serie de potencias:
+
+\[ 1, 4, 9, 16, \ldots \quad \text{o} \quad 1^2, 2^2, 3^2, 4^2, \ldots \]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+% Número cuadrado 1 (1²=1)
+\begin{scope}[xshift=0cm]
+\fill[orange] (0,0) rectangle (0.8,0.8);
+\node at (0.4, -0.7) {$1^2 = 1$};
+\end{scope}
+
+% Número cuadrado 2 (2²=4)
+\begin{scope}[xshift=2.5cm]
+\foreach \x in {0,1} {
+    \foreach \y in {0,1} {
+        \fill[orange] (\x*0.8,\y*0.8) rectangle (\x*0.8+0.7,\y*0.8+0.7);
+    }
+}
+\node at (0.7, -0.7) {$2^2 = 4$};
+\end{scope}
+
+% Número cuadrado 3 (3²=9)
+\begin{scope}[xshift=6cm]
+\foreach \x in {0,1,2} {
+    \foreach \y in {0,1,2} {
+        \fill[orange] (\x*0.8,\y*0.8) rectangle (\x*0.8+0.7,\y*0.8+0.7);
+    }
+}
+\node at (1.1, -0.7) {$3^2 = 9$};
+\end{scope}
+
+% Número cuadrado 4 (4²=16)
+\begin{scope}[xshift=10.5cm]
+\foreach \x in {0,1,2,3} {
+    \foreach \y in {0,1,2,3} {
+        \fill[orange] (\x*0.8,\y*0.8) rectangle (\x*0.8+0.7,\y*0.8+0.7);
+    }
+}
+\node at (1.5, -0.7) {$4^2 = 16$};
+\end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+\textbf{Completa el diagrama de puntos anterior con los números 25 y 36 y dibújalo en tu cuaderno.}
+
+Existe una regla de formación, que es ``cada término se obtiene elevando al cuadrado su número de orden''. Así como también un término general, es fácil dar con su término general, solo tenemos que expresar algebraicamente su regla de formación:
+
+\[ a_n = n^2 \]
+
+Ejemplo:
+\[ a_1 = 1 \quad a_2 = 4 \quad a_3 = 9 \quad a_4 = 16 \]
+
+\newpage
+
+\subsection*{Más sobre Sucesiones}
+
+Una \textbf{sucesión} es un conjunto de números dispuestos en cierto orden. Su representación simbólica es:
+
+\[ \{a_n\} = \{a_1, a_2, a_3, \ldots, a_n, \ldots\} \]
+
+Los números $\{a_1, a_2, a_3, \ldots, a_n, \ldots\}$ que forman una sucesión se denominan \textbf{términos}. El subíndice indica la posición que ocupa cada término en la sucesión.
+
+Una sucesión es una función cuyo dominio es el conjunto de los \textbf{números naturales} y su rango es un subconjunto de los \textbf{números reales}. En general, podemos decir que una sucesión está definida por una expresión con una variable que toma valores naturales de 1 en adelante y en forma sucesiva, y se obtiene así los términos de la sucesión.
+
+\textbf{Vamos a ver un ejemplo a continuación:}
+
+\textbf{Ejemplo 1.} Calcula los 5 primeros términos de la sucesión cuyo término general está dado por la expresión:
+
+\[ a_n = \frac{n^2}{2n - 1} \]
+
+\textbf{Solución:} Como $n$ representa la posición, para calcular cada término, se reemplaza $n$ por los cinco primeros números naturales:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Si} & \textbf{Se obtiene} & \textbf{Que es el} \\
+\hline
+$n = 1$ & $a_1 = \frac{(1)^2}{2(1) - 1} = \frac{1}{1} = 1$ & Primer término \\
+\hline
+$n = 2$ & $a_2 = \frac{(2)^2}{2(2) - 1} = \frac{4}{3}$ & Segundo término \\
+\hline
+$n = 3$ & $a_3 = $ & Tercer término \\
+\hline
+$n = 4$ & $a_4 = $ & Cuarto término \\
+\hline
+$n = 5$ & $a_5 = $ & Quinto término \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Ahora es tu turno, encuentra el tercer, cuarto y quinto término de la tabla anterior y lleva la actividad a tu cuaderno.}
+
+\vspace{1cm}
+
+\textbf{Ejemplo 2.} Determina la expresión del término general de la siguiente sucesión:
+
+\[ \{a_n\} = \{0, 3, 8, 15, 24, 35, 48, 63, \ldots\} \]
+
+\textbf{Solución:} Cada término equivale al cuadrado de su posición menos 1
+
+Observa:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{TÉRMINOS} & \textbf{POSICIÓN} & \textbf{OPERACIÓN} \\
+\hline
+0 & 1 & $1^2 - 1 = 0$ \\
+\hline
+3 & 2 & $2^2 - 1 = 3$ \\
+\hline
+8 & 3 & $3^2 - 1 = 8$ \\
+\hline
+15 & 4 & \\
+\hline
+24 & 5 & \\
+\hline
+35 & 6 & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Completa en tu cuaderno la tabla anterior.}
+
+Por lo tanto, el término general de la sucesión es $a_n = n^2 - 1$
+
+Para probar el resultado obtenido, se reemplaza $n$ por algún valor y se debe obtener el término de la $n$-ésima posición.
+
+Vamos a reforzar un poquito más lo aprendido por medio del siguiente video:
+
+\url{https://www.youtube.com/watch?v=lXEe11Sfwgo}
+
+\vspace{1cm}
+
+\textbf{El término general de una sucesión} es una expresión algebraica que me permite calcular cualquier término de la sucesión a partir de su posición. Su representación es $a_n$ e indica el término que ocupa el término la $n$-ésima posición.
+
+\subsection*{Vamos a practicar sobre lo aprendido}
+
+\begin{enumerate}[label=\alph*.]
+    \item También existen otros tipos de números figurados dependiendo la forma geométrica resultante que se obtiene, como por ejemplo:
+
+    \begin{itemize}
+        \item El 37 es un número hexagonal centrado
+        \item El 22 es un número pentagonal
+        \item El 19 es un número triangular centrado
+    \end{itemize}
+
+    Investiga sobre más números figurados y dibújalos en tu cuaderno, utiliza colores diferentes para definir las secuencias de dichos números.
+
+    \item Encuentra la fórmula general o término general para obtener los números pares.
+
+    \item Encuentra la fórmula general o término general para obtener los números impares.
+\end{enumerate}
+
+\textit{Tomado de: \url{https://es.wikipedia.org/wiki/Número_figurado}}
+
+\textit{\url{http://geogebra.es/gauss/materiales_didacticos/eso/actividades/algebra/pautas/numeros_figurados/actividad.html}}
+
+\textit{Tomado de: Secuencias matemáticas 9 editorial libros y libros S.A 2016}
+
+% ========== SISTEMAS DE ECUACIONES ==========
+\vspace{1cm}
+
+\subsection*{SISTEMAS DE ECUACIONES}
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=MINI EXPLICACIÓN SISTEMAS DE ECUACIONES,breakable]
+
+\textbf{¿Qué son los sistemas de ecuaciones?}
+
+Un \textbf{sistema de ecuaciones} es un conjunto de dos o más ecuaciones que comparten dos o más incógnitas. Las soluciones de un sistema de ecuaciones son todos los valores que son válidos para todas las ecuaciones, o los puntos donde las gráficas de las ecuaciones se intersectan.
+
+\textbf{Ejemplo de sistema de ecuaciones:}
+
+\[ \begin{cases}
+x = 5y + 10 \\
+x = 4y + 16
+\end{cases} \]
+
+\textit{Tomado de: \url{http://www.montereyinstitute.org/courses/Algebra1/COURSE_TEXT_RESOURCE/U10_L2_T2_text_final_es.htm}}
+
+Los métodos de resolución de sistemas de ecuaciones lineales se basan en \textbf{transformaciones}; es decir, convierte un sistema de ecuaciones en otro equivalente, pero más sencillo de resolver. Un \textbf{sistema de ecuaciones lineales 2 × 2}, es aquel que está conformado por dos ecuaciones lineales, las cuales contienen dos incógnitas, como se muestra en el siguiente ejemplo.
+
+\[ \begin{cases}
+5x + 7y = -11 \\
+-3x + 4y = -24
+\end{cases} \]
+
+La gráfica que obtengo de una ecuación lineal con dos incógnitas es una recta. Empieza por hablar sobre dos ecuaciones lineales; es decir sistemas de ecuaciones 2 × 2. La solución de este tipo de sistema es el punto de intersección entre las dos rectas, o el lugar donde las dos ecuaciones tienen los mismos valores de $x$ y de $y$. Existen varios métodos para solucionar sistemas de ecuaciones, \textbf{método gráfico}, \textbf{método de sustitución}, \textbf{método de igualación}, \textbf{método de reducción o eliminación} y \textbf{por determinantes}.
+
+\end{tcolorbox}
+
+Vamos a conocer algunos métodos utilizados a la hora de resolver sistemas de ecuaciones:
+
+\subsubsection*{MÉTODO GRÁFICO}
+
+Comenzaremos con el \textbf{MÉTODO GRÁFICO} para dar solución al siguiente sistema de ecuaciones lineales 2 × 2.
+
+\[ \begin{cases}
+x + 2y = 4 \\
+3x - y = 5
+\end{cases} \]
+
+\textbf{Comienza tomando una hoja milimetrada, el lápiz y la regla.}
+
+\begin{enumerate}[label=\alph*.]
+    \item Traza un plano cartesiano en el centro de la hoja, enumera cada cuadrante. En la parte de atrás de la hoja, escribe el sistema de ecuaciones lineales y comienza a despejar la variable dependiente en este caso la $y$, en cada una de las ecuaciones.
+
+    Si realizaste correctamente el despeje de la primera ecuación, debiste obtener lo siguiente:
+
+    \[ x + 2y = 4 \quad \Rightarrow \quad y = \frac{4 - x}{2} \]
+
+    tomar los valores $-2, -1, 0, 1, 2$, pues son valores que te facilitarán los cálculos.
+
+    \item Después de haber despejado ambas ecuaciones, realiza para cada una de ellas su respectiva tabla de valores.
+
+    Recuerda que puedes proponer los valores que quieras para la variable $X$, aunque es aconsejable
+
+    \item Teniendo las tablas de valores realizadas, ubica cada una de las coordenadas para cada ecuación organizadamente. Al terminar de ubicar las coordenadas de la primera ecuación, procede a tomar la regla y un color o esfero de color y une los puntos, obteniendo la gráfica lineal.
+
+    \item Luego realiza el mismo procedimiento para la ecuación número dos, teniendo en cuenta que al unir los puntos con un color o esfero de color de tonalidad diferente al usado en la primera ecuación.
+
+    \item Si el proceso que realizaste anteriormente está bien, debieron cruzarse o interceptarse las dos rectas en un punto. Remarca este punto con un color diferente a los que ya utilizaste, con el fin de resaltarlo, pues este punto es la \textbf{SOLUCIÓN} de este sistema de ecuaciones lineales 2 × 2.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-2, xmax=5,
+    ymin=-2, ymax=4,
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=north west,
+    legend style={font=\small},
+    xtick={-2,-1,0,1,2,3,4,5},
+    ytick={-2,-1,0,1,2,3,4},
+]
+
+% Primera ecuación: x + 2y = 4  =>  y = (4-x)/2
+\addplot[
+    color=blue,
+    thick,
+    domain=-2:5,
+    samples=100
+] {(4-x)/2};
+\addlegendentry{$x + 2y = 4$}
+
+% Segunda ecuación: 3x - y = 5  =>  y = 3x - 5
+\addplot[
+    color=red,
+    thick,
+    domain=-2:5,
+    samples=100
+] {3*x - 5};
+\addlegendentry{$3x - y = 5$}
+
+% Punto de intersección (2, 1)
+\addplot[
+    only marks,
+    mark=*,
+    mark size=3pt,
+    color=green!60!black
+] coordinates {(2,1)};
+\node[above right, font=\small] at (axis cs:2,1) {Solución: $(2, 1)$};
+
+\end{axis}
+\end{tikzpicture}
+
+\vspace{0.5cm}
+
+\textbf{YA SÉ QUE EN EL PUNTO DONDE SE CRUCEN LAS DOS RECTAS DEL SISTEMA SERÁ LA SOLUCIÓN}
+\end{center}
+
+% ========== TIPOS DE SISTEMAS ==========
+\vspace{1cm}
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,breakable]
+
+Un sistema de dos ecuaciones lineales puede tener una solución, un número infinito de soluciones, o ninguna solución. Los sistemas de ecuaciones pueden clasificarse por el número de soluciones.
+
+Si un sistema tiene por lo menos una solución, se dice que es \textbf{consistente}.
+
+Si un sistema \textbf{consistente} tiene exactamente una solución, es \textbf{INDEPENDIENTE}.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=8cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=4,
+    ymin=-1, ymax=4,
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=north east,
+    legend style={font=\footnotesize},
+    title={\textbf{Sistema Consistente Independiente}},
+    title style={font=\small},
+]
+
+% Primera ecuación: 2x + y = 5  =>  y = 5 - 2x
+\addplot[
+    color=blue,
+    thick,
+    domain=-1:4,
+    samples=50
+] {5 - 2*x};
+\addlegendentry{$2x + y = 5$}
+
+% Segunda ecuación: x - y = -1  =>  y = x + 1
+\addplot[
+    color=red,
+    thick,
+    domain=-1:4,
+    samples=50
+] {x + 1};
+\addlegendentry{$x - y = -1$}
+
+% Punto de intersección
+\addplot[
+    only marks,
+    mark=*,
+    mark size=3pt,
+    color=green!60!black
+] coordinates {(2,1)};
+\node[above right, font=\footnotesize] at (axis cs:2,1) {$(2, 1)$};
+
+\end{axis}
+\end{tikzpicture}
+
+\textit{Una solución única}
+\end{center}
+
+Si un sistema \textbf{consistente} tiene un número infinito de soluciones, es \textbf{DEPENDIENTE}. Cuando grafica las ecuaciones, ambas ecuaciones representan la misma recta.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=8cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=4,
+    ymin=-1, ymax=4,
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=north east,
+    legend style={font=\footnotesize},
+    title={\textbf{Sistema Consistente Dependiente}},
+    title style={font=\small},
+]
+
+% Ambas ecuaciones representan la misma recta: y = 2x - 1
+% Ecuación 1: 2x - y = 1
+% Ecuación 2: 4x - 2y = 2 (múltiplo de la primera)
+\addplot[
+    color=blue,
+    thick,
+    domain=-1:4,
+    samples=50
+] {2*x - 1};
+\addlegendentry{$2x - y = 1$}
+
+\addplot[
+    color=red,
+    thick,
+    dashed,
+    domain=-1:4,
+    samples=50,
+    line width=2pt
+] {2*x - 1};
+\addlegendentry{$4x - 2y = 2$}
+
+\end{axis}
+\end{tikzpicture}
+
+\textit{Infinitas soluciones (rectas coincidentes)}
+\end{center}
+
+Si un sistema no tiene solución, se dice que es \textbf{Inconsistente}. Las gráficas de las rectas no se intersectan, así las gráficas son paralelas y \textbf{NO HAY SOLUCIÓN}.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=8cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=4,
+    ymin=-1, ymax=4,
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=north east,
+    legend style={font=\footnotesize},
+    title={\textbf{Sistema Inconsistente}},
+    title style={font=\small},
+]
+
+% Primera ecuación: 2x + y = 3  =>  y = 3 - 2x
+\addplot[
+    color=blue,
+    thick,
+    domain=-1:4,
+    samples=50
+] {3 - 2*x};
+\addlegendentry{$2x + y = 3$}
+
+% Segunda ecuación: 2x + y = 1  =>  y = 1 - 2x (paralela, misma pendiente)
+\addplot[
+    color=red,
+    thick,
+    domain=-1:4,
+    samples=50
+] {1 - 2*x};
+\addlegendentry{$2x + y = 1$}
+
+\end{axis}
+\end{tikzpicture}
+
+\textit{Sin solución (rectas paralelas)}
+\end{center}
+
+\end{tcolorbox}
+
+\textit{Tomado de: \url{https://www.varsitytutors.com/hotmath/hotmath_help/spanish/topics/consistent-and-dependent-systems}}
+
+% ========== MÉTODO DE SUSTITUCIÓN ==========
+\vspace{1cm}
+
+\subsubsection*{MÉTODO DE SUSTITUCIÓN}
+
+\textbf{¿QUÉ ES SUSTITUIR?:}
+
+es reemplazar o cambiar alguna cosa, para colocar otra en su lugar.
+
+Para dar solución a un sistema de ecuaciones lineales por el método de sustitución, debes tener en cuenta los siguientes pasos en el siguiente ejemplo:
+
+\[ \begin{cases}
+5X + Y = 8 \quad \text{(Ecuación 1)} \\
+3X - Y = 8 \quad \text{(Ecuación 2)}
+\end{cases} \]
+
+\textbf{¿QUÉ SIGNIFICA QUE UN MÉTODO SEA ANALÍTICO?}
+
+Método analítico es el que tiene una serie de pasos bien definidos y ordenados, de modo que al realizarse una y otra vez siempre se llega a un resultado, al aplicar ciertos conocimientos en cierta área. Al integrar el álgebra en otras áreas se vuelve análisis analítico.
+
+\textit{TOMADO DE: \url{https://mx.answers.yahoo.com/question/index?qid=20101111084300AAamp4x}}
+
+\textbf{Ten en cuenta el siguiente sistema de ecuaciones:}
+
+\[ \begin{cases}
+-4X + 2Y = 12 \\
+3X + 4Y = 0
+\end{cases} \]
+
+Sustituye las letras $X$ e $Y$, con los siguientes valores. $(2, 10)$ Para $X$ toma el valor de 2, Para $Y$ toma el valor de 10. Y realiza los respectivos cálculos que indican cada una de las ecuaciones; así:
+
+\[ -4(x) + 2(y) = 12 \]
+\[ -4(2) + 2(10) = 12 \]
+\[ -8 + 20 = 12 \]
+\[ 12 = 12 \]
+
+Ya observaste cómo se sustituyeron los valores en la ecuación número uno, ahora realiza la sustitución de los valores, en la ecuación número 2. ¿Qué observaste?
+
+Sustituye las letras $X$ e $Y$, con los siguientes valores. $(4, -3)$
+
+\vspace{1cm}
+
+\textbf{PASOS DEL MÉTODO DE SUSTITUCIÓN:}
+
+\begin{enumerate}
+    \item Despejar una de las incógnitas en una de las ecuaciones, de la ecuación 1 despejo $(Y)$
+
+    $Y = 8 - 5X$ (Ecuación 3)
+
+    \item En la ecuación 2 sustituyo la incógnita $(Y)$ por el valor de $(Y)$ de la ecuación 3, así:
+
+    $3X - (8 - 5X) = 8$ (Ecuación 4)
+
+    \item De la ecuación 4 despejó la única variable de dicha expresión, en este caso la variable $X$
+
+    \begin{align*}
+    3X - 8 + 5X &= 8 \\
+    8X - 8 &= 8 \\
+    8X &= 8 + 8 \\
+    8X &= 16 \\
+    X &= \frac{16}{8} \\
+    X &= 2
+    \end{align*}
+
+    \item El valor encontrado para $X$ en el despeje de la ecuación 4 lo sustituyo en la ecuación 1 como se muestra a continuación:
+
+    $5X + Y = 8$ (Ecuación 1)
+
+    En lugar de $X$ coloco el valor hallado:
+
+    \begin{align*}
+    5(2) + Y &= 8 \\
+    10 + Y &= 8 \\
+    Y &= 8 - 10 \\
+    Y &= -2
+    \end{align*}
+\end{enumerate}
+
+Obtengo así la solución del sistema: $X = 2$, $Y = -2$
+
+Teniendo en cuenta que $y$ representa el número de mujeres, entonces ahora sabemos que son 4.
+
+Para conocer el número de hombres sustituimos el valor de $y$ en la ecuación 1, así:
+
+\[ x + y = 6 \Rightarrow x + 4 = 6 \Rightarrow x = 6 - 4 \Rightarrow x = 2 \]
+
+\vspace{1cm}
+
+\textbf{Vamos a ver el siguiente ejemplo:}
+
+Las edades de Carlos y Juan están en la relación de 5 a 7. Dentro de dos años la relación entre la edad de Carlos y Juan será de 8 a 11, hallar las edades actuales.
+
+Vamos a definir la edad de Carlos como $(x)$ y la edad de Juan como $(y)$.
+
+Existe una relación de 5 a 7 entre ellos por lo tanto:
+
+\[ \frac{x}{y} = \frac{5}{7} \]
+\[ 7x = 5y \]
+\[ 7x - 5y = 0 \]
+
+Mi primera ecuación es: $7x - 5y = 0$
+
+Dentro de 2 años la relación será de 8 a 11, por lo tanto:
+
+\[ \frac{x + 2}{y + 2} = \frac{8}{11} \]
+\[ 11(x + 2) = 8(y + 2) \]
+\[ 11x + 22 = 8y + 16 \]
+\[ 11x - 8y = 16 - 22 \]
+\[ 11x - 8y = -6 \]
+
+Mi segunda ecuación es: $11x - 8y = -6$
+
+Nuestro sistema de ecuaciones queda de la siguiente manera:
+
+\[ \begin{cases}
+7x - 5y = 0 \quad \text{Ecuación 1} \\
+11x - 8y = -6 \quad \text{Ecuación 2}
+\end{cases} \]
+
+Despejando $(x)$ de la ecuación 1:
+
+\[ 7x - 5y = 0 \]
+\[ 7x = 5y \]
+\[ x = \frac{5y}{7} \]
+
+Sustituyendo $(x)$ en la segunda ecuación:
+
+\[ 11x - 8y = -6 \]
+\[ 11\left(\frac{5y}{7}\right) - 8y = -6 \]
+\[ \frac{55y}{7} - 8y = -6 \]
+\[ -\frac{1}{7}y = -6 \]
+\[ y = 42 \]
+
+Por lo tanto la edad de Juan es de 42 años.
+
+Ahora conociendo el valor de $(y)$ reemplazamos en la ecuación 2 dicho valor y despejamos $(x)$.
+
+\[ 11x - 8y = -6 \]
+\[ 11x - 8(42) = -6 \]
+\[ 11x - 336 = -6 \]
+\[ 11x = 336 - 6 \]
+\[ 11x = 330 \]
+\[ x = \frac{330}{11} \]
+\[ x = 30 \]
+
+Por lo tanto la edad de Carlos es de 30 años.
+
+% ========== MÉTODO DE CRAMER ==========
+\vspace{1cm}
+
+\subsubsection*{MÉTODO DE CRAMER}
+
+\textbf{Primero debemos saber lo que es un determinante.}
+
+Un \textbf{determinante} equivale al producto de los términos que pertenecen a la diagonal principal, menos el producto de los términos que pertenecen a la diagonal secundaria.
+
+Entonces, de $ab$ restamos el producto $cd$, tendremos la expresión $ab - cd$, esta expresión podemos escribirla con la siguiente notación:
+
+\[ ab - cd = \begin{vmatrix} a & d \\ c & b \end{vmatrix} \]
+
+La expresión $\begin{vmatrix} a & d \\ c & b \end{vmatrix}$ es determinante.
+
+Ten en cuenta que las \textbf{columnas} de un determinante están constituidas por las cantidades que están en una misma línea vertical, en el ejemplo anterior $ac$ es la primera columna y $db$ la segunda columna.
+
+Una determinante es \textbf{cuadrada} cuando tiene el mismo número de columnas que de filas como en nuestro ejemplo anterior.
+
+Para determinar el orden de una determinante cuadrada debemos mirar el número de elementos de cada fila o columna. Así, $\begin{vmatrix} a & d \\ c & b \end{vmatrix}$ es determinante de segundo orden.
+
+En el siguiente ejemplo la línea que une $a$ con $b$ es la \textbf{diagonal principal} y la línea que une $c$ con $d$ es la \textbf{diagonal secundaria}.
+
+Los elementos de esta determinante son los productos $ab$ y $cd$, cuya diferencia equivale está determinante.
+
+Para desarrollar una determinante de segundo orden debemos multiplicar los términos que pertenecen a la diagonal principal y este resultado o producto, lo restamos del resultado obtenido en la multiplicación entre los términos que pertenecen a la diagonal secundaria.
+
+\textbf{Ejemplo 1:}
+\[ \begin{vmatrix} a & -n \\ m & b \end{vmatrix} = ab - m(-n) = ab + mn \]
+
+\textbf{Ejemplo 2:}
+\[ \begin{vmatrix} 3 & 2 \\ 5 & 4 \end{vmatrix} = 3 \times 4 - 5 \times 2 = 12 - 10 = 2 \]
+
+\textbf{Ejemplo 3:}
+\[ \begin{vmatrix} 3 & -5 \\ 1 & -2 \end{vmatrix} = 3(-2) - 1(-5) = -6 + 5 = -1 \]
+
+\textbf{Ejemplo 4:}
+\[ \begin{vmatrix} -2 & -5 \\ -3 & -9 \end{vmatrix} = (-2)(-9) - (-3)(-5) = 18 - 15 = 3 \]
+
+\textbf{Ejemplo 5:}
+\[ \begin{vmatrix} -2 & -5 \\ -3 & -9 \end{vmatrix} = (-2)(-9) - (-3)(-5) = 18 - 15 = 3 \]
+
+\vspace{1cm}
+
+\textbf{Vamos a practicar, desarrolla los siguientes determinantes:}
+
+\[ \begin{vmatrix} 4 & 5 \\ 2 & 3 \end{vmatrix} \quad \begin{vmatrix} 7 & 9 \\ 5 & -2 \end{vmatrix} \]
+
+\[ \begin{vmatrix} 9 & -11 \\ -3 & 7 \end{vmatrix} \quad \begin{vmatrix} 5 & -3 \\ -2 & -8 \end{vmatrix} \]
+
+\vspace{1cm}
+
+\textbf{Ahora vamos a aplicar el método de Cramer para resolver un sistema de ecuaciones lineales de dos incógnitas.}
+
+\textbf{Ejemplo:}
+
+Observa el siguiente sistema de ecuaciones lineales:
+
+\[ \begin{cases}
+5X + 3Y = 5 \\
+4X + 7Y = 27
+\end{cases} \]
+
+\textbf{Primer paso:} Calculamos el determinante del sistema usando los coeficientes de $(X)$ y $(Y)$, en la primera columna coloco los coeficientes de $X$ y en la segunda los coeficientes de $Y$.
+
+\[ \begin{vmatrix} 5 & 3 \\ 4 & 7 \end{vmatrix} = (5)(7) - (4)(3) = 35 - 12 = 23 \]
+
+Por lo tanto el determinante del sistema es 23
+
+\textbf{Segundo paso:} Calculamos el determinante para la variable $X$ y para la variable $Y$, utilizando los términos independientes (números después de la igualdad sin letras a sus lados) y también el valor obtenido en el determinante del sistema, de la siguiente manera:
+
+\textbf{Para hallar el valor de $X$:}
+
+\[ X = \frac{\begin{vmatrix} 5 & 3 \\ 27 & 7 \end{vmatrix}}{23} = \frac{35 - 81}{23} = \frac{-46}{23} = -2 \]
+
+Valor obtenido en el determinante del sistema en el paso 1
+
+\textbf{Para hallar el valor de $Y$:}
+
+\[ Y = \frac{\begin{vmatrix} 5 & 5 \\ 4 & 27 \end{vmatrix}}{23} = \frac{135 - 20}{23} = \frac{115}{23} = 5 \]
+
+Valor obtenido en el determinante del sistema en el paso 1
+
+Los valores de $x$, $y$ representan el valor de los panes.
+
+\vspace{1cm}
+
+\textbf{Investiga el método de igualación y el método de eliminación, luego discute con tus compañeros sobre la diferencia que tienen con respecto a los métodos vistos anteriormente.}
+
+% ========== SECCIÓN C: RESUELVE Y PRACTICA ==========
+\vspace{1.5cm}
+
+\subsection*{C) Resuelve y practica}
+
+\textbf{Manos a la obra}
+
+\begin{enumerate}
+    \item Investiga sobre las progresiones geométricas y aritméticas y dialoga con dos compañeros acerca del asunto.
+
+    \item En el siguiente diagrama de números figurados encuentra la secuencia P4 y P5 de los números pentagonales.
+
+    \begin{center}
+    \begin{tikzpicture}[scale=0.4]
+    % P1 = 1
+    \begin{scope}[xshift=0cm]
+    \fill[violet] (0,0) circle (0.2);
+    \node at (0, -1.5) {$P_1 = 1$};
+    \end{scope}
+
+    % P2 = 5
+    \begin{scope}[xshift=3cm]
+    \fill[violet] (0,1) circle (0.2);
+    \fill[violet] (-0.7,0) circle (0.2);
+    \fill[violet] (0.7,0) circle (0.2);
+    \fill[violet] (-0.4,-0.8) circle (0.2);
+    \fill[violet] (0.4,-0.8) circle (0.2);
+    \node at (0, -1.8) {$P_2 = 5$};
+    \end{scope}
+
+    % P3 = 12
+    \begin{scope}[xshift=7cm]
+    \fill[violet] (0,1.5) circle (0.2);
+    \fill[violet] (-0.6,0.8) circle (0.2);
+    \fill[violet] (0.6,0.8) circle (0.2);
+    \fill[violet] (-1.2,0) circle (0.2);
+    \fill[violet] (0,0) circle (0.2);
+    \fill[violet] (1.2,0) circle (0.2);
+    \fill[violet] (-1.5,-0.8) circle (0.2);
+    \fill[violet] (-0.5,-0.8) circle (0.2);
+    \fill[violet] (0.5,-0.8) circle (0.2);
+    \fill[violet] (1.5,-0.8) circle (0.2);
+    \fill[violet] (-0.8,-1.6) circle (0.2);
+    \fill[violet] (0.8,-1.6) circle (0.2);
+    \node at (0, -2.6) {$P_3 = 12$};
+    \end{scope}
+    \end{tikzpicture}
+    \end{center}
+
+    \item En el siguiente diagrama de números figurados encuentra la secuencia H4 y H5 de los números hexagonales.
+
+    \begin{center}
+    \begin{tikzpicture}[scale=0.4]
+    % H1 = 1
+    \begin{scope}[xshift=0cm]
+    \fill[teal] (0,0) circle (0.2);
+    \node at (-0.7, -1.5) {$H_1 = 1$};
+    \end{scope}
+
+    % H2 = 6
+    \begin{scope}[xshift=3cm]
+    \fill[teal] (0,0) circle (0.2);
+    \fill[teal] (-0.8,0.5) circle (0.2);
+    \fill[teal] (0.8,0.5) circle (0.2);
+    \fill[teal] (-0.8,-0.5) circle (0.2);
+    \fill[teal] (0.8,-0.5) circle (0.2);
+    \fill[teal] (0,-1) circle (0.2);
+    \node at (0, -1.8) {$H_2 = 6$};
+    \end{scope}
+
+    % H3 = 15
+    \begin{scope}[xshift=7.5cm]
+    \fill[teal] (0,0) circle (0.2);
+    \fill[teal] (-0.8,0.5) circle (0.2);
+    \fill[teal] (0,0.5) circle (0.2);
+    \fill[teal] (0.8,0.5) circle (0.2);
+    \fill[teal] (-1.4,1) circle (0.2);
+    \fill[teal] (1.4,1) circle (0.2);
+    \fill[teal] (-0.8,-0.5) circle (0.2);
+    \fill[teal] (0,-0.5) circle (0.2);
+    \fill[teal] (0.8,-0.5) circle (0.2);
+    \fill[teal] (-1.4,-1) circle (0.2);
+    \fill[teal] (1.4,-1) circle (0.2);
+    \fill[teal] (-0.8,-1.5) circle (0.2);
+    \fill[teal] (0,-1.5) circle (0.2);
+    \fill[teal] (0.8,-1.5) circle (0.2);
+    \fill[teal] (0,-2) circle (0.2);
+    \node at (0, -3) {$H_3 = 15$};
+    \end{scope}
+    \end{tikzpicture}
+    \end{center}
+
+    \item Observa la secuencia
+
+    \begin{center}
+    \begin{tikzpicture}[scale=0.6]
+    % Término 1: 1 cuadrado
+    \begin{scope}[xshift=0cm]
+    \fill[red!70] (0,0) rectangle (0.7,0.7);
+    \node at (-0.3, -0.7) {Término 1};
+    \end{scope}
+
+    % Término 2: 1+3 = 4 cuadrados
+    \begin{scope}[xshift=2.5cm]
+    \fill[red!70] (0.35,0.35) rectangle (1.05,1.05);
+    \fill[blue!70] (0,0) rectangle (0.7,0.7);
+    \fill[blue!70] (0.7,0) rectangle (1.4,0.7);
+    \fill[blue!70] (0,0.7) rectangle (0.7,1.4);
+    \node at (0.7, -0.7) {Término 2};
+    \end{scope}
+
+    % Término 3: 1+3+5 = 9 cuadrados
+    \begin{scope}[xshift=6cm]
+    \fill[red!70] (0.7,0.7) rectangle (1.4,1.4);
+    \fill[blue!70] (0.35,0.35) rectangle (1.05,1.05);
+    \fill[blue!70] (1.05,0.35) rectangle (1.75,1.05);
+    \fill[blue!70] (0.35,1.05) rectangle (1.05,1.75);
+    \fill[green!70] (0,0) rectangle (0.7,0.7);
+    \fill[green!70] (0.7,0) rectangle (1.4,0.7);
+    \fill[green!70] (1.4,0) rectangle (2.1,0.7);
+    \fill[green!70] (0,0.7) rectangle (0.7,1.4);
+    \fill[green!70] (0,1.4) rectangle (0.7,2.1);
+    \node at (1.05, -0.7) {Término 3};
+    \end{scope}
+    \end{tikzpicture}
+    \end{center}
+
+    Escribe la sucesión de números asociados a esta secuencia. ¿Cuál será el 4° término?
+
+    \item Escribe los 5 primeros términos de cada sucesión a partir de su término general.
+
+    \begin{enumerate}[label=\alph*.]
+        \item $a_n = \frac{3n - 1}{2}$
+
+        \item $a_n = \frac{n^2 - 1}{n^2 + 1}$
+
+        \item $a_n = (-1)^n \frac{2^n}{1 + 2^n}$
+
+        \item $a_n = 5n^2 + 1$
+
+        \item $a_n = (-1)^n$
+
+        \item $a_n = \frac{1}{2^n}$
+    \end{enumerate}
+
+    \item Determina la expresión del término general de cada sucesión.
+
+    \begin{enumerate}[label=\alph*.]
+        \item $\{a_n\} = \{2, 5, 10, 17, 26, 37, 50, \ldots\}$
+
+        \item $\{a_n\} = \{2, \frac{3}{4}, \frac{4}{9}, \frac{5}{16}, \frac{6}{25}, \frac{7}{36}, \frac{49}{8}, \ldots\}$
+
+        \item $\{a_n\} = \{2, \frac{1}{3}, \frac{1}{5}, \frac{1}{7}, \frac{1}{9}, \frac{1}{11}, \frac{1}{13}, \ldots\}$
+    \end{enumerate}
+
+    \item Ya tuviste la oportunidad de ver cómo se resuelve un sistema de ecuaciones lineales por diferentes métodos, ahora pon en práctica lo aprendido y resuelve los siguientes sistemas de ecuaciones usando los tres métodos vistos anteriormente (método gráfico, método de sustitución y método de cramer).
+
+    \begin{enumerate}[label=\alph*.]
+        \item $\begin{cases} 2x + 2y = 64 \\ x - y = 6 \end{cases}$
+
+        \item $\begin{cases} y = x + 25 \\ 0.8y = 0.85x + 8 \end{cases}$
+
+        \item $\begin{cases} x - 10 = y + 10 \\ x + 10 = 2y \end{cases}$
+
+        \item $\begin{cases} \frac{x}{3} + \frac{y}{5} = 13 \\ 5x + 7y = 247 \end{cases}$
+
+        \item $\begin{cases} 80x + 20 = y \\ 90x - 40 = y \end{cases}$
+
+        \item $\begin{cases} \frac{3x}{4} + \frac{4y}{3} = -1 \\ \frac{2x}{3} + \frac{3y}{2} = 1 \end{cases}$
+    \end{enumerate}
+
+    \item Utilizando los métodos de igualación y eliminación, resuelve el siguiente problema:
+
+    La factura del teléfono del mes pasado ascendió a un total de \$39 por un consumo de 80 minutos mientras que la de este mes asciende a \$31,5 por un consumo de 55 minutos.
+
+    El importe de cada factura es la suma de una tasa fija (mantenimiento) más un precio fijo por minuto de consumo. Calcular la tasa y el precio de cada minuto.
+\end{enumerate}
+
+\textit{Tomado de: \url{file:///C:/Users/Andres/Downloads/Números\%20en\%20induccion\%20y\%20\%20deducción.pdf}}
+
+\textit{Tomado de: \url{https://www.problemasyecuaciones.com/Ecuaciones/problemas/sistemas/problemas-ecuaciones-sistemas-lineales-resueltos-numeros-edades-incognitas-ejemplos-explicados.html}}
+
+\textit{Tomado de: Secuencias matemáticas 9 editorial libros y libros S.A 2016}
+
+% ========== SECCIÓN D: RESUMEN ==========
+\vspace{1.5cm}
+
+\subsection*{D) Resumen}
+
+Un \textbf{número triangular} cuenta objetos organizados de tal manera que se forma un triángulo equilátero. El $n$-ésimo número triangular es el número de puntos que forman el triángulo con $n$ cantidad de puntos en un lado, y es igual a la suma de los $n$ números naturales de 1 hasta $n$, siendo por convención, el 1 el primer número triangular o primer término.
+
+Una \textbf{sucesión} es una función cuyo dominio son los números naturales y su codominio un subconjunto de los números reales.
+
+\textbf{Ten en cuenta.} De acuerdo con el comportamiento de sus términos una sucesión se puede clasificar en:
+
+\begin{itemize}
+    \item \textbf{Creciente.} Si cada término es mayor que el anterior.
+    \item \textbf{Decreciente.} Si cada término es menor que el anterior.
+    \item \textbf{Oscilante.} Si sus términos se alternan de mayor a menor.
+    \item \textbf{Alternada.} Si los signos de sus términos se alternan entre positivos y negativos.
+    \item \textbf{Constante.} Si todos sus términos tienen el mismo valor.
+\end{itemize}
+
+Los \textbf{números cuadrados} terminan en 0, 1, 4, 5, 6 o 9, todo número cuadrado es la suma de dos números triangulares consecutivos. También se forma un cuadrado con 8 unidades sumándoles una unidad.
+
+Un \textbf{sistema de ecuaciones} es aquel donde hay dos o más ecuaciones, que tiene dos o más incógnitas, se dice que dichas ecuaciones son simultáneas cuando los valores de las incógnitas satisfacen o cumplen para las ecuaciones dadas en el sistema.
+
+Tenemos diversos métodos para la solución de ecuaciones simultáneas o sistemas de ecuación:
+
+\begin{itemize}
+    \item Método de sustitución
+    \item Método de igualación
+    \item Método de eliminación
+    \item Método de Cramer
+    \item Método gráfico
+\end{itemize}
+
+% ========== SECCIÓN E: VALORACIÓN ==========
+\vspace{1.5cm}
+
+\subsection*{E) Valoración}
+
+\subsubsection*{i) Califica tu comprensión por tema en tu cuaderno}
+
+\begin{center}
+\begin{tabular}{|p{5cm}|c|c|c|}
+\hline
+\textbf{Evidencias} & \begin{tabular}{c} \textbf{Todavía no} \\ \textbf{entiendo los} \\ \textbf{conceptos} \end{tabular} & \begin{tabular}{c} \textbf{Voy bien pero} \\ \textbf{quiero más} \\ \textbf{práctica} \end{tabular} & \begin{tabular}{c} \textbf{Comprendí} \\ \textbf{muy bien} \\ \textbf{el tema} \end{tabular} \\
+\hline
+Identifico la secuencia numérica dado los primeros términos de la misma. & & & \\
+\hline
+Soy capaz de completar las gráficas de los números figurados y entiendo el concepto de los mismos. & & & \\
+\hline
+Determino con claridad los términos generales de una sucesión & & & \\
+\hline
+Soy capaz de resolver ecuaciones simultáneas o sistemas de ecuaciones y comprendo el significado de los resultados. & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{Contestar falso o verdadero en las siguientes oraciones.}
+
+\begin{enumerate}
+    \item Una sucesión es una progresión aritmética ( \hspace{1cm} )
+    \item Una sucesión es una función ( \hspace{1cm} )
+    \item En un sistema de ecuaciones las incógnitas pueden tener valores diferentes para que se satisfagan las ecuaciones. ( \hspace{1cm} )
+\end{enumerate}
+
+\subsubsection*{ii) Preguntas de comprensión}
+
+\begin{enumerate}
+    \item ¿Qué sucede cuando resolvemos un sistema de ecuaciones por el método gráfico y al final del procedimiento nos damos cuenta que las rectas son paralelas?
+
+    \item ¿Se obtiene el mismo término cuando se calcula $a_{n-1}$ y $a_n - 1$?
+
+    \item Explica cómo se halla la fórmula general o término general para la formación de los números cuadrados.
+\end{enumerate}
+
+\subsubsection*{iii) Resuelvo un problema}
+
+Utiliza el método que quieras para resolver el siguiente sistema de ecuaciones:
+
+\[ \begin{cases}
+7X + 8Y = 29 \\
+5X + 11Y = 26
+\end{cases} \]
+
+% ========================================
+% ACTIVIDAD 2: APLICANDO LAS ECUACIONES LINEALES
+% ========================================
+
+\newpage
+\seccion{ACTIVIDAD 2: Aplicando las ecuaciones lineales}
+
+Aprendamos a dar respuesta a situaciones problemas de la cotidianidad a partir de sistemas de ecuaciones lineales.
+
+\subsection*{A) Activando saberes previos}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,title=RECUERDA QUE...,breakable]
+
+\textbf{La Recta Numérica:} Es una línea recta la cual contiene todos los números reales.
+
+Está dividida en dos mitades simétricas por el origen, es decir el número cero.
+
+\textbf{¿Qué es un intervalo?:} Es un subconjunto de la recta real que contiene a todos los números reales que están comprendidos entre dos cualesquiera de sus elementos.
+
+Geométricamente los intervalos corresponden a segmentos de recta, semirrectas o la misma recta real.
+
+Por ejemplo, en la siguiente imagen se representa el intervalo $[-5; 9]$ de la recta numérica.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Dibujar la recta numérica
+\draw[latex-latex,thick] (-6,0) -- (10,0);
+
+% Marcar el intervalo [-5, 9] con línea gruesa
+\draw[line width=3pt, blue!30!red] (-5,0) -- (9,0);
+
+% Puntos extremos del intervalo (cerrados)
+\fill[blue] (-5,0) circle (0.12);
+\fill[blue] (9,0) circle (0.12);
+
+% Marcas y números
+\foreach \x in {-5,-4,...,9} {
+    \draw (\x,0.15) -- (\x,-0.15);
+    \node[below] at (\x,-0.3) {\small $\x$};
+}
+
+% Etiqueta del intervalo
+\node[above, blue] at (2, 0.5) {$[-5; 9]$};
+
+\end{tikzpicture}
+\end{center}
+
+En ese intervalo puedes encontrar los números $\{-4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8\}$, incluyendo el $-5$ y $9$.
+
+Pero también puedes encontrar los siguientes números:
+
+\[ \left\{\frac{1}{2}, \frac{1}{4}, \frac{1}{6}, \frac{1}{8}, \frac{1}{10}\right\} \]
+
+Estos números están contenidos en el intervalo $[0, 1]$
+
+Podría decirse que el intervalo $[0, 1]$ es una manera más precisa de indicar en qué intervalo se encuentra el conjunto anterior.
+
+\end{tcolorbox}
+
+\subsection*{Práctica}
+
+Ejercítate resolviendo ejercicios que te permitirán recordar y afianzar tus saberes.
+
+\begin{enumerate}
+    \item Observa la recta numérica y determina:
+
+    \begin{center}
+    \begin{tikzpicture}[scale=0.9]
+    % Recta numérica simple sin marcas de números
+    \draw[latex-latex,thick] (-7,0) -- (7,0);
+
+    % Algunas marcas sin etiquetas
+    \foreach \x in {-6,-4,-2,0,2,4,6} {
+        \draw (\x,0.15) -- (\x,-0.15);
+    }
+    \end{tikzpicture}
+    \end{center}
+
+    \begin{enumerate}[label=\alph*)]
+        \item ¿Dónde pondrías el origen o punto de partida?
+        \item ¿Será posible establecer el origen en uno de los extremos de la recta?
+        \item Explica, ¿por qué es correcto establecer el origen en cualquier punto de la recta numérica?
+        \item ¿A qué conclusión llegaste después de entender este concepto?
+    \end{enumerate}
+
+    \item En los siguientes ejercicios:
+
+        \begin{enumerate}[label=\alph*)]
+            \item Ubica cada número en la recta numérica.
+            \item Realiza las operaciones que se indique
+            \item Ubica el resultado obtenido en la recta numérica.
+            \item Compara la posición del resultado obtenido en la recta numérica respecto al origen y a los números operados.
+        \end{enumerate}
+
+        \begin{itemize}
+            \item $\frac{4}{5}$ y $\frac{2}{7}$ sumar
+            \item $\frac{4}{9}$ y $\frac{4}{3}$ restar
+            \item $\frac{3}{7}$ y 2 multiplicación.
+            \item $-3$ y $\frac{9}{5}$ división.
+        \end{itemize}
+
+    \item En los siguientes ejercicios tener en cuenta las indicaciones:
+
+        \textbf{Expresa el intervalo en términos de desigualdades y grafícalo:}
+
+        \begin{itemize}
+            \item $(-3, 0)$ \hspace{2cm} $(2, 8]$
+            \item $[2, 8)$ \hspace{2cm} $[-6, \frac{1}{2}]$
+            \item $[2, \infty)$ \hspace{2cm} $(-\infty, 1)$
+        \end{itemize}
+
+        \textbf{Expresa la desigualdad en notación de intervalos y realiza las gráficas correspondientes:}
+
+        \begin{itemize}
+            \item $x \leq 1$ \hspace{2cm} $1 \leq x \leq 2$
+            \item $-2 < x \leq 1$ \hspace{2cm} $x \geq -5$
+            \item $x > -1$ \hspace{2cm} $-5 < x < 2$
+        \end{itemize}
+\end{enumerate}
+
+\begin{center}
+\textit{Verifica las respuestas de la sección A con tu profesor.}
+\end{center}
+
+% ========== SECCIÓN B: CONCEPTOS - APLICACIÓN ==========
+\vspace{1.5cm}
+
+\subsection*{B) Conceptos: aplicación de sistemas de ecuaciones lineales}
+
+\textbf{1. Analiza la siguiente situación.}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,breakable]
+
+En una cena familiar se encuentran 6 personas.
+
+La familia tiene buen gusto por la comida y en particular por las arepas de queso y los pandebonos, Felipe propone que las mujeres deberían comer 3 pandebonos y los hombres 2 arepas.
+
+Se sabe que el total de amasijos es 16,
+
+¿cuántos hombres y mujeres participan en la cena?
+
+\end{tcolorbox}
+
+Es común encontrarse con preguntas como estas en el día a día, por tal razón es necesario saber resolver estos problemas ya que podríamos ser partícipes de algunos de ellos. Con los conocimientos de matemáticas adquiridos puedes ayudar en gran manera a resolverlos.
+
+\textbf{¿QUÉ DEBEMOS HACER PARA SABER LA RESPUESTA?}
+
+\begin{enumerate}
+    \item Analizar la situación
+    \item Comprender qué es lo que se quiere saber y cómo se relaciona con el problema.
+    \item Asociar incógnitas como ``$X$'' y ``$Y$'' a los datos desconocidos.
+    \item Representar la situación de la cotidianidad como un modelo matemático (sistema de ecuaciones)
+    \item Resolver el sistema o modelo
+    \item Interpretar el resultado obtenido.
+\end{enumerate}
+
+Por ejemplo: En la situación anterior nos dicen que un grupo de personas se encuentra en una cena, también nos dicen que hay hombres y mujeres, entonces se quiere saber el número de hombres y mujeres presentes en la cena.
+
+Como puedes observar el número de hombres y mujeres es el dato que no se menciona en la situación, entonces asociaremos las variables o incógnitas ``$X$'' y ``$Y$'' al número hombres y mujeres respectivamente.
+
+Sea $x$: Número de hombres. \quad Sea $y$: Número de mujeres.
+
+En la situación problema nos indican que el número total de personas es 6. Por lo tanto:
+
+\textbf{1)} $x + y = 6$ \quad \textit{Esta ecuación nos dice que el \# de hombres más el \# de mujeres es igual al total de personas.}
+
+La situación antes mencionada nos dice que el total de amasijos es 16, donde les corresponde de 2 arepas a los hombres y 3 pandebonos a las mujeres, lo cual lo podemos representar de la siguiente manera.
+
+\textbf{2)} $2x + 3y = 16$ \quad \textit{Esta ecuación nos dice que el \# de amasijos que les corresponde tanto a hombres como mujeres es igual al total de amasijos.}
+
+Así hemos podido establecer la situación de la vida real en un modelo matemático; particularmente en un sistemas de ecuaciones 2×2. Para resolver el sistema usaremos los conceptos de la actividad 1, donde se muestra los distintos métodos para resolver un sistema de ecuaciones lineales.
+
+\[ \begin{cases}
+1) \, x + y = 6 \\
+2) \, 2x + 3y = 16
+\end{cases} \]
+
+\textbf{Solución:}
+
+\begin{table}[h]
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+\centering\textbf{Método de Sustitución} & \textbf{Método de Igualación} \\
+\hline \\[.5em]
+De la ecuación 1) despejamos la variable $x$, así:
+
+$x + y = 6 \Rightarrow x = 6 - y$
+
+Sustituimos este resultado en la ecuación 2).
+
+Como $2x + 3y = 16 \Rightarrow 2(6 - y) + 3y = 16$
+
+\[ \begin{aligned}
+12 - 2y + 3y &= 16 \\
+12 + y &= 16 \\
+y &= 16 - 12 \\
+y &= 4
+\end{aligned} \]
+
+Teniendo en cuenta que $y$ representa el número de mujeres, entonces ahora sabemos que son 4.
+
+Para conocer el número de hombres sustituimos el valor de $y$ en la ecuación 1), así:
+
+\[ \begin{aligned}
+x + y &= 6 \\
+x + 4 &= 6 \\
+x &= 6 - 4 \\
+x &= 2
+\end{aligned} \]
+&
+De la ecuación 1) despejamos la variable $x$, así:
+
+$x + y = 6 \Rightarrow x = 6 - y$
+
+De la ecuación 2) despejamos la variable $x$, así:
+
+$2x + 3y = 16 \Rightarrow x = \frac{16 - 3y}{2}$
+
+Ahora igualamos los dos resultados obtenidos para $x$ de las ecuaciones 1) y 2).
+
+\[ \begin{aligned}
+6 - y &= \frac{16 - 3y}{2} \\
+2(6 - y) &= 16 - 3y \\
+12 - 2y &= 16 - 3y \\
+3y - 2y &= 16 - 12 \\
+y &= 4
+\end{aligned} \]
+
+Para conocer el número de hombres sustituimos el valor de $y$ en la ecuación 1) ó 2). Así:
+
+\[ \begin{aligned}
+x + y &= 6 \\
+x + 4 &= 6 \\
+x &= 6 - 4 \\
+x &= 2
+\end{aligned} \]
+\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\textbf{¡Ponte a prueba!... Halla la solución de la situación anterior usando el método de ELIMINACIÓN o REDUCCIÓN}}}
+
+
+\vspace{1cm}
+
+\textbf{2. Analiza la siguiente situación:}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,breakable]
+
+Javier y su mamá van a la panadería y compran panes de dos precios.
+
+Se sabe que ambos panes cuestan \$800 y pagaron \$3.700 por todo, además llevaron 5 panes de un precio y 3 panes del otro.
+
+¿De qué precio eran los panes?
+
+\end{tcolorbox}
+
+Para responder, tendremos en cuenta las recomendaciones dadas en el ejemplo anterior.
+
+\textbf{Solución:} Los datos desconocidos del problema son los precios de los panes, como son panes de dos precios diferentes entonces:
+
+Sea $X$: panes de menor precio. \quad Sea $Y$: panes de mayor precio.
+
+\begin{itemize}
+    \item Como ambos panes juntos cuestan \$800, entonces $x + y = 800$. \textit{Esta ecuación nos dice que la suma de los valores de panes de distintos precios es igual al valor de ambos panes.}
+
+    \item El costo de todos los panes es \$3.700 y compraron 5 de un precio y 4 de otro precio, entonces:
+
+    $5x + 4y = 3.700$ \textit{Esta ecuación nos dice que el costo de los panes de menor precio más el costo de los panes de mayor precio es igual al total del costo de los panes.}
+\end{itemize}
+
+Hemos representado el problema de la cotidianidad en un sistema de ecuaciones. Este sistema lo podemos resolver aplicando cualquiera de los métodos vistos en la actividad 1.
+
+Para hallar la solución aplicaremos el \textbf{método de eliminación}:
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,title=Método de Eliminación]
+
+\[ \begin{cases}
+1) \, x + y = 800 \\
+2) \, 4x + 5y = 3.700
+\end{cases} \]
+
+Multiplicamos la ecuación 1) por $(-5)$ en ambos lados de la igualdad. Así:
+
+\begin{align*}
+-5x - 5y &= -4.000 \quad \text{Sumar término a término} \\
+4x + 5y &= 3.700 \\
+\hline
+-x - 0y &= -300 \\
+x &= 300
+\end{align*}
+
+Para hallar el valor de $y$ se sustituye el valor de $x$ en cualquiera de las ecuaciones 1) ó 2). Así:
+
+\begin{align*}
+x + y &= 800 \\
+300 + y &= 800 \\
+y &= 800 - 300 \\
+y &= 500
+\end{align*}
+
+Los valores de $x$, $y$ representan el valor de los panes.
+
+\end{tcolorbox}
+
+\vspace{1cm}
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=Reflexiona un momento]
+
+Para establecer la segunda ecuación 2 del ejercicio anterior se tuvo en cuenta la siguiente información: ``El costo de todos los panes es \$3700 y compraron 5 de un precio y 4 de otro precio'', entonces:
+
+2) $5x + 4y = 3700$.
+
+Pero en ningún momento se dijo que los 5 panes de un precio corresponden a los panes de menor precio y tampoco se menciona que los 4 panes de otro precio corresponden a los panes de mayor precio.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,title=PROYECTO GRUPAL - APLIQUEMOS LO APRENDIDO]
+
+Reúnete con tus compañeros y discute:
+
+\begin{enumerate}[label=\alph*)]
+    \item ¿Qué pasaría si se asocia los 5 panes con los panes de mayor precio y los 4 panes con los panes de menor precio?
+    \item Resuelve el sistema de ecuaciones teniendo en cuenta lo sugerido en el ítem a).
+    \item ¿Qué representan los valores de $x$ e $y$ obtenidos?
+    \item ¿Qué conclusión se puede extraer de este hecho?
+    \item Si Javier y su mamá hubiesen pagado \$3500 por los panes, ¿Qué cantidad de panes de \$300 y \$500 sería posible llevar?
+    \item Expresa en forma de intervalos la cantidad de panes que podrían llevar de cada precio teniendo en cuenta el ítem e).
+\end{enumerate}
+
+\end{tcolorbox}
+
+% ========== SECCIÓN C: RESUELVE Y PRACTICA - ACTIVIDAD 2 ==========
+\vspace{1.5cm}
+
+\subsection*{C) Resuelve y practica}
+
+Analiza las siguientes situaciones de la cotidianidad, represéntalas en lenguaje matemático a través de sistemas de ecuaciones, resuelve el sistema y reflexiona sobre las soluciones.
+
+\begin{enumerate}
+    \item En una granja se crían gallinas y conejos. Si se cuentan las cabezas, son 50, si las patas, son 134. ¿Cuántos animales hay de cada clase?
+
+    \item Un granjero cuenta con un determinado número de jaulas para sus conejos. Si introduce 6 conejos en cada jaula quedan cuatro plazas libres en una jaula. Si introduce 5 conejos en cada jaula quedan dos conejos libres. ¿Cuántos conejos y jaulas hay? (Resolver por método de sustitución).
+
+    \item En una lucha entre moscas y arañas intervienen 42 cabezas y 276 patas. ¿Cuántos luchadores había de cada clase? (Recuerda que una mosca tiene 6 patas y una araña 8 patas). (Resolver por método de eliminación).
+
+    \item En la granja se han envasado 300 litros de leche en 120 botellas de dos y cinco litros. ¿Cuántas botellas de cada clase se han utilizado? (Resolver por método de Cramer).
+
+    \item Se quieren mezclar vino de 60 ptas. con otro de 35 ptas., de modo que resulte vino con un precio de 50 ptas. el litro. ¿Cuántos litros de cada clase deben mezclarse para obtener 200 litros de la mezcla?
+\end{enumerate}
+
+\vspace{1cm}
+
+\textbf{Pon en práctica tus nuevos conocimientos y adquiere otros resolviendo los siguientes problemas.}
+
+Dado un sistema de ecuaciones lineales Platónico, crear una situación de la cotidianidad que represente el sistema de ecuaciones.
+
+\textbf{Ejemplo:} En el sistema de ecuaciones lineales
+
+\[ \begin{cases}
+1. \, x - y = 20 \\
+2. \, 2x - 3y = 10
+\end{cases} \]
+
+Sea $x$: Pago. \quad Sea $y$: Deudas
+
+\textbf{Situación:} En el último mes Andrés obtuvo un ingreso con el cual pudo pagar la deuda que tiene con el banco. Al pagar la deuda quedó con un excedente de \$20. El mes anterior había duplicado el pago pero estaba atrasado 3 veces en el pago de la deuda. ¿Cuánto debía Juan y cuánto pagó?
+
+Siguiendo el ejemplo, plantea situaciones de la cotidianidad que estén representadas por los siguientes sistemas de ecuaciones.
+
+\begin{enumerate}[label=\alph*)]
+    \item $\begin{cases} x + y = 3 \\ 2x - y = 0 \end{cases}$
+
+    \item $\begin{cases} 5x - \frac{y}{2} = -1 \\ 3x - 2y = 1 \end{cases}$
+
+    \item $\begin{cases} -10x - y = 0 \\ 21x - 7y = 28 \end{cases}$
+
+    \item $\begin{cases} \frac{x}{3} + \frac{y}{5} = \frac{2}{7} \\ \frac{x}{2} + \frac{y}{10} = \frac{3}{7} \end{cases}$
+\end{enumerate}
+
+% ========== SECCIÓN D: RESUMEN - ACTIVIDAD 2 ==========
+\vspace{1.5cm}
+
+\subsection*{D) Resumen}
+
+% ========== SECCIÓN E: VALORACIÓN - ACTIVIDAD 2 ==========
+\vspace{1.5cm}
+
+\subsection*{E) Valoración}
+
+Has avanzado mucho, debes sentirte bien por todo lo que has hecho hasta ahora. Tómate un espacio y valora tu aprendizaje.
+
+\subsubsection*{i) Califica tu comprensión por tema en tu cuaderno}
+
+\begin{center}
+\begin{tabular}{|p{5cm}|c|c|c|}
+\hline
+\textbf{Evidencias} & \begin{tabular}{c} \textbf{Todavía no} \\ \textbf{entiendo los} \\ \textbf{conceptos} \end{tabular} & \begin{tabular}{c} \textbf{Voy bien pero} \\ \textbf{quiero más} \\ \textbf{práctica} \end{tabular} & \begin{tabular}{c} \textbf{Comprendí} \\ \textbf{muy bien} \\ \textbf{el tema} \end{tabular} \\
+\hline
+Comprendo la utilidad de plantear y resolver sistemas de ecuaciones para resolver problemas. & & & \\
+\hline
+Reconozco cuándo un sistema de ecuaciones lineales de dos incógnitas no tiene solución. & & & \\
+\hline
+Interpreto y grafico intervalos en la recta como subconjuntos utilizando notación de intervalos y desigualdades. & & & \\
+\hline
+Represento intervalos utilizando la notación de conjuntos graficándolos en la recta real. & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{ii) Preguntas de comprensión}
+
+\begin{enumerate}
+    \item ¿Es posible asociar todo sistema de ecuaciones platónicas a una situación de la vida real? Explica tu respuesta.
+
+    \rule{10cm}{0.4pt}
+
+    \item ¿Puedes afirmar que todo sistema de ecuaciones que representa una situación de la realidad tiene solución? Explica tu respuesta.
+
+    [ ] Sí. \quad [ ] No.
+
+    \item Representa en forma de intervalos a través de la recta numérica las siguientes situaciones:
+
+        \begin{enumerate}[label=\alph*)]
+            \item Se empieza a medir la velocidad del coche transcurrido 10 minutos del instante inicial.
+            \item La temperatura ha pasado de 20°C a $-1$°C.
+        \end{enumerate}
+
+    \item Dibuja la recta numérica y representa en notación de intervalos los valores entre 0 y 1, luego construye 4 intervalos que estén contenidos en el intervalo inicial. ¿Qué se puede concluir de este hecho?
+\end{enumerate}
+
+\textit{(Verifica las respuestas con tu profesor)}
+
+\subsubsection*{iii) Resuelvo un problema}
+
+Completa el planteamiento del problema y resuélvelo.
+
+En una pecera hay cangrejos y \rule{2cm}{0.4pt}. El número de cabezas de los animales es 4, el número de patas es 36. ¿Cuántos animales de cada especie hay?
+
+\end{document}
