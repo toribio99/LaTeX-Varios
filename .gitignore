@@ -15,8 +15,8 @@
 *.ind
 *.listing
 
-# PDFs (opcional - descomenta si quieres versionar PDFs)
-# *.pdf
+# PDFs generados por compilación
+*.pdf
 
 # Archivos de sistema
 .DS_Store
