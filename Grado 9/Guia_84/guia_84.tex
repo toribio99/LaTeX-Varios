@@ -1,0 +1,1945 @@
+% !TEX program = lualatex
+% !TEX encoding = UTF-8
+%
+% Guía 84: Funciónate con el saber
+% Grado 9 - Meta 28
+% Fe y Alegría Colombia
+%
+% Compilar con: lualatex guia_84.tex
+%
+
+\documentclass[12pt,a4paper]{article}
+
+% ========== PAQUETES ==========
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{margin=2cm, top=1.5cm, bottom=1.5cm}
+
+% Matemáticas
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% Tablas y colores
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+
+% Cajas y entornos destacados
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\tcbset{
+    before skip=0.5em,
+    after skip=0.5em,
+    top=0.3cm,
+    bottom=0.3cm,
+    left=0.3cm,
+    right=0.3cm
+}
+
+% Listas y enumeraciones
+\usepackage{enumitem}
+
+% Código verbatim
+\usepackage{fancyvrb}
+
+% Gráficos
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{shapes.geometric}
+
+% Enlaces
+\usepackage[hidelinks]{hyperref}
+
+% ========== CONFIGURACIÓN DE COLORES ==========
+\definecolor{azuloscuro}{RGB}{41,72,137}
+\definecolor{rojoclaro}{RGB}{220,80,80}
+\definecolor{verdeclaro}{RGB}{100,180,100}
+\definecolor{fondogris}{RGB}{240,240,240}
+\definecolor{fondorosa}{RGB}{255,230,240}
+\definecolor{fondoverde}{RGB}{230,255,240}
+\definecolor{fondoazul}{RGB}{230,240,255}
+
+% ========== CONFIGURACIÓN DE ESPACIADO ==========
+% Reducir espacio entre secciones
+\setlength{\parskip}{0.3em}
+\setlength{\parindent}{0pt}
+
+% Reducir espacio antes y después de listas
+\setlist{nosep, topsep=0.3em, partopsep=0pt, itemsep=0pt}
+
+% Reducir espacios verticales adicionales
+\setlength{\abovedisplayskip}{6pt}
+\setlength{\belowdisplayskip}{6pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+
+% Ajustar espacio entre títulos de sección
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.5em}{0.3em}
+\titlespacing*{\subsection}{0pt}{0.4em}{0.2em}
+\titlespacing*{\subsubsection}{0pt}{0.3em}{0.2em}
+
+% ========== COMANDOS PERSONALIZADOS ==========
+\newcommand{\seccion}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+
+% ========== TÍTULO DEL DOCUMENTO ==========
+\title{\textbf{Guía 84: Funciónate con el saber}}
+\author{Fe y Alegría Colombia}
+\date{}
+
+% ========== INICIO DEL DOCUMENTO ==========
+\begin{document}
+
+% ========== PORTADA ==========
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+
+    {\Huge\textbf{CH-FyA-0500}}
+
+    \vspace{0.5cm}
+
+    {\LARGE Guía 84: Funciónate con el saber}
+
+    \vspace{1cm}
+
+    {\Large Fe y Alegría Colombia}
+
+    \vfill
+
+    {\large Código: CH-FyA-0500}
+
+    \vspace{0.5cm}
+\end{titlepage}
+
+% ========== PÁGINA 2 - INFORMACIÓN ==========
+\newpage
+\begin{center}
+    {\large\textbf{Guía 84}}
+
+    {\large\textbf{Meta 28}}
+
+    {\large\textbf{GRADO 9}}
+
+    \vspace{1cm}
+
+    {\LARGE\textbf{GUÍA DEL ESTUDIANTE}}
+
+    \vspace{1cm}
+
+    {\Huge\textbf{FUNCIÓNATE}}
+
+    {\Huge\textbf{CON EL SABER}}
+
+\end{center}
+
+% ========== PÁGINA 3 - CRÉDITOS ==========
+\newpage
+
+\seccion{Guías de Aprendizaje de Cualificar Matemáticas}
+
+{\centering\large\textbf{Fe y Alegría Colombia}\par}
+
+\vspace{1cm}
+
+\subsection*{Fe y Alegría Colombia}
+
+\textbf{Víctor Murillo} \\
+Director Nacional
+
+\subsection*{Desarrollo de contenidos pedagógicos y educativos}
+Jaime Benjumea - Marcela Vega
+
+\subsection*{Autores de la guía 70}
+Yocelyn Arias Campo, I.E.D. Germán Vargas Cantillo, BARRANQUILLA \\
+Francisco Javier Gutierrez Sierra, I.E.D ALUNA \\
+Angie Paola Pardo Sanchez, Colegio Bicentenario
+
+\subsection*{Coordinación pedagógica}
+Francy Paola González Castelblanco \\
+Andrés Forero Cuervo \\
+GRUPO LEMA \url{www.grupolema.org}
+
+\subsection*{Revisores}
+Jaime Benjumea \\
+Francy Paola González Castelblanco \\
+Andrés Forero Cuervo
+
+% ========== PÁGINA 4 - ESTRUCTURA DE LAS GUÍAS ==========
+\newpage
+
+\seccion{FUNCIÓNATE CON EL SABER}
+
+\begin{center}
+    {\large\textbf{Guía 84}}\\[0.3cm]
+    {\large\textbf{GRADO 9}}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{|
+		>{\centering\arraybackslash}m{4.5cm}|
+		>{\centering\arraybackslash}m{4.5cm}|
+		>{\centering\arraybackslash}m{4.5cm}|}
+\hline
+\rowcolor{fondogris}
+\textbf{Guía 82} & \textbf{Guía 83} & \textbf{Guía 84} \\
+\rowcolor{fondogris}
+\textbf{(Duración 13 h)} & \textbf{(Duración 13 h)} & \textbf{(Duración 13 h)} \\
+\hline
+%\cellcolor{yellow!30}
+\begin{itemize}[leftmargin=*]
+\item Magnitudes conmensurables y no conmensurables
+\item Expansión decimal no periódica y los números irracionales.
+\item Propiedades de las operaciones de los reales y equivalencias entre expresiones numéricas.
+\item Aproximación y truncamiento irracionales y graficación en la recta.
+\item Notación científica.
+\item Propiedades de los exponentes.
+\item Radicación y sus propiedades.
+\item Logaritmación y sus propiedades; logaritmos en distintas bases.
+\end{itemize}
+&
+%\cellcolor{yellow!30}
+\begin{itemize}[leftmargin=*]
+\item Secuencias con figuras y patrones.
+\item Expresa patrones en tablas y con expresiones algebraicas.
+\item Números figurados.
+\item Sistemas de ecuaciones lineales de dos incógnitas.
+\item Resuelve problemas planteando y resolviendo sistemas de ecuaciones lineales.
+\item Expresa intervalos en la recta con desigualdades, con notacion de conjuntos, en la recta y con notación de intervalos.
+\end{itemize}
+&
+%\cellcolor{yellow!30}
+\begin{itemize}[leftmargin=*]
+\item{\textbf{ACTIVIDAD 1}}
+\item Relaciones y funciones.
+\item Funciones lineales ($y=mx+b$) y funciones de proporcionalidad ($y=mx$).
+\item Pendiente de una recta.
+\item{\textbf{ACTIVIDAD 2}}
+\item Función cuadrática, expresiones algebraicas, tabla y gráfica.
+\item Estrategias para factorizar una cuadrática.
+\item Vértice, puntos de corte, amplitud, simetría, crecimiento y decrecimiento de la parábola.
+\item{\textbf{ACTIVIDAD 3}}
+\item Función de proporcionalidad inversa.
+\item Funciones exponenciales.
+\end{itemize}
+\\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+\subsection*{META DE APRENDIZAJE 28:}
+
+Reconozco procesos de aproximación y truncamiento de números irracionales para explicar cómo es su expansión decimal en contextos geométricos y numéricos (secuencias y sucesiones) que involucren números figurados y mediciones de magnitudes inconmensurables. También interpreto situaciones en contextos contables y de finanzas en los que se requiera plantear un sistema de ecuaciones lineales de una incógnita o analizar funciones lineales calculando capital inicial y final, porcentaje de intereses anuales, precios de venta, problemas en los que se quiera estimar la ganancia máxima (función cuadrática) o analizar cómo crece un capital de forma exponencial y funciones de proporcionalidad inversa con ayuda de un software o applets de Geogebra.
+
+\subsection*{PREGUNTAS ESENCIALES:}
+
+\textbf{Actividad 1:}
+\begin{itemize}
+\item Si se va al mercado o a cualquier centro comercial, ¿cómo se relacionan un conjunto de determinados objetos, con el costo expresado en pesos, para saber cuánto podemos comprar?
+\item ¿Cómo puedo aplicar funciones lineales en mi deporte favorito?
+\end{itemize}
+
+\textbf{Actividad 2:}
+\begin{itemize}
+\item ¿Cómo podemos predecir las ganancias y pérdidas de una empresa o negocio a través de funciones cuadráticas?
+\item ¿De qué manera podría analizar e interpretar las gráficas de funciones cuadráticas en el contexto económico?
+\item ¿De qué manera puedo usar herramientas digitales al analizar gráficamente funciones cuadráticas de mi ámbito local?
+\end{itemize}
+
+%\newpage
+
+\textbf{Actividad 3:}
+\begin{itemize}
+\item ¿Cómo las funciones te sirven para calcular el capital de una empresa?
+\item ¿De qué manera puedes predecir una situación teniendo en cuenta el comportamiento de una función?
+\item ¿Puedes determinar el crecimiento o decrecimiento a fenómenos naturales o situaciones financieras de acuerdo a su comportamiento?
+\end{itemize}
+
+\subsection*{EVIDENCIAS DE APRENDIZAJE}
+
+\textbf{Actividad 1:}
+\begin{itemize}
+\item Identifico funciones en diversos contextos y comprende que una función sirve para modelar relaciones de dependencia entre dos magnitudes.
+\item Describo características de la relación entre dos variables a partir de la gráfica
+\item Reconozco relaciones que son o no son funciones y las representa en diagramas sagitales y en el plano.
+\item Interpreto la pendiente de una recta como una razón de cambio entre el desplazamiento vertical y horizontal y utiliza esta información para interpretar la variación lineal en situaciones problema.
+\end{itemize}
+
+\textbf{Actividad 2:}
+\begin{itemize}
+\item Represento gráficamente funciones de la forma $y=ax^2+bx+c$, $y=ax^2+bx$ y $y=ax^2+c$ en cada caso reconozco el efecto de variar los parámetros algebraicos en las gráficas de las funciones.
+\item Utilizo diferentes estrategias para resolver ecuaciones cuadráticas de la forma: $y=ax^2+bx+c$, (factorizar ecuación cuadrática mediante la fórmula de la cuadrática, completando el cuadrado, por método gráfico) y comprendo que las soluciones son puntos de corte de la función con el eje x.
+\item Identifico en la gráfica y en expresión algebraica el valor máximo, mínimo, ceros, simetría, concavidad, crecimiento y decrecimiento.
+\end{itemize}
+
+\textbf{Actividad 3:}
+\begin{itemize}
+\item Reconozco situaciones que varían de forma proporcional inversa representadas en gráficas o en tablas y las modela encontrando la ecuación que las representa.
+\item Interpreto distintos fenómenos de variación que se pueden modelar mediante funciones exponenciales y los explica analizandolos primero gráficamente y luego numéricamente.
+\item Reconozco que en la variación exponencial hay un factor multiplicativo que acelera rápidamente el crecimiento de la función, utilizo este factor para descubrir patrones de variación en situaciones que se modelen exponencialmente.
+\end{itemize}
+
+% ========== ACTIVIDAD 1: RELACIONES Y FUNCIONES ==========
+\newpage
+
+\seccion{ACTIVIDAD 1: RELACIONES Y FUNCIONES}
+
+\begin{center}
+\textbf{Conozcamos un poco sobre las relaciones para saber cuándo son también funciones\\
+y cómo aplicar esto a la vida financiera o económica de mi hogar.}
+\end{center}
+
+\subsection*{A) Activando saberes previos}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,title=\textbf{RECUERDA QUE...}]
+
+Una \textbf{relación} es una correspondencia entre los elementos de dos conjuntos: cada elemento del primer conjunto se corresponde (se relaciona) con algunos elementos del segundo conjunto. Un elemento puede relacionarse con cero, 1 o más de 1 elementos.
+
+\textbf{Ejemplo 1:} Para la relación ``P se relaciona con Q si P + Q es par'': 3 se relaciona con 5, 3 se relaciona con 3, pero 3 NO se relaciona con 6 (porque 3+6 no es par).
+
+\textbf{Ejemplo 2:}
+
+La expresión verbal que relaciona una variable $y$ con el doble de un número $x$ más uno se puede representar mediante la fórmula $y = 2x + 1$. Esta función se puede representar también con esta tabla:
+
+\begin{center}
+\begin{tabular}{|
+		>{\centering\arraybackslash}m{2.5cm}|
+		>{\centering\arraybackslash}m{1cm}|
+		>{\centering\arraybackslash}m{1cm}|
+		>{\centering\arraybackslash}m{1cm}|
+		>{\centering\arraybackslash}m{1cm}|
+		>{\centering\arraybackslash}m{1cm}|
+		>{\centering\arraybackslash}m{1cm}|}
+\hline
+\textbf{X (Dom)} & \centering 1 & \centering 2 & \centering 3 & \centering 5 & \centering 10 & 35 \\
+\hline
+\textbf{$y = 2x + 1$} & \centering 3 & \centering 5 & \centering 7 & \centering 11 & \centering 21 & 71 \\
+\textbf{(Rango)} & & & & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+Cada valor de la segunda fila se obtiene reemplazando los valores respectivos de $x$ en la fórmula $y = 2x + 1$. Esto es:
+
+$2(1) + 1 = 3$, $2(2) + 1 = 5$, $2(3) + 1 = 7$, $2(5) + 1 = 11$, $2(10) + 1 = 21$, $2(35) + 1 = 71$
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,title=\textbf{PRACTICA}]
+
+\textbf{Aprendamos a identificar las relaciones entre variables:}
+
+\end{tcolorbox}
+
+\vspace{5mm}
+
+%\newpage
+
+\textbf{Ejercicio 1:}
+
+Una empresa de buses intermunicipal, cobra por pasajes \$10000. La gráfica, relaciona el costo del pasaje por persona.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=8cm,
+    xlabel={Número de pasajeros},
+    ylabel={Costo total (\$)},
+    xmin=0, xmax=5.5,
+    ymin=0, ymax=55000,
+    xtick={0,1,2,3,4,5},
+    ytick={0,10000,20000,30000,40000,50000},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    axis lines=middle,
+    enlargelimits=false,
+]
+\addplot[
+    color=blue,
+    thick,
+    domain=0:5,
+    samples=2
+] {10000*x};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+\item ¿Qué significan los números correspondientes a cada eje, según el contexto dado?
+\item El punto (0,0) ¿Qué representa en este caso?
+\item ¿Qué pasa con el precio del pasaje, a medida que aumentan los pasajeros?
+\item ¿Qué parejas ordenadas se forman a partir de la gráfica?
+\item ¿Qué tipo de gráfica se obtiene?
+\end{itemize}
+
+\vspace{1cm}
+
+\textbf{Ejercicio 2:}
+
+La gráfica muestra el comportamiento de los precios de la gasolina en Bogotá, en el último año.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    xlabel={Mes},
+    ylabel={Precio (\$/gal)},
+    xmin=0, xmax=13,
+    ymin=9400, ymax=9900,
+    xtick={1,2,3,4,5,6,7,8,9,10,11,12},
+    xticklabels={Feb,Mar,Jul,Ago,Sep,Oct,Nov,Dic,Ene,Feb},
+    ytick={9400,9500,9600,9700,9800,9900},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    enlargelimits=false,
+]
+\addplot[
+    color=red,
+    thick,
+    mark=*,
+    mark size=3pt
+] coordinates {
+    (1,9539)
+    (2,9586)
+    (3,9736)
+    (4,9734)
+    (5,9734)
+    (6,9734)
+    (7,9705)
+    (8,9704)
+    (9,9702)
+    (10,9702)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+\item ¿En qué meses, el precio de la gasolina fue constante?
+\item ¿Cómo fue el comportamiento del precio de la gasolina durante el mes de marzo a julio?
+\item ¿En qué intervalos, el precio de la gasolina fue decreciente?
+\item Si, los siguientes tres meses, el precio de la gasolina fue constante, ¿cómo lo graficamos?
+\end{itemize}
+
+\subsection*{B) Conceptos}
+
+\textbf{Exploración: El mejor salario}
+
+Antes de comenzar la clase, discute con tus compañeros cuál es la mejor opción que tiene Luis para escoger una oferta de trabajo si las opciones que tiene son:
+
+\textbf{A.} En una empresa de domicilios, le ofrecen un salario fijo mensual de \$300000 y adicional, \$5000 por cada reparto que haga (el promedio de repartos por mes es de 180)
+
+\textbf{B.} Atender una papelería, cuyo salario fijo mensual es de \$500000, y adicional \$20000 por cada 100 libros que imprima. (El promedio de impresión por mes es de 300 libros)
+
+\vspace{0.5cm}
+
+Detallamos cada opción, en la \textbf{A}, podemos expresar la función como: $f(x) = 5000x + 300000$, ya que el salario, dependerá de cuántos repartos haga en el mes.
+
+Tomando como referencia el promedio de repartos mensuales, podríamos decir que:
+
+$f(180) = 5000(180) + 300000$. Así, $f(180) = 1200000$. El salario que obtendrá Luis será de \$1200000.
+
+En la opción \textbf{B}, tenemos que el sueldo fijo es de \$500000 más un adicional de \$20000, pero depende de cuántos libros imprima en el mes, el promedio es de 299 libros, es decir que: $f(x) = 20000x + 500000$.
+
+Tomando como referencia que el promedio es de 300 libros mensuales, y por cada 100 será adicionado \$20000, entonces, la función queda representada como:
+
+$f(3) = 20000(3) + 500000$. Así, $f(3) = 560000$. El salario que obtendrá Luis será de \$560000.
+
+Entonces, a Luis le convendrá mejor la opción \textbf{B}.
+
+\vspace{0.5cm}
+
+\textbf{Responde:}
+\begin{itemize}
+\item Teniendo en cuenta que Luis aceptó la opción A, y en el primer mes hizo el promedio de repartos de 180, y a partir del segundo mes se duplicaron los repartos con respecto al mes anterior, ¿cómo graficamos esta situación en el plano cartesiano? ¿Qué tipo de gráfica saldría?
+\item Al cuarto mes, ¿Cuáles serán las ganancias de Luis? ¿Cuál será la expresión matemática que corresponda a la situación?
+\end{itemize}
+
+\vspace{5mm}
+
+%\newpage
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{MINI-EXPLICACIÓN: CONCEPTO DE FUNCIONES},breakable]
+
+Una \textbf{función} es una relación entre dos variables $x$, $y$, de manera que a cada $x$ le corresponde un único valor de $y$. Usualmente se escribe $y = f(x)$.
+
+Es importante conocer la diferencia entre una relación y una función.
+
+Una \textbf{relación} es una correspondencia de elementos entre dos conjuntos.
+
+Una \textbf{función} es un caso especial de relación en donde a cada elemento de un conjunto (A) le corresponde uno y sólo un elemento de otro conjunto (B).
+
+\vspace{0.5cm}
+
+Las relaciones pueden escribirse como pares ordenados de números o como números en una tabla de valores. Examinar las entradas (coordenada $x$) y las salidas (coordenada $y$), puedes determinar si una relación es o no una función. Recuerda, en una función cada entrada tiene sólo una salida. Veamos un par de ejemplos.
+
+\vspace{0.5cm}
+
+\textbf{Ejemplo:}
+
+\textbf{Problema:} ¿Es una función la relación dada por el conjunto de pares ordenados $\{(-3, -6), (-2, -1), (1, 0), (1, 5), (2, 0)\}$?
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$x$ & $y$ \\
+\hline
+-3 & -6 \\
+-2 & -1 \\
+1 & 0 \\
+1 & 5 \\
+2 & 0 \\
+\hline
+\end{tabular}
+\end{center}
+
+Organiza los pares ordenados en la tabla. Por definición, las entradas de una función tienen sólo una salida.
+
+La entrada 1 tiene dos salidas: 0 y 5.
+
+\textbf{La relación NO es una función.}
+
+\vspace{0.5cm}
+
+\textbf{Ejemplo:}
+
+\textbf{Problema:} ¿Es una función la relación dada por el conjunto de pares ordenados siguientes? $\{(-3, 4), (-2, 4), (-1, 4), (2, 4), (3, 4)\}$
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$x$ & $y$ \\
+\hline
+-3 & 4 \\
+-2 & 4 \\
+-1 & 4 \\
+2 & 4 \\
+3 & 4 \\
+\hline
+\end{tabular}
+\end{center}
+
+Puedes organizar la información en una tabla.
+
+Cada entrada tiene sólo una salida. Cada entrada tiene sólo una salida y no importa el hecho de que sea la misma salida (4).
+
+\textbf{Respuesta: La relación es una función.}
+
+\vspace{0.5cm}
+
+La gráfica de la función dibujada se ve como un semicírculo. Sabemos que ``y'' es una función de ``x'' porque por cada coordenada ``x'' hay exactamente una coordenada ``y''.
+
+\end{tcolorbox}
+
+\vspace{5mm}
+
+%\newpage
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,breakable]
+
+\textbf{Si la comparamos con la siguiente:}
+
+Esta relación no puede ser una función, porque algunas de las coordenadas en $x$ tienen dos coordenadas en $y$ correspondientes.
+
+Recuerda que en una función, un valor de entrada debe tener uno y sólo un valor de salida.
+
+\begin{itemize}
+\item Se llama \textbf{variable dependiente} a la variable $y$, ya que su valor depende de la variable $x$, que es la \textbf{variable independiente}.
+\item $y = f(x)$ es la expresión algebraica de una función.
+\item Para representar una función, se construye una tabla de valores y se representan sus pares de valores como puntos en el sistema de coordenadas.
+
+\textbf{a.} Los valores de la variable independiente ($x$), se representan sobre el eje horizontal o eje de las abscisas.
+
+\textbf{b.} Los valores de la variable dependiente ($y$), se representan sobre el eje de las ordenadas.
+
+\item Uniendo los puntos marcados, se obtiene una gráfica, que representa la relación entre las dos variables.
+\item \textbf{Evaluar} una función $y = f(x)$ es obtener el valor que la función le asocia a un valor determinado de $x$.
+\item En una función, la \textbf{imagen} de un número equivale al resultado de evaluar el número en la función.
+\item La \textbf{preimagen} de un número es el valor que se evaluó en la función para obtener dicho número.
+\item El \textbf{dominio} de una función, que se expresa Dom $f$, es el conjunto de todos los elementos para los cuales la función está definida, es decir, los valores que la variable independiente $x$ puede tomar.
+\item El \textbf{rango o imagen} de una función $f$, que se expresa Ran $f$, es el conjunto de valores que toma la variable dependiente $y$, es decir, todos los valores que son imagen de algún valor de la variable independiente $x$.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{EJEMPLO:} Jaime planea vender pasteles caseros a \$10 cada uno. La cantidad que gana es una función de cuántos pasteles vende: \$0 si vende 0 pasteles, \$10 si vende 1 pastel, \$20 si vende 2 pasteles, etc.
+
+Jaime no quiere que se dañen los pasteles antes de ser vendidos, por lo que no hará más de 10 pasteles. ¿Cuál es el dominio y el rango de la función?
+
+\textbf{SOLUCIÓN:} Dominio: $\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$ \quad Rango: $\{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100\}$
+
+El número de pasteles que Jaime puede vender es la entrada y eso puede ser cualquier número entero de 0 hasta 10. El dinero que gana de esos pasteles es siempre un múltiplo de 10: 10 para 1 pastel, 20 para 2 pasteles, etc.
+
+\end{tcolorbox}
+
+\vspace{5mm}
+
+%\newpage
+
+\textbf{FUNCIÓN LINEAL: GRAFIQUEMOS} la relación entre el número de domicilios de Luis y el salario que obtendrá cada mes: $f(x) = 5000x + 300000$. Para graficar en el plano, realizamos una tabla de valores:
+
+\begin{align*}
+f(0) &= 5000(0) + 300000 = 300000 \\
+f(180) &= 5000(180) + 300000 = 1'200000 \\
+f(360) &= 5000(360) + 300000 = 2'100000 \\
+f(720) &= 5000(720) + 300000 = 3'900000
+\end{align*}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$x$ (repartos de domicilio) & 0 & 180 & 360 & 720 \\
+\hline
+$y$ (salario) & 300000 & 1'200000 & 2'100000 & 3'900000 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=11cm,
+    height=8cm,
+    xlabel={Repartos de domicilio ($x$)},
+    ylabel={Salario (\$)},
+    xmin=0, xmax=800,
+    ymin=0, ymax=4200000,
+    xtick={0,200,400,600,800,1000},
+    ytick={0,1000000,2000000,3000000,4000000},
+    yticklabel style={/pgf/number format/fixed,
+                     /pgf/number format/fixed zerofill,
+                     /pgf/number format/precision=0},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    axis lines=middle,
+    enlargelimits=false,
+]
+\addplot[
+    color=green!60!black,
+    thick,
+    domain=0:800,
+    samples=2,
+    mark=*,
+    mark size=2pt,
+    mark options={solid}
+] {5000*x + 300000};
+\addplot[only marks, mark=*, mark size=3pt, color=green!60!black] coordinates {
+    (0,300000) (180,1200000) (360,2100000) (720,3900000)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\vspace{1cm}
+
+Acá, la pendiente es 5000: cada vez que $x$ aumenta una unidad, la recta sube 5000 unidades en $y$. 300000 es el intercepto con el eje $y$. De la gráfica podemos decir que es una función lineal.
+
+Una \textbf{función lineal} se define por la ecuación $y = f(x) = mx + b$ (ecuación canónica), donde $m$ es la pendiente $b$ es el $y$-intercepto.
+
+Por ejemplo, son funciones lineales $f(x) = 3x + 2$, $g(x) = -x + 7$, $h(x) = 4$ (en esta $m = 0$ por lo que $0x$ no se pone en la ecuación). La gráfica de una función lineal, siempre será una línea recta.
+
+\vspace{0.5cm}
+
+Ahora, si detallamos el desplazamiento desde $(0, 300000)$ hasta $(360, 2100000)$ y dividimos el cambio de repartos de domicilio entre el cambio de salario, obtendremos el valor de la pendiente:
+
+$$m = \frac{2100000 - 300000}{360 - 0} = \frac{1800000}{360} = 5000$$
+
+En conclusión, la \textbf{pendiente de la recta} se escribe con la letra $m$ es la relación entre la altura y la base e indica qué tan inclinada está la recta con respecto al eje $x$, y está dada por la ecuación:
+
+$$m = \frac{y_2 - y_1}{x_2 - x_1}$$
+
+Si $m > 0$ la función es creciente y el ángulo que forma la recta con la parte positiva del eje OX es agudo.
+
+Si $m < 0$ la función es decreciente y el ángulo que forma la recta con la parte positiva del eje OX es obtuso.
+
+\vspace{5mm}
+
+%\newpage
+
+\subsection*{C) Resuelve y practica}
+
+\begin{enumerate}
+\item Lucas y Matías compiten para ver quien dibuja la recta que crece más rápido. No pueden hacerla vertical y tampoco pueden escribir una ecuación antes de representarla. Lucas dibujó una que pasa por los puntos $(1,1)$ y $(2,5)$; en cambio la de Matías pasa por los puntos $(2,4)$ y $(3,6)$.
+
+¿Cuál de las dos rectas crece más rápido? ¿Cómo podrías darte cuenta sin representarla?
+
+\item Francisco acompañó a su padre a comprar y ha visto que 1 libra de tomates tiene un precio de \$750. Al preguntar cómo se calcula el precio para diferentes libra de tomates su padre le explica que debe relacionar el número de kilos de tomates con el precio final.
+
+\begin{enumerate}[label=\alph*.]
+\item ¿Cuál es la variable independiente y cuál es la variable dependiente?
+\item ¿Cuál es la expresión algebraica de esta función?
+\item ¿Cuánto debe pagar si compra 3, 5 o 9 libras?
+\end{enumerate}
+
+\item Un grifo, vierte agua a un depósito dejando caer 30 litros cada minuto.
+
+\begin{enumerate}[label=\alph*.]
+\item ¿Cuánto tiempo tardará en llenar una piscina de 50 metros cúbicos?
+\item ¿Cuál es la manera apropiada de representar la capacidad en función del tiempo?. Grafica en el plano cartesiano.
+\end{enumerate}
+
+\item Un técnico en reparaciones de electrodomésticos cobra \$25 por la visita, más \$20 por cada hora de trabajo ¿Qué función lineal expresa el dinero que debemos pagar en total, en relación al tiempo trabajado? ¿Cuál es su representación gráfica?
+
+\item Por el alquiler de un coche cobran una cuota fija de 20.000 pesos y adicionalmente 3.000 pesos por kilómetro recorrido. Escribe la ecuación canónica que representa esta función y grafícala. ¿Cuánto dinero hay que pagar para hacer un recorrido de 125 Km? y si pagué un valor de 65.000 pesos ¿cuántos kilómetros recorrí?
+
+\item Un almacén ofrece el 40\% de descuento en sus productos. Si Juan compró una patineta y pagó \$75, ¿cuánto valía la patineta sin descuento?
+
+\item Una fábrica de botones produce 1500 botones en una hora, pero la décima parte salen imperfectos. ¿Cuántos botones buenos se producen en dos horas?
+
+\item La suma de tres números pares consecutivos es 54. ¿Cuáles son los tres números?
+
+\item Tres hermanos reciben una herencia de \$96000. Luis recibe el triple que Ana y Pedro, el doble que Ana. ¿Cuánto recibe cada uno?
+
+\item Las longitudes de los lados de un triángulo son números impares consecutivos. El perímetro es 69 cm. ¿Cuáles son las longitudes de los lados del triángulo?
+\end{enumerate}
+
+\vspace{1cm}
+
+\textbf{PROBLEMAS VIRTUALES} Tema: funciones (Mira los videos y responde las preguntas)
+
+\url{http://www.mat.uson.mx/~jldiaz/WFunciones/Dominio_y_rango.htm}
+
+\url{https://www.youtube.com/watch?v=QY0mJGQjE5E}
+
+\newpage
+
+\subsection*{D) Resumen}
+
+\begin{center}
+\textbf{FUNCIONES}
+\end{center}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro]
+
+\textbf{¿Qué es una función?}
+
+Una relación entre dos variables $x$ e $y$, que se puede representar o modelar por una ecuación de manera que a cada valor de $x$ le corresponde un único valor de $y$.
+
+\vspace{0.5cm}
+
+\textbf{¿Qué es una función lineal?}
+
+Es aquella cuya gráfica es una línea recta.
+
+\textbf{Expresión algebraica:} $y = mx + b$
+
+\vspace{0.5cm}
+
+\textbf{Pendiente}
+
+Es el coeficiente (constante de proporcionalidad) en $y = mx$, se representa con la letra $m$
+
+Puede ser creciente o decreciente
+
+\vspace{0.5cm}
+
+\textbf{TEN EN CUENTA:}
+
+\begin{itemize}
+\item No toda relación es una función.
+\item En toda función $y = mx + b$, $X$ es la variable independiente, $Y$ es la dependiente.
+\end{itemize}
+
+\end{tcolorbox}
+
+\vspace{5mm}
+
+%\newpage
+
+\subsection*{E) Valoración}
+
+\subsubsection*{i) Califica tu comprensión por tema en tu cuaderno}
+
+\begin{center}
+\small
+\begin{tabular}{|
+		>{\centering\arraybackslash}m{3.5cm}|
+		>{\centering\arraybackslash}m{3cm}|
+		>{\centering\arraybackslash}m{3cm}|
+		>{\centering\arraybackslash}m{3cm}|}
+\hline
+\textbf{Temas} & \textbf{Todavía no entiendo los conceptos} & \textbf{Voy bien pero quiero más práctica} & \textbf{Comprendí muy bien el tema} \\
+\hline
+Identifico cuándo una relación es una función y cuándo no y las represento en diagramas y en el plano. & & & \\
+\hline
+Comprendo la dependencia entre dos magnitudes & & & \\
+\hline
+Interpreto la pendiente de una recta. & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{ii) Preguntas de comprensión}
+
+\textbf{1)} ¿Cuál de las siguientes gráficas corresponde a una función lineal?
+
+(Opciones con gráficas)
+
+\textbf{2)} En el punto anterior, para la gráfica de la función lineal, la pendiente es:
+
+\begin{enumerate}[label=\alph*.]
+\item 0
+\item -1
+\item 1
+\item 2
+\end{enumerate}
+
+\textbf{3)} La gráfica de la función lineal anterior es:
+
+\begin{enumerate}[label=\alph*.]
+\item creciente
+\item decreciente
+\item constante
+\end{enumerate}
+
+(Verifica las respuestas con tu profesor)
+
+\subsubsection*{iii) Resuelvo un problema}
+
+Examina la gráfica que se muestra abajo. Representa la jornada realizada por un camión grande en un día particular. Durante el día, el camión hizo dos entregas, cada una de ellas la realiza en el lapso de una hora. Sabemos también que el conductor se tomó una hora libre para almorzar. Identifica qué está ocurriendo en cada etapa de este viaje (de la etapa A hasta la E)
+
+\textbf{Distancia recorrida por el camión desde su base (o punto de partida), en función del tiempo transcurrido}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    xlabel={Tiempo (horas)},
+    ylabel={Distancia (millas)},
+    xmin=0, xmax=9,
+    ymin=0, ymax=140,
+    xtick={0,1,2,3,4,5,6,7,8},
+    ytick={0,20,40,60,80,100,120,140},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    axis lines=left,
+    enlargelimits=false,
+]
+\addplot[
+    color=blue,
+    thick,
+    mark=none
+] coordinates {
+    (0,0) (1,40) (2,80) (3,100) (4,120) (5,120) (6,100) (7,80) (8,40) (9,0)
+};
+\node at (axis cs:0.5,20) {A};
+\node at (axis cs:1.5,60) {B};
+\node at (axis cs:2.5,90) {C};
+\node at (axis cs:3.5,110) {D};
+\node at (axis cs:4.5,120) {E};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+\item Describe el itinerario seguido por el camión.
+\item Halla la razón de cambio para cada sección
+\end{itemize}
+
+\vspace{5mm}
+
+% ========== ACTIVIDAD 2: FUNCIÓN CUADRÁTICA ==========
+%\newpage
+
+\seccion{ACTIVIDAD 2: FUNCIÓN CUADRÁTICA}
+
+\begin{center}
+\textbf{Conozcamos las funciones cuadráticas y sus aplicaciones.}
+\end{center}
+
+\subsection*{A) Activando saberes previos}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,title=\textbf{RECUERDA QUE...}]
+
+Las \textbf{Expresión algebraica} resultan de la combinación de letras y números ligadas por los signos de las operaciones: adición, sustracción, multiplicación, división y potenciación.
+
+\vspace{0.5cm}
+
+Hay distintos tipos de expresiones algebraicas. Dependiendo del número de sumandos, tenemos: \textbf{monomios} (1 sumando) y \textbf{polinomios} (varios sumandos). Algunos polinomios tienen nombre propio: \textbf{binomio} (2 sumandos), \textbf{trinomio} (3 sumandos), ... se llama ecuación.
+
+Las \textbf{ecuaciones} son una igualdad entre dos expresiones algebraicas que contienen una o más incógnitas
+
+\textbf{Para despejar una ecuación se debe tener en cuenta lo siguiente:}
+\begin{itemize}
+\item Identificar la variable que representa el valor desconocido.
+\item La ecuación guarda un equilibrio, el cual debe mantenerse, por lo tanto cualquier cambio (adición, sustracción, multiplicación o división) que se haga, debe ser hecho a ambos lados del igual.
+\end{itemize}
+
+Para verificar que $x = 9$ es solución de la ecuación $5x + 22 = 2x + 49$, se reemplaza ese valor en la ecuación dada. Observa:
+
+\begin{align*}
+5x + 22 &= 2x + 49 \\
+5(9) + 22 &= 2(9) + 49 \\
+45 + 22 &= 18 + 49 \\
+67 &= 67
+\end{align*}
+
+\end{tcolorbox}
+
+\vspace{5mm}
+
+%\newpage
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,breakable]
+
+La \textbf{factorización} es una técnica que consiste en la descomposición en factores de una expresión algebraica, en forma de producto.
+
+\begin{itemize}
+\item $a^2 + 2ab + b^2 = (a + b)^2 = (a + b) \cdot (a + b)$
+\item $a^2 - 2ab + b^2 = (a - b)^2 = (a - b) \cdot (a - b)$
+\item $a^2 - b^2 = (a - b) \cdot (a + b)$
+\item $a^3 + 3a^2b + 3ab^2 + b^3 = (a + b)^3 = (a + b) \cdot (a + b) \cdot (a + b)$
+\item $a^3 - 3a^2b + 3ab^2 - b^3 = (a - b)^3 = (a - b) \cdot (a - b) \cdot (a - b)$
+\item $a^3 + b^3 = (a + b) \cdot (a^2 - ab + b^2)$
+\item $a^3 - b^3 = (a - b) \cdot (a^2 + ab + b^2)$
+\item $x^2 + (a + b) \cdot x + (a \cdot b) = (x + a) \cdot (x + b)$
+\end{itemize}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,title=\textbf{PRACTICA}]
+
+\textbf{1.} Observa la siguiente imagen y responde brevemente las siguientes preguntas:
+
+\begin{enumerate}[label=\Alph*.]
+\item ¿Reconoces las imágenes? ¿Cuales?
+\item ¿Tienen características en común?
+\end{enumerate}
+
+\textbf{2.} Entra al link y realiza el nivel 1 del juego:
+
+\url{http://www.macrojuegos.com/juegos/angry-birds-space-online~18347/}
+
+\begin{itemize}
+\item Responde: ¿Qué debes hacer para superar el level 1? ¿Qué estrategia debes usar? ¿Qué tipo de trayectoria describe el vuelo de Angry Birds?. Dibújala en el plano cartesiano.
+\end{itemize}
+
+\textit{Verifica las respuestas de la sección A con tu profesor.}
+
+\end{tcolorbox}
+
+\vspace{5mm}
+
+%\newpage
+
+\subsection*{B) Conceptos}
+
+Antes de comenzar discute en clase: ¿Cuándo van a comprar un producto que criterios tienen en cuenta? ¿Cómo planeas cuánto gastar? ¿si el precio del producto varía como afecta esto tu intención de comprar?
+
+\textbf{Exploremos: Modelando Situaciones}
+
+Las ecuaciones cuadráticas a veces se usan para modelar situaciones o relaciones en los negocios, en la ciencia y en la medicina. Un uso común en los negocios es maximizar las ganancias, es decir, la diferencia entre los ingresos (dinero que entra) y los costos de producción (dinero gastado).
+
+La relación entre el costo de un artículo y la cantidad vendida es normalmente lineal. En otras palabras, por cada \$1 de incremento en el precio hay un decremento correspondiente en la cantidad vendida. Una vez que determinamos la relación entre el precio de venta de un artículo y la cantidad vendida, podemos pensar en cómo generar la máxima ganancia. ¿A qué precio de venta haríamos más dinero?.
+
+La cantidad de ganancia se encontrará tomando el total de ingresos (la cantidad vendida multiplicada por el precio de venta) y restando el costo de producir todos los artículos: \textbf{Ganancia = Ingreso Total - Costos de Producción}. Podemos integrar la relación lineal del precio de venta a la cantidad y la fórmula de la Ganancia y crear una ecuación cuadrática, que entonces podemos maximizar. Veamos un ejemplo:
+
+Aquí hay una muestra de datos:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Precio de venta \$ (s)} & \textbf{Cantidad Vendida en 1 año (q)} \\
+\hline
+10 & 1000 \\
+15 & 900 \\
+20 & 800 \\
+25 & 700 \\
+\hline
+\end{tabular}
+\end{center}
+
+Para calcular la ganancia, también necesitamos saber cuánto cuesta producir cada artículo. Para este ejemplo, el costo unitario es \$10.
+
+\textbf{Usando los datos, ¿cuál sería el precio de venta $s$ que produce la ganancia máxima?}
+
+\textbf{Primer paso:} Graficar $s$ en el eje horizontal y $q$ en el eje vertical. Usar dos puntos cualesquiera en la línea recta de la gráfica para encontrar la pendiente de la recta que es $m = -20$. Leer la intersección en $y$ cómo 1200.
+
+Se usa la fórmula para hallar la pendiente $m$ en este caso es $s$, se necesitan al menos dos puntos de la linea recta.
+
+Poner estos valores en la forma pendiente-intersección:
+
+$$q = -20s + 1200$$
+
+donde $q =$ cantidad vendida y $s =$ precio de venta del artículo
+
+La fórmula de la ganancia es \textbf{P = Ingresos Totales - Costos de Producción}
+
+\begin{align*}
+\text{Ingresos Totales} &= \text{precio} \cdot \text{cantidad vendida} = s \cdot q \\
+\text{Costos de Producción} &= \text{costo por artículo} \cdot \text{cantidad vendida} = 10 \cdot q
+\end{align*}
+
+Entonces obtenemos que $P = sq - 10q$
+
+\begin{align*}
+P &= s(-20s + 1200) - 10(-20s + 1200) \quad \text{Sustituir } -20s + 1200 \text{ por } q \text{ en la fórmula de la ganancia} \\
+P &= -20s^2 + 1200s + 200s - 12000 \quad \text{Multiplicamos expresiones y combinamos los términos comunes} \\
+P &= -20s^2 + 1400s - 12000 \quad \text{Encontramos una ecuación cuadrática.}
+\end{align*}
+
+Si ya sabemos que la función está representada gráficamente por una parábola ¿Cómo entonces podemos conocer el precio que generará la ganancia máxima?
+
+Encontrando el \textbf{vértice} de la parábola, encontraremos el precio de venta que generará la ganancia máxima. El eje $x$ representa el precio de venta, por lo que el valor de la coordenada $x$ en el vértice, representa el mejor precio y el valor de la coordenada $y$ en el vértice nos dará la cantidad de ganancias hechas.
+
+Encontramos la coordenada $x$ del vértice aplicando la fórmula $x = \frac{-b}{2a}$. En este caso, la variable es $s$ en lugar de $x$. Los otros valores son $a = -20$, el coeficiente en el término $s^2$ y 1400, el coeficiente en el término $s$:
+
+$$-20s^2 + 1400s - 12000 = ax^2 + bx + c$$
+
+El precio de venta que genera la máxima ganancia es \$35 debido a que:
+
+$$s = -\frac{1400}{2(-20)} = -\frac{1400}{-40} = 35$$
+
+\textbf{Realiza:}
+\begin{enumerate}
+\item La gráfica de la función cuadrática que representa las ganancias.
+\item Señala los elementos que hacen parte de la gráfica.
+\item Encuentra la solución de la ecuación cuadrática y que representaría estas soluciones.
+\end{enumerate}
+
+\vspace{5mm} %\newpage
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{Mini-explicación: Elementos en la gráfica},breakable]
+
+Las \textbf{funciones cuadráticas} son las que su expresión es un polinomio de segundo grado. Comenzamos por la más sencilla, $f(x) = ax^2$ o $y = ax^2$, la forma completa o general es: $f(x) = ax^2 + bx + c$, con $a \neq 0$; $a, b, c \in \mathbb{R}$
+
+\textbf{Concavidad:} La gráfica de $y = ax^2$ es una curva llamada parábola. El vértice es el origen de coordenadas y es simétrica respecto del eje OY. Si $a > 0$ la curva se abre hacia arriba y si $a < 0$ hacia abajo. La curva es tanto más cerrada cuanto más se aleja de 0 el valor de $a$.
+
+\textbf{Traslación en los Ejes:} La expresión algebraica de la parábola que resulta de trasladar la parábola $f(x) = x^2$ horizontalmente es $f(x) = (x - p)^2$
+
+Si $p > 0$, la parábola se desplaza $p$ unidades hacia la derecha.
+
+Si $p < 0$, la parábola se desplaza $p$ unidades hacia la izquierda.
+
+El vértice de la parábola se encuentra en el punto $(p, 0)$.
+
+La expresión algebraica de la parábola que resulta de trasladar la parábola $f(x) = x^2$ verticalmente es $f(x) = x^2 + q$
+
+Si $q > 0$, la parábola se desplaza $q$ unidades hacia arriba. Si $q < 0$, la parábola se desplaza $q$ unidades hacia abajo.
+
+El vértice de la parábola se encuentra en el punto $(0, q)$
+
+\vspace{0.5cm}
+
+\textbf{Vértice:} El vértice es un punto de la parábola máximo o mínimo en la función. Diremos que el vértice es máximo si la parábola tiene concavidad hacia abajo y diremos que el vértice es mínimo siempre y cuando la parábola tenga concavidad hacia arriba.
+
+\textbf{Eje de Simetría:} El eje de simetría es una recta paralela al eje $y$ que pasa por el vértice de la parábola, por tanto, es única y dividirá en dos partes iguales a la parábola como una simetría axial.
+
+\textbf{Corte con el eje Y:} El corte con el eje $y$ está determinado por el coeficiente ``c'', el punto de intersección será el punto $(0, c)$.
+
+\textbf{RAÍCES O CEROS:} Las raíces de una función cuadrática son los valores de $x$ cuando la función es igual a cero. En otras palabras, son los valores de $x$ donde la parábola interseca el eje $x$, también puedes encontrar las raíces con el nombre de soluciones o ceros.
+
+Generalmente para encontrar las raíces, podemos factorizar la función o bien utilizar la fórmula general.
+
+\textbf{TIPOS DE RAÍCES:} Para encontrar fácilmente las soluciones de una ecuación cuadrática se usa la Fórmula General:
+
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+
+El discriminante nos dice la cantidad de soluciones reales que tiene la ecuación cuadrática. Tenemos:
+
+\begin{itemize}
+\item Si $b^2 - 4ac > 0$ entonces la ecuación tiene dos soluciones reales.
+\item Si $b^2 - 4ac = 0$ entonces la ecuación tiene una sola solución real.
+\item Si $b^2 - 4ac < 0$ entonces la ecuación no tiene soluciones reales
+\end{itemize}
+
+\end{tcolorbox}
+
+\vspace{5mm}
+
+%\newpage
+
+\textbf{Paso 1:}
+
+¿Cuál de las siguientes gráficas podrían representar la parábola dada por la ecuación cuadrática $y = 2(x - 3)(x + 1)$?
+
+\textbf{a)} Incorrecto. Esta parábola tiene las raíces correctas $(3,0)$ y $(-1, 0)$, pero la parábola abre hacia abajo. Como el coeficiente de $x$ es 2, la parábola debería abrir hacia arriba. La respuesta correcta es C.
+
+\textbf{b)} Incorrecto. Si bien esta parábola abre hacia arriba, las raíces no son $(3, 0)$ y $(-1, 0)$. La respuesta correcta es C.
+
+\textbf{c)} Correcto. La gráfica muestra las raíces en $(3, 0)$ y $(-1, 0)$ y abre hacia arriba.
+
+\textbf{d)} Incorrecto. Esta parábola no tiene raíces, pero la gráfica correcta debería tener dos raíces, $(3, 0)$ y $(-1, 0)$. Esta gráfica no tiene posibilidad de representar la ecuación. La respuesta correcta es C.
+
+\vspace{1cm}
+
+\textbf{Paso 2:}
+
+\textbf{Usar el vértice y el eje de simetría para graficar} $y = 2x^2 + 2x - 12$.
+
+\begin{enumerate}
+\item Como el coeficiente $x^2$ es positivo, la parábola abre hacia arriba $a = 2$.
+\item Para encontrar el vértice, debemos encontrar los valores de $a$ y $b$. Son los coeficientes de los términos $x^2$ y $x$ cuando la ecuación cuadrática se escribe en su forma estándar $a = 2$ y $b = 2$.
+\item Encontrar la coordenada $x$ del vértice sustituyendo los valores de $a$ y $b$ en la fórmula del vértice:
+$$x = -\frac{b}{2a} = -\frac{2}{2 \times 2} = -\frac{2}{4} = -0.5$$
+\item Encontrar la coordenada $y$ del vértice sustituyendo el valor de $x$ en la ecuación original:
+\begin{align*}
+y &= 2(-0.5)^2 + 2(-0.5) - 12 \\
+y &= 2(0.25) - 1 - 12 \\
+y &= 0.5 - 1 - 12 \\
+y &= -12.5
+\end{align*}
+\item Graficar el vértice $(-0.5, -12.5)$ y dibujar el eje de simetría $x = -0.5$.
+\item Graficar dos puntos en un lado del eje de simetría, como $(0, -12)$ y $(1, -8)$
+\item Podemos elegir cualquier valor de $x$ que queramos; $x = 0$ y $x = 1$ son normalmente buenos porque los cálculos tienden a ser fáciles. Para encontrar los valores de $y$, sustituir los valores de $x$ que hemos escogido en la función y resolverla
+\end{enumerate}
+
+\vspace{5mm}
+
+%\newpage
+
+\textbf{Paso 3:} Señala las elementos de cada gráfica y Relacionarlo con cada expresión algebraica
+
+\begin{enumerate}[label=\alph*.]
+\item ( \quad ) $y = x^2 + 1$
+\item ( \quad ) $y = -x^2 + 2$
+\item ( \quad ) $y = -x^2 - 5x + 3$
+\end{enumerate}
+
+\subsection*{C) Resuelve y practica}
+
+\begin{enumerate}
+\item Gráfica UNA de las siguientes parábolas $y = 3x^2 - 2x - 2$ \quad $y = 2x^2 + 6x + 1$ \quad $y = -x^2 - 2x + 8$
+
+Determina: a) Vértice ( \quad ) \quad b) Punto de corte eje Y ( \quad ) \quad c) Eje de simetría $\rightarrow$
+
+\item En cada una de las siguientes parábolas, construye si es posible, la ecuación que representa la función cuadrática, teniendo en cuenta los respectivos elementos de las gráficas.
+
+V( \quad ) eje simetría$\rightarrow$ \quad C=
+
+\item Bajo ciertas condiciones, una compañía encuentra que la utilidad diaria en miles de pesos al producir $x$ artículos de cierto tipo está dada por: $U(x) = -x^2 + 1000x$
+
+¿Cuál es la máxima utilidad? ¿Cuántos artículos se deben fabricar en la compañía para que la utilidad sea igual a cero? Esboza la gráfica de la función utilidad.
+
+\item ¿Cuál de las siguientes ecuaciones cuadráticas es una parábola que abre hacia abajo? Justifica tu respuesta.
+
+\begin{enumerate}
+\item $y = 3x^2 - 4x - 2$
+\item $y = -0.25x^2 + 4$
+\item $y = 999x^2 - 888x + 777$
+\item $y = -(x + 2)(x + 3)$
+\end{enumerate}
+
+A) 1 y 3 \quad B) 2 y 4 \quad C) 3 \quad D) 2
+
+\item Dada la función cuadrática: $f(x) = 2x^2 - 8x + 1$, el punto de intersección del eje de simetría con el eje $x$ es:
+
+a) $(0,1)$ \quad b) $(0,2)$ \quad c) $(1,0)$ \quad d) $(2,0)$
+
+\item Una compañía armadora de netbooks, representa el costo anual, en pesos, por la función: $C(x) = 90.000 + 500x + 0,01x^2$ y el ingreso anual, en pesos, por la función de venta: $V(x) = 1.000x - 0,04x^2$ ($x$ es la cantidad de netbooks producidos).
+
+\begin{enumerate}[label=\Alph*.]
+\item ¿Cuántos netbooks deben fabricarse para que la ganancia sea la máxima?
+\item ¿Cuál es la ganancia máxima?
+\end{enumerate}
+
+\end{enumerate}
+
+\vspace{5mm}
+
+%\newpage
+
+\subsection*{D) Resumen}
+
+\begin{center}
+\textbf{FUNCIÓN CUADRÁTICA}
+\end{center}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro]
+
+\textbf{Ecuación de 2.º grado}
+
+\textbf{Completa:} $ax^2 + bx + c = 0$
+
+\textbf{Incompleta:}
+\begin{itemize}
+\item $ax^2 = 0$
+\item $ax^2 + bx = 0$
+\item $ax^2 + c = 0$
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{FÓRMULA GENERAL:}
+
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}, \quad a \neq 0$$
+
+Su solución es:
+
+Donde: $\Delta = b^2 - 4ac$ es el discriminante.
+
+\begin{itemize}
+\item Si $\Delta > 0$, la ecuación tiene dos soluciones.
+\item Si $\Delta = 0$, solo hay una solución (doble)
+\item Si $\Delta < 0$, No tiene solución en los reales.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Cuando la $\Delta > 0$} la ecuación tendrá dos raíces, por lo tanto, corta dos veces el eje $x$.
+
+\textbf{Cuando la $\Delta = 0$} la ecuación tendrá una raíces, por lo tanto, corta una vez el eje $x$.
+
+\textbf{Cuando la $\Delta < 0$ la} ecuación tendrá dos raíces imaginarias, por lo tanto, no toca nunca el eje $x$.
+
+\end{tcolorbox}
+
+\vspace{5mm}
+
+%\newpage
+
+\subsection*{E) Valoración}
+
+\subsubsection*{i) Califica tu comprensión por tema en tu cuaderno}
+
+\begin{center}
+\small
+\begin{tabular}{|
+		>{\centering\arraybackslash}m{3.5cm}|
+		>{\centering\arraybackslash}m{3cm}|
+		>{\centering\arraybackslash}m{3cm}|
+		>{\centering\arraybackslash}m{3cm}|}
+\hline
+\centering\textbf{Evidencias} & \centering\textbf{Todavía no entiendo los conceptos} & \centering\textbf{Voy bien pero quiero más práctica} & \textbf{Comprendí muy bien el tema} \\
+\hline
+1. Grafico una función cuadrática. & & & \\
+\hline
+2. Identifico gráficamente y algebraicamente los distintos elementos que hacen parte de una función cuadrática. & & & \\
+\hline
+3. Resuelvo ecuaciones cuadráticas. & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{ii) Preguntas de comprensión}
+
+\textbf{1)} Con respecto la parábola $f(x) = -x^2 - 3x + 2$, ¿cuál de las siguientes afirmaciones es (son) verdadera(s)?
+
+\begin{enumerate}[label=\Roman*)]
+\item Su concavidad es hacia abajo
+\item Su eje de simetría es $-3/2$
+\item Corta al eje $x$ en un punto
+\end{enumerate}
+
+A) Sólo I \quad B) Sólo II \quad C) Sólo III \quad D) Sólo I y II \quad E) Sólo II y III
+
+\textbf{2)} Dado el gráfico de la figura, ¿cuál es la función que representa a la parábola?
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=8cm,
+    height=6cm,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-3, xmax=3,
+    ymin=-1, ymax=8,
+    xtick={-3,-2,-1,0,1,2,3},
+    ytick={0,2,4,6,8},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    axis lines=middle,
+    enlargelimits=false,
+]
+\addplot[
+    color=blue,
+    thick,
+    domain=-2:2,
+    samples=50,
+    smooth
+] {3*x^2};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+A) $f(x) = x^2$ \quad B) $f(x) = 3x$ \quad C) $f(x) = -3x^2$ \quad D) $f(x) = 3x^2$ \quad E) $f(x) = 3x^4$
+
+\textbf{3)} ¿Cuál es la función cuadrática cuya representación gráfica es la parábola de la figura?
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=8cm,
+    height=6cm,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-3, xmax=3,
+    ymin=-3, ymax=3,
+    xtick={-3,-2,-1,0,1,2,3},
+    ytick={-3,-2,-1,0,1,2,3},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    axis lines=middle,
+    enlargelimits=false,
+]
+\addplot[
+    color=blue,
+    thick,
+    domain=-2:2,
+    samples=50,
+    smooth
+] {-x^2 + 2};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+A) $f(x) = 2x^2 - 2$ \quad B) $f(x) = -x^2 - 4$ \quad C) $f(x) = x^2 + 2$ \quad D) $f(x) = -x^2 - 2$ \quad E) $f(x) = -x^2 + 2$
+
+\textbf{4)} Si el discriminante de una ecuación cuadrática asociado a una función de segundo grado es 0. ¿Cuál(es) de las siguientes afirmaciones es(son) siempre verdadera(s)
+
+\begin{enumerate}[label=\Roman*)]
+\item La parábola es tangente al eje de las abscisas
+\item El vértice está ubicado en el eje X.
+\item Las raíces o soluciones de la ecuación de segundo grado asociada a la función son reales e iguales.
+\end{enumerate}
+
+A) Sólo I \quad B) Sólo I y II \quad C) Sólo II y III \quad D) I, II y III \quad E) Ninguna de ellas
+
+(Verifica las respuestas con tu profesor)
+
+\subsubsection*{iii) Resuelvo un problema}
+
+Los ingresos mensuales de un fabricante de zapatos están dados por la función $I(z) = 1000z - 2z^2$, donde $z$ es la cantidad de pares de zapatos que fabrica en el mes.
+
+Realicen el gráfico aproximado de la función y respondan:
+
+\begin{enumerate}[label=\alph*)]
+\item ¿Qué cantidad de pares debe fabricar mensualmente para obtener el mayor ingreso?
+\end{enumerate}
+
+\vspace{5mm}
+
+% ========== ACTIVIDAD 3: RECORDANDO PROPORCIONALIDAD ==========
+%\newpage
+
+\seccion{ACTIVIDAD 3: RECORDANDO PROPORCIONALIDAD}
+
+\begin{center}
+\textbf{Conozcamos más sobre las otras funciones y la utilidad para resolver problemas en mi vida diaria.}
+\end{center}
+
+\subsection*{A) Activando saberes previos}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro,title=\textbf{RECUERDA QUE...}]
+
+\textbf{Función de Proporcionalidad Directa}
+
+Cuando las \textbf{variables independiente y dependiente son proporcionales}, es decir cuando aumenta la variable independiente la variable dependiente lo hace en la misma proporción, y cuando disminuye la variable independiente la variable dependiente lo hace también en la misma proporción, entonces la función que las relaciona se dice que es de proporcionalidad directa.
+
+\vspace{0.5cm}
+
+\textbf{$y = 2x$}
+
+Si el coeficiente es mayor la pendiente de la recta aumenta, si es menor la pendiente disminuye, por lo que sería una recta creciente.
+
+\textbf{$y = 2$}
+
+La función es constante puesto que a medida que aumenta el valor de $x$, se mantiene el mismo valor en $y$.
+
+\textbf{$y = -2x$}
+
+Si este coeficiente tiene valor negativo la pendiente es negativa, por lo que sería una recta decreciente.
+
+\end{tcolorbox}
+
+\vspace{3mm}
+
+\begin{tcolorbox}[colback=fondoverde,colframe=verdeclaro,title=\textbf{PRACTICA}]
+
+De acuerdo a la información anterior resolvamos:
+
+En la gráfica muestra la altura del nivel del agua de una tina de baño en función del tiempo.
+
+\begin{center}
+\begin{tikzpicture}[scale=.75]
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    xlabel={Tiempo (minutos)},
+    ylabel={Altura del agua (cm)},
+    xmin=0, xmax=14,
+    ymin=0, ymax=70,
+    xtick={0,2,4,6,8,10,12,14},
+    ytick={0,10,20,30,40,50,60,70},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    axis lines=left,
+    enlargelimits=false,
+]
+\addplot[
+    color=blue,
+    thick,
+    mark=none
+] coordinates {
+    (0,0) (2,30) (4,50) (6,50) (8,50) (10,30) (12,10) (14,0)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+\item Interprete la gráfica y de una descripción de lo puede estar ocurriendo en la tina
+\item Identifique en qué partes de la función es creciente, constante y decreciente.
+\end{enumerate}
+
+\textit{Verifica las respuestas de las sección A con tu profesor.}
+
+\end{tcolorbox}
+
+\vspace{5mm}
+
+%\newpage
+
+\subsection*{B) Conceptos}
+
+\textbf{Exploración: Haciendo cuentas entre amigos}
+
+Antes de iniciar puedes discutir con tus amigos si en algún momento se reunieron para comprar algo en conjunto y como hacer para que sea más económico para todos sin cambiar el objeto a comprar. Describe tu experiencia y estrategias que se usaron.
+
+\vspace{0.5cm}
+
+Tres compañeros han decidido hacerle un regalo a una amiga en su cumpleaños, cada una tendría que poner \$4000, aunque si fueran más personas, cada persona tendría que poner menos dinero.
+
+Para dar solución a este problema vamos a iniciar con ingresar los datos en una tabla.
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{\# de amigas} & \textbf{\$ Valor a pagar cada amiga} & \textbf{Valor total del regalo} \\
+\hline
+3 & 4.000 & 12.000 \\
+4 & 3.000 & 12.000 \\
+6 & 2.000 & 12.000 \\
+12 & 1.000 & 12.000 \\
+\hline
+\end{tabular}
+\end{center}
+
+En la primera columna se colocan la cantidad de amigos y en la segunda columna el valor que va pagar cada amiga.
+
+Si observamos hay dos magnitudes que son inversamente proporcionales, cuando se aumenta una de ellas la otra disminuye en la misma proporción o viceversa.
+
+En una relación de proporcionalidad inversa, el producto entre los dos elementos de los dos conjuntos se mantiene constante.
+
+En nuestro caso si multiplicamos la primera columna que es la cantidad de amigos con la segunda columna que es el valor a pagar, siempre nos va a dar el valor del precio del regalo que se va a comprar
+
+\begin{align*}
+3 \cdot 4000 &= 12000 \\
+4 \cdot 3000 &= 12000 \\
+6 \cdot 2000 &= 12000 \\
+12 \cdot 1000 &= 12000
+\end{align*}
+
+Si lo transformamos en una fórmula genera quedaría $x \cdot y = k$ donde $k$ es la constante de proporcionalidad.
+
+De manera que si despejo a $y$ para ponerlo en forma de función me quedaría de la siguiente forma:
+
+$$y = \frac{k}{x}$$
+
+siendo esta una \textbf{función de proporcionalidad inversa}
+
+Ahora continuemos con nuestro problema si
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{\# de amigas} & \textbf{\$ Valor a pagar cada amiga} & \textbf{Valor total del regalo} \\
+\hline
+$x$ & $y$ & 12.000 \\
+\hline
+\end{tabular}
+\end{center}
+
+y quedaría: $x \cdot y = 12.000$ despejando $y = \frac{12.000}{x}$ \textbf{Función}
+
+Ahora vamo a representar esta función en una gráfica:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$x$ & $y$ \\
+\hline
+3 & 4.000 \\
+4 & 3.000 \\
+6 & 2.000 \\
+12 & 1.000 \\
+\hline
+\end{tabular}
+\end{center}
+
+Si observamos aparece dos cuadrantes con dos hipérbolas (cuadrante I y III), pero para nuestro problema solo es necesario tomar valores positivos entonces graficamos solo el I cuadrante.
+
+Como podemos observar la situación anterior se usó \textbf{funciones de proporcionalidad inversa}.
+
+\vspace{5mm}
+
+%\newpage
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{Mini explicacion: Funciones de proporcionalidad inversa},breakable]
+
+Cuando las variables independiente y dependiente son inversamente proporcionales, es decir cuando aumenta la variable independiente la variable dependiente disminuye en la misma proporción, y cuando disminuye la variable independiente la variable dependiente aumenta en la misma proporción, entonces la función que las relaciona se dice que es de proporcionalidad inversa.
+
+Las funciones de este tipo tienen la siguiente forma: $y = \frac{k}{x}$, siendo ``$k$'' un coeficiente.
+
+Estas funciones presentan las siguientes propiedades:
+
+\begin{enumerate}
+\item Su dominio y recorrido es todo $\mathbb{R}$, salvo el 0.
+\item A medida que $x$ se aleja del origen, por la izquierda o por la derecha, los valores correspondientes de $y$ se aproximan a cero, si $x$ se acerca al origen, los valores correspondientes de $y$ se alejan de cero.
+\item Si $k > 0$, la función es siempre decreciente, y si $k < 0$, es siempre creciente.
+\end{enumerate}
+
+Su representación gráfica son hipérbolas y de acuerdo la situación se toma un solo cuadrante. Por ejemplo: $y = \frac{1}{x}$.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=8cm,
+    xlabel={$x$ (número de amigas)},
+    ylabel={$y$ (valor a pagar)},
+    xmin=0, xmax=14,
+    ymin=0, ymax=5000,
+    xtick={0,2,4,6,8,10,12,14},
+    ytick={0,1000,2000,3000,4000,5000},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    axis lines=left,
+    enlargelimits=false,
+]
+\addplot[
+    color=red,
+    thick,
+    domain=1:14,
+    samples=100,
+    smooth
+] {12000/x};
+\addplot[only marks, mark=*, mark size=3pt, color=red] coordinates {
+    (3,4000) (4,3000) (6,2000) (12,1000)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\end{tcolorbox}
+
+\vspace{1cm}
+
+Vamos a estudiar otro tipo de problemas también haciendo uso las funciones:
+
+Analiza la siguiente situación: En un banco se paga un interés compuesto, expresado como $f(x) = (1,5)^x$ a las cuentas de ahorro, por cada \$1.000 de ahorro que permanece en la cuenta durante $x$ meses.
+
+De acuerdo a la situación responde las siguientes preguntas:
+
+\begin{enumerate}
+\item ¿Identificas alguna función en el problema, si es el caso nombrala y por que?
+\item ¿Cuál crees que sería el comportamiento del interés compuesto en este tipo de cuentas durante la permanencia de cada \$1.000?
+\item ¿Qué diferencias encuentras entre la función de proporcionalidad inversa y este tipo de función?
+\end{enumerate}
+
+Ahora vamos a calcular el interés compuesto durante los primeros 3 meses, para esto vamos a calcular los valores en una tabla y luego a graficar para mirar su comportamiento.
+
+$$y = (1.5)^x$$
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$x$ (tiempo en meses) & $y$ (Miles de pesos (\$)) \\
+\hline
+1 & 1,5 \\
+2 & 2,25 \\
+3 & 3,375 \\
+\hline
+\end{tabular}
+\end{center}
+
+Al dar solución a la actividad, la función tiene una forma $y = a^x$ y es llamada \textbf{Función exponencial}.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=8cm,
+    xlabel={$x$ (tiempo en meses)},
+    ylabel={$y$ (Miles de pesos \$)},
+    xmin=0, xmax=4,
+    ymin=0, ymax=5,
+    xtick={0,1,2,3,4},
+    ytick={0,1,2,3,4,5},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    axis lines=left,
+    enlargelimits=false,
+]
+\addplot[
+    color=green!60!black,
+    thick,
+    domain=0:3.5,
+    samples=100,
+    smooth
+] {1.5^x};
+\addplot[only marks, mark=*, mark size=3pt, color=green!60!black] coordinates {
+    (1,1.5) (2,2.25) (3,3.375)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Analiza y Responde}
+
+\begin{enumerate}
+\item De acuerdo a la solución de la actividad sacar dos conclusiones teniendo en cuenta el comportamiento de la gráfica según la situación.
+\item Analiza la situación y plantea un ejemplo de tu vida cotidiana donde creas que se presentan ese tipo de funciones.
+\end{enumerate}
+
+\vspace{5mm}
+
+%\newpage
+
+\begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,title=\textbf{Mini explicación - Función Exponencial},breakable]
+
+La \textbf{función exponencial} es de la forma $y = a^x$, siendo $a$ un número real positivo distinto a 1.
+
+El dominio de las funciones exponenciales es toda recta real, y su recorrido, es el conjunto de los números reales positivos.
+
+Las funciones exponenciales cumplen con las siguientes propiedades:
+
+\begin{itemize}
+\item Sus gráficas pasan por los puntos $(0,1)$ y $(1,a)$, ya que $a^0 = 1$ y $a^1 = a$.
+\item Si $a > 1$, la función $y = a^x$ es creciente en todo el dominio.
+\item Si $0 < a < 1$, la función $y = a^x$ es decreciente en todo el dominio.
+\end{itemize}
+
+Para estas funciones, la recta $y = 0$ es una asíntota horizontal cuando $x \to -\infty$ si $a > 1$, y cuando $x \to +\infty$ si $0 < a < 1$.
+
+La función de la forma $y = e^x$ es una función exponencial cuya base es el llamado numero Euler ($e = 2,718281828\ldots$) y es llamado \textbf{función exponencial natural}.
+
+La Función $y = e^x$ es una exponencial importante porque aparece en la descripción de múltiples procesos naturales, como el crecimiento de poblaciones de microorganismos. Esta función también es muy útil, porque permite describir, por ejemplo, procesos como desintegraciones radiactivas.
+
+Para analizar algunos fenómenos estudiados en diferentes áreas del conocimiento que siguen un comportamiento exponencial, se utilizan con frecuencia la fórmula conocida como \textbf{fórmula de crecimiento exponencial}, dada por la fórmula:
+
+$$f(t) = x_0 e^{tk}$$
+
+Acá, $x_0$ es el valor inicial de la variable estudiada, $t$ es el lapso de variación continua y $k$ es la tasa de variación. Veamos un ejemplo por medio de una situación del contexto:
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\textbf{Ejemplo:} Para el año 2020 se calculaba que la población de una región era de aproximadamente 250.000 habitantes, con un crecimiento anual del 1,5\%. Determina la fórmula de crecimiento poblacional y la cantidad de habitantes esperados para el año 2027.
+
+\textbf{Solución:}
+
+\textbf{1. Leemos y analizamos el problema y definimos cada una de sus partes:}
+
+$x_0 =$ Valor inicial, seria los habitantes que hasta en el momento hay $\longrightarrow$ 250.000
+
+$$x_0 = 25.000$$
+
+$t =$ La tasa de variación continua, en este caso la cantidad de años que se quiere investigar (7 años).
+
+$$t = 7$$
+
+$k =$ la tasa de variación, en este caso es 1,5 \%, se transforma de manera decimal.
+
+$$k = \frac{1,5}{100} = 0,015$$
+
+\textbf{2. Luego definimos la fórmula de crecimiento poblacional:}
+
+$$f(t) = 250.000e^{t(0,015)}$$
+
+\textbf{3. Finalmente remplazamos y solucionamos para dar respuesta:}
+
+$$f(t) = 250.000e^{7(0,015)} = 277.677$$
+
+R/: Por lo tanto, la población esperada para el año 2020 es de 277.677 habitantes.
+
+\vspace{5mm}
+
+%\newpage
+
+\subsection*{C) Resuelve y practica}
+
+\begin{enumerate}
+\item Representa las siguientes funciones de proporcionalidad inversa en el mismo sistema de coordenadas (Plano cartesiano).
+
+\begin{enumerate}[label=\alph*.]
+\item $y = \frac{-1}{x}$ 
+
+\vspace{3.5mm}
+
+\item $y = \frac{5}{x}$
+
+\vspace{3.5mm}
+
+\item $y = \frac{1}{2x}$
+
+\vspace{3.5mm}
+
+\item $y = \frac{3}{8x}$
+
+\vspace{3.5mm}
+
+\item $y = \frac{-5}{3x}$
+
+\vspace{3.5mm}
+
+\item $y = \frac{-12}{5x}$
+
+\vspace{3.5mm}
+
+\end{enumerate}
+
+\item Describe lo que sucede cuando varía el valor de $k$, ayúdate con las gráficas del ejercicio anterior.
+
+\textbf{Ahora vamos a resolver problemas:}
+
+\item En la confitería La Unión fabricaron 120 bombones para vender el domingo. Quieren colocarlos todos en varias cajas con igual cantidad de bombones.
+
+\begin{itemize}
+\item En los casos que sea posible, completen la tabla que relaciona la cantidad de bombones por caja con la cantidad de cajas necesarias. En las columnas en blanco, agreguen otras posibilidades.
+
+\vspace{3.5mm}
+
+\begin{center}
+\small
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Bombones/caja} & 4 & 6 & 8 & 10 & 12 & 24 & 25 & 30 \\
+\hline
+\textbf{Cantidad de cajas} & & & & & & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{3.5mm}
+
+\item ¿Es posible escribir todos los pares (cantidad de bombones por caja; cantidad de cajas) que se pueden armar? Si responden que sí, hagan una lista con todos los pares. Si responden que no, expliquen por qué no es posible.
+\end{itemize}
+
+\item En una fábrica de bebidas, se elaboró un nuevo producto (jugo natural de naranjas) y se quiere analizar en qué tamaño de envase conviene venderlo. Toda la producción diaria se reparte en envases iguales y en cada uno se coloca la misma cantidad de jugo.
+
+\begin{itemize}
+\item Completen la siguiente tabla para que muestre cuántos envases se precisan por día según la capacidad de cada uno de ellos
+
+\vspace{3.5mm}
+
+\begin{center}
+\small
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Capacidad/envase (litros)} & 10 & 5 & & 3 & 1.5 & 1 & $\frac{1}{2}$ \\
+\hline
+\textbf{Cantidad de envases} & & 6 & 15 & & & 40 & 120 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{3.5mm}
+
+\item ¿Cuántos litros de jugo natural por día prepara esta fábrica? Expliquen cómo obtuvieron ese valor.
+\item ¿Es posible escribir todos los pares (capacidad de cada envase, cantidad de envases) que se pueden armar? Si responden que sí, hagan una lista con todos los pares. Si responden que no, expliquen por qué no es posible.
+\end{itemize}
+
+\item Consideren todos los rectángulos que tienen 70 unidades cuadradas de área.
+
+\begin{itemize}
+\item ¿Cuáles podrían ser las medidas de sus lados? Escriban algunas posibilidades. ¿Cuántas hay?
+\item Completen la siguiente tabla con los distintos valores que deben tener la base y la altura. En las columnas en blanco, agreguen otras posibilidades.
+\item Escriban la fórmula de una función que permita calcular la medida de la altura (en cm), a partir de la medida de la base (en cm) de todos los rectángulos posibles.
+\item Grafica la función correspondiente.
+\item Para cada una de las siguientes afirmaciones, decidan si son verdaderas o falsas y expliquen por qué.
+\end{itemize}
+
+A medida que aumenta la medida de la altura del rectángulo, también aumenta la medida de su base.
+
+El gráfico de esta relación de proporcionalidad inversa no interseca el eje vertical.
+
+No es posible construir un rectángulo de 70 cm$^2$ de área cuya base mide 30 cm.
+
+\item De acuerdo a la gráfica, analiza las funciones conclusiones cuando se cambia el valor de $a$
+
+\item En cierto cultivo, inicialmente había 350 baterías que se triplican cada día.
+
+Si ahora hay 9450 bacterias, ¿cuántos días han transcurrido desde que se inició el cultivo?
+
+¿Cuántas bacterias habrá luego de una semana?
+
+Se compara este cultivo con el de otra especie de bacteria que se duplica cada día y cuya población inicial era de 1200 bacterias. ¿cuál de los dos cultivos será más numeroso luego de 4 días?
+
+¿En qué instante del tiempo ambos cultivos tendrán aproximadamente la misma población?
+
+Realizar el respectivo diagrama para ambos cultivos de bacterias.
+
+\item Digamos que ganas \$500 en una competencia de deletreo y lo inviertes en un fondo mutuo que paga el 8\% de interés anual. ¿Cuánto dinero tendrías después de 5 años.
+
+\item Se Calienta un objeto a 120ºC y después se deja enfriar en una habitación cuya temperatura es de 40ºC, si la función es:
+
+$$u(t) = 30 + 70e^{-0.0673t}$$
+
+\begin{enumerate}[label=\alph*.]
+\item ¿Que temperatura tiene el objeto a los 15 minutos?
+\item ¿Cuando la temperatura será 42ºC?
+\end{enumerate}
+
+\end{enumerate}
+
+\vspace{5mm}
+
+%\newpage
+
+\subsection*{D) Resumen}
+
+\begin{center}
+\textbf{FUNCIONES DE PROPORCIONALIDAD}
+\end{center}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro]
+
+\textbf{La función de proporcionalidad directa} relaciona dos magnitudes directamente proporcionales.
+
+\textbf{Expresión algebraica:} $y = kx$ \quad $k$ es la constante proporcionalidad
+
+\textbf{La gráfica} es una línea recta que pasa por el origen
+
+\vspace{0.5cm}
+
+\textbf{La función de proporcionalidad inversa} relaciona dos magnitudes inversamente proporcionales.
+
+\textbf{Expresión algebraica:} $y = \frac{k}{x}$ \quad $k$ es la constante proporcionalidad
+
+\textbf{La gráfica} es una línea curva llamada hipérbola.
+
+\end{tcolorbox}
+
+\vspace{1cm}
+
+\begin{center}
+\textbf{FUNCIÓN EXPONENCIAL Y SUS CARACTERÍSTICAS}
+
+$$y = a^x$$
+\end{center}
+
+\begin{tcolorbox}[colback=fondoazul,colframe=azuloscuro]
+
+\begin{itemize}
+\item Sea la función: $f(x) = a^x$
+\item Donde siempre $a > 0$
+\item El eje X es siempre una asíntota horizontal.
+\item Corta al eje Y en el punto $(0,1)$.
+\item Dom $f(x) = \mathbb{R}$, \quad Img $f(x) = \mathbb{R}^+$
+\item La diferencia más importante de las funciones con $(0 < a < 1)$ y $a > 1$, es el CRECIMIENTO.
+\item Si $0 < a < 1$ $\rightarrow$ La función es DECRECIENTE.
+\item Si $a = 1$ $\rightarrow$ $f(x) = 1$
+\item Si $a > 1$ $\rightarrow$ La función es CRECIENTE.
+\end{itemize}
+
+\end{tcolorbox}
+
+\vspace{5mm}
+
+%\newpage
+
+\subsection*{E) Valoración}
+
+\subsubsection*{i) Califica tu comprensión por tema en tu cuaderno}
+
+\begin{center}
+\small
+\begin{tabular}{|p{3.5cm}|p{3cm}|p{3cm}|p{3cm}|}
+\hline
+\textbf{Evidencias} & \textbf{Todavía no entiendo los conceptos} & \textbf{Voy bien pero quiero más práctica} & \textbf{Comprendí muy bien el tema} \\
+\hline
+Identificó la forma de la función de proporcionalidad inversa & & & \\
+\hline
+Diferenció el crecimiento y decrecimiento en una función en casos particulares. & & & \\
+\hline
+Identificó la forma de la función exponencial & & & \\
+\hline
+Logró graficar funciones de proporcionalidad inversa y exponencial. & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection*{ii) Preguntas de comprensión}
+
+\textbf{1)} Verdadero o falso: el producto de dos variables relacionadas por una función de proporcionalidad inversa es constante.
+
+\textbf{2)} Identifica entre las siguientes funciones las que son de proporcionalidad inversa:
+
+\begin{enumerate}[label=\alph*)]
+\item $y = \frac{-3x}{2}$
+\item $y = \frac{4x}{x + 1}$
+\item $y = \frac{-5}{x}$
+\end{enumerate}
+
+\textbf{3)} Completa la tabla que relaciona el número de trabajadores con el número de días que tardan en realizar una obra.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Número de trabajadores} & 1 & 2 & 4 & 5 \\
+\hline
+\textbf{Días que tardan} & & 10 & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\alph*.]
+\item Escribe la función que relaciona las dos magnitudes
+\item ¿Cuántos trabajadores se necesitan para acabar la obra en un día?
+\end{enumerate}
+
+\textbf{4)} Indica, sin dibujarlas, si las siguientes son funciones crecientes o funciones decrecientes:
+
+\begin{enumerate}[label=\alph*.]
+\item $y = \left(\frac{1}{2}\right)^x$
+\item $y = 5^{-x}$
+\item $y = 3^{-x}$
+\item $y = 7^x$
+\item $y = \left(\frac{2}{5}\right)^x$
+\item $y = \left(\frac{4}{3}\right)^x$
+\end{enumerate}
+
+(Verifica las respuestas con tu profesor)
+
+\subsubsection*{iii) Resuelvo un problema}
+
+Digamos que comenzaste un buen negocio y compraste una moto nueva para hacer entregas. La moto tuvo un costo de \$6'000000 y de acuerdo a la ley de impuestos, te es permitido depreciar su valor por un 15\% por año. Esto significa que después de la depreciación del primer año, el valor de la moto será de solamente 85\% de su costo original, o \$5'100000.
+
+La Formula seria:
+
+$$y = 6'000.000 \cdot (1 - 0,5)^x \longrightarrow y = 6'000.000 \cdot (0,85)^x$$
+
+\begin{enumerate}[label=\alph*.]
+\item ¿Disminuye el valor de la moto la misma cantidad cada año?
+\item ¿cuando es mayor la caída del valor?
+\item ¿cuánto tiempo deberá transcurrir para que su valor fiscal sea de \$1'000.00, de acuerdo a este modelo?
+\end{enumerate}
+
+% ========== FIN DEL DOCUMENTO ==========
+
+\end{document}
