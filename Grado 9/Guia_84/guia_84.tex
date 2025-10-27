@@ -290,8 +290,10 @@ Reconozco procesos de aproximación y truncamiento de números irracionales para
 \item Reconozco que en la variación exponencial hay un factor multiplicativo que acelera rápidamente el crecimiento de la función, utilizo este factor para descubrir patrones de variación en situaciones que se modelen exponencialmente.
 \end{itemize}
 
+\vspace{5mm}
+
 % ========== ACTIVIDAD 1: RELACIONES Y FUNCIONES ==========
-\newpage
+%\newpage
 
 \seccion{ACTIVIDAD 1: RELACIONES Y FUNCIONES}
 
@@ -544,6 +546,22 @@ Cada entrada tiene sólo una salida. Cada entrada tiene sólo una salida y no im
 
 La gráfica de la función dibujada se ve como un semicírculo. Sabemos que ``y'' es una función de ``x'' porque por cada coordenada ``x'' hay exactamente una coordenada ``y''.
 
+\begin{center}
+\shorthandoff{<>}
+\begin{tikzpicture}[scale=0.8]
+\draw[thick,->] (-3.5,0) -- (3.5,0) node[right] {$x$};
+\draw[thick,->] (0,-0.5) -- (0,3.5) node[above] {$y$};
+\draw[gray!30,very thin] (-3,-0.5) grid (3,3.5);
+\draw[blue,very thick,domain=-2.5:2.5,samples=100] plot (\x,{sqrt(6.25-\x*\x)});
+\draw[red,thick,->] (-2,3.2) -- (-2,0.2);
+\draw[red,thick,->] (-1,3.2) -- (-1,0.2);
+\draw[red,thick,->] (0,3.2) -- (0,0.2);
+\draw[red,thick,->] (1,3.2) -- (1,0.2);
+\draw[red,thick,->] (2,3.2) -- (2,0.2);
+\end{tikzpicture}
+\shorthandon{<>}
+\end{center}
+
 \end{tcolorbox}
 
 \vspace{5mm}
@@ -553,6 +571,22 @@ La gráfica de la función dibujada se ve como un semicírculo. Sabemos que ``y'
 \begin{tcolorbox}[colback=fondorosa,colframe=rojoclaro,breakable]
 
 \textbf{Si la comparamos con la siguiente:}
+
+\begin{center}
+\shorthandoff{<>}
+\begin{tikzpicture}[scale=0.8]
+\draw[thick,->] (-3.5,0) -- (3.5,0) node[right] {$x$};
+\draw[thick,->] (0,-3.5) -- (0,3.5) node[above] {$y$};
+\draw[gray!30,very thin] (-3,-3) grid (3,3);
+\draw[blue,very thick] (0,0) circle (2.5);
+\draw[red,thick,->] (-2,3.2) -- (-2,-3.2);
+\draw[red,thick,->] (-1,3.2) -- (-1,-3.2);
+\draw[red,thick,->] (0,3.2) -- (0,-3.2);
+\draw[red,thick,->] (1,3.2) -- (1,-3.2);
+\draw[red,thick,->] (2,3.2) -- (2,-3.2);
+\end{tikzpicture}
+\shorthandon{<>}
+\end{center}
 
 Esta relación no puede ser una función, porque algunas de las coordenadas en $x$ tienen dos coordenadas en $y$ correspondientes.
 
@@ -709,15 +743,9 @@ Si $m < 0$ la función es decreciente y el ángulo que forma la recta con la par
 \item Las longitudes de los lados de un triángulo son números impares consecutivos. El perímetro es 69 cm. ¿Cuáles son las longitudes de los lados del triángulo?
 \end{enumerate}
 
-\vspace{1cm}
+\vspace{5mm}
 
-\textbf{PROBLEMAS VIRTUALES} Tema: funciones (Mira los videos y responde las preguntas)
-
-\url{http://www.mat.uson.mx/~jldiaz/WFunciones/Dominio_y_rango.htm}
-
-\url{https://www.youtube.com/watch?v=QY0mJGQjE5E}
-
-\newpage
+%\newpage
 
 \subsection*{D) Resumen}
 
@@ -1891,9 +1919,21 @@ Logró graficar funciones de proporcionalidad inversa y exponencial. & & & \\
 \textbf{2)} Identifica entre las siguientes funciones las que son de proporcionalidad inversa:
 
 \begin{enumerate}[label=\alph*)]
+	
+	\vspace{5mm}
+	
 \item $y = \frac{-3x}{2}$
+
+\vspace{5mm}
+
 \item $y = \frac{4x}{x + 1}$
+
+\vspace{5mm}
+
 \item $y = \frac{-5}{x}$
+
+\vspace{5mm}
+
 \end{enumerate}
 
 \textbf{3)} Completa la tabla que relaciona el número de trabajadores con el número de días que tardan en realizar una obra.
@@ -1916,12 +1956,33 @@ Logró graficar funciones de proporcionalidad inversa y exponencial. & & & \\
 \textbf{4)} Indica, sin dibujarlas, si las siguientes son funciones crecientes o funciones decrecientes:
 
 \begin{enumerate}[label=\alph*.]
+	
+	\vspace{5mm}
+	
 \item $y = \left(\frac{1}{2}\right)^x$
+
+\vspace{5mm}
+
 \item $y = 5^{-x}$
+
+\vspace{5mm}
+
 \item $y = 3^{-x}$
+
+\vspace{5mm}
+
 \item $y = 7^x$
+
+\vspace{5mm}
+
 \item $y = \left(\frac{2}{5}\right)^x$
+
+\vspace{5mm}
+
 \item $y = \left(\frac{4}{3}\right)^x$
+
+\vspace{5mm}
+
 \end{enumerate}
 
 (Verifica las respuestas con tu profesor)
