@@ -39,9 +39,23 @@
 		\item En las antenas parabólicas.
 		\item En los faros de los carros (los reflectores tienen forma parabólica).
 	\end{itemize}
+	
+	\bigskip
+	
+	A continuación se definen los elementos de la parábola como son el \textbf{Vértice, Foco, Directriz, Eje de Simetría, y Parámetro}, es fundamental que identifiques cada uno de estos elementos ya sea analítica(que te sepas la definición) y gráficamente(que lo sepas ubicar en el plano cartesiano en la gráfica de la parábola).
+	
+	\bigskip
+	
+	Muchos autores de libros de geometría analítica manifiestan que el éxito de dominar los temas de la Geometría Analítica está en tener claridad en las definiciones de los elementos de cada cónica así como su correcta representación gráfica en el plano cartesiano..
+	
+	\bigskip
+	
+	En las gráficas de cónicas se acostumbra a reemplazar algunos de los nombre de elementos con letras mayúsculas, por ejemplo: al \textbf{Vértice} lo representan con la letra mayúscula \textbf{V}, al \textbf{Foco} con \textbf{F}, a la \textbf{Directriz} con \textbf{D}, al \textbf{Eje de Simetría} por \textbf{E} o con \textbf{$E_S$} y al \textbf{Parámetro} con \textbf{p} minúscula, pero generalmente \textbf{aparece dos veces en las gráficas} del plano. Con base en stas observaciones pasemos a las definiciones de los elementos de la parábola.
 
 	\section{Elementos de la parábola}
 
+	\noindent
+	\begin{minipage}[t]{0.52\textwidth}
 	Toda parábola tiene varios elementos importantes que debemos conocer:
 
 	\begin{itemize}
@@ -53,8 +67,57 @@
 
 		\item \textbf{Eje de simetría:} Es una recta que pasa por el vértice y el foco, y divide la parábola en dos partes iguales (como un espejo).
 
+
+	\end{itemize}
+	\end{minipage}%
+	\hfill
+	\begin{minipage}[t]{0.45\textwidth}
+		
+	\begin{itemize}
 		\item \textbf{Parámetro (p):} Es la distancia del vértice al foco (y también del vértice a la directriz). Este valor nos dice qué tan "abierta" está la parábola.
 	\end{itemize}
+		
+	\vspace{0pt}
+	\centering
+	\begin{tikzpicture}[scale=0.7]
+		% Definir límites
+		\def\xmin{-1}\def\xmax{7}
+		\def\ymin{-2}\def\ymax{8}
+
+		% Grid y ejes
+		\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+		\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+		\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+		% Parábola (x-2)² = 8(y-1), vértice en V(2,1), p=2
+		\draw[thick,red,domain=-0.5:4.5,samples=100,smooth]
+			plot (\x,{(\x-2)*(\x-2)/8 + 1});
+
+		% Vértice V(2,1)
+		\filldraw[black] (2,1) circle (2.5pt);
+		\node[black,below right=1pt] at (2,1) {$V(2,1)$};
+
+		% Foco F(2,3)
+		\filldraw[blue] (2,3) circle (2.5pt);
+		\node[blue,right=3pt] at (2,3) {$F(2,3)$};
+
+		% Directriz y = -1
+		\draw[dashed,blue,very thick] (\xmin,-1)--(\xmax,-1);
+		\node[blue,scale=0.85] at (4.2,-1.4) {Directriz: $y=-1$};
+
+		% Eje de simetría x = 2
+		\draw[dashed,green!60!black,thick] (2,\ymin)--(2,\ymax);
+		\node[green!60!black,scale=0.85,rotate=90] at (1.4,5.5) {Eje de simetría = $E_S$};
+
+		% Parámetro p (distancia del vértice al foco)
+		\draw[orange,very thick,{Latex}-{Latex}] (2.4,1)--(2.4,3);
+		\node[orange,right=2pt,scale=0.9] at (2.4,2) {$p=2$};
+
+		% Parámetro p (distancia del vértice a la directriz)
+		\draw[purple,very thick,{Latex}-{Latex}] (1.6,1)--(1.6,-1);
+		\node[purple,left=2pt,scale=0.9] at (1.6,0.4) {$p=2$};
+	\end{tikzpicture}
+	\end{minipage}
 
 	\section{Parábola vertical con vértice en el origen}
 
@@ -62,7 +125,7 @@
 
 	\subsection*{Ecuación}
 
-	La ecuación de una parábola vertical con vértice en \((0,0)\) es:
+	La ecuación de una parábola vertical con vértice en \((0,0)\) tiene la forma :
 	\[
 	\boxed{x^2=4py}
 	\]
@@ -79,8 +142,8 @@
 	\begin{itemize}
 		\item Vértice: \(V(0,0)\)
 		\item Foco: \(F(0,p)\)
-		\item Directriz: \(y=-p\)
-		\item Eje de simetría: el eje \(y\) (la recta \(x=0\))
+		\item Directriz: Es la recta paralela al eje $x$ que pasa por \(y=-p\)
+		\item Eje de simetría: En este caso es el eje \(y\) (o sea la recta \(x=0\))
 	\end{itemize}
 
 	\subsection*{Ejemplo 1: Parábola que abre hacia arriba}
@@ -89,7 +152,11 @@
 
 	\bigskip
 
-	\textbf{Solución.} Comparamos con la forma \(x^2=4py\):
+	\textbf{Solución.} Para solucionar este ejercicio procedemos así:
+	
+	\bigskip
+	
+	Comparamos con la forma \(x^2=4py\):
 	\[
 	x^2=8y \quad\Rightarrow\quad 4p=8 \quad\Rightarrow\quad p=2.
 	\]
@@ -129,22 +196,26 @@
 			\draw[thick,red,domain=-8:8,samples=100] plot (\x,{\x*\x/8});
 
 			% vértice
-			\filldraw[black] (0,0) circle (3pt) node[below right] {$V(0,0)$};
+			\filldraw[black] (0,0) circle (3pt) node at (1,0.5) {$V(0,0)$};
 
 			% foco
 			\filldraw[blue] (0,2) circle (3pt) node[right] {$F(0,2)$};
 
 			% directriz
-			\draw[dashed,blue,thick] (-8,-2)--(8,-2) node[right] {$y=-2$};
+			\draw[dashed,blue,thick] (-8,-2)--(8,-2) node at (4,-1.5) {$D = y = -2$};
 
 			% eje de simetría
 			\draw[dotted,thick] (0,-4)--(0,10);
 			\node[green!30!black,scale=0.9,rotate=90] at (.6,6) {Eje de simetría};
+			
+			%\filldraw[black] (-4,2) circle (3pt)
+			%\draw [{Latex}-{Latex},thick] (-4,-2)--(-4,2) node at (-4.5,1) {$p$};
+			%\draw [{Latex}-{Latex},thick] (-4,2)--(0,2) node at (-2,2.2) {$p$};
 
 		\end{tikzpicture}
 	\end{center}
 
-	\bigskip
+	%\bigskip
 
 	\subsection*{Ejemplo 2: Parábola que abre hacia abajo}
 
@@ -198,7 +269,7 @@
 			\filldraw[blue] (0,-3) circle (3pt) node[right] {$F(0,-3)$};
 
 			% directriz
-			\draw[dashed,blue,thick] (-8,3)--(8,3) node[right] {$y=3$};
+			\draw[dashed,blue,thick] (-8,3)--(8,3) node at (4,3.5) {$D = y=3$};
 
 			% eje de simetría
 			\draw[dotted,thick] (0,-10)--(0,5);
@@ -258,7 +329,7 @@
 	\subsection*{Gráfica de la parábola \(y^2=16x\)}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.6]
+		\begin{tikzpicture}[scale=0.4]
 			% límites
 			\def\xmin{-6}\def\xmax{12}
 			\def\ymin{-10}\def\ymax{10}
@@ -280,17 +351,17 @@
 			\draw[thick,red,domain=-10:10,samples=100] plot ({\x*\x/16},\x);
 
 			% vértice
-			\filldraw[black] (0,0) circle (3pt) node[below left] {$V(0,0)$};
+			\filldraw[black] (0,0) circle (3pt) node[rotate=45] at (1.45,1.2) {$V(0,0)$};
 
 			% foco
-			\filldraw[blue] (4,0) circle (3pt) node[below] {$F(4,0)$};
+			\filldraw[blue] (4,0) circle (3pt) node[rotate=45] at (4.5,1.5) {$F(4,0)$};
 
 			% directriz
-			\draw[dashed,blue,thick] (-4,-10)--(-4,10) node[above] {$x=-4$};
+			\draw[dashed,blue,thick] (-4,-10)--(-4,10) node[rotate=90] at (-4.7,6) {$D=x=-4$};
 
 			% eje de simetría
 			\draw[dotted,thick] (-6,0)--(12,0);
-			\node[above, green!30!black,scale=0.9] at (8,0.3) {Eje de simetría};
+			\node[above, green!30!black,scale=0.9] at (8.6,0.3) {Eje de simetría};
 
 		\end{tikzpicture}
 	\end{center}
@@ -382,12 +453,12 @@
 			\filldraw[blue] (2,1) circle (3pt) node[right] {$F(2,1)$};
 
 			% directriz
-			\draw[dashed,blue,thick] (-4,-3)--(8,-3) node[right] {$y=-3$};
+			\draw[dashed,blue,thick] (-4,-3)--(8,-3) node at (4, -3.5) {$D=y=-3$};
 
 			% eje de simetría
 			\draw[dotted,thick] (2,-5)--(2,8);
-			\node[green!30!black,scale=0.9,rotate=9] at (2.2,7.5) {$x=2$};
-			\node[green!30!black,scale=0.9,rotate=90] at (2.6,4.3) {Eje de simetría};
+			%\node[green!30!black,scale=0.9,rotate=90] at (2.2,7.5) {$x=2$};
+			\node[green!30!black,scale=0.9,rotate=90] at (2.6,4.3) {$E_S=x=2$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -609,27 +680,27 @@
 			\draw[thick,red,domain=-10:10,samples=100] plot (\x,{\x*\x/12});
 
 			% vértice
-			\filldraw[black] (0,0) circle (3.5pt) node[below right=2pt,scale=1] {$V(0,0)$};
+			\filldraw[black] (0,0) circle (3.5pt) node[rotate=-45] at (1,-1.5) {$V(0,0)$};
 
 			% foco
 			\filldraw[blue] (0,3) circle (3.5pt) node[right=3pt,scale=1] {$F(0,3)$};
 
 			% directriz
 			\draw[dashed,blue,very thick] (\xmin,-3)--(\xmax,-3);
-			\node[blue,scale=1] at (-8,-3.6) {Directriz: $y=-3$};
+			\node[blue,scale=1] at (-7,-3.6) {$D: y=-3$};
 
 			% eje de simetría (línea punteada vertical)
 			\draw[dotted,thick,green!60!black] (0,\ymin)--(0,\ymax);
 			\node[green!60!black,scale=0.9,rotate=90] at (0.7,9) {Eje de simetría};
 
 			% etiqueta de la parábola
-			\node[red,scale=1.1] at (7,5) {$x^2=12y$};
+			\node[red,scale=1.1] at (5.5,5) {$x^2=12y$};
 
 			% algunos puntos de la parábola para ilustrar
 			\filldraw[red] (6,3) circle (2pt);
 			\filldraw[red] (-6,3) circle (2pt);
-			\node[red,scale=0.8] at (6,3.7) {$(6,3)$};
-			\node[red,scale=0.8] at (-6,3.7) {$(-6,3)$};
+			\node[red,scale=0.8] at (5,3.5) {$(6,3)$};
+			\node[red,scale=0.8] at (-5.2,3.5) {$(-6,3)$};
 
 			% distancia del vértice al foco
 			\draw[<->,orange,very thick] (0.5,0)--(0.5,3);
@@ -647,7 +718,7 @@
 	\end{itemize}
 	¡Las distancias son iguales!
 
-	\newpage
+	%\newpage
 
 	\subsection*{Solución del Ejercicio 2}
 
@@ -768,18 +839,18 @@
 			\draw[thick,red,domain=-10:10,samples=100] plot ({-\x*\x/8},\x);
 
 			% vértice
-			\filldraw[black] (0,0) circle (3.5pt) node[above right=2pt,scale=1] {$V(0,0)$};
+			\filldraw[black] (0,0) circle (3.5pt) node[rotate=45] at (1,1) {$V(0,0)$};
 
 			% foco
 			\filldraw[blue] (-2,0) circle (3.5pt) node[above=3pt,scale=1] {$F(-2,0)$};
 
 			% directriz
 			\draw[dashed,blue,very thick] (2,\ymin)--(2,\ymax);
-			\node[blue,scale=1] at (2,8.5) {Directriz: $x=2$};
+			\node[blue,scale=1, rotate=90] at (1.5,8.5) {$D: x=2$};
 
 			% eje de simetría (línea punteada horizontal)
 			\draw[dotted,thick,green!60!black] (\xmin,0)--(\xmax,0);
-			\node[green!60!black,scale=0.9] at (-9,0.7) {Eje de simetría};
+			\node[green!60!black,scale=0.9] at (-9,0.7) {$E_S=y=0$};
 
 			% etiqueta de la parábola
 			\node[red,scale=1.1] at (-8,5) {$y^2=-8x$};
@@ -787,12 +858,12 @@
 			% algunos puntos de la parábola para ilustrar
 			\filldraw[red] (-2,4) circle (2pt);
 			\filldraw[red] (-2,-4) circle (2pt);
-			\node[red,scale=0.8] at (-2.8,4.5) {$(-2,4)$};
-			\node[red,scale=0.8] at (-2.8,-4.5) {$(-2,-4)$};
+			\node[red,scale=0.8] at (-3.5,4) {$(-2,4)$};
+			\node[red,scale=0.8] at (-3.5,-4) {$(-2,-4)$};
 
 			% distancia del vértice al foco
 			\draw[<->,orange,very thick] (0,-0.6)--(-2,-0.6);
-			\node[orange,scale=0.9] at (-1,-1.4) {$|p|=2$};
+			\node[orange,scale=0.9, rotate=45] at (-2,-1.7) {$|p|=2$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -941,11 +1012,11 @@
 
 			% directriz
 			\draw[dashed,blue,very thick] (\xmin,-2)--(\xmax,-2);
-			\node[blue,scale=1] at (-9,-2.7) {Directriz: $y=-2$};
+			\node[blue,scale=1] at (-9,-2.7) {$D: y=-2$};
 
 			% eje de simetría (línea punteada vertical)
 			\draw[dotted,thick,green!40!black] (-3,\ymin)--(-3,\ymax);
-			\node[green!40!black,scale=0.9,rotate=90] at (-2.2,11) {Eje: $x=-3$};
+			\node[green!40!black,scale=0.9,rotate=90] at (-2.2,11) {$E_S: x=-3$};
 
 			% etiqueta de la parábola
 			\node[red,scale=1] at (-5,8) {$(x+3)^2=16(y-2)$};
@@ -1137,28 +1208,28 @@
 			\draw[thick,red,domain=-9:3,samples=100] plot ({(\x+3)*(\x+3)/4-2},\x);
 
 			% vértice
-			\filldraw[black] (-2,-3) circle (3.5pt) node[below left=2pt,scale=1] {$V(-2,-3)$};
+			\filldraw[black] (-2,-3) circle (3.5pt) node[rotate=-30] at (-3.5,-2.2) {$V(-2,-3)$};
 
 			% foco
-			\filldraw[blue] (-1,-3) circle (3.5pt) node[above=3pt,scale=1] {$F(-1,-3)$};
+			\filldraw[blue] (-1,-3) circle (3.5pt) node[rotate=35] at(0.8,-2) {$F(-1,-3)$};
 
 			% directriz
 			\draw[dashed,blue,very thick] (-3,\ymin)--(-3,\ymax);
-			\node[blue,scale=1] at (-3,2) {$x=-3$};
+			\node[blue,scale=.85, rotate=90] at (-3.5,-7.5) {$D: x=-3$};
 
 			% eje de simetría (línea punteada horizontal)
 			\draw[dotted,thick,green!60!black] (\xmin,-3)--(\xmax,-3);
-			\node[green!60!black,scale=0.9] at (4.5,-3.6) {Eje de Simetría: $y=-3$};
+			\node[green!60!black,scale=0.9] at (4.5,-3.6) {$E_S: y=-3$};
 
 			% etiqueta de la parábola
-			\node[red,scale=1] at (4,-1) {$y^2+6y-4x+1=0$};
-			\node[red,scale=0.9] at (4,-1.7) {o bien $(y+3)^2=4(x+2)$};
+			\node[red,scale=.75] at (5.2,1) {$y^2+6y-4x+1=0$};
+			\node[red,scale=0.75] at (5,0.45) {o bien $(y+3)^2=4(x+2)$};
 
 			% algunos puntos de la parábola para ilustrar
 			\filldraw[red] (-1,-1) circle (2pt);
 			\filldraw[red] (-1,-5) circle (2pt);
-			\node[red,scale=0.75] at (-0.3,-0.7) {$(-1,-1)$};
-			\node[red,scale=0.75] at (-0.3,-5.3) {$(-1,-5)$};
+			\node[red,scale=0.75] at (-2.2,-1.1) {$(-1,-1)$};
+			\node[red,scale=0.75] at (-1.9,-5.3) {$(-1,-5)$};
 
 			% distancia del vértice al foco
 			\draw[<->,orange,very thick] (-2,-2.4)--(-1,-2.4);
@@ -1184,7 +1255,7 @@
 	\end{aligned}
 	\]
 
-	\newpage
+	%\newpage
 
 	\subsection*{Solución del Ejercicio 5}
 
@@ -1328,21 +1399,21 @@
 			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.7]{\y};
 
 			% parábola x^2 = -4y => y = -x^2/4
-			\draw[thick,red,domain=-8:8,samples=100] plot (\x,{-\x*\x/4});
+			\draw[thick,red,domain=-6.2:6.2,samples=100] plot (\x,{-\x*\x/4});
 
 			% vértice
-			\filldraw[black] (0,0) circle (3.5pt) node[above right=2pt,scale=1] {$V(0,0)$};
+			\filldraw[black] (0,0) circle (3.5pt) node at(1.2,0.5) {$V(0,0)$};
 
 			% foco
-			\filldraw[blue] (0,-1) circle (3.5pt) node[right=3pt,scale=1] {$F(0,-1)$};
+			\filldraw[blue] (0,-1) circle (3.5pt) node at(1.3,-1.5) {$F(0,-1)$};
 
 			% directriz
 			\draw[dashed,blue,very thick] (\xmin,1)--(\xmax,1);
-			\node[blue,scale=1] at (-6,1.6) {Directriz: $y=1$};
+			\node[blue,scale=1] at (-6,1.6) {$D: y=1$};
 
 			% eje de simetría (línea punteada vertical)
 			\draw[dotted,thick,green!60!black] (0,\ymin)--(0,\ymax);
-			\node[green!60!black,scale=0.9,rotate=90] at (0.7,-7) {Eje de simetría};
+			\node[green!60!black,scale=0.9,rotate=90] at (0.7,-7) {$E_S=x=0$};
 
 			% etiqueta de la parábola
 			\node[red,scale=1.1] at (5,-2) {$x^2=-4y$};
@@ -1356,8 +1427,8 @@
 			\filldraw[red] (-6,-9) circle (2.5pt);
 
 			% etiquetas de puntos
-			\node[red,scale=0.75] at (2.7,-0.5) {$(2,-1)$};
-			\node[red,scale=0.75] at (-2.7,-0.5) {$(-2,-1)$};
+			\node[red,scale=0.75] at (3.5,-1.2) {$(2,-1)$};
+			\node[red,scale=0.75] at (-3.5,-1.2) {$(-2,-1)$};
 			\node[red,scale=0.75] at (4.7,-3.5) {$(4,-4)$};
 			\node[red,scale=0.75] at (-4.7,-3.5) {$(-4,-4)$};
 			\node[red,scale=0.75] at (6.7,-8.5) {$(6,-9)$};
@@ -1404,7 +1475,7 @@
 
 	\textbf{Observación importante:} Como la parábola abre hacia abajo, el vértice \(V(0,0)\) es el \textbf{punto más alto} de la curva. El foco \(F(0,-1)\) está dentro de la parábola (debajo del vértice), y la directriz \(y=1\) está fuera de la parábola (arriba del vértice). Todos los puntos de la parábola están a la misma distancia del foco que de la directriz.
 
-	\newpage
+	%\newpage
 
 	\section{Ejercicios: De elementos a ecuación}
 
@@ -1465,7 +1536,7 @@
 		\item[(e)] Escribe la ecuación de la parábola.
 	\end{itemize}
 
-	\newpage
+	%\newpage
 
 	\section{Soluciones: De elementos a ecuación}
 
@@ -1539,13 +1610,13 @@
 
 			\draw[thick,red,domain=-12:12,samples=100] plot (\x,{\x*\x/20});
 
-			\filldraw[black] (0,0) circle (3.5pt) node[below right=2pt,scale=1] {$V(0,0)$};
-			\filldraw[blue] (0,5) circle (3.5pt) node[right=3pt,scale=1] {$F(0,5)$};
+			\filldraw[black] (0,0) circle (3.5pt) node[rotate=-30] at(1.5,-1.2) {$V(0,0)$};
+			\filldraw[blue] (0,5) circle (3.5pt) node[right=3pt,scale=1, rotate=45] {$F(0,5)$};
 			\draw[dashed,blue,very thick] (\xmin,-5)--(\xmax,-5);
-			\node[blue,scale=1] at (-9,-5.7) {Directriz: $y=-5$};
+			\node[blue,scale=1] at (-9,-5.7) {$D: y=-5$};
 
 			\draw[dotted,thick,green!60!black] (0,\ymin)--(0,\ymax);
-			\node[green!60!black,scale=0.9,rotate=90] at (0.8,12) {Eje de simetría};
+			\node[green!60!black,scale=0.9,rotate=90] at (0.8,12) {$E_S=x=0$};
 
 			\node[red,scale=1.1] at (8,8) {$x^2=20y$};
 
@@ -1554,7 +1625,7 @@
 		\end{tikzpicture}
 	\end{center}
 
-	\newpage
+	%\newpage
 
 	\subsection*{Solución del Ejercicio 7}
 
@@ -1626,24 +1697,24 @@
 			\foreach \y in {-12,-10,...,12}
 			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.65]{\y};
 
-			\draw[thick,red,domain=-12:12,samples=100] plot ({-\x*\x/12},\x);
+			\draw[thick,red,domain=-10:10,samples=100] plot ({-\x*\x/12},\x);
 
 			\filldraw[black] (0,0) circle (3.5pt) node[above right=2pt,scale=1] {$V(0,0)$};
 			\filldraw[blue] (-3,0) circle (3.5pt) node[above=3pt,scale=1] {$F(-3,0)$};
 			\draw[dashed,blue,very thick] (3,\ymin)--(3,\ymax);
-			\node[blue,scale=1] at (3,10) {Directriz: $x=3$};
+			\node[blue,scale=1, rotate=90] at (3.5,10) {$D: x=3$};
 
 			\draw[dotted,thick,green!60!black] (\xmin,0)--(\xmax,0);
-			\node[green!60!black,scale=0.9] at (-10,0.8) {Eje de simetría};
+			\node[green!60!black,scale=0.9] at (-10,0.8) {$E_S=y=0$};
 
 			\node[red,scale=1.1] at (-9,6) {$y^2=-12x$};
 
 			\draw[<->,orange,very thick] (0,-0.8)--(-3,-0.8);
-			\node[orange,scale=0.9] at (-1.5,-2) {$|p|=3$};
+			\node[orange,scale=0.9] at (-2,-1.5) {$|p|=3$};
 		\end{tikzpicture}
 	\end{center}
 
-	\newpage
+	%\newpage
 
 	\subsection*{Solución del Ejercicio 8}
 
@@ -1715,13 +1786,13 @@
 
 			\draw[thick,red,domain=-4:8,samples=100] plot (\x,{(\x-2)*(\x-2)/16-3});
 
-			\filldraw[black] (2,-3) circle (3.5pt) node[right=3pt,scale=1] {$V(2,-3)$};
+			\filldraw[black] (2,-3) circle (3.5pt) node at(3.2,-3.6) {$V(2,-3)$};
 			\filldraw[blue] (2,1) circle (3.5pt) node[right=3pt,scale=1] {$F(2,1)$};
 			\draw[dashed,blue,very thick] (\xmin,-7)--(\xmax,-7);
-			\node[blue,scale=1] at (-4,-7.7) {Directriz: $y=-7$};
+			\node[blue,scale=1] at (-4,-7.7) {$D: y=-7$};
 
 			\draw[dotted,thick,green!60!black] (2,\ymin)--(2,\ymax);
-			\node[green!60!black,scale=0.9,rotate=90] at (2.8,6) {Eje: $x=2$};
+			\node[green!60!black,scale=0.9,rotate=90] at (2.8,6) {$E_S: x=2$};
 
 			\node[red,scale=1] at (6,3) {$(x-2)^2=16(y+3)$};
 
@@ -1730,7 +1801,7 @@
 		\end{tikzpicture}
 	\end{center}
 
-	\newpage
+	%\newpage
 
 	\subsection*{Solución del Ejercicio 9}
 
@@ -1804,15 +1875,15 @@
 
 			\draw[thick,red,domain=-7:5,samples=100] plot (\x,{-(\x+1)*(\x+1)/8+4});
 
-			\filldraw[black] (-1,4) circle (3.5pt) node[right=3pt,scale=1] {$V(-1,4)$};
-			\filldraw[blue] (-1,2) circle (3.5pt) node[right=3pt,scale=1] {$F(-1,2)$};
+			\filldraw[black] (-1,4) circle (3.5pt) node at(.5,4.2) {$V(-1,4)$};
+			\filldraw[blue] (-1,2) circle (3.5pt) node at(-2.7,2) {$F(-1,2)$};
 			\draw[dashed,blue,very thick] (\xmin,6)--(\xmax,6);
-			\node[blue,scale=1] at (-6,6.7) {Directriz: $y=6$};
+			\node[blue,scale=1] at (-6,6.7) {$D: y=6$};
 
 			\draw[dotted,thick,green!60!black] (-1,\ymin)--(-1,\ymax);
-			\node[green!60!black,scale=0.9,rotate=90] at (-0.2,6.5) {Eje: $x=-1$};
+			\node[green!60!black,scale=0.9,rotate=90] at (-1.3,6.5) {$E_S: x=-1$};
 
-			\node[red,scale=1] at (3,1) {$(x+1)^2=-8(y-4)$};
+			\node[red,scale=1] at (-4.5,-2) {$(x+1)^2=-8(y-4)$};
 
 			\draw[<->,orange,very thick] (-0.3,4)--(-0.3,2);
 			\node[orange,scale=0.9] at (1.2,3) {$|p|=2$};
@@ -1822,7 +1893,7 @@
 		\end{tikzpicture}
 	\end{center}
 
-	\newpage
+	%\newpage
 
 	\subsection*{Solución del Ejercicio 10}
 
@@ -1899,7 +1970,7 @@
 	\subsection*{Gráfica del Ejercicio 10}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.7]
+		\begin{tikzpicture}[scale=0.85]
 			\def\xmin{1}\def\xmax{9}
 			\def\ymin{-2}\def\ymax{6}
 
@@ -1912,19 +1983,19 @@
 			\foreach \y in {-2,-1,...,6}
 			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.7]{\y};
 
-			\draw[thick,red,domain=-2:6,samples=100] plot ({(\x-2)*(\x-2)+3},\x);
+			\draw[thick,red,domain=-0.5:4.5,samples=100] plot ({(\x-2)*(\x-2)+3},\x);
 
 			\filldraw[black] (3,2) circle (3.5pt) node[below left=2pt,scale=1] {$V(3,2)$};
-			\filldraw[blue] (3.25,2) circle (3.5pt) node[above=3pt,scale=0.9] {$F(3.25,2)$};
+			\filldraw[blue] (3.25,2) circle (3.5pt) node at(4.7,1.5) {$F(3.25,2)$};
 			\filldraw[red] (7,4) circle (3pt) node[above right=2pt,scale=1] {$P(7,4)$};
 
 			\draw[dashed,blue,very thick] (2.75,\ymin)--(2.75,\ymax);
-			\node[blue,scale=0.9,rotate=90] at (2.75,4.5) {Directriz: $x=2.75$};
+			\node[blue,scale=0.9,rotate=90] at (2.4,4.5) {$D: x=2.75$};
 
 			\draw[dotted,thick,green!60!black] (\xmin,2)--(\xmax,2);
-			\node[green!60!black,scale=0.9] at (7,2.6) {Eje: $y=2$};
+			\node[green!60!black,scale=0.9] at (7,2.3) {$E_S: y=2$};
 
-			\node[red,scale=1] at (5.5,0) {$(y-2)^2=x-3$};
+			\node[red,scale=1] at (7.5,0.6) {$(y-2)^2=x-3$};
 
 			\draw[<->,orange,very thick] (3,1.4)--(3.25,1.4);
 			\node[orange,scale=0.8] at (3.1,0.8) {$p=\frac{1}{4}$};
