@@ -1,0 +1,1944 @@
+% !TEX TS-program = lualatex
+% !TEX encoding = UTF-8
+
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage[spanish,shorthands=off]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta}
+\usepackage{xcolor}
+
+\title{\Large Guía de Geometría Analítica: La Parábola
+
+\small{Elaborado para : \textsc{\bf{Sheyra Celedón}}}}
+
+\author{\bf{\textsc{Toribio de J Arrieta F}}}
+\date{\today}
+
+\begin{document}
+	\maketitle
+
+	\section{¿Qué es una parábola?}
+
+	Una \textbf{parábola} es una curva que se forma en el plano cartesiano y tiene una forma muy especial: \emph{es como una U} (puede estar abierta hacia arriba, hacia abajo, hacia la derecha o hacia la izquierda).
+
+	\bigskip
+
+	\textbf{Definición geométrica.} Una parábola es el conjunto de todos los puntos del plano que están a la \textcolor{red}{\textbf{misma distancia}} de un punto fijo llamado \textbf{foco} y de una recta fija llamada \textbf{directriz}.
+
+	\bigskip
+
+	\textbf{¿Dónde vemos parábolas en la vida real?}
+	\begin{itemize}
+		\item En el chorro de agua de una fuente.
+		\item En la trayectoria de una pelota cuando la lanzamos.
+		\item En las antenas parabólicas.
+		\item En los faros de los carros (los reflectores tienen forma parabólica).
+	\end{itemize}
+
+	\section{Elementos de la parábola}
+
+	Toda parábola tiene varios elementos importantes que debemos conocer:
+
+	\begin{itemize}
+		\item \textbf{Vértice (V):} Es el punto donde la parábola cambia de dirección. Es el punto más bajo si abre hacia arriba, o el más alto si abre hacia abajo. \emph{(o sea, es como la punta de la U)}.
+
+		\item \textbf{Foco (F):} Es un punto fijo dentro de la parábola. Todos los puntos de la parábola están a la misma distancia del foco que de la directriz.
+
+		\item \textbf{Directriz:} Es una recta fija que está fuera de la parábola.
+
+		\item \textbf{Eje de simetría:} Es una recta que pasa por el vértice y el foco, y divide la parábola en dos partes iguales (como un espejo).
+
+		\item \textbf{Parámetro (p):} Es la distancia del vértice al foco (y también del vértice a la directriz). Este valor nos dice qué tan "abierta" está la parábola.
+	\end{itemize}
+
+	\section{Parábola vertical con vértice en el origen}
+
+	Empecemos con el caso más sencillo: cuando el vértice de la parábola está en el origen \((0,0)\) y la parábola abre hacia arriba o hacia abajo.
+
+	\subsection*{Ecuación}
+
+	La ecuación de una parábola vertical con vértice en \((0,0)\) es:
+	\[
+	\boxed{x^2=4py}
+	\]
+
+	\textbf{¿Qué significa cada cosa?}
+	\begin{itemize}
+		\item \(x^2\): La variable \(x\) está elevada al cuadrado.
+		\item \(p\): Es el parámetro (distancia del vértice al foco).
+		\item Si \(\mathbf{p>0}\): la parábola abre \textcolor{red}{\textbf{hacia arriba}}.
+		\item Si \(\mathbf{p<0}\): la parábola abre \textcolor{blue}{\textbf{hacia abajo}}.
+	\end{itemize}
+
+	\subsection*{Elementos importantes}
+	\begin{itemize}
+		\item Vértice: \(V(0,0)\)
+		\item Foco: \(F(0,p)\)
+		\item Directriz: \(y=-p\)
+		\item Eje de simetría: el eje \(y\) (la recta \(x=0\))
+	\end{itemize}
+
+	\subsection*{Ejemplo 1: Parábola que abre hacia arriba}
+
+	\textbf{Ejercicio.} Encuentra el foco y la directriz de la parábola \(x^2=8y\).
+
+	\bigskip
+
+	\textbf{Solución.} Comparamos con la forma \(x^2=4py\):
+	\[
+	x^2=8y \quad\Rightarrow\quad 4p=8 \quad\Rightarrow\quad p=2.
+	\]
+	Como \(p=2>0\), la parábola abre hacia arriba.
+
+	\bigskip
+
+	\textbf{Elementos:}
+	\begin{itemize}
+		\item Vértice: \(V(0,0)\)
+		\item Foco: \(F(0,2)\) (porque el foco está a distancia \(p=2\) del vértice, hacia arriba)
+		\item Directriz: \(y=-2\) (una recta horizontal a distancia \(p=2\) del vértice, hacia abajo)
+	\end{itemize}
+
+	\subsection*{Gráfica de la parábola \(x^2=8y\)}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			% límites
+			\def\xmin{-8}\def\xmax{8}
+			\def\ymin{-4}\def\ymax{10}
+
+			% cuadrícula
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas numéricas
+			\foreach \x in {-8,-7,...,8}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.7]{\x};
+			\foreach \y in {-4,-3,...,10}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.7]{\y};
+
+			% parábola x^2 = 8y => y = x^2/8
+			\draw[thick,red,domain=-8:8,samples=100] plot (\x,{\x*\x/8});
+
+			% vértice
+			\filldraw[black] (0,0) circle (3pt) node[below right] {$V(0,0)$};
+
+			% foco
+			\filldraw[blue] (0,2) circle (3pt) node[right] {$F(0,2)$};
+
+			% directriz
+			\draw[dashed,blue,thick] (-8,-2)--(8,-2) node[right] {$y=-2$};
+
+			% eje de simetría
+			\draw[dotted,thick] (0,-4)--(0,10);
+			\node[green!30!black,scale=0.9,rotate=90] at (.6,6) {Eje de simetría};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+
+	\subsection*{Ejemplo 2: Parábola que abre hacia abajo}
+
+	\textbf{Ejercicio.} Encuentra el foco y la directriz de la parábola \(x^2=-12y\).
+
+	\bigskip
+
+	\textbf{Solución.} Comparamos con la forma \(x^2=4py\):
+	\[
+	x^2=-12y \quad\Rightarrow\quad 4p=-12 \quad\Rightarrow\quad p=-3.
+	\]
+	Como \(p=-3<0\), la parábola abre hacia abajo.
+
+	\bigskip
+
+	\textbf{Elementos:}
+	\begin{itemize}
+		\item Vértice: \(V(0,0)\)
+		\item Foco: \(F(0,-3)\) (porque el foco está a distancia \(|p|=3\) del vértice, hacia abajo)
+		\item Directriz: \(y=3\) (una recta horizontal a distancia \(|p|=3\) del vértice, hacia arriba)
+	\end{itemize}
+
+	\subsection*{Gráfica de la parábola \(x^2=-12y\)}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			% límites
+			\def\xmin{-8}\def\xmax{8}
+			\def\ymin{-10}\def\ymax{5}
+
+			% cuadrícula
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas numéricas
+			\foreach \x in {-8,-7,...,8}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.7]{\x};
+			\foreach \y in {-10,-9,...,5}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.7]{\y};
+
+			% parábola x^2 = -12y => y = -x^2/12
+			\draw[thick,red,domain=-8:8,samples=100] plot (\x,{-\x*\x/12});
+
+			% vértice
+			\filldraw[black] (0,0) circle (3pt) node[above right] {$V(0,0)$};
+
+			% foco
+			\filldraw[blue] (0,-3) circle (3pt) node[right] {$F(0,-3)$};
+
+			% directriz
+			\draw[dashed,blue,thick] (-8,3)--(8,3) node[right] {$y=3$};
+
+			% eje de simetría
+			\draw[dotted,thick] (0,-10)--(0,5);
+			\node[green!30!black,scale=0.9,rotate=90] at (0.6,-7) {Eje de simetría};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\section{Parábola horizontal con vértice en el origen}
+
+	Ahora veamos el caso cuando la parábola abre hacia la derecha o hacia la izquierda (en lugar de hacia arriba o abajo).
+
+	\subsection*{Ecuación}
+
+	La ecuación de una parábola horizontal con vértice en \((0,0)\) es:
+	\[
+	\boxed{y^2=4px}
+	\]
+
+	\textbf{¿Qué significa cada cosa?}
+	\begin{itemize}
+		\item \(y^2\): Ahora la variable \(y\) está elevada al cuadrado (en lugar de \(x\)).
+		\item \(p\): Es el parámetro (distancia del vértice al foco).
+		\item Si \(\mathbf{p>0}\): la parábola abre \textcolor{red}{\textbf{hacia la derecha}}.
+		\item Si \(\mathbf{p<0}\): la parábola abre \textcolor{blue}{\textbf{hacia la izquierda}}.
+	\end{itemize}
+
+	\subsection*{Elementos importantes}
+	\begin{itemize}
+		\item Vértice: \(V(0,0)\)
+		\item Foco: \(F(p,0)\)
+		\item Directriz: \(x=-p\)
+		\item Eje de simetría: el eje \(x\) (la recta \(y=0\))
+	\end{itemize}
+
+	\subsection*{Ejemplo 3: Parábola que abre hacia la derecha}
+
+	\textbf{Ejercicio.} Encuentra el foco y la directriz de la parábola \(y^2=16x\).
+
+	\bigskip
+
+	\textbf{Solución.} Comparamos con la forma \(y^2=4px\):
+	\[
+	y^2=16x \quad\Rightarrow\quad 4p=16 \quad\Rightarrow\quad p=4.
+	\]
+	Como \(p=4>0\), la parábola abre hacia la derecha.
+
+	\bigskip
+
+	\textbf{Elementos:}
+	\begin{itemize}
+		\item Vértice: \(V(0,0)\)
+		\item Foco: \(F(4,0)\) (porque el foco está a distancia \(p=4\) del vértice, hacia la derecha)
+		\item Directriz: \(x=-4\) (una recta vertical a distancia \(p=4\) del vértice, hacia la izquierda)
+	\end{itemize}
+
+	\subsection*{Gráfica de la parábola \(y^2=16x\)}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			% límites
+			\def\xmin{-6}\def\xmax{12}
+			\def\ymin{-10}\def\ymax{10}
+
+			% cuadrícula
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas numéricas
+			\foreach \x in {-6,-5,...,12}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.7]{\x};
+			\foreach \y in {-10,-9,...,10}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.7]{\y};
+
+			% parábola y^2 = 16x => x = y^2/16
+			\draw[thick,red,domain=-10:10,samples=100] plot ({\x*\x/16},\x);
+
+			% vértice
+			\filldraw[black] (0,0) circle (3pt) node[below left] {$V(0,0)$};
+
+			% foco
+			\filldraw[blue] (4,0) circle (3pt) node[below] {$F(4,0)$};
+
+			% directriz
+			\draw[dashed,blue,thick] (-4,-10)--(-4,10) node[above] {$x=-4$};
+
+			% eje de simetría
+			\draw[dotted,thick] (-6,0)--(12,0);
+			\node[above, green!30!black,scale=0.9] at (8,0.3) {Eje de simetría};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\section{Parábola con vértice fuera del origen}
+
+	Hasta ahora hemos visto parábolas con vértice en \((0,0)\). Pero, ¿qué pasa si el vértice está en otro punto \((h,k)\)?
+
+	\subsection*{Parábola vertical con vértice en \((h,k)\)}
+
+	Si la parábola abre hacia arriba o hacia abajo y tiene vértice en \((h,k)\), la ecuación es:
+	\[
+	\boxed{(x-h)^2=4p(y-k)}
+	\]
+
+	\textbf{Elementos:}
+	\begin{itemize}
+		\item Vértice: \(V(h,k)\)
+		\item Foco: \(F(h,k+p)\)
+		\item Directriz: \(y=k-p\)
+		\item Eje de simetría: \(x=h\)
+	\end{itemize}
+
+	\subsection*{Parábola horizontal con vértice en \((h,k)\)}
+
+	Si la parábola abre hacia la derecha o hacia la izquierda y tiene vértice en \((h,k)\), la ecuación es:
+	\[
+	\boxed{(y-k)^2=4p(x-h)}
+	\]
+
+	\textbf{Elementos:}
+	\begin{itemize}
+		\item Vértice: \(V(h,k)\)
+		\item Foco: \(F(h+p,k)\)
+		\item Directriz: \(x=h-p\)
+		\item Eje de simetría: \(y=k\)
+	\end{itemize}
+
+	\subsection*{Ejemplo 4: Parábola con vértice fuera del origen}
+
+	\textbf{Ejercicio.} Encuentra el vértice, foco y directriz de la parábola \((x-2)^2=8(y+1)\).
+
+	\bigskip
+
+	\textbf{Solución.} Comparamos con la forma \((x-h)^2=4p(y-k)\):
+	\[
+	(x-2)^2=8(y-(-1)) \quad\Rightarrow\quad h=2,\quad k=-1,\quad 4p=8 \quad\Rightarrow\quad p=2.
+	\]
+	Como \(p=2>0\), la parábola abre hacia arriba.
+
+	\bigskip
+
+	\textbf{Elementos:}
+	\begin{itemize}
+		\item Vértice: \(V(2,-1)\)
+		\item Foco: \(F(2,-1+2)=F(2,1)\)
+		\item Directriz: \(y=-1-2=-3\)
+		\item Eje de simetría: \(x=2\)
+	\end{itemize}
+
+	\subsection*{Gráfica de la parábola \((x-2)^2=8(y+1)\)}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			% límites
+			\def\xmin{-4}\def\xmax{8}
+			\def\ymin{-5}\def\ymax{8}
+
+			% cuadrícula
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas numéricas
+			\foreach \x in {-4,-3,...,8}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.7]{\x};
+			\foreach \y in {-5,-4,...,8}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.7]{\y};
+
+			% parábola (x-2)^2 = 8(y+1) => y = (x-2)^2/8 - 1
+			\draw[thick,red,domain=-2:6,samples=100] plot (\x,{(\x-2)*(\x-2)/8-1});
+
+			% vértice
+			\filldraw[black] (2,-1) circle (3pt) node[below right] {$V(2,-1)$};
+
+			% foco
+			\filldraw[blue] (2,1) circle (3pt) node[right] {$F(2,1)$};
+
+			% directriz
+			\draw[dashed,blue,thick] (-4,-3)--(8,-3) node[right] {$y=-3$};
+
+			% eje de simetría
+			\draw[dotted,thick] (2,-5)--(2,8);
+			\node[green!30!black,scale=0.9,rotate=9] at (2.2,7.5) {$x=2$};
+			\node[green!30!black,scale=0.9,rotate=90] at (2.6,4.3) {Eje de simetría};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\section{Forma desarrollada de la parábola}
+
+	A veces la ecuación de la parábola no está en la forma \((x-h)^2=4p(y-k)\) que hemos visto, sino que está \textbf{desarrollada} (o sea, con todos los términos multiplicados). En ese caso necesitamos \textbf{completar el cuadrado} para encontrar el vértice y el foco.
+
+	\subsection*{Ejemplo 5: Completar el cuadrado}
+
+	\textbf{Ejercicio.} Encuentra el vértice y el foco de la parábola \(x^2-4x-8y+12=0\).
+
+	\bigskip
+
+	\textbf{Solución.} Vamos a reorganizar la ecuación para dejarla en la forma \((x-h)^2=4p(y-k)\).
+
+	\bigskip
+
+	\textbf{Paso 1:} Agrupamos los términos con \(x\) y dejamos los demás del otro lado:
+	\[
+	x^2-4x=8y-12.
+	\]
+
+	\textbf{Paso 2:} Completamos el cuadrado en el lado izquierdo. Para eso, tomamos el coeficiente de \(x\) (que es \(-4\)), lo dividimos entre 2 y lo elevamos al cuadrado:
+	\[
+	\left(\frac{-4}{2}\right)^2=(-2)^2=4.
+	\]
+	Sumamos 4 a ambos lados:
+	\[
+	x^2-4x+4=8y-12+4 \quad\Rightarrow\quad (x-2)^2=8y-8.
+	\]
+
+	\textbf{Paso 3:} Factorizamos el lado derecho:
+	\[
+	(x-2)^2=8(y-1).
+	\]
+
+	\textbf{Paso 4:} Ahora comparamos con la forma \((x-h)^2=4p(y-k)\):
+	\[
+	h=2,\quad k=1,\quad 4p=8 \quad\Rightarrow\quad p=2.
+	\]
+
+	\bigskip
+
+	\textbf{Elementos:}
+	\begin{itemize}
+		\item Vértice: \(V(2,1)\)
+		\item Foco: \(F(2,1+2)=F(2,3)\)
+		\item Directriz: \(y=1-2=-1\)
+	\end{itemize}
+
+	\section{Resumen: ¿Cómo identificar una parábola?}
+
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\textbf{Ecuación} & \textbf{Orientación} & \textbf{Abre hacia} \\
+			\hline
+			\(x^2=4py\) con \(p>0\) & Vertical & Arriba \\
+			\hline
+			\(x^2=4py\) con \(p<0\) & Vertical & Abajo \\
+			\hline
+			\(y^2=4px\) con \(p>0\) & Horizontal & Derecha \\
+			\hline
+			\(y^2=4px\) con \(p<0\) & Horizontal & Izquierda \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	\bigskip
+
+	\textbf{Regla práctica:}
+	\begin{itemize}
+		\item Si \textcolor{red}{\textbf{la variable \(x\) está al cuadrado}}, la parábola es \textbf{vertical} (abre hacia arriba o abajo).
+		\item Si \textcolor{blue}{\textbf{la variable \(y\) está al cuadrado}}, la parábola es \textbf{horizontal} (abre hacia la derecha o izquierda).
+	\end{itemize}
+
+	\section{Ejercicios propuestos}
+
+	\textbf{1.} Encuentra el foco y la directriz de la parábola \(x^2=12y\).
+
+	\bigskip
+
+	\textbf{2.} Encuentra el foco y la directriz de la parábola \(y^2=-8x\).
+
+	\bigskip
+
+	\textbf{3.} Encuentra el vértice y el foco de la parábola \((x+3)^2=16(y-2)\).
+
+	\bigskip
+
+	\textbf{4.} Encuentra el vértice y el foco de la parábola \(y^2+6y-4x+1=0\) (pista: completa el cuadrado).
+
+	\bigskip
+
+	\textbf{5.} Dibuja la gráfica de la parábola \(x^2=-4y\) e indica el vértice, foco y directriz.
+
+	\bigskip
+	\bigskip
+
+	\section{Soluciones detalladas de los ejercicios}
+
+	\subsection*{Solución del Ejercicio 1}
+
+	\textbf{Enunciado:} Encuentra el foco y la directriz de la parábola \(x^2=12y\).
+
+	\bigskip
+
+	\textbf{Solución paso a paso:}
+
+	\bigskip
+
+	\textbf{Paso 1: Identificar el tipo de parábola.}
+
+	La ecuación es \(x^2=12y\). Como la variable \(x\) está elevada al cuadrado, se trata de una \textcolor{red}{\textbf{parábola vertical}} (abre hacia arriba o hacia abajo).
+
+	\bigskip
+
+	\textbf{Paso 2: Comparar con la forma estándar.}
+
+	La forma estándar de una parábola vertical con vértice en el origen es:
+	\[
+	x^2=4py
+	\]
+
+	Comparamos nuestra ecuación con esta forma:
+	\[
+	x^2=12y \quad\Leftrightarrow\quad x^2=4py
+	\]
+
+	Por lo tanto:
+	\[
+	4p=12
+	\]
+
+	\textbf{Paso 3: Calcular el valor de \(p\).}
+
+	Despejamos \(p\):
+	\[
+	4p=12 \quad\Rightarrow\quad p=\frac{12}{4}=3
+	\]
+
+	Como \(\mathbf{p=3>0}\), la parábola \textcolor{red}{\textbf{abre hacia arriba}}.
+
+	\bigskip
+
+	\textbf{Paso 4: Determinar el vértice.}
+
+	Como la ecuación es de la forma \(x^2=4py\) (sin desplazamiento), el vértice está en el origen:
+	\[
+	\boxed{V(0,0)}
+	\]
+
+	\textbf{Paso 5: Calcular el foco.}
+
+	Para una parábola vertical con vértice en \((0,0)\), el foco está en \((0,p)\):
+	\[
+	\boxed{F(0,3)}
+	\]
+
+	\emph{Interpretación:} El foco está 3 unidades arriba del vértice, sobre el eje \(y\).
+
+	\bigskip
+
+	\textbf{Paso 6: Determinar la directriz.}
+
+	Para una parábola vertical con vértice en \((0,0)\), la directriz es la recta \(y=-p\):
+	\[
+	\boxed{y=-3}
+	\]
+
+	\emph{Interpretación:} La directriz es una recta horizontal que está 3 unidades debajo del vértice.
+
+	\bigskip
+
+	\textbf{Paso 7: Identificar el eje de simetría.}
+
+	El eje de simetría es la recta vertical que pasa por el vértice:
+	\[
+	x=0 \quad\text{(el eje \(y\))}
+	\]
+
+	\bigskip
+
+	\textbf{Resumen de elementos:}
+	\begin{itemize}
+		\item Vértice: \(V(0,0)\)
+		\item Foco: \(F(0,3)\)
+		\item Directriz: \(y=-3\)
+		\item Eje de simetría: \(x=0\)
+		\item Orientación: Abre hacia arriba
+		\item Parámetro: \(p=3\)
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 1: Parábola \(x^2=12y\)}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.55]
+			% límites
+			\def\xmin{-10}\def\xmax{10}
+			\def\ymin{-5}\def\ymax{12}
+
+			% cuadrícula
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas numéricas en x
+			\foreach \x in {-10,-9,...,10}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.65]{\x};
+
+			% marcas numéricas en y
+			\foreach \y in {-5,-4,...,12}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.65]{\y};
+
+			% parábola x^2 = 12y => y = x^2/12
+			\draw[thick,red,domain=-10:10,samples=100] plot (\x,{\x*\x/12});
+
+			% vértice
+			\filldraw[black] (0,0) circle (3.5pt) node[below right=2pt,scale=1] {$V(0,0)$};
+
+			% foco
+			\filldraw[blue] (0,3) circle (3.5pt) node[right=3pt,scale=1] {$F(0,3)$};
+
+			% directriz
+			\draw[dashed,blue,very thick] (\xmin,-3)--(\xmax,-3);
+			\node[blue,scale=1] at (-8,-3.6) {Directriz: $y=-3$};
+
+			% eje de simetría (línea punteada vertical)
+			\draw[dotted,thick,green!60!black] (0,\ymin)--(0,\ymax);
+			\node[green!60!black,scale=0.9,rotate=90] at (0.7,9) {Eje de simetría};
+
+			% etiqueta de la parábola
+			\node[red,scale=1.1] at (7,5) {$x^2=12y$};
+
+			% algunos puntos de la parábola para ilustrar
+			\filldraw[red] (6,3) circle (2pt);
+			\filldraw[red] (-6,3) circle (2pt);
+			\node[red,scale=0.8] at (6,3.7) {$(6,3)$};
+			\node[red,scale=0.8] at (-6,3.7) {$(-6,3)$};
+
+			% distancia del vértice al foco
+			\draw[<->,orange,very thick] (0.5,0)--(0.5,3);
+			\node[orange,scale=0.9] at (1.8,1.5) {$p=3$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+
+	\textbf{Verificación:} Podemos verificar que cualquier punto de la parábola está a la misma distancia del foco que de la directriz. Por ejemplo, el punto \((6,3)\):
+	\begin{itemize}
+		\item Distancia al foco \(F(0,3)\): \(\sqrt{(6-0)^2+(3-3)^2}=\sqrt{36}=6\)
+		\item Distancia a la directriz \(y=-3\): \(|3-(-3)|=6\)
+	\end{itemize}
+	¡Las distancias son iguales!
+
+	\newpage
+
+	\subsection*{Solución del Ejercicio 2}
+
+	\textbf{Enunciado:} Encuentra el foco y la directriz de la parábola \(y^2=-8x\).
+
+	\bigskip
+
+	\textbf{Solución paso a paso:}
+
+	\bigskip
+
+	\textbf{Paso 1: Identificar el tipo de parábola.}
+
+	La ecuación es \(y^2=-8x\). Como la variable \(y\) está elevada al cuadrado, se trata de una \textcolor{blue}{\textbf{parábola horizontal}} (abre hacia la derecha o hacia la izquierda).
+
+	\bigskip
+
+	\textbf{Paso 2: Comparar con la forma estándar.}
+
+	La forma estándar de una parábola horizontal con vértice en el origen es:
+	\[
+	y^2=4px
+	\]
+
+	Comparamos nuestra ecuación con esta forma:
+	\[
+	y^2=-8x \quad\Leftrightarrow\quad y^2=4px
+	\]
+
+	Por lo tanto:
+	\[
+	4p=-8
+	\]
+
+	\textbf{Paso 3: Calcular el valor de \(p\).}
+
+	Despejamos \(p\):
+	\[
+	4p=-8 \quad\Rightarrow\quad p=\frac{-8}{4}=-2
+	\]
+
+	Como \(\mathbf{p=-2<0}\), la parábola \textcolor{blue}{\textbf{abre hacia la izquierda}}.
+
+	\bigskip
+
+	\textbf{Paso 4: Determinar el vértice.}
+
+	Como la ecuación es de la forma \(y^2=4px\) (sin desplazamiento), el vértice está en el origen:
+	\[
+	\boxed{V(0,0)}
+	\]
+
+	\textbf{Paso 5: Calcular el foco.}
+
+	Para una parábola horizontal con vértice en \((0,0)\), el foco está en \((p,0)\):
+	\[
+	\boxed{F(-2,0)}
+	\]
+
+	\emph{Interpretación:} El foco está 2 unidades a la izquierda del vértice, sobre el eje \(x\).
+
+	\bigskip
+
+	\textbf{Paso 6: Determinar la directriz.}
+
+	Para una parábola horizontal con vértice en \((0,0)\), la directriz es la recta \(x=-p\):
+	\[
+	x=-(-2)=2 \quad\Rightarrow\quad \boxed{x=2}
+	\]
+
+	\emph{Interpretación:} La directriz es una recta vertical que está 2 unidades a la derecha del vértice.
+
+	\bigskip
+
+	\textbf{Paso 7: Identificar el eje de simetría.}
+
+	El eje de simetría es la recta horizontal que pasa por el vértice:
+	\[
+	y=0 \quad\text{(el eje \(x\))}
+	\]
+
+	\bigskip
+
+	\textbf{Resumen de elementos:}
+	\begin{itemize}
+		\item Vértice: \(V(0,0)\)
+		\item Foco: \(F(-2,0)\)
+		\item Directriz: \(x=2\)
+		\item Eje de simetría: \(y=0\)
+		\item Orientación: Abre hacia la izquierda
+		\item Parámetro: \(p=-2\)
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 2: Parábola \(y^2=-8x\)}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.55]
+			% límites
+			\def\xmin{-12}\def\xmax{5}
+			\def\ymin{-10}\def\ymax{10}
+
+			% cuadrícula
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas numéricas en x
+			\foreach \x in {-12,-11,...,5}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.65]{\x};
+
+			% marcas numéricas en y
+			\foreach \y in {-10,-9,...,10}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.65]{\y};
+
+			% parábola y^2 = -8x => x = -y^2/8
+			\draw[thick,red,domain=-10:10,samples=100] plot ({-\x*\x/8},\x);
+
+			% vértice
+			\filldraw[black] (0,0) circle (3.5pt) node[above right=2pt,scale=1] {$V(0,0)$};
+
+			% foco
+			\filldraw[blue] (-2,0) circle (3.5pt) node[above=3pt,scale=1] {$F(-2,0)$};
+
+			% directriz
+			\draw[dashed,blue,very thick] (2,\ymin)--(2,\ymax);
+			\node[blue,scale=1] at (2,8.5) {Directriz: $x=2$};
+
+			% eje de simetría (línea punteada horizontal)
+			\draw[dotted,thick,green!60!black] (\xmin,0)--(\xmax,0);
+			\node[green!60!black,scale=0.9] at (-9,0.7) {Eje de simetría};
+
+			% etiqueta de la parábola
+			\node[red,scale=1.1] at (-8,5) {$y^2=-8x$};
+
+			% algunos puntos de la parábola para ilustrar
+			\filldraw[red] (-2,4) circle (2pt);
+			\filldraw[red] (-2,-4) circle (2pt);
+			\node[red,scale=0.8] at (-2.8,4.5) {$(-2,4)$};
+			\node[red,scale=0.8] at (-2.8,-4.5) {$(-2,-4)$};
+
+			% distancia del vértice al foco
+			\draw[<->,orange,very thick] (0,-0.6)--(-2,-0.6);
+			\node[orange,scale=0.9] at (-1,-1.4) {$|p|=2$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+
+	\textbf{Verificación:} Podemos verificar que el punto \((-2,4)\) de la parábola está a la misma distancia del foco que de la directriz:
+	\begin{itemize}
+		\item Distancia al foco \(F(-2,0)\): \(\sqrt{(-2-(-2))^2+(4-0)^2}=\sqrt{16}=4\)
+		\item Distancia a la directriz \(x=2\): \(|(-2)-2|=|-4|=4\)
+	\end{itemize}
+	¡Las distancias son iguales!
+
+	\newpage
+
+	\subsection*{Solución del Ejercicio 3}
+
+	\textbf{Enunciado:} Encuentra el vértice y el foco de la parábola \((x+3)^2=16(y-2)\).
+
+	\bigskip
+
+	\textbf{Solución paso a paso:}
+
+	\bigskip
+
+	\textbf{Paso 1: Identificar el tipo de parábola.}
+
+	La ecuación es \((x+3)^2=16(y-2)\). Como la variable \(x\) (dentro del paréntesis) está elevada al cuadrado, se trata de una \textcolor{red}{\textbf{parábola vertical}}.
+
+	\bigskip
+
+	\textbf{Paso 2: Comparar con la forma estándar.}
+
+	La forma estándar de una parábola vertical con vértice en \((h,k)\) es:
+	\[
+	(x-h)^2=4p(y-k)
+	\]
+
+	Reescribimos nuestra ecuación para compararla:
+	\[
+	(x+3)^2=16(y-2) \quad\Leftrightarrow\quad (x-(-3))^2=16(y-2)
+	\]
+
+	\textbf{Paso 3: Identificar los valores de \(h\), \(k\) y \(p\).}
+
+	Comparando con \((x-h)^2=4p(y-k)\):
+	\[
+	\begin{aligned}
+		h &= -3 \\
+		k &= 2 \\
+		4p &= 16 \quad\Rightarrow\quad p=\frac{16}{4}=4
+	\end{aligned}
+	\]
+
+	Como \(\mathbf{p=4>0}\), la parábola \textcolor{red}{\textbf{abre hacia arriba}}.
+
+	\bigskip
+
+	\textbf{Paso 4: Determinar el vértice.}
+
+	El vértice está en el punto \((h,k)\):
+	\[
+	\boxed{V(-3,2)}
+	\]
+
+	\textbf{Paso 5: Calcular el foco.}
+
+	Para una parábola vertical con vértice en \((h,k)\), el foco está en \((h,k+p)\):
+	\[
+	F(h,k+p)=F(-3,2+4)=F(-3,6)
+	\]
+	\[
+	\boxed{F(-3,6)}
+	\]
+
+	\emph{Interpretación:} El foco está 4 unidades arriba del vértice.
+
+	\bigskip
+
+	\textbf{Paso 6: Determinar la directriz.}
+
+	Para una parábola vertical con vértice en \((h,k)\), la directriz es la recta \(y=k-p\):
+	\[
+	y=k-p=2-4=-2
+	\]
+	\[
+	\boxed{y=-2}
+	\]
+
+	\emph{Interpretación:} La directriz es una recta horizontal que está 4 unidades debajo del vértice.
+
+	\bigskip
+
+	\textbf{Paso 7: Identificar el eje de simetría.}
+
+	El eje de simetría es la recta vertical que pasa por el vértice:
+	\[
+	x=-3
+	\]
+
+	\bigskip
+
+	\textbf{Resumen de elementos:}
+	\begin{itemize}
+		\item Vértice: \(V(-3,2)\)
+		\item Foco: \(F(-3,6)\)
+		\item Directriz: \(y=-2\)
+		\item Eje de simetría: \(x=-3\)
+		\item Orientación: Abre hacia arriba
+		\item Parámetro: \(p=4\)
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 3: Parábola \((x+3)^2=16(y-2)\)}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.55]
+			% límites
+			\def\xmin{-12}\def\xmax{6}
+			\def\ymin{-4}\def\ymax{14}
+
+			% cuadrícula
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas numéricas en x
+			\foreach \x in {-12,-11,...,6}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.65]{\x};
+
+			% marcas numéricas en y
+			\foreach \y in {-4,-3,...,14}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.65]{\y};
+
+			% parábola (x+3)^2 = 16(y-2) => y = (x+3)^2/16 + 2
+			\draw[thick,red,domain=-11:5,samples=100] plot (\x,{(\x+3)*(\x+3)/16+2});
+
+			% vértice
+			\filldraw[black] (-3,2) circle (3.5pt) node[blue,scale=1] at (-1.8,1.3) {$V(-3,2)$};
+			%\node[blue,scale=1] at (-2,1.2) {$V(-3,2)$};
+
+			% foco
+			\filldraw[blue] (-3,6) circle (3.5pt) node[blue,scale=1] at (-4.7,6) {$F(-3,6)$};
+			%node[right=3pt,scale=1] {$F(-3,6)$};
+
+			% directriz
+			\draw[dashed,blue,very thick] (\xmin,-2)--(\xmax,-2);
+			\node[blue,scale=1] at (-9,-2.7) {Directriz: $y=-2$};
+
+			% eje de simetría (línea punteada vertical)
+			\draw[dotted,thick,green!40!black] (-3,\ymin)--(-3,\ymax);
+			\node[green!40!black,scale=0.9,rotate=90] at (-2.2,11) {Eje: $x=-3$};
+
+			% etiqueta de la parábola
+			\node[red,scale=1] at (-5,8) {$(x+3)^2=16(y-2)$};
+
+			% algunos puntos de la parábola para ilustrar
+			\filldraw[red] (1,3) circle (2pt);
+			\filldraw[red] (-7,3) circle (2pt);
+			\node[red,scale=0.8] at (1.8,2.5) {$(1,3)$};
+			\node[red,scale=0.8] at (-7.8,2.5) {$(-7,3)$};
+
+			% distancia del vértice al foco
+			\draw[<->,orange,very thick] (-2.4,2)--(-2.4,6);
+			\node[orange,scale=0.9] at (-4,4) {$p=4$};
+
+			% distancia del vértice a la directriz
+			\draw[<->,purple,very thick] (-3.6,2)--(-3.6,-2);
+			\node[purple,scale=0.9] at (-4.5,.5) {$p=4$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+
+	\textbf{Observación:} Nota que el vértice está desplazado del origen: 3 unidades a la izquierda (porque \(h=-3\)) y 2 unidades hacia arriba (porque \(k=2\)). La distancia del vértice al foco es igual a la distancia del vértice a la directriz, ambas iguales a \(p=4\).
+	
+	\vspace{3mm}
+
+	%\newpage
+
+	\subsection*{Solución del Ejercicio 4}
+
+	\textbf{Enunciado:} Encuentra el vértice y el foco de la parábola \(y^2+6y-4x+1=0\) (pista: completa el cuadrado).
+
+	\bigskip
+
+	\textbf{Solución paso a paso:}
+
+	\bigskip
+
+	\textbf{Paso 1: Identificar el tipo de parábola.}
+
+	La ecuación tiene el término \(y^2\) (la variable \(y\) está al cuadrado), por lo que es una \textcolor{blue}{\textbf{parábola horizontal}}.
+
+	\bigskip
+
+	\textbf{Paso 2: Reorganizar la ecuación.}
+
+	Agrupamos los términos que contienen \(y\) en un lado y los demás en el otro:
+	\[
+	y^2+6y-4x+1=0
+	\]
+	\[
+	y^2+6y=4x-1
+	\]
+
+	\textbf{Paso 3: Completar el cuadrado en \(y\).}
+
+	Para completar el cuadrado, tomamos el coeficiente de \(y\) (que es 6), lo dividimos entre 2 y lo elevamos al cuadrado:
+	\[
+	\left(\frac{6}{2}\right)^2=3^2=9
+	\]
+
+	Sumamos 9 a ambos lados de la ecuación:
+	\[
+	y^2+6y+9=4x-1+9
+	\]
+	\[
+	y^2+6y+9=4x+8
+	\]
+
+	\textbf{Paso 4: Factorizar el lado izquierdo.}
+
+	El lado izquierdo es un trinomio cuadrado perfecto:
+	\[
+	(y+3)^2=4x+8
+	\]
+
+	\textbf{Paso 5: Factorizar el lado derecho.}
+
+	Factorizamos el 4 en el lado derecho:
+	\[
+	(y+3)^2=4(x+2)
+	\]
+
+	Reescribimos para que coincida con la forma estándar:
+	\[
+	(y-(-3))^2=4(x-(-2))
+	\]
+
+	\textbf{Paso 6: Comparar con la forma estándar.}
+
+	La forma estándar de una parábola horizontal con vértice en \((h,k)\) es:
+	\[
+	(y-k)^2=4p(x-h)
+	\]
+
+	Comparando con nuestra ecuación \((y-(-3))^2=4(x-(-2))\):
+	\[
+	\begin{aligned}
+		h &= -2 \\
+		k &= -3 \\
+		4p &= 4 \quad\Rightarrow\quad p=1
+	\end{aligned}
+	\]
+
+	Como \(\mathbf{p=1>0}\), la parábola \textcolor{blue}{\textbf{abre hacia la derecha}}.
+
+	\bigskip
+
+	\textbf{Paso 7: Determinar el vértice.}
+
+	El vértice está en el punto \((h,k)\):
+	\[
+	\boxed{V(-2,-3)}
+	\]
+
+	\textbf{Paso 8: Calcular el foco.}
+
+	Para una parábola horizontal con vértice en \((h,k)\), el foco está en \((h+p,k)\):
+	\[
+	F(h+p,k)=F(-2+1,-3)=F(-1,-3)
+	\]
+	\[
+	\boxed{F(-1,-3)}
+	\]
+
+	\emph{Interpretación:} El foco está 1 unidad a la derecha del vértice.
+
+	\bigskip
+
+	\textbf{Paso 9: Determinar la directriz.}
+
+	Para una parábola horizontal con vértice en \((h,k)\), la directriz es la recta \(x=h-p\):
+	\[
+	x=h-p=-2-1=-3
+	\]
+	\[
+	\boxed{x=-3}
+	\]
+
+	\emph{Interpretación:} La directriz es una recta vertical que está 1 unidad a la izquierda del vértice.
+
+	\bigskip
+
+	\textbf{Paso 10: Identificar el eje de simetría.}
+
+	El eje de simetría es la recta horizontal que pasa por el vértice:
+	\[
+	y=-3
+	\]
+
+	\bigskip
+
+	\textbf{Resumen de elementos:}
+	\begin{itemize}
+		\item Ecuación en forma estándar: \((y+3)^2=4(x+2)\)
+		\item Vértice: \(V(-2,-3)\)
+		\item Foco: \(F(-1,-3)\)
+		\item Directriz: \(x=-3\)
+		\item Eje de simetría: \(y=-3\)
+		\item Orientación: Abre hacia la derecha
+		\item Parámetro: \(p=1\)
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 4: Parábola \(y^2+6y-4x+1=0\)}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			% límites
+			\def\xmin{-5}\def\xmax{8}
+			\def\ymin{-9}\def\ymax{3}
+
+			% cuadrícula
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas numéricas en x
+			\foreach \x in {-5,-4,...,8}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.7]{\x};
+
+			% marcas numéricas en y
+			\foreach \y in {-9,-8,...,3}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.7]{\y};
+
+			% parábola (y+3)^2 = 4(x+2) => x = (y+3)^2/4 - 2
+			\draw[thick,red,domain=-9:3,samples=100] plot ({(\x+3)*(\x+3)/4-2},\x);
+
+			% vértice
+			\filldraw[black] (-2,-3) circle (3.5pt) node[below left=2pt,scale=1] {$V(-2,-3)$};
+
+			% foco
+			\filldraw[blue] (-1,-3) circle (3.5pt) node[above=3pt,scale=1] {$F(-1,-3)$};
+
+			% directriz
+			\draw[dashed,blue,very thick] (-3,\ymin)--(-3,\ymax);
+			\node[blue,scale=1] at (-3,2) {$x=-3$};
+
+			% eje de simetría (línea punteada horizontal)
+			\draw[dotted,thick,green!60!black] (\xmin,-3)--(\xmax,-3);
+			\node[green!60!black,scale=0.9] at (4.5,-3.6) {Eje de Simetría: $y=-3$};
+
+			% etiqueta de la parábola
+			\node[red,scale=1] at (4,-1) {$y^2+6y-4x+1=0$};
+			\node[red,scale=0.9] at (4,-1.7) {o bien $(y+3)^2=4(x+2)$};
+
+			% algunos puntos de la parábola para ilustrar
+			\filldraw[red] (-1,-1) circle (2pt);
+			\filldraw[red] (-1,-5) circle (2pt);
+			\node[red,scale=0.75] at (-0.3,-0.7) {$(-1,-1)$};
+			\node[red,scale=0.75] at (-0.3,-5.3) {$(-1,-5)$};
+
+			% distancia del vértice al foco
+			\draw[<->,orange,very thick] (-2,-2.4)--(-1,-2.4);
+			\node[orange,scale=0.9] at (-1.5,-1.7) {$p=1$};
+
+			% distancia del vértice a la directriz
+			\draw[<->,purple,very thick] (-2,-3.6)--(-3,-3.6);
+			\node[purple,scale=0.9] at (-2.5,-4.3) {$p=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+
+	\textbf{Proceso de completar el cuadrado resumido:}
+	\[
+	\begin{aligned}
+		y^2+6y-4x+1&=0 \\
+		y^2+6y&=4x-1 \\
+		y^2+6y+9&=4x-1+9 \quad\text{(sumamos 9)} \\
+		(y+3)^2&=4x+8 \\
+		(y+3)^2&=4(x+2) \quad\text{(forma estándar)}
+	\end{aligned}
+	\]
+
+	\newpage
+
+	\subsection*{Solución del Ejercicio 5}
+
+	\textbf{Enunciado:} Dibuja la gráfica de la parábola \(x^2=-4y\) e indica el vértice, foco y directriz.
+
+	\bigskip
+
+	\textbf{Solución paso a paso:}
+
+	\bigskip
+
+	\textbf{Paso 1: Identificar el tipo de parábola.}
+
+	La ecuación es \(x^2=-4y\). Como la variable \(x\) está elevada al cuadrado, se trata de una \textcolor{red}{\textbf{parábola vertical}}.
+
+	\bigskip
+
+	\textbf{Paso 2: Comparar con la forma estándar.}
+
+	La forma estándar de una parábola vertical con vértice en el origen es:
+	\[
+	x^2=4py
+	\]
+
+	Comparamos nuestra ecuación:
+	\[
+	x^2=-4y \quad\Leftrightarrow\quad x^2=4py
+	\]
+
+	Por lo tanto:
+	\[
+	4p=-4
+	\]
+
+	\textbf{Paso 3: Calcular el valor de \(p\).}
+
+	Despejamos \(p\):
+	\[
+	4p=-4 \quad\Rightarrow\quad p=\frac{-4}{4}=-1
+	\]
+
+	Como \(\mathbf{p=-1<0}\), la parábola \textcolor{red}{\textbf{abre hacia abajo}}.
+
+	\bigskip
+
+	\textbf{Paso 4: Determinar el vértice.}
+
+	Como la ecuación es de la forma \(x^2=4py\) (sin desplazamiento), el vértice está en el origen:
+	\[
+	\boxed{V(0,0)}
+	\]
+
+	\textbf{Paso 5: Calcular el foco.}
+
+	Para una parábola vertical con vértice en \((0,0)\), el foco está en \((0,p)\):
+	\[
+	F(0,p)=F(0,-1)
+	\]
+	\[
+	\boxed{F(0,-1)}
+	\]
+
+	\emph{Interpretación:} El foco está 1 unidad debajo del vértice, sobre el eje \(y\).
+
+	\bigskip
+
+	\textbf{Paso 6: Determinar la directriz.}
+
+	Para una parábola vertical con vértice en \((0,0)\), la directriz es la recta \(y=-p\):
+	\[
+	y=-p=-(-1)=1
+	\]
+	\[
+	\boxed{y=1}
+	\]
+
+	\emph{Interpretación:} La directriz es una recta horizontal que está 1 unidad arriba del vértice.
+
+	\bigskip
+
+	\textbf{Paso 7: Identificar el eje de simetría.}
+
+	El eje de simetría es la recta vertical que pasa por el vértice:
+	\[
+	x=0 \quad\text{(el eje \(y\))}
+	\]
+
+	\bigskip
+
+	\textbf{Paso 8: Calcular algunos puntos de la parábola.}
+
+	Para dibujar la parábola, calculamos algunos puntos. De la ecuación \(x^2=-4y\), despejamos \(y\):
+	\[
+	y=-\frac{x^2}{4}
+	\]
+
+	Algunos puntos:
+	\begin{itemize}
+		\item Si \(x=0\): \(y=-\frac{0^2}{4}=0\) \(\Rightarrow\) Punto \((0,0)\)
+		\item Si \(x=2\): \(y=-\frac{2^2}{4}=-1\) \(\Rightarrow\) Punto \((2,-1)\)
+		\item Si \(x=-2\): \(y=-\frac{(-2)^2}{4}=-1\) \(\Rightarrow\) Punto \((-2,-1)\)
+		\item Si \(x=4\): \(y=-\frac{4^2}{4}=-4\) \(\Rightarrow\) Punto \((4,-4)\)
+		\item Si \(x=-4\): \(y=-\frac{(-4)^2}{4}=-4\) \(\Rightarrow\) Punto \((-4,-4)\)
+		\item Si \(x=6\): \(y=-\frac{6^2}{4}=-9\) \(\Rightarrow\) Punto \((6,-9)\)
+		\item Si \(x=-6\): \(y=-\frac{(-6)^2}{4}=-9\) \(\Rightarrow\) Punto \((-6,-9)\)
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Resumen de elementos:}
+	\begin{itemize}
+		\item Vértice: \(V(0,0)\)
+		\item Foco: \(F(0,-1)\)
+		\item Directriz: \(y=1\)
+		\item Eje de simetría: \(x=0\)
+		\item Orientación: Abre hacia abajo
+		\item Parámetro: \(p=-1\)
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 5: Parábola \(x^2=-4y\)}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			% límites
+			\def\xmin{-8}\def\xmax{8}
+			\def\ymin{-10}\def\ymax{3}
+
+			% cuadrícula
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas numéricas en x
+			\foreach \x in {-8,-7,...,8}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.7]{\x};
+
+			% marcas numéricas en y
+			\foreach \y in {-10,-9,...,3}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.7]{\y};
+
+			% parábola x^2 = -4y => y = -x^2/4
+			\draw[thick,red,domain=-8:8,samples=100] plot (\x,{-\x*\x/4});
+
+			% vértice
+			\filldraw[black] (0,0) circle (3.5pt) node[above right=2pt,scale=1] {$V(0,0)$};
+
+			% foco
+			\filldraw[blue] (0,-1) circle (3.5pt) node[right=3pt,scale=1] {$F(0,-1)$};
+
+			% directriz
+			\draw[dashed,blue,very thick] (\xmin,1)--(\xmax,1);
+			\node[blue,scale=1] at (-6,1.6) {Directriz: $y=1$};
+
+			% eje de simetría (línea punteada vertical)
+			\draw[dotted,thick,green!60!black] (0,\ymin)--(0,\ymax);
+			\node[green!60!black,scale=0.9,rotate=90] at (0.7,-7) {Eje de simetría};
+
+			% etiqueta de la parábola
+			\node[red,scale=1.1] at (5,-2) {$x^2=-4y$};
+
+			% puntos calculados
+			\filldraw[red] (2,-1) circle (2.5pt);
+			\filldraw[red] (-2,-1) circle (2.5pt);
+			\filldraw[red] (4,-4) circle (2.5pt);
+			\filldraw[red] (-4,-4) circle (2.5pt);
+			\filldraw[red] (6,-9) circle (2.5pt);
+			\filldraw[red] (-6,-9) circle (2.5pt);
+
+			% etiquetas de puntos
+			\node[red,scale=0.75] at (2.7,-0.5) {$(2,-1)$};
+			\node[red,scale=0.75] at (-2.7,-0.5) {$(-2,-1)$};
+			\node[red,scale=0.75] at (4.7,-3.5) {$(4,-4)$};
+			\node[red,scale=0.75] at (-4.7,-3.5) {$(-4,-4)$};
+			\node[red,scale=0.75] at (6.7,-8.5) {$(6,-9)$};
+			\node[red,scale=0.75] at (-6.7,-8.5) {$(-6,-9)$};
+
+			% distancia del vértice al foco
+			\draw[<->,orange,very thick] (0.6,0)--(0.6,-1);
+			\node[orange,scale=0.9] at (1.8,-0.5) {$|p|=1$};
+
+			% distancia del vértice a la directriz
+			\draw[<->,purple,very thick] (-0.6,0)--(-0.6,1);
+			\node[purple,scale=0.9] at (-1.8,0.5) {$|p|=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+
+	\textbf{Tabla de puntos de la parábola:}
+
+	\begin{center}
+		\begin{tabular}{|c|c|}
+			\hline
+			\(x\) & \(y=-\dfrac{x^2}{4}\) \\
+			\hline
+			\(-6\) & \(-9\) \\
+			\hline
+			\(-4\) & \(-4\) \\
+			\hline
+			\(-2\) & \(-1\) \\
+			\hline
+			\(0\) & \(0\) \\
+			\hline
+			\(2\) & \(-1\) \\
+			\hline
+			\(4\) & \(-4\) \\
+			\hline
+			\(6\) & \(-9\) \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	\bigskip
+
+	\textbf{Observación importante:} Como la parábola abre hacia abajo, el vértice \(V(0,0)\) es el \textbf{punto más alto} de la curva. El foco \(F(0,-1)\) está dentro de la parábola (debajo del vértice), y la directriz \(y=1\) está fuera de la parábola (arriba del vértice). Todos los puntos de la parábola están a la misma distancia del foco que de la directriz.
+
+	\newpage
+
+	\section{Ejercicios: De elementos a ecuación}
+
+	En estos ejercicios te doy algunos elementos de la parábola y tú debes \textbf{encontrar los elementos faltantes} y luego \textbf{escribir la ecuación de la parábola}.
+
+	\bigskip
+
+	\textbf{Ejercicio 6.} Se tiene una parábola con vértice en \(V(0,0)\) y foco en \(F(0,5)\).
+	\begin{itemize}
+		\item[(a)] ¿La parábola es vertical u horizontal?
+		\item[(b)] ¿Hacia dónde abre la parábola?
+		\item[(c)] Encuentra el valor de \(p\).
+		\item[(d)] Encuentra la directriz.
+		\item[(e)] Escribe la ecuación de la parábola.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 7.} Se tiene una parábola con vértice en \(V(0,0)\) y directriz \(x=3\).
+	\begin{itemize}
+		\item[(a)] ¿La parábola es vertical u horizontal?
+		\item[(b)] ¿Hacia dónde abre la parábola?
+		\item[(c)] Encuentra el valor de \(p\).
+		\item[(d)] Encuentra el foco.
+		\item[(e)] Escribe la ecuación de la parábola.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 8.} Se tiene una parábola con vértice en \(V(2,-3)\), foco en \(F(2,1)\).
+	\begin{itemize}
+		\item[(a)] ¿La parábola es vertical u horizontal?
+		\item[(b)] ¿Hacia dónde abre la parábola?
+		\item[(c)] Encuentra el valor de \(p\).
+		\item[(d)] Encuentra la directriz.
+		\item[(e)] Escribe la ecuación de la parábola.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 9.} Se tiene una parábola con vértice en \(V(-1,4)\) y directriz \(y=6\).
+	\begin{itemize}
+		\item[(a)] ¿La parábola es vertical u horizontal?
+		\item[(b)] ¿Hacia dónde abre la parábola?
+		\item[(c)] Encuentra el valor de \(p\).
+		\item[(d)] Encuentra el foco.
+		\item[(e)] Escribe la ecuación de la parábola.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 10.} Se tiene una parábola con vértice en \(V(3,2)\), que pasa por el punto \(P(7,4)\) y abre hacia la derecha.
+	\begin{itemize}
+		\item[(a)] ¿La parábola es vertical u horizontal?
+		\item[(b)] Usa el punto \(P\) para encontrar el valor de \(p\).
+		\item[(c)] Encuentra el foco.
+		\item[(d)] Encuentra la directriz.
+		\item[(e)] Escribe la ecuación de la parábola.
+	\end{itemize}
+
+	\newpage
+
+	\section{Soluciones: De elementos a ecuación}
+
+	\subsection*{Solución del Ejercicio 6}
+
+	\textbf{Datos:} Vértice \(V(0,0)\) y foco \(F(0,5)\).
+
+	\bigskip
+
+	\textbf{(a) ¿La parábola es vertical u horizontal?}
+
+	Observamos que el vértice y el foco tienen la misma coordenada \(x\) (ambos tienen \(x=0\)), pero diferente coordenada \(y\) (\(y=0\) para el vértice y \(y=5\) para el foco). Esto significa que el foco está sobre el eje \(y\), por lo tanto:
+
+	\[
+	\boxed{\text{La parábola es \textbf{vertical}}}
+	\]
+
+	\textbf{(b) ¿Hacia dónde abre la parábola?}
+
+	Como el foco \(F(0,5)\) está \emph{arriba} del vértice \(V(0,0)\) (porque \(5>0\)):
+
+	\[
+	\boxed{\text{La parábola abre \textbf{hacia arriba}}}
+	\]
+
+	\textbf{(c) Encuentra el valor de \(p\).}
+
+	El parámetro \(p\) es la distancia del vértice al foco:
+	\[
+	p = y_{\text{foco}} - y_{\text{vértice}} = 5-0=5
+	\]
+	\[
+	\boxed{p=5}
+	\]
+
+	\textbf{(d) Encuentra la directriz.}
+
+	Para una parábola vertical con vértice en el origen, la directriz es \(y=-p\):
+	\[
+	y=-p=-5
+	\]
+	\[
+	\boxed{\text{Directriz: } y=-5}
+	\]
+
+	\textbf{(e) Escribe la ecuación de la parábola.}
+
+	Para una parábola vertical con vértice en \((0,0)\), la ecuación es \(x^2=4py\):
+	\[
+	x^2=4py=4(5)y=20y
+	\]
+	\[
+	\boxed{x^2=20y}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 6}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.5]
+			\def\xmin{-12}\def\xmax{12}
+			\def\ymin{-7}\def\ymax{15}
+
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-12,-10,...,12}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.65]{\x};
+			\foreach \y in {-7,-5,...,15}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.65]{\y};
+
+			\draw[thick,red,domain=-12:12,samples=100] plot (\x,{\x*\x/20});
+
+			\filldraw[black] (0,0) circle (3.5pt) node[below right=2pt,scale=1] {$V(0,0)$};
+			\filldraw[blue] (0,5) circle (3.5pt) node[right=3pt,scale=1] {$F(0,5)$};
+			\draw[dashed,blue,very thick] (\xmin,-5)--(\xmax,-5);
+			\node[blue,scale=1] at (-9,-5.7) {Directriz: $y=-5$};
+
+			\draw[dotted,thick,green!60!black] (0,\ymin)--(0,\ymax);
+			\node[green!60!black,scale=0.9,rotate=90] at (0.8,12) {Eje de simetría};
+
+			\node[red,scale=1.1] at (8,8) {$x^2=20y$};
+
+			\draw[<->,orange,very thick] (0.7,0)--(0.7,5);
+			\node[orange,scale=0.9] at (2.5,2.5) {$p=5$};
+		\end{tikzpicture}
+	\end{center}
+
+	\newpage
+
+	\subsection*{Solución del Ejercicio 7}
+
+	\textbf{Datos:} Vértice \(V(0,0)\) y directriz \(x=3\).
+
+	\bigskip
+
+	\textbf{(a) ¿La parábola es vertical u horizontal?}
+
+	La directriz es una recta vertical (\(x=3\)). Para una parábola, la directriz es perpendicular al eje de simetría. Si la directriz es vertical, el eje de simetría es horizontal, por lo tanto:
+
+	\[
+	\boxed{\text{La parábola es \textbf{horizontal}}}
+	\]
+
+	\textbf{(b) ¿Hacia dónde abre la parábola?}
+
+	La directriz está a la \emph{derecha} del vértice (porque \(x=3>0\)). Como la parábola abre en dirección \emph{opuesta} a la directriz:
+
+	\[
+	\boxed{\text{La parábola abre \textbf{hacia la izquierda}}}
+	\]
+
+	\textbf{(c) Encuentra el valor de \(p\).}
+
+	Para una parábola horizontal con vértice en el origen, la directriz es \(x=-p\). En nuestro caso:
+	\[
+	x=-p=3 \quad\Rightarrow\quad -p=3 \quad\Rightarrow\quad p=-3
+	\]
+	\[
+	\boxed{p=-3}
+	\]
+
+	El signo negativo confirma que la parábola abre hacia la izquierda.
+
+	\textbf{(d) Encuentra el foco.}
+
+	Para una parábola horizontal con vértice en \((0,0)\), el foco está en \((p,0)\):
+	\[
+	F(p,0)=F(-3,0)
+	\]
+	\[
+	\boxed{\text{Foco: } F(-3,0)}
+	\]
+
+	\textbf{(e) Escribe la ecuación de la parábola.}
+
+	Para una parábola horizontal con vértice en \((0,0)\), la ecuación es \(y^2=4px\):
+	\[
+	y^2=4px=4(-3)x=-12x
+	\]
+	\[
+	\boxed{y^2=-12x}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 7}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.5]
+			\def\xmin{-14}\def\xmax{6}
+			\def\ymin{-12}\def\ymax{12}
+
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-14,-12,...,6}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.65]{\x};
+			\foreach \y in {-12,-10,...,12}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.65]{\y};
+
+			\draw[thick,red,domain=-12:12,samples=100] plot ({-\x*\x/12},\x);
+
+			\filldraw[black] (0,0) circle (3.5pt) node[above right=2pt,scale=1] {$V(0,0)$};
+			\filldraw[blue] (-3,0) circle (3.5pt) node[above=3pt,scale=1] {$F(-3,0)$};
+			\draw[dashed,blue,very thick] (3,\ymin)--(3,\ymax);
+			\node[blue,scale=1] at (3,10) {Directriz: $x=3$};
+
+			\draw[dotted,thick,green!60!black] (\xmin,0)--(\xmax,0);
+			\node[green!60!black,scale=0.9] at (-10,0.8) {Eje de simetría};
+
+			\node[red,scale=1.1] at (-9,6) {$y^2=-12x$};
+
+			\draw[<->,orange,very thick] (0,-0.8)--(-3,-0.8);
+			\node[orange,scale=0.9] at (-1.5,-2) {$|p|=3$};
+		\end{tikzpicture}
+	\end{center}
+
+	\newpage
+
+	\subsection*{Solución del Ejercicio 8}
+
+	\textbf{Datos:} Vértice \(V(2,-3)\) y foco \(F(2,1)\).
+
+	\bigskip
+
+	\textbf{(a) ¿La parábola es vertical u horizontal?}
+
+	El vértice y el foco tienen la misma coordenada \(x\) (ambos tienen \(x=2\)), pero diferente coordenada \(y\). El foco está sobre una recta vertical que pasa por el vértice, por lo tanto:
+
+	\[
+	\boxed{\text{La parábola es \textbf{vertical}}}
+	\]
+
+	\textbf{(b) ¿Hacia dónde abre la parábola?}
+
+	Como el foco \(F(2,1)\) está \emph{arriba} del vértice \(V(2,-3)\) (porque \(1>-3\)):
+
+	\[
+	\boxed{\text{La parábola abre \textbf{hacia arriba}}}
+	\]
+
+	\textbf{(c) Encuentra el valor de \(p\).}
+
+	El parámetro \(p\) es la distancia del vértice al foco:
+	\[
+	p = y_{\text{foco}} - y_{\text{vértice}} = 1-(-3)=1+3=4
+	\]
+	\[
+	\boxed{p=4}
+	\]
+
+	\textbf{(d) Encuentra la directriz.}
+
+	Para una parábola vertical con vértice en \((h,k)\), la directriz es \(y=k-p\):
+	\[
+	y=k-p=-3-4=-7
+	\]
+	\[
+	\boxed{\text{Directriz: } y=-7}
+	\]
+
+	\textbf{(e) Escribe la ecuación de la parábola.}
+
+	Para una parábola vertical con vértice en \((h,k)=(2,-3)\), la ecuación es \((x-h)^2=4p(y-k)\):
+	\[
+	(x-2)^2=4p(y-k)=4(4)(y-(-3))=16(y+3)
+	\]
+	\[
+	\boxed{(x-2)^2=16(y+3)}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 8}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.5]
+			\def\xmin{-6}\def\xmax{10}
+			\def\ymin{-9}\def\ymax{8}
+
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-6,-5,...,10}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.65]{\x};
+			\foreach \y in {-9,-8,...,8}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.65]{\y};
+
+			\draw[thick,red,domain=-4:8,samples=100] plot (\x,{(\x-2)*(\x-2)/16-3});
+
+			\filldraw[black] (2,-3) circle (3.5pt) node[right=3pt,scale=1] {$V(2,-3)$};
+			\filldraw[blue] (2,1) circle (3.5pt) node[right=3pt,scale=1] {$F(2,1)$};
+			\draw[dashed,blue,very thick] (\xmin,-7)--(\xmax,-7);
+			\node[blue,scale=1] at (-4,-7.7) {Directriz: $y=-7$};
+
+			\draw[dotted,thick,green!60!black] (2,\ymin)--(2,\ymax);
+			\node[green!60!black,scale=0.9,rotate=90] at (2.8,6) {Eje: $x=2$};
+
+			\node[red,scale=1] at (6,3) {$(x-2)^2=16(y+3)$};
+
+			\draw[<->,orange,very thick] (1.3,-3)--(1.3,1);
+			\node[orange,scale=0.9] at (-0.5,-1) {$p=4$};
+		\end{tikzpicture}
+	\end{center}
+
+	\newpage
+
+	\subsection*{Solución del Ejercicio 9}
+
+	\textbf{Datos:} Vértice \(V(-1,4)\) y directriz \(y=6\).
+
+	\bigskip
+
+	\textbf{(a) ¿La parábola es vertical u horizontal?}
+
+	La directriz es una recta horizontal (\(y=6\)). Si la directriz es horizontal, el eje de simetría es vertical, por lo tanto:
+
+	\[
+	\boxed{\text{La parábola es \textbf{vertical}}}
+	\]
+
+	\textbf{(b) ¿Hacia dónde abre la parábola?}
+
+	El vértice está en \(V(-1,4)\), con \(y=4\). La directriz está en \(y=6\), es decir, \emph{arriba} del vértice (porque \(6>4\)). Como la parábola abre en dirección \emph{opuesta} a la directriz:
+
+	\[
+	\boxed{\text{La parábola abre \textbf{hacia abajo}}}
+	\]
+
+	\textbf{(c) Encuentra el valor de \(p\).}
+
+	Para una parábola vertical con vértice en \((h,k)\), la directriz es \(y=k-p\). En nuestro caso:
+	\[
+	y=k-p \quad\Rightarrow\quad 6=4-p \quad\Rightarrow\quad -p=6-4=2 \quad\Rightarrow\quad p=-2
+	\]
+	\[
+	\boxed{p=-2}
+	\]
+
+	El signo negativo confirma que la parábola abre hacia abajo.
+
+	\textbf{(d) Encuentra el foco.}
+
+	Para una parábola vertical con vértice en \((h,k)\), el foco está en \((h,k+p)\):
+	\[
+	F(h,k+p)=F(-1,4+(-2))=F(-1,2)
+	\]
+	\[
+	\boxed{\text{Foco: } F(-1,2)}
+	\]
+
+	\textbf{(e) Escribe la ecuación de la parábola.}
+
+	Para una parábola vertical con vértice en \((h,k)=(-1,4)\), la ecuación es \((x-h)^2=4p(y-k)\):
+	\[
+	(x-(-1))^2=4p(y-4)=4(-2)(y-4)=-8(y-4)
+	\]
+	\[
+	\boxed{(x+1)^2=-8(y-4)}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 9}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.55]
+			\def\xmin{-8}\def\xmax{6}
+			\def\ymin{-4}\def\ymax{8}
+
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-8,-7,...,6}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.65]{\x};
+			\foreach \y in {-4,-3,...,8}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.65]{\y};
+
+			\draw[thick,red,domain=-7:5,samples=100] plot (\x,{-(\x+1)*(\x+1)/8+4});
+
+			\filldraw[black] (-1,4) circle (3.5pt) node[right=3pt,scale=1] {$V(-1,4)$};
+			\filldraw[blue] (-1,2) circle (3.5pt) node[right=3pt,scale=1] {$F(-1,2)$};
+			\draw[dashed,blue,very thick] (\xmin,6)--(\xmax,6);
+			\node[blue,scale=1] at (-6,6.7) {Directriz: $y=6$};
+
+			\draw[dotted,thick,green!60!black] (-1,\ymin)--(-1,\ymax);
+			\node[green!60!black,scale=0.9,rotate=90] at (-0.2,6.5) {Eje: $x=-1$};
+
+			\node[red,scale=1] at (3,1) {$(x+1)^2=-8(y-4)$};
+
+			\draw[<->,orange,very thick] (-0.3,4)--(-0.3,2);
+			\node[orange,scale=0.9] at (1.2,3) {$|p|=2$};
+
+			\draw[<->,purple,very thick] (-1.7,4)--(-1.7,6);
+			\node[purple,scale=0.9] at (-3.2,5) {$|p|=2$};
+		\end{tikzpicture}
+	\end{center}
+
+	\newpage
+
+	\subsection*{Solución del Ejercicio 10}
+
+	\textbf{Datos:} Vértice \(V(3,2)\), pasa por el punto \(P(7,4)\), y abre hacia la derecha.
+
+	\bigskip
+
+	\textbf{(a) ¿La parábola es vertical u horizontal?}
+
+	Nos dicen que la parábola abre \emph{hacia la derecha}, lo cual es una orientación horizontal:
+
+	\[
+	\boxed{\text{La parábola es \textbf{horizontal}}}
+	\]
+
+	\textbf{(b) Usa el punto \(P\) para encontrar el valor de \(p\).}
+
+	Para una parábola horizontal con vértice en \((h,k)=(3,2)\), la ecuación es:
+	\[
+	(y-k)^2=4p(x-h) \quad\Rightarrow\quad (y-2)^2=4p(x-3)
+	\]
+
+	Como el punto \(P(7,4)\) está en la parábola, debe satisfacer la ecuación. Sustituimos \(x=7\) y \(y=4\):
+	\[
+	(4-2)^2=4p(7-3)
+	\]
+	\[
+	2^2=4p(4)
+	\]
+	\[
+	4=16p
+	\]
+	\[
+	p=\frac{4}{16}=\frac{1}{4}
+	\]
+	\[
+	\boxed{p=\frac{1}{4}}
+	\]
+
+	Como \(p>0\), esto confirma que la parábola abre hacia la derecha.
+
+	\textbf{(c) Encuentra el foco.}
+
+	Para una parábola horizontal con vértice en \((h,k)\), el foco está en \((h+p,k)\):
+	\[
+	F(h+p,k)=F\left(3+\frac{1}{4},2\right)=F\left(\frac{13}{4},2\right)=F(3.25,2)
+	\]
+	\[
+	\boxed{\text{Foco: } F\left(\frac{13}{4},2\right) \text{ o } F(3.25,2)}
+	\]
+
+	\textbf{(d) Encuentra la directriz.}
+
+	Para una parábola horizontal con vértice en \((h,k)\), la directriz es \(x=h-p\):
+	\[
+	x=h-p=3-\frac{1}{4}=\frac{12}{4}-\frac{1}{4}=\frac{11}{4}=2.75
+	\]
+	\[
+	\boxed{\text{Directriz: } x=\frac{11}{4} \text{ o } x=2.75}
+	\]
+
+	\textbf{(e) Escribe la ecuación de la parábola.}
+
+	Para una parábola horizontal con vértice en \((h,k)=(3,2)\), la ecuación es \((y-k)^2=4p(x-h)\):
+	\[
+	(y-2)^2=4p(x-3)=4\left(\frac{1}{4}\right)(x-3)=(x-3)
+	\]
+	\[
+	\boxed{(y-2)^2=x-3}
+	\]
+
+	También podemos escribirla como: \((y-2)^2=1(x-3)\)
+
+	\subsection*{Gráfica del Ejercicio 10}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.7]
+			\def\xmin{1}\def\xmax{9}
+			\def\ymin{-2}\def\ymax{6}
+
+			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {1,2,...,9}
+			\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.7]{\x};
+			\foreach \y in {-2,-1,...,6}
+			\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.7]{\y};
+
+			\draw[thick,red,domain=-2:6,samples=100] plot ({(\x-2)*(\x-2)+3},\x);
+
+			\filldraw[black] (3,2) circle (3.5pt) node[below left=2pt,scale=1] {$V(3,2)$};
+			\filldraw[blue] (3.25,2) circle (3.5pt) node[above=3pt,scale=0.9] {$F(3.25,2)$};
+			\filldraw[red] (7,4) circle (3pt) node[above right=2pt,scale=1] {$P(7,4)$};
+
+			\draw[dashed,blue,very thick] (2.75,\ymin)--(2.75,\ymax);
+			\node[blue,scale=0.9,rotate=90] at (2.75,4.5) {Directriz: $x=2.75$};
+
+			\draw[dotted,thick,green!60!black] (\xmin,2)--(\xmax,2);
+			\node[green!60!black,scale=0.9] at (7,2.6) {Eje: $y=2$};
+
+			\node[red,scale=1] at (5.5,0) {$(y-2)^2=x-3$};
+
+			\draw[<->,orange,very thick] (3,1.4)--(3.25,1.4);
+			\node[orange,scale=0.8] at (3.1,0.8) {$p=\frac{1}{4}$};
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+
+	\textbf{Observación:} Este ejercicio es especial porque usamos un punto de la parábola para calcular \(p\). Sustituimos las coordenadas del punto en la ecuación general y resolvemos para \(p\).
+
+	\bigskip
+	\bigskip
+
+	\noindent
+	\textbf{Nota final:} Esta guía cubre los conceptos fundamentales de la parábola en geometría analítica. Recuerda que la clave para entender la parábola es identificar cuál variable está al cuadrado y el signo del parámetro \(p\). ¡Con práctica dominarás este tema, Sheyra!
+
+\end{document}
