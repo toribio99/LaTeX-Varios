@@ -10,6 +10,8 @@
 \geometry{margin=2.5cm}
 \usepackage{tikz}
 \usetikzlibrary{calc,arrows.meta}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage{xcolor}
 
 \title{\Large Guía de Geometría Analítica: La Hipérbola
@@ -208,56 +210,51 @@
 	\subsection*{Gráfica de la hipérbola $\displaystyle\frac{x^2}{16}-\frac{y^2}{9}=1$}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.65]
-			% límites
-			\def\xmin{-8}\def\xmax{8}
-			\def\ymin{-6}\def\ymax{6}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=12cm, height=9cm,
+				axis lines=middle,
+				xlabel={$x$}, ylabel={$y$},
+				xmin=-8, xmax=8,
+				ymin=-6, ymax=6,
+				xtick={-7,-6,...,7},
+				ytick={-5,-4,...,5},
+				grid=both,
+				grid style={line width=.1pt, draw=gray!30},
+				axis line style={-{Latex},thick},
+				tick label style={font=\tiny},
+				samples=100,
+				domain=-8:8,
+				restrict y to domain=-6:6,
+			]
 
-			% grid
-			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			% Hipérbola: rama derecha
+			\addplot[red, thick, domain=4:8] {3*sqrt(x^2/16-1)};
+			\addplot[red, thick, domain=4:8] {-3*sqrt(x^2/16-1)};
 
-			% ejes
-			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+			% Hipérbola: rama izquierda
+			\addplot[red, thick, domain=-8:-4] {3*sqrt(x^2/16-1)};
+			\addplot[red, thick, domain=-8:-4] {-3*sqrt(x^2/16-1)};
 
-			% marcas en los ejes
-			\foreach \x in {-7,-6,...,7}
-			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
-			\foreach \y in {-5,-4,...,5}
-			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+			% Asíntotas
+			\addplot[orange, dashed, thick, domain=-8:8] {0.75*x} node[pos=0.85, above right] {$y=\frac{3}{4}x$};
+			\addplot[orange, dashed, thick, domain=-8:8] {-0.75*x} node[pos=0.85, below right] {$y=-\frac{3}{4}x$};
 
-			% hipérbola rama derecha
-			\draw[thick,red,domain=4:8,samples=100] plot (\x,{3*sqrt(\x*\x/16-1)});
-			\draw[thick,red,domain=4:8,samples=100] plot (\x,{-3*sqrt(\x*\x/16-1)});
+			% Centro
+			\node[circle, fill=black, inner sep=2pt, label={below right:$C(0,0)$}] at (0,0) {};
 
-			% hipérbola rama izquierda
-			\draw[thick,red,domain=-8:-4,samples=100] plot (\x,{3*sqrt(\x*\x/16-1)});
-			\draw[thick,red,domain=-8:-4,samples=100] plot (\x,{-3*sqrt(\x*\x/16-1)});
+			% Focos
+			\node[circle, fill=blue, inner sep=2pt, label={above:$F_1(-5,0)$}] at (-5,0) {};
+			\node[circle, fill=blue, inner sep=2pt, label={above:$F_2(5,0)$}] at (5,0) {};
 
-			% centro
-			\filldraw[black] (0,0) circle (3pt) node[below right=3pt,scale=0.9] {$C(0,0)$};
+			% Vértices
+			\node[circle, fill=purple, inner sep=1.5pt, label={below:$V_1(-4,0)$}] at (-4,0) {};
+			\node[circle, fill=purple, inner sep=1.5pt, label={below:$V_2(4,0)$}] at (4,0) {};
 
-			% focos
-			\filldraw[blue] (-5,0) circle (3pt);
-			\filldraw[blue] (5,0) circle (3pt);
-			\node[blue,above=3pt,scale=0.9] at (-5,0) {$F_1(-5,0)$};
-			\node[blue,above=3pt,scale=0.9] at (5,0) {$F_2(5,0)$};
+			% Etiqueta de la ecuación
+			\node[red] at (0,5.5) {$\displaystyle\frac{x^2}{16}-\frac{y^2}{9}=1$};
 
-			% vértices
-			\filldraw[purple] (-4,0) circle (2.5pt);
-			\filldraw[purple] (4,0) circle (2.5pt);
-			\node[purple,below=2pt,scale=0.85] at (-4,-0.3) {$V_1(-4,0)$};
-			\node[purple,below=2pt,scale=0.85] at (4,-0.3) {$V_2(4,0)$};
-
-			% asíntotas
-			\draw[dashed,orange,thick] (-8,-6)--(8,6);
-			\draw[dashed,orange,thick] (-8,6)--(8,-6);
-			\node[orange,scale=0.8] at (6,5) {$y=\frac{3}{4}x$};
-			\node[orange,scale=0.8] at (6,-5) {$y=-\frac{3}{4}x$};
-
-			% etiqueta
-			\node[red,scale=1.1] at (0,5.5) {$\displaystyle\frac{x^2}{16}-\frac{y^2}{9}=1$};
-
+			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 
@@ -317,46 +314,49 @@
 	\subsection*{Gráfica de la hipérbola $\displaystyle\frac{y^2}{25}-\frac{x^2}{16}=1$}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.6]
-			\def\xmin{-7}\def\xmax{7}
-			\def\ymin{-9}\def\ymax{9}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=11cm, height=13cm,
+				axis lines=middle,
+				xlabel={$x$}, ylabel={$y$},
+				xmin=-7, xmax=7,
+				ymin=-9, ymax=9,
+				xtick={-6,-5,...,6},
+				ytick={-8,-7,...,8},
+				grid=both,
+				grid style={line width=.1pt, draw=gray!30},
+				axis line style={-{Latex},thick},
+				tick label style={font=\tiny},
+				samples=100,
+			]
 
-			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
-			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+			% Hipérbola: rama superior (y >= 5)
+			\addplot[red, thick, domain=5:9] ({4*sqrt(x^2/25-1)}, x);
+			\addplot[red, thick, domain=5:9] ({-4*sqrt(x^2/25-1)}, x);
 
-			\foreach \x in {-6,-5,...,6}
-			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
-			\foreach \y in {-8,-7,...,8}
-			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+			% Hipérbola: rama inferior (y <= -5)
+			\addplot[red, thick, domain=-9:-5] ({4*sqrt(x^2/25-1)}, x);
+			\addplot[red, thick, domain=-9:-5] ({-4*sqrt(x^2/25-1)}, x);
 
-			% hipérbola rama superior
-			\draw[thick,red,domain=5:9,samples=100] plot ({4*sqrt(\x*\x/25-1)},\x);
-			\draw[thick,red,domain=5:9,samples=100] plot ({-4*sqrt(\x*\x/25-1)},\x);
+			% Asíntotas
+			\addplot[orange, dashed, thick, domain=-7:7] {1.25*x} node[pos=0.8, above right] {$y=\frac{5}{4}x$};
+			\addplot[orange, dashed, thick, domain=-7:7] {-1.25*x} node[pos=0.8, below right] {$y=-\frac{5}{4}x$};
 
-			% hipérbola rama inferior
-			\draw[thick,red,domain=-9:-5,samples=100] plot ({4*sqrt(\x*\x/25-1)},\x);
-			\draw[thick,red,domain=-9:-5,samples=100] plot ({-4*sqrt(\x*\x/25-1)},\x);
+			% Centro
+			\node[circle, fill=black, inner sep=2pt, label={below right:$C(0,0)$}] at (0,0) {};
 
-			\filldraw[black] (0,0) circle (3pt) node[below right=3pt,scale=0.9] {$C(0,0)$};
+			% Focos
+			\node[circle, fill=blue, inner sep=2pt, label={right:$F_1(0,-\sqrt{41})$}] at (0,-6.4) {};
+			\node[circle, fill=blue, inner sep=2pt, label={right:$F_2(0,\sqrt{41})$}] at (0,6.4) {};
 
-			\filldraw[blue] (0,-6.4) circle (3pt);
-			\filldraw[blue] (0,6.4) circle (3pt);
-			\node[blue,right=3pt,scale=0.9] at (0,-6.4) {$F_1$};
-			\node[blue,right=3pt,scale=0.9] at (0,6.4) {$F_2$};
+			% Vértices
+			\node[circle, fill=purple, inner sep=1.5pt, label={right:$V_1(0,-5)$}] at (0,-5) {};
+			\node[circle, fill=purple, inner sep=1.5pt, label={right:$V_2(0,5)$}] at (0,5) {};
 
-			\filldraw[purple] (0,-5) circle (2.5pt);
-			\filldraw[purple] (0,5) circle (2.5pt);
-			\node[purple,right=2pt,scale=0.85] at (0,-5) {$V_1(0,-5)$};
-			\node[purple,right=2pt,scale=0.85] at (0,5) {$V_2(0,5)$};
+			% Etiqueta de la ecuación
+			\node[red] at (-3.5,8) {$\displaystyle\frac{y^2}{25}-\frac{x^2}{16}=1$};
 
-			% asíntotas
-			\draw[dashed,orange,thick] (-6,-7.5)--(6,7.5);
-			\draw[dashed,orange,thick] (-6,7.5)--(6,-7.5);
-			\node[orange,scale=0.8] at (4.5,6.5) {$y=\frac{5}{4}x$};
-
-			\node[red,scale=1] at (-3.5,8) {$\displaystyle\frac{y^2}{25}-\frac{x^2}{16}=1$};
-
+			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 
@@ -444,45 +444,49 @@
 	\subsection*{Gráfica de la hipérbola $\displaystyle\frac{(x-3)^2}{9}-\frac{(y+2)^2}{16}=1$}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.55]
-			\def\xmin{-4}\def\xmax{10}
-			\def\ymin{-9}\def\ymax{5}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=12cm, height=11cm,
+				axis lines=middle,
+				xlabel={$x$}, ylabel={$y$},
+				xmin=-4, xmax=10,
+				ymin=-9, ymax=5,
+				xtick={-3,-2,...,9},
+				ytick={-8,-7,...,4},
+				grid=both,
+				grid style={line width=.1pt, draw=gray!30},
+				axis line style={-{Latex},thick},
+				tick label style={font=\tiny},
+				samples=100,
+			]
 
-			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
-			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+			% Hipérbola: rama derecha
+			\addplot[red, thick, domain=6:10] {4*sqrt((x-3)^2/9-1)-2};
+			\addplot[red, thick, domain=6:10] {-4*sqrt((x-3)^2/9-1)-2};
 
-			\foreach \x in {-3,-2,...,9}
-			\draw (\x,0)--(\x,-0.15) node[below,scale=0.6]{\x};
-			\foreach \y in {-8,-7,...,4}
-			\draw (0,\y)--(0.15,\y) node[right,scale=0.6]{\y};
+			% Hipérbola: rama izquierda
+			\addplot[red, thick, domain=-4:0] {4*sqrt((x-3)^2/9-1)-2};
+			\addplot[red, thick, domain=-4:0] {-4*sqrt((x-3)^2/9-1)-2};
 
-			% hipérbola rama derecha
-			\draw[thick,red,domain=6:10,samples=100] plot (\x,{4*sqrt((\x-3)*(\x-3)/9-1)-2});
-			\draw[thick,red,domain=6:10,samples=100] plot (\x,{-4*sqrt((\x-3)*(\x-3)/9-1)-2});
+			% Asíntotas: y+2 = ±(4/3)(x-3)
+			\addplot[orange, dashed, thick, domain=-4:10] {(4/3)*(x-3)-2} node[pos=0.9, above] {\tiny Asíntotas};
+			\addplot[orange, dashed, thick, domain=-4:10] {-(4/3)*(x-3)-2};
 
-			% hipérbola rama izquierda
-			\draw[thick,red,domain=-4:0,samples=100] plot (\x,{4*sqrt((\x-3)*(\x-3)/9-1)-2});
-			\draw[thick,red,domain=-4:0,samples=100] plot (\x,{-4*sqrt((\x-3)*(\x-3)/9-1)-2});
+			% Centro
+			\node[circle, fill=black, inner sep=2pt, label={below:$C(3,-2)$}] at (3,-2) {};
 
-			\filldraw[black] (3,-2) circle (3pt) node[below=2pt,scale=0.85] {$C(3,-2)$};
+			% Focos
+			\node[circle, fill=blue, inner sep=2pt, label={above:$F_1(-2,-2)$}] at (-2,-2) {};
+			\node[circle, fill=blue, inner sep=2pt, label={above:$F_2(8,-2)$}] at (8,-2) {};
 
-			\filldraw[blue] (-2,-2) circle (3pt);
-			\filldraw[blue] (8,-2) circle (3pt);
-			\node[blue,above=2pt,scale=0.8] at (-2,-1.7) {$F_1$};
-			\node[blue,above=2pt,scale=0.8] at (8,-1.7) {$F_2$};
+			% Vértices
+			\node[circle, fill=purple, inner sep=1.5pt, label={below:$V_1(0,-2)$}] at (0,-2) {};
+			\node[circle, fill=purple, inner sep=1.5pt, label={below:$V_2(6,-2)$}] at (6,-2) {};
 
-			\filldraw[purple] (0,-2) circle (2.5pt);
-			\filldraw[purple] (6,-2) circle (2.5pt);
-			\node[purple,below=2pt,scale=0.75] at (0,-2.3) {$V_1$};
-			\node[purple,below=2pt,scale=0.75] at (6,-2.3) {$V_2$};
+			% Etiqueta de la ecuación
+			\node[red] at (5,3.5) {$\displaystyle\frac{(x-3)^2}{9}-\frac{(y+2)^2}{16}=1$};
 
-			% asíntotas
-			\draw[dashed,orange,thick] (-2,-5.33)--(9,6);
-			\draw[dashed,orange,thick] (-2,0.67)--(9,-10);
-
-			\node[red,scale=0.9] at (5,3.5) {$\displaystyle\frac{(x-3)^2}{9}-\frac{(y+2)^2}{16}=1$};
-
+			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 
@@ -714,41 +718,49 @@
 	\subsection*{Gráfica del Ejercicio 1}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.55]
-			\def\xmin{-9}\def\xmax{9}
-			\def\ymin{-6}\def\ymax{6}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=12cm, height=9cm,
+				axis lines=middle,
+				xlabel={$x$}, ylabel={$y$},
+				xmin=-9, xmax=9,
+				ymin=-6, ymax=6,
+				xtick={-8,-7,...,8},
+				ytick={-5,-4,...,5},
+				grid=both,
+				grid style={line width=.1pt, draw=gray!30},
+				axis line style={-{Latex},thick},
+				tick label style={font=\tiny},
+				samples=100,
+			]
 
-			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
-			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+			% Hipérbola: rama derecha
+			\addplot[red, thick, domain=5:9] {3*sqrt(x^2/25-1)};
+			\addplot[red, thick, domain=5:9] {-3*sqrt(x^2/25-1)};
 
-			\foreach \x in {-8,-7,...,8}
-			\draw (\x,0)--(\x,-0.15) node[below,scale=0.6]{\x};
-			\foreach \y in {-5,-4,...,5}
-			\draw (0,\y)--(0.15,\y) node[right,scale=0.6]{\y};
+			% Hipérbola: rama izquierda
+			\addplot[red, thick, domain=-9:-5] {3*sqrt(x^2/25-1)};
+			\addplot[red, thick, domain=-9:-5] {-3*sqrt(x^2/25-1)};
 
-			% hipérbola
-			\draw[thick,red,domain=5:9,samples=100] plot (\x,{3*sqrt(\x*\x/25-1)});
-			\draw[thick,red,domain=5:9,samples=100] plot (\x,{-3*sqrt(\x*\x/25-1)});
-			\draw[thick,red,domain=-9:-5,samples=100] plot (\x,{3*sqrt(\x*\x/25-1)});
-			\draw[thick,red,domain=-9:-5,samples=100] plot (\x,{-3*sqrt(\x*\x/25-1)});
+			% Asíntotas: y = ±(3/5)x
+			\addplot[orange, dashed, thick, domain=-9:9] {0.6*x} node[pos=0.85, above right] {$y=\frac{3}{5}x$};
+			\addplot[orange, dashed, thick, domain=-9:9] {-0.6*x} node[pos=0.85, below right] {$y=-\frac{3}{5}x$};
 
-			\filldraw[black] (0,0) circle (3.5pt) node[below right=3pt,scale=1] {$C(0,0)$};
+			% Centro
+			\node[circle, fill=black, inner sep=2.5pt, label={below right:$C(0,0)$}] at (0,0) {};
 
-			\filldraw[blue] (-5.83,0) circle (3pt);
-			\filldraw[blue] (5.83,0) circle (3pt);
-			\node[blue,above=3pt,scale=0.85] at (-5.83,0) {$F_1$};
-			\node[blue,above=3pt,scale=0.85] at (5.83,0) {$F_2$};
+			% Focos: c=√34≈5.83
+			\node[circle, fill=blue, inner sep=2pt, label={above:$F_1(-\sqrt{34},0)$}] at (-5.83,0) {};
+			\node[circle, fill=blue, inner sep=2pt, label={above:$F_2(\sqrt{34},0)$}] at (5.83,0) {};
 
-			\filldraw[purple] (-5,0) circle (2.5pt);
-			\filldraw[purple] (5,0) circle (2.5pt);
+			% Vértices
+			\node[circle, fill=purple, inner sep=1.5pt, label={below:$V_1(-5,0)$}] at (-5,0) {};
+			\node[circle, fill=purple, inner sep=1.5pt, label={below:$V_2(5,0)$}] at (5,0) {};
 
-			% asíntotas
-			\draw[dashed,orange,thick] (-8,-4.8)--(8,4.8);
-			\draw[dashed,orange,thick] (-8,4.8)--(8,-4.8);
+			% Etiqueta de la ecuación
+			\node[red] at (0,5.5) {$\displaystyle\frac{x^2}{25}-\frac{y^2}{9}=1$};
 
-			\node[red,scale=1] at (0,5.5) {$\displaystyle\frac{x^2}{25}-\frac{y^2}{9}=1$};
-
+			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 
@@ -782,41 +794,49 @@
 	\subsection*{Gráfica del Ejercicio 2}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.45]
-			\def\xmin{-10}\def\xmax{10}
-			\def\ymin{-12}\def\ymax{12}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=11cm, height=14cm,
+				axis lines=middle,
+				xlabel={$x$}, ylabel={$y$},
+				xmin=-10, xmax=10,
+				ymin=-12, ymax=12,
+				xtick={-9,-8,...,9},
+				ytick={-11,-10,...,11},
+				grid=both,
+				grid style={line width=.1pt, draw=gray!30},
+				axis line style={-{Latex},thick},
+				tick label style={font=\tiny},
+				samples=100,
+			]
 
-			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
-			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+			% Hipérbola: rama superior
+			\addplot[red, thick, domain=6:12] ({8*sqrt(x^2/36-1)}, x);
+			\addplot[red, thick, domain=6:12] ({-8*sqrt(x^2/36-1)}, x);
 
-			\foreach \x in {-9,-8,...,9}
-			\draw (\x,0)--(\x,-0.15) node[below,scale=0.6]{\x};
-			\foreach \y in {-11,-10,...,11}
-			\draw (0,\y)--(0.15,\y) node[right,scale=0.6]{\y};
+			% Hipérbola: rama inferior
+			\addplot[red, thick, domain=-12:-6] ({8*sqrt(x^2/36-1)}, x);
+			\addplot[red, thick, domain=-12:-6] ({-8*sqrt(x^2/36-1)}, x);
 
-			% hipérbola
-			\draw[thick,red,domain=6:12,samples=100] plot ({8*sqrt(\x*\x/36-1)},\x);
-			\draw[thick,red,domain=6:12,samples=100] plot ({-8*sqrt(\x*\x/36-1)},\x);
-			\draw[thick,red,domain=-12:-6,samples=100] plot ({8*sqrt(\x*\x/36-1)},\x);
-			\draw[thick,red,domain=-12:-6,samples=100] plot ({-8*sqrt(\x*\x/36-1)},\x);
+			% Asíntotas: y = ±(3/4)x
+			\addplot[orange, dashed, thick, domain=-10:10] {0.75*x} node[pos=0.8, above right] {$y=\frac{3}{4}x$};
+			\addplot[orange, dashed, thick, domain=-10:10] {-0.75*x} node[pos=0.8, below right] {$y=-\frac{3}{4}x$};
 
-			\filldraw[black] (0,0) circle (3.5pt) node[below right=3pt,scale=1] {$C(0,0)$};
+			% Centro
+			\node[circle, fill=black, inner sep=2.5pt, label={below right:$C(0,0)$}] at (0,0) {};
 
-			\filldraw[blue] (0,-10) circle (3pt);
-			\filldraw[blue] (0,10) circle (3pt);
-			\node[blue,right=3pt,scale=0.85] at (0,-10) {$F_1$};
-			\node[blue,right=3pt,scale=0.85] at (0,10) {$F_2$};
+			% Focos: c=10
+			\node[circle, fill=blue, inner sep=2pt, label={right:$F_1(0,-10)$}] at (0,-10) {};
+			\node[circle, fill=blue, inner sep=2pt, label={right:$F_2(0,10)$}] at (0,10) {};
 
-			\filldraw[purple] (0,-6) circle (2.5pt);
-			\filldraw[purple] (0,6) circle (2.5pt);
+			% Vértices
+			\node[circle, fill=purple, inner sep=1.5pt, label={right:$V_1(0,-6)$}] at (0,-6) {};
+			\node[circle, fill=purple, inner sep=1.5pt, label={right:$V_2(0,6)$}] at (0,6) {};
 
-			% asíntotas
-			\draw[dashed,orange,thick] (-9,-6.75)--(9,6.75);
-			\draw[dashed,orange,thick] (-9,6.75)--(9,-6.75);
+			% Etiqueta de la ecuación
+			\node[red] at (-5,11) {$\displaystyle\frac{y^2}{36}-\frac{x^2}{64}=1$};
 
-			\node[red,scale=0.9] at (-5,11) {$\displaystyle\frac{y^2}{36}-\frac{x^2}{64}=1$};
-
+			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 
@@ -866,41 +886,49 @@
 	\subsection*{Gráfica del Ejercicio 3}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.5]
-			\def\xmin{-5}\def\xmax{9}
-			\def\ymin{-7}\def\ymax{5}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=11cm, height=10cm,
+				axis lines=middle,
+				xlabel={$x$}, ylabel={$y$},
+				xmin=-5, xmax=9,
+				ymin=-7, ymax=5,
+				xtick={-4,-3,...,8},
+				ytick={-6,-5,...,4},
+				grid=both,
+				grid style={line width=.1pt, draw=gray!30},
+				axis line style={-{Latex},thick},
+				tick label style={font=\tiny},
+				samples=100,
+			]
 
-			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
-			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+			% Hipérbola: rama derecha
+			\addplot[red, thick, domain=6:9] {3*sqrt((x-2)^2/16-1)-1};
+			\addplot[red, thick, domain=6:9] {-3*sqrt((x-2)^2/16-1)-1};
 
-			\foreach \x in {-4,-3,...,8}
-			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
-			\foreach \y in {-6,-5,...,4}
-			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+			% Hipérbola: rama izquierda
+			\addplot[red, thick, domain=-5:-2] {3*sqrt((x-2)^2/16-1)-1};
+			\addplot[red, thick, domain=-5:-2] {-3*sqrt((x-2)^2/16-1)-1};
 
-			% hipérbola
-			\draw[thick,red,domain=6:9,samples=100] plot (\x,{3*sqrt((\x-2)*(\x-2)/16-1)-1});
-			\draw[thick,red,domain=6:9,samples=100] plot (\x,{-3*sqrt((\x-2)*(\x-2)/16-1)-1});
-			\draw[thick,red,domain=-5:-2,samples=100] plot (\x,{3*sqrt((\x-2)*(\x-2)/16-1)-1});
-			\draw[thick,red,domain=-5:-2,samples=100] plot (\x,{-3*sqrt((\x-2)*(\x-2)/16-1)-1});
+			% Asíntotas: y+1 = ±(3/4)(x-2)
+			\addplot[orange, dashed, thick, domain=-5:9] {(3/4)*(x-2)-1} node[pos=0.9, above] {\tiny Asíntotas};
+			\addplot[orange, dashed, thick, domain=-5:9] {-(3/4)*(x-2)-1};
 
-			\filldraw[black] (2,-1) circle (3pt) node[below=2pt,scale=0.9] {$C(2,-1)$};
+			% Centro
+			\node[circle, fill=black, inner sep=2pt, label={below:$C(2,-1)$}] at (2,-1) {};
 
-			\filldraw[blue] (-3,-1) circle (3pt);
-			\filldraw[blue] (7,-1) circle (3pt);
-			\node[blue,above=2pt,scale=0.8] at (-3,-0.7) {$F_1$};
-			\node[blue,above=2pt,scale=0.8] at (7,-0.7) {$F_2$};
+			% Focos
+			\node[circle, fill=blue, inner sep=2pt, label={above:$F_1(-3,-1)$}] at (-3,-1) {};
+			\node[circle, fill=blue, inner sep=2pt, label={above:$F_2(7,-1)$}] at (7,-1) {};
 
-			\filldraw[purple] (-2,-1) circle (2.5pt);
-			\filldraw[purple] (6,-1) circle (2.5pt);
+			% Vértices
+			\node[circle, fill=purple, inner sep=1.5pt, label={below:$V_1(-2,-1)$}] at (-2,-1) {};
+			\node[circle, fill=purple, inner sep=1.5pt, label={below:$V_2(6,-1)$}] at (6,-1) {};
 
-			% asíntotas
-			\draw[dashed,orange,thick] (-4,-5.5)--(8,3.5);
-			\draw[dashed,orange,thick] (-4,3.5)--(8,-5.5);
+			% Etiqueta de la ecuación
+			\node[red] at (4.5,3.5) {$\displaystyle\frac{(x-2)^2}{16}-\frac{(y+1)^2}{9}=1$};
 
-			\node[red,scale=0.9] at (4.5,3.5) {$\displaystyle\frac{(x-2)^2}{16}-\frac{(y+1)^2}{9}=1$};
-
+			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 
@@ -985,32 +1013,49 @@
 	\subsection*{Gráfica del Ejercicio 4}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.65]
-			\def\xmin{-2}\def\xmax{6}
-			\def\ymin{-5}\def\ymax{7}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=10cm, height=11cm,
+				axis lines=middle,
+				xlabel={$x$}, ylabel={$y$},
+				xmin=-2, xmax=6,
+				ymin=-5, ymax=7,
+				xtick={-1,0,...,5},
+				ytick={-4,-3,...,6},
+				grid=both,
+				grid style={line width=.1pt, draw=gray!30},
+				axis line style={-{Latex},thick},
+				tick label style={font=\tiny},
+				samples=100,
+			]
 
-			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
-			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+			% Hipérbola: rama superior (y ≥ 4)
+			\addplot[red, thick, domain=4:7] ({2*sqrt((x-1)^2/9-1)+2}, x);
+			\addplot[red, thick, domain=4:7] ({-2*sqrt((x-1)^2/9-1)+2}, x);
 
-			\foreach \x in {-1,0,...,5}
-			\draw (\x,0)--(\x,-0.1) node[below,scale=0.7]{\x};
-			\foreach \y in {-4,-3,...,6}
-			\draw (0,\y)--(0.1,\y) node[right,scale=0.7]{\y};
+			% Hipérbola: rama inferior (y ≤ -2)
+			\addplot[red, thick, domain=-5:-2] ({2*sqrt((x-1)^2/9-1)+2}, x);
+			\addplot[red, thick, domain=-5:-2] ({-2*sqrt((x-1)^2/9-1)+2}, x);
 
-			% hipérbola
-			\draw[thick,red,domain=4:7,samples=100] plot ({2*sqrt(\x*\x/9-1)+2},\x);
-			\draw[thick,red,domain=4:7,samples=100] plot ({-2*sqrt(\x*\x/9-1)+2},\x);
-			\draw[thick,red,domain=-5:-3,samples=100] plot ({2*sqrt(\x*\x/9-1)+2},\x);
-			\draw[thick,red,domain=-5:-3,samples=100] plot ({-2*sqrt(\x*\x/9-1)+2},\x);
+			% Asíntotas: y-1 = ±(3/2)(x-2)
+			\addplot[orange, dashed, thick, domain=-2:6] {(3/2)*(x-2)+1} node[pos=0.85, above] {\tiny Asíntotas};
+			\addplot[orange, dashed, thick, domain=-2:6] {-(3/2)*(x-2)+1};
 
-			\filldraw[black] (2,1) circle (3pt) node[right=3pt,scale=0.9] {$C(2,1)$};
+			% Centro
+			\node[circle, fill=black, inner sep=2pt, label={right:$C(2,1)$}] at (2,1) {};
 
-			\filldraw[purple] (2,-2) circle (2.5pt);
-			\filldraw[purple] (2,4) circle (2.5pt);
+			% Focos: c=√13≈3.61
+			\node[circle, fill=blue, inner sep=2pt, label={right:$F_1(2,-2.61)$}] at (2,-2.61) {};
+			\node[circle, fill=blue, inner sep=2pt, label={right:$F_2(2,4.61)$}] at (2,4.61) {};
 
-			\node[red,scale=0.85] at (3.5,6) {$\displaystyle\frac{(y-1)^2}{9}-\frac{(x-2)^2}{4}=1$};
+			% Vértices
+			\node[circle, fill=purple, inner sep=1.5pt, label={left:$V_1(2,-2)$}] at (2,-2) {};
+			\node[circle, fill=purple, inner sep=1.5pt, label={left:$V_2(2,4)$}] at (2,4) {};
 
+			% Etiqueta de la ecuación
+			\node[red] at (3.5,6) {$\displaystyle\frac{(y-1)^2}{9}-\frac{(x-2)^2}{4}=1$};
+
+			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 
@@ -1056,45 +1101,49 @@
 	\subsection*{Gráfica del Ejercicio 5}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.55]
-			\def\xmin{-7}\def\xmax{5}
-			\def\ymin{-7}\def\ymax{11}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=11cm, height=13cm,
+				axis lines=middle,
+				xlabel={$x$}, ylabel={$y$},
+				xmin=-7, xmax=5,
+				ymin=-7, ymax=11,
+				xtick={-6,-5,...,4},
+				ytick={-6,-5,...,10},
+				grid=both,
+				grid style={line width=.1pt, draw=gray!30},
+				axis line style={-{Latex},thick},
+				tick label style={font=\tiny},
+				samples=100,
+			]
 
-			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
-			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+			% Hipérbola: rama superior (y ≥ 7)
+			\addplot[red, thick, domain=7:11] ({4*sqrt((x-2)^2/25-1)-1}, x);
+			\addplot[red, thick, domain=7:11] ({-4*sqrt((x-2)^2/25-1)-1}, x);
 
-			\foreach \x in {-6,-5,...,4}
-			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
-			\foreach \y in {-6,-5,...,10}
-			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+			% Hipérbola: rama inferior (y ≤ -3)
+			\addplot[red, thick, domain=-7:-3] ({4*sqrt((x-2)^2/25-1)-1}, x);
+			\addplot[red, thick, domain=-7:-3] ({-4*sqrt((x-2)^2/25-1)-1}, x);
 
-			% hipérbola
-			% Rama superior (y ≥ 7)
-			\draw[thick,red,domain=7:11,samples=100] plot ({4*sqrt(\x*\x/25-1)-1},\x);
-			\draw[thick,red,domain=7:11,samples=100] plot ({-4*sqrt(\x*\x/25-1)-1},\x);
-			% Rama inferior (y ≤ -3)
-			\draw[thick,red,domain=-11:-7,samples=100] plot ({4*sqrt(\x*\x/25-1)-1},\x);
-			\draw[thick,red,domain=-11:-7,samples=100] plot ({-4*sqrt(\x*\x/25-1)-1},\x);
+			% Asíntotas: y - 2 = ±(5/4)(x + 1)
+			\addplot[orange, dashed, thick, domain=-7:5] {1.25*(x+1)+2} node[pos=0.85, above] {\tiny Asíntotas};
+			\addplot[orange, dashed, thick, domain=-7:5] {-1.25*(x+1)+2};
 
-			\filldraw[black] (-1,2) circle (3pt) node[right=3pt,scale=0.9] {$C(-1,2)$};
+			% Centro
+			\node[circle, fill=black, inner sep=2pt, label={right:$C(-1,2)$}] at (-1,2) {};
 
-			\filldraw[blue] (-1,-4.4) circle (3pt);
-			\filldraw[blue] (-1,8.4) circle (3pt);
-			\node[blue,right=2pt,scale=0.8] at (-1,-4.4) {$F_1$};
-			\node[blue,right=2pt,scale=0.8] at (-1,8.4) {$F_2$};
+			% Focos
+			\node[circle, fill=blue, inner sep=2pt, label={right:$F_1(-1,-4.40)$}] at (-1,-4.4) {};
+			\node[circle, fill=blue, inner sep=2pt, label={right:$F_2(-1,8.40)$}] at (-1,8.4) {};
 
-			\filldraw[purple] (-1,-3) circle (2.5pt);
-			\filldraw[purple] (-1,7) circle (2.5pt);
-			\node[purple,right=2pt,scale=0.8] at (-1,-3) {$V_1$};
-			\node[purple,right=2pt,scale=0.8] at (-1,7) {$V_2$};
+			% Vértices
+			\node[circle, fill=purple, inner sep=2pt, label={right:$V_1(-1,-3)$}] at (-1,-3) {};
+			\node[circle, fill=purple, inner sep=2pt, label={right:$V_2(-1,7)$}] at (-1,7) {};
 
-			% asíntotas
-			\draw[dashed,orange,thick] (-6,-4.25)--(4,8.25);
-			\draw[dashed,orange,thick] (-6,8.25)--(4,-4.25);
+			% Ecuación
+			\node[red] at (2,10) {$\displaystyle\frac{(y-2)^2}{25}-\frac{(x+1)^2}{16}=1$};
 
-			\node[red,scale=0.9] at (2,10) {$\displaystyle\frac{(y-2)^2}{25}-\frac{(x+1)^2}{16}=1$};
-
+			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 
@@ -1179,36 +1228,49 @@
 	\subsection*{Gráfica del Ejercicio 6}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.6]
-			\def\xmin{-7}\def\xmax{7}
-			\def\ymin{-6}\def\ymax{6}
+		\begin{tikzpicture}
+			\begin{axis}[
+				width=12cm, height=10cm,
+				axis lines=middle,
+				xlabel={$x$}, ylabel={$y$},
+				xmin=-7, xmax=7,
+				ymin=-6, ymax=6,
+				xtick={-6,-5,...,6},
+				ytick={-5,-4,...,5},
+				grid=both,
+				grid style={line width=.1pt, draw=gray!30},
+				axis line style={-{Latex},thick},
+				tick label style={font=\tiny},
+				samples=100,
+			]
 
-			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
-			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+			% Hipérbola: rama derecha (x ≥ 3)
+			\addplot[red, thick, domain=3:7] {4*sqrt(x^2/9-1)};
+			\addplot[red, thick, domain=3:7] {-4*sqrt(x^2/9-1)};
 
-			\foreach \x in {-6,-5,...,6}
-			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
-			\foreach \y in {-5,-4,...,5}
-			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+			% Hipérbola: rama izquierda (x ≤ -3)
+			\addplot[red, thick, domain=-7:-3] {4*sqrt(x^2/9-1)};
+			\addplot[red, thick, domain=-7:-3] {-4*sqrt(x^2/9-1)};
 
-			\draw[thick,red,domain=3:7,samples=100] plot (\x,{4*sqrt(\x*\x/9-1)});
-			\draw[thick,red,domain=3:7,samples=100] plot (\x,{-4*sqrt(\x*\x/9-1)});
-			\draw[thick,red,domain=-7:-3,samples=100] plot (\x,{4*sqrt(\x*\x/9-1)});
-			\draw[thick,red,domain=-7:-3,samples=100] plot (\x,{-4*sqrt(\x*\x/9-1)});
+			% Asíntotas: y = ±(4/3)x
+			\addplot[orange, dashed, thick, domain=-7:7] {(4/3)*x} node[pos=0.85, above right] {$y=\frac{4}{3}x$};
+			\addplot[orange, dashed, thick, domain=-7:7] {-(4/3)*x} node[pos=0.85, below right] {$y=-\frac{4}{3}x$};
 
-			\filldraw[black] (0,0) circle (3.5pt) node[below right=3pt,scale=1] {$C(0,0)$};
+			% Centro
+			\node[circle, fill=black, inner sep=2.5pt, label={below right:$C(0,0)$}] at (0,0) {};
 
-			\filldraw[blue] (-5,0) circle (3pt);
-			\filldraw[blue] (5,0) circle (3pt);
-			\filldraw[purple] (-3,0) circle (2.5pt);
-			\filldraw[purple] (3,0) circle (2.5pt);
+			% Focos
+			\node[circle, fill=blue, inner sep=2pt, label={above:$F_1(-5,0)$}] at (-5,0) {};
+			\node[circle, fill=blue, inner sep=2pt, label={above:$F_2(5,0)$}] at (5,0) {};
 
-			\draw[dashed,orange,thick] (-6,-8)--(6,8);
-			\draw[dashed,orange,thick] (-6,8)--(6,-8);
+			% Vértices
+			\node[circle, fill=purple, inner sep=2pt, label={below:$V_1(-3,0)$}] at (-3,0) {};
+			\node[circle, fill=purple, inner sep=2pt, label={below:$V_2(3,0)$}] at (3,0) {};
 
-			\node[red,scale=1] at (0,5.5) {$\displaystyle\frac{x^2}{9}-\frac{y^2}{16}=1$};
+			% Ecuación
+			\node[red] at (0,5.5) {$\displaystyle\frac{x^2}{9}-\frac{y^2}{16}=1$};
 
+			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 
