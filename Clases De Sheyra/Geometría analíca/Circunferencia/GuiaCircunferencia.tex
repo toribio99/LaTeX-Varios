@@ -1,0 +1,1151 @@
+% !TEX TS-program = lualatex
+% !TEX encoding = UTF-8
+
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage[spanish,shorthands=off]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta}
+\usepackage{xcolor}
+
+\title{\Large Guía de Geometría Analítica: La Circunferencia
+
+\small{Elaborado para : \textsc{\bf{Sheyra Celedón}}}}
+
+\author{\bf{\textsc{Toribio de J Arrieta F}}}
+\date{\today}
+
+\begin{document}
+	\maketitle
+
+	\section{¿Qué es una circunferencia?}
+
+	Una \textbf{circunferencia} es una curva cerrada en el plano donde todos sus puntos están a la \textcolor{red}{\textbf{misma distancia}} de un punto fijo llamado \textbf{centro}. \emph{Es como si dibujaras con un compás: el centro es donde pones la punta del compás y el radio es qué tan abierto lo tienes}.
+
+	\bigskip
+
+	\textbf{Definición geométrica.} Una circunferencia es el conjunto de todos los puntos del plano que están a la misma distancia (llamada \textbf{radio}) de un punto fijo llamado \textbf{centro}.
+
+	\bigskip
+
+	\textbf{¿Dónde vemos circunferencias en la vida real?}
+	\begin{itemize}
+		\item En las ruedas de los vehículos (bicicletas, carros, motos).
+		\item En los platos, tazas y vasos vistos desde arriba.
+		\item En las monedas y medallas.
+		\item En los relojes de pared.
+		\item En las pistas de atletismo (las curvas son circunferencias).
+		\item En los CD, DVD y discos de vinilo.
+	\end{itemize}
+
+	\bigskip
+
+	A continuación se definen los elementos de la circunferencia como son el \textbf{Centro, Radio, Diámetro, y Cuerda}. Es fundamental que identifiques cada uno de estos elementos tanto analíticamente (que te sepas la definición) como gráficamente (que lo sepas ubicar en el plano cartesiano en la gráfica de la circunferencia).
+
+	\bigskip
+
+	Muchos autores de libros de geometría analítica manifiestan que el éxito de dominar los temas de la Geometría Analítica está en tener claridad en las definiciones de los elementos de cada cónica así como su correcta representación gráfica en el plano cartesiano.
+
+	\bigskip
+
+	En las gráficas de circunferencias se acostumbra a representar al \textbf{Centro} con la letra mayúscula \textbf{C} o con las coordenadas \textbf{$(h,k)$}, y al \textbf{Radio} con la letra minúscula \textbf{r}. Con base en estas observaciones pasemos a las definiciones de los elementos de la circunferencia.
+
+	\section{Elementos de la circunferencia}
+
+	\noindent
+	\begin{minipage}[t]{0.52\textwidth}
+	Toda circunferencia tiene varios elementos importantes que debemos conocer:
+
+	\begin{itemize}
+		\item \textbf{Centro (C):} Es el punto fijo del cual todos los puntos de la circunferencia están a la misma distancia. Lo representamos como $C(h,k)$.
+
+		\item \textbf{Radio (r):} Es la distancia del centro a cualquier punto de la circunferencia. \emph{(es como el brazo del compás)}.
+
+		\item \textbf{Diámetro (d):} Es el doble del radio, o sea $d=2r$. Es la distancia de un punto de la circunferencia a otro pasando por el centro.
+
+	\end{itemize}
+	\end{minipage}%
+	\hfill
+	\begin{minipage}[t]{0.45\textwidth}
+
+	\begin{itemize}
+		\item \textbf{Cuerda:} Es un segmento que une dos puntos cualquiera de la circunferencia. \emph{(cuando la cuerda pasa por el centro, se llama diámetro)}.
+	\end{itemize}
+
+	\vspace{0pt}
+	\centering
+	\begin{tikzpicture}[scale=0.75]
+		% Definir límites
+		\def\xmin{-1}\def\xmax{7}
+		\def\ymin{-1}\def\ymax{6}
+
+		% Grid y ejes
+		\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+		\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+		\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+		% Circunferencia con centro en (3,2.5) y radio 2
+		\draw[thick,red] (3,2.5) circle (2);
+
+		% Centro C(3,2.5)
+		\filldraw[black] (3,2.5) circle (2.5pt);
+		\node[black,below right=1pt] at (3,2.5) {$C(3,2.5)$};
+
+		% Radio
+		\draw[blue,very thick] (3,2.5)--(5,2.5);
+		\filldraw[blue] (5,2.5) circle (2pt);
+		\node[blue,above=2pt,scale=0.9] at (4,2.5) {$r=2$};
+
+		% Diámetro
+		\draw[orange,very thick] (1,2.5)--(5,2.5);
+		\filldraw[orange] (1,2.5) circle (2pt);
+		\node[orange,below=2pt,scale=0.9] at (3,2.35) {$d=4$};
+
+		% Cuerda
+		\draw[green!60!black,thick] (3+1.732,3.5)--(3-1.414,2.5-1.414);
+		\node[green!60!black,scale=0.8] at (2.5,3.8) {Cuerda};
+
+		% Punto en la circunferencia
+		\filldraw[purple] (3+1.732,3.5) circle (2pt);
+		\node[purple,scale=0.75] at (5.2,3.7) {$P$};
+
+	\end{tikzpicture}
+	\end{minipage}
+
+	\section{Circunferencia con centro en el origen}
+
+	Empecemos con el caso más sencillo: cuando el centro de la circunferencia está en el origen $(0,0)$.
+
+	\subsection*{Ecuación}
+
+	La ecuación de una circunferencia con centro en $(0,0)$ y radio $r$ es:
+	\[
+	\boxed{x^2+y^2=r^2}
+	\]
+
+	\textbf{¿Por qué esta ecuación?} Imagina un punto cualquiera $P(x,y)$ en la circunferencia. La distancia de $P$ al centro $(0,0)$ debe ser exactamente $r$. Usando la fórmula de distancia:
+	\[
+	\sqrt{(x-0)^2+(y-0)^2}=r
+	\]
+	Si elevamos al cuadrado ambos lados, obtenemos:
+	\[
+	x^2+y^2=r^2
+	\]
+
+	\bigskip
+
+	\textbf{Datos importantes:}
+	\begin{itemize}
+		\item Centro: $C(0,0)$
+		\item Radio: $r$
+		\item Diámetro: $d=2r$
+	\end{itemize}
+
+	\subsection*{{\color{blue!50!red}{Ejemplo 1}}: \color{blue!80!black}{Circunferencia con centro en el origen}}
+
+	\textbf{Ejercicio.} Encuentra el centro y el radio de la circunferencia $x^2+y^2=25$.
+
+	\bigskip
+
+	\textbf{Solución.} Para solucionar este ejercicio procedemos así:
+
+	\bigskip
+
+	Comparamos con la forma $x^2+y^2=r^2$:
+	\[
+	x^2+y^2=25 \quad\Rightarrow\quad r^2=25 \quad\Rightarrow\quad r=\sqrt{25}=5
+	\]
+
+	Por lo tanto:
+	\begin{itemize}
+		\item Centro: $\boxed{C(0,0)}$
+		\item Radio: $\boxed{r=5}$
+		\item Diámetro: $\boxed{d=2(5)=10}$
+	\end{itemize}
+
+	\subsection*{Gráfica de la circunferencia $x^2+y^2=25$}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			% límites
+			\def\xmin{-7}\def\xmax{7}
+			\def\ymin{-7}\def\ymax{7}
+
+			% grid
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas en los ejes
+			\foreach \x in {-6,-5,...,6}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-6,-5,...,6}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			% circunferencia
+			\draw[thick,red] (0,0) circle (5);
+
+			% centro
+			\filldraw[black] (0,0) circle (3pt) node[below right=3pt] {$C(0,0)$};
+
+			% radio
+			\draw[blue,very thick] (0,0)--(5,0);
+			\filldraw[blue] (5,0) circle (3pt);
+			\node[blue,above=3pt,scale=1] at (2.5,0) {$r=5$};
+
+			% algunos puntos
+			\filldraw[red] (5,0) circle (2pt);
+			\filldraw[red] (-5,0) circle (2pt);
+			\filldraw[red] (0,5) circle (2pt);
+			\filldraw[red] (0,-5) circle (2pt);
+			\node[red,scale=0.8] at (5.5,0.5) {$(5,0)$};
+			\node[red,scale=0.8] at (-5.5,0.5) {$(-5,0)$};
+			\node[red,scale=0.8] at (0.7,5.3) {$(0,5)$};
+			\node[red,scale=0.8] at (0.7,-5.3) {$(0,-5)$};
+
+			% etiqueta
+			\node[red,scale=1.1] at (4,3.5) {$x^2+y^2=25$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+
+	\subsection*{{\color{blue!40!red}{Ejemplo 2}}: \color{blue!80!black}{Encontrar la ecuación dado el radio}}
+
+	\textbf{Ejercicio.} Escribe la ecuación de la circunferencia con centro en el origen y radio $r=3$.
+
+	\bigskip
+
+	\textbf{Solución.} Usamos la fórmula $x^2+y^2=r^2$ y sustituimos $r=3$:
+	\[
+	x^2+y^2=3^2=9
+	\]
+
+	Por lo tanto, la ecuación es:
+	\[
+	\boxed{x^2+y^2=9}
+	\]
+
+	\section{Circunferencia con centro fuera del origen}
+
+	Ahora veamos el caso más general: cuando el centro de la circunferencia está en cualquier punto $(h,k)$ del plano.
+
+	\subsection*{Ecuación ordinaria}
+
+	La ecuación de una circunferencia con centro en $(h,k)$ y radio $r$ es:
+	\[
+	\boxed{(x-h)^2+(y-k)^2=r^2}
+	\]
+
+	Esta se llama la \textbf{ecuación ordinaria} o \textbf{ecuación estándar} de la circunferencia.
+
+	\bigskip
+
+	\textbf{¿Cómo recordar esta fórmula?} Piensa en la fórmula de distancia. Si $P(x,y)$ es un punto en la circunferencia y $C(h,k)$ es el centro, entonces:
+	\[
+	\text{distancia de }P\text{ a }C = r
+	\]
+	\[
+	\sqrt{(x-h)^2+(y-k)^2}=r
+	\]
+	Elevando al cuadrado:
+	\[
+	(x-h)^2+(y-k)^2=r^2
+	\]
+
+	\bigskip
+
+	\textbf{Datos importantes:}
+	\begin{itemize}
+		\item Centro: $C(h,k)$
+		\item Radio: $r$
+		\item Diámetro: $d=2r$
+	\end{itemize}
+
+	\subsection*{{\color{blue!40!red}{Ejemplo 3}}: \color{blue!80!black}{Circunferencia con centro fuera del origen}}
+
+	\textbf{Ejercicio.} Encuentra el centro y el radio de la circunferencia $(x-2)^2+(y+3)^2=16$.
+
+	\bigskip
+
+	\textbf{Solución.} Comparamos con la forma $(x-h)^2+(y-k)^2=r^2$.
+
+	\bigskip
+
+	\textbf{Paso 1:} Identificar $h$. La ecuación dice $(x-2)^2$, así que:
+	\[
+	x-h=x-2 \quad\Rightarrow\quad h=2
+	\]
+
+	\textbf{Paso 2:} Identificar $k$. La ecuación dice $(y+3)^2=(y-(-3))^2$, así que:
+	\[
+	y-k=y-(-3) \quad\Rightarrow\quad k=-3
+	\]
+
+	\textbf{Paso 3:} Identificar $r$. La ecuación dice que el lado derecho es $16$, así que:
+	\[
+	r^2=16 \quad\Rightarrow\quad r=\sqrt{16}=4
+	\]
+
+	Por lo tanto:
+	\begin{itemize}
+		\item Centro: $\boxed{C(2,-3)}$
+		\item Radio: $\boxed{r=4}$
+		\item Diámetro: $\boxed{d=2(4)=8}$
+	\end{itemize}
+
+	\subsection*{Gráfica de la circunferencia $(x-2)^2+(y+3)^2=16$}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			% límites
+			\def\xmin{-4}\def\xmax{8}
+			\def\ymin{-9}\def\ymax{3}
+
+			% grid
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas en los ejes
+			\foreach \x in {-3,-2,...,7}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-8,-7,...,2}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			% circunferencia
+			\draw[thick,red] (2,-3) circle (4);
+
+			% centro
+			\filldraw[black] (2,-3) circle (3pt) node[right=4pt] {$C(2,-3)$};
+
+			% radio
+			\draw[blue,very thick] (2,-3)--(6,-3);
+			\filldraw[blue] (6,-3) circle (3pt);
+			\node[blue,above=3pt,scale=1] at (4,-3) {$r=4$};
+
+			% algunos puntos
+			\filldraw[red] (6,-3) circle (2pt);
+			\filldraw[red] (-2,-3) circle (2pt);
+			\filldraw[red] (2,1) circle (2pt);
+			\filldraw[red] (2,-7) circle (2pt);
+			\node[red,scale=0.8] at (6.7,-2.5) {$(6,-3)$};
+			\node[red,scale=0.8] at (-2.7,-2.5) {$(-2,-3)$};
+			\node[red,scale=0.8] at (2.7,1.3) {$(2,1)$};
+			\node[red,scale=0.8] at (2.7,-7.3) {$(2,-7)$};
+
+			% etiqueta
+			\node[red,scale=1] at (5,0.5) {$(x-2)^2+(y+3)^2=16$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+
+	\subsection*{{\color{blue!40!red}{Ejemplo 4}}: \color{blue!80!black}{Encontrar la ecuación dados el centro y el radio}}
+
+	\textbf{Ejercicio.} Escribe la ecuación de la circunferencia con centro en $C(3,5)$ y radio $r=7$.
+
+	\bigskip
+
+	\textbf{Solución.} Usamos la fórmula $(x-h)^2+(y-k)^2=r^2$ con $h=3$, $k=5$ y $r=7$:
+	\[
+	(x-3)^2+(y-5)^2=7^2
+	\]
+	\[
+	\boxed{(x-3)^2+(y-5)^2=49}
+	\]
+
+	\section{Forma general de la circunferencia}
+
+	A veces la ecuación de la circunferencia no está en la forma ordinaria $(x-h)^2+(y-k)^2=r^2$, sino que está \textbf{desarrollada}. Cuando desarrollamos la forma ordinaria, obtenemos la \textbf{forma general}:
+	\[
+	\boxed{x^2+y^2+Dx+Ey+F=0}
+	\]
+
+	donde $D$, $E$ y $F$ son constantes.
+
+	\bigskip
+
+	\textbf{¿Cómo pasamos de la forma ordinaria a la general?} Desarrollamos los cuadrados. Por ejemplo:
+	\[
+	\begin{aligned}
+		(x-2)^2+(y+3)^2&=16\\
+		x^2-4x+4+y^2+6y+9&=16\\
+		x^2+y^2-4x+6y+4+9-16&=0\\
+		x^2+y^2-4x+6y-3&=0
+	\end{aligned}
+	\]
+
+	\bigskip
+
+	\textbf{¿Cómo pasamos de la forma general a la ordinaria?} Completamos el cuadrado. Este es el proceso más importante y lo veremos en detalle en el siguiente ejemplo.
+
+	\subsection*{{\color{blue!40!red}{Ejemplo 5}}: \color{blue!80!black}{Completar el cuadrado}}
+
+	\textbf{Ejercicio.} Encuentra el centro y el radio de la circunferencia $x^2+y^2-6x+4y-12=0$.
+
+	\bigskip
+
+	\textbf{Solución.} Debemos completar el cuadrado para las variables $x$ y $y$.
+
+	\bigskip
+
+	\textbf{Paso 1: Agrupar términos con $x$ y términos con $y$.}
+	\[
+	(x^2-6x)+(y^2+4y)=12
+	\]
+
+	\textbf{Paso 2: Completar el cuadrado para $x$.}
+
+	Tomamos el coeficiente de $x$ (que es $-6$), lo dividimos entre $2$ y lo elevamos al cuadrado:
+	\[
+	\left(\frac{-6}{2}\right)^2=(-3)^2=9
+	\]
+
+	Sumamos $9$ en ambos lados:
+	\[
+	(x^2-6x+9)+(y^2+4y)=12+9
+	\]
+
+	Ahora $x^2-6x+9=(x-3)^2$:
+	\[
+	(x-3)^2+(y^2+4y)=21
+	\]
+
+	\textbf{Paso 3: Completar el cuadrado para $y$.}
+
+	Tomamos el coeficiente de $y$ (que es $4$), lo dividimos entre $2$ y lo elevamos al cuadrado:
+	\[
+	\left(\frac{4}{2}\right)^2=(2)^2=4
+	\]
+
+	Sumamos $4$ en ambos lados:
+	\[
+	(x-3)^2+(y^2+4y+4)=21+4
+	\]
+
+	Ahora $y^2+4y+4=(y+2)^2$:
+	\[
+	(x-3)^2+(y+2)^2=25
+	\]
+
+	\textbf{Paso 4: Identificar el centro y el radio.}
+
+	Comparando con $(x-h)^2+(y-k)^2=r^2$:
+	\[
+	\begin{aligned}
+		h&=3\\
+		k&=-2\\
+		r^2&=25 \quad\Rightarrow\quad r=5
+	\end{aligned}
+	\]
+
+	Por lo tanto:
+	\begin{itemize}
+		\item Centro: $\boxed{C(3,-2)}$
+		\item Radio: $\boxed{r=5}$
+	\end{itemize}
+
+	\subsection*{Gráfica de la circunferencia $x^2+y^2-6x+4y-12=0$}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			% límites
+			\def\xmin{-4}\def\xmax{10}
+			\def\ymin{-9}\def\ymax{5}
+
+			% grid
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas en los ejes
+			\foreach \x in {-3,-2,...,9}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
+			\foreach \y in {-8,-7,...,4}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+
+			% circunferencia
+			\draw[thick,red] (3,-2) circle (5);
+
+			% centro
+			\filldraw[black] (3,-2) circle (3pt) node[below right=2pt] {$C(3,-2)$};
+
+			% radio
+			\draw[blue,very thick] (3,-2)--(8,-2);
+			\filldraw[blue] (8,-2) circle (3pt);
+			\node[blue,above=3pt,scale=1] at (5.5,-2) {$r=5$};
+
+			% etiqueta
+			\node[red,scale=0.9] at (6,2) {$x^2+y^2-6x+4y-12=0$};
+			\node[red,scale=0.9] at (6,1.3) {o $(x-3)^2+(y+2)^2=25$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+
+	\section{Resumen de fórmulas}
+
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\textbf{Tipo} & \textbf{Ecuación} & \textbf{Centro y Radio}\\
+			\hline
+			Centro en el origen & $x^2+y^2=r^2$ & $C(0,0)$, radio $r$\\
+			\hline
+			Centro en $(h,k)$ & $(x-h)^2+(y-k)^2=r^2$ & $C(h,k)$, radio $r$\\
+			\hline
+			Forma general & $x^2+y^2+Dx+Ey+F=0$ & Completar cuadrado\\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	\section{Ejercicios propuestos}
+
+	\textbf{1.} Encuentra el centro y el radio de la circunferencia {\color{red}{$x^2+y^2=49$}}.
+
+	\bigskip
+
+	\textbf{2.} Encuentra el centro y el radio de la circunferencia {\color{red}{$(x-4)^2+(y-1)^2=36$}}.
+
+	\bigskip
+
+	\textbf{3.} Escribe la ecuación de la circunferencia con centro en {\color{red}{$C(-2,5)$}} y radio {\color{red}{$r=6$}}.
+
+	\bigskip
+
+	\textbf{4.} Encuentra el centro y el radio de la circunferencia {\color{red}{$x^2+y^2+8x-10y+16=0$}} (pista: completa el cuadrado).
+
+	\bigskip
+
+	\textbf{5.} Dibuja la gráfica de la circunferencia {\color{red}{$(x+3)^2+(y-2)^2=25$}} e indica el centro y el radio.
+
+	\bigskip
+	\bigskip
+
+	\hrule
+
+	\bigskip
+	\bigskip
+
+	\section{Soluciones de los ejercicios propuestos}
+
+	\subsection*{Solución del Ejercicio 1}
+
+	\textbf{Ecuación:} $x^2+y^2=49$
+
+	\bigskip
+
+	Esta circunferencia tiene la forma $x^2+y^2=r^2$, por lo tanto el centro está en el origen.
+
+	\bigskip
+
+	Comparando:
+	\[
+	x^2+y^2=49 \quad\Rightarrow\quad r^2=49 \quad\Rightarrow\quad r=\sqrt{49}=7
+	\]
+
+	\textbf{Respuesta:}
+	\begin{itemize}
+		\item Centro: $\boxed{C(0,0)}$
+		\item Radio: $\boxed{r=7}$
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 1}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.5]
+			\def\xmin{-9}\def\xmax{9}
+			\def\ymin{-9}\def\ymax{9}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-8,-6,...,8}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
+			\foreach \y in {-8,-6,...,8}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+
+			\draw[thick,red] (0,0) circle (7);
+
+			\filldraw[black] (0,0) circle (3.5pt) node[below right=3pt,scale=1] {$C(0,0)$};
+
+			\draw[blue,very thick] (0,0)--(7,0);
+			\filldraw[blue] (7,0) circle (3pt);
+			\node[blue,above=3pt,scale=1] at (3.5,0) {$r=7$};
+
+			\node[red,scale=1.1] at (5,5) {$x^2+y^2=49$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 2}
+
+	\textbf{Ecuación:} $(x-4)^2+(y-1)^2=36$
+
+	\bigskip
+
+	Comparamos con $(x-h)^2+(y-k)^2=r^2$:
+	\[
+	\begin{aligned}
+		(x-{\color{red}{4}})^2+(y-{\color{red}{1}})^2&=36\\
+		(x-{\color{red}{h}})^2+(y-{\color{red}{k}})^2&=r^2\\
+		{\color{red}{h}}&={\color{red}{4}}\\
+		{\color{red}{k}}&={\color{red}{1}}\\
+		r^2&=36 \quad\Rightarrow\quad r=6
+	\end{aligned}
+	\]
+
+	\textbf{Respuesta:}
+	\begin{itemize}
+		\item Centro: $\boxed{C(4,1)}$
+		\item Radio: $\boxed{r=6}$
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 2}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.5]
+			\def\xmin{-4}\def\xmax{12}
+			\def\ymin{-7}\def\ymax{9}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-3,-2,...,11}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.6]{\x};
+			\foreach \y in {-6,-5,...,8}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.6]{\y};
+
+			\draw[thick,red] (4,1) circle (6);
+
+			\filldraw[black] (4,1) circle (3.5pt) node[below right=2pt,scale=1] {$C(4,1)$};
+
+			\draw[blue,very thick] (4,1)--(10,1);
+			\filldraw[blue] (10,1) circle (3pt);
+			\node[blue,above=3pt,scale=1] at (7,1) {$r=6$};
+
+			\node[red,scale=1] at (7,6) {$(x-4)^2+(y-1)^2=36$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 3}
+
+	\textbf{Datos:} Centro $C(-2,5)$ y radio $r=6$
+
+	\bigskip
+
+	Usamos la fórmula $(x-h)^2+(y-k)^2=r^2$ con $h=-2$, $k=5$, $r=6$:
+	\[
+	(x-(-2))^2+(y-5)^2=6^2
+	\]
+	\[
+	(x+2)^2+(y-5)^2=36
+	\]
+
+	\textbf{Respuesta:}
+	\[
+	\boxed{(x+2)^2+(y-5)^2=36}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 3}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.5]
+			\def\xmin{-10}\def\xmax{6}
+			\def\ymin{-3}\def\ymax{13}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-9,-8,...,5}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.6]{\x};
+			\foreach \y in {-2,-1,...,12}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.6]{\y};
+
+			\draw[thick,red] (-2,5) circle (6);
+
+			\filldraw[black] (-2,5) circle (3.5pt) node[below right=2pt,scale=1] {$C(-2,5)$};
+
+			\draw[blue,very thick] (-2,5)--(4,5);
+			\filldraw[blue] (4,5) circle (3pt);
+			\node[blue,above=3pt,scale=1] at (1,5) {$r=6$};
+
+			\node[red,scale=1] at (1,10) {$(x+2)^2+(y-5)^2=36$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 4}
+
+	\textbf{Ecuación:} $x^2+y^2+8x-10y+16=0$
+
+	\bigskip
+
+	Completamos el cuadrado para $x$ y para $y$.
+
+	\bigskip
+
+	\textbf{Paso 1: Agrupar términos.}
+	\[
+	(x^2+8x)+(y^2-10y)=-16
+	\]
+
+	\textbf{Paso 2: Completar el cuadrado para $x$.}
+
+	Coeficiente de $x$ es $8$:
+	\[
+	\left(\frac{8}{2}\right)^2=(4)^2=16
+	\]
+
+	Sumamos $16$ en ambos lados:
+	\[
+	(x^2+8x+16)+(y^2-10y)=-16+16
+	\]
+	\[
+	(x+4)^2+(y^2-10y)=0
+	\]
+
+	\textbf{Paso 3: Completar el cuadrado para $y$.}
+
+	Coeficiente de $y$ es $-10$:
+	\[
+	\left(\frac{-10}{2}\right)^2=(-5)^2=25
+	\]
+
+	Sumamos $25$ en ambos lados:
+	\[
+	(x+4)^2+(y^2-10y+25)=0+25
+	\]
+	\[
+	(x+4)^2+(y-5)^2=25
+	\]
+
+	\textbf{Paso 4: Identificar centro y radio.}
+
+	Comparando con $(x-h)^2+(y-k)^2=r^2$:
+	\[
+	\begin{aligned}
+		h&=-4\\
+		k&=5\\
+		r^2&=25 \quad\Rightarrow\quad r=5
+	\end{aligned}
+	\]
+
+	\textbf{Respuesta:}
+	\begin{itemize}
+		\item Centro: $\boxed{C(-4,5)}$
+		\item Radio: $\boxed{r=5}$
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 4}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.55]
+			\def\xmin{-11}\def\xmax{3}
+			\def\ymin{-2}\def\ymax{12}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-10,-9,...,2}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
+			\foreach \y in {-1,0,...,11}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+
+			\draw[thick,red] (-4,5) circle (5);
+
+			\filldraw[black] (-4,5) circle (3.5pt) node[below right=2pt,scale=1] {$C(-4,5)$};
+
+			\draw[blue,very thick] (-4,5)--(1,5);
+			\filldraw[blue] (1,5) circle (3pt);
+			\node[blue,above=3pt,scale=1] at (-1.5,5) {$r=5$};
+
+			\node[red,scale=0.9] at (-2,9.5) {$x^2+y^2+8x-10y+16=0$};
+			\node[red,scale=0.9] at (-2,8.7) {o $(x+4)^2+(y-5)^2=25$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 5}
+
+	\textbf{Ecuación:} $(x+3)^2+(y-2)^2=25$
+
+	\bigskip
+
+	Comparamos con $(x-h)^2+(y-k)^2=r^2$:
+	\[
+	\begin{aligned}
+		(x+3)^2&=(x-(-3))^2 \quad\Rightarrow\quad h=-3\\
+		(y-2)^2&=(y-2)^2 \quad\Rightarrow\quad k=2\\
+		r^2&=25 \quad\Rightarrow\quad r=5
+	\end{aligned}
+	\]
+
+	\textbf{Respuesta:}
+	\begin{itemize}
+		\item Centro: $\boxed{C(-3,2)}$
+		\item Radio: $\boxed{r=5}$
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 5}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\def\xmin{-10}\def\xmax{4}
+			\def\ymin{-5}\def\ymax{9}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-9,-8,...,3}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-4,-3,...,8}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			\draw[thick,red] (-3,2) circle (5);
+
+			\filldraw[black] (-3,2) circle (3.5pt) node[below right=2pt,scale=1] {$C(-3,2)$};
+
+			\draw[blue,very thick] (-3,2)--(2,2);
+			\filldraw[blue] (2,2) circle (3pt);
+			\node[blue,above=3pt,scale=1] at (-0.5,2) {$r=5$};
+
+			\filldraw[red] (2,2) circle (2pt);
+			\filldraw[red] (-8,2) circle (2pt);
+			\filldraw[red] (-3,7) circle (2pt);
+			\filldraw[red] (-3,-3) circle (2pt);
+
+			\node[red,scale=1] at (0,6.5) {$(x+3)^2+(y-2)^2=25$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\section{Ejercicios: De elementos a ecuación}
+
+	En esta sección resolveremos ejercicios donde nos dan algunos elementos de la circunferencia (como el centro y el radio, o el centro y un punto en la circunferencia) y debemos encontrar su ecuación.
+
+	\bigskip
+
+	\textbf{Ejercicio 6.} Se tiene una circunferencia con centro en $C(0,0)$ y radio $r=8$.
+	\begin{itemize}
+		\item[(a)] Escribe la ecuación de la circunferencia.
+		\item[(b)] Encuentra el diámetro.
+		\item[(c)] Determina si el punto $(6,-2)$ está dentro, sobre o fuera de la circunferencia.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 7.} Se tiene una circunferencia con centro en $C(5,-3)$ y radio $r=4$.
+	\begin{itemize}
+		\item[(a)] Escribe la ecuación de la circunferencia.
+		\item[(b)] Encuentra el diámetro.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 8.} Se tiene una circunferencia con centro en $C(-1,2)$ y pasa por el punto $P(3,5)$.
+	\begin{itemize}
+		\item[(a)] Encuentra el radio de la circunferencia (usa la fórmula de distancia).
+		\item[(b)] Escribe la ecuación de la circunferencia.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 9.} Una circunferencia tiene diámetro con extremos en $A(-2,1)$ y $B(4,5)$.
+	\begin{itemize}
+		\item[(a)] Encuentra el centro de la circunferencia (punto medio del diámetro).
+		\item[(b)] Encuentra el radio (la mitad de la longitud del diámetro).
+		\item[(c)] Escribe la ecuación de la circunferencia.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 10.} Encuentra la ecuación de la circunferencia que tiene centro en $C(2,-1)$ y es tangente al eje $x$.
+	\begin{itemize}
+		\item[(a)] ¿Cuál es el radio? (pista: si es tangente al eje $x$, el radio es la distancia del centro al eje $x$).
+		\item[(b)] Escribe la ecuación de la circunferencia.
+	\end{itemize}
+
+	\section{Soluciones: De elementos a ecuación}
+
+	\subsection*{Solución del Ejercicio 6}
+
+	\textbf{Datos:} Centro $C(0,0)$ y radio $r=8$
+
+	\bigskip
+
+	\textbf{(a)} Ecuación: Usamos $x^2+y^2=r^2$ con $r=8$:
+	\[
+	\boxed{x^2+y^2=64}
+	\]
+
+	\textbf{(b)} Diámetro: $d=2r=2(8)=\boxed{16}$
+
+	\textbf{(c)} Para saber si $(6,-2)$ está dentro, sobre o fuera, calculamos la distancia del punto al centro:
+	\[
+	d=\sqrt{(6-0)^2+(-2-0)^2}=\sqrt{36+4}=\sqrt{40}\approx 6.32
+	\]
+
+	Como $6.32<8$ (la distancia es menor que el radio), el punto está \boxed{\text{dentro}} de la circunferencia.
+
+	\subsection*{Gráfica del Ejercicio 6}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.45]
+			\def\xmin{-10}\def\xmax{10}
+			\def\ymin{-10}\def\ymax{10}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-9,-8,...,9}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
+			\foreach \y in {-9,-8,...,9}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+
+			\draw[thick,red] (0,0) circle (8);
+
+			\filldraw[black] (0,0) circle (3.5pt) node[below right=3pt,scale=1] {$C(0,0)$};
+
+			\draw[blue,very thick] (0,0)--(8,0);
+			\node[blue,above=3pt,scale=1] at (4,0) {$r=8$};
+
+			\filldraw[purple] (6,-2) circle (3.5pt) node[right=3pt,scale=1] {$(6,-2)$};
+
+			\node[red,scale=1.1] at (5,6) {$x^2+y^2=64$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 7}
+
+	\textbf{Datos:} Centro $C(5,-3)$ y radio $r=4$
+
+	\bigskip
+
+	\textbf{(a)} Ecuación: Usamos $(x-h)^2+(y-k)^2=r^2$ con $h=5$, $k=-3$, $r=4$:
+	\[
+	(x-5)^2+(y-(-3))^2=4^2
+	\]
+	\[
+	\boxed{(x-5)^2+(y+3)^2=16}
+	\]
+
+	\textbf{(b)} Diámetro: $d=2r=2(4)=\boxed{8}$
+
+	\subsection*{Gráfica del Ejercicio 7}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\def\xmin{-1}\def\xmax{11}
+			\def\ymin{-9}\def\ymax{3}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {0,1,...,10}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-8,-7,...,2}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			\draw[thick,red] (5,-3) circle (4);
+
+			\filldraw[black] (5,-3) circle (3.5pt) node[below right=2pt,scale=1] {$C(5,-3)$};
+
+			\draw[blue,very thick] (5,-3)--(9,-3);
+			\node[blue,above=3pt,scale=1] at (7,-3) {$r=4$};
+
+			\node[red,scale=1] at (7,1) {$(x-5)^2+(y+3)^2=16$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 8}
+
+	\textbf{Datos:} Centro $C(-1,2)$ y pasa por $P(3,5)$
+
+	\bigskip
+
+	\textbf{(a)} Radio: Usamos la fórmula de distancia entre $C(-1,2)$ y $P(3,5)$:
+	\[
+	r=\sqrt{(3-(-1))^2+(5-2)^2}=\sqrt{(4)^2+(3)^2}=\sqrt{16+9}=\sqrt{25}=5
+	\]
+
+	Por lo tanto: $\boxed{r=5}$
+
+	\textbf{(b)} Ecuación: Usamos $(x-h)^2+(y-k)^2=r^2$ con $h=-1$, $k=2$, $r=5$:
+	\[
+	(x-(-1))^2+(y-2)^2=5^2
+	\]
+	\[
+	\boxed{(x+1)^2+(y-2)^2=25}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 8}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\def\xmin{-8}\def\xmax{6}
+			\def\ymin{-5}\def\ymax{9}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-7,-6,...,5}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-4,-3,...,8}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			\draw[thick,red] (-1,2) circle (5);
+
+			\filldraw[black] (-1,2) circle (3.5pt) node[below left=2pt,scale=1] {$C(-1,2)$};
+
+			\draw[blue,very thick] (-1,2)--(3,5);
+			\filldraw[purple] (3,5) circle (3pt) node[above right=2pt,scale=1] {$P(3,5)$};
+			\node[blue,above=2pt,scale=0.9,rotate=37] at (1,3.5) {$r=5$};
+
+			\node[red,scale=1] at (2,7) {$(x+1)^2+(y-2)^2=25$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 9}
+
+	\textbf{Datos:} Extremos del diámetro $A(-2,1)$ y $B(4,5)$
+
+	\bigskip
+
+	\textbf{(a)} Centro: Es el punto medio entre $A$ y $B$:
+	\[
+	C=\left(\frac{-2+4}{2},\frac{1+5}{2}\right)=\left(\frac{2}{2},\frac{6}{2}\right)=(1,3)
+	\]
+
+	Por lo tanto: $\boxed{C(1,3)}$
+
+	\textbf{(b)} Radio: Es la mitad de la distancia entre $A$ y $B$. Primero calculamos la distancia:
+	\[
+	d_{AB}=\sqrt{(4-(-2))^2+(5-1)^2}=\sqrt{6^2+4^2}=\sqrt{36+16}=\sqrt{52}=2\sqrt{13}
+	\]
+
+	El radio es:
+	\[
+	r=\frac{d_{AB}}{2}=\frac{2\sqrt{13}}{2}=\sqrt{13}
+	\]
+
+	Por lo tanto: $\boxed{r=\sqrt{13}\approx 3.61}$
+
+	\textbf{(c)} Ecuación: Usamos $(x-h)^2+(y-k)^2=r^2$ con $h=1$, $k=3$, $r^2=13$:
+	\[
+	\boxed{(x-1)^2+(y-3)^2=13}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 9}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.7]
+			\def\xmin{-4}\def\xmax{7}
+			\def\ymin{-2}\def\ymax{8}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-3,-2,...,6}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-1,0,...,7}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			\draw[thick,red] (1,3) circle (3.606);
+
+			\filldraw[black] (1,3) circle (3.5pt) node[below right=2pt,scale=1] {$C(1,3)$};
+
+			\filldraw[purple] (-2,1) circle (3pt) node[below left=2pt,scale=1] {$A(-2,1)$};
+			\filldraw[purple] (4,5) circle (3pt) node[above right=2pt,scale=1] {$B(4,5)$};
+
+			\draw[orange,very thick] (-2,1)--(4,5);
+			\node[orange,below=2pt,scale=0.9] at (1,2.3) {diámetro};
+
+			\node[red,scale=1] at (4,0) {$(x-1)^2+(y-3)^2=13$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 10}
+
+	\textbf{Datos:} Centro $C(2,-1)$ y tangente al eje $x$
+
+	\bigskip
+
+	\textbf{(a)} Radio: Si la circunferencia es tangente al eje $x$, significa que toca el eje en exactamente un punto. La distancia del centro $C(2,-1)$ al eje $x$ (que es $y=0$) es:
+	\[
+	r=|y_C-0|=|-1-0|=|-1|=1
+	\]
+
+	Por lo tanto: $\boxed{r=1}$
+
+	\textbf{(b)} Ecuación: Usamos $(x-h)^2+(y-k)^2=r^2$ con $h=2$, $k=-1$, $r=1$:
+	\[
+	\boxed{(x-2)^2+(y+1)^2=1}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 10}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=1.2]
+			\def\xmin{-1}\def\xmax{5}
+			\def\ymin{-4}\def\ymax{2}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {0,1,...,4}
+			\draw (\x,0)--(\x,-0.1) node[below,scale=0.8]{\x};
+			\foreach \y in {-3,-2,...,1}
+			\draw (0,\y)--(0.1,\y) node[right,scale=0.8]{\y};
+
+			\draw[thick,red] (2,-1) circle (1);
+
+			\filldraw[black] (2,-1) circle (2.5pt) node[right=3pt,scale=1] {$C(2,-1)$};
+
+			\draw[blue,very thick,dashed] (2,-1)--(2,0);
+			\filldraw[blue] (2,0) circle (2pt);
+			\node[blue,right=3pt,scale=0.9] at (2,-0.5) {$r=1$};
+
+			\node[red,scale=0.9] at (3.2,-2.5) {$(x-2)^2+(y+1)^2=1$};
+			\node[green!60!black,scale=0.9] at (3,-3) {Tangente al eje $x$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+	\bigskip
+
+	\begin{center}
+		\textbf{FIN DE LA GUÍA DE CIRCUNFERENCIA}
+	\end{center}
+
+\end{document}
