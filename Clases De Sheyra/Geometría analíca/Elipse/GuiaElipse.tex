@@ -1,0 +1,1423 @@
+% !TEX TS-program = lualatex
+% !TEX encoding = UTF-8
+
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage[spanish,shorthands=off]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta}
+\usepackage{xcolor}
+
+\title{\Large Guía de Geometría Analítica: La Elipse
+
+\small{Elaborado para : \textsc{\bf{Sheyra Celedón}}}}
+
+\author{\bf{\textsc{Toribio de J Arrieta F}}}
+\date{\today}
+
+\begin{document}
+	\maketitle
+
+	\section{¿Qué es una elipse?}
+
+	Una \textbf{elipse} es una curva cerrada en el plano que tiene una forma ovalada, \emph{como un círculo aplastado o estirado}. A diferencia de la circunferencia que tiene un solo centro, la elipse tiene dos puntos especiales llamados \textbf{focos}.
+
+	\bigskip
+
+	\textbf{Definición geométrica.} Una elipse es el conjunto de todos los puntos del plano tales que la \textcolor{red}{\textbf{suma de las distancias}} de cada punto a dos puntos fijos llamados \textbf{focos} es constante.
+
+	\bigskip
+
+	Si llamamos $F_1$ y $F_2$ a los focos, y $P$ a cualquier punto de la elipse, entonces:
+	\[
+	d(P,F_1)+d(P,F_2)=\text{constante}=2a
+	\]
+
+	donde $a$ es el \textbf{semieje mayor} (la mitad del eje más largo).
+
+	\bigskip
+
+	\textbf{¿Dónde vemos elipses en la vida real?}
+	\begin{itemize}
+		\item En las órbitas de los planetas alrededor del Sol (las órbitas son elípticas, no circulares).
+		\item En un plato visto desde cierto ángulo.
+		\item En la sombra proyectada por una lámpara circular.
+		\item En los estadios de atletismo (la pista tiene forma elíptica).
+		\item En algunas ventanas y arcos arquitectónicos.
+		\item En los anillos de Saturno vistos desde cierto ángulo.
+	\end{itemize}
+
+	\bigskip
+
+	A continuación se definen los elementos de la elipse como son el \textbf{Centro, Focos, Vértices, Eje Mayor, Eje Menor, Distancia Focal y Excentricidad}. Es fundamental que identifiques cada uno de estos elementos tanto analíticamente (que te sepas la definición) como gráficamente (que lo sepas ubicar en el plano cartesiano en la gráfica de la elipse).
+
+	\bigskip
+
+	Muchos autores de libros de geometría analítica manifiestan que el éxito de dominar los temas de la Geometría Analítica está en tener claridad en las definiciones de los elementos de cada cónica así como su correcta representación gráfica en el plano cartesiano.
+
+	\bigskip
+
+	En las gráficas de elipses se acostumbra a representar al \textbf{Centro} con la letra mayúscula \textbf{C} o con las coordenadas \textbf{$(h,k)$}, a los \textbf{Focos} con $\textbf{F}_1$ y $\textbf{F}_2$, a los \textbf{Vértices} con $\textbf{V}_1$, $\textbf{V}_2$, $\textbf{V}_3$, $\textbf{V}_4$, y se usan las letras \textbf{a}, \textbf{b} y \textbf{c} para representar distancias importantes. Con base en estas observaciones pasemos a las definiciones de los elementos de la elipse.
+
+	\section{Elementos de la elipse}
+
+	\noindent
+	\begin{minipage}[t]{0.52\textwidth}
+	Toda elipse tiene varios elementos importantes que debemos conocer:
+
+	\begin{itemize}
+		\item \textbf{Centro (C):} Es el punto medio entre los dos focos. Lo representamos como $C(h,k)$.
+
+		\item \textbf{Focos ($F_1$ y $F_2$):} Son dos puntos fijos dentro de la elipse. La suma de distancias de cualquier punto de la elipse a los dos focos es constante.
+
+		\item \textbf{Eje mayor:} Es el segmento más largo que pasa por el centro y los focos. Su longitud es $2a$.
+
+		\item \textbf{Eje menor:} Es el segmento más corto perpendicular al eje mayor. Su longitud es $2b$.
+
+	\end{itemize}
+	\end{minipage}%
+	\hfill
+	\begin{minipage}[t]{0.45\textwidth}
+
+	\begin{itemize}
+		\item \textbf{Vértices:} Son los extremos de los ejes. Hay 4 vértices en total.
+
+		\item \textbf{Distancia focal ($2c$):} Es la distancia entre los dos focos.
+
+		\item \textbf{Relación fundamental:} $\boxed{a^2=b^2+c^2}$ donde $a>b$.
+	\end{itemize}
+
+	\vspace{10pt}
+	\centering
+	\begin{tikzpicture}[scale=0.65]
+		% Definir límites
+		\def\xmin{-1}\def\xmax{7}
+		\def\ymin{-1}\def\ymax{5}
+
+		% Grid y ejes
+		\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+		\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+		\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+		% Elipse horizontal con centro en (3,2), a=2.5, b=1.5
+		\draw[thick,red] (3,2) ellipse (2.5 and 1.5);
+
+		% Centro C(3,2)
+		\filldraw[black] (3,2) circle (2.5pt);
+		\node[black,below=2pt,scale=0.85] at (3,1.7) {$C(3,2)$};
+
+		% Focos (c² = a² - b² = 6.25 - 2.25 = 4, c=2)
+		\filldraw[blue] (5,2) circle (2pt);
+		\filldraw[blue] (1,2) circle (2pt);
+		\node[blue,above=1pt,scale=0.75] at (5,2.3) {$F_2$};
+		\node[blue,above=1pt,scale=0.75] at (1,2.3) {$F_1$};
+
+		% Vértices del eje mayor
+		\filldraw[purple] (5.5,2) circle (2pt);
+		\filldraw[purple] (0.5,2) circle (2pt);
+		\node[purple,below=1pt,scale=0.7] at (5.5,1.6) {$V_2$};
+		\node[purple,below=1pt,scale=0.7] at (0.5,1.6) {$V_1$};
+
+		% Vértices del eje menor
+		\filldraw[purple] (3,3.5) circle (2pt);
+		\filldraw[purple] (3,0.5) circle (2pt);
+		\node[purple,right=1pt,scale=0.7] at (3.15,3.5) {$V_3$};
+		\node[purple,right=1pt,scale=0.7] at (3.15,0.5) {$V_4$};
+
+		% Eje mayor
+		\draw[orange,very thick,dashed] (0.5,2)--(5.5,2);
+		\node[orange,scale=0.7] at (3,2.6) {Eje mayor};
+
+		% Eje menor
+		\draw[green!60!black,very thick,dashed] (3,0.5)--(3,3.5);
+		\node[green!60!black,scale=0.7,rotate=90] at (2.3,2) {Eje menor};
+
+		% Semieje a
+		\draw[orange,thick,{Latex}-{Latex}] (3,1.3)--(5.5,1.3);
+		\node[orange,scale=0.7] at (4.25,1) {$a$};
+
+		% Semieje b
+		\draw[green!60!black,thick,{Latex}-{Latex}] (3.7,2)--(3.7,3.5);
+		\node[green!60!black,scale=0.7] at (4.3,2.75) {$b$};
+
+	\end{tikzpicture}
+	\end{minipage}
+
+	\section{Elipse horizontal con centro en el origen}
+
+	Empecemos con el caso donde el centro de la elipse está en el origen $(0,0)$ y el eje mayor es horizontal (paralelo al eje $x$).
+
+	\subsection*{Ecuación}
+
+	La ecuación de una elipse horizontal con centro en $(0,0)$ es:
+	\[
+	\boxed{\frac{x^2}{a^2}+\frac{y^2}{b^2}=1} \quad\text{con }a>b
+	\]
+
+	donde:
+	\begin{itemize}
+		\item $a$ es el semieje mayor (en dirección horizontal)
+		\item $b$ es el semieje menor (en dirección vertical)
+		\item $c$ es la distancia del centro a cada foco
+		\item Se cumple: $\boxed{a^2=b^2+c^2}$ o equivalentemente $\boxed{c^2=a^2-b^2}$
+	\end{itemize}
+
+	\textbf{Datos importantes:}
+	\begin{itemize}
+		\item Centro: $C(0,0)$
+		\item Focos: $F_1(-c,0)$ y $F_2(c,0)$ donde $c=\sqrt{a^2-b^2}$
+		\item Vértices del eje mayor: $V_1(-a,0)$ y $V_2(a,0)$
+		\item Vértices del eje menor: $V_3(0,-b)$ y $V_4(0,b)$
+		\item Longitud del eje mayor: $2a$
+		\item Longitud del eje menor: $2b$
+	\end{itemize}
+
+	\subsection*{{\color{blue!50!red}{Ejemplo 1}}: \color{blue!80!black}{Elipse horizontal con centro en el origen}}
+
+	\textbf{Ejercicio.} Encuentra los focos, vértices y grafica la elipse $\displaystyle\frac{x^2}{25}+\frac{y^2}{9}=1$.
+
+	\bigskip
+
+	\textbf{Solución.} Para solucionar este ejercicio procedemos así:
+
+	\bigskip
+
+	\textbf{Paso 1:} Identificar $a^2$ y $b^2$. Comparamos con $\displaystyle\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$:
+	\[
+	\frac{x^2}{25}+\frac{y^2}{9}=1 \quad\Rightarrow\quad a^2=25,\;b^2=9
+	\]
+
+	Por lo tanto: $a=5$ y $b=3$.
+
+	\textbf{Paso 2:} Verificar que $a>b$. Como $5>3$, la elipse es horizontal (el eje mayor está en el eje $x$).
+
+	\textbf{Paso 3:} Calcular $c$ usando $c^2=a^2-b^2$:
+	\[
+	c^2=25-9=16 \quad\Rightarrow\quad c=4
+	\]
+
+	\textbf{Paso 4:} Identificar todos los elementos:
+	\begin{itemize}
+		\item Centro: $\boxed{C(0,0)}$
+		\item Focos: $\boxed{F_1(-4,0)\text{ y }F_2(4,0)}$
+		\item Vértices del eje mayor: $\boxed{V_1(-5,0)\text{ y }V_2(5,0)}$
+		\item Vértices del eje menor: $\boxed{V_3(0,-3)\text{ y }V_4(0,3)}$
+		\item Eje mayor: $2a=\boxed{10}$
+		\item Eje menor: $2b=\boxed{6}$
+	\end{itemize}
+
+	\subsection*{Gráfica de la elipse $\displaystyle\frac{x^2}{25}+\frac{y^2}{9}=1$}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.7]
+			% límites
+			\def\xmin{-7}\def\xmax{7}
+			\def\ymin{-5}\def\ymax{5}
+
+			% grid
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+
+			% ejes
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			% marcas en los ejes
+			\foreach \x in {-6,-5,...,6}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-4,-3,...,4}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			% elipse
+			\draw[thick,red] (0,0) ellipse (5 and 3);
+
+			% centro
+			\filldraw[black] (0,0) circle (3pt) node[below right=3pt,scale=0.9] {$C(0,0)$};
+
+			% focos
+			\filldraw[blue] (-4,0) circle (3pt);
+			\filldraw[blue] (4,0) circle (3pt);
+			\node[blue,above=3pt,scale=0.9] at (-4,0) {$F_1(-4,0)$};
+			\node[blue,above=3pt,scale=0.9] at (4,0) {$F_2(4,0)$};
+
+			% vértices del eje mayor
+			\filldraw[purple] (-5,0) circle (2.5pt);
+			\filldraw[purple] (5,0) circle (2.5pt);
+			\node[purple,below=2pt,scale=0.85] at (-5,-0.3) {$V_1(-5,0)$};
+			\node[purple,below=2pt,scale=0.85] at (5,-0.3) {$V_2(5,0)$};
+
+			% vértices del eje menor
+			\filldraw[purple] (0,-3) circle (2.5pt);
+			\filldraw[purple] (0,3) circle (2.5pt);
+			\node[purple,right=2pt,scale=0.85] at (0,-3) {$V_3(0,-3)$};
+			\node[purple,right=2pt,scale=0.85] at (0,3) {$V_4(0,3)$};
+
+			% eje mayor
+			\draw[orange,very thick,{Latex}-{Latex}] (-5,-1.3)--(5,-1.3);
+			\node[orange,scale=0.9] at (0,-1.8) {Eje mayor $=2a=10$};
+
+			% eje menor
+			\draw[green!60!black,very thick,{Latex}-{Latex}] (5.8,3)--(5.8,-3);
+			\node[green!60!black,scale=0.9,rotate=90] at (6.5,0) {Eje menor $=2b=6$};
+
+			% etiqueta
+			\node[red,scale=1.1] at (0,4) {$\displaystyle\frac{x^2}{25}+\frac{y^2}{9}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\section{Elipse vertical con centro en el origen}
+
+	Ahora veamos el caso donde el centro está en el origen $(0,0)$ pero el eje mayor es vertical (paralelo al eje $y$).
+
+	\subsection*{Ecuación}
+
+	La ecuación de una elipse vertical con centro en $(0,0)$ es:
+	\[
+	\boxed{\frac{x^2}{b^2}+\frac{y^2}{a^2}=1} \quad\text{con }a>b
+	\]
+
+	\textbf{¡Cuidado!} Ahora $a^2$ está con la $y^2$ porque el eje mayor es vertical.
+
+	\textbf{Datos importantes:}
+	\begin{itemize}
+		\item Centro: $C(0,0)$
+		\item Focos: $F_1(0,-c)$ y $F_2(0,c)$ donde $c=\sqrt{a^2-b^2}$
+		\item Vértices del eje mayor: $V_1(0,-a)$ y $V_2(0,a)$
+		\item Vértices del eje menor: $V_3(-b,0)$ y $V_4(b,0)$
+	\end{itemize}
+
+	\subsection*{{\color{blue!40!red}{Ejemplo 2}}: \color{blue!80!black}{Elipse vertical con centro en el origen}}
+
+	\textbf{Ejercicio.} Encuentra los focos y vértices de la elipse $\displaystyle\frac{x^2}{16}+\frac{y^2}{25}=1$.
+
+	\bigskip
+
+	\textbf{Solución.}
+
+	\bigskip
+
+	\textbf{Paso 1:} Identificar $a^2$ y $b^2$. Miramos cuál denominador es mayor:
+	\[
+	\frac{x^2}{16}+\frac{y^2}{25}=1
+	\]
+
+	Como $25>16$, entonces $a^2=25$ y $b^2=16$. Por lo tanto: $a=5$ y $b=4$.
+
+	\textbf{Paso 2:} Como $a^2$ está con $y^2$, la elipse es vertical.
+
+	\textbf{Paso 3:} Calcular $c$:
+	\[
+	c^2=a^2-b^2=25-16=9 \quad\Rightarrow\quad c=3
+	\]
+
+	\textbf{Paso 4:} Identificar los elementos:
+	\begin{itemize}
+		\item Centro: $\boxed{C(0,0)}$
+		\item Focos: $\boxed{F_1(0,-3)\text{ y }F_2(0,3)}$ (en el eje $y$)
+		\item Vértices del eje mayor: $\boxed{V_1(0,-5)\text{ y }V_2(0,5)}$
+		\item Vértices del eje menor: $\boxed{V_3(-4,0)\text{ y }V_4(4,0)}$
+	\end{itemize}
+
+	\subsection*{Gráfica de la elipse $\displaystyle\frac{x^2}{16}+\frac{y^2}{25}=1$}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.7]
+			\def\xmin{-6}\def\xmax{6}
+			\def\ymin{-7}\def\ymax{7}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-5,-4,...,5}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-6,-5,...,6}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			\draw[thick,red] (0,0) ellipse (4 and 5);
+
+			\filldraw[black] (0,0) circle (3pt) node[below right=3pt,scale=0.9] {$C(0,0)$};
+
+			\filldraw[blue] (0,-3) circle (3pt);
+			\filldraw[blue] (0,3) circle (3pt);
+			\node[blue,right=3pt,scale=0.9] at (0,-3) {$F_1(0,-3)$};
+			\node[blue,right=3pt,scale=0.9] at (0,3) {$F_2(0,3)$};
+
+			\filldraw[purple] (0,-5) circle (2.5pt);
+			\filldraw[purple] (0,5) circle (2.5pt);
+			\node[purple,right=2pt,scale=0.85] at (0,-5) {$V_1(0,-5)$};
+			\node[purple,right=2pt,scale=0.85] at (0,5) {$V_2(0,5)$};
+
+			\filldraw[purple] (-4,0) circle (2.5pt);
+			\filldraw[purple] (4,0) circle (2.5pt);
+			\node[purple,below=2pt,scale=0.85] at (-4,0) {$V_3(-4,0)$};
+			\node[purple,below=2pt,scale=0.85] at (4,0) {$V_4(4,0)$};
+
+			\node[red,scale=1.1] at (-3,6) {$\displaystyle\frac{x^2}{16}+\frac{y^2}{25}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\section{Elipse con centro fuera del origen}
+
+	Ahora veamos el caso más general: cuando el centro de la elipse está en cualquier punto $(h,k)$ del plano.
+
+	\subsection*{Ecuación}
+
+	\textbf{Elipse horizontal} (eje mayor paralelo al eje $x$) con centro en $(h,k)$:
+	\[
+	\boxed{\frac{(x-h)^2}{a^2}+\frac{(y-k)^2}{b^2}=1} \quad\text{con }a>b
+	\]
+
+	\textbf{Elipse vertical} (eje mayor paralelo al eje $y$) con centro en $(h,k)$:
+	\[
+	\boxed{\frac{(x-h)^2}{b^2}+\frac{(y-k)^2}{a^2}=1} \quad\text{con }a>b
+	\]
+
+	\textbf{Datos importantes para elipse horizontal:}
+	\begin{itemize}
+		\item Centro: $C(h,k)$
+		\item Focos: $F_1(h-c,k)$ y $F_2(h+c,k)$ donde $c=\sqrt{a^2-b^2}$
+		\item Vértices del eje mayor: $V_1(h-a,k)$ y $V_2(h+a,k)$
+		\item Vértices del eje menor: $V_3(h,k-b)$ y $V_4(h,k+b)$
+	\end{itemize}
+
+	\textbf{Datos importantes para elipse vertical:}
+	\begin{itemize}
+		\item Centro: $C(h,k)$
+		\item Focos: $F_1(h,k-c)$ y $F_2(h,k+c)$ donde $c=\sqrt{a^2-b^2}$
+		\item Vértices del eje mayor: $V_1(h,k-a)$ y $V_2(h,k+a)$
+		\item Vértices del eje menor: $V_3(h-b,k)$ y $V_4(h+b,k)$
+	\end{itemize}
+
+	\subsection*{{\color{blue!40!red}{Ejemplo 3}}: \color{blue!80!black}{Elipse horizontal con centro fuera del origen}}
+
+	\textbf{Ejercicio.} Encuentra el centro, focos y vértices de la elipse $\displaystyle\frac{(x-2)^2}{36}+\frac{(y+1)^2}{16}=1$.
+
+	\bigskip
+
+	\textbf{Solución.}
+
+	\bigskip
+
+	\textbf{Paso 1:} Identificar el centro. Comparamos con $\displaystyle\frac{(x-h)^2}{a^2}+\frac{(y-k)^2}{b^2}=1$:
+	\[
+	\begin{aligned}
+		(x-{\color{red}{2}})^2&\Rightarrow h={\color{red}{2}}\\
+		(y-{\color{red}{(-1)}})^2=(y+1)^2&\Rightarrow k={\color{red}{-1}}
+	\end{aligned}
+	\]
+
+	Centro: $\boxed{C(2,-1)}$
+
+	\textbf{Paso 2:} Identificar $a^2$ y $b^2$. Como $36>16$, entonces:
+	\[
+	a^2=36,\;b^2=16 \quad\Rightarrow\quad a=6,\;b=4
+	\]
+
+	La elipse es horizontal porque $a^2$ está con $(x-h)^2$.
+
+	\textbf{Paso 3:} Calcular $c$:
+	\[
+	c^2=a^2-b^2=36-16=20 \quad\Rightarrow\quad c=\sqrt{20}=2\sqrt{5}\approx 4.47
+	\]
+
+	\textbf{Paso 4:} Identificar focos y vértices:
+	\begin{itemize}
+		\item Focos: $F_1(h-c,k)=(2-2\sqrt{5},-1)$ y $F_2(h+c,k)=(2+2\sqrt{5},-1)$
+
+		$\boxed{F_1\approx(-2.47,-1)\text{ y }F_2\approx(6.47,-1)}$
+
+		\item Vértices del eje mayor: $V_1(h-a,k)=(2-6,-1)=(-4,-1)$ y $V_2(h+a,k)=(2+6,-1)=(8,-1)$
+
+		$\boxed{V_1(-4,-1)\text{ y }V_2(8,-1)}$
+
+		\item Vértices del eje menor: $V_3(h,k-b)=(2,-1-4)=(2,-5)$ y $V_4(h,k+b)=(2,-1+4)=(2,3)$
+
+		$\boxed{V_3(2,-5)\text{ y }V_4(2,3)}$
+	\end{itemize}
+
+	\subsection*{Gráfica de la elipse $\displaystyle\frac{(x-2)^2}{36}+\frac{(y+1)^2}{16}=1$}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\def\xmin{-6}\def\xmax{10}
+			\def\ymin{-7}\def\ymax{5}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-5,-4,...,9}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
+			\foreach \y in {-6,-5,...,4}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+
+			\draw[thick,red] (2,-1) ellipse (6 and 4);
+
+			\filldraw[black] (2,-1) circle (3pt) node[below=2pt,scale=0.9] {$C(2,-1)$};
+
+			\filldraw[blue] (-2.47,-1) circle (3pt);
+			\filldraw[blue] (6.47,-1) circle (3pt);
+			\node[blue,above=2pt,scale=0.85] at (-2.47,-0.7) {$F_1$};
+			\node[blue,above=2pt,scale=0.85] at (6.47,-0.7) {$F_2$};
+
+			\filldraw[purple] (-4,-1) circle (2.5pt);
+			\filldraw[purple] (8,-1) circle (2.5pt);
+			\node[purple,below=2pt,scale=0.8] at (-4,-1.3) {$V_1(-4,-1)$};
+			\node[purple,below=2pt,scale=0.8] at (8,-1.3) {$V_2(8,-1)$};
+
+			\filldraw[purple] (2,-5) circle (2.5pt);
+			\filldraw[purple] (2,3) circle (2.5pt);
+			\node[purple,right=2pt,scale=0.8] at (2,-5) {$V_3(2,-5)$};
+			\node[purple,right=2pt,scale=0.8] at (2,3) {$V_4(2,3)$};
+
+			\node[red,scale=1] at (5,3.5) {$\displaystyle\frac{(x-2)^2}{36}+\frac{(y+1)^2}{16}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{{\color{blue!40!red}{Ejemplo 4}}: \color{blue!80!black}{Elipse vertical con centro fuera del origen}}
+
+	\textbf{Ejercicio.} Encuentra el centro y los focos de la elipse $\displaystyle\frac{(x+3)^2}{9}+\frac{(y-2)^2}{25}=1$.
+
+	\bigskip
+
+	\textbf{Solución.}
+
+	\bigskip
+
+	\textbf{Paso 1:} Centro:
+	\[
+	\begin{aligned}
+		(x+3)^2=(x-(-3))^2&\Rightarrow h=-3\\
+		(y-2)^2&\Rightarrow k=2
+	\end{aligned}
+	\]
+
+	Centro: $\boxed{C(-3,2)}$
+
+	\textbf{Paso 2:} Como $25>9$, entonces $a^2=25$ y $b^2=9$, por lo tanto $a=5$ y $b=3$.
+
+	La elipse es vertical porque $a^2$ está con $(y-k)^2$.
+
+	\textbf{Paso 3:} Calcular $c$:
+	\[
+	c^2=a^2-b^2=25-9=16 \quad\Rightarrow\quad c=4
+	\]
+
+	\textbf{Paso 4:} Focos (en dirección vertical desde el centro):
+	\[
+	\begin{aligned}
+		F_1(h,k-c)&=(-3,2-4)=(-3,-2)\\
+		F_2(h,k+c)&=(-3,2+4)=(-3,6)
+	\end{aligned}
+	\]
+
+	Por lo tanto: $\boxed{F_1(-3,-2)\text{ y }F_2(-3,6)}$
+
+	\section{Forma general de la elipse}
+
+	A veces la ecuación de la elipse viene en la \textbf{forma general}:
+	\[
+	Ax^2+Cy^2+Dx+Ey+F=0
+	\]
+
+	donde $A>0$, $C>0$ y $A\neq C$ (si $A=C$ sería una circunferencia).
+
+	\bigskip
+
+	Para encontrar el centro, focos y vértices, debemos \textbf{completar el cuadrado} para $x$ y para $y$.
+
+	\subsection*{{\color{blue!40!red}{Ejemplo 5}}: \color{blue!80!black}{Completar el cuadrado en una elipse}}
+
+	\textbf{Ejercicio.} Encuentra el centro y los semiejes de la elipse $4x^2+9y^2-8x+36y+4=0$.
+
+	\bigskip
+
+	\textbf{Solución.}
+
+	\bigskip
+
+	\textbf{Paso 1:} Agrupar términos con $x$ y términos con $y$:
+	\[
+	4x^2-8x+9y^2+36y=-4
+	\]
+
+	\textbf{Paso 2:} Factorizar los coeficientes de $x^2$ y $y^2$:
+	\[
+	4(x^2-2x)+9(y^2+4y)=-4
+	\]
+
+	\textbf{Paso 3:} Completar el cuadrado para $x$. El coeficiente de $x$ es $-2$:
+	\[
+	\left(\frac{-2}{2}\right)^2=(-1)^2=1
+	\]
+
+	Sumamos $4(1)=4$ en ambos lados:
+	\[
+	4(x^2-2x+1)+9(y^2+4y)=-4+4
+	\]
+	\[
+	4(x-1)^2+9(y^2+4y)=0
+	\]
+
+	\textbf{Paso 4:} Completar el cuadrado para $y$. El coeficiente de $y$ es $4$:
+	\[
+	\left(\frac{4}{2}\right)^2=(2)^2=4
+	\]
+
+	Sumamos $9(4)=36$ en ambos lados:
+	\[
+	4(x-1)^2+9(y^2+4y+4)=0+36
+	\]
+	\[
+	4(x-1)^2+9(y+2)^2=36
+	\]
+
+	\textbf{Paso 5:} Dividir ambos lados entre 36 para obtener 1 en el lado derecho:
+	\[
+	\frac{4(x-1)^2}{36}+\frac{9(y+2)^2}{36}=1
+	\]
+	\[
+	\frac{(x-1)^2}{9}+\frac{(y+2)^2}{4}=1
+	\]
+
+	\textbf{Paso 6:} Identificar el centro y los semiejes:
+	\[
+	\begin{aligned}
+		\text{Centro: }&C(1,-2)\\
+		a^2=9&\Rightarrow a=3\\
+		b^2=4&\Rightarrow b=2
+	\end{aligned}
+	\]
+
+	Como $a^2=9$ está con $(x-1)^2$, la elipse es horizontal.
+
+	Por lo tanto:
+	\begin{itemize}
+		\item Centro: $\boxed{C(1,-2)}$
+		\item Semieje mayor: $\boxed{a=3}$ (horizontal)
+		\item Semieje menor: $\boxed{b=2}$ (vertical)
+		\item $c=\sqrt{a^2-b^2}=\sqrt{9-4}=\sqrt{5}\approx 2.24$
+	\end{itemize}
+
+	\section{Resumen de fórmulas}
+
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\textbf{Tipo} & \textbf{Ecuación} & \textbf{Eje mayor}\\
+			\hline
+			Horizontal, centro $(0,0)$ & $\displaystyle\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$ & Eje $x$\\
+			\hline
+			Vertical, centro $(0,0)$ & $\displaystyle\frac{x^2}{b^2}+\frac{y^2}{a^2}=1$ & Eje $y$\\
+			\hline
+			Horizontal, centro $(h,k)$ & $\displaystyle\frac{(x-h)^2}{a^2}+\frac{(y-k)^2}{b^2}=1$ & Paralelo a $x$\\
+			\hline
+			Vertical, centro $(h,k)$ & $\displaystyle\frac{(x-h)^2}{b^2}+\frac{(y-k)^2}{a^2}=1$ & Paralelo a $y$\\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	\bigskip
+
+	\textbf{Relación fundamental:} $\boxed{a^2=b^2+c^2}$ donde $a>b$ siempre.
+
+	\section{Ejercicios propuestos}
+
+	\textbf{1.} Encuentra los focos y vértices de la elipse {\color{red}{$\displaystyle\frac{x^2}{49}+\frac{y^2}{25}=1$}}.
+
+	\bigskip
+
+	\textbf{2.} Encuentra los focos y vértices de la elipse {\color{red}{$\displaystyle\frac{x^2}{9}+\frac{y^2}{36}=1$}}.
+
+	\bigskip
+
+	\textbf{3.} Encuentra el centro, focos y vértices de la elipse {\color{red}{$\displaystyle\frac{(x-3)^2}{25}+\frac{(y+2)^2}{9}=1$}}.
+
+	\bigskip
+
+	\textbf{4.} Encuentra el centro y los semiejes de la elipse {\color{red}{$9x^2+4y^2-18x+16y-11=0$}} (pista: completa el cuadrado).
+
+	\bigskip
+
+	\textbf{5.} Dibuja la gráfica de la elipse {\color{red}{$\displaystyle\frac{(x+1)^2}{16}+\frac{(y-3)^2}{25}=1$}} e indica el centro, focos y vértices.
+
+	\bigskip
+	\bigskip
+
+	\hrule
+
+	\bigskip
+	\bigskip
+
+	\section{Soluciones de los ejercicios propuestos}
+
+	\subsection*{Solución del Ejercicio 1}
+
+	\textbf{Ecuación:} $\displaystyle\frac{x^2}{49}+\frac{y^2}{25}=1$
+
+	\bigskip
+
+	Esta elipse tiene centro en el origen. Como $49>25$, entonces $a^2=49$ y $b^2=25$.
+
+	\bigskip
+
+	Por lo tanto: $a=7$ y $b=5$.
+
+	\bigskip
+
+	Como $a^2$ está con $x^2$, la elipse es horizontal.
+
+	\bigskip
+
+	Calculamos $c$:
+	\[
+	c^2=a^2-b^2=49-25=24 \quad\Rightarrow\quad c=\sqrt{24}=2\sqrt{6}\approx 4.90
+	\]
+
+	\textbf{Respuesta:}
+	\begin{itemize}
+		\item Centro: $\boxed{C(0,0)}$
+		\item Focos: $\boxed{F_1(-2\sqrt{6},0)\text{ y }F_2(2\sqrt{6},0)}$ o aproximadamente $F_1(-4.90,0)$ y $F_2(4.90,0)$
+		\item Vértices del eje mayor: $\boxed{V_1(-7,0)\text{ y }V_2(7,0)}$
+		\item Vértices del eje menor: $\boxed{V_3(0,-5)\text{ y }V_4(0,5)}$
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 1}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\def\xmin{-9}\def\xmax{9}
+			\def\ymin{-7}\def\ymax{7}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-8,-7,...,8}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
+			\foreach \y in {-6,-5,...,6}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+
+			\draw[thick,red] (0,0) ellipse (7 and 5);
+
+			\filldraw[black] (0,0) circle (3.5pt) node[below right=3pt,scale=1] {$C(0,0)$};
+
+			\filldraw[blue] (-4.9,0) circle (3pt);
+			\filldraw[blue] (4.9,0) circle (3pt);
+			\node[blue,above=3pt,scale=0.9] at (-4.9,0) {$F_1$};
+			\node[blue,above=3pt,scale=0.9] at (4.9,0) {$F_2$};
+
+			\filldraw[purple] (-7,0) circle (2.5pt);
+			\filldraw[purple] (7,0) circle (2.5pt);
+			\filldraw[purple] (0,-5) circle (2.5pt);
+			\filldraw[purple] (0,5) circle (2.5pt);
+
+			\node[red,scale=1.1] at (0,6) {$\displaystyle\frac{x^2}{49}+\frac{y^2}{25}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 2}
+
+	\textbf{Ecuación:} $\displaystyle\frac{x^2}{9}+\frac{y^2}{36}=1$
+
+	\bigskip
+
+	Como $36>9$, entonces $a^2=36$ y $b^2=9$, por lo tanto $a=6$ y $b=3$.
+
+	\bigskip
+
+	Como $a^2$ está con $y^2$, la elipse es vertical.
+
+	\bigskip
+
+	Calculamos $c$:
+	\[
+	c^2=a^2-b^2=36-9=27 \quad\Rightarrow\quad c=\sqrt{27}=3\sqrt{3}\approx 5.20
+	\]
+
+	\textbf{Respuesta:}
+	\begin{itemize}
+		\item Centro: $\boxed{C(0,0)}$
+		\item Focos: $\boxed{F_1(0,-3\sqrt{3})\text{ y }F_2(0,3\sqrt{3})}$ o aproximadamente $F_1(0,-5.20)$ y $F_2(0,5.20)$
+		\item Vértices del eje mayor: $\boxed{V_1(0,-6)\text{ y }V_2(0,6)}$
+		\item Vértices del eje menor: $\boxed{V_3(-3,0)\text{ y }V_4(3,0)}$
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 2}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\def\xmin{-5}\def\xmax{5}
+			\def\ymin{-8}\def\ymax{8}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-4,-3,...,4}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-7,-6,...,7}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			\draw[thick,red] (0,0) ellipse (3 and 6);
+
+			\filldraw[black] (0,0) circle (3.5pt) node[below right=3pt,scale=1] {$C(0,0)$};
+
+			\filldraw[blue] (0,-5.2) circle (3pt);
+			\filldraw[blue] (0,5.2) circle (3pt);
+			\node[blue,right=3pt,scale=0.9] at (0,-5.2) {$F_1$};
+			\node[blue,right=3pt,scale=0.9] at (0,5.2) {$F_2$};
+
+			\filldraw[purple] (0,-6) circle (2.5pt);
+			\filldraw[purple] (0,6) circle (2.5pt);
+			\filldraw[purple] (-3,0) circle (2.5pt);
+			\filldraw[purple] (3,0) circle (2.5pt);
+
+			\node[red,scale=1.1] at (-2,7) {$\displaystyle\frac{x^2}{9}+\frac{y^2}{36}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 3}
+
+	\textbf{Ecuación:} $\displaystyle\frac{(x-3)^2}{25}+\frac{(y+2)^2}{9}=1$
+
+	\bigskip
+
+	Centro:
+	\[
+	\begin{aligned}
+		(x-{\color{red}{3}})^2&\Rightarrow h=3\\
+		(y-{\color{red}{(-2)}})^2=(y+2)^2&\Rightarrow k=-2
+	\end{aligned}
+	\]
+
+	Por lo tanto: $\boxed{C(3,-2)}$
+
+	\bigskip
+
+	Como $25>9$, entonces $a^2=25$ y $b^2=9$, así que $a=5$ y $b=3$.
+
+	\bigskip
+
+	Como $a^2$ está con $(x-h)^2$, la elipse es horizontal.
+
+	\bigskip
+
+	Calculamos $c$:
+	\[
+	c^2=a^2-b^2=25-9=16 \quad\Rightarrow\quad c=4
+	\]
+
+	\textbf{Respuesta:}
+	\begin{itemize}
+		\item Centro: $\boxed{C(3,-2)}$
+		\item Focos: $F_1(h-c,k)=(3-4,-2)=(-1,-2)$ y $F_2(h+c,k)=(3+4,-2)=(7,-2)$
+
+		$\boxed{F_1(-1,-2)\text{ y }F_2(7,-2)}$
+
+		\item Vértices del eje mayor: $V_1(h-a,k)=(3-5,-2)=(-2,-2)$ y $V_2(h+a,k)=(3+5,-2)=(8,-2)$
+
+		$\boxed{V_1(-2,-2)\text{ y }V_2(8,-2)}$
+
+		\item Vértices del eje menor: $V_3(h,k-b)=(3,-2-3)=(3,-5)$ y $V_4(h,k+b)=(3,-2+3)=(3,1)$
+
+		$\boxed{V_3(3,-5)\text{ y }V_4(3,1)}$
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 3}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\def\xmin{-4}\def\xmax{10}
+			\def\ymin{-7}\def\ymax{3}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-3,-2,...,9}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
+			\foreach \y in {-6,-5,...,2}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+
+			\draw[thick,red] (3,-2) ellipse (5 and 3);
+
+			\filldraw[black] (3,-2) circle (3pt) node[above=2pt,scale=0.9] {$C(3,-2)$};
+
+			\filldraw[blue] (-1,-2) circle (3pt);
+			\filldraw[blue] (7,-2) circle (3pt);
+			\node[blue,above=2pt,scale=0.85] at (-1,-1.7) {$F_1$};
+			\node[blue,above=2pt,scale=0.85] at (7,-1.7) {$F_2$};
+
+			\filldraw[purple] (-2,-2) circle (2.5pt);
+			\filldraw[purple] (8,-2) circle (2.5pt);
+			\filldraw[purple] (3,-5) circle (2.5pt);
+			\filldraw[purple] (3,1) circle (2.5pt);
+
+			\node[red,scale=1] at (5.5,1.5) {$\displaystyle\frac{(x-3)^2}{25}+\frac{(y+2)^2}{9}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 4}
+
+	\textbf{Ecuación:} $9x^2+4y^2-18x+16y-11=0$
+
+	\bigskip
+
+	Completamos el cuadrado.
+
+	\bigskip
+
+	\textbf{Paso 1:} Agrupar y factorizar:
+	\[
+	9x^2-18x+4y^2+16y=11
+	\]
+	\[
+	9(x^2-2x)+4(y^2+4y)=11
+	\]
+
+	\textbf{Paso 2:} Completar el cuadrado para $x$ (coeficiente de $x$ es $-2$):
+	\[
+	\left(\frac{-2}{2}\right)^2=1
+	\]
+
+	Sumamos $9(1)=9$:
+	\[
+	9(x^2-2x+1)+4(y^2+4y)=11+9=20
+	\]
+	\[
+	9(x-1)^2+4(y^2+4y)=20
+	\]
+
+	\textbf{Paso 3:} Completar el cuadrado para $y$ (coeficiente de $y$ es $4$):
+	\[
+	\left(\frac{4}{2}\right)^2=4
+	\]
+
+	Sumamos $4(4)=16$:
+	\[
+	9(x-1)^2+4(y^2+4y+4)=20+16=36
+	\]
+	\[
+	9(x-1)^2+4(y+2)^2=36
+	\]
+
+	\textbf{Paso 4:} Dividir entre 36:
+	\[
+	\frac{9(x-1)^2}{36}+\frac{4(y+2)^2}{36}=1
+	\]
+	\[
+	\frac{(x-1)^2}{4}+\frac{(y+2)^2}{9}=1
+	\]
+
+	\textbf{Paso 5:} Identificar:
+	\[
+	\begin{aligned}
+		\text{Centro: }&C(1,-2)\\
+		b^2=4&\Rightarrow b=2\\
+		a^2=9&\Rightarrow a=3
+	\end{aligned}
+	\]
+
+	Como $a^2=9$ está con $(y+2)^2$, la elipse es vertical.
+
+	\textbf{Respuesta:}
+	\begin{itemize}
+		\item Centro: $\boxed{C(1,-2)}$
+		\item Semieje mayor: $\boxed{a=3}$ (vertical)
+		\item Semieje menor: $\boxed{b=2}$ (horizontal)
+		\item $c=\sqrt{a^2-b^2}=\sqrt{9-4}=\sqrt{5}\approx 2.24$
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 4}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8]
+			\def\xmin{-3}\def\xmax{5}
+			\def\ymin{-7}\def\ymax{3}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-2,-1,...,4}
+			\draw (\x,0)--(\x,-0.1) node[below,scale=0.75]{\x};
+			\foreach \y in {-6,-5,...,2}
+			\draw (0,\y)--(0.1,\y) node[right,scale=0.75]{\y};
+
+			\draw[thick,red] (1,-2) ellipse (2 and 3);
+
+			\filldraw[black] (1,-2) circle (3pt) node[right=3pt,scale=0.9] {$C(1,-2)$};
+
+			\filldraw[blue] (1,-2-2.24) circle (2.5pt);
+			\filldraw[blue] (1,-2+2.24) circle (2.5pt);
+
+			\node[red,scale=0.9] at (2.5,1.5) {$\displaystyle\frac{(x-1)^2}{4}+\frac{(y+2)^2}{9}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 5}
+
+	\textbf{Ecuación:} $\displaystyle\frac{(x+1)^2}{16}+\frac{(y-3)^2}{25}=1$
+
+	\bigskip
+
+	Centro:
+	\[
+	\begin{aligned}
+		(x+1)^2=(x-(-1))^2&\Rightarrow h=-1\\
+		(y-3)^2&\Rightarrow k=3
+	\end{aligned}
+	\]
+
+	Por lo tanto: $\boxed{C(-1,3)}$
+
+	\bigskip
+
+	Como $25>16$, entonces $a^2=25$ y $b^2=16$, así que $a=5$ y $b=4$.
+
+	\bigskip
+
+	Como $a^2$ está con $(y-k)^2$, la elipse es vertical.
+
+	\bigskip
+
+	Calculamos $c$:
+	\[
+	c^2=a^2-b^2=25-16=9 \quad\Rightarrow\quad c=3
+	\]
+
+	\textbf{Respuesta:}
+	\begin{itemize}
+		\item Centro: $\boxed{C(-1,3)}$
+		\item Focos: $\boxed{F_1(-1,0)\text{ y }F_2(-1,6)}$
+		\item Vértices del eje mayor: $\boxed{V_1(-1,-2)\text{ y }V_2(-1,8)}$
+		\item Vértices del eje menor: $\boxed{V_3(-5,3)\text{ y }V_4(3,3)}$
+	\end{itemize}
+
+	\subsection*{Gráfica del Ejercicio 5}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.65]
+			\def\xmin{-7}\def\xmax{5}
+			\def\ymin{-4}\def\ymax{10}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-6,-5,...,4}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-3,-2,...,9}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			\draw[thick,red] (-1,3) ellipse (4 and 5);
+
+			\filldraw[black] (-1,3) circle (3pt) node[right=3pt,scale=0.9] {$C(-1,3)$};
+
+			\filldraw[blue] (-1,0) circle (3pt);
+			\filldraw[blue] (-1,6) circle (3pt);
+			\node[blue,right=2pt,scale=0.85] at (-1,0) {$F_1(-1,0)$};
+			\node[blue,right=2pt,scale=0.85] at (-1,6) {$F_2(-1,6)$};
+
+			\filldraw[purple] (-1,-2) circle (2.5pt);
+			\filldraw[purple] (-1,8) circle (2.5pt);
+			\filldraw[purple] (-5,3) circle (2.5pt);
+			\filldraw[purple] (3,3) circle (2.5pt);
+
+			\node[red,scale=1] at (1,8.5) {$\displaystyle\frac{(x+1)^2}{16}+\frac{(y-3)^2}{25}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\section{Ejercicios: De elementos a ecuación}
+
+	En esta sección resolveremos ejercicios donde nos dan algunos elementos de la elipse y debemos encontrar su ecuación.
+
+	\bigskip
+
+	\textbf{Ejercicio 6.} Se tiene una elipse con centro en $C(0,0)$, vértices del eje mayor en $(-6,0)$ y $(6,0)$, y vértices del eje menor en $(0,-4)$ y $(0,4)$.
+	\begin{itemize}
+		\item[(a)] ¿La elipse es horizontal o vertical?
+		\item[(b)] Encuentra los valores de $a$ y $b$.
+		\item[(c)] Encuentra los focos.
+		\item[(d)] Escribe la ecuación de la elipse.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 7.} Una elipse tiene centro en $C(0,0)$, un foco en $(0,5)$ y un vértice del eje mayor en $(0,8)$.
+	\begin{itemize}
+		\item[(a)] ¿La elipse es horizontal o vertical?
+		\item[(b)] Encuentra los valores de $a$ y $c$.
+		\item[(c)] Calcula $b$ usando la relación $a^2=b^2+c^2$.
+		\item[(d)] Escribe la ecuación de la elipse.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 8.} Una elipse tiene centro en $C(2,-3)$, $a=5$ (eje mayor horizontal), y $b=3$.
+	\begin{itemize}
+		\item[(a)] Encuentra los focos.
+		\item[(b)] Encuentra los vértices.
+		\item[(c)] Escribe la ecuación de la elipse.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 9.} Una elipse tiene centro en $C(-1,2)$, un vértice del eje mayor en $(-1,7)$, y un foco en $(-1,5)$.
+	\begin{itemize}
+		\item[(a)] ¿La elipse es horizontal o vertical?
+		\item[(b)] Encuentra $a$ y $c$.
+		\item[(c)] Calcula $b$.
+		\item[(d)] Escribe la ecuación de la elipse.
+	\end{itemize}
+
+	\bigskip
+
+	\textbf{Ejercicio 10.} Una elipse tiene focos en $F_1(3,1)$ y $F_2(3,9)$, y la suma de las distancias de cualquier punto de la elipse a los focos es $10$.
+	\begin{itemize}
+		\item[(a)] Encuentra el centro (punto medio entre los focos).
+		\item[(b)] Encuentra $c$ (distancia del centro a un foco).
+		\item[(c)] Como la suma de distancias es $2a=10$, encuentra $a$.
+		\item[(d)] Calcula $b$.
+		\item[(e)] Escribe la ecuación de la elipse.
+	\end{itemize}
+
+	\section{Soluciones: De elementos a ecuación}
+
+	\subsection*{Solución del Ejercicio 6}
+
+	\textbf{Datos:} Centro $C(0,0)$, vértices del eje mayor en $(\pm 6,0)$, vértices del eje menor en $(0,\pm 4)$
+
+	\bigskip
+
+	\textbf{(a)} Los vértices del eje mayor están en el eje $x$, por lo tanto la elipse es \boxed{\text{horizontal}}.
+
+	\textbf{(b)} El eje mayor tiene longitud $2a=12$, entonces $\boxed{a=6}$.
+
+	El eje menor tiene longitud $2b=8$, entonces $\boxed{b=4}$.
+
+	\textbf{(c)} Calculamos $c$:
+	\[
+	c^2=a^2-b^2=36-16=20 \quad\Rightarrow\quad c=\sqrt{20}=2\sqrt{5}\approx 4.47
+	\]
+
+	Focos: $\boxed{F_1(-2\sqrt{5},0)\text{ y }F_2(2\sqrt{5},0)}$
+
+	\textbf{(d)} Ecuación:
+	\[
+	\boxed{\frac{x^2}{36}+\frac{y^2}{16}=1}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 6}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\def\xmin{-8}\def\xmax{8}
+			\def\ymin{-6}\def\ymax{6}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-7,-6,...,7}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
+			\foreach \y in {-5,-4,...,5}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+
+			\draw[thick,red] (0,0) ellipse (6 and 4);
+
+			\filldraw[black] (0,0) circle (3.5pt) node[below right=3pt,scale=1] {$C(0,0)$};
+
+			\filldraw[blue] (-4.47,0) circle (3pt);
+			\filldraw[blue] (4.47,0) circle (3pt);
+			\node[blue,above=3pt,scale=0.9] at (-4.47,0) {$F_1$};
+			\node[blue,above=3pt,scale=0.9] at (4.47,0) {$F_2$};
+
+			\filldraw[purple] (-6,0) circle (2.5pt);
+			\filldraw[purple] (6,0) circle (2.5pt);
+			\filldraw[purple] (0,-4) circle (2.5pt);
+			\filldraw[purple] (0,4) circle (2.5pt);
+
+			\node[red,scale=1.1] at (0,5) {$\displaystyle\frac{x^2}{36}+\frac{y^2}{16}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 7}
+
+	\textbf{Datos:} Centro $C(0,0)$, foco en $(0,5)$, vértice del eje mayor en $(0,8)$
+
+	\bigskip
+
+	\textbf{(a)} El foco y el vértice están en el eje $y$, por lo tanto la elipse es \boxed{\text{vertical}}.
+
+	\textbf{(b)} La distancia del centro al vértice del eje mayor es $a=8$, entonces $\boxed{a=8}$.
+
+	La distancia del centro al foco es $c=5$, entonces $\boxed{c=5}$.
+
+	\textbf{(c)} Usamos $a^2=b^2+c^2$:
+	\[
+	64=b^2+25 \quad\Rightarrow\quad b^2=39 \quad\Rightarrow\quad \boxed{b=\sqrt{39}\approx 6.24}
+	\]
+
+	\textbf{(d)} Como la elipse es vertical:
+	\[
+	\boxed{\frac{x^2}{39}+\frac{y^2}{64}=1}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 7}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.5]
+			\def\xmin{-8}\def\xmax{8}
+			\def\ymin{-10}\def\ymax{10}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-7,-6,...,7}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
+			\foreach \y in {-9,-8,...,9}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+
+			\draw[thick,red] (0,0) ellipse (6.24 and 8);
+
+			\filldraw[black] (0,0) circle (3.5pt) node[below right=3pt,scale=1] {$C(0,0)$};
+
+			\filldraw[blue] (0,-5) circle (3pt);
+			\filldraw[blue] (0,5) circle (3pt);
+			\node[blue,right=3pt,scale=0.9] at (0,-5) {$F_1(0,-5)$};
+			\node[blue,right=3pt,scale=0.9] at (0,5) {$F_2(0,5)$};
+
+			\filldraw[purple] (0,-8) circle (2.5pt);
+			\filldraw[purple] (0,8) circle (2.5pt);
+
+			\node[red,scale=1] at (3,9) {$\displaystyle\frac{x^2}{39}+\frac{y^2}{64}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 8}
+
+	\textbf{Datos:} Centro $C(2,-3)$, $a=5$ (horizontal), $b=3$
+
+	\bigskip
+
+	\textbf{(a)} Calculamos $c$:
+	\[
+	c^2=a^2-b^2=25-9=16 \quad\Rightarrow\quad c=4
+	\]
+
+	Como la elipse es horizontal, los focos están en:
+	\[
+	F_1(h-c,k)=(2-4,-3)=(-2,-3)
+	\]
+	\[
+	F_2(h+c,k)=(2+4,-3)=(6,-3)
+	\]
+
+	\boxed{F_1(-2,-3)\text{ y }F_2(6,-3)}
+
+	\textbf{(b)} Vértices:
+	\[
+	\begin{aligned}
+		V_1(h-a,k)&=(2-5,-3)=(-3,-3)\\
+		V_2(h+a,k)&=(2+5,-3)=(7,-3)\\
+		V_3(h,k-b)&=(2,-3-3)=(2,-6)\\
+		V_4(h,k+b)&=(2,-3+3)=(2,0)
+	\end{aligned}
+	\]
+
+	\boxed{V_1(-3,-3),\;V_2(7,-3),\;V_3(2,-6),\;V_4(2,0)}
+
+	\textbf{(c)} Ecuación:
+	\[
+	\boxed{\frac{(x-2)^2}{25}+\frac{(y+3)^2}{9}=1}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 8}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\def\xmin{-5}\def\xmax{9}
+			\def\ymin{-8}\def\ymax{2}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-4,-3,...,8}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.65]{\x};
+			\foreach \y in {-7,-6,...,1}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.65]{\y};
+
+			\draw[thick,red] (2,-3) ellipse (5 and 3);
+
+			\filldraw[black] (2,-3) circle (3pt) node[above=2pt,scale=0.9] {$C(2,-3)$};
+
+			\filldraw[blue] (-2,-3) circle (3pt);
+			\filldraw[blue] (6,-3) circle (3pt);
+			\node[blue,above=2pt,scale=0.85] at (-2,-2.7) {$F_1$};
+			\node[blue,above=2pt,scale=0.85] at (6,-2.7) {$F_2$};
+
+			\filldraw[purple] (-3,-3) circle (2.5pt);
+			\filldraw[purple] (7,-3) circle (2.5pt);
+			\filldraw[purple] (2,-6) circle (2.5pt);
+			\filldraw[purple] (2,0) circle (2.5pt);
+
+			\node[red,scale=1] at (5,0.5) {$\displaystyle\frac{(x-2)^2}{25}+\frac{(y+3)^2}{9}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 9}
+
+	\textbf{Datos:} Centro $C(-1,2)$, vértice del eje mayor en $(-1,7)$, foco en $(-1,5)$
+
+	\bigskip
+
+	\textbf{(a)} El vértice y el foco tienen la misma coordenada $x=-1$ pero diferentes coordenadas $y$, por lo tanto la elipse es \boxed{\text{vertical}}.
+
+	\textbf{(b)} La distancia del centro $C(-1,2)$ al vértice $V(-1,7)$ es:
+	\[
+	a=|7-2|=5 \quad\Rightarrow\quad \boxed{a=5}
+	\]
+
+	La distancia del centro al foco $F(-1,5)$ es:
+	\[
+	c=|5-2|=3 \quad\Rightarrow\quad \boxed{c=3}
+	\]
+
+	\textbf{(c)} Usamos $a^2=b^2+c^2$:
+	\[
+	25=b^2+9 \quad\Rightarrow\quad b^2=16 \quad\Rightarrow\quad \boxed{b=4}
+	\]
+
+	\textbf{(d)} Como la elipse es vertical:
+	\[
+	\boxed{\frac{(x+1)^2}{16}+\frac{(y-2)^2}{25}=1}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 9}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.7]
+			\def\xmin{-7}\def\xmax{5}
+			\def\ymin{-5}\def\ymax{9}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-6,-5,...,4}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-4,-3,...,8}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			\draw[thick,red] (-1,2) ellipse (4 and 5);
+
+			\filldraw[black] (-1,2) circle (3pt) node[right=3pt,scale=0.9] {$C(-1,2)$};
+
+			\filldraw[blue] (-1,5) circle (3pt);
+			\filldraw[blue] (-1,-1) circle (3pt);
+			\node[blue,right=2pt,scale=0.85] at (-1,5) {$F_2(-1,5)$};
+			\node[blue,right=2pt,scale=0.85] at (-1,-1) {$F_1(-1,-1)$};
+
+			\filldraw[purple] (-1,7) circle (2.5pt);
+			\filldraw[purple] (-1,-3) circle (2.5pt);
+
+			\node[red,scale=1] at (1.5,7.5) {$\displaystyle\frac{(x+1)^2}{16}+\frac{(y-2)^2}{25}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\subsection*{Solución del Ejercicio 10}
+
+	\textbf{Datos:} Focos en $F_1(3,1)$ y $F_2(3,9)$, suma de distancias $=10$
+
+	\bigskip
+
+	\textbf{(a)} Centro (punto medio entre los focos):
+	\[
+	C=\left(\frac{3+3}{2},\frac{1+9}{2}\right)=\left(3,5\right)
+	\]
+
+	\boxed{C(3,5)}
+
+	\textbf{(b)} Distancia del centro $C(3,5)$ al foco $F_2(3,9)$:
+	\[
+	c=|9-5|=4 \quad\Rightarrow\quad \boxed{c=4}
+	\]
+
+	\textbf{(c)} Como la suma de distancias es $2a=10$:
+	\[
+	a=\frac{10}{2}=5 \quad\Rightarrow\quad \boxed{a=5}
+	\]
+
+	\textbf{(d)} Usamos $a^2=b^2+c^2$:
+	\[
+	25=b^2+16 \quad\Rightarrow\quad b^2=9 \quad\Rightarrow\quad \boxed{b=3}
+	\]
+
+	\textbf{(e)} Los focos están en el eje vertical (misma coordenada $x$), por lo tanto la elipse es vertical:
+	\[
+	\boxed{\frac{(x-3)^2}{9}+\frac{(y-5)^2}{25}=1}
+	\]
+
+	\subsection*{Gráfica del Ejercicio 10}
+
+	\begin{center}
+		\begin{tikzpicture}[scale=0.7]
+			\def\xmin{-2}\def\xmax{8}
+			\def\ymin{-2}\def\ymax{12}
+
+			\draw[very thin,gray!30] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+			\foreach \x in {-1,0,...,7}
+			\draw (\x,0)--(\x,-0.15) node[below,scale=0.7]{\x};
+			\foreach \y in {-1,0,...,11}
+			\draw (0,\y)--(0.15,\y) node[right,scale=0.7]{\y};
+
+			\draw[thick,red] (3,5) ellipse (3 and 5);
+
+			\filldraw[black] (3,5) circle (3pt) node[right=3pt,scale=0.9] {$C(3,5)$};
+
+			\filldraw[blue] (3,1) circle (3pt);
+			\filldraw[blue] (3,9) circle (3pt);
+			\node[blue,right=2pt,scale=0.85] at (3,1) {$F_1(3,1)$};
+			\node[blue,right=2pt,scale=0.85] at (3,9) {$F_2(3,9)$};
+
+			\filldraw[purple] (3,0) circle (2.5pt);
+			\filldraw[purple] (3,10) circle (2.5pt);
+			\filldraw[purple] (0,5) circle (2.5pt);
+			\filldraw[purple] (6,5) circle (2.5pt);
+
+			\node[red,scale=1] at (5,11) {$\displaystyle\frac{(x-3)^2}{9}+\frac{(y-5)^2}{25}=1$};
+
+		\end{tikzpicture}
+	\end{center}
+
+	\bigskip
+	\bigskip
+
+	\begin{center}
+		\textbf{FIN DE LA GUÍA DE ELIPSE}
+	\end{center}
+
+\end{document}
