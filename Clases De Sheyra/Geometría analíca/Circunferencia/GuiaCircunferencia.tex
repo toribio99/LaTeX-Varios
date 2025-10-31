@@ -93,7 +93,7 @@
 
 		% Centro C(3,2.5)
 		\filldraw[black] (3,2.5) circle (2.5pt);
-		\node[black,below right=1pt] at (3,2.5) {$C(3,2.5)$};
+		\node[black, scale=.75] at (2,2.5) {$C(3,2.5)$};
 
 		% Radio
 		\draw[blue,very thick] (3,2.5)--(5,2.5);
@@ -101,15 +101,18 @@
 		\node[blue,above=2pt,scale=0.9] at (4,2.5) {$r=2$};
 
 		% Diámetro
-		\draw[orange,very thick] (1,2.5)--(5,2.5);
-		\filldraw[orange] (1,2.5) circle (2pt);
-		\node[orange,below=2pt,scale=0.9] at (3,2.35) {$d=4$};
+		\draw[orange!55!black,very thick] (3,0.5)--(3,4.5);
+		%\filldraw[orange] (1,2.5) circle (2pt);
+		\node[orange!55!black,below=2pt,scale=0.9, rotate=90] at (2.3,1.5) {$d=4$};
 
 		% Cuerda
-		\draw[green!60!black,thick] (3+1.732,3.5)--(3-1.414,2.5-1.414);
-		\node[green!60!black,scale=0.8] at (2.5,3.8) {Cuerda};
+		\draw[green!60!black,thick] (3+1.732,3.5)--(3-1.8,3.5);
+		\node[green!60!black,scale=0.7] at (2.3,3.8) {Cuerda};
 
 		% Punto en la circunferencia
+		\filldraw[purple] (3,0.5) circle (2pt);
+		\filldraw[purple] (3,4.5) circle (2pt);
+		\filldraw[purple] (3-1.7,3.5) circle (2pt);
 		\filldraw[purple] (3+1.732,3.5) circle (2pt);
 		\node[purple,scale=0.75] at (5.2,3.7) {$P$};
 
@@ -192,10 +195,10 @@
 			\draw[thick,red] (0,0) circle (5);
 
 			% centro
-			\filldraw[black] (0,0) circle (3pt) node[below right=3pt] {$C(0,0)$};
+			\filldraw[black] (0,0) circle (3pt) node[above left=0pt] {$C(0,0)$};
 
 			% radio
-			\draw[blue,very thick] (0,0)--(5,0);
+			\draw[blue,ultra thick] (0,0)--(5,0);
 			\filldraw[blue] (5,0) circle (3pt);
 			\node[blue,above=3pt,scale=1] at (2.5,0) {$r=5$};
 
@@ -204,13 +207,13 @@
 			\filldraw[red] (-5,0) circle (2pt);
 			\filldraw[red] (0,5) circle (2pt);
 			\filldraw[red] (0,-5) circle (2pt);
-			\node[red,scale=0.8] at (5.5,0.5) {$(5,0)$};
-			\node[red,scale=0.8] at (-5.5,0.5) {$(-5,0)$};
-			\node[red,scale=0.8] at (0.7,5.3) {$(0,5)$};
-			\node[red,scale=0.8] at (0.7,-5.3) {$(0,-5)$};
+			\node[red,scale=0.8] at (5.7,0.5) {$(5,0)$};
+			\node[red,scale=0.8] at (-5.9,0.5) {$(-5,0)$};
+			\node[red,scale=0.8] at (0.7,5.5) {$(0,5)$};
+			\node[red,scale=0.8] at (0.7,-5.6) {$(0,-5)$};
 
 			% etiqueta
-			\node[red,scale=1.1] at (4,3.5) {$x^2+y^2=25$};
+			\node[red,scale=1.1] at (-4.5,5.5) {$x^2+y^2=25$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -326,7 +329,7 @@
 			\draw[thick,red] (2,-3) circle (4);
 
 			% centro
-			\filldraw[black] (2,-3) circle (3pt) node[right=4pt] {$C(2,-3)$};
+			\filldraw[black] (2,-3) circle (3pt) node[right=4pt] at(1.1,-3.5) {$C(2,-3)$};
 
 			% radio
 			\draw[blue,very thick] (2,-3)--(6,-3);
@@ -338,13 +341,13 @@
 			\filldraw[red] (-2,-3) circle (2pt);
 			\filldraw[red] (2,1) circle (2pt);
 			\filldraw[red] (2,-7) circle (2pt);
-			\node[red,scale=0.8] at (6.7,-2.5) {$(6,-3)$};
-			\node[red,scale=0.8] at (-2.7,-2.5) {$(-2,-3)$};
-			\node[red,scale=0.8] at (2.7,1.3) {$(2,1)$};
-			\node[red,scale=0.8] at (2.7,-7.3) {$(2,-7)$};
+			\node[red,scale=0.8] at (6.9,-2.5) {$(6,-3)$};
+			\node[red,scale=0.8] at (-3.3,-2.5) {$(-2,-3)$};
+			\node[red,scale=0.8] at (2.7,1.5) {$(2,1)$};
+			\node[red,scale=0.8] at (2.7,-7.6) {$(2,-7)$};
 
 			% etiqueta
-			\node[red,scale=1] at (5,0.5) {$(x-2)^2+(y+3)^2=16$};
+			\node[red,scale=1] at (4.5,2.5) {$(x-2)^2+(y+3)^2=16$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -481,7 +484,7 @@
 			\draw[thick,red] (3,-2) circle (5);
 
 			% centro
-			\filldraw[black] (3,-2) circle (3pt) node[below right=2pt] {$C(3,-2)$};
+			\filldraw[black] (3,-2) circle (3pt) node[below right=2pt] at(2.5,-2) {$C(3,-2)$};
 
 			% radio
 			\draw[blue,very thick] (3,-2)--(8,-2);
@@ -489,8 +492,8 @@
 			\node[blue,above=3pt,scale=1] at (5.5,-2) {$r=5$};
 
 			% etiqueta
-			\node[red,scale=0.9] at (6,2) {$x^2+y^2-6x+4y-12=0$};
-			\node[red,scale=0.9] at (6,1.3) {o $(x-3)^2+(y+2)^2=25$};
+			\node[red,scale=0.9] at (6,4.5) {$x^2+y^2-6x+4y-12=0$};
+			\node[red,scale=0.9] at (6,3.6) {o $(x-3)^2+(y+2)^2=25$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -588,7 +591,7 @@
 			\filldraw[blue] (7,0) circle (3pt);
 			\node[blue,above=3pt,scale=1] at (3.5,0) {$r=7$};
 
-			\node[red,scale=1.1] at (5,5) {$x^2+y^2=49$};
+			\node[red,scale=1.1] at (5,7) {$x^2+y^2=49$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -634,13 +637,13 @@
 
 			\draw[thick,red] (4,1) circle (6);
 
-			\filldraw[black] (4,1) circle (3.5pt) node[below right=2pt,scale=1] {$C(4,1)$};
+			\filldraw[black] (4,1) circle (3.5pt) node[below right=2pt,scale=1] at(2,2.6) {$C(4,1)$};
 
 			\draw[blue,very thick] (4,1)--(10,1);
 			\filldraw[blue] (10,1) circle (3pt);
 			\node[blue,above=3pt,scale=1] at (7,1) {$r=6$};
 
-			\node[red,scale=1] at (7,6) {$(x-4)^2+(y-1)^2=36$};
+			\node[red,scale=1] at (7,7.7) {$(x-4)^2+(y-1)^2=36$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -682,13 +685,13 @@
 
 			\draw[thick,red] (-2,5) circle (6);
 
-			\filldraw[black] (-2,5) circle (3.5pt) node[below right=2pt,scale=1] {$C(-2,5)$};
+			\filldraw[black] (-2,5) circle (3.5pt) node[below right=2pt,scale=1] at(-4.5,6.5) {$C(-2,5)$};
 
 			\draw[blue,very thick] (-2,5)--(4,5);
 			\filldraw[blue] (4,5) circle (3pt);
-			\node[blue,above=3pt,scale=1] at (1,5) {$r=6$};
+			\node[blue,above=3pt,scale=1] at (1.75,4.7) {$r=6$};
 
-			\node[red,scale=1] at (1,10) {$(x+2)^2+(y-5)^2=36$};
+			\node[red,scale=1] at (-5,12) {$(x+2)^2+(y-5)^2=36$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -758,7 +761,7 @@
 	\subsection*{Gráfica del Ejercicio 4}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.55]
+		\begin{tikzpicture}[scale=0.6]
 			\def\xmin{-11}\def\xmax{3}
 			\def\ymin{-2}\def\ymax{12}
 
@@ -779,8 +782,8 @@
 			\filldraw[blue] (1,5) circle (3pt);
 			\node[blue,above=3pt,scale=1] at (-1.5,5) {$r=5$};
 
-			\node[red,scale=0.9] at (-2,9.5) {$x^2+y^2+8x-10y+16=0$};
-			\node[red,scale=0.9] at (-2,8.7) {o $(x+4)^2+(y-5)^2=25$};
+			\node[red,scale=0.9] at (-6,11.5) {$x^2+y^2+8x-10y+16=0$};
+			\node[red,scale=0.9] at (-6,10.5) {o $(x+4)^2+(y-5)^2=25$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -835,7 +838,7 @@
 			\filldraw[red] (-3,7) circle (2pt);
 			\filldraw[red] (-3,-3) circle (2pt);
 
-			\node[red,scale=1] at (0,6.5) {$(x+3)^2+(y-2)^2=25$};
+			\node[red,scale=1] at (-4.5,7.5) {$(x+3)^2+(y-2)^2=25$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -911,7 +914,7 @@
 	\subsection*{Gráfica del Ejercicio 6}
 
 	\begin{center}
-		\begin{tikzpicture}[scale=0.45]
+		\begin{tikzpicture}[scale=0.4]
 			\def\xmin{-10}\def\xmax{10}
 			\def\ymin{-10}\def\ymax{10}
 
@@ -926,14 +929,14 @@
 
 			\draw[thick,red] (0,0) circle (8);
 
-			\filldraw[black] (0,0) circle (3.5pt) node[below right=3pt,scale=1] {$C(0,0)$};
+			\filldraw[black] (0,0) circle (3.5pt) node[below right=3pt,scale=1] at(-3.5,1.5) {$C(0,0)$};
 
 			\draw[blue,very thick] (0,0)--(8,0);
 			\node[blue,above=3pt,scale=1] at (4,0) {$r=8$};
 
-			\filldraw[purple] (6,-2) circle (3.5pt) node[right=3pt,scale=1] {$(6,-2)$};
+			\filldraw[purple] (6,-2) circle (3.5pt) node[right=3pt,scale=1] at(2.4,-2) {$(6,-2)$};
 
-			\node[red,scale=1.1] at (5,6) {$x^2+y^2=64$};
+			\node[red,scale=1.1] at (5,9.2) {$x^2+y^2=64$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -977,7 +980,7 @@
 			\draw[blue,very thick] (5,-3)--(9,-3);
 			\node[blue,above=3pt,scale=1] at (7,-3) {$r=4$};
 
-			\node[red,scale=1] at (7,1) {$(x-5)^2+(y+3)^2=16$};
+			\node[red,scale=1] at (7,1.5) {$(x-5)^2+(y+3)^2=16$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -1027,7 +1030,7 @@
 			\filldraw[purple] (3,5) circle (3pt) node[above right=2pt,scale=1] {$P(3,5)$};
 			\node[blue,above=2pt,scale=0.9,rotate=37] at (1,3.5) {$r=5$};
 
-			\node[red,scale=1] at (2,7) {$(x+1)^2+(y-2)^2=25$};
+			\node[red,scale=1] at (-4,7.5) {$(x+1)^2+(y-2)^2=25$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -1086,9 +1089,9 @@
 			\filldraw[purple] (4,5) circle (3pt) node[above right=2pt,scale=1] {$B(4,5)$};
 
 			\draw[orange,very thick] (-2,1)--(4,5);
-			\node[orange,below=2pt,scale=0.9] at (1,2.3) {diámetro};
+			\node[orange,below=2pt,scale=0.9, rotate=35] at (2,4.7) {diámetro};
 
-			\node[red,scale=1] at (4,0) {$(x-1)^2+(y-3)^2=13$};
+			\node[red,scale=1] at (4,-1.5) {$(x-1)^2+(y-3)^2=13$};
 
 		\end{tikzpicture}
 	\end{center}
@@ -1133,16 +1136,19 @@
 
 			\draw[blue,very thick,dashed] (2,-1)--(2,0);
 			\filldraw[blue] (2,0) circle (2pt);
-			\node[blue,right=3pt,scale=0.9] at (2,-0.5) {$r=1$};
+			\node[blue,right=3pt,scale=0.9,rotate=90] at (1.65,-1) {$r=1$};
 
-			\node[red,scale=0.9] at (3.2,-2.5) {$(x-2)^2+(y+1)^2=1$};
-			\node[green!60!black,scale=0.9] at (3,-3) {Tangente al eje $x$};
+			\node[red,scale=0.9] at (3.2,-2.3) {$(x-2)^2+(y+1)^2=1$};
+			\node[green!60!black,scale=0.9] at (3,0.2) {Tangente al eje $x$};
 
 		\end{tikzpicture}
 	\end{center}
 
 	\bigskip
 	\bigskip
+	
+		\noindent
+	\textbf{Nota final:} Esta guía cubre los conceptos fundamentales de la circunferencia en geometría analítica. ¡Con práctica dominarás este tema, Sheyra!
 
 	\begin{center}
 		\textbf{FIN DE LA GUÍA DE CIRCUNFERENCIA}
