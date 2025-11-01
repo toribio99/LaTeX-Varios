@@ -1,0 +1,765 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage[spanish,shorthands=off]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{tikz}
+\usetikzlibrary{calc, angles, quotes, intersections, arrows.meta, decorations.markings, babel}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots, fillbetween, statistics, polar, colormaps, dateplot}
+\usepackage{xcolor}
+
+\title{\Large Guía de Cálculo Diferencial: La Derivada
+
+\small{Elaborado para : \textsc{\bf{Sheyra Celedón}}}}
+
+\author{\bf{\textsc{Toribio de J Arrieta F}}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introducción: ¿Qué es la derivada?}
+
+La derivada es uno de los conceptos más importantes del cálculo. En términos simples, la derivada nos dice \textbf{qué tan rápido cambia algo}. Es como medir la velocidad de cambio de una función en un punto específico.
+
+\subsection*{Ejemplos de la vida cotidiana}
+
+\begin{itemize}
+	\item \textbf{Velocidad de un auto:} Si tienes una función que te dice la posición de un auto en cada momento, la derivada te dice la velocidad del auto. O sea, qué tan rápido está cambiando la posición.
+
+	\item \textbf{Crecimiento de una planta:} Si mides la altura de una planta cada día, la derivada te indica qué tan rápido está creciendo en un momento específico.
+
+	\item \textbf{Temperatura:} Si la temperatura cambia durante el día, la derivada te dice qué tan rápido sube o baja la temperatura en cada momento.
+
+	\item \textbf{Ventas de un producto:} Si tienes datos de ventas, la derivada te ayuda a entender si las ventas están aumentando rápidamente, lentamente, o están bajando.
+\end{itemize}
+
+En todos estos ejemplos, la derivada mide la \textbf{razón de cambio instantánea}, o sea, qué tan rápido cambia algo en un instante específico.
+
+\section{Interpretación geométrica de la derivada}
+
+Geométricamente, la derivada de una función en un punto representa la \textbf{pendiente de la recta tangente} a la curva en ese punto.
+
+\subsection*{¿Qué es una recta tangente?}
+
+Una recta tangente es una línea que "toca" la curva en un solo punto y tiene la misma dirección que la curva en ese punto. Es como si la curva fuera una carretera curva y la tangente fuera la dirección en la que apuntaría tu auto en ese momento.
+
+\begin{center}
+\begin{minipage}{0.52\textwidth}
+	\textbf{Elementos principales:}
+	\begin{itemize}
+		\item \textcolor{red}{Curva $f(x)$}: La función original
+		\item \textcolor{blue}{Punto $P(a, f(a))$}: El punto donde calculamos la derivada
+		\item \textcolor{green!60!black}{Recta tangente}: Línea que toca la curva en $P$ con pendiente $f'(a)$
+		\item \textcolor{orange}{Pendiente $m = f'(a)$}: El valor de la derivada en $x=a$
+	\end{itemize}
+
+	\bigskip
+	La pendiente de la tangente nos dice:
+	\begin{itemize}
+		\item Si $f'(a) > 0$: La función está creciendo
+		\item Si $f'(a) < 0$: La función está decreciendo
+		\item Si $f'(a) = 0$: La función tiene un máximo, mínimo o punto de inflexión
+	\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=7.5cm, height=7cm,
+			axis lines=middle,
+			xlabel={$x$}, ylabel={$y$},
+			xmin=-0.5, xmax=4,
+			ymin=-0.5, ymax=5,
+			xtick={0,1,2,3,4},
+			ytick={0,1,2,3,4},
+			grid=both,
+			grid style={line width=.1pt, draw=gray!30},
+			axis line style={-{Latex},thick},
+			tick label style={font=\tiny},
+			samples=100,
+		]
+
+		% Función f(x) = 0.3x^2 + 0.5x + 1
+		\addplot[red, thick, domain=0:3.5] {0.3*x^2 + 0.5*x + 1};
+		\node[red] at (3,3.8) {$y=f(x)$};
+
+		% Punto P(2, f(2))
+		\node[circle, fill=blue, inner sep=2pt, label={above right:$P(2,f(2))$}] at (2,2.7) {};
+
+		% Recta tangente: y - f(2) = f'(2)(x - 2)
+		% f'(x) = 0.6x + 0.5, f'(2) = 1.7
+		\addplot[green!60!black, thick, dashed, domain=0.5:3.5] {1.7*(x-2) + 2.7};
+		\node[green!60!black] at (3.2,4.5) {\small Tangente};
+
+		\end{axis}
+	\end{tikzpicture}
+\end{minipage}
+\end{center}
+
+\section{Definición formal de la derivada}
+
+La derivada de una función $f(x)$ en un punto $x=a$ se define como el límite:
+
+\[
+f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}
+\]
+
+Esta fórmula nos dice: toma un punto $a+h$ muy cercano a $a$, calcula el cambio en $f$ dividido por el cambio en $x$, y luego deja que $h$ se acerque a cero.
+
+\bigskip
+
+También podemos escribir la derivada en cualquier punto $x$ como:
+
+\[
+\boxed{f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}}
+\]
+
+\subsection*{Notaciones para la derivada}
+
+Existen varias formas de escribir la derivada:
+
+\begin{itemize}
+	\item $f'(x)$ --- Notación de Lagrange
+	\item $\dfrac{df}{dx}$ --- Notación de Leibniz
+	\item $\dfrac{dy}{dx}$ --- Si $y = f(x)$
+	\item $Df(x)$ --- Notación de operador
+\end{itemize}
+
+Todas significan lo mismo: la razón de cambio instantánea de $f$ con respecto a $x$.
+
+\section{Reglas básicas de derivación}
+
+A continuación se presentan las reglas más importantes para calcular derivadas sin usar la definición de límite cada vez.
+
+\subsection*{1. Regla de la constante}
+
+Si $f(x) = c$ (donde $c$ es una constante), entonces:
+\[
+\boxed{f'(x) = 0}
+\]
+
+\textit{Ejemplo:} Si $f(x) = 5$, entonces $f'(x) = 0$
+
+\subsection*{2. Regla de la potencia}
+
+Si $f(x) = x^n$ (donde $n$ es cualquier número real), entonces:
+\[
+\boxed{f'(x) = n \cdot x^{n-1}}
+\]
+
+\textit{Ejemplos:}
+\begin{itemize}
+	\item Si $f(x) = x^3$, entonces $f'(x) = 3x^2$
+	\item Si $f(x) = x^{1/2} = \sqrt{x}$, entonces $f'(x) = \frac{1}{2}x^{-1/2} = \frac{1}{2\sqrt{x}}$
+	\item Si $f(x) = \frac{1}{x} = x^{-1}$, entonces $f'(x) = -x^{-2} = -\frac{1}{x^2}$
+\end{itemize}
+
+\subsection*{3. Regla del múltiplo constante}
+
+Si $f(x) = c \cdot g(x)$ (donde $c$ es una constante), entonces:
+\[
+\boxed{f'(x) = c \cdot g'(x)}
+\]
+
+\textit{Ejemplo:} Si $f(x) = 5x^3$, entonces $f'(x) = 5 \cdot 3x^2 = 15x^2$
+
+\subsection*{4. Regla de la suma}
+
+Si $f(x) = g(x) + h(x)$, entonces:
+\[
+\boxed{f'(x) = g'(x) + h'(x)}
+\]
+
+\textit{Ejemplo:} Si $f(x) = x^3 + 2x^2 - 5x + 7$, entonces $f'(x) = 3x^2 + 4x - 5$
+
+\subsection*{5. Regla del producto}
+
+Si $f(x) = g(x) \cdot h(x)$, entonces:
+\[
+\boxed{f'(x) = g'(x) \cdot h(x) + g(x) \cdot h'(x)}
+\]
+
+\subsection*{6. Regla del cociente}
+
+Si $f(x) = \dfrac{g(x)}{h(x)}$, entonces:
+\[
+\boxed{f'(x) = \frac{g'(x) \cdot h(x) - g(x) \cdot h'(x)}{[h(x)]^2}}
+\]
+
+\subsection*{7. Regla de la cadena}
+
+Si $f(x) = g(h(x))$ (función compuesta), entonces:
+\[
+\boxed{f'(x) = g'(h(x)) \cdot h'(x)}
+\]
+
+O en notación de Leibniz: $\dfrac{dy}{dx} = \dfrac{dy}{du} \cdot \dfrac{du}{dx}$
+
+\section{Ejemplos resueltos}
+
+\subsection*{{\color{blue!40!red}{Ejemplo 1}}: \color{blue!80!black}{Derivada usando la definición de límite}}
+
+\textbf{Problema:} Encuentra la derivada de $f(x) = x^2$ usando la definición de límite.
+
+\bigskip
+
+\textbf{Solución:}
+
+Usamos la definición: $f'(x) = \lim_{h \to 0} \dfrac{f(x+h) - f(x)}{h}$
+
+\textbf{Paso 1:} Calculamos $f(x+h)$
+\[
+f(x+h) = (x+h)^2 = x^2 + 2xh + h^2
+\]
+
+\textbf{Paso 2:} Calculamos $f(x+h) - f(x)$
+\[
+f(x+h) - f(x) = (x^2 + 2xh + h^2) - x^2 = 2xh + h^2
+\]
+
+\textbf{Paso 3:} Dividimos por $h$
+\[
+\frac{f(x+h) - f(x)}{h} = \frac{2xh + h^2}{h} = \frac{h(2x + h)}{h} = 2x + h
+\]
+
+\textbf{Paso 4:} Calculamos el límite cuando $h \to 0$
+\[
+f'(x) = \lim_{h \to 0} (2x + h) = 2x
+\]
+
+\textbf{Respuesta:} $\boxed{f'(x) = 2x}$
+
+\subsection*{Gráfica del Ejemplo 1}
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=14cm, height=9cm,
+			axis lines=middle,
+			xlabel={$x$}, ylabel={$y$},
+			xmin=-3, xmax=3,
+			ymin=-1, ymax=9,
+			xtick={-3,-2,...,3},
+			ytick={0,1,...,9},
+			grid=both,
+			grid style={line width=.1pt, draw=gray!30},
+			axis line style={-{Latex},thick},
+			tick label style={font=\small},
+			samples=100,
+			legend pos=north west,
+		]
+
+		% Función f(x) = x^2
+		\addplot[red, very thick, domain=-3:3] {x^2};
+		\addlegendentry{$f(x) = x^2$}
+
+		% Tangente en x = 1: y - 1 = 2(x - 1), o sea y = 2x - 1
+		\addplot[blue, thick, dashed, domain=-0.5:2.5] {2*x - 1};
+		\addlegendentry{Tangente en $x=1$}
+		\node[circle, fill=blue, inner sep=2pt] at (1,1) {};
+		\node[blue, above right] at (1,1) {$(1,1)$};
+
+		% Tangente en x = -1.5: y - 2.25 = -3(x + 1.5), o sea y = -3x - 2.25
+		\addplot[green!60!black, thick, dashed, domain=-2.5:-0.5] {-3*x - 2.25};
+		\addlegendentry{Tangente en $x=-1.5$}
+		\node[circle, fill=green!60!black, inner sep=2pt] at (-1.5,2.25) {};
+		\node[green!60!black, above left] at (-1.5,2.25) {$(-1.5,2.25)$};
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+En esta gráfica vemos que:
+\begin{itemize}
+	\item En $x=1$: $f'(1) = 2(1) = 2$ (pendiente positiva, función creciendo)
+	\item En $x=-1.5$: $f'(-1.5) = 2(-1.5) = -3$ (pendiente negativa, función decreciendo)
+	\item En $x=0$: $f'(0) = 0$ (tangente horizontal, mínimo de la función)
+\end{itemize}
+
+\subsection*{{\color{blue!40!red}{Ejemplo 2}}: \color{blue!80!black}{Derivada de un polinomio}}
+
+\textbf{Problema:} Encuentra la derivada de $f(x) = 3x^4 - 5x^3 + 2x^2 - 7x + 9$
+
+\bigskip
+
+\textbf{Solución:}
+
+Aplicamos las reglas de derivación término por término:
+
+\begin{align*}
+f'(x) &= \frac{d}{dx}(3x^4) - \frac{d}{dx}(5x^3) + \frac{d}{dx}(2x^2) - \frac{d}{dx}(7x) + \frac{d}{dx}(9) \\
+&= 3 \cdot 4x^3 - 5 \cdot 3x^2 + 2 \cdot 2x - 7 \cdot 1 + 0 \\
+&= 12x^3 - 15x^2 + 4x - 7
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f'(x) = 12x^3 - 15x^2 + 4x - 7}$
+
+\subsection*{{\color{blue!40!red}{Ejemplo 3}}: \color{blue!80!black}{Derivada usando la regla del producto}}
+
+\textbf{Problema:} Encuentra la derivada de $f(x) = (2x + 3)(x^2 - 4)$
+
+\bigskip
+
+\textbf{Solución:}
+
+Identificamos: $g(x) = 2x + 3$ y $h(x) = x^2 - 4$
+
+\textbf{Paso 1:} Calculamos las derivadas individuales
+\[
+g'(x) = 2, \quad h'(x) = 2x
+\]
+
+\textbf{Paso 2:} Aplicamos la regla del producto: $f'(x) = g'(x) \cdot h(x) + g(x) \cdot h'(x)$
+\begin{align*}
+f'(x) &= 2 \cdot (x^2 - 4) + (2x + 3) \cdot 2x \\
+&= 2x^2 - 8 + 4x^2 + 6x \\
+&= 6x^2 + 6x - 8
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f'(x) = 6x^2 + 6x - 8}$
+
+\bigskip
+
+\textit{Nota:} También podríamos expandir primero y luego derivar:
+\[
+f(x) = 2x^3 + 3x^2 - 8x - 12 \quad \Rightarrow \quad f'(x) = 6x^2 + 6x - 8
+\]
+
+\subsection*{{\color{blue!40!red}{Ejemplo 4}}: \color{blue!80!black}{Derivada usando la regla del cociente}}
+
+\textbf{Problema:} Encuentra la derivada de $f(x) = \dfrac{x^2 + 1}{x - 2}$
+
+\bigskip
+
+\textbf{Solución:}
+
+Identificamos: $g(x) = x^2 + 1$ y $h(x) = x - 2$
+
+\textbf{Paso 1:} Calculamos las derivadas individuales
+\[
+g'(x) = 2x, \quad h'(x) = 1
+\]
+
+\textbf{Paso 2:} Aplicamos la regla del cociente: $f'(x) = \dfrac{g'(x) \cdot h(x) - g(x) \cdot h'(x)}{[h(x)]^2}$
+\begin{align*}
+f'(x) &= \frac{2x \cdot (x-2) - (x^2+1) \cdot 1}{(x-2)^2} \\
+&= \frac{2x^2 - 4x - x^2 - 1}{(x-2)^2} \\
+&= \frac{x^2 - 4x - 1}{(x-2)^2}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f'(x) = \dfrac{x^2 - 4x - 1}{(x-2)^2}}$
+
+\subsection*{{\color{blue!40!red}{Ejemplo 5}}: \color{blue!80!black}{Derivada usando la regla de la cadena}}
+
+\textbf{Problema:} Encuentra la derivada de $f(x) = (3x^2 - 2x + 1)^5$
+
+\bigskip
+
+\textbf{Solución:}
+
+Esta es una función compuesta. Identificamos:
+\begin{itemize}
+	\item Función exterior: $g(u) = u^5$ con $u = 3x^2 - 2x + 1$
+	\item Función interior: $h(x) = 3x^2 - 2x + 1$
+\end{itemize}
+
+\textbf{Paso 1:} Calculamos las derivadas
+\[
+g'(u) = 5u^4, \quad h'(x) = 6x - 2
+\]
+
+\textbf{Paso 2:} Aplicamos la regla de la cadena: $f'(x) = g'(h(x)) \cdot h'(x)$
+\begin{align*}
+f'(x) &= 5(3x^2 - 2x + 1)^4 \cdot (6x - 2) \\
+&= 5(6x - 2)(3x^2 - 2x + 1)^4 \\
+&= (30x - 10)(3x^2 - 2x + 1)^4
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f'(x) = (30x - 10)(3x^2 - 2x + 1)^4}$
+
+O factorizando: $\boxed{f'(x) = 10(3x - 1)(3x^2 - 2x + 1)^4}$
+
+\section{Ejercicios propuestos: Calcular derivadas}
+
+Encuentra la derivada de cada una de las siguientes funciones:
+
+\begin{enumerate}
+	\item {\color{red}{$f(x) = 7x^5 - 3x^3 + 2x - 9$}}
+
+	\item {\color{red}{$f(x) = \sqrt{x} + \dfrac{1}{x^2}$}}
+
+	\item {\color{red}{$f(x) = (x^2 + 1)(x^3 - 2x)$}}
+
+	\item {\color{red}{$f(x) = \dfrac{2x + 5}{x^2 + 1}$}}
+
+	\item {\color{red}{$f(x) = (4x^2 - 3x + 1)^6$}}
+
+	\item {\color{red}{$f(x) = x^4(2x - 3)^3$}}
+
+	\item {\color{red}{$f(x) = \dfrac{x^3 - 1}{x^2 + 1}$}}
+\end{enumerate}
+
+\section{Soluciones de los ejercicios propuestos}
+
+\subsection*{Solución del Ejercicio 1}
+
+\textbf{Función:} $f(x) = 7x^5 - 3x^3 + 2x - 9$
+
+\bigskip
+
+Aplicamos la regla de la potencia y la regla de la suma:
+
+\begin{align*}
+f'(x) &= 7 \cdot 5x^4 - 3 \cdot 3x^2 + 2 \cdot 1 - 0 \\
+&= 35x^4 - 9x^2 + 2
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f'(x) = 35x^4 - 9x^2 + 2}$
+
+\subsection*{Gráfica del Ejercicio 1}
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=14cm, height=8cm,
+			axis lines=middle,
+			xlabel={$x$}, ylabel={$y$},
+			xmin=-1.5, xmax=1.5,
+			ymin=-12, ymax=5,
+			xtick={-1.5,-1,...,1.5},
+			ytick={-12,-10,...,4},
+			grid=both,
+			grid style={line width=.1pt, draw=gray!30},
+			axis line style={-{Latex},thick},
+			tick label style={font=\tiny},
+			samples=100,
+			legend pos=north west,
+		]
+
+		% Función original (escalada)
+		\addplot[red, very thick, domain=-1.3:1.3] {0.7*x^5 - 0.3*x^3 + 2*x - 9};
+		\addlegendentry{$f(x)$}
+
+		% Derivada (escalada)
+		\addplot[blue, thick, dashed, domain=-1.3:1.3] {3.5*x^4 - 0.9*x^2 + 2};
+		\addlegendentry{$f'(x)$}
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\subsection*{Solución del Ejercicio 2}
+
+\textbf{Función:} $f(x) = \sqrt{x} + \dfrac{1}{x^2}$
+
+\bigskip
+
+Reescribimos usando exponentes: $f(x) = x^{1/2} + x^{-2}$
+
+Aplicamos la regla de la potencia:
+
+\begin{align*}
+f'(x) &= \frac{1}{2}x^{-1/2} + (-2)x^{-3} \\
+&= \frac{1}{2\sqrt{x}} - \frac{2}{x^3}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f'(x) = \dfrac{1}{2\sqrt{x}} - \dfrac{2}{x^3}}$
+
+\subsection*{Solución del Ejercicio 3}
+
+\textbf{Función:} $f(x) = (x^2 + 1)(x^3 - 2x)$
+
+\bigskip
+
+Identificamos: $g(x) = x^2 + 1$ y $h(x) = x^3 - 2x$
+
+Calculamos: $g'(x) = 2x$ y $h'(x) = 3x^2 - 2$
+
+Aplicamos la regla del producto:
+
+\begin{align*}
+f'(x) &= g'(x) \cdot h(x) + g(x) \cdot h'(x) \\
+&= 2x(x^3 - 2x) + (x^2 + 1)(3x^2 - 2) \\
+&= 2x^4 - 4x^2 + 3x^4 - 2x^2 + 3x^2 - 2 \\
+&= 5x^4 - 3x^2 - 2
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f'(x) = 5x^4 - 3x^2 - 2}$
+
+\subsection*{Solución del Ejercicio 4}
+
+\textbf{Función:} $f(x) = \dfrac{2x + 5}{x^2 + 1}$
+
+\bigskip
+
+Identificamos: $g(x) = 2x + 5$ y $h(x) = x^2 + 1$
+
+Calculamos: $g'(x) = 2$ y $h'(x) = 2x$
+
+Aplicamos la regla del cociente:
+
+\begin{align*}
+f'(x) &= \frac{g'(x) \cdot h(x) - g(x) \cdot h'(x)}{[h(x)]^2} \\
+&= \frac{2(x^2 + 1) - (2x + 5)(2x)}{(x^2 + 1)^2} \\
+&= \frac{2x^2 + 2 - 4x^2 - 10x}{(x^2 + 1)^2} \\
+&= \frac{-2x^2 - 10x + 2}{(x^2 + 1)^2}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f'(x) = \dfrac{-2x^2 - 10x + 2}{(x^2 + 1)^2}}$
+
+O factorizando: $\boxed{f'(x) = \dfrac{-2(x^2 + 5x - 1)}{(x^2 + 1)^2}}$
+
+\subsection*{Solución del Ejercicio 5}
+
+\textbf{Función:} $f(x) = (4x^2 - 3x + 1)^6$
+
+\bigskip
+
+Aplicamos la regla de la cadena:
+
+Función exterior: $g(u) = u^6$ con $g'(u) = 6u^5$
+
+Función interior: $h(x) = 4x^2 - 3x + 1$ con $h'(x) = 8x - 3$
+
+\begin{align*}
+f'(x) &= 6(4x^2 - 3x + 1)^5 \cdot (8x - 3) \\
+&= 6(8x - 3)(4x^2 - 3x + 1)^5
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f'(x) = 6(8x - 3)(4x^2 - 3x + 1)^5}$
+
+\subsection*{Solución del Ejercicio 6}
+
+\textbf{Función:} $f(x) = x^4(2x - 3)^3$
+
+\bigskip
+
+Identificamos: $g(x) = x^4$ y $h(x) = (2x - 3)^3$
+
+Calculamos:
+\begin{itemize}
+	\item $g'(x) = 4x^3$
+	\item $h'(x) = 3(2x - 3)^2 \cdot 2 = 6(2x - 3)^2$ (usando regla de la cadena)
+\end{itemize}
+
+Aplicamos la regla del producto:
+
+\begin{align*}
+f'(x) &= g'(x) \cdot h(x) + g(x) \cdot h'(x) \\
+&= 4x^3(2x - 3)^3 + x^4 \cdot 6(2x - 3)^2 \\
+&= 4x^3(2x - 3)^3 + 6x^4(2x - 3)^2
+\end{align*}
+
+Factorizamos $2x^3(2x - 3)^2$:
+
+\begin{align*}
+f'(x) &= 2x^3(2x - 3)^2[2(2x - 3) + 3x] \\
+&= 2x^3(2x - 3)^2(4x - 6 + 3x) \\
+&= 2x^3(2x - 3)^2(7x - 6)
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f'(x) = 2x^3(2x - 3)^2(7x - 6)}$
+
+\subsection*{Solución del Ejercicio 7}
+
+\textbf{Función:} $f(x) = \dfrac{x^3 - 1}{x^2 + 1}$
+
+\bigskip
+
+Identificamos: $g(x) = x^3 - 1$ y $h(x) = x^2 + 1$
+
+Calculamos: $g'(x) = 3x^2$ y $h'(x) = 2x$
+
+Aplicamos la regla del cociente:
+
+\begin{align*}
+f'(x) &= \frac{3x^2(x^2 + 1) - (x^3 - 1)(2x)}{(x^2 + 1)^2} \\
+&= \frac{3x^4 + 3x^2 - 2x^4 + 2x}{(x^2 + 1)^2} \\
+&= \frac{x^4 + 3x^2 + 2x}{(x^2 + 1)^2}
+\end{align*}
+
+Factorizamos el numerador:
+
+\[
+f'(x) = \frac{x(x^3 + 3x + 2)}{(x^2 + 1)^2}
+\]
+
+\textbf{Respuesta:} $\boxed{f'(x) = \dfrac{x(x^3 + 3x + 2)}{(x^2 + 1)^2}}$
+
+\section{Aplicaciones de la derivada}
+
+\subsection*{Puntos críticos y extremos}
+
+Los \textbf{puntos críticos} de una función son aquellos donde $f'(x) = 0$ o $f'(x)$ no existe. En estos puntos, la función puede tener máximos, mínimos o puntos de inflexión.
+
+\subsection*{{\color{blue!40!red}{Ejemplo 6}}: \color{blue!80!black}{Encontrar máximos y mínimos}}
+
+\textbf{Problema:} Encuentra los puntos críticos y determina si son máximos o mínimos locales de la función $f(x) = x^3 - 6x^2 + 9x + 1$
+
+\bigskip
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Calculamos la derivada
+\[
+f'(x) = 3x^2 - 12x + 9
+\]
+
+\textbf{Paso 2:} Igualamos a cero y resolvemos
+\begin{align*}
+3x^2 - 12x + 9 &= 0 \\
+3(x^2 - 4x + 3) &= 0 \\
+3(x - 1)(x - 3) &= 0
+\end{align*}
+
+Los puntos críticos son: $\boxed{x = 1 \text{ y } x = 3}$
+
+\textbf{Paso 3:} Usamos el criterio de la segunda derivada
+
+Calculamos: $f''(x) = 6x - 12$
+
+\begin{itemize}
+	\item En $x = 1$: $f''(1) = 6(1) - 12 = -6 < 0$ $\Rightarrow$ \textbf{Máximo local}
+
+	Valor: $f(1) = 1 - 6 + 9 + 1 = 5$ $\Rightarrow$ Máximo local en $(1, 5)$
+
+	\item En $x = 3$: $f''(3) = 6(3) - 12 = 6 > 0$ $\Rightarrow$ \textbf{Mínimo local}
+
+	Valor: $f(3) = 27 - 54 + 27 + 1 = 1$ $\Rightarrow$ Mínimo local en $(3, 1)$
+\end{itemize}
+
+\textbf{Respuestas:}
+\begin{itemize}
+	\item Máximo local: $\boxed{(1, 5)}$
+	\item Mínimo local: $\boxed{(3, 1)}$
+\end{itemize}
+
+\subsection*{Gráfica del Ejemplo 6}
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=14cm, height=9cm,
+			axis lines=middle,
+			xlabel={$x$}, ylabel={$y$},
+			xmin=-0.5, xmax=4.5,
+			ymin=-1, ymax=7,
+			xtick={0,1,2,3,4},
+			ytick={0,1,...,7},
+			grid=both,
+			grid style={line width=.1pt, draw=gray!30},
+			axis line style={-{Latex},thick},
+			tick label style={font=\small},
+			samples=100,
+		]
+
+		% Función f(x) = x^3 - 6x^2 + 9x + 1
+		\addplot[red, very thick, domain=-0.3:4.3] {x^3 - 6*x^2 + 9*x + 1};
+		\node[red] at (3.5,5) {$f(x) = x^3 - 6x^2 + 9x + 1$};
+
+		% Máximo local en (1, 5)
+		\node[circle, fill=blue, inner sep=3pt, label={above:Máximo $(1,5)$}] at (1,5) {};
+
+		% Mínimo local en (3, 1)
+		\node[circle, fill=green!60!black, inner sep=3pt, label={below:Mínimo $(3,1)$}] at (3,1) {};
+
+		% Tangentes horizontales en los puntos críticos
+		\addplot[blue, dashed, thick, domain=0.3:1.7] {5};
+		\addplot[green!60!black, dashed, thick, domain=2.3:3.7] {1};
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\section{Ejercicios de aplicación}
+
+\subsection*{Ejercicio A}
+
+Un objeto se mueve en línea recta y su posición en el tiempo $t$ (en segundos) está dada por:
+\[
+s(t) = 2t^3 - 9t^2 + 12t + 5 \quad \text{(en metros)}
+\]
+
+\begin{enumerate}
+	\item Encuentra la velocidad del objeto en cualquier tiempo $t$
+	\item ¿En qué momento(s) el objeto está en reposo?
+	\item Encuentra la aceleración del objeto en cualquier tiempo $t$
+\end{enumerate}
+
+\subsection*{Solución del Ejercicio A}
+
+\textbf{(a) Velocidad:} La velocidad es la derivada de la posición:
+\[
+v(t) = s'(t) = 6t^2 - 18t + 12
+\]
+$\boxed{v(t) = 6t^2 - 18t + 12 \text{ m/s}}$
+
+\bigskip
+
+\textbf{(b) En reposo:} El objeto está en reposo cuando $v(t) = 0$:
+\begin{align*}
+6t^2 - 18t + 12 &= 0 \\
+6(t^2 - 3t + 2) &= 0 \\
+6(t - 1)(t - 2) &= 0
+\end{align*}
+
+El objeto está en reposo en: $\boxed{t = 1 \text{ s y } t = 2 \text{ s}}$
+
+\bigskip
+
+\textbf{(c) Aceleración:} La aceleración es la derivada de la velocidad:
+\[
+a(t) = v'(t) = s''(t) = 12t - 18
+\]
+$\boxed{a(t) = 12t - 18 \text{ m/s}^2}$
+
+\subsection*{Ejercicio B}
+
+Una empresa produce $x$ unidades de un producto. El costo de producción (en miles de pesos) está dado por:
+\[
+C(x) = 0.01x^3 - 0.6x^2 + 13x + 50
+\]
+
+El costo marginal es la derivada $C'(x)$. Encuentra:
+
+\begin{enumerate}
+	\item El costo marginal en función de $x$
+	\item El costo marginal cuando se producen 20 unidades
+\end{enumerate}
+
+\subsection*{Solución del Ejercicio B}
+
+\textbf{(a) Costo marginal:}
+\[
+C'(x) = 0.03x^2 - 1.2x + 13
+\]
+$\boxed{C'(x) = 0.03x^2 - 1.2x + 13 \text{ miles de pesos por unidad}}$
+
+\bigskip
+
+\textbf{(b) Costo marginal cuando $x = 20$:}
+\begin{align*}
+C'(20) &= 0.03(20)^2 - 1.2(20) + 13 \\
+&= 0.03(400) - 24 + 13 \\
+&= 12 - 24 + 13 \\
+&= 1
+\end{align*}
+
+$\boxed{C'(20) = 1 \text{ mil pesos por unidad = 1000 pesos por unidad}}$
+
+Esto significa que producir la unidad 21 costará aproximadamente 1000 pesos adicionales.
+
+\bigskip
+\bigskip
+
+\begin{center}
+	\textbf{FIN DE LA GUÍA DE DERIVADAS}
+\end{center}
+
+\end{document}
