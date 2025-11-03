@@ -1,0 +1,189 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # PROMPT PARA GENERAR GU\'cdAS DE GEOMETR\'cdA ANAL\'cdTICA\
+\
+Este prompt te permite generar gu\'edas did\'e1cticas de geometr\'eda anal\'edtica con caracter\'edsticas similares a GuiaParabola.tex. Solo necesitas cambiar el tema espec\'edfico.\
+\
+---\
+\
+## PROMPT COMPLETO:\
+\
+```\
+Revisa el archivo de referencia '/Users/toribioarrieta/Documents/LaTeX-GitHub/LaTeX-Varios/Clases De Sheyra/Geometr\'eda anal\'edca/Parabola/GuiaParabola.tex' para que aprendas su estructura completa, estilo pedag\'f3gico, uso de gr\'e1ficas TikZ, y caracter\'edsticas visuales.\
+\
+Luego crea un documento LaTeX sobre el tema de **[TEMA A ABORDAR]** que se entrega en geometr\'eda anal\'edtica en grado [GRADO] en el bachillerato de Colombia.\
+\
+## CARACTER\'cdSTICAS REQUERIDAS:\
+\
+### 1. ESTRUCTURA DEL DOCUMENTO:\
+- Compilador: lualatex\
+- Clase: article, 12pt, a4paper\
+- Packages necesarios:\
+  * fontspec\
+  * babel (spanish, shorthands=off)\
+  * amsmath, amssymb\
+  * geometry (margin=2.5cm)\
+  * tikz con bibliotecas: calc, arrows.meta\
+\
+### 2. CONTENIDO PEDAG\'d3GICO:\
+El documento debe incluir en este orden:\
+\
+a) **Introducci\'f3n:**\
+   - \'bfQu\'e9 es [CONCEPTO]?\
+   - Ejemplos de aplicaciones en la vida cotidiana (m\'ednimo 3-4 ejemplos)\
+   - Lenguaje coloquial y accesible para estudiantes\
+\
+b) **Elementos principales:**\
+   - Definici\'f3n detallada de cada elemento del concepto\
+   - Texto en columna izquierda (52% del ancho)\
+   - Gr\'e1fica TikZ ilustrativa en columna derecha (45% del ancho)\
+   - La gr\'e1fica debe mostrar TODOS los elementos definidos con:\
+     * Puntos marcados con c\'edrculos rellenos\
+     * L\'edneas entrecortadas (dashed) para elementos auxiliares\
+     * Colores diferenciados (rojo para curva principal, azul para elementos fijos, verde para ejes, naranja/morado para distancias)\
+     * Etiquetas claras sin superposiciones\
+     * Grid en gris claro (gray!30)\
+     * Ejes con flechas tipo Latex\
+\
+c) **Casos particulares con ejemplos resueltos:**\
+   - M\'ednimo 3-5 ejemplos resueltos\
+   - Cada ejemplo debe incluir:\
+     * T\'edtulo con colores: \\subsection*\{\{\\color\{blue!40!red\}\{Ejemplo N\}\}: \\color\{blue!80!black\}\{Descripci\'f3n\}\}\
+     * Enunciado del ejercicio\
+     * Soluci\'f3n paso a paso MUY detallada\
+     * Resultados en \\boxed\{\}\
+     * Gr\'e1fica TikZ completa mostrando todos los elementos\
+   - Progresar de casos simples a casos complejos\
+\
+d) **Ejercicios propuestos (de ecuaci\'f3n a elementos):**\
+   - M\'ednimo 5 ejercicios\
+   - Ecuaciones resaltadas en rojo: \{\\color\{red\}\{ecuaci\'f3n\}\}\
+   - Variedad de dificultad\
+\
+e) **Soluciones detalladas de ejercicios propuestos:**\
+   - Soluci\'f3n paso a paso con m\'e1ximo detalle\
+   - Gr\'e1ficas TikZ para cada ejercicio\
+   - Explicaciones en lenguaje coloquial\
+\
+f) **Ejercicios inversos (de elementos a ecuaci\'f3n):**\
+   - M\'ednimo 5 ejercicios donde se dan elementos y se debe encontrar la ecuaci\'f3n\
+   - Progresar en dificultad\
+\
+g) **Soluciones de ejercicios inversos:**\
+   - Procedimiento detallado\
+   - Gr\'e1ficas TikZ completas\
+   - Resultados claramente indicados\
+\
+### 3. ESTILO VISUAL:\
+\
+**Colores a usar:**\
+- Rojo (red): Curvas principales, ecuaciones importantes\
+- Azul (blue): Puntos fijos, elementos caracter\'edsticos\
+- Verde (green!60!black): Ejes de simetr\'eda\
+- Naranja (orange): Distancias, par\'e1metros\
+- Morado (purple): Distancias alternativas\
+- Gris claro (gray!30): Grid de fondo\
+\
+**Notaci\'f3n consistente:**\
+- Usar abreviaturas como: D (directriz), E_S (eje de simetr\'eda), V (v\'e9rtice), F (foco), etc.\
+- Mantener notaci\'f3n consistente en todo el documento\
+\
+**Gr\'e1ficas TikZ:**\
+- Siempre incluir grid: \\draw[very thin,gray!30] (\\xmin,\\ymin) grid (\\xmax,\\ymax);\
+- Ejes con flechas: \\draw[-\{Latex\},thick]\
+- Scale apropiado para cada gr\'e1fica (t\'edpicamente 0.4 a 0.85)\
+- Usar \\def para l\'edmites: \\def\\xmin\{valor\}\\def\\xmax\{valor\}\
+- Samples=100 para curvas suaves\
+- domain= apropiado para cada curva\
+- Etiquetas con scale ajustado (0.75-1.1)\
+- Rotaciones cuando sea necesario para evitar superposiciones\
+- Flechas bidireccionales para distancias: \\draw[<->,color,very thick]\
+\
+### 4. NIVEL DE EXPLICACI\'d3N:\
+- Explicar desde lo M\'c1S B\'c1SICO posible\
+- Usar lenguaje coloquial (ejemplo: "o sea", "como si fuera", "es como")\
+- Explicaciones entre par\'e9ntesis para aclarar conceptos\
+- Paso a paso sin saltarse ning\'fan detalle\
+- Justificar cada operaci\'f3n matem\'e1tica\
+\
+### 5. FORMATO DEL ARCHIVO:\
+- Guardar en: [RUTA COMPLETA DEL DIRECTORIO]\
+- Nombre del archivo: [NombreDelArchivo].tex\
+- Despu\'e9s de crear, compilar con lualatex\
+- Abrir el PDF para verificaci\'f3n\
+\
+### 6. DESPU\'c9S DE CREAR:\
+1. Compilar el documento\
+2. Revisar el PDF generado\
+3. Hacer los ajustes necesarios si hay superposiciones en gr\'e1ficas\
+4. Volver a compilar\
+5. Iniciar guardado de versi\'f3n local y remoto (git add, commit, push)\
+\
+---\
+\
+## EJEMPLO DE USO:\
+\
+Tema: **Elipse**\
+Grado: **11**\
+Directorio: `/Users/toribioarrieta/Documents/LaTeX-GitHub/LaTeX-Varios/Clases De Sheyra/Geometr\'eda anal\'edca/Elipse`\
+Archivo: `GuiaElipse.tex`\
+```\
+\
+---\
+\
+## TEMAS QUE PUEDES ABORDAR CON ESTE PROMPT:\
+\
+1. **Elipse** (Geometr\'eda Anal\'edtica - Grado 11)\
+2. **Hip\'e9rbola** (Geometr\'eda Anal\'edtica - Grado 11)\
+3. **Circunferencia** (Geometr\'eda Anal\'edtica - Grado 10)\
+4. **Recta** (Geometr\'eda Anal\'edtica - Grado 10)\
+5. **Sistemas de ecuaciones lineales** (\'c1lgebra - Grado 9-10)\
+6. **Funciones cuadr\'e1ticas** (\'c1lgebra - Grado 9)\
+7. **Funciones exponenciales** (\'c1lgebra - Grado 10-11)\
+8. **Funciones logar\'edtmicas** (\'c1lgebra - Grado 10-11)\
+9. **Trigonometr\'eda b\'e1sica** (Trigonometr\'eda - Grado 10)\
+10. **Identidades trigonom\'e9tricas** (Trigonometr\'eda - Grado 11)\
+\
+---\
+\
+## INSTRUCCIONES DE USO:\
+\
+1. Copia el PROMPT COMPLETO de arriba\
+2. Reemplaza **[TEMA A ABORDAR]** con el tema espec\'edfico (ej: "elipse", "hip\'e9rbola", "circunferencia")\
+3. Reemplaza **[GRADO]** con el grado correspondiente (10, 11, etc.)\
+4. Especifica la **[RUTA COMPLETA DEL DIRECTORIO]** donde se guardar\'e1\
+5. Define el **[NombreDelArchivo]** (ej: GuiaElipse, GuiaHiperbola, etc.)\
+6. Env\'eda el prompt completo al asistente\
+7. El asistente crear\'e1 el documento completo siguiendo todas las caracter\'edsticas\
+\
+---\
+\
+## VENTAJAS DE ESTE PROMPT:\
+\
+\uc0\u10003  **Consistencia:** Todas las gu\'edas tendr\'e1n el mismo estilo y estructura\
+\uc0\u10003  **Reutilizable:** Solo cambias el tema y algunos par\'e1metros\
+\uc0\u10003  **Completo:** Incluye todas las caracter\'edsticas de la gu\'eda de referencia\
+\uc0\u10003  **Flexible:** Puedes ajustar detalles espec\'edficos seg\'fan el tema\
+\uc0\u10003  **Automatizable:** El proceso de creaci\'f3n, compilaci\'f3n y versionado est\'e1 definido\
+\
+---\
+\
+## NOTAS IMPORTANTES:\
+\
+- El archivo de referencia GuiaParabola.tex debe estar disponible para que el asistente aprenda su estructura\
+- Aseg\'farate de tener instalado lualatex en tu sistema\
+- El repositorio git debe estar configurado correctamente\
+- Las rutas de archivos deben ser absolutas\
+- Los temas matem\'e1ticos deben ser apropiados para el nivel educativo especificado\
+\
+---\
+\
+**Fecha de creaci\'f3n:** 2025-10-30\
+**Basado en:** GuiaParabola.tex\
+**Versi\'f3n:** 1.0\
+}
