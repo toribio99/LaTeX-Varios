@@ -1,189 +1,826 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2865
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;}
+\margl1440\margr1440\vieww14200\viewh15400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 # PROMPT PARA GENERAR GU\'cdAS DE GEOMETR\'cdA ANAL\'cdTICA\
+\f0\fs28 \cf0 # PROMPT AUT\'d3NOMO PARA GENERAR GU\'cdAS DE GEOMETR\'cdA ANAL\'cdTICA Y C\'c1LCULO\
 \
-Este prompt te permite generar gu\'edas did\'e1cticas de geometr\'eda anal\'edtica con caracter\'edsticas similares a GuiaParabola.tex. Solo necesitas cambiar el tema espec\'edfico.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 Este prompt es 100% aut\'f3nomo y no requiere acceso a archivos externos. Contiene TODA la informaci\'f3n necesaria para generar gu\'edas did\'e1cticas profesionales de geometr\'eda anal\'edtica y c\'e1lculo.\
 \
 ---\
 \
-## PROMPT COMPLETO:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## PROMPT COMPLETO:\
 \
-```\
-Revisa el archivo de referencia '/Users/toribioarrieta/Documents/LaTeX-GitHub/LaTeX-Varios/Clases De Sheyra/Geometr\'eda anal\'edca/Parabola/GuiaParabola.tex' para que aprendas su estructura completa, estilo pedag\'f3gico, uso de gr\'e1ficas TikZ, y caracter\'edsticas visuales.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 Crea un documento LaTeX sobre el tema de
+\b **[TEMA A ABORDAR]**
+\b0  que se entrega en
+\b [MATERIA]
+\b0  en grado
+\b [GRADO]
+\b0  en el bachillerato de Colombia.\
 \
-Luego crea un documento LaTeX sobre el tema de **[TEMA A ABORDAR]** que se entrega en geometr\'eda anal\'edtica en grado [GRADO] en el bachillerato de Colombia.\
+---\
 \
-## CARACTER\'cdSTICAS REQUERIDAS:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## 1. PRE\'c1MBULO COMPLETO Y DOCUMENTADO\
 \
-### 1. ESTRUCTURA DEL DOCUMENTO:\
-- Compilador: lualatex\
-- Clase: article, 12pt, a4paper\
-- Packages necesarios:\
-  * fontspec\
-  * babel (spanish, shorthands=off)\
-  * amsmath, amssymb\
-  * geometry (margin=2.5cm)\
-  * tikz con bibliotecas: calc, arrows.meta\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 Usa el siguiente pre\'e1mbulo EXACTAMENTE como se muestra. Est\'e1 organizado jer\'e1rquicamente y completamente documentado:\
 \
-### 2. CONTENIDO PEDAG\'d3GICO:\
-El documento debe incluir en este orden:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs20 \cf2 \cb3 % !TEX TS-program = lualatex\
+% !TEX encoding = UTF-8\
 \
-a) **Introducci\'f3n:**\
-   - \'bfQu\'e9 es [CONCEPTO]?\
-   - Ejemplos de aplicaciones en la vida cotidiana (m\'ednimo 3-4 ejemplos)\
-   - Lenguaje coloquial y accesible para estudiantes\
+% ========================================\
+% CLASE DEL DOCUMENTO\
+% ========================================\
+% Tama\'f1o de letra: 12pt (legible para estudiantes)\
+% Tama\'f1o de papel: a4paper (est\'e1ndar internacional)\
+\\documentclass[12pt,a4paper]\{article\}\
 \
-b) **Elementos principales:**\
-   - Definici\'f3n detallada de cada elemento del concepto\
-   - Texto en columna izquierda (52% del ancho)\
-   - Gr\'e1fica TikZ ilustrativa en columna derecha (45% del ancho)\
-   - La gr\'e1fica debe mostrar TODOS los elementos definidos con:\
-     * Puntos marcados con c\'edrculos rellenos\
-     * L\'edneas entrecortadas (dashed) para elementos auxiliares\
-     * Colores diferenciados (rojo para curva principal, azul para elementos fijos, verde para ejes, naranja/morado para distancias)\
-     * Etiquetas claras sin superposiciones\
-     * Grid en gris claro (gray!30)\
-     * Ejes con flechas tipo Latex\
+% ========================================\
+% PAQUETES DE FUENTES (lualatex)\
+% ========================================\
+% fontspec: Permite usar fuentes del sistema operativo (requiere lualatex)\
+\\usepackage\{fontspec\}\
 \
-c) **Casos particulares con ejemplos resueltos:**\
-   - M\'ednimo 3-5 ejemplos resueltos\
-   - Cada ejemplo debe incluir:\
-     * T\'edtulo con colores: \\subsection*\{\{\\color\{blue!40!red\}\{Ejemplo N\}\}: \\color\{blue!80!black\}\{Descripci\'f3n\}\}\
-     * Enunciado del ejercicio\
-     * Soluci\'f3n paso a paso MUY detallada\
-     * Resultados en \\boxed\{\}\
-     * Gr\'e1fica TikZ completa mostrando todos los elementos\
-   - Progresar de casos simples a casos complejos\
+% ========================================\
+% PAQUETES DE IDIOMA\
+% ========================================\
+% babel[spanish]: Configuraci\'f3n completa del idioma espa\'f1ol\
+% shorthands=off: Desactiva atajos que pueden causar conflictos con TikZ\
+\\usepackage[spanish,shorthands=off]\{babel\}\
 \
-d) **Ejercicios propuestos (de ecuaci\'f3n a elementos):**\
-   - M\'ednimo 5 ejercicios\
-   - Ecuaciones resaltadas en rojo: \{\\color\{red\}\{ecuaci\'f3n\}\}\
-   - Variedad de dificultad\
+% ========================================\
+% PAQUETES MATEM\'c1TICOS\
+% ========================================\
+% amsmath: Entornos y comandos matem\'e1ticos avanzados (ecuaciones, matrices, etc.)\
+% amssymb: S\'edmbolos matem\'e1ticos adicionales (conjuntos, l\'f3gica, etc.)\
+% bm: Permite s\'edmbolos matem\'e1ticos en negrita con \\bm\{x\} (opcional, \'fatil para vectores)\
+\\usepackage\{amsmath,amssymb\}\
+% \\usepackage\{bm\}  % Descomenta si necesitas vectores en negrita\
 \
-e) **Soluciones detalladas de ejercicios propuestos:**\
-   - Soluci\'f3n paso a paso con m\'e1ximo detalle\
-   - Gr\'e1ficas TikZ para cada ejercicio\
-   - Explicaciones en lenguaje coloquial\
+% ========================================\
+% PAQUETES DE GEOMETR\'cdA DE P\'c1GINA\
+% ========================================\
+% geometry: Control de m\'e1rgenes y dise\'f1o de p\'e1gina\
+\\usepackage\{geometry\}\
+\\geometry\{margin=2.5cm\}  % M\'e1rgenes uniformes de 2.5cm\
 \
-f) **Ejercicios inversos (de elementos a ecuaci\'f3n):**\
-   - M\'ednimo 5 ejercicios donde se dan elementos y se debe encontrar la ecuaci\'f3n\
-   - Progresar en dificultad\
+% ========================================\
+% PAQUETES GR\'c1FICOS - TikZ (B\'e1sico)\
+% ========================================\
+% tikz: Motor principal para gr\'e1ficas vectoriales\
+\\usepackage\{tikz\}\
 \
-g) **Soluciones de ejercicios inversos:**\
-   - Procedimiento detallado\
-   - Gr\'e1ficas TikZ completas\
-   - Resultados claramente indicados\
+% Bibliotecas TikZ b\'e1sicas (siempre incluidas):\
+% - calc: Permite c\'e1lculos de coordenadas (ej: (\\$(A)+(B)\\$))\
+% - arrows.meta: Flechas modernas y configurables (Latex, Stealth, etc.)\
+\\usetikzlibrary\{calc, arrows.meta\}\
 \
-### 3. ESTILO VISUAL:\
+% Bibliotecas TikZ avanzadas (descomenta seg\'fan necesites):\
+% - angles: Para dibujar y etiquetar \'e1ngulos\
+% - quotes: Simplifica etiquetado de l\'edneas y \'e1ngulos\
+% - intersections: Encuentra intersecciones entre trayectorias\
+% - decorations.markings: Marcas personalizadas en trayectorias (flechas, puntos)\
+% - babel: Necesaria si babel interfiere con caracteres especiales en TikZ\
+% \\usetikzlibrary\{angles, quotes, intersections, decorations.markings, babel\}\
 \
-**Colores a usar:**\
-- Rojo (red): Curvas principales, ecuaciones importantes\
-- Azul (blue): Puntos fijos, elementos caracter\'edsticos\
-- Verde (green!60!black): Ejes de simetr\'eda\
-- Naranja (orange): Distancias, par\'e1metros\
-- Morado (purple): Distancias alternativas\
-- Gris claro (gray!30): Grid de fondo\
+% ========================================\
+% PAQUETES GR\'c1FICOS - PGFPlots (Avanzado)\
+% ========================================\
+% pgfplots: Para gr\'e1ficas de funciones m\'e1s complejas (ejes axis, plots)\
+% SOLO USAR si necesitas:\
+%   - Gr\'e1ficas de funciones con ejes numerados autom\'e1ticos\
+%   - M\'faltiples gr\'e1ficas en una figura (groupplots)\
+%   - \'c1reas entre curvas (fillbetween)\
+%   - Estad\'edsticas, polares, mapas de colores\
+% \\usepackage\{pgfplots\}\
+% \\pgfplotsset\{compat=1.18\}  % Versi\'f3n de compatibilidad\
+%\
+% Bibliotecas pgfplots (descomenta solo si usas pgfplots):\
+% - groupplots: M\'faltiples gr\'e1ficas organizadas\
+% - fillbetween: Rellenar \'e1reas entre curvas\
+% - statistics: Gr\'e1ficas estad\'edsticas (boxplots, histogramas)\
+% - polar: Coordenadas polares\
+% - colormaps: Mapas de colores para superficies 3D\
+% - dateplot: Gr\'e1ficas con fechas en ejes\
+% \\usepgfplotslibrary\{groupplots, fillbetween, statistics, polar, colormaps, dateplot\}\
 \
-**Notaci\'f3n consistente:**\
-- Usar abreviaturas como: D (directriz), E_S (eje de simetr\'eda), V (v\'e9rtice), F (foco), etc.\
-- Mantener notaci\'f3n consistente en todo el documento\
+% ========================================\
+% PAQUETES DE COLOR\
+% ========================================\
+% xcolor: Permite usar colores personalizados y mezclas\
+\\usepackage\{xcolor\}\
 \
-**Gr\'e1ficas TikZ:**\
-- Siempre incluir grid: \\draw[very thin,gray!30] (\\xmin,\\ymin) grid (\\xmax,\\ymax);\
-- Ejes con flechas: \\draw[-\{Latex\},thick]\
-- Scale apropiado para cada gr\'e1fica (t\'edpicamente 0.4 a 0.85)\
-- Usar \\def para l\'edmites: \\def\\xmin\{valor\}\\def\\xmax\{valor\}\
-- Samples=100 para curvas suaves\
-- domain= apropiado para cada curva\
-- Etiquetas con scale ajustado (0.75-1.1)\
-- Rotaciones cuando sea necesario para evitar superposiciones\
-- Flechas bidireccionales para distancias: \\draw[<->,color,very thick]\
+% ========================================\
+% INFORMACI\'d3N DEL DOCUMENTO\
+% ========================================\
+\\title\{\\Large Gu\'eda de [MATERIA]: [T\'cdTULO DEL TEMA]\
 \
-### 4. NIVEL DE EXPLICACI\'d3N:\
-- Explicar desde lo M\'c1S B\'c1SICO posible\
-- Usar lenguaje coloquial (ejemplo: "o sea", "como si fuera", "es como")\
-- Explicaciones entre par\'e9ntesis para aclarar conceptos\
-- Paso a paso sin saltarse ning\'fan detalle\
+\\small\{Elaborado para : \\textsc\{\\bf\{Sheyra Celed\'f3n\}\}\}\}\
+\
+\\author\{\\bf\{\\textsc\{Toribio de J Arrieta F\}\}\}\
+\\date\{\\today\}\
+\
+\\begin\{document\}\
+\
+\\maketitle\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 ---\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## 2. ESTRUCTURA DEL CONTENIDO PEDAG\'d3GICO\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 El documento DEBE incluir las siguientes secciones en este orden:\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 ### a) Introducci\'f3n: \'bfQu\'e9 es [CONCEPTO]?\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 \
+- Usar
+\f1\fs20 \\section\{\'bfQu\'e9 es [concepto]?\}
+\f0\fs24 \
+- Explicaci\'f3n simple y coloquial del concepto\
+- Definici\'f3n geom\'e9trica formal con negritas y colores:\
+
+\f1\fs20 \\textbf\{Definici\'f3n geom\'e9trica.\} [Texto] \\textcolor\{red\}\{\\textbf\{palabra clave\}\} [resto]
+\f0\fs24 \
+- M\'ednimo 4-6 ejemplos de la vida cotidiana en itemize\
+- Lenguaje accesible: usar expresiones como "o sea", "es como", "imagina que"\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 ### b) Elementos principales\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 \
+Usar estructura de DOS COLUMNAS con minipage:\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs20 \cf2 \cb3 \\section\{Elementos de [concepto]\}\
+\
+\\noindent\
+\\begin\{minipage\}[t]\{0.52\\textwidth\}  % Columna izquierda: 52% del ancho\
+    Toda [concepto] tiene varios elementos importantes:\
+    \
+    \\begin\{itemize\}\
+        \\item \\textbf\{Elemento 1:
+\f0\fs24 \cf0 \cb1
+\f1\fs20 \cf2 \cb3 \} Descripci\'f3n detallada.\
+        \\item \\textbf\{Elemento 2:\} Descripci\'f3n con \\emph\{aclaraciones coloquiales\}.\
+        \\item \\textbf\{Elemento 3:\} ...\
+    \\end\{itemize\}\
+\\end\{minipage\}%  % Importante: el % evita espacios extra\
+\\hfill  % Espacio entre columnas\
+\\begin\{minipage\}[t]\{0.45\\textwidth\}  % Columna derecha: 45% del ancho\
+    \\vspace\{0pt\}  % Alineaci\'f3n superior\
+    \\centering\
+    \\begin\{tikzpicture\}[scale=0.75]\
+        % Definir l\'edmites del gr\'e1fico\
+        \\def\\xmin\{-1\}\\def\\xmax\{7\}\
+        \\def\\ymin\{-1\}\\def\\ymax\{6\}\
+        \
+        % Grid de fondo (SIEMPRE incluir)\
+        \\draw[very thin,gray!30] (\\xmin,\\ymin) grid (\\xmax,\\ymax);\
+        \
+        % Ejes con flechas\
+        \\draw[-\{Latex\},thick] (\\xmin,0)--(\\xmax,0) node[right] \{$x$\};\
+        \\draw[-\{Latex\},thick] (0,\\ymin)--(0,\\ymax) node[above] \{$y$\};\
+        \
+        % Aqu\'ed dibuja la figura principal (par\'e1bola, elipse, etc.)\
+        % Usar color ROJO para la curva principal\
+        \\draw[thick,red] ...;\
+        \
+        % Marcar elementos importantes:\
+        % - Centro/V\'e9rtice: c\'edrculo negro\
+        \\filldraw[black] (x,y) circle (2.5pt);\
+        \\node[black,below right=1pt] at (x,y) \{$V(x,y)$\};\
+        \
+        % - Focos: c\'edrculos azules\
+        \\filldraw[blue] (x,y) circle (2.5pt);\
+        \\node[blue,right=3pt] at (x,y) \{$F(x,y)$\};\
+        \
+        % - L\'edneas auxiliares: dashed\
+        \\draw[dashed,blue,very thick] ...;\
+        \
+        % - Distancias: flechas bidireccionales\
+        \\draw[orange,very thick,\{Latex\}-\{Latex\}] (x1,y1)--(x2,y2);\
+        \\node[orange,scale=0.9] at (x,y) \{$p=...$\};\
+    \\end\{tikzpicture\}\
+\\end\{minipage\}\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 ### c) Casos particulares con ejemplos resueltos\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 \
+Incluir 3-5 ejemplos resueltos paso a paso.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Formato del t\'edtulo del ejemplo:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b0\fs20 \cf2 \cb3 \\subsection*\{\{\\color\{blue!40!red\}\{Ejemplo 1\}\}: \\color\{blue!80!black\}\{Descripci\'f3n corta\}\}\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Estructura de cada ejemplo:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b0\fs20 \cf2 \cb3 \\textbf\{Ejercicio.\} [Enunciado claro]\
+\
+\\bigskip\
+\
+\\textbf\{Soluci\'f3n.\} Para solucionar este ejercicio procedemos as\'ed:\
+\
+\\bigskip\
+\
+\\textbf\{Paso 1:\} [T\'edtulo del paso]\
+\\[\
+    [Ecuaciones con explicaci\'f3n]\
+\\]\
+[Texto explicativo muy detallado]\
+\
+\\textbf\{Paso 2:\} ...\
+\
+\\textbf\{Respuesta:\} \\boxed\{[Resultado final]\}\
+\
+% Gr\'e1fica del ejemplo\
+\\subsection*\{Gr\'e1fica del Ejemplo 1\}\
+\
+\\begin\{center\}\
+    \\begin\{tikzpicture\}[scale=0.6]\
+        % [C\'f3digo TikZ completo]\
+    \\end\{tikzpicture\}\
+\\end\{center\}\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 ### d) Aplicaciones pr\'e1cticas del concepto (Opcional)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 \
+Si el tema lo permite (especialmente en C\'e1lculo), incluir 2-3 ejercicios de aplicaci\'f3n en contextos reales:\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Tipos de aplicaciones:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 - Problemas de f\'edsica (movimiento, velocidad, aceleraci\'f3n, optimizaci\'f3n)\
+- Aplicaciones en econom\'eda (costos marginales, ingresos, utilidad)\
+- Ingenier\'eda y arquitectura (resistencia de materiales, dise\'f1o)\
+- Biolog\'eda (crecimiento poblacional, tasas de cambio)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs20 \cf2 \cb3 \\section\{Aplicaciones de [concepto]\}\
+\
+\\subsection*\{Ejercicio de aplicaci\'f3n A\}\
+\
+[Contexto del problema real, ejemplo: "Un objeto se mueve en l\'ednea recta y su posici\'f3n..."]\
+\
+\\textbf\{Soluci\'f3n:\}\
+\
+[Procedimiento MUY detallado paso a paso]\
+\
+\\textbf\{Respuesta:\} \\boxed\{[resultado con unidades]\}\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 ### e) Ejercicios propuestos\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b0\fs20 \cf2 \cb3 \\section\{Ejercicios propuestos: [T\'edtulo]\}\
+\
+Encuentra [lo que se pide] de cada una de las siguientes [ecuaciones/datos]:\
+\
+\\begin\{enumerate\}\
+    \\item \{\\color\{red\}\{$[ecuaci\'f3n]$\}\}  % Ecuaciones en ROJO\
+    \\item \{\\color\{red\}\{$[ecuaci\'f3n]$\}\}\
+    % ... m\'ednimo 5 ejercicios\
+\\end\{enumerate\}\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 ### e) Soluciones detalladas\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b0\fs20 \cf2 \cb3 \\section\{Soluciones de los ejercicios propuestos\}\
+\
+\\subsection*\{Soluci\'f3n del Ejercicio 1\}\
+\
+\\textbf\{Funci\'f3n/Ecuaci\'f3n:\} $[ecuaci\'f3n]$\
+\
+\\bigskip\
+\
+[Procedimiento paso a paso MUY detallado]\
+\
+\\textbf\{Respuesta:\} \\boxed\{[resultado]\}\
+\
+\\subsection*\{Gr\'e1fica del Ejercicio 1\}\
+\\begin\{center\}\
+    \\begin\{tikzpicture\}...\
+\\end\{center\}\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+---\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## 3. ESPECIFICACIONES PARA GR\'c1FICAS TikZ\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b\fs24 \cf0 ### Paleta de colores est\'e1ndar:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 -
+\b red
+\b0 : Curvas principales (par\'e1bola, elipse, hip\'e9rbola, funci\'f3n)\
+-
+\b blue
+\b0 : Focos, puntos caracter\'edsticos, directrices\
+-
+\b green!60!black
+\b0 : Ejes de simetr\'eda, ejes menores\
+-
+\b orange
+\b0 : Distancias, par\'e1metros, semiejes\
+-
+\b purple
+\b0 : V\'e9rtices, distancias alternativas\
+-
+\b black
+\b0 : Centro, v\'e9rtice principal\
+-
+\b gray!30
+\b0 : Grid de fondo\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 ### Elementos gr\'e1ficos obligatorios:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 1. Grid de fondo:
+\f1\fs20 \\draw[very thin,gray!30] (\\xmin,\\ymin) grid (\\xmax,\\ymax);
+\f0\fs24 \
+2. Ejes con flechas:
+\f1\fs20 \\draw[-\{Latex\},thick] (\\xmin,0)--(\\xmax,0) node[right] \{$x$\};
+\f0\fs24 \
+3. Usar
+\f1\fs20 \\def
+\f0\fs24  para l\'edmites:
+\f1\fs20 \\def\\xmin\{-5\}\\def\\xmax\{5\}
+\f0\fs24 \
+4. Samples=100 m\'ednimo para curvas suaves\
+5. Scale entre 0.4 y 0.85 seg\'fan el tama\'f1o\
+6. Etiquetas con
+\f1\fs20 scale=0.7
+\f0\fs24  a
+\f1\fs20 1.1
+\f0\fs24  para legibilidad\
+7. Rotaciones para evitar superposiciones:
+\f1\fs20 rotate=90
+\f0\fs24 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \fs26 \cf0 ### Plantilla completa de gr\'e1fica TikZ:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b0\fs20 \cf2 \cb3 \\begin\{tikzpicture\}[scale=0.7]\
+    % ===== DEFINIR L\'cdMITES =====\
+    \\def\\xmin\{-5\}\\def\\xmax\{5\}\
+    \\def\\ymin\{-3\}\\def\\ymax\{8\}\
+    \
+    % ===== GRID DE FONDO (OBLIGATORIO) =====\
+    \\draw[very thin,gray!30] (\\xmin,\\ymin) grid (\\xmax,\\ymax);\
+    \
+    % ===== EJES CARTESIANOS =====\
+    \\draw[-\{Latex\},thick] (\\xmin,0)--(\\xmax,0) node[right] \{$x$\};\
+    \\draw[-\{Latex\},thick] (0,\\ymin)--(0,\\ymax) node[above] \{$y$\};\
+    \
+    % ===== CURVA PRINCIPAL (ROJO) =====\
+    % Ejemplo: par\'e1bola x\'b2 = 8y => y = x\'b2/8\
+    \\draw[thick,red,domain=-6:6,samples=100] plot (\\x,\{\\x*\\x/8\});\
+    \
+    % ===== V\'c9RTICE / CENTRO (NEGRO) =====\
+    \\filldraw[black] (0,0) circle (2.5pt);\
+    \\node[black,below right] at (0,0) \{$V(0,0)$\};\
+    \
+    % ===== FOCO (AZUL) =====\
+    \\filldraw[blue] (0,2) circle (2.5pt);\
+    \\node[blue,right] at (0,2) \{$F(0,2)$\};\
+    \
+    % ===== DIRECTRIZ (AZUL, DASHED) =====\
+    \\draw[dashed,blue,very thick] (\\xmin,-2)--(\\xmax,-2);\
+    \\node[blue,scale=0.85] at (3,-2.4) \{Directriz: $y=-2$\};\
+    \
+    % ===== EJE DE SIMETR\'cdA (VERDE) =====\
+    \\draw[dashed,green!60!black,thick] (0,\\ymin)--(0,\\ymax);\
+    \\node[green!60!black,scale=0.85,rotate=90] at (-0.6,5) \{Eje de simetr\'eda\};\
+    \
+    % ===== PAR\'c1METRO p (NARANJA, FLECHAS) =====\
+    \\draw[orange,very thick,\{Latex\}-\{Latex\}] (0.4,0)--(0.4,2);\
+    \\node[orange,right,scale=0.9] at (0.4,1) \{$p=2$\};\
+\\end\{tikzpicture\}\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+---\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## 4. PLANTILLA PARA GR\'c1FICAS CON PGFPLOTS (Opcional)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 Solo usar pgfplots si necesitas:\
+- Ejes con escalas autom\'e1ticas\
+- Legends (leyendas)\
+- M\'faltiples funciones con colores diferenciados\
+- Gr\'e1ficas m\'e1s complejas (derivadas, tangentes, \'e1reas)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs20 \cf2 \cb3 \\begin\{tikzpicture\}\
+    \\begin\{axis\}[\
+        width=14cm, height=9cm,\
+        axis lines=middle,\
+        xlabel=\{$x$\}, ylabel=\{$y$\},\
+        xmin=-3, xmax=3,\
+        ymin=-1, ymax=9,\
+        xtick=\{-3,-2,...,3\},\
+        ytick=\{0,1,...,9\},\
+        grid=both,\
+        grid style=\{line width=.1pt, draw=gray!30\},\
+        axis line style=\{-\{Latex\},thick\},\
+        tick label style=\{font=\\small\},\
+        samples=100,\
+        legend pos=north east,  % Posici\'f3n de leyenda\
+    ]\
+    \
+    % Funci\'f3n principal\
+    \\addplot[red, very thick, domain=-3:3] \{x^2\};\
+    \\addlegendentry\{$f(x) = x^2$\}\
+    \
+    % Tangente en un punto\
+    \\addplot[blue, thick, dashed, domain=-0.5:2.5] \{2*x - 1\};\
+    \\addlegendentry\{Tangente en $x=1$\}\
+    \
+    % Marcar punto\
+    \\node[circle, fill=blue, inner sep=2pt] at (1,1) \{\};\
+    \\node[blue, below right] at (1,1) \{$(1,1)$\};\
+    \
+    \\end\{axis\}\
+\\end\{tikzpicture\}\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+---\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## 5. ESTILO PEDAG\'d3GICO\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 ### Lenguaje coloquial:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 - Usar: "o sea", "es como", "imagina que", "como si fuera"\
+- Explicaciones entre par\'e9ntesis: \\emph\{(es como la punta de la U)\}\
+- Comparaciones con objetos cotidianos\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 ### Nivel de detalle:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 - Explicar desde lo M\'c1S B\'c1SICO\
+- NO saltarse ning\'fan paso en procedimientos\
 - Justificar cada operaci\'f3n matem\'e1tica\
+- Mostrar c\'e1lculos intermedios\
 \
-### 5. FORMATO DEL ARCHIVO:\
-- Guardar en: [RUTA COMPLETA DEL DIRECTORIO]\
-- Nombre del archivo: [NombreDelArchivo].tex\
-- Despu\'e9s de crear, compilar con lualatex\
-- Abrir el PDF para verificaci\'f3n\
-\
-### 6. DESPU\'c9S DE CREAR:\
-1. Compilar el documento\
-2. Revisar el PDF generado\
-3. Hacer los ajustes necesarios si hay superposiciones en gr\'e1ficas\
-4. Volver a compilar\
-5. Iniciar guardado de versi\'f3n local y remoto (git add, commit, push)\
-\
----\
-\
-## EJEMPLO DE USO:\
-\
-Tema: **Elipse**\
-Grado: **11**\
-Directorio: `/Users/toribioarrieta/Documents/LaTeX-GitHub/LaTeX-Varios/Clases De Sheyra/Geometr\'eda anal\'edca/Elipse`\
-Archivo: `GuiaElipse.tex`\
-```\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 ### Formato de texto:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 - Negritas: \\textbf\{...\} para t\'e9rminos clave\
+- It\'e1licas: \\emph\{...\} para aclaraciones\
+- Colores: \\textcolor\{red\}\{...\} para resaltar\
+- Boxed: \\boxed\{...\} para resultados finales\
+- Bigskip: \\bigskip para separar secciones\
 \
 ---\
 \
-## TEMAS QUE PUEDES ABORDAR CON ESTE PROMPT:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## 6. INSTRUCCIONES DE USO DEL PROMPT\
 \
-1. **Elipse** (Geometr\'eda Anal\'edtica - Grado 11)\
-2. **Hip\'e9rbola** (Geometr\'eda Anal\'edtica - Grado 11)\
-3. **Circunferencia** (Geometr\'eda Anal\'edtica - Grado 10)\
-4. **Recta** (Geometr\'eda Anal\'edtica - Grado 10)\
-5. **Sistemas de ecuaciones lineales** (\'c1lgebra - Grado 9-10)\
-6. **Funciones cuadr\'e1ticas** (\'c1lgebra - Grado 9)\
-7. **Funciones exponenciales** (\'c1lgebra - Grado 10-11)\
-8. **Funciones logar\'edtmicas** (\'c1lgebra - Grado 10-11)\
-9. **Trigonometr\'eda b\'e1sica** (Trigonometr\'eda - Grado 10)\
-10. **Identidades trigonom\'e9tricas** (Trigonometr\'eda - Grado 11)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Par\'e1metros a reemplazar:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 \
+1.
+\b [TEMA A ABORDAR]
+\b0 : "Elipse", "Hip\'e9rbola", "Derivadas", "L\'edmites", etc.\
+2.
+\b [MATERIA]
+\b0 : "Geometr\'eda Anal\'edtica", "C\'e1lculo Diferencial", etc.\
+3.
+\b [GRADO]
+\b0 : 10, 11, etc.\
+4.
+\b [T\'cdTULO DEL TEMA]
+\b0 : "La Elipse", "La Derivada", etc.\
+5.
+\b [CONCEPTO]
+\b0 : "elipse", "hip\'e9rbola", "derivada", etc. (min\'fascula)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Pasos:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 1. Copia TODO este prompt\
+2. Reemplaza los par\'e1metros entre corchetes\
+3. Ajusta el pre\'e1mbulo seg\'fan necesites (pgfplots, bibliotecas extra)\
+4. Env\'eda el prompt al asistente\
+5. El asistente crear\'e1 el documento completo\
+6. Compila con:
+\f1\fs20 lualatex archivo.tex
+\f0\fs24 \
+7. Revisa el PDF\
+8. Solicita ajustes si es necesario\
+9. Guarda en el repositorio (git add, commit, push)\
 \
 ---\
 \
-## INSTRUCCIONES DE USO:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## 7. EJEMPLOS DE USO\
 \
-1. Copia el PROMPT COMPLETO de arriba\
-2. Reemplaza **[TEMA A ABORDAR]** con el tema espec\'edfico (ej: "elipse", "hip\'e9rbola", "circunferencia")\
-3. Reemplaza **[GRADO]** con el grado correspondiente (10, 11, etc.)\
-4. Especifica la **[RUTA COMPLETA DEL DIRECTORIO]** donde se guardar\'e1\
-5. Define el **[NombreDelArchivo]** (ej: GuiaElipse, GuiaHiperbola, etc.)\
-6. Env\'eda el prompt completo al asistente\
-7. El asistente crear\'e1 el documento completo siguiendo todas las caracter\'edsticas\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b\fs24 \cf0 Ejemplo 1: Gu\'eda de Elipse\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 - TEMA: Elipse\
+- MATERIA: Geometr\'eda Anal\'edtica\
+- GRADO: 11\
+- T\'cdTULO: La Elipse\
+- Archivo: GuiaElipse.tex\
 \
----\
-\
-## VENTAJAS DE ESTE PROMPT:\
-\
-\uc0\u10003  **Consistencia:** Todas las gu\'edas tendr\'e1n el mismo estilo y estructura\
-\uc0\u10003  **Reutilizable:** Solo cambias el tema y algunos par\'e1metros\
-\uc0\u10003  **Completo:** Incluye todas las caracter\'edsticas de la gu\'eda de referencia\
-\uc0\u10003  **Flexible:** Puedes ajustar detalles espec\'edficos seg\'fan el tema\
-\uc0\u10003  **Automatizable:** El proceso de creaci\'f3n, compilaci\'f3n y versionado est\'e1 definido\
-\
----\
-\
-## NOTAS IMPORTANTES:\
-\
-- El archivo de referencia GuiaParabola.tex debe estar disponible para que el asistente aprenda su estructura\
-- Aseg\'farate de tener instalado lualatex en tu sistema\
-- El repositorio git debe estar configurado correctamente\
-- Las rutas de archivos deben ser absolutas\
-- Los temas matem\'e1ticos deben ser apropiados para el nivel educativo especificado\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Ejemplo 2: Gu\'eda de Derivadas\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 - TEMA: Derivadas\
+- MATERIA: C\'e1lculo Diferencial\
+- GRADO: 11\
+- T\'cdTULO: La Derivada\
+- Archivo: Derivada.tex\
+- Nota: Usar pgfplots para gr\'e1ficas de funciones\
 \
 ---\
 \
-**Fecha de creaci\'f3n:** 2025-10-30\
-**Basado en:** GuiaParabola.tex\
-**Versi\'f3n:** 1.0\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## 8. TEMAS SUGERIDOS\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b\fs24 \cf0 Geometr\'eda Anal\'edtica:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 1. Par\'e1bola (Grado 11)\
+2. Elipse (Grado 11)\
+3. Hip\'e9rbola (Grado 11)\
+4. Circunferencia (Grado 10)\
+5. Recta (Grado 10)\
+6. Distancia entre puntos (Grado 10)\
+7. Punto medio (Grado 10)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 C\'e1lculo:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 8. L\'edmites (Grado 11)\
+9. Derivadas (Grado 11)\
+10. Integrales (Grado 11)\
+11. Aplicaciones de la derivada (Grado 11)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 \'c1lgebra:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 12. Funciones cuadr\'e1ticas (Grado 9)\
+13. Sistemas de ecuaciones (Grado 9-10)\
+14. Funciones exponenciales (Grado 10)\
+15. Funciones logar\'edtmicas (Grado 10)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Trigonometr\'eda:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 16. Trigonometr\'eda b\'e1sica (Grado 10)\
+17. Identidades trigonom\'e9tricas (Grado 11)\
+18. Funciones trigonom\'e9tricas (Grado 11)\
+\
+---\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## 9. VENTAJAS DE ESTE PROMPT AUT\'d3NOMO\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \uc0\u10003
+\b Aut\'f3nomo:
+\b0  No requiere archivos de referencia externos\
+\uc0\u10003
+\b Documentado:
+\b0  Cada paquete y configuraci\'f3n est\'e1 explicado\
+\uc0\u10003
+\b Completo:
+\b0  Incluye plantillas de c\'f3digo listas para usar\
+\uc0\u10003
+\b Consistente:
+\b0  Todas las gu\'edas seguir\'e1n el mismo estilo\
+\uc0\u10003
+\b Flexible:
+\b0  Adaptable a diferentes temas y niveles\
+\uc0\u10003
+\b Portabilidad:
+\b0  Funciona en cualquier sistema con lualatex\
+\uc0\u10003
+\b Educativo:
+\b0  Los comentarios ayudan a entender el c\'f3digo LaTeX\
+\
+---\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## 10. NOTAS IMPORTANTES\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Requisitos del sistema:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 - lualatex instalado (viene con TeX Live, MiKTeX)\
+- Editor LaTeX (TeXShop, TeXstudio, Overleaf, VS Code con LaTeX Workshop)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Cu\'e1ndo usar TikZ vs pgfplots:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 -
+\b TikZ puro:
+\b0  C\'f3nicas (par\'e1bola, elipse, hip\'e9rbola, circunferencia)\
+-
+\b pgfplots:
+\b0  Funciones (derivadas, integrales, l\'edmites, gr\'e1ficas avanzadas)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Compilaci\'f3n:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 - SIEMPRE usar lualatex (no pdflatex)\
+- Compilar 2 veces si hay referencias\
+- Si hay errores, revisar: corchetes, llaves, s\'edmbolos especiales\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Control de versiones:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 - Usar git para versionar los archivos .tex\
+- Hacer commit despu\'e9s de cada secci\'f3n completa\
+- Push al remoto cuando el documento est\'e9 completo\
+\
+---\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs26 \cf0 ## 11. REFERENCIA R\'c1PIDA DE COMANDOS LaTeX\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b\fs24 \cf0 Estructura:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b0\fs20 \cf2 \cb3 \\section\{T\'edtulo\}                  % Secci\'f3n numerada\
+\\section*\{T\'edtulo\}                 % Secci\'f3n sin n\'famero\
+\\subsection\{T\'edtulo\}               % Subsecci\'f3n\
+\\subsection*\{T\'edtulo\}              % Subsecci\'f3n sin n\'famero\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 Formato de texto:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b0\fs20 \cf2 \cb3 \\textbf\{texto\}                    % Negrita\
+\\emph\{texto\}                      % It\'e1lica/\'e9nfasis\
+\\textcolor\{red\}\{texto\}            % Color\
+\\boxed\{ecuaci\'f3n\}                 % Recuadro para resultados\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 Ecuaciones:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b0\fs20 \cf2 \cb3 $ecuaci\'f3n$                        % En l\'ednea\
+\\[ecuaci\'f3n\\]                      % Centrada, sin n\'famero\
+\\begin\{align*\} ... \\end\{align*\}   % Ecuaciones alineadas\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 Listas:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b0\fs20 \cf2 \cb3 \\begin\{itemize\} \\item ... \\end\{itemize\}     % Vi\'f1etas\
+\\begin\{enumerate\} \\item ... \\end\{enumerate\}  % Numerada\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 Espaciado:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\b0\fs20 \cf2 \cb3 \\bigskip                          % Espacio grande\
+\\medskip                          % Espacio mediano\
+\\smallskip                        % Espacio peque\'f1o\
+\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+---\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs20 \cf0 **Fecha de creaci\'f3n:** 2025-11-03\
+**Basado en:** GuiaParabola.tex, GuiaCircunferencia.tex, GuiaElipse.tex, GuiaHiperbola.tex, Derivada.tex\
+**Versi\'f3n:** 2.0 (Aut\'f3noma y Documentada)\
+**Autor del template:** Toribio de J Arrieta F\
 }
