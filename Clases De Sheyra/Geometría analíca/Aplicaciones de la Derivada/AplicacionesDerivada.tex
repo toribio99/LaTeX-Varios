@@ -1,0 +1,1424 @@
+% !TEX TS-program = lualatex
+% !TEX encoding = UTF-8
+
+% ========================================
+% CLASE DEL DOCUMENTO
+% ========================================
+% Tamaño de letra: 12pt (legible para estudiantes)
+% Tamaño de papel: a4paper (estándar internacional)
+\documentclass[12pt,a4paper]{article}
+
+% ========================================
+% PAQUETES DE FUENTES (lualatex)
+% ========================================
+% fontspec: Permite usar fuentes del sistema operativo (requiere lualatex)
+\usepackage{fontspec}
+
+% ========================================
+% PAQUETES DE IDIOMA
+% ========================================
+% babel[spanish]: Configuración completa del idioma español
+% shorthands=off: Desactiva atajos que pueden causar conflictos con TikZ
+\usepackage[spanish,shorthands=off]{babel}
+
+% ========================================
+% PAQUETES MATEMÁTICOS
+% ========================================
+% amsmath: Entornos y comandos matemáticos avanzados (ecuaciones, matrices, etc.)
+% amssymb: Símbolos matemáticos adicionales (conjuntos, lógica, etc.)
+\usepackage{amsmath,amssymb}
+
+% ========================================
+% PAQUETES DE GEOMETRÍA DE PÁGINA
+% ========================================
+% geometry: Control de márgenes y diseño de página
+\usepackage{geometry}
+\geometry{margin=2.5cm}  % Márgenes uniformes de 2.5cm
+
+% ========================================
+% PAQUETES GRÁFICOS - TikZ (Básico)
+% ========================================
+% tikz: Motor principal para gráficas vectoriales
+\usepackage{tikz}
+
+% Bibliotecas TikZ básicas (siempre incluidas):
+% - calc: Permite cálculos de coordenadas
+% - arrows.meta: Flechas modernas y configurables
+\usetikzlibrary{calc, arrows.meta}
+
+% ========================================
+% PAQUETES GRÁFICOS - PGFPlots (Avanzado)
+% ========================================
+% pgfplots: Para gráficas de funciones más complejas
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}  % Versión de compatibilidad
+
+% ========================================
+% PAQUETES DE COLOR
+% ========================================
+% xcolor: Permite usar colores personalizados y mezclas
+\usepackage{xcolor}
+
+% ========================================
+% INFORMACIÓN DEL DOCUMENTO
+% ========================================
+\title{\Large Guía de Cálculo Diferencial: Aplicaciones de la Derivada
+
+\small{Elaborado para : \textsc{\bf{Estudiante De Bachillerato}}}}
+
+\author{\bf{\textsc{Toribio de J Arrieta F}}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{¿Qué son las aplicaciones de la derivada?}
+
+La \textbf{derivada} es una herramienta matemática muy poderosa que no solo nos ayuda a entender cómo cambian las cosas, sino que también tiene aplicaciones prácticas en muchos campos de la vida real. \emph{Es como tener una lupa matemática que nos permite ver y entender el cambio}.
+
+\bigskip
+
+En esta guía vamos a explorar cómo la derivada se aplica en diferentes áreas:
+
+\begin{itemize}
+	\item \textbf{Física:} Para calcular velocidades, aceleraciones, y entender el movimiento.
+
+	\item \textbf{Economía:} Para maximizar ganancias, minimizar costos, y tomar decisiones financieras óptimas.
+
+	\item \textbf{Medicina y Epidemiología:} Para modelar el crecimiento de poblaciones y la propagación de enfermedades.
+
+	\item \textbf{Optimización:} Para encontrar los mejores diseños, las formas más eficientes, o los valores óptimos en general.
+
+	\item \textbf{Ingeniería:} Para diseñar estructuras, optimizar procesos, y resolver problemas técnicos.
+
+	\item \textbf{Ciencias Sociales:} Para analizar cambios en poblaciones, tendencias, y patrones sociales.
+\end{itemize}
+
+\bigskip
+
+\textbf{La idea central:} Cuando algo cambia (población, precio, velocidad, temperatura), la derivada nos dice \textcolor{red}{\textbf{qué tan rápido está cambiando}} y nos ayuda a tomar decisiones basadas en ese cambio.
+
+\section{Aplicación 1: Física - Movimiento, Velocidad y Aceleración}
+
+En física, la derivada es fundamental para entender el movimiento. Si conocemos la posición de un objeto en función del tiempo, la derivada nos da información sobre su velocidad y aceleración.
+
+\subsection*{Conceptos básicos}
+
+\noindent
+\begin{minipage}[t]{0.52\textwidth}
+Cuando un objeto se mueve, podemos describir tres conceptos relacionados:
+
+\begin{itemize}
+	\item \textbf{Posición $s(t)$:} Dónde está el objeto en el tiempo $t$ (generalmente en metros).
+
+	\item \textbf{Velocidad $v(t)$:} Qué tan rápido cambia la posición. Es la derivada de la posición: $v(t) = s'(t)$.
+
+	\item \textbf{Aceleración $a(t)$:} Qué tan rápido cambia la velocidad. Es la derivada de la velocidad: $a(t) = v'(t) = s''(t)$.
+\end{itemize}
+
+\bigskip
+
+\textbf{Interpretación:}
+\begin{itemize}
+\item Si $v(t) = 0$: el objeto está en reposo
+\item Si $v(t) > 0$: el objeto se mueve hacia adelante
+\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+	\begin{itemize}
+\item Si $v(t) < 0$: el objeto se mueve hacia atrás
+\item Si $a(t) > 0$: el objeto está acelerando
+\item Si $a(t) < 0$: el objeto está frenando
+	\end{itemize}
+	\vspace{0pt}
+	\centering
+	\begin{tikzpicture}[scale=0.8]
+		\begin{axis}[
+			width=7cm, height=6cm,
+			axis lines=middle,
+			xlabel={Tiempo (s)}, ylabel={Posición (m)},
+			xmin=0, xmax=5,
+			ymin=0, ymax=30,
+			xtick={0,1,2,3,4,5},
+			ytick={0,10,20,30},
+			grid=both,
+			grid style={line width=.1pt, draw=gray!30},
+			axis line style={-{Latex},thick},
+			tick label style={font=\tiny},
+			samples=100,
+		]
+
+		% Función posición s(t) = t^2 + 2t + 5
+		\addplot[red, very thick, domain=0:5] {x^2 + 2*x + 5};
+		\node[red, scale=0.8] at (axis cs:2.9,25) {$s(t)$};
+
+		\end{axis}
+	\end{tikzpicture}
+
+	\vspace{5pt}
+	\small\textit{Gráfica de posición vs tiempo}
+\end{minipage}
+
+\subsection*{{\color{blue!40!red}{Ejemplo 1}}: \color{blue!80!black}{Movimiento de un proyectil}}
+
+\textbf{Problema:} Un objeto se lanza verticalmente hacia arriba desde el suelo. Su altura en metros después de $t$ segundos está dada por:
+\[
+h(t) = -5t^2 + 20t
+\]
+
+Encuentra:
+\begin{enumerate}
+	\item La velocidad del objeto en cualquier tiempo $t$
+	\item La velocidad inicial (cuando $t=0$)
+	\item El tiempo en que el objeto alcanza su altura máxima
+	\item La altura máxima
+	\item La aceleración del objeto
+\end{enumerate}
+
+\bigskip
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Calcular la velocidad}
+
+La velocidad es la derivada de la posición:
+\[
+v(t) = h'(t) = \frac{d}{dt}(-5t^2 + 20t) = -10t + 20
+\]
+
+\textbf{Respuesta 1:} $\boxed{v(t) = -10t + 20 \text{ m/s}}$
+
+\bigskip
+
+\textbf{Paso 2: Velocidad inicial}
+
+Evaluamos $v(t)$ en $t=0$:
+\[
+v(0) = -10(0) + 20 = 20 \text{ m/s}
+\]
+
+\textbf{Respuesta 2:} $\boxed{v(0) = 20 \text{ m/s}}$ (hacia arriba)
+
+\bigskip
+
+\textbf{Paso 3: Tiempo de altura máxima}
+
+La altura máxima se alcanza cuando la velocidad es cero:
+\begin{align*}
+v(t) &= 0 \\
+-10t + 20 &= 0 \\
+10t &= 20 \\
+t &= 2
+\end{align*}
+
+\textbf{Respuesta 3:} $\boxed{t = 2 \text{ segundos}}$
+
+\bigskip
+
+\textbf{Paso 4: Altura máxima}
+
+Evaluamos $h(t)$ en $t=2$:
+\begin{align*}
+h(2) &= -5(2)^2 + 20(2) \\
+&= -5(4) + 40 \\
+&= -20 + 40 \\
+&= 20
+\end{align*}
+
+\textbf{Respuesta 4:} $\boxed{h_{\text{máx}} = 20 \text{ metros}}$
+
+\bigskip
+
+\textbf{Paso 5: Aceleración}
+
+La aceleración es la derivada de la velocidad:
+\[
+a(t) = v'(t) = \frac{d}{dt}(-10t + 20) = -10 \text{ m/s}^2
+\]
+
+\textbf{Respuesta 5:} $\boxed{a(t) = -10 \text{ m/s}^2}$ (constante, debido a la gravedad)
+
+\subsection*{Gráfica del Ejemplo 1}
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=14cm, height=9cm,
+			axis lines=middle,
+			xlabel={Tiempo $t$ (segundos)}, ylabel={Altura $h$ (metros)},
+			xmin=-0.5, xmax=4.5,
+			ymin=-2, ymax=22,
+			xtick={0,1,2,3,4},
+			ytick={0,5,10,15,20},
+			grid=both,
+			grid style={line width=.1pt, draw=gray!30},
+			axis line style={-{Latex},thick},
+			tick label style={font=\small},
+			samples=100,
+			legend style={
+				at={(0.49,0.4)},    % ubica cerca de la esquina inferior derecha
+				anchor=south east, % “pega” la esquina inferior derecha de la caja
+				font=\scriptsize
+			},
+		]
+
+		% Altura h(t) = -5t^2 + 20t
+		\addplot[red, very thick, domain=0:4] {-5*x^2 + 20*x};
+		\addlegendentry{$h(t) = -5t^2 + 20t$}
+
+		% Punto máximo
+		\node[circle, fill=blue, inner sep=2.5pt] at (2,20) {};
+		\node[blue, above right] at (2,20) {Altura máxima $(2, 20)$};
+
+		% Línea vertical en t=2
+		\draw[blue, dashed, thick] (2,0)--(2,20);
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+En esta gráfica vemos que:
+\begin{itemize}
+	\item El objeto sube desde $t=0$ hasta $t=2$ segundos (velocidad positiva)
+	\item Alcanza la altura máxima de 20 metros en $t=2$ segundos
+	\item Luego baja desde $t=2$ hasta $t=4$ segundos (velocidad negativa)
+	\item En $t=4$ segundos, el objeto regresa al suelo ($h(4) = 0$)
+\end{itemize}
+
+\section{Aplicación 2: Economía - Maximización de Utilidades}
+
+En economía, las empresas quieren maximizar sus ganancias y minimizar sus costos. La derivada nos ayuda a encontrar los puntos óptimos.
+
+\subsection*{Conceptos económicos}
+
+\noindent
+\begin{minipage}[t]{0.52\textwidth}
+En economía usamos estas funciones:
+
+\begin{itemize}
+	\item \textbf{Ingreso $I(x)$:} Dinero que entra por vender $x$ unidades.
+
+	\item \textbf{Costo $C(x)$:} Dinero que cuesta producir $x$ unidades.
+
+	\item \textbf{Utilidad $U(x)$:} Ganancia neta. Es la diferencia: $U(x) = I(x) - C(x)$.
+
+	\item \textbf{Ingreso marginal:} $I'(x)$ - Ingreso adicional por vender una unidad más.
+
+	\item \textbf{Costo marginal:} $C'(x)$ - Costo adicional de producir una unidad más.
+
+	\item \textbf{Utilidad marginal:} $U'(x) = I'(x) - C'(x)$
+\end{itemize}
+
+\bigskip
+
+\textbf{Criterio de optimización:}
+
+Para maximizar utilidad, buscamos donde $U'(x) = 0$ y verificamos que $U''(x) < 0$.
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+	\begin{itemize}
+	\item \textbf{Ingreso marginal:} $I'(x)$ - Ingreso adicional por vender una unidad más.
+	
+	\item \textbf{Costo marginal:} $C'(x)$ - Costo adicional de producir una unidad más.
+	
+	\item \textbf{Utilidad marginal:} $U'(x) = I'(x) - C'(x)$
+	\end{itemize}
+	\vspace{0pt}
+	\centering
+	\begin{tikzpicture}[scale=0.75]
+		\begin{axis}[
+			width=7.5cm, height=6cm,
+			axis lines=middle,
+			xlabel={Unidades $x$}, ylabel={Pesos},
+			xmin=0, xmax=60,
+			ymin=-200, ymax=800,
+			xtick={0,20,40,60},
+			ytick={0,200,400,600,800},
+			grid=both,
+			grid style={line width=.1pt, draw=gray!30},
+			axis line style={-{Latex},thick},
+			tick label style={font=\tiny},
+			samples=100,
+			legend pos=north east,
+			legend style={font=\small},
+		]
+
+		% Ingreso I(x) = 50x
+		\addplot[blue, thick, domain=0:60] {50*x};
+		\addlegendentry{Ingreso $I(x)$}
+
+		% Costo C(x) = 200 + 10x + 0.5x^2
+		\addplot[red, thick, domain=0:60] {200 + 10*x + 0.5*x^2};
+		\addlegendentry{Costo $C(x)$}
+
+		\end{axis}
+	\end{tikzpicture}
+
+	\vspace{5pt}
+	\small\textit{Ingreso y Costo vs Producción}
+\end{minipage}
+
+\subsection*{{\color{blue!40!red}{Ejemplo 2}}: \color{blue!80!black}{Maximizar utilidades de una empresa}}
+
+\textbf{Problema:} Una empresa produce y vende $x$ unidades de un producto. El ingreso por ventas es $I(x) = 50x$ (en miles de pesos) y el costo de producción es $C(x) = 200 + 10x + 0.5x^2$ (en miles de pesos).
+
+Encuentra:
+\begin{enumerate}
+	\item La función de utilidad $U(x)$
+	\item La cantidad de unidades que maximiza la utilidad
+	\item La utilidad máxima
+	\item El ingreso marginal y el costo marginal
+\end{enumerate}
+
+\bigskip
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Función de utilidad}
+
+La utilidad es la diferencia entre ingreso y costo:
+\begin{align*}
+U(x) &= I(x) - C(x) \\
+&= 50x - (200 + 10x + 0.5x^2) \\
+&= 50x - 200 - 10x - 0.5x^2 \\
+&= -0.5x^2 + 40x - 200
+\end{align*}
+
+\textbf{Respuesta 1:} $\boxed{U(x) = -0.5x^2 + 40x - 200 \text{ (miles de pesos)}}$
+
+\bigskip
+
+\textbf{Paso 2: Cantidad que maximiza la utilidad}
+
+Calculamos la derivada y la igualamos a cero:
+\begin{align*}
+U'(x) &= -x + 40 \\
+U'(x) &= 0 \\
+-x + 40 &= 0 \\
+x &= 40
+\end{align*}
+
+Verificamos con la segunda derivada:
+\[
+U''(x) = -1 < 0 \quad \text{(es un máximo)}
+\]
+
+\textbf{Respuesta 2:} $\boxed{x = 40 \text{ unidades}}$
+
+\bigskip
+
+\textbf{Paso 3: Utilidad máxima}
+
+Evaluamos $U(x)$ en $x=40$:
+\begin{align*}
+U(40) &= -0.5(40)^2 + 40(40) - 200 \\
+&= -0.5(1600) + 1600 - 200 \\
+&= -800 + 1600 - 200 \\
+&= 600
+\end{align*}
+
+\textbf{Respuesta 3:} $\boxed{U_{\text{máx}} = 600 \text{ mil pesos = \$600,000}}$
+
+\bigskip
+
+\textbf{Paso 4: Ingresos y costos marginales}
+
+Ingreso marginal:
+\[
+I'(x) = 50 \text{ mil pesos por unidad}
+\]
+
+Costo marginal:
+\[
+C'(x) = 10 + x
+\]
+
+En $x=40$:
+\[
+C'(40) = 10 + 40 = 50 \text{ mil pesos por unidad}
+\]
+
+\textbf{Respuesta 4:} $\boxed{I'(x) = 50, \quad C'(40) = 50}$
+
+\textbf{Observación importante:} En el punto óptimo, el ingreso marginal iguala al costo marginal ($I'(x) = C'(x)$). \emph{Esto tiene sentido: si producir una unidad más cuesta lo mismo que lo que genera, ese es el punto óptimo}.
+
+\subsection*{Gráfica del Ejemplo 2}
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=14cm, height=9cm,
+			axis lines=middle,
+			xlabel={Cantidad $x$ (unidades)}, ylabel={Miles de pesos},
+			xmin=0, xmax=80,
+			ymin=-300, ymax=700,
+			xtick={0,10,20,30,40,50,60,70,80},
+			ytick={-300,-200,...,700},
+			grid=both,
+			grid style={line width=.1pt, draw=gray!30},
+			axis line style={-{Latex},thick},
+			tick label style={font=\small},
+			samples=100,
+			legend style={
+				at={(0.98,0.91)},    % ubica cerca de la esquina inferior derecha
+				anchor=south east, % “pega” la esquina inferior derecha de la caja
+				font=\scriptsize
+			},
+		]
+
+		% Utilidad U(x) = -0.5x^2 + 40x - 200
+		\addplot[red, very thick, domain=0:80] {-0.5*x^2 + 40*x - 200};
+		\addlegendentry{$U(x)$ - Utilidad}
+
+		% Punto máximo
+		\node[circle, fill=blue, inner sep=3pt] at (40,600) {};
+		\node[blue, above] at (40,600) {Utilidad máxima $(40, 600)$};
+
+		% Línea vertical en x=40
+		\draw[blue, dashed, thick] (40,-300)--(40,600);
+		\node[blue, below] at (40,-300) {$x=40$};
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación:}
+\begin{itemize}
+	\item Si se producen menos de 40 unidades, la empresa puede aumentar utilidad produciendo más
+	\item Si se producen más de 40 unidades, la utilidad disminuye (los costos marginales superan los ingresos)
+	\item El punto óptimo es exactamente 40 unidades, con una utilidad de \$600,000
+\end{itemize}
+
+\section{Aplicación 3: Medicina y Epidemiología - Propagación de Enfermedades}
+
+En medicina y ciencias de la salud, la derivada se usa para modelar cómo se propagan las enfermedades y cómo crece una población afectada.
+
+\subsection*{Conceptos básicos}
+
+\noindent
+\begin{minipage}[t]{0.52\textwidth}
+Cuando estudiamos epidemias:
+
+\begin{itemize}
+	\item \textbf{$P(t)$:} Número de personas infectadas en el tiempo $t$ (días).
+
+	\item \textbf{$P'(t)$:} Tasa de crecimiento de la epidemia. Nos dice qué tan rápido se está propagando la enfermedad.
+
+	\item \textbf{Punto de inflexión:} Momento donde $P''(t) = 0$. Aquí la epidemia deja de acelerarse y comienza a desacelerarse.
+\end{itemize}
+
+\bigskip
+
+\textbf{Modelo logístico:}
+
+Las epidemias suelen seguir un patrón donde:
+\begin{itemize}
+	\item Crecen lentamente al inicio
+\end{itemize}
+
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+	\begin{itemize}
+		\item Aceleran en el medio
+		\item Se desaceleran cuando se acerca al límite de población
+	\end{itemize}
+	\vspace{0pt}
+	\centering
+	\begin{tikzpicture}[scale=0.75]
+		\begin{axis}[
+			width=7.5cm, height=6cm,
+			axis lines=middle,
+			xlabel={Tiempo (días)}, ylabel={Infectados},
+			xmin=0, xmax=30,
+			ymin=0, ymax=1100,
+			xtick={0,10,20,30},
+			ytick={0,250,500,750,1000},
+			grid=both,
+			grid style={line width=.1pt, draw=gray!30},
+			axis line style={-{Latex},thick},
+			tick label style={font=\tiny},
+			samples=100,
+		]
+
+		% Modelo logístico simplificado
+		\addplot[red, very thick, domain=0:30] {1000/(1+99*exp(-0.3*x))};
+		\node[red, scale=0.75] at (axis cs:13,850) {Curva epidémica};
+
+		\end{axis}
+	\end{tikzpicture}
+
+	\vspace{5pt}
+	\small\textit{Modelo de propagación de epidemia}
+\end{minipage}
+
+\subsection*{{\color{blue!40!red}{Ejemplo 3}}: \color{blue!80!black}{Velocidad de propagación de una enfermedad}}
+
+\textbf{Problema:} El número de personas infectadas por una gripe en una ciudad después de $t$ días está dado por:
+\[
+P(t) = \frac{2000}{1 + 19e^{-0.5t}}
+\]
+
+Encuentra:
+\begin{enumerate}
+	\item El número inicial de infectados (en $t=0$)
+	\item La tasa de crecimiento de la epidemia en $t=0$ y en $t=5$
+	\item El momento donde la epidemia crece más rápido (punto de inflexión)
+	\item El número máximo de personas que pueden infectarse
+\end{enumerate}
+
+\bigskip
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Número inicial de infectados}
+
+Evaluamos $P(t)$ en $t=0$:
+\begin{align*}
+P(0) &= \frac{2000}{1 + 19e^{-0.5(0)}} \\
+&= \frac{2000}{1 + 19e^0} \\
+&= \frac{2000}{1 + 19} \\
+&= \frac{2000}{20} \\
+&= 100
+\end{align*}
+
+\textbf{Respuesta 1:} $\boxed{P(0) = 100 \text{ personas}}$
+
+\bigskip
+
+\textbf{Paso 2: Tasa de crecimiento}
+
+Calculamos la derivada usando la regla de la cadena y del cociente:
+\begin{align*}
+P'(t) &= \frac{d}{dt}\left[\frac{2000}{1 + 19e^{-0.5t}}\right] \\
+&= 2000 \cdot \frac{-1}{(1 + 19e^{-0.5t})^2} \cdot 19e^{-0.5t} \cdot (-0.5) \\
+&= \frac{19000e^{-0.5t}}{(1 + 19e^{-0.5t})^2}
+\end{align*}
+
+En $t=0$:
+\begin{align*}
+P'(0) &= \frac{19000e^0}{(1 + 19)^2} = \frac{19000}{400} = 47.5
+\end{align*}
+
+En $t=5$:
+\begin{align*}
+P'(5) &= \frac{19000e^{-2.5}}{(1 + 19e^{-2.5})^2} \approx \frac{19000(0.0821)}{(1 + 1.56)^2} \approx \frac{1560}{6.55} \approx 238
+\end{align*}
+
+\textbf{Respuesta 2:} $\boxed{P'(0) \approx 47.5 \text{ personas/día}, \quad P'(5) \approx 238 \text{ personas/día}}$
+
+\bigskip
+
+\textbf{Paso 3: Punto de inflexión}
+
+Para un modelo logístico $P(t) = \frac{K}{1 + Ae^{-rt}}$, el punto de inflexión ocurre cuando $P(t) = \frac{K}{2}$.
+
+En nuestro caso:
+\[
+P(t) = \frac{2000}{2} = 1000
+\]
+
+Resolvemos:
+\begin{align*}
+\frac{2000}{1 + 19e^{-0.5t}} &= 1000 \\
+2000 &= 1000(1 + 19e^{-0.5t}) \\
+2 &= 1 + 19e^{-0.5t} \\
+1 &= 19e^{-0.5t} \\
+e^{-0.5t} &= \frac{1}{19} \\
+-0.5t &= \ln\left(\frac{1}{19}\right) = -\ln(19) \\
+t &= \frac{\ln(19)}{0.5} = 2\ln(19) \approx 5.89
+\end{align*}
+
+\textbf{Respuesta 3:} $\boxed{t \approx 5.89 \text{ días (aproximadamente 6 días)}}$
+
+\bigskip
+
+\textbf{Paso 4: Número máximo de infectados}
+
+El límite cuando $t \to \infty$:
+\[
+\lim_{t \to \infty} P(t) = \lim_{t \to \infty} \frac{2000}{1 + 19e^{-0.5t}} = \frac{2000}{1 + 0} = 2000
+\]
+
+\textbf{Respuesta 4:} $\boxed{P_{\text{máx}} = 2000 \text{ personas}}$
+
+\subsection*{Gráfica del Ejemplo 3}
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=14cm, height=9cm,
+			axis lines=middle,
+			xlabel={Tiempo $t$ (días)}, ylabel={Número de infectados $P(t)$},
+			xmin=0, xmax=20,
+			ymin=0, ymax=2200,
+			xtick={0,2,4,6,8,10,12,14,16,18,20},
+			ytick={0,500,1000,1500,2000},
+			grid=both,
+			grid style={line width=.1pt, draw=gray!30},
+			axis line style={-{Latex},thick},
+			tick label style={font=\small},
+			samples=200,
+			legend style={
+			at={(0.98,0.76)},    % ubica cerca de la esquina inferior derecha
+			anchor=south east, % “pega” la esquina inferior derecha de la caja
+			font=\small
+			},
+		]
+
+		% Función P(t) = 2000/(1+19e^{-0.5t})
+		\addplot[red, very thick, domain=0:20] {2000/(1+19*exp(-0.5*x))};
+		\addlegendentry{$P(t) = \frac{2000}{1+19e^{-0.5t}}$}
+
+		% Punto inicial
+		\node[circle, fill=blue, inner sep=2pt] at (0,100) {};
+		\node[blue, right] at (0,100) {Inicio: 100 infectados};
+
+		% Punto de inflexión
+		\node[circle, fill=green!60!black, inner sep=2.5pt] at (5.89,1000) {};
+		\node[green!60!black, right] at (5.89,1000) {Punto de inflexión};
+		\draw[green!60!black, dashed, thick] (5.89,0)--(5.89,1000);
+
+		% Línea horizontal en 2000
+		\draw[orange, dashed, thick] (0,2000)--(20,2000);
+		\node[orange, left] at (0,2000) {Límite: 2000};
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación:}
+\begin{itemize}
+	\item La epidemia empieza con 100 infectados
+	\item Crece más rápido alrededor del día 6 (punto de inflexión)
+	\item Se estabiliza cerca de 2000 infectados (toda la población susceptible)
+	\item La curva tiene forma de "S" (sigmoide), típica de modelos epidémicos
+\end{itemize}
+
+\section{Aplicación 4: Optimización Geométrica - Maximizar Áreas y Volúmenes}
+
+La derivada nos ayuda a encontrar las dimensiones óptimas para maximizar o minimizar áreas, volúmenes, y otras cantidades geométricas.
+
+\subsection*{{\color{blue!40!red}{Ejemplo 4}}: \color{blue!80!black}{Maximizar el área de un corral rectangular}}
+
+\textbf{Problema:} Un granjero tiene 200 metros de cerca para construir un corral rectangular. Uno de los lados del corral estará contra un granero (y no necesita cerca). ¿Cuáles deben ser las dimensiones del corral para maximizar el área?
+
+\bigskip
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Definir variables y ecuaciones}
+
+Sea:
+\begin{itemize}
+	\item $x$ = ancho del corral (perpendicular al granero)
+	\item $y$ = largo del corral (paralelo al granero)
+\end{itemize}
+
+Restricción de cerca:
+\[
+2x + y = 200 \quad \Rightarrow \quad y = 200 - 2x
+\]
+
+Área a maximizar:
+\[
+A = x \cdot y = x(200 - 2x) = 200x - 2x^2
+\]
+
+\bigskip
+
+\textbf{Paso 2: Encontrar el máximo}
+
+Derivamos e igualamos a cero:
+\begin{align*}
+A'(x) &= 200 - 4x \\
+A'(x) &= 0 \\
+200 - 4x &= 0 \\
+4x &= 200 \\
+x &= 50
+\end{align*}
+
+Verificamos con la segunda derivada:
+\[
+A''(x) = -4 < 0 \quad \text{(es un máximo)}
+\]
+
+\bigskip
+
+\textbf{Paso 3: Calcular las dimensiones}
+
+Ancho: $x = 50$ metros
+
+Largo: $y = 200 - 2(50) = 200 - 100 = 100$ metros
+
+Área máxima: $A = 50 \times 100 = 5000$ m²
+
+\bigskip
+
+\textbf{Respuestas:}
+\begin{itemize}
+	\item Ancho: $\boxed{x = 50 \text{ metros}}$
+	\item Largo: $\boxed{y = 100 \text{ metros}}$
+	\item Área máxima: $\boxed{A_{\text{máx}} = 5000 \text{ m}^2}$
+\end{itemize}
+
+\subsection*{Ilustración del Ejemplo 4}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+	% Granero
+	\fill[gray!30] (0,0) rectangle (5,0.3);
+	\node at (2.5,0.15) {GRANERO};
+
+	% Corral óptimo
+	\draw[very thick, blue] (0,0)--(0,-2.5);
+	\draw[very thick, blue] (0,-2.5)--(5,-2.5);
+	\draw[very thick, blue] (5,-2.5)--(5,0);
+
+	% Dimensiones
+	\draw[<->, thick, red] (-0.3,0)--(-0.3,-2.5);
+	\node[red, left] at (-0.3,-1.25) {$x = 50$ m};
+
+	\draw[<->, thick, red] (0,-2.9)--(5,-2.9);
+	\node[red, below] at (2.5,-2.9) {$y = 100$ m};
+
+	% Etiquetas de cerca
+	\node[blue,rotate=90] at (0.3,-1.25) {cerca};
+	\node[blue] at (2.5,-2.3) {cerca};
+	\node[blue,rotate=90] at (4.8,-1.25) {cerca};
+	\node[gray] at (2.5,0.6) {(sin cerca)};
+
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Gráfica: Área vs Ancho}
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=14cm, height=9cm,
+			axis lines=middle,
+			xlabel={Ancho $x$ (metros)}, ylabel={Área $A$ (m²)},
+			xmin=0, xmax=110,
+			ymin=0, ymax=5500,
+			xtick={0,20,40,50,60,80,100},
+			ytick={0,1000,2000,3000,4000,5000},
+			grid=both,
+			grid style={line width=.1pt, draw=gray!30},
+			axis line style={-{Latex},thick},
+			tick label style={font=\small},
+			samples=100,
+		]
+
+		% Área A(x) = 200x - 2x^2
+		\addplot[red, very thick, domain=0:100] {200*x - 2*x^2};
+		\node[red] at (axis cs:84,4500) {$A(x) = 200x - 2x^2$};
+
+		% Punto máximo
+		\node[circle, fill=blue, inner sep=3pt] at (50,5000) {};
+		\node[blue, above right] at (50,5000) {Máximo $(50, 5000)$};
+
+		% Línea vertical en x=50
+		\draw[blue, dashed, thick] (50,0)--(50,5000);
+
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación:}
+\begin{itemize}
+	\item El área crece desde $x=0$ hasta $x=50$ metros
+	\item El área máxima se alcanza en $x=50$ metros
+	\item Después de $x=50$, el área disminuye
+	\item El área es cero en $x=0$ y en $x=100$ (los extremos)
+\end{itemize}
+
+\section{Aplicación 5: Razones de Cambio Relacionadas - Problemas Dinámicos}
+
+A veces dos o más variables están relacionadas y cambian con el tiempo. La derivada nos permite encontrar cómo el cambio en una variable afecta a la otra.
+
+\subsection*{{\color{blue!40!red}{Ejemplo 5}}: \color{blue!80!black}{Llenado de un tanque cilíndrico}}
+
+\textbf{Problema:} Un tanque cilíndrico de 3 metros de radio se está llenando con agua a una tasa de 2 m³/min. ¿Qué tan rápido está subiendo el nivel del agua cuando la altura es de 5 metros?
+
+\bigskip
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar las variables}
+
+\begin{itemize}
+	\item $r = 3$ m (radio del tanque, constante)
+	\item $h$ = altura del agua (variable con el tiempo)
+	\item $V$ = volumen del agua (variable con el tiempo)
+	\item $\frac{dV}{dt} = 2$ m³/min (tasa a la que entra agua)
+	\item Queremos: $\frac{dh}{dt}$ (tasa a la que sube el nivel) cuando $h=5$ m
+\end{itemize}
+
+\bigskip
+
+\textbf{Paso 2: Relacionar las variables}
+
+El volumen de un cilindro es:
+\[
+V = \pi r^2 h = \pi (3)^2 h = 9\pi h
+\]
+
+\bigskip
+
+\textbf{Paso 3: Derivar con respecto al tiempo}
+
+Aplicamos derivada implícita:
+\begin{align*}
+\frac{dV}{dt} &= 9\pi \frac{dh}{dt}
+\end{align*}
+
+\bigskip
+
+\textbf{Paso 4: Sustituir valores conocidos}
+
+Sabemos que $\frac{dV}{dt} = 2$ m³/min:
+\begin{align*}
+2 &= 9\pi \frac{dh}{dt} \\
+\frac{dh}{dt} &= \frac{2}{9\pi} \\
+\frac{dh}{dt} &\approx \frac{2}{28.27} \\
+\frac{dh}{dt} &\approx 0.0707 \text{ m/min}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\frac{dh}{dt} \approx 0.071 \text{ m/min} \approx 7.1 \text{ cm/min}}$
+
+\bigskip
+
+\textbf{Nota:} Observa que la tasa $\frac{dh}{dt}$ NO depende de la altura $h$ en este caso, porque el tanque tiene sección transversal constante.
+
+\subsection*{Ilustración del Ejemplo 5}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+	% Tanque cilíndrico
+	\draw[thick] (0,0) ellipse (2 and 0.5);
+	\draw[thick] (-2,0)--(-2,-5);
+	\draw[thick] (2,0)--(2,-5);
+	\draw[thick] (0,-5) ellipse (2 and 0.5);
+
+	% Agua
+	\fill[blue!30] (-2,-2) rectangle (2,-5);
+	\draw[thick, blue] (0,-2) ellipse (2 and 0.5);
+	\draw[thick, blue] (-2,-2)--(-2,-5);
+	\draw[thick, blue] (2,-2)--(2,-5);
+
+	% Dimensiones
+	\draw[<->, thick, red] (2.5,0)--(2.5,-5);
+	\node[red, right] at (2.5,-2.5) {altura total};
+
+	\draw[<->, thick, orange] (-2.5,-2)--(-2.5,-5);
+	\node[orange, left] at (-2.5,-3.5) {$h = 5$ m};
+
+	\draw[<->, thick, green!60!black] (0,0.7)--(2,0.7);
+	\node[green!60!black, above] at (1,0.7) {$r = 3$ m};
+
+	% Flujo
+	\draw[->, very thick, blue] (-1,1)--(-1,0.2);
+	\node[blue, left] at (-1,1.2) {$\frac{dV}{dt} = 2$ m³/min};
+
+	% Nivel subiendo
+	\draw[->, very thick, purple] (2.8,-2)--(2.8,-1.5);
+	\node[purple, right] at (2.8,-1.75) {$\frac{dh}{dt} = ?$};
+
+\end{tikzpicture}
+\end{center}
+
+\subsection*{{\color{blue!40!red}{Ejemplo 6}}: \color{blue!80!black}{Escalera deslizándose}}
+
+\textbf{Problema:} Una escalera de 10 metros de largo está apoyada contra una pared. La base de la escalera se aleja de la pared a una velocidad de 0.5 m/s. ¿Qué tan rápido baja el extremo superior de la escalera cuando la base está a 6 metros de la pared?
+
+\bigskip
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar variables}
+
+\begin{itemize}
+	\item $L = 10$ m (longitud de la escalera, constante)
+	\item $x$ = distancia de la base de la escalera a la pared (variable)
+	\item $y$ = altura del extremo superior (variable)
+	\item $\frac{dx}{dt} = 0.5$ m/s (velocidad de la base alejándose)
+	\item Queremos: $\frac{dy}{dt}$ cuando $x=6$ m
+\end{itemize}
+
+\bigskip
+
+\textbf{Paso 2: Relacionar las variables}
+
+Por el teorema de Pitágoras:
+\[
+x^2 + y^2 = 10^2 = 100
+\]
+
+Cuando $x=6$:
+\[
+6^2 + y^2 = 100 \quad \Rightarrow \quad y^2 = 64 \quad \Rightarrow \quad y = 8 \text{ m}
+\]
+
+\bigskip
+
+\textbf{Paso 3: Derivar con respecto al tiempo}
+
+Derivamos implícitamente:
+\begin{align*}
+2x\frac{dx}{dt} + 2y\frac{dy}{dt} &= 0 \\
+x\frac{dx}{dt} + y\frac{dy}{dt} &= 0 \\
+\frac{dy}{dt} &= -\frac{x}{y}\frac{dx}{dt}
+\end{align*}
+
+\bigskip
+
+\textbf{Paso 4: Sustituir valores}
+
+Con $x=6$, $y=8$, $\frac{dx}{dt}=0.5$:
+\begin{align*}
+\frac{dy}{dt} &= -\frac{6}{8}(0.5) \\
+&= -\frac{3}{4}(0.5) \\
+&= -0.375 \text{ m/s}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\frac{dy}{dt} = -0.375 \text{ m/s}}$
+
+El signo negativo indica que la altura está disminuyendo (bajando).
+
+\subsection*{Ilustración del Ejemplo 6}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+	% Pared
+	\draw[very thick] (0,0)--(0,10);
+	\fill[gray!20] (-0.3,0) rectangle (0,10);
+
+	% Suelo
+	\draw[very thick] (0,0)--(10,0);
+	\fill[gray!20] (0,-0.3) rectangle (10,0);
+
+	% Escalera en posición x=6
+	\draw[very thick, blue] (0,8)--(6,0);
+	\node[circle, fill=blue, inner sep=2pt] at (0,8) {};
+	\node[circle, fill=blue, inner sep=2pt] at (6,0) {};
+
+	% Dimensiones
+	\draw[<->, thick, red] (6,-0.7)--(0,-0.7);
+	\node[red, below] at (3,-0.7) {$x = 6$ m};
+
+	\draw[<->, thick, orange] (-0.7,0)--(-0.7,8);
+	\node[orange, left] at (-0.7,4) {$y = 8$ m};
+
+	\node[green!60!black] at (4.4,4.5) {$L = 10$ m};
+
+	% Velocidades
+	\draw[->, very thick, purple] (6,0)--(7.5,0);
+	\node[purple, below] at (7.9,0) {$\frac{dx}{dt} = 0.5$ m/s};
+
+	\draw[->, very thick, purple] (0,8)--(0,6.5);
+	\node[purple, right] at (0.9,7) {$\frac{dy}{dt} = ?$};
+
+\end{tikzpicture}
+\end{center}
+
+\section{Ejercicios propuestos}
+
+Resuelve los siguientes problemas aplicando derivadas:
+
+\begin{enumerate}
+	\item {\color{red}{Una partícula se mueve según $s(t) = t^3 - 6t^2 + 9t$. Encuentra los momentos donde la partícula está en reposo.}}
+
+	\item {\color{red}{Una empresa tiene ingresos $I(x) = 100x$ y costos $C(x) = 500 + 20x + x^2$. ¿Cuántas unidades maximizan la utilidad?}}
+
+	\item {\color{red}{El crecimiento de una bacteria está dado por $N(t) = 100e^{0.3t}$. ¿A qué tasa crece la población en $t=5$ horas?}}
+
+	\item {\color{red}{Se quiere construir una caja sin tapa con una lámina cuadrada de 12 cm de lado, cortando cuadrados iguales en las esquinas. ¿Qué tamaño deben tener los cuadrados cortados para maximizar el volumen?}}
+
+	\item {\color{red}{Un globo esférico se infla a razón de 100 cm³/s. ¿Qué tan rápido aumenta el radio cuando este mide 5 cm? (Volumen de esfera: $V = \frac{4}{3}\pi r^3$)}}
+\end{enumerate}
+
+\section{Soluciones de los ejercicios propuestos}
+
+\subsection*{Solución del Ejercicio 1}
+
+\textbf{Función:} $s(t) = t^3 - 6t^2 + 9t$
+
+\bigskip
+
+La partícula está en reposo cuando $v(t) = s'(t) = 0$:
+\begin{align*}
+v(t) &= 3t^2 - 12t + 9 \\
+3t^2 - 12t + 9 &= 0 \\
+3(t^2 - 4t + 3) &= 0 \\
+3(t-1)(t-3) &= 0
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{t = 1 \text{ s y } t = 3 \text{ s}}$
+
+\bigskip
+
+\textbf{Gráfica de la función posición:}
+
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}[
+		width=14cm, height=9cm,
+		axis lines=middle,
+		xlabel={Tiempo $t$ (s)}, ylabel={Posición $s(t)$ (m)},
+		xmin=-1, xmax=5,
+		ymin=-2, ymax=6,
+		xtick={-1,0,1,2,3,4,5},
+		ytick={-2,-1,0,1,2,3,4,5,6},
+		grid=both,
+		grid style={line width=.1pt, draw=gray!30},
+		axis line style={-{Latex},thick},
+		tick label style={font=\small},
+		samples=100,
+		legend style={
+			at={(0.525,0.815)},
+			anchor=south east,
+			font=\small
+		},
+	]
+
+	% Función s(t) = t^3 - 6t^2 + 9t
+	\addplot[red, very thick, domain=-1:5] {x^3 - 6*x^2 + 9*x};
+	\addlegendentry{$s(t) = t^3 - 6t^2 + 9t$}
+
+	% Puntos donde la partícula está en reposo (v=0)
+	\node[circle, fill=blue, inner sep=2.5pt] at (1,4) {};
+	\node[blue, above right=2mm] at (1,3.5) {Reposo: $(1, 4)$};
+
+	\node[circle, fill=blue, inner sep=2.5pt] at (3,0) {};
+	\node[blue, above=4mm, rotate=90] at (3.15,1.2) {Reposo: $(3, 0)$};
+
+	% Líneas verticales en t=1 y t=3
+	\draw[blue, dashed, thick] (1,-2)--(1,4);
+	\draw[blue, dashed, thick] (3,-2)--(3,0);
+
+	\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación:}
+\begin{itemize}
+	\item En $t = 1$ s, la partícula está en reposo en la posición $s = 4$ m (máximo local)
+	\item En $t = 3$ s, la partícula está en reposo en la posición $s = 0$ m (mínimo local)
+	\item Entre $t = 0$ y $t = 1$ s, la partícula se mueve hacia adelante (velocidad positiva)
+	\item Entre $t = 1$ y $t = 3$ s, la partícula se mueve hacia atrás (velocidad negativa)
+	\item Después de $t = 3$ s, la partícula se mueve nuevamente hacia adelante
+\end{itemize}
+
+\subsection*{Solución del Ejercicio 2}
+
+\textbf{Utilidad:} $U(x) = I(x) - C(x) = 100x - (500 + 20x + x^2) = -x^2 + 80x - 500$
+
+\bigskip
+
+Derivamos e igualamos a cero:
+\begin{align*}
+U'(x) &= -2x + 80 = 0 \\
+x &= 40
+\end{align*}
+
+Verificamos: $U''(x) = -2 < 0$ (es máximo)
+
+\textbf{Respuesta:} $\boxed{x = 40 \text{ unidades}}$
+
+\bigskip
+
+\textbf{Gráfica de la función de utilidad:}
+
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}[
+		width=14cm, height=9cm,
+		axis lines=middle,
+		xlabel={Unidades producidas $x$}, ylabel={Utilidad $U(x)$ (pesos)},
+		xmin=0, xmax=80,
+		ymin=-600, ymax=1200,
+		xtick={0,10,20,30,40,50,60,70,80},
+		ytick={-600,-400,-200,0,200,400,600,800,1000,1200},
+		grid=both,
+		grid style={line width=.1pt, draw=gray!30},
+		axis line style={-{Latex},thick},
+		tick label style={font=\small},
+		samples=100,
+		legend style={
+			at={(0.48,0.12)},
+			anchor=south east,
+			font=\small
+		},
+	]
+
+	% Función U(x) = -x^2 + 80x - 500
+	\addplot[blue, very thick, domain=0:80] {-x^2 + 80*x - 500};
+	\addlegendentry{$U(x) = -x^2 + 80x - 500$}
+
+	% Punto máximo
+	\node[circle, fill=red, inner sep=2.5pt] at (40,1100) {};
+	\node[red, above, rotate=90, scale=.8] at (40,550) {Utilidad máxima: $(40, 1100)$};
+
+	% Línea vertical en x=40
+	\draw[red, dashed, thick] (40,-600)--(40,1100);
+
+	% Línea horizontal en U=0
+	\draw[green!60!black, dashed, thin] (0,0)--(80,0);
+	\node[green!60!black, above right, scale=0.8] at (8.8,50) {Punto de equilibrio};
+
+	\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación:}
+\begin{itemize}
+	\item La empresa tiene pérdidas (utilidad negativa) cuando produce menos de $\approx 6.8$ unidades o más de $\approx 73.2$ unidades
+	\item La utilidad máxima de \$1100 se alcanza produciendo exactamente 40 unidades
+	\item La función es simétrica respecto a $x = 40$ (vértice de la parábola)
+	\item Producir más o menos de 40 unidades disminuye la utilidad
+	\item Los costos fijos de \$500 se reflejan en que $U(0) = -500$
+\end{itemize}
+
+\subsection*{Solución del Ejercicio 3}
+
+\textbf{Función:} $N(t) = 100e^{0.3t}$
+
+\bigskip
+
+Tasa de crecimiento:
+\begin{align*}
+N'(t) &= 100 \cdot 0.3 \cdot e^{0.3t} = 30e^{0.3t} \\
+N'(5) &= 30e^{1.5} \approx 30(4.482) \approx 134.5
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{N'(5) \approx 134.5 \text{ bacterias por hora}}$
+
+\bigskip
+
+\textbf{Gráfica del crecimiento de bacterias:}
+
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}[
+		width=14cm, height=9cm,
+		axis lines=middle,
+		xlabel={Tiempo $t$ (horas)}, ylabel={Población $N(t)$ (bacterias)},
+		xmin=0, xmax=10,
+		ymin=0, ymax=2200,
+		xtick={0,1,2,3,4,5,6,7,8,9,10},
+		ytick={0,200,400,600,800,1000,1200,1400,1600,1800,2000,2200},
+		grid=both,
+		grid style={line width=.1pt, draw=gray!30},
+		axis line style={-{Latex},thick},
+		tick label style={font=\small},
+		samples=100,
+		legend style={
+			at={(0.65,0.98)},
+			anchor=north west,
+			font=\small
+		},
+	]
+
+	% Función N(t) = 100e^{0.3t}
+	\addplot[blue!45, very thick, domain=0:10] {100*exp(0.3*x)};
+	\addlegendentry{$N(t) = 100e^{0.3t}$}
+
+	% Punto inicial (t=0)
+	\node[circle, fill=green!60!black, inner sep=2pt] at (0,100) {};
+	\node[green!60!black, right] at (0,230) {Inicio: $(0, 100)$};
+
+	% Punto en t=5
+	\node[circle, fill=red, inner sep=2.5pt] at (5,448.2) {};
+	\node[red, above right] at (3,448.2) {$t=5$: $(5, 448)$};
+	\draw[red, dashed, thick] (5,0)--(5,448.2);
+
+	% Vector tangente en t=5 (representando la tasa de crecimiento)
+	\draw[-{Latex}, very thick, orange!45!black] (5,448.2)--(5.7,448.2+134.5*0.7);
+	\node[orange!45!black, right, scale=0.9] at (5.3,420) {$N'(5) \approx 134.5$ bacterias/h};
+
+	\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación:}
+\begin{itemize}
+	\item La población inicial es de 100 bacterias en $t=0$
+	\item El crecimiento es exponencial, lo que significa que la población crece cada vez más rápido
+	\item En $t=5$ horas, hay aproximadamente 448 bacterias
+	\item La tasa de crecimiento en $t=5$ es de 134.5 bacterias por hora (pendiente de la recta tangente)
+	\item Este es un modelo típico de crecimiento bacteriano sin restricciones de recursos
+	\item Después de 10 horas, la población alcanza aproximadamente 2,009 bacterias
+\end{itemize}
+
+\subsection*{Solución del Ejercicio 4}
+
+Sea $x$ el tamaño del cuadrado cortado.
+
+Base de la caja: $(12-2x) \times (12-2x)$
+
+Altura de la caja: $x$
+
+Volumen:
+\[
+V(x) = x(12-2x)^2 = x(144 - 48x + 4x^2) = 144x - 48x^2 + 4x^3
+\]
+
+Derivamos:
+\begin{align*}
+V'(x) &= 144 - 96x + 12x^2 = 0 \\
+12x^2 - 96x + 144 &= 0 \\
+x^2 - 8x + 12 &= 0 \\
+(x-2)(x-6) &= 0
+\end{align*}
+
+$x=6$ no es válido (la caja se anula), entonces $x=2$.
+
+\textbf{Respuesta:} $\boxed{x = 2 \text{ cm}}$
+
+\bigskip
+
+\textbf{Gráfica del volumen de la caja:}
+
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}[
+		width=14cm, height=9cm,
+		axis lines=middle,
+		xlabel={Tamaño del corte $x$ (cm)}, ylabel={Volumen $V(x)$ (cm³)},
+		xmin=0, xmax=7.5,
+		ymin=-25, ymax=150,
+		xtick={0,1,2,3,4,5,6},
+		ytick={0,20,40,60,80,100,120,140},
+		grid=both,
+		grid style={line width=.1pt, draw=gray!30},
+		axis line style={-{Latex},thick},
+		tick label style={font=\small},
+		samples=100,
+		legend style={
+			at={(0.57,0.982)},
+			anchor=north,
+			font=\small
+		},
+	]
+
+	% Función V(x) = 4x^3 - 48x^2 + 144x
+	\addplot[blue, very thick, domain=0:6] {4*x^3 - 48*x^2 + 144*x};
+	\addlegendentry{$V(x) = 4x^3 - 48x^2 + 144x$}
+
+	% Punto máximo en x=2
+	\node[circle, fill=red, inner sep=2.5pt] at (2,128) {};
+	\node[red, above, rotate=90, scale=.9] at (2.5,62.5) {Volumen máximo: $(2, 128)$ cm³};
+	\draw[red, dashed, thick] (2,0)--(2,128);
+
+	% Punto crítico en x=6 (no válido)
+	\node[circle, fill=gray, inner sep=2pt] at (6,0) {};
+	\node[gray, below=5mm, scale=0.9] at (6,5) {$(6, 0)$ no válido};
+	\draw[gray, dashed] (6,0)--(6,20);
+
+	% Región válida (sombreada ligeramente)
+	\fill[green!10, opacity=0.3] (0,0) rectangle (6,150);
+	\node[green!60!black, scale=0.9] at (4.65,110) {Región válida: $0 < x < 6$};
+
+	\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación:}
+\begin{itemize}
+	\item El problema consiste en cortar cuadrados de tamaño $x$ en las esquinas de una lámina de 12 cm
+	\item Si $x = 0$, no hay caja (volumen = 0)
+	\item Si $x = 6$, la base desaparece: $12 - 2(6) = 0$ (volumen = 0)
+	\item El dominio válido es $0 < x < 6$ cm
+	\item El volumen es máximo cuando $x = 2$ cm, con $V = 128$ cm³
+	\item Si cortamos cuadrados de 2 cm, la caja tendrá base de $8 \times 8$ cm y altura de 2 cm
+	\item El punto $x = 6$ es un mínimo local (volumen = 0), por eso no es válido
+\end{itemize}
+
+\subsection*{Solución del Ejercicio 5}
+
+Volumen: $V = \frac{4}{3}\pi r^3$
+
+Derivamos:
+\[
+\frac{dV}{dt} = 4\pi r^2 \frac{dr}{dt}
+\]
+
+Con $\frac{dV}{dt} = 100$ cm³/s y $r=5$ cm:
+\begin{align*}
+100 &= 4\pi(5)^2 \frac{dr}{dt} \\
+100 &= 100\pi \frac{dr}{dt} \\
+\frac{dr}{dt} &= \frac{100}{100\pi} = \frac{1}{\pi} \approx 0.318 \text{ cm/s}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\frac{dr}{dt} \approx 0.318 \text{ cm/s}}$
+
+\bigskip
+
+\textbf{Gráfica del volumen de la esfera vs radio:}
+
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}[
+		width=14cm, height=9cm,
+		axis lines=middle,
+		xlabel={Radio $r$ (cm)}, ylabel={Volumen $V$ (cm³)},
+		xmin=0, xmax=8,
+		ymin=0, ymax=2200,
+		xtick={0,1,2,3,4,5,6,7,8},
+		ytick={0,200,400,600,800,1000,1200,1400,1600,1800,2000,2200},
+		grid=both,
+		grid style={line width=.1pt, draw=gray!30},
+		axis line style={-{Latex},thick},
+		tick label style={font=\small},
+		samples=100,
+		legend style={
+			at={(0.6,0.98)},
+			anchor=north west,
+			font=\small
+		},
+	]
+
+	% Función V = (4/3)πr³
+	\addplot[blue!40, very thick, domain=0:8] {(4/3)*pi*x^3};
+	\addlegendentry{$V(r) = \frac{4}{3}\pi r^3$}
+
+	% Punto en r=5
+	\node[circle, fill=red, inner sep=2.5pt] at (5,523.6) {};
+	\node[red, above right] at (2.5,523.6) {$r=5$: $(5, 523.6)$ cm³};
+	\draw[red, dashed, thick] (5,0)--(5,523.6);
+
+	% Vector tangente representando dV/dt
+	\draw[->, very thick, orange!45!black] (5,523.6)--(5.5,523.6+314.2*0.5);
+	\node[orange!45!black, right, scale=0.9] at (5.2,520) {$\frac{dV}{dt} = 100$ cm³/s};
+
+	% Tasa de cambio del radio
+	\draw[->, very thick, green!60!black] (5,-50)--(5.318,-50);
+	\node[green!60!black, below, scale=0.9] at (5.159,-80) {$\frac{dr}{dt} \approx 0.318$ cm/s};
+
+	\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación:}
+\begin{itemize}
+	\item El volumen de una esfera crece según $V = \frac{4}{3}\pi r^3$ (relación cúbica)
+	\item Cuando $r = 5$ cm, el volumen es aproximadamente 523.6 cm³
+	\item El globo se está inflando a una tasa constante de 100 cm³/s ($\frac{dV}{dt} = 100$)
+	\item En $r = 5$ cm, el radio aumenta a $\frac{dr}{dt} \approx 0.318$ cm/s
+	\item A medida que el globo crece, el radio aumenta más lentamente para el mismo cambio de volumen
+	\item Esto se debe a que el área superficial $A = 4\pi r^2$ aumenta con el radio
+	\item La relación es: $\frac{dV}{dt} = 4\pi r^2 \frac{dr}{dt}$ (razones de cambio relacionadas)
+\end{itemize}
+
+\bigskip
+\bigskip
+
+\begin{center}
+	\textbf{FIN DE LA GUÍA DE APLICACIONES DE LA DERIVADA}
+\end{center}
+
+\end{document}

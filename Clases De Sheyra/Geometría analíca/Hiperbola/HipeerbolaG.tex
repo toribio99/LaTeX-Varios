@@ -1,0 +1,49 @@
+\documentclass[10pt]{article}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\pagestyle{empty}
+
+\begin{document}
+\definecolor{wewdxt}{rgb}{0.43137254901960786,0.42745098039215684,0.45098039215686275}
+\definecolor{qqwuqq}{rgb}{0,0.39215686274509803,0}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+\begin{axis}[
+x=1cm,y=1cm,
+axis lines=middle,
+ymajorgrids=true,
+xmajorgrids=true,
+xmin=-7.830849490717788,
+xmax=13.103245339137015,
+ymin=-10.593734071402759,
+ymax=4.825145973249489,
+xtick={-7,-6,...,13},
+ytick={-10,-9,...,4},]
+\clip(-7.830849490717788,-10.593734071402759) rectangle (13.103245339137015,4.825145973249489);
+\draw [samples=100,domain=-0.99:0.99,rotate around={0:(3,-2)},xshift=3cm,yshift=-2cm,line width=2pt,color=qqwuqq] plot ({3*(1+(\x)^2)/(1-(\x)^2)},{4*2*(\x)/(1-(\x)^2)});
+\draw [samples=100,domain=-0.99:0.99,rotate around={0:(3,-2)},xshift=3cm,yshift=-2cm,line width=2pt,color=qqwuqq] plot ({3*(-1-(\x)^2)/(1-(\x)^2)},{4*(-2)*(\x)/(1-(\x)^2)});
+\draw [line width=2pt,domain=-7.830849490717788:13.103245339137015] plot(\x,{(-6--1.3333333333333333*\x)/1});
+\draw [line width=2pt,domain=-7.830849490717788:13.103245339137015] plot(\x,{(--2-1.3333333333333333*\x)/1});
+\draw [line width=2pt,domain=-7.830849490717788:13.103245339137015] plot(\x,{(-2-0*\x)/1});
+\draw [line width=2pt,domain=-7.830849490717788:13.103245339137015] plot(\x,{(-2-0*\x)/1});
+\draw [line width=2pt] (3,-10.593734071402759) -- (3,4.825145973249489);
+\begin{scriptsize}
+\draw[color=qqwuqq] (9.055789327415797,4.68430043438007) node {$f$};
+\draw[color=black] (7.825244093082971,4.6398228957897265) node {$g$};
+\draw[color=black] (-1.8412076272182551,4.6398228957897265) node {$h$};
+\draw [fill=wewdxt] (0,-2) circle (2pt);
+\draw[color=wewdxt] (0.1158040707568398,-1.7056392764325439) node {$A$};
+\draw [fill=wewdxt] (6,-2) circle (2pt);
+\draw[color=wewdxt] (6.1202717804531535,-1.7056392764325439) node {$B$};
+\draw [fill=wewdxt] (-2,-2) circle (2pt);
+\draw[color=wewdxt] (-1.8856851658085982,-1.7056392764325439) node {$C$};
+\draw [fill=wewdxt] (8,-2) circle (2pt);
+\draw[color=wewdxt] (8.121761017018592,-1.7056392764325439) node {$D$};
+\draw[color=black] (-7.652939336356416,-2.061459585155288) node {$i$};
+\draw[color=black] (-7.652939336356416,-2.061459585155288) node {$j$};
+\draw[color=black] (2.814108078570986,4.6398228957897265) node {$k$};
+\end{scriptsize}
+\end{axis}
+\end{tikzpicture}
+\end{document}
