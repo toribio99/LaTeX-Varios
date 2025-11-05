@@ -34,7 +34,7 @@
 %\newpage
 
 \tableofcontents
-%\newpage
+\newpage
 
 \section{Introducción}
 
@@ -42,7 +42,7 @@ La derivada es una de las herramientas matemáticas más poderosas y versátiles
 
 \subsection*{¿Qué nos dice la derivada?}
 
-La derivada nos indica \textbf{cómo cambia} algo con respecto a otra cosa. O sea, si tenemos una función $y = f(x)$, su derivada $f'(x)$ nos dice qué tan rápido está creciendo o decreciendo $y$ cuando $x$ cambia.
+La derivada nos indica \textbf{cómo cambia} algo con respecto a otra cosa. Es decir, si tenemos una función $y = f(x)$, su derivada $f'(x)$ nos dice qué tan rápido está creciendo o decreciendo $y$ cuando $x$ cambia.
 
 \textbf{Conceptos clave:}
 \begin{itemize}[leftmargin=2cm]
@@ -131,8 +131,8 @@ I(\sqrt{2}) = \frac{1000\sqrt{2}}{1 + 0.5(2)} = \frac{1414.2}{2} = \boxed{707 \t
     \draw[very thin,gray!30] (\xmin,0) grid[ystep=100] (\xmax,8);
 
     % Ejes
-    \draw[-{Latex},thick] (\xmin,0)--(\xmax+0.3,0) node[right]{Días ($t$)};
-    \draw[-{Latex},thick] (0,\ymin)--(0,8.5) node[above right=-3mm]{Infectados $I(t)$};
+    \draw[-{Latex},thick] (\xmin,0)--(\xmax+0.3,0) node[above]{Días ($t$)};
+    \draw[-{Latex},thick] (0,\ymin)--(0,8.5) node[below right]{Infectados $I(t)$};
 
     % Etiquetas del eje y
     \foreach \y in {0,100,200,300,400,500,600,700,800}{
@@ -149,7 +149,7 @@ I(\sqrt{2}) = \frac{1000\sqrt{2}}{1 + 0.5(2)} = \frac{1414.2}{2} = \boxed{707 \t
         plot (\x,{1000*\x/(1 + 0.5*\x*\x)/100});
 
     % Punto máximo
-    \fill[blue] (1.414,7.07) circle (0.08) node[above right,scale=0.85]{Pico: $(1.41, 707)$};
+    \fill[blue] (1.414,7.07) circle (0.08) node[right=2mm,scale=0.85]{Pico: $(1.41, 707)$};
 
     % Línea vertical en el máximo
     \draw[blue,dashed,thick] (1.414,0) -- (1.414,7.07);
@@ -207,8 +207,8 @@ C(2) = \frac{20(2)}{2^2 + 4} = \frac{40}{8} = \boxed{5 \text{ mg/L}}
     \draw[very thin,gray!30] (\xmin,0) grid[ystep=0.5] (\xmax,6);
 
     % Ejes
-    \draw[-{Latex},thick] (\xmin,0)--(\xmax+0.3,0) node[right]{Tiempo (horas)};
-    \draw[-{Latex},thick] (0,0)--(0,6.5) node[above right=-2mm]{$C(t)$ (mg/L)};
+    \draw[-{Latex},thick] (\xmin,0)--(\xmax+0.3,0) node[above left=1mm]{Tiempo (horas)};
+    \draw[-{Latex},thick] (0,0)--(0,6.5) node[below right]{$C(t)$ (mg/L)};
 
     % Etiquetas eje y
     \foreach \y in {0,1,2,3,4,5,6}{
@@ -225,7 +225,7 @@ C(2) = \frac{20(2)}{2^2 + 4} = \frac{40}{8} = \boxed{5 \text{ mg/L}}
         plot (\x,{20*\x/(\x*\x + 4)});
 
     % Punto máximo
-    \fill[blue] (2,5) circle (0.08) node[above right,scale=0.85]{Máximo: $(2, 5)$};
+    \fill[blue] (2,5) circle (0.08) node[right=1mm,scale=0.85]{Máximo: $(2, 5)$};
 
     % Líneas de referencia
     \draw[blue,dashed] (2,0) -- (2,5);
@@ -338,7 +338,7 @@ B(80) &= -0.5(80)^2 + 80(80) - 500\\
 
     % Punto máximo
     \node[circle, fill=black, inner sep=2pt] at (80,{(-0.5*80*80 + 80*80 - 500)/500}) {};
-    \node[black,above,scale=0.8] at (80,5.6) {Máx: $(80, 2700)$};
+    \node[black,above,scale=0.8] at (80,5.6) {Máx: $(80, 5.4)$};
     \draw[black,dashed,thick] (80,-10)--(80,{(-0.5*80*80 + 80*80 - 500)/500});
 
     \end{axis}
@@ -398,35 +398,35 @@ C''(x) = 0.06x - 1.2
 
 \begin{center}
 \begin{tikzpicture}[scale=0.65]
-    \def\xmin{0}\def\xmax{50}
+    \def\xmin{0}\def\xmax{40}
 
     % Grid
-    \draw[very thin,gray!30] (\xmin,0) grid[xstep=5,ystep=2] (\xmax/5,20);
+    \draw[very thin,gray!30] (\xmin,0) grid[xstep=1,ystep=1] (\xmax/5,15);
 
     % Ejes
-    \draw[-{Latex},thick] (\xmin,0)--(\xmax/5+0.5,0) node[right]{Unidades ($x$)};
-    \draw[-{Latex},thick] (0,0)--(0,21) node[above]{Costo Marginal};
+    \draw[-{Latex},thick] (\xmin,0)--(\xmax/5+0.5,0) node[above left=-1mm]{Unidades ($x$)};
+    \draw[-{Latex},thick] (0,0)--(0,14) node[right=1mm]{Costo Marginal};
 
     % Etiquetas eje x
-    \foreach \x in {0,5,10,15,20,25,30,35,40,45,50}{
+    \foreach \x in {0,5,10,15,20,25,30,35,40}{
         \draw (\x/5,0) -- (\x/5,-0.2) node[below,scale=0.7]{\x};
     }
 
     % Etiquetas eje y
-    \foreach \y in {0,2,4,6,8,10,12,14,16,18,20}{
+    \foreach \y in {0,2,4,6,8,10,12,14}{
         \draw (0,\y) -- (-0.1,\y) node[left,scale=0.7]{\y};
     }
 
     % Costo marginal
-    \draw[economia,very thick,domain=0:45,samples=150]
+    \draw[economia,very thick,domain=0:40,samples=150]
         plot (\x/5,{0.03*\x*\x - 1.2*\x + 13});
 
     % Punto mínimo
-    \fill[blue] (20/5,1) circle (0.08) node[below right,scale=0.85]{Mínimo: $(20, 1)$};
+    \fill[blue] (20/5,1) circle (0.08) node[below left,scale=0.85]{Mínimo: $(20, 1)$};
     \draw[blue,dashed] (20/5,0) -- (20/5,1);
 
     % Título
-    \node[economia,scale=1.1] at (5,22) {\textbf{Costo Marginal $C'(x)$}};
+    \node[economia,scale=1.1] at (5,16) {\textbf{Costo Marginal $C'(x)$}};
 
 \end{tikzpicture}
 \end{center}
@@ -495,7 +495,7 @@ Máximo crecimiento cuando: $P(t) = 50$
 
     % Ejes
     \draw[-{Latex},thick] (\xmin,0)--(\xmax/2+0.5,0) node[above left]{Años desde 2000};
-    \draw[-{Latex},thick] (0,0)--(0,12.5) node[above right=-3mm]{Población (miles)};
+    \draw[-{Latex},thick] (0,0)--(0,12.5) node[below right]{Población (miles)};
 
     % Etiquetas eje x
     \foreach \x in {0,5,10,15,20,25,30,35,40}{
@@ -769,10 +769,8 @@ Como $v(2) = 0$ y $v(3) = -3$, en $t = 3$ la velocidad es \textbf{mínima} (más
             plot (\x,{(\x*\x*\x - 9*\x*\x + 24*\x)/20});
 
         % Puntos de reposo
-        \fill[red] (2,{(8-36+48)/20}) circle (0.08);
-        \fill[red] (4,{(64-144+96)/20}) circle (0.08);
-		\fill[red] (2,{(8-36+48)/20})  circle (0.08) node[scale=0.65, rotate=90] at(2,1.8){$t=2$};
-		\fill[red] (4,{(64-144+96)/20}) circle (0.08) node[scale=0.65, rotate=90] at(4,1.6){$t=4$};
+        \fill[red] (2,{(8-36+48)/20}) circle (0.08) node[scale=0.65, rotate=90] at(2,1.8){$t=2$};
+        \fill[red] (4,{(64-144+96)/20}) circle (0.08) node[scale=0.65, rotate=90] at(4,1.6){$t=4$};
 
         % Título
         \node[fisica,scale=0.9] at (3,6.2) {\textbf{Posición}};
@@ -982,6 +980,85 @@ G'(2) = \frac{40(1-4)}{(1+4)^2} = \frac{-120}{25} = \boxed{-4.8 \text{ mg/dL por
 \end{tikzpicture}
 \end{center}
 
+\subsection*{Solución Ejercicio 2 (Medicina - Tumor)}
+
+\textbf{Función:} $T(t) = 0.5e^{0.1t}$
+
+\bigskip
+
+\textbf{Parte a:} Tasa de crecimiento del tumor (derivada):
+\begin{align*}
+T'(t) &= 0.5 \cdot 0.1 \cdot e^{0.1t} \\
+&= 0.05e^{0.1t}
+\end{align*}
+
+En la semana 10:
+\begin{align*}
+T'(10) &= 0.05e^{0.1(10)} \\
+&= 0.05e^1 \\
+&= 0.05(2.718) \\
+&\approx 0.136
+\end{align*}
+
+\textbf{Respuesta a:} $\boxed{T'(10) \approx 0.136 \text{ cm}^3\text{/semana}}$
+
+\bigskip
+
+\textbf{Parte b:} Encontrar cuándo $T(t) = 5$:
+\begin{align*}
+0.5e^{0.1t} &= 5 \\
+e^{0.1t} &= 10 \\
+0.1t &= \ln(10) \\
+t &= \frac{\ln(10)}{0.1} \\
+t &= 10\ln(10) \\
+t &\approx 10(2.303) \\
+t &\approx 23.03
+\end{align*}
+
+\textbf{Respuesta b:} $\boxed{t \approx 23 \text{ semanas}}$
+
+\bigskip
+
+\textbf{Interpretación:} El tumor crece exponencialmente. En la semana 10, crece a una tasa de aproximadamente 0.136 cm³ por semana. Debe programarse la cirugía alrededor de la semana 23.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={Semanas ($t$)}, ylabel={Tamaño $T(t)$ (cm³)},
+        xmin=0, xmax=30,
+        ymin=0, ymax=12,
+        xtick={0,5,10,15,20,23,25,30},
+        ytick={0,2,4,5,6,8,10,12},
+        grid=both,
+        grid style={line width=.1pt, draw=gray!30},
+        axis line style={-{Latex},thick},
+        tick label style={font=\small},
+        samples=100,
+        legend pos=north east,
+        legend style={font=\small},
+    ]
+
+    % Función del tumor
+    \addplot[medicina,very thick,domain=0:30] {0.5*exp(0.1*x)};
+    \addlegendentry{$T(t) = 0.5e^{0.1t}$}
+
+    % Punto en semana 10
+    \node[circle, fill=blue, inner sep=2pt] at (10,{0.5*exp(1)}) {};
+    \node[blue, above right, scale=0.85] at (1,1.36) {Semana 10: 1.36 cm³};
+    \draw[blue, dashed, thick] (10,0)--(10,{0.5*exp(1)});
+
+    % Punto cuando T=5 (cirugía)
+    \node[circle, fill=red, inner sep=2.5pt] at (23.03,5) {};
+    \node[red, left, scale=0.85] at (23,5.5) {Cirugía: semana 23};
+    \draw[red, dashed, thick] (0,5)--(23.03,5);
+    \draw[red, dashed, thick] (23.03,0)--(23.03,5);
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
 \subsection*{Solución Ejercicio 3 (Economía - Beneficio)}
 
 \textbf{Parte a:} Función de beneficio:
@@ -1018,6 +1095,182 @@ B(37.5) = -2(37.5)^2 + 150(37.5) - 1000 = -2812.5 + 5625 - 1000 = \boxed{1812.5 
 	\pgfmathparse{\y*(0.05)}
 	\node[left, scale=0.7] at (-0.2,{ \pgfmathresult }) {\y};
 	}
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Solución Ejercicio 4 (Economía - Costo Marginal)}
+
+\textbf{Función de costo:} $C(x) = 0.002x^3 - 0.3x^2 + 20x + 500$
+
+\bigskip
+
+\textbf{Parte a:} Costo marginal (derivada del costo):
+\begin{align*}
+C'(x) &= \frac{d}{dx}(0.002x^3 - 0.3x^2 + 20x + 500) \\
+&= 0.006x^2 - 0.6x + 20
+\end{align*}
+
+\textbf{Respuesta a:} $\boxed{C'(x) = 0.006x^2 - 0.6x + 20}$
+
+\bigskip
+
+\textbf{Parte b:} Para encontrar el mínimo del costo marginal, derivamos nuevamente:
+\begin{align*}
+C''(x) &= \frac{d}{dx}(0.006x^2 - 0.6x + 20) \\
+&= 0.012x - 0.6
+\end{align*}
+
+Igualamos a cero:
+\begin{align*}
+0.012x - 0.6 &= 0 \\
+0.012x &= 0.6 \\
+x &= \frac{0.6}{0.012} \\
+x &= 50
+\end{align*}
+
+Verificamos que es un mínimo con la tercera derivada:
+\[
+C'''(x) = 0.012 > 0 \quad \text{(es un mínimo)}
+\]
+
+Calculamos el costo marginal mínimo:
+\begin{align*}
+C'(50) &= 0.006(50)^2 - 0.6(50) + 20 \\
+&= 0.006(2500) - 30 + 20 \\
+&= 15 - 30 + 20 \\
+&= 5
+\end{align*}
+
+\textbf{Respuesta b:} $\boxed{x = 50 \text{ unidades, con } C'(50) = 5 \text{ pesos/unidad}}$
+
+\bigskip
+
+\textbf{Interpretación:} El costo marginal es mínimo cuando se producen 50 unidades, y en ese punto el costo de producir una unidad adicional es de 5 pesos.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=6cm,
+        axis lines=middle,
+        xlabel={Unidades ($x$)}, ylabel={Costo marginal $C'(x)$ (pesos)},
+        xmin=0, xmax=100,
+        ymin=0, ymax=40,
+        xtick={0,10,20,30,40,50,60,70,80,90,100},
+        ytick={0,5,10,15,20,25,30,35,40},
+        grid=both,
+        grid style={line width=.1pt, draw=gray!30},
+        axis line style={-{Latex},thick},
+        tick label style={font=\small},
+        samples=100,
+     	legend style={
+     	at={(0.75,0.45)},    % ubica cerca de la esquina inferior derecha
+     	anchor=south east, % “pega” la esquina inferior derecha de la caja
+     	font=\small
+        },
+    ]
+
+    % Función de costo marginal
+    \addplot[economia,very thick,domain=0:100] {0.006*x^2 - 0.6*x + 20};
+    \addlegendentry{$C'(x) = 0.006x^2 - 0.6x + 20$}
+
+    % Punto mínimo
+    \node[circle, fill=blue, inner sep=2.5pt] at (50,5) {};
+    \node[blue, above] at (50,5) {Mínimo: $(50, 5)$};
+    \draw[blue, dashed, thick] (50,0)--(50,5);
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Solución Ejercicio 5 (Ciencias Sociales - Difusión de Noticia)}
+
+\textbf{Función:} $N(t) = \frac{5000}{1 + 99e^{-0.6t}}$ (Función logística)
+
+\bigskip
+
+\textbf{Parte a:} La noticia se difunde más rápidamente en el punto de inflexión. Para una función logística, esto ocurre cuando $N(t) = \frac{L}{2}$, donde $L$ es el límite (5000).
+
+\begin{align*}
+\frac{5000}{1 + 99e^{-0.6t}} &= 2500 \\
+5000 &= 2500(1 + 99e^{-0.6t}) \\
+2 &= 1 + 99e^{-0.6t} \\
+1 &= 99e^{-0.6t} \\
+e^{-0.6t} &= \frac{1}{99} \\
+-0.6t &= \ln\left(\frac{1}{99}\right) \\
+t &= \frac{-\ln(1/99)}{0.6} \\
+t &= \frac{\ln(99)}{0.6} \\
+t &\approx \frac{4.595}{0.6} \\
+t &\approx 7.66
+\end{align*}
+
+\textbf{Respuesta a:} $\boxed{t \approx 7.66 \text{ días (aproximadamente día 8)}}$
+
+\bigskip
+
+\textbf{Parte b:} Tasa máxima de difusión (derivada en el punto de inflexión):
+
+Primero calculamos $N'(t)$:
+\begin{align*}
+N'(t) &= \frac{d}{dt}\left[\frac{5000}{1 + 99e^{-0.6t}}\right] \\
+&= 5000 \cdot \frac{-1}{(1 + 99e^{-0.6t})^2} \cdot 99e^{-0.6t} \cdot (-0.6) \\
+&= \frac{5000 \cdot 99 \cdot 0.6 \cdot e^{-0.6t}}{(1 + 99e^{-0.6t})^2} \\
+&= \frac{297000 e^{-0.6t}}{(1 + 99e^{-0.6t})^2}
+\end{align*}
+
+En $t \approx 7.66$:
+\begin{align*}
+N'(7.66) &= \frac{297000 e^{-0.6(7.66)}}{(1 + 99e^{-0.6(7.66)})^2} \\
+&= \frac{297000 e^{-4.596}}{(1 + 99e^{-4.596})^2} \\
+&= \frac{297000 \cdot 0.0101}{(1 + 99 \cdot 0.0101)^2} \\
+&= \frac{3000}{(1 + 1)^2} \\
+&= \frac{3000}{4} \\
+&= 750
+\end{align*}
+
+\textbf{Respuesta b:} $\boxed{N'(7.66) = 750 \text{ personas/día}}$
+
+\bigskip
+
+\textbf{Interpretación:} La noticia se difunde más rápidamente alrededor del día 8, cuando alcanza a 2,500 personas (mitad de la población objetivo). En ese momento, la tasa de difusión es de 750 personas por día.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=13cm, height=8.5cm,
+        axis lines=middle,
+        xlabel={Días ($t$)}, ylabel={Personas $N(t)$},
+        xmin=0, xmax=20,
+        ymin=0, ymax=5500,
+        xtick={0,2,4,6,8,10,12,14,16,18,20},
+        ytick={0,1000,2000,2500,3000,4000,5000},
+        grid=both,
+        grid style={line width=.1pt, draw=gray!30},
+        axis line style={-{Latex},thick},
+        tick label style={font=\small},
+        samples=150,
+		legend style={
+		at={(0.99,0.75)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+		},
+    ]
+
+    % Función logística
+    \addplot[blue!60!black,very thick,domain=0:20] {5000/(1 + 99*exp(-0.6*x))};
+    \addlegendentry{$N(t) = \frac{5000}{1 + 99e^{-0.6t}}$}
+
+    % Punto de inflexión
+    \node[circle, fill=red, inner sep=2.5pt] at (7.66,2500) {};
+    \node[red, above left, scale=0.85] at (7.66,2500) {Máxima difusión};
+    \node[red, below, scale=0.85] at (11,2200) {Día 8: 2500 personas};
+    \draw[red, dashed, thick] (7.66,0)--(7.66,2500);
+    \draw[red, dashed, thick] (0,2500)--(7.66,2500);
+
+    % Asíntota horizontal
+    \draw[green!60!black, dashed, thin] (0,5000)--(20,5000);
+    \node[green!60!black, above, scale=0.8] at (15,5000) {Límite: 5000};
+
+    \end{axis}
 \end{tikzpicture}
 \end{center}
 
@@ -1064,6 +1317,109 @@ a(t) = v'(t) = 12t - 30
         \pgfmathparse{\y/10}
     	\node[left,scale=0.7] at (-0.1,{ \pgfmathresult }) {\y};
     }
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Solución Ejercicio 7 (Física - Cohete)}
+
+\textbf{Función:} $h(t) = -4.9t^2 + 150t$
+
+\bigskip
+
+\textbf{Parte a:} Altura máxima. Primero encontramos cuándo la velocidad es cero:
+\begin{align*}
+v(t) = h'(t) &= -9.8t + 150 \\
+-9.8t + 150 &= 0 \\
+t &= \frac{150}{9.8} \\
+t &\approx 15.31 \text{ segundos}
+\end{align*}
+
+Calculamos la altura máxima:
+\begin{align*}
+h(15.31) &= -4.9(15.31)^2 + 150(15.31) \\
+&= -4.9(234.40) + 2296.5 \\
+&= -1148.56 + 2296.5 \\
+&\approx 1147.94
+\end{align*}
+
+\textbf{Respuesta a:} $\boxed{h_{\text{máx}} \approx 1148 \text{ metros}}$
+
+\bigskip
+
+\textbf{Parte b:} El cohete toca el suelo cuando $h(t) = 0$:
+\begin{align*}
+-4.9t^2 + 150t &= 0 \\
+t(-4.9t + 150) &= 0
+\end{align*}
+
+Soluciones: $t = 0$ (lanzamiento) o $-4.9t + 150 = 0$
+
+\begin{align*}
+t &= \frac{150}{4.9} \\
+t &\approx 30.61 \text{ segundos}
+\end{align*}
+
+\textbf{Respuesta b:} $\boxed{t \approx 30.61 \text{ segundos}}$
+
+\bigskip
+
+\textbf{Parte c:} Velocidad al impactar (en $t = 30.61$ s):
+\begin{align*}
+v(30.61) &= -9.8(30.61) + 150 \\
+&= -299.98 + 150 \\
+&= -149.98 \\
+&\approx -150
+\end{align*}
+
+El signo negativo indica dirección hacia abajo.
+
+\textbf{Respuesta c:} $\boxed{v \approx -150 \text{ m/s (hacia abajo)}}$
+
+\bigskip
+
+\textbf{Interpretación:} El cohete alcanza su altura máxima de aproximadamente 1,148 metros a los 15.31 segundos. Luego cae y toca el suelo a los 30.61 segundos con una velocidad de 150 m/s hacia abajo.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=13cm, height=9cm,
+        axis lines=middle,
+        xlabel={$t$ (s)}, ylabel={Altura $h(t)$ (m)},
+        xmin=0, xmax=35,
+        ymin=0, ymax=1300,
+        xtick={0,5,10,15,20,25,30},
+        ytick={0,200,400,600,800,1000,1148,1200},
+        grid=both,
+        grid style={line width=.1pt, draw=gray!30},
+        axis line style={-{Latex},thick},
+        tick label style={font=\small},
+		legend style={
+		at={(0.99,0.78)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+},
+    ]
+
+    % Función de altura
+    \addplot[fisica,very thick,domain=0:30.61] {-4.9*x^2 + 150*x};
+    \addlegendentry{$h(t) = -4.9t^2 + 150t$}
+
+    % Punto máximo
+    \node[circle, fill=red, inner sep=2.5pt] at (15.31,1148) {};
+    \node[red, above right, scale=0.85] at (15.31,1148) {Altura máxima};
+    \node[red, below, scale=0.85] at (15.31,1050) {$(15.31, 1148)$ m};
+    \draw[red, dashed, thick] (15.31,0)--(15.31,1148);
+
+    % Punto de impacto
+    \node[circle, fill=blue, inner sep=2.5pt] at (30.61,0) {};
+    \node[blue, scale=0.85, rotate=90] at (30.61,500) {Impacto: $t = 30.61$ s};
+    \draw[blue, dashed, thick] (30.61,0)--(30.61,200);
+
+    % Flecha de velocidad en el impacto
+    \draw[-{Latex}, very thick, orange!60!black] (30.61,200)--(30.61,25);
+    \node[orange!60!black, right, scale=0.8] at (31,125) {$v = -150$ m/s};
+
+    \end{axis}
 \end{tikzpicture}
 \end{center}
 
