@@ -1,0 +1,1916 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\pgfplotsset{compat=1.18}
+
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de títulos
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración para cajas de ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{ejemplo}{
+    colback=maincolor!5,
+    colframe=maincolor,
+    fonttitle=\bfseries,
+    title=Ejemplo,
+    breakable,
+    enhanced
+}
+
+\newtcolorbox{ejercicio}{
+    colback=accentcolor!5,
+    colframe=accentcolor,
+    fonttitle=\bfseries,
+    title=Ejercicio,
+    breakable,
+    enhanced
+}
+
+\title{\textbf{\color{maincolor}Funciones: Concepto y Aplicaciones}}
+\author{Prof. Toribio de J Arrieta F \\ \small Institución La Pruebita}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\large\textbf{Trigonometría -- Grado 10}
+\end{center}
+
+\vspace{1cm}
+
+\tableofcontents
+
+\newpage
+
+\section{Introducción}
+
+\subsection{¿Qué es una función?}
+
+Imagínate que tienes una máquina mágica: le metes un número y ella te devuelve otro número. Eso, en esencia, es una función. Pero no es cualquier máquina loca que hace lo que quiera, no. Esta máquina tiene una regla fija: para cada número que le metas, siempre te dará el mismo resultado.
+
+Por ejemplo, piensa en una máquina que duplica números. Si le metes un 3, te da 6. Si le metes un 5, te da 10. Si vuelves a meter un 3, otra vez te da 6 (no puede darte 7 o cualquier otro número). Eso es lo fundamental de las funciones: \textbf{consistencia}. A cada entrada le corresponde una única salida.
+
+En matemáticas, en lugar de decir "meter un número a la máquina", decimos "evaluar la función en un punto". Y en lugar de decir "el número que sale", decimos "el valor de la función". Suena más elegante, ¿no?
+
+\subsection{¿Por qué son importantes las funciones?}
+
+Las funciones están por todas partes en la vida real. No estoy exagerando. Cada vez que usas tu celular, hay miles de funciones trabajando en segundo plano. Cada vez que compras algo, hay funciones calculando precios, impuestos y descuentos. Cada vez que miras el clima, hay funciones prediciendo la temperatura.
+
+Veamos algunas aplicaciones concretas de funciones en la vida cotidiana:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Conversión de temperaturas:} Cuando viajas a Estados Unidos y ves que el clima marca 68°F, ¿cuánto es eso en grados Celsius? Hay una función para eso: $C(F) = \frac{5}{9}(F - 32)$. Le metes los grados Fahrenheit y te da los Celsius.
+
+    \item \textbf{Cálculo de distancias en movimiento:} Si vas en un carro a velocidad constante de 80 km/h, la distancia que recorres depende del tiempo: $d(t) = 80t$. Después de 2 horas habrás recorrido 160 km, después de 3 horas, 240 km, y así.
+
+    \item \textbf{Costos y tarifas:} Un taxi cobra \$3000 de bajada de bandera más \$1500 por kilómetro. El costo total está dado por $C(x) = 3000 + 1500x$, donde $x$ es la cantidad de kilómetros recorridos.
+
+    \item \textbf{Crecimiento poblacional:} La población de una ciudad que crece 2\% anualmente se puede modelar con una función: $P(t) = P_0(1.02)^{t}$, donde $P_0$ es la población inicial y $t$ son los años transcurridos.
+
+    \item \textbf{Consumo de datos en tu celular:} Si tu plan te da 10 GB al mes y usas aproximadamente 300 MB por día, la cantidad de datos que te quedan es: $D(d) = 10000 - 300d$, donde $d$ son los días del mes.
+
+    \item \textbf{Área de figuras geométricas:} El área de un círculo depende de su radio: $A(r) = \pi r^{2}$. Dale un radio y obtienes un área.
+
+    \item \textbf{Descuentos en compras:} Si una tienda tiene 25\% de descuento, el precio final es función del precio original: $P_f(P_o) = 0.75P_o$.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+Como ves, las funciones no son solo fórmulas aburridas en un pizarrón. Son herramientas poderosas para modelar y entender el mundo que nos rodea. Dominar las funciones te abrirá las puertas a entender física, química, economía, ingeniería y muchísimas áreas más.
+
+En esta guía vamos a explorar a fondo qué son las funciones, cómo representarlas, cómo trabajar con ellas, y cómo aplicarlas a problemas reales. ¡Vamos a ello!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Definición formal de función}
+
+Ahora sí, pongámonos un poquito más formales. Una \textbf{función} es una relación entre dos conjuntos (llamémoslos $A$ y $B$) que asigna a cada elemento de $A$ exactamente un elemento de $B$.
+
+Escribimos: $f: A \to B$ y leemos "función $f$ de $A$ en $B$".
+
+\begin{itemize}[leftmargin=*]
+    \item El conjunto $A$ se llama \textbf{dominio} de la función (todos los valores que puedes meter a la máquina).
+    \item El conjunto $B$ se llama \textbf{codominio} (el conjunto donde están los posibles resultados).
+    \item El conjunto de todos los resultados que realmente se obtienen se llama \textbf{rango} o \textbf{imagen} de la función.
+\end{itemize}
+
+\textbf{Regla de oro:} Para que una relación sea función, cada elemento del dominio debe estar relacionado con \textbf{uno y solo un} elemento del codominio. No puede quedarse sin pareja, ni puede tener dos parejas.
+
+\subsection{Variables independientes y dependientes}
+
+Cuando trabajamos con funciones, aparecen dos tipos de variables:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Variable independiente:} Es la que TÚ eliges libremente. Es el valor que "metes" a la función. Generalmente se denota con $x$.
+
+    \item \textbf{Variable dependiente:} Es la que resulta de aplicar la función. Depende del valor que elegiste para la variable independiente. Generalmente se denota con $y$ o $f(x)$.
+\end{itemize}
+
+\textbf{Ejemplo visual:} En la función $y = 2x + 3$:
+\begin{itemize}
+    \item $x$ es la variable independiente (tú eliges el valor de $x$)
+    \item $y$ es la variable dep
+    endiente (el valor de $y$ depende del $x$ que elegiste)
+\end{itemize}
+
+Si eliges $x=1$, entonces $y=2(1)+3=5$. Si eliges $x=4$, entonces $y=2(4)+3=11$. Ves cómo $y$ depende de $x$?
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$ (variable independiente)},
+        ylabel={$y$ (variable dependiente)},
+        xmin=-2, xmax=5,
+        ymin=-2, ymax=14,
+        grid=both,
+        samples=100,
+        legend style={
+       	at={(0.95,0.5)},    % ubica cerca de la esquina inferior derecha
+       	anchor=south east, % “pega” la esquina inferior derecha de la caja
+       	font=\small
+        },
+    ]
+    \addplot[blue, thick, domain=-1:5] {2*x + 3};
+    \addlegendentry{$y = 2x + 3$}
+
+    % Puntos específicos
+    \addplot[red, only marks, mark=*, mark size=3pt] coordinates {(1,5) (4,11)};
+    \node[red, above right] at (axis cs:1,3.7) {$(1,5)$};
+    \node[red, above right] at (axis cs:4,9.7) {$(4,11)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Notación de funciones}
+
+Las funciones se pueden escribir de varias formas:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Notación clásica:} $f(x) = 2x + 3$
+
+    Se lee "f de x igual a 2x más 3". Aquí $f$ es el nombre de la función y $x$ es la variable independiente.
+
+    \item \textbf{Con otras letras:} $g(t) = t^{2} - 1$ o $h(u) = \sqrt{u + 5}$
+
+    Puedes usar cualquier letra para nombrar la función y cualquier letra para la variable. Depende del contexto.
+
+    \item \textbf{Notación de ecuación:} $y = 2x + 3$
+
+    Es equivalente a $f(x) = 2x + 3$, solo que aquí llamamos $y$ al resultado en lugar de $f(x)$.
+\end{enumerate}
+
+\textbf{Evaluación de funciones:} Cuando escribimos $f(3)$, significa "el valor de la función $f$ cuando $x=3$". Es decir, sustituimos el 3 donde esté la $x$ y calculamos.
+
+Ejemplo: Si $f(x) = x^{2} + 2x - 1$, entonces:
+\begin{align*}
+    f(3) &= 3^{2} + 2(3) - 1 = 9 + 6 - 1 = 14 \\
+    f(0) &= 0^{2} + 2(0) - 1 = -1 \\
+    f(-2) &= (-2)^{2} + 2(-2) - 1 = 4 - 4 - 1 = -1
+\end{align*}
+
+\subsection{Formas de representar funciones}
+
+Una función se puede representar de cuatro formas principales:
+
+\subsubsection{Tabla de valores}
+
+Una tabla muestra pares ordenados $(x, y)$ que satisfacen la función:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{$x$} & \textbf{$f(x)$} \\
+\hline
+-2 & 1 \\
+-1 & 2 \\
+0 & 3 \\
+1 & 4 \\
+2 & 5 \\
+\hline
+\end{tabular}
+\end{center}
+
+Esta tabla representa la función $f(x) = x + 3$.
+
+\subsubsection{Gráfica}
+
+La representación visual en el plano cartesiano. Cada punto $(x, f(x))$ se marca en el plano:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm, height=7cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-3, xmax=3,
+        ymin=-1, ymax=6,
+        grid=both,
+        samples=100,
+    ]
+    \addplot[blue, thick, domain=-3:3] {x + 3};
+    \addplot[red, only marks, mark=*, mark size=2pt] coordinates {
+        (-2,1) (-1,2) (0,3) (1,4) (2,5)
+    };
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Ecuación o fórmula}
+
+La expresión algebraica que define la relación:
+\[
+f(x) = x + 3
+\]
+
+Esta es la forma más compacta y permite calcular el valor de la función para cualquier $x$.
+
+\subsubsection{Diagrama sagital}
+
+Un diagrama con flechas que muestra cómo cada elemento del dominio se relaciona con un elemento del rango:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Dominio
+    \draw[thick] (-2,0) ellipse (0.8cm and 2.5cm);
+    \node at (-2,2.8) {\textbf{Dominio}};
+    \node (x1) at (-2,1.5) {$-2$};
+    \node (x2) at (-2,0.75) {$-1$};
+    \node (x3) at (-2,0) {$0$};
+    \node (x4) at (-2,-0.75) {$1$};
+    \node (x5) at (-2,-1.5) {$2$};
+
+    % Rango
+    \draw[thick] (2,0) ellipse (0.8cm and 2.5cm);
+    \node at (2,2.8) {\textbf{Rango}};
+    \node (y1) at (2,1.5) {$1$};
+    \node (y2) at (2,0.75) {$2$};
+    \node (y3) at (2,0) {$3$};
+    \node (y4) at (2,-0.75) {$4$};
+    \node (y5) at (2,-1.5) {$5$};
+
+    % Flechas
+    \draw[-{Latex}, thick, blue] (x1) -- (y1);
+    \draw[-{Latex}, thick, blue] (x2) -- (y2);
+    \draw[-{Latex}, thick, blue] (x3) -- (y3);
+    \draw[-{Latex}, thick, blue] (x4) -- (y4);
+    \draw[-{Latex}, thick, blue] (x5) -- (y5);
+
+    \node at (0,-3) {$f(x) = x + 3$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Dominio y rango de funciones}
+
+Ya los mencionamos antes, pero ahora vamos a profundizar:
+
+\subsubsection{Dominio}
+
+El \textbf{dominio} de una función es el conjunto de todos los valores que puede tomar la variable independiente $x$. Es decir, todos los valores que puedes "meter" a la función.
+
+Para encontrar el dominio, pregúntate: ¿qué valores de $x$ NO puedo usar?
+
+\textbf{Restricciones comunes:}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{División por cero:} No podemos dividir entre cero. Si hay un denominador, excluimos los valores que lo hacen cero.
+    \item \textbf{Raíces pares:} No podemos sacar raíz cuadrada de números negativos (en los reales). Si hay $\sqrt{x}$, necesitamos $x \geq 0$.
+    \item \textbf{Logaritmos:} Solo definidos para números positivos. Si hay $\log(x)$, necesitamos $x > 0$.
+\end{itemize}
+
+\textbf{Ejemplos:}
+
+\begin{enumerate}[leftmargin=*]
+    \item $f(x) = 2x + 3$ \quad $\Rightarrow$ \quad Dominio: $\mathbb{R}$ (todos los reales, no hay restricciones)
+
+    \item $g(x) = \frac{1}{x-2}$ \quad $\Rightarrow$ \quad Dominio: $\mathbb{R} - \{2\}$ (todos excepto $x=2$, porque haría cero el denominador)
+
+    \item $h(x) = \sqrt{x+1}$ \quad $\Rightarrow$ \quad Dominio: $[-1, \infty)$ (necesitamos $x+1 \geq 0$, es decir $x \geq -1$)
+\end{enumerate}
+
+\subsubsection{Rango}
+
+El \textbf{rango} es el conjunto de todos los valores que puede tomar $f(x)$ (la variable dependiente). Es decir, todos los valores que puede "devolver" la función.
+
+Para encontrar el rango, pregúntate: ¿qué valores puede alcanzar $y$?
+
+\textbf{Ejemplos con gráficas:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm, height=7cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-3, xmax=3,
+        ymin=-2, ymax=10,
+        grid=both,
+        samples=100,
+        title={$f(x) = x^{2}$},
+    ]
+    \addplot[blue, thick, domain=-3:3] {x^2};
+    \draw[red, dashed, thick] (axis cs:0,-2) -- (axis cs:0,10);
+    \node[red, right, rotate=90] at (axis cs:0.3,2.5) {Rango: $[0, \infty)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Para $f(x) = x^{2}$:
+\begin{itemize}
+    \item Dominio: $\mathbb{R}$ (podemos elevar al cuadrado cualquier número)
+    \item Rango: $[0, \infty)$ (un cuadrado nunca es negativo)
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm, height=7cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-1, xmax=5,
+        ymin=-1, ymax=3,
+        grid=both,
+        samples=100,
+        title={$g(x) = \sqrt{x}$},
+    ]
+    \addplot[blue, thick, domain=0:5] {sqrt(x)};
+    \draw[red, dashed, very thick] (axis cs:0,0) -- (axis cs:5,0);
+    \node[red, right] at (axis cs:2,0.3) {Dominio: $[0, \infty)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Para $g(x) = \sqrt{x}$:
+\begin{itemize}
+    \item Dominio: $[0, \infty)$ (no podemos sacar raíz de negativos)
+    \item Rango: $[0, \infty)$ (una raíz cuadrada nunca es negativa)
+\end{itemize}
+
+\newpage
+
+\section{Ejemplos Resueltos}
+
+\subsection{Ejemplo 1: Identificar si una relación es función}
+
+\textbf{Problema:} Determina cuáles de las siguientes relaciones son funciones:
+
+\begin{multicols}{2}
+a)
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{$x$} & \textbf{$y$} \\
+\hline
+1 & 3 \\
+2 & 5 \\
+3 & 7 \\
+4 & 9 \\
+\hline
+\end{tabular}
+\end{center}
+
+b)
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{$x$} & \textbf{$y$} \\
+\hline
+1 & 2 \\
+2 & 4 \\
+2 & 6 \\
+3 & 8 \\
+\hline
+\end{tabular}
+\end{center}
+\end{multicols}
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Recordemos la regla de oro de las funciones: cada valor de $x$ debe estar relacionado con \textbf{exactamente un} valor de $y$. \\[.5mm]
+
+\textbf{Paso 2:} Analicemos la relación (a):
+\begin{itemize}
+    \item Para $x=1$, tenemos $y=3$ (solo un valor)
+    \item Para $x=2$, tenemos $y=5$ (solo un valor)
+    \item Para $x=3$, tenemos $y=7$ (solo un valor)
+    \item Para $x=4$, tenemos $y=9$ (solo un valor)
+\end{itemize}
+
+Cada valor de $x$ tiene asociado exactamente un valor de $y$. Por lo tanto, la relación (a) \textbf{SÍ es una función}. \\[.5mm]
+
+\textbf{Paso 3:} Analicemos la relación (b):
+\begin{itemize}
+    \item Para $x=1$, tenemos $y=2$ (solo un valor)
+    \item Para $x=2$, tenemos $y=4$ Y también $y=6$ (dos valores diferentes!)
+    \item Para $x=3$, tenemos $y=8$ (solo un valor)
+\end{itemize}
+
+\noindent
+El problema está en $x=2$: tiene dos valores de $y$ asociados (4 y 6). Esto viola la regla de las funciones.
+\noindent
+Por lo tanto, la relación (b) \textbf{NO es una función}.
+
+\textbf{Respuesta:} $\boxed{\text{Solo (a) es función}}$ \\[.5mm]
+
+\textbf{Visualización con diagramas sagitales:}
+\begin{multicols}{2}
+%\begin{center}
+\centering
+\textbf{Relación (a) - ES función} 
+\begin{tikzpicture}[scale=0.55]
+    \draw[thick] (-1.5,0) ellipse (0.7cm and 2cm);
+    \node at (-1.5,2.3) {\small Dominio};
+    \node (x1) at (-1.5,1.2) {$1$};
+    \node (x2) at (-1.5,0.4) {$2$};
+    \node (x3) at (-1.5,-0.4) {$3$};
+    \node (x4) at (-1.5,-1.2) {$4$};
+
+    \draw[thick] (1.5,0) ellipse (0.7cm and 2cm);
+    \node at (1.5,2.3) {\small Rango};
+    \node (y1) at (1.5,1.2) {$3$};
+    \node (y2) at (1.5,0.4) {$5$};
+    \node (y3) at (1.5,-0.4) {$7$};
+    \node (y4) at (1.5,-1.2) {$9$};
+
+    \draw[-{Latex}, thick, blue] (x1) -- (y1);
+    \draw[-{Latex}, thick, blue] (x2) -- (y2);
+    \draw[-{Latex}, thick, blue] (x3) -- (y3);
+    \draw[-{Latex}, thick, blue] (x4) -- (y4);
+\end{tikzpicture}
+%\hspace{2cm}
+\columnbreak
+
+\centering
+\textbf{Relación (b) - NO ES función} \\[1mm]
+\begin{tikzpicture}[scale=0.5]
+    \draw[thick] (-1.5,0) ellipse (0.7cm and 2cm);
+    \node at (-1.5,2.3) {\small Dominio};
+    \node (x1) at (-1.5,1.2) {$1$};
+    \node (x2) at (-1.5,0.4) {$2$};
+    \node (x3) at (-1.5,-0.4) {$2$};
+    \node (x4) at (-1.5,-1.2) {$3$};
+
+    \draw[thick] (1.5,0) ellipse (0.7cm and 2cm);
+    \node at (1.5,2.3) {\small Rango};
+    \node (y1) at (1.5,1.2) {$2$};
+    \node (y2) at (1.5,0.4) {$4$};
+    \node (y3) at (1.5,-0.4) {$6$};
+    \node (y4) at (1.5,-1.2) {$8$};
+
+    \draw[-{Latex}, thick, blue] (x1) -- (y1);
+    \draw[-{Latex}, thick, red] (x2) -- (y2);
+    \draw[-{Latex}, thick, red] (x3) -- (y3);
+    \draw[-{Latex}, thick, blue] (x4) -- (y4);
+
+    \node[red] at (0,-2.8) {\small Una $x$ con dos $y$!};
+\end{tikzpicture}
+%\end{center}
+\end{multicols}
+
+\subsection{Ejemplo 2: Evaluar una función en puntos específicos}
+
+\textbf{Problema:} Dada la función $f(x) = 3x^{2} - 5x + 2$, calcula:
+\begin{multicols}{3}
+a) $f(0)$
+
+b) $f(2)$
+
+c) $f(-1)$
+\end{multicols}
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Para evaluar una función en un punto, simplemente sustituimos el valor de $x$ en la fórmula.
+
+\textbf{Paso 2:} Calculemos $f(0)$:
+\begin{align*}
+    f(0) &= 3(0)^{2} - 5(0) + 2 \\
+    &= 3(0) - 0 + 2 \\
+    &= 0 - 0 + 2 \\
+    &= 2
+\end{align*}
+
+\textbf{Paso 3:} Calculemos $f(2)$:
+\begin{align*}
+    f(2) &= 3(2)^{2} - 5(2) + 2 \\
+    &= 3(4) - 10 + 2 \\
+    &= 12 - 10 + 2 \\
+    &= 4
+\end{align*}
+
+\textbf{Paso 4:} Calculemos $f(-1)$:
+\begin{align*}
+    f(-1) &= 3(-1)^{2} - 5(-1) + 2 \\
+    &= 3(1) + 5 + 2 \\
+    &= 3 + 5 + 2 \\
+    &= 10
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f(0) = 2, \quad f(2) = 4, \quad f(-1) = 10}$
+
+\textbf{Gráfica mostrando los puntos evaluados:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-2, xmax=3,
+        ymin=-1, ymax=11,
+        grid=both,
+        samples=100,
+        legend pos=north east,
+    ]
+    \addplot[blue, thick, domain=-1.5:2.5] {3*x^2 - 5*x + 2};
+    \addlegendentry{$f(x) = 3x^{2} - 5x + 2$}
+
+    % Puntos evaluados
+    \addplot[red, only marks, mark=*, mark size=4pt] coordinates {
+        (0,2) (2,4) (-1,10)
+    };
+
+    \node[red, below right] at (axis cs:0,2.6) {$(0, 2)$};
+    \node[red, above right] at (axis cs:2,3.4) {$(2, 4)$};
+    \node[red, left] at (axis cs:-1,10) {$(-1, 10)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ejemplo 3: Determinar dominio y rango de una función algebraica}
+
+\textbf{Problema:} Encuentra el dominio y rango de las siguientes funciones:
+
+a) $f(x) = \frac{1}{x-3}$
+
+b) $g(x) = \sqrt{x+2}$
+
+\textbf{Solución:}
+
+\textbf{Para la función $f(x) = \frac{1}{x-3}$:}
+
+\textbf{Paso 1:} Encontremos el dominio. Tenemos una división, así que debemos evitar que el denominador sea cero.
+
+El denominador es $x - 3$. ¿Cuándo es cero?
+\[
+x - 3 = 0 \quad \Rightarrow \quad x = 3
+\]
+
+Entonces $x = 3$ no puede estar en el dominio.
+
+\textbf{Dominio de $f$:} $\mathbb{R} - \{3\}$ o en intervalo: $(-\infty, 3) \cup (3, \infty)$
+
+\textbf{Paso 2:} Encontremos el rango. ¿Qué valores puede tomar $y = \frac{1}{x-3}$?
+
+Despejemos $x$ en términos de $y$:
+\begin{align*}
+    y &= \frac{1}{x-3} \\
+    y(x-3) &= 1 \\
+    yx - 3y &= 1 \\
+    yx &= 1 + 3y \\
+    x &= \frac{1 + 3y}{y}
+\end{align*}
+
+Para que esto tenga sentido, necesitamos $y \neq 0$. Por lo tanto, $y = 0$ no está en el rango.
+
+\textbf{Rango de $f$:} $\mathbb{R} - \{0\}$ o en intervalo: $(-\infty, 0) \cup (0, \infty)$
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=11cm, height=7cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-2, xmax=8,
+        ymin=-5, ymax=5,
+        grid=both,
+        samples=200,
+        title={$f(x) = \frac{1}{x-3}$},
+    ]
+    \addplot[blue, thick, domain=-2:2.8] {1/(x-3)};
+    \addplot[blue, thick, domain=3.2:8] {1/(x-3)};
+
+    % Asíntotas
+    \draw[red, dashed, very thick] (axis cs:3,-5) -- (axis cs:3,5);
+    \draw[red, dashed, very thick] (axis cs:-2,0) -- (axis cs:8,0);
+
+    \node[red, below left] at (axis cs:3,4.5) {$x=3$};
+    \node[red, right] at (axis cs:1,0.5) {$y=0$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Para la función $g(x) = \sqrt{x+2}$:}
+
+\textbf{Paso 1:} Encontremos el dominio. Tenemos una raíz cuadrada, así que lo de adentro debe ser no negativo.
+
+Necesitamos: $x + 2 \geq 0$
+
+Resolviendo: $x \geq -2$
+
+\textbf{Dominio de $g$:} $[-2, \infty)$
+
+\textbf{Paso 2:} Encontremos el rango. Una raíz cuadrada siempre da valores no negativos.
+
+El mínimo valor se alcanza cuando $x = -2$:
+\[
+g(-2) = \sqrt{-2+2} = \sqrt{0} = 0
+\]
+
+A medida que $x$ aumenta, $g(x)$ también aumenta sin límite.
+
+\textbf{Rango de $g$:} $[0, \infty)$
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=7cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-3.5, xmax=8,
+        ymin=-1, ymax=4,
+        grid=both,
+        samples=100,
+        title={$g(x) = \sqrt{x+2}$},
+    ]
+    \addplot[blue, thick, domain=-2:8] {sqrt(x+2)};
+
+    % Punto inicial
+    \addplot[red, only marks, mark=*, mark size=3pt] coordinates {(-2,0)};
+    \node[red, above left] at (axis cs:-2,0) {$(-2, 0)$};
+
+    % Indicadores de dominio y rango
+    \draw[red, very thick] (axis cs:-2,-0.5) -- (axis cs:8,-0.5);
+    \node[red, below] at (axis cs:3,-0.5) {Dominio: $[-2, \infty)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{array}{ll}
+f(x) = \frac{1}{x-3}: & \text{Dom} = \mathbb{R}-\{3\}, \quad \text{Rango} = \mathbb{R}-\{0\} \\[0.3cm]
+g(x) = \sqrt{x+2}: & \text{Dom} = [-2,\infty), \quad \text{Rango} = [0,\infty)
+\end{array}
+}
+\]
+
+\subsection{Ejemplo 4: Aplicación práctica -- Conversión de temperaturas}
+
+\textbf{Problema:} La temperatura en grados Celsius ($C$) se relaciona con la temperatura en grados Fahrenheit ($F$) mediante la función:
+\[
+C(F) = \frac{5}{9}(F - 32)
+\]
+
+a) Si en Nueva York la temperatura es 77°F, ¿cuántos grados Celsius son?
+
+b) ¿A qué temperatura en Fahrenheit corresponden 0°C (punto de congelación del agua)?
+
+c) Construye una tabla de conversión para temperaturas desde 32°F hasta 212°F en incrementos de 30°F.
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Calculemos la temperatura en Celsius cuando $F = 77$:
+\begin{align*}
+    C(77) &= \frac{5}{9}(77 - 32) \\
+    &= \frac{5}{9}(45) \\
+    &= \frac{225}{9} \\
+    &= 25
+\end{align*}
+
+Por lo tanto, 77°F equivalen a 25°C.
+
+\textbf{Paso 2:} Para encontrar a qué temperatura en Fahrenheit corresponden 0°C, debemos resolver:
+\[
+0 = \frac{5}{9}(F - 32)
+\]
+
+Multiplicando ambos lados por $\frac{9}{5}$:
+\begin{align*}
+    0 &= F - 32 \\
+    F &= 32
+\end{align*}
+
+Por lo tanto, 0°C corresponden a 32°F.
+
+\textbf{Paso 3:} Construyamos la tabla de conversión:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Fahrenheit ($F$)} & \textbf{Celsius ($C$)} \\
+\hline
+32 & $\frac{5}{9}(32-32) = 0$ \\[0.2cm]
+62 & $\frac{5}{9}(62-32) = \frac{5}{9}(30) \approx 16.7$ \\[0.2cm]
+92 & $\frac{5}{9}(92-32) = \frac{5}{9}(60) \approx 33.3$ \\[0.2cm]
+122 & $\frac{5}{9}(122-32) = \frac{5}{9}(90) = 50$ \\[0.2cm]
+152 & $\frac{5}{9}(152-32) = \frac{5}{9}(120) \approx 66.7$ \\[0.2cm]
+182 & $\frac{5}{9}(182-32) = \frac{5}{9}(150) \approx 83.3$ \\[0.2cm]
+212 & $\frac{5}{9}(212-32) = \frac{5}{9}(180) = 100$ \\[0.2cm]
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{array}{l}
+\text{a) } 77°F = 25°C \\
+\text{b) } 0°C = 32°F \\
+\text{c) Ver tabla arriba}
+\end{array}
+}
+\]
+
+\textbf{Gráfica de la función de conversión:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={Fahrenheit ($F$)},
+        ylabel={Celsius ($C$)},
+        xmin=0, xmax=220,
+        ymin=-20, ymax=110,
+        grid=both,
+        samples=100,
+        legend style={
+       	at={(0.4,0.8)},    % ubica cerca de la esquina inferior derecha
+       	anchor=south east, % “pega” la esquina inferior derecha de la caja
+       	font=\small
+       },
+    ]
+    \addplot[blue, thick, domain=0:220] {5/9*(x-32)};
+    \addlegendentry{$C(F) = \frac{5}{9}(F-32)$}
+
+    % Puntos importantes
+    \addplot[red, only marks, mark=*, mark size=3pt] coordinates {
+        (32,0) (77,25) (212,100)
+    };
+
+    \node[red, above left] at (axis cs:32,0) {$(32, 0)$};
+    \node[red, above right] at (axis cs:77,15) {$(77, 25)$};
+    \node[red, below right] at (axis cs:212,100) {$(212, 100)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ejemplo 5: Aplicación práctica -- Costo de taxi}
+
+\textbf{Problema:} Una empresa de taxis cobra \$4000 de bajada de bandera (costo fijo) más \$1800 por cada kilómetro recorrido.
+
+a) Escribe una función $C(x)$ que represente el costo total en función de los kilómetros recorridos ($x$).
+
+b) ¿Cuánto cuesta un viaje de 8 km?
+
+c) Si María pagó \$22{,}000 por su viaje, ¿cuántos kilómetros recorrió?
+
+d) Grafica la función y marca los puntos de los incisos (b) y (c).
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identifiquemos los componentes del costo:
+\begin{itemize}
+    \item Costo fijo (bajada de bandera): \$4000
+    \item Costo variable (por kilómetro): \$1800 por km
+    \item Si recorremos $x$ kilómetros, el costo variable es $1800x$
+\end{itemize}
+
+Por lo tanto, el costo total es:
+\[
+C(x) = 4000 + 1800x
+\]
+
+\textbf{Paso 2:} Para un viaje de 8 km, calculemos $C(8)$:
+\begin{align*}
+    C(8) &= 4000 + 1800(8) \\
+    &= 4000 + 14{,}400 \\
+    &= 18{,}400
+\end{align*}
+
+Un viaje de 8 km cuesta \$18{,}400.
+
+\textbf{Paso 3:} Si María pagó \$22{,}000, encontremos cuántos kilómetros recorrió. Debemos resolver:
+\[
+22{,}000 = 4000 + 1800x
+\]
+
+Restando 4000 de ambos lados:
+\begin{align*}
+    18{,}000 &= 1800x \\
+    x &= \frac{18{,}000}{1800} \\
+    x &= 10
+\end{align*}
+
+María recorrió 10 km.
+
+\textbf{Paso 4:} Grafiquemos la función:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={Distancia (km)},
+        ylabel={Costo (\$)},
+        xmin=0, xmax=12,
+        ymin=0, ymax=26000,
+        grid=both,
+		samples=100,
+		legend style={
+		at={(0.45,0.55)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+        },
+        ytick={0,4000,8000,12000,16000,20000,24000},
+        yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=0},
+    ]
+    \addplot[blue, thick, domain=0:12] {4000 + 1800*x};
+    \addlegendentry{$C(x) = 4000 + 1800x$}
+
+    % Puntos de los incisos
+    \addplot[red, only marks, mark=*, mark size=4pt] coordinates {
+        (8,18400) (10,22000)
+    };
+
+    % Líneas punteadas
+    \draw[red, dashed] (axis cs:8,0) -- (axis cs:8,18400) -- (axis cs:0,18400);
+    \draw[red, dashed] (axis cs:10,0) -- (axis cs:10,22000) -- (axis cs:0,22000);
+
+    \node[red, above right] at (axis cs:8,16400) {$(8, 18{,}400)$};
+    \node[red, above right] at (axis cs:7.85,22000) {$(10, 22{,}000)$};
+
+    % Bajada de bandera
+    \addplot[green!60!black, only marks, mark=*, mark size=3pt] coordinates {(0,4000)};
+    \node[green!60!black, right] at (axis cs:0,3100) {Bajada de bandera};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{array}{l}
+\text{a) } C(x) = 4000 + 1800x \\
+\text{b) Un viaje de 8 km cuesta \$18{,}400} \\
+\text{c) María recorrió 10 km}
+\end{array}
+}
+\]
+
+\textbf{Observación:} Nota que la gráfica es una línea recta. Esto es característico de las funciones lineales. La pendiente (1800) representa el costo por kilómetro, y el intercepto con el eje $y$ (4000) representa la bajada de bandera.
+
+\newpage
+
+\section{Ejercicios Propuestos}
+
+Resuelve los siguientes ejercicios. Encontrarás las soluciones detalladas en la siguiente sección.
+
+\begin{ejercicio}
+\textbf{Ejercicio 1:} Determina si las siguientes relaciones son funciones. Justifica tu respuesta.
+
+a) $\{(1,2), (3,4), (5,6), (7,8)\}$
+
+b) $\{(2,3), (2,5), (4,7), (6,9)\}$
+
+c) $\{(-1,1), (0,0), (1,1), (2,4)\}$
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 2:} Dada la función $f(x) = 2x^{2} - 3x + 1$, calcula:
+
+a) $f(3)$ \qquad b) $f(-2)$ \qquad c) $f(0)$ \qquad d) $f\left(\frac{1}{2}\right)$
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 3:} Encuentra el dominio de las siguientes funciones:
+
+a) $f(x) = \frac{x+2}{x-5}$
+
+b) $g(x) = \sqrt{2x-6}$
+
+c) $h(x) = \frac{1}{x^{2}-9}$
+
+d) $k(x) = \sqrt{x^{2}+1}$
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 4:} El área de un círculo es función de su radio, dada por $A(r) = \pi r^{2}$.
+
+a) Calcula el área de un círculo con radio 5 cm.
+
+b) Si un círculo tiene área $100\pi$ cm$^{2}$, ¿cuál es su radio?
+
+c) ¿Cuál es el dominio de esta función en el contexto del problema?
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 5:} Una compañía de celulares ofrece un plan que cobra \$25{,}000 al mes por un paquete base de 5 GB de datos. Cada GB adicional cuesta \$3500.
+
+a) Escribe una función $C(x)$ que represente el costo mensual si se consumen $x$ GB adicionales.
+
+b) ¿Cuánto pagará alguien que consume 12 GB en total durante el mes?
+
+c) Si alguien pagó \$42{,}500 en el mes, ¿cuántos GB consumió en total?
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 6:} Dada la función $f(x) = -x^{2} + 4x - 3$:
+
+a) Encuentra $f(1)$, $f(2)$, y $f(3)$.
+
+b) Grafica la función en el intervalo $[-1, 5]$.
+
+c) Determina el rango de la función.
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 7:} Un tanque de agua tiene inicialmente 500 litros. Se está vaciando a razón de 20 litros por minuto.
+
+a) Escribe una función $V(t)$ que represente el volumen de agua en el tanque después de $t$ minutos.
+
+b) ¿Cuánta agua queda después de 15 minutos?
+
+c) ¿Cuánto tiempo tardará en vaciarse completamente el tanque?
+
+d) ¿Cuál es el dominio de esta función en el contexto del problema?
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones Detalladas de los Ejercicios Propuestos}
+
+\subsection{Solución del Ejercicio 1}
+
+\textbf{Ejercicio:} Determina si las siguientes relaciones son funciones.
+
+a) $\{(1,2), (3,4), (5,6), (7,8)\}$
+
+b) $\{(2,3), (2,5), (4,7), (6,9)\}$
+
+c) $\{(-1,1), (0,0), (1,1), (2,4)\}$
+
+\textbf{Solución:}
+
+\textbf{Para (a):} Examinemos cada par ordenado:
+\begin{itemize}
+    \item $x=1$ está emparejado con $y=2$ (una sola vez)
+    \item $x=3$ está emparejado con $y=4$ (una sola vez)
+    \item $x=5$ está emparejado con $y=6$ (una sola vez)
+    \item $x=7$ está emparejado con $y=8$ (una sola vez)
+\end{itemize}
+
+Cada valor de $x$ aparece exactamente una vez y tiene un único valor de $y$ asociado.
+
+\textbf{Conclusión:} La relación (a) \textbf{SÍ es una función}.
+
+\textbf{Para (b):} Examinemos cada par ordenado:
+\begin{itemize}
+    \item $x=2$ está emparejado con $y=3$
+    \item $x=2$ está emparejado con $y=5$ (aquí está el problema!)
+    \item $x=4$ está emparejado con $y=7$
+    \item $x=6$ está emparejado con $y=9$
+\end{itemize}
+
+El valor $x=2$ aparece dos veces con diferentes valores de $y$ (3 y 5). Esto viola la definición de función.
+
+\textbf{Conclusión:} La relación (b) \textbf{NO es una función}.
+
+\textbf{Para (c):} Examinemos cada par ordenado:
+\begin{itemize}
+    \item $x=-1$ está emparejado con $y=1$ (una sola vez)
+    \item $x=0$ está emparejado con $y=0$ (una sola vez)
+    \item $x=1$ está emparejado con $y=1$ (una sola vez)
+    \item $x=2$ está emparejado con $y=4$ (una sola vez)
+\end{itemize}
+
+Nota que $y=1$ aparece dos veces, pero eso no es problema. Lo importante es que cada valor de $x$ tenga un único valor de $y$. Aquí $x=-1$ da $y=1$ y $x=1$ da $y=1$, pero son valores diferentes de $x$.
+
+\textbf{Conclusión:} La relación (c) \textbf{SÍ es una función}.
+
+\textbf{Respuesta:} $\boxed{\text{(a) SÍ, (b) NO, (c) SÍ}}$
+
+\textbf{Nota importante:} Una función puede tener dos valores de $x$ diferentes que produzcan el mismo $y$, pero no puede tener un valor de $x$ que produzca dos valores de $y$ diferentes.
+
+\subsection{Solución del Ejercicio 2}
+
+\textbf{Ejercicio:} Dada la función $f(x) = 2x^{2} - 3x + 1$, calcula: a) $f(3)$, b) $f(-2)$, c) $f(0)$, d) $f\left(\frac{1}{2}\right)$
+
+\textbf{Solución:}
+
+\textbf{a) Calcular $f(3)$:}
+\begin{align*}
+    f(3) &= 2(3)^{2} - 3(3) + 1 \\
+    &= 2(9) - 9 + 1 \\
+    &= 18 - 9 + 1 \\
+    &= 10
+\end{align*}
+
+\textbf{b) Calcular $f(-2)$:}
+\begin{align*}
+    f(-2) &= 2(-2)^{2} - 3(-2) + 1 \\
+    &= 2(4) + 6 + 1 \\
+    &= 8 + 6 + 1 \\
+    &= 15
+\end{align*}
+
+\textbf{c) Calcular $f(0)$:}
+\begin{align*}
+    f(0) &= 2(0)^{2} - 3(0) + 1 \\
+    &= 0 - 0 + 1 \\
+    &= 1
+\end{align*}
+
+\textbf{d) Calcular $f\left(\frac{1}{2}\right)$:}
+\begin{align*}
+    f\left(\frac{1}{2}\right) &= 2\left(\frac{1}{2}\right)^{2} - 3\left(\frac{1}{2}\right) + 1 \\
+    &= 2\left(\frac{1}{4}\right) - \frac{3}{2} + 1 \\
+    &= \frac{2}{4} - \frac{3}{2} + 1 \\
+    &= \frac{1}{2} - \frac{3}{2} + \frac{2}{2} \\
+    &= \frac{1 - 3 + 2}{2} \\
+    &= \frac{0}{2} \\
+    &= 0
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{f(3) = 10, \quad f(-2) = 15, \quad f(0) = 1, \quad f\left(\frac{1}{2}\right) = 0}$
+
+\textbf{Gráfica mostrando los puntos:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-4, xmax=4,
+        ymin=-2, ymax=18,
+        grid=both,
+        samples=100,
+		legend style={
+      	at={(0.43,0.13)},    % ubica cerca de la esquina inferior derecha
+      	anchor=south east, % “pega” la esquina inferior derecha de la caja
+      	font=\small
+        },
+    ]
+    \addplot[blue, thick, domain=-2.5:3.5] {2*x^2 - 3*x + 1};
+    \addlegendentry{$f(x) = 2x^{2} - 3x + 1$}
+
+    % Puntos evaluados
+    \addplot[red, only marks, mark=*, mark size=4pt] coordinates {
+        (3,10) (-2,15) (0,1) (0.5,0)
+    };
+
+    \node[red, right] at (axis cs:3,10) {$(3, 10)$};
+    \node[red, above left] at (axis cs:-2,15) {$(-2, 15)$};
+    \node[red, right] at (axis cs:0,1) {$(0, 1)$};
+    \node[red, below] at (axis cs:0.5,0) {$\left(\frac{1}{2}, 0\right)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Solución del Ejercicio 3}
+
+\textbf{Ejercicio:} Encuentra el dominio de las siguientes funciones:
+
+\textbf{a) $f(x) = \frac{x+2}{x-5}$}
+
+Tenemos una fracción, así que debemos evitar que el denominador sea cero.
+
+¿Cuándo se hace cero el denominador?
+\[
+x - 5 = 0 \quad \Rightarrow \quad x = 5
+\]
+
+Por lo tanto, $x = 5$ debe excluirse del dominio.
+
+\textbf{Dominio:} $\boxed{\text{Dom}(f) = \mathbb{R} - \{5\} = (-\infty, 5) \cup (5, \infty)}$
+
+\textbf{b) $g(x) = \sqrt{2x-6}$}
+
+Para que la raíz cuadrada esté definida, el radicando debe ser no negativo:
+\begin{align*}
+    2x - 6 &\geq 0 \\
+    2x &\geq 6 \\
+    x &\geq 3
+\end{align*}
+
+\textbf{Dominio:} $\boxed{\text{Dom}(g) = [3, \infty)}$
+
+\textbf{c) $h(x) = \frac{1}{x^{2}-9}$}
+
+El denominador no puede ser cero:
+\begin{align*}
+    x^{2} - 9 &\neq 0 \\
+    x^{2} &\neq 9 \\
+    x &\neq \pm 3
+\end{align*}
+
+Por lo tanto, debemos excluir $x = 3$ y $x = -3$.
+
+\textbf{Dominio:} $\boxed{\text{Dom}(h) = \mathbb{R} - \{-3, 3\} = (-\infty, -3) \cup (-3, 3) \cup (3, \infty)}$
+
+\textbf{d) $k(x) = \sqrt{x^{2}+1}$}
+
+El radicando es $x^{2} + 1$. Veamos si puede ser negativo:
+
+Como $x^{2} \geq 0$ para todo $x$ real, entonces $x^{2} + 1 \geq 1 > 0$ para todo $x$ real.
+
+El radicando siempre es positivo, así que no hay restricciones.
+
+\textbf{Dominio:} $\boxed{\text{Dom}(k) = \mathbb{R} = (-\infty, \infty)}$
+
+\textbf{Visualización gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-8, xmax=10,
+        ymin=-2, ymax=5,
+        grid=both,
+        samples=200,
+        title={$f(x) = \frac{x+2}{x-5}$ y $h(x) = \frac{1}{x^{2}-9}$},
+        legend pos=north west,
+    ]
+    % f(x)
+    \addplot[blue, thick, domain=-8:4.7] {(x+2)/(x-5)};
+    \addplot[blue, thick, domain=5.3:10] {(x+2)/(x-5)};
+    \addlegendentry{$f(x) = \frac{x+2}{x-5}$}
+
+    % h(x)
+    \addplot[red, thick, domain=-8:-3.3] {1/(x^2-9)};
+    \addplot[red, thick, domain=-2.7:2.7] {1/(x^2-9)};
+    \addplot[red, thick, domain=3.3:10] {1/(x^2-9)};
+    \addlegendentry{$h(x) = \frac{1}{x^{2}-9}$}
+
+    % Asíntotas
+    \draw[dashed, gray] (axis cs:5,-2) -- (axis cs:5,5);
+    \draw[dashed, gray] (axis cs:-3,-2) -- (axis cs:-3,5);
+    \draw[dashed, gray] (axis cs:3,-2) -- (axis cs:3,5);
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Solución del Ejercicio 4}
+
+\textbf{Ejercicio:} El área de un círculo es función de su radio: $A(r) = \pi r^{2}$.
+
+\textbf{a) Calcula el área de un círculo con radio 5 cm.}
+
+Sustituimos $r = 5$ en la función:
+\begin{align*}
+    A(5) &= \pi (5)^{2} \\
+    &= \pi \cdot 25 \\
+    &= 25\pi \text{ cm}^{2} \\
+    &\approx 78.54 \text{ cm}^{2}
+\end{align*}
+
+\textbf{b) Si un círculo tiene área $100\pi$ cm$^{2}$, ¿cuál es su radio?}
+
+Debemos resolver:
+\begin{align*}
+    100\pi &= \pi r^{2} \\
+    100 &= r^{2} \\
+    r &= \sqrt{100} \\
+    r &= 10 \text{ cm}
+\end{align*}
+
+(Tomamos solo la raíz positiva porque el radio debe ser positivo)
+
+\textbf{c) ¿Cuál es el dominio de esta función en el contexto del problema?}
+
+Matemáticamente, $A(r) = \pi r^{2}$ está definida para todo $r$ real. Sin embargo, en el contexto del problema, el radio de un círculo debe ser positivo.
+
+\textbf{Dominio en contexto:} $(0, \infty)$ o $r > 0$
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{array}{l}
+\text{a) } A = 25\pi \approx 78.54 \text{ cm}^{2} \\
+\text{b) } r = 10 \text{ cm} \\
+\text{c) Dominio: } (0, \infty)
+\end{array}
+}
+\]
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={Radio $r$ (cm)},
+        ylabel={Área $A$ (cm$^{2}$)},
+        xmin=0, xmax=12,
+        ymin=0, ymax=400,
+        grid=both,
+        samples=100,
+        legend style={
+		at={(0.3,0.78)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+		},
+    	]
+    \addplot[blue, thick, domain=0:11] {pi*x^2};
+    \addlegendentry{$A(r) = \pi r^{2}$}
+
+    % Puntos específicos
+    \addplot[red, only marks, mark=*, mark size=4pt] coordinates {
+        (5, 78.54) (10, 314.16)
+    };
+
+    \node[red, above right] at (axis cs:5,48.54) {$(5, 25\pi)$};
+    \node[red, above right] at (axis cs:7.7,314.16) {$(10, 100\pi)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Solución del Ejercicio 5}
+
+\textbf{Ejercicio:} Una compañía de celulares cobra \$25{,}000 al mes por 5 GB base. Cada GB adicional cuesta \$3500.
+
+\textbf{a) Escribe una función $C(x)$ que represente el costo mensual si se consumen $x$ GB adicionales.}
+
+Analicemos:
+\begin{itemize}
+    \item Costo base (incluye 5 GB): \$25{,}000
+    \item Costo por cada GB adicional: \$3500
+    \item Si consumes $x$ GB adicionales: $3500x$
+\end{itemize}
+
+Por lo tanto:
+\[
+C(x) = 25{,}000 + 3500x
+\]
+
+\textbf{b) ¿Cuánto pagará alguien que consume 12 GB en total durante el mes?}
+
+Si consume 12 GB en total y el plan incluye 5 GB, entonces consume:
+\[
+x = 12 - 5 = 7 \text{ GB adicionales}
+\]
+
+Calculemos $C(7)$:
+\begin{align*}
+    C(7) &= 25{,}000 + 3500(7) \\
+    &= 25{,}000 + 24{,}500 \\
+    &= 49{,}500
+\end{align*}
+
+\textbf{c) Si alguien pagó \$42{,}500 en el mes, ¿cuántos GB consumió en total?}
+
+Primero, encontremos cuántos GB adicionales consumió:
+\begin{align*}
+    42{,}500 &= 25{,}000 + 3500x \\
+    17{,}500 &= 3500x \\
+    x &= \frac{17{,}500}{3500} \\
+    x &= 5 \text{ GB adicionales}
+\end{align*}
+
+Por lo tanto, en total consumió:
+\[
+\text{Total} = 5 + 5 = 10 \text{ GB}
+\]
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{array}{l}
+\text{a) } C(x) = 25{,}000 + 3500x \\
+\text{b) Pagará \$49{,}500} \\
+\text{c) Consumió 10 GB en total}
+\end{array}
+}
+\]
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={GB adicionales ($x$)},
+        ylabel={Costo (\$)},
+        xmin=0, xmax=10,
+        ymin=20000, ymax=60000,
+        grid=both,
+        samples=100,
+        legend style={
+		at={(0.48,0.8)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+		},
+        yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=0},
+    ]
+    \addplot[blue, thick, domain=0:10] {25000 + 3500*x};
+    \addlegendentry{$C(x) = 25{,}000 + 3500x$}
+
+    % Puntos
+    \addplot[red, only marks, mark=*, mark size=4pt] coordinates {
+        (0,25000) (7,49500) (5,42500)
+    };
+
+    \node[red, above right] at (axis cs:0,22000) {$(0, 25{,}000)$ Plan base};
+    \node[red, above] at (axis cs:6,49500) {$(7, 49{,}500)$};
+    \node[red, below right] at (axis cs:5,42500) {$(5, 42{,}500)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Solución del Ejercicio 6}
+
+\textbf{Ejercicio:} Dada la función $f(x) = -x^{2} + 4x - 3$:
+
+\textbf{a) Encuentra $f(1)$, $f(2)$, y $f(3)$.}
+
+Calculemos cada uno:
+
+$f(1)$:
+\begin{align*}
+    f(1) &= -(1)^{2} + 4(1) - 3 \\
+    &= -1 + 4 - 3 \\
+    &= 0
+\end{align*}
+
+$f(2)$:
+\begin{align*}
+    f(2) &= -(2)^{2} + 4(2) - 3 \\
+    &= -4 + 8 - 3 \\
+    &= 1
+\end{align*}
+
+$f(3)$:
+\begin{align*}
+    f(3) &= -(3)^{2} + 4(3) - 3 \\
+    &= -9 + 12 - 3 \\
+    &= 0
+\end{align*}
+
+\textbf{b) Grafica la función en el intervalo $[-1, 5]$.}
+
+\textbf{c) Determina el rango de la función.}
+
+Esta es una parábola que abre hacia abajo (porque el coeficiente de $x^{2}$ es negativo). El máximo se alcanza en el vértice.
+
+El vértice de una parábola $f(x) = ax^{2} + bx + c$ está en $x = -\frac{b}{2a}$.
+
+Para nuestra función: $a = -1$, $b = 4$, $c = -3$
+
+\begin{align*}
+    x_v &= -\frac{4}{2(-1)} = -\frac{4}{-2} = 2
+\end{align*}
+
+El valor máximo es:
+\begin{align*}
+    f(2) &= 1 \quad \text{(ya lo calculamos)}
+\end{align*}
+
+Como la parábola abre hacia abajo, la función puede tomar todos los valores desde $-\infty$ hasta el máximo.
+
+\textbf{Rango:} $(-\infty, 1]$
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{array}{l}
+\text{a) } f(1) = 0, \quad f(2) = 1, \quad f(3) = 0 \\
+\text{c) Rango: } (-\infty, 1]
+\end{array}
+}
+\]
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-1.5, xmax=5.5,
+        ymin=-4, ymax=2,
+        grid=both,
+        samples=100,
+        legend style={
+		at={(0.7,0.07)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+		},
+    ]
+    \addplot[blue, thick, domain=-1:5] {-x^2 + 4*x - 3};
+    \addlegendentry{$f(x) = -x^{2} + 4x - 3$}
+
+    % Puntos evaluados
+    \addplot[red, only marks, mark=*, mark size=4pt] coordinates {
+        (1,0) (2,1) (3,0)
+    };
+
+    % Vértice
+    \addplot[green!60!black, only marks, mark=*, mark size=4pt] coordinates {(2,1)};
+
+    \node[red, above left] at (axis cs:1,0) {$(1, 0)$};
+    \node[green!60!black, above] at (axis cs:2,1) {Vértice $(2, 1)$};
+    \node[red, above right] at (axis cs:3,0) {$(3, 0)$};
+
+    % Línea de rango máximo
+    \draw[orange, dashed, very thick] (axis cs:-1.5,1) -- (axis cs:5.5,1);
+    \node[orange, above left] at (axis cs:5,1) {Valor máximo};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Solución del Ejercicio 7}
+
+\textbf{Ejercicio:} Un tanque tiene inicialmente 500 litros y se vacía a 20 litros/min.
+
+\textbf{a) Escribe una función $V(t)$ que represente el volumen después de $t$ minutos.}
+
+Analicemos:
+\begin{itemize}
+    \item Volumen inicial: 500 litros
+    \item Cada minuto se pierden 20 litros
+    \item Después de $t$ minutos, se han perdido $20t$ litros
+\end{itemize}
+
+Por lo tanto:
+\[
+V(t) = 500 - 20t
+\]
+
+\textbf{b) ¿Cuánta agua queda después de 15 minutos?}
+
+\begin{align*}
+    V(15) &= 500 - 20(15) \\
+    &= 500 - 300 \\
+    &= 200 \text{ litros}
+\end{align*}
+
+\textbf{c) ¿Cuánto tiempo tardará en vaciarse completamente?}
+
+El tanque estará vacío cuando $V(t) = 0$:
+\begin{align*}
+    0 &= 500 - 20t \\
+    20t &= 500 \\
+    t &= \frac{500}{20} \\
+    t &= 25 \text{ minutos}
+\end{align*}
+
+\textbf{d) ¿Cuál es el dominio en el contexto del problema?}
+
+El tiempo debe ser no negativo, y el tanque se vacía completamente a los 25 minutos. Después de ese momento, la función ya no tiene sentido físico (no puede haber volumen negativo).
+
+\textbf{Dominio en contexto:} $[0, 25]$
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{array}{l}
+\text{a) } V(t) = 500 - 20t \\
+\text{b) Quedan 200 litros} \\
+\text{c) 25 minutos} \\
+\text{d) Dominio: } [0, 25]
+\end{array}
+}
+\]
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={Tiempo (minutos)},
+        ylabel={Volumen (litros)},
+        xmin=0, xmax=30,
+        ymin=0, ymax=550,
+        grid=both,
+        samples=100,
+        legend pos=north east,
+    ]
+    % Función completa (solo en el dominio válido)
+    \addplot[blue, thick, domain=0:25] {500 - 20*x};
+    \addlegendentry{$V(t) = 500 - 20t$}
+
+    % Extensión fuera del dominio (punteada)
+    \addplot[blue, dashed, thin, domain=25:30] {500 - 20*x};
+
+    % Puntos importantes
+    \addplot[red, only marks, mark=*, mark size=4pt] coordinates {
+        (0,500) (15,200) (25,0)
+    };
+
+    \node[red, above right] at (axis cs:0,470) {$(0, 500)$ Inicial};
+    \node[red, above left] at (axis cs:14,180) {$(15, 200)$};
+    \node[red, above right] at (axis cs:22,30) {$(25, 0)$ Vacío};
+
+    % Región válida
+    \draw[green!60!black, very thick] (axis cs:0,-20) -- (axis cs:25,-20);
+    \node[green!60!black, below] at (axis cs:12.5,-20) {Dominio válido: $[0, 25]$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación importante:} Nota cómo el dominio está restringido por el contexto físico del problema. Matemáticamente, la función lineal $V(t) = 500 - 20t$ está definida para todo $t$ real, pero en este problema solo tiene sentido para $t \in [0, 25]$.
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+En estos ejercicios, en lugar de darte la función y pedirte que la evalúes, te daremos información sobre la función y tú deberás encontrarla.
+
+\begin{ejercicio}
+\textbf{Ejercicio Inverso 1:} Encuentra la función lineal $f(x) = mx + b$ que pasa por los puntos $(1, 5)$ y $(3, 11)$.
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio Inverso 2:} Una función lineal $g(x)$ satisface que $g(0) = -2$ y $g(4) = 6$. Encuentra la expresión de $g(x)$.
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio Inverso 3:} Un taxi cobra una tarifa que depende linealmente de la distancia. Se sabe que un viaje de 5 km cuesta \$8500 y un viaje de 10 km cuesta \$13{,}500.
+
+a) Encuentra la función $C(x)$ que da el costo en función de los kilómetros.
+
+b) ¿Cuál es la bajada de bandera (costo fijo)?
+
+c) ¿Cuánto cuesta cada kilómetro?
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio Inverso 4:} Una función cuadrática $h(x) = ax^{2}$ pasa por el punto $(2, 12)$.
+
+a) Encuentra el valor de $a$.
+
+b) ¿Cuál es el valor de $h(3)$?
+
+c) Si $h(k) = 48$, ¿cuál es el valor de $k$? (considera $k > 0$)
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones de los Ejercicios Inversos}
+
+\subsection{Solución del Ejercicio Inverso 1}
+
+\textbf{Problema:} Encuentra la función lineal $f(x) = mx + b$ que pasa por $(1, 5)$ y $(3, 11)$.
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Una función lineal tiene la forma $f(x) = mx + b$, donde $m$ es la pendiente y $b$ es el intercepto con el eje $y$.
+
+\textbf{Paso 2:} Calculemos la pendiente usando los dos puntos:
+\[
+m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{11 - 5}{3 - 1} = \frac{6}{2} = 3
+\]
+
+Entonces $f(x) = 3x + b$.
+
+\textbf{Paso 3:} Para encontrar $b$, usamos uno de los puntos. Usemos $(1, 5)$:
+\begin{align*}
+    f(1) &= 5 \\
+    3(1) + b &= 5 \\
+    3 + b &= 5 \\
+    b &= 2
+\end{align*}
+
+\textbf{Paso 4:} Por lo tanto, la función es:
+\[
+f(x) = 3x + 2
+\]
+
+\textbf{Paso 5:} Verifiquemos con el otro punto $(3, 11)$:
+\[
+f(3) = 3(3) + 2 = 9 + 2 = 11 \quad \checkmark
+\]
+
+\textbf{Respuesta:} $\boxed{f(x) = 3x + 2}$
+
+\textbf{Gráfica de verificación:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=11cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-1, xmax=5,
+        ymin=-1, ymax=14,
+        grid=both,
+        samples=100,
+        legend style={
+		at={(0.95,0.2)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+		},
+    ]
+    \addplot[blue, thick, domain=-0.5:4.5] {3*x + 2};
+    \addlegendentry{$f(x) = 3x + 2$}
+
+    % Puntos dados
+    \addplot[red, only marks, mark=*, mark size=4pt] coordinates {
+        (1,5) (3,11)
+    };
+
+    \node[red, above left] at (axis cs:1,5) {$(1, 5)$};
+    \node[red, above left] at (axis cs:3,11) {$(3, 11)$};
+
+    % Intercepto
+    \addplot[green!60!black, only marks, mark=*, mark size=3pt] coordinates {(0,2)};
+    \node[green!60!black, right] at (axis cs:0,2) {$(0, 2)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Solución del Ejercicio Inverso 2}
+
+\textbf{Problema:} Una función lineal $g(x)$ satisface que $g(0) = -2$ y $g(4) = 6$. Encuentra $g(x)$.
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Tenemos dos puntos: $(0, -2)$ y $(4, 6)$.
+
+\textbf{Paso 2:} Calculemos la pendiente:
+\[
+m = \frac{6 - (-2)}{4 - 0} = \frac{6 + 2}{4} = \frac{8}{4} = 2
+\]
+
+\textbf{Paso 3:} Como conocemos $g(0) = -2$, sabemos directamente que $b = -2$ (porque $g(0)$ es el intercepto con el eje $y$).
+
+Por lo tanto:
+\[
+g(x) = 2x - 2
+\]
+
+\textbf{Paso 4:} Verifiquemos con el otro punto:
+\[
+g(4) = 2(4) - 2 = 8 - 2 = 6 \quad \checkmark
+\]
+
+\textbf{Respuesta:} $\boxed{g(x) = 2x - 2}$
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=11cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-1, xmax=6,
+        ymin=-3, ymax=8,
+        grid=both,
+        samples=100,
+        legend style={
+		at={(0.95,0.35)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+},
+    ]
+    \addplot[blue, thick, domain=-0.5:5.5] {2*x - 2};
+    \addlegendentry{$g(x) = 2x - 2$}
+
+    % Puntos dados
+    \addplot[red, only marks, mark=*, mark size=4pt] coordinates {
+        (0,-2) (4,6)
+    };
+
+    \node[red, left] at (axis cs:0,-1.5) {$(0, -2)$};
+    \node[red, above right] at (axis cs:4,5) {$(4, 6)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Solución del Ejercicio Inverso 3}
+
+\textbf{Problema:} Un taxi cobra una tarifa lineal. Un viaje de 5 km cuesta \$8500 y uno de 10 km cuesta \$13{,}500.
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Tenemos dos puntos: $(5, 8500)$ y $(10, 13500)$, donde $x$ son los kilómetros y $y$ es el costo.
+
+\textbf{Paso 2:} La función tiene la forma $C(x) = mx + b$, donde:
+\begin{itemize}
+    \item $m$ es el costo por kilómetro
+    \item $b$ es la bajada de bandera (costo fijo)
+\end{itemize}
+
+\textbf{Paso 3:} Calculemos la pendiente (costo por km):
+\[
+m = \frac{13{,}500 - 8500}{10 - 5} = \frac{5000}{5} = 1000
+\]
+
+Cada kilómetro cuesta \$1000.
+
+\textbf{Paso 4:} Encontremos la bajada de bandera usando el punto $(5, 8500)$:
+\begin{align*}
+    8500 &= 1000(5) + b \\
+    8500 &= 5000 + b \\
+    b &= 3500
+\end{align*}
+
+La bajada de bandera es \$3500.
+
+\textbf{Paso 5:} Por lo tanto:
+\[
+C(x) = 1000x + 3500
+\]
+
+\textbf{Paso 6:} Verifiquemos con el otro punto $(10, 13500)$:
+\[
+C(10) = 1000(10) + 3500 = 10{,}000 + 3500 = 13{,}500 \quad \checkmark
+\]
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{array}{l}
+\text{a) } C(x) = 1000x + 3500 \\
+\text{b) Bajada de bandera: \$3500} \\
+\text{c) Costo por km: \$1000}
+\end{array}
+}
+\]
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={Distancia (km)},
+        ylabel={Costo (\$)},
+        xmin=0, xmax=12,
+        ymin=0, ymax=16000,
+        grid=both,
+        samples=100,
+        legend style={
+		at={(0.95,0.3)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+		},
+        yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=0},
+    ]
+    \addplot[blue, thick, domain=0:12] {1000*x + 3500};
+    \addlegendentry{$C(x) = 1000x + 3500$}
+
+    % Puntos dados
+    \addplot[red, only marks, mark=*, mark size=4pt] coordinates {
+        (5,8500) (10,13500)
+    };
+
+    \node[red, above right] at (axis cs:5,7000) {$(5, 8500)$};
+    \node[red, above right] at (axis cs:8,13500) {$(10, 13{,}500)$};
+
+    % Bajada de bandera
+    \addplot[green!60!black, only marks, mark=*, mark size=3pt] coordinates {(0,3500)};
+    \node[green!60!black, right] at (axis cs:0,3000) {Bajada: \$3500};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Solución del Ejercicio Inverso 4}
+
+\textbf{Problema:} Una función cuadrática $h(x) = ax^{2}$ pasa por $(2, 12)$.
+
+\textbf{Solución:}
+
+\textbf{a) Encuentra el valor de $a$.}
+
+\textbf{Paso 1:} Sabemos que $h(x) = ax^{2}$ y que $h(2) = 12$.
+
+Sustituyendo:
+\begin{align*}
+    h(2) &= 12 \\
+    a(2)^{2} &= 12 \\
+    4a &= 12 \\
+    a &= 3
+\end{align*}
+
+Por lo tanto: $h(x) = 3x^{2}$
+
+\textbf{b) ¿Cuál es el valor de $h(3)$?}
+
+\begin{align*}
+    h(3) &= 3(3)^{2} \\
+    &= 3(9) \\
+    &= 27
+\end{align*}
+
+\textbf{c) Si $h(k) = 48$, ¿cuál es el valor de $k$? (con $k > 0$)}
+
+\textbf{Paso 1:} Debemos resolver:
+\begin{align*}
+    3k^{2} &= 48 \\
+    k^{2} &= 16 \\
+    k &= \pm 4
+\end{align*}
+
+Como nos piden $k > 0$, entonces $k = 4$.
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{array}{l}
+\text{a) } a = 3, \quad h(x) = 3x^{2} \\
+\text{b) } h(3) = 27 \\
+\text{c) } k = 4
+\end{array}
+}
+\]
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-5, xmax=5,
+        ymin=0, ymax=60,
+        grid=both,
+        samples=100,
+        legend pos=south west,
+    ]
+    \addplot[blue, thick, domain=-4.5:4.5] {3*x^2};
+    \addlegendentry{$h(x) = 3x^{2}$}
+
+    % Puntos importantes
+    \addplot[red, only marks, mark=*, mark size=4pt] coordinates {
+        (2,12) (3,27) (4,48) (-4,48)
+    };
+
+    \node[red, above right] at (axis cs:2,9) {$(2, 12)$};
+    \node[red, above right] at (axis cs:3,24) {$(3, 27)$};
+    \node[red, below right] at (axis cs:2.5,48) {$(4, 48)$};
+    \node[red, below left] at (axis cs:-2.25,48) {$(-4, 48)$};
+
+    % Líneas para mostrar la altura de 48
+    \draw[dashed, orange] (axis cs:-5,48) -- (axis cs:5,48);
+    \node[orange, left] at (axis cs:-5,48) {$y = 48$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación:} Nota que $h(-4) = 3(-4)^{2} = 48$ también. La ecuación $h(k) = 48$ tiene dos soluciones: $k = 4$ y $k = -4$. El problema nos pidió solo la positiva.
+
+\vspace{1cm}
+
+\begin{center}
+\textbf{\Large ¡Felicitaciones!}
+
+\vspace{0.5cm}
+
+Has completado esta guía sobre funciones. Dominar estos conceptos te abrirá las puertas a temas más avanzados como funciones trigonométricas, exponenciales, logarítmicas, y cálculo diferencial e integral.
+
+\vspace{0.5cm}
+
+\textit{Sigue practicando y no temas hacer preguntas.}
+
+\vspace{0.5cm}
+
+\textbf{-- Prof. Toribio de J Arrieta F}
+\end{center}
+
+\end{document}

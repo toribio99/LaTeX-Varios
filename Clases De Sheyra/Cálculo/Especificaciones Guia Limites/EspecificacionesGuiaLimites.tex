@@ -1,0 +1,547 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+
+% Colores
+\definecolor{azuloscuro}{RGB}{0,51,102}
+\definecolor{azulclaro}{RGB}{51,153,255}
+\definecolor{verde}{RGB}{0,128,0}
+\definecolor{naranja}{RGB}{255,140,0}
+
+% Configuración de cajas
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{infobox}[1][]{
+    colback=azulclaro!5!white,
+    colframe=azulclaro!75!black,
+    fonttitle=\bfseries,
+    title=#1,
+    breakable
+}
+
+\newtcolorbox{seccionbox}[1][]{
+    colback=verde!5!white,
+    colframe=verde!75!black,
+    fonttitle=\bfseries,
+    title=#1,
+    breakable
+}
+
+% Encabezado
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Especificaciones - Guía de Límites}
+\fancyhead[R]{\small Grado 11}
+\fancyfoot[C]{\thepage}
+
+\title{
+    \vspace{-2cm}
+    \Huge\textbf{\color{azuloscuro}Especificaciones para Guía de Límites}\\
+    \Large\textbf{\color{azulclaro}Límites de Funciones Reales}\\
+    \vspace{0.5cm}
+    \large Grado 11 - Cálculo Diferencial
+}
+\author{Preparado para generación con Sistema v3.1}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1cm}
+
+\begin{center}
+\large\textit{Este documento contiene las respuestas completas\\
+para generar una guía exhaustiva sobre límites de funciones reales}
+\end{center}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Información del Documento}
+
+\begin{infobox}[Pregunta 1: Título de la guía]
+\textbf{Respuesta:}
+
+``Límites de Funciones Reales: Fundamentos y Aplicaciones''
+
+\vspace{0.3cm}
+\textit{Justificación:} El título es descriptivo, incluye el concepto principal (Límites) y sugiere tanto teoría (Fundamentos) como práctica (Aplicaciones).
+\end{infobox}
+
+\begin{infobox}[Pregunta 2: Autor]
+\textbf{Respuesta:}
+
+Prof. Toribio de J Arrieta F
+
+\vspace{0.3cm}
+\textit{Nota:} Nombre completo del docente autor de la guía.
+\end{infobox}
+
+\begin{infobox}[Pregunta 3: Institución]
+\textbf{Respuesta:}
+
+La Pruebita
+
+\vspace{0.3cm}
+\textit{Nota:} Nombre de la institución educativa.
+\end{infobox}
+
+\begin{infobox}[Pregunta 4: Fecha de creación]
+\textbf{Respuesta:}
+
+Noviembre 2025
+
+\vspace{0.3cm}
+\textit{Alternativa:} Usar la fecha actual o dejar que se genere automáticamente.
+\end{infobox}
+
+\newpage
+
+\section{Información Académica}
+
+\begin{infobox}[Pregunta 5: Tema principal]
+\textbf{Respuesta:}
+
+Límites de Funciones Reales
+
+\vspace{0.3cm}
+\textit{Justificación:} Es el tema específico que se va a desarrollar en toda la guía.
+\end{infobox}
+
+\begin{infobox}[Pregunta 6: Grado]
+\textbf{Respuesta:}
+
+11
+
+\vspace{0.3cm}
+\textit{Implicación:} Al ser grado 11, el sistema usará \textbf{tono formal}, apropiado para cálculo diferencial. Se evitarán expresiones coloquiales y se usará lenguaje matemático riguroso.
+\end{infobox}
+
+\begin{infobox}[Pregunta 7: Asignatura/Área]
+\textbf{Respuesta:}
+
+Cálculo Diferencial
+
+\vspace{0.3cm}
+\textit{Alternativas:}
+\begin{itemize}
+    \item ``Matemáticas - Cálculo''
+    \item ``Análisis Matemático''
+\end{itemize}
+\end{infobox}
+
+\newpage
+
+\section{Contenido Técnico}
+
+\begin{seccionbox}[Pregunta 8: Elementos Clave del Concepto]
+\textbf{Respuesta completa:}
+
+Para una guía \textbf{exhaustiva} de límites para grado 11, se deben incluir los siguientes elementos:
+
+\subsection*{Conceptos Fundamentales}
+\begin{itemize}[leftmargin=1.5cm]
+    \item Definición intuitiva de límite
+    \item Notación matemática: $\lim_{x \to a} f(x) = L$
+    \item Interpretación gráfica del límite
+    \item Límites laterales (por la derecha $x \to a^+$ y por la izquierda $x \to a^-$)
+    \item Existencia del límite (cuando ambos laterales coinciden)
+\end{itemize}
+
+\subsection*{Propiedades y Teoremas}
+\begin{itemize}[leftmargin=1.5cm]
+    \item Propiedades de los límites:
+    \begin{itemize}
+        \item Límite de una suma/resta
+        \item Límite de un producto
+        \item Límite de un cociente
+        \item Límite de una potencia
+        \item Límite de una raíz
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Técnicas de Cálculo}
+\begin{itemize}[leftmargin=1.5cm]
+    \item Límites algebraicos (sustitución directa)
+    \item Indeterminaciones: $\frac{0}{0}$, $\frac{\infty}{\infty}$, $\infty - \infty$, $0 \cdot \infty$
+    \item Técnicas de resolución:
+    \begin{itemize}
+        \item Factorización
+        \item Racionalización
+        \item Uso de conjugados
+        \item Simplificación algebraica
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Límites Especiales}
+\begin{itemize}[leftmargin=1.5cm]
+    \item Límites trigonométricos fundamentales:
+    \begin{itemize}
+        \item $\lim_{x \to 0} \frac{\sin x}{x} = 1$
+        \item $\lim_{x \to 0} \frac{1-\cos x}{x} = 0$
+    \end{itemize}
+    \item Límites al infinito: $\lim_{x \to \infty} f(x)$
+    \item Límites infinitos: $\lim_{x \to a} f(x) = \pm\infty$
+\end{itemize}
+
+\subsection*{Asíntotas y Continuidad}
+\begin{itemize}[leftmargin=1.5cm]
+    \item Asíntotas verticales (límites infinitos)
+    \item Asíntotas horizontales (límites al infinito)
+    \item Definición de continuidad en un punto
+    \item Tipos de discontinuidad (evitable, salto, infinita)
+    \item Continuidad en un intervalo
+\end{itemize}
+\end{seccionbox}
+
+\newpage
+
+\begin{seccionbox}[Pregunta 9: Aplicaciones de la Vida Real (mínimo 3)]
+\textbf{Respuesta:}
+
+Se deben mencionar al menos las siguientes 6 aplicaciones:
+
+\begin{enumerate}
+    \item \textbf{Física - Velocidad Instantánea:}
+
+    El límite es la base del concepto de velocidad instantánea. Si un objeto se mueve, su velocidad en un instante específico se calcula como:
+    $$v(t) = \lim_{\Delta t \to 0} \frac{\Delta s}{\Delta t}$$
+
+    \item \textbf{Economía - Costo Marginal:}
+
+    El costo de producir una unidad adicional se obtiene mediante:
+    $$CM = \lim_{\Delta q \to 0} \frac{\Delta C}{\Delta q}$$
+    donde $C$ es el costo total y $q$ la cantidad producida.
+
+    \item \textbf{Ingeniería Eléctrica - Circuitos en Estado Estacionario:}
+
+    Análisis del comportamiento de circuitos cuando $t \to \infty$ (estado estable).
+
+    \item \textbf{Biología - Capacidad de Carga Poblacional:}
+
+    Modelos de crecimiento poblacional logístico:
+    $$\lim_{t \to \infty} P(t) = K$$
+    donde $K$ es la capacidad de carga del ecosistema.
+
+    \item \textbf{Medicina - Vida Media de Medicamentos:}
+
+    Concentración de un fármaco en el cuerpo cuando $t \to \infty$:
+    $$\lim_{t \to \infty} C(t) = 0$$
+
+    \item \textbf{Arquitectura - Análisis de Estructuras:}
+
+    Comportamiento de materiales bajo cargas variables, estudiando límites de resistencia.
+\end{enumerate}
+
+\vspace{0.5cm}
+\textit{Nota:} Cada aplicación debe tener un ejemplo concreto con valores numéricos en la guía final.
+\end{seccionbox}
+
+\newpage
+
+\begin{seccionbox}[Pregunta 10: Ejemplos Resueltos]
+\textbf{Respuesta:}
+
+7-8 ejemplos resueltos
+
+\vspace{0.5cm}
+\textbf{Distribución sugerida:}
+
+\begin{enumerate}
+    \item \textbf{Ejemplo 1 - Límite por Sustitución Directa:}
+
+    Calcular: $\lim_{x \to 2} (3x^2 - 5x + 1)$
+
+    \textit{Objetivo:} Mostrar el caso más simple donde se puede sustituir directamente.
+
+    \item \textbf{Ejemplo 2 - Indeterminación $\frac{0}{0}$ con Factorización:}
+
+    Calcular: $\lim_{x \to 3} \frac{x^2 - 9}{x - 3}$
+
+    \textit{Objetivo:} Enseñar factorización de diferencia de cuadrados.
+
+    \item \textbf{Ejemplo 3 - Racionalización:}
+
+    Calcular: $\lim_{x \to 0} \frac{\sqrt{x+4} - 2}{x}$
+
+    \textit{Objetivo:} Técnica de multiplicar por el conjugado.
+
+    \item \textbf{Ejemplo 4 - Límites Laterales:}
+
+    Calcular: $\lim_{x \to 1} f(x)$ donde $f(x) = \begin{cases} x^2 & \text{si } x < 1 \\ 2x & \text{si } x \geq 1 \end{cases}$
+
+    \textit{Objetivo:} Mostrar cuando el límite no existe.
+
+    \item \textbf{Ejemplo 5 - Límite al Infinito:}
+
+    Calcular: $\lim_{x \to \infty} \frac{3x^2 + 5x - 1}{2x^2 - x + 7}$
+
+    \textit{Objetivo:} Técnica de dividir por la mayor potencia.
+
+    \item \textbf{Ejemplo 6 - Límite Infinito (Asíntota Vertical):}
+
+    Calcular: $\lim_{x \to 2^+} \frac{1}{x-2}$
+
+    \textit{Objetivo:} Identificar asíntotas verticales.
+
+    \item \textbf{Ejemplo 7 - Límite Trigonométrico:}
+
+    Calcular: $\lim_{x \to 0} \frac{\sin(3x)}{x}$
+
+    \textit{Objetivo:} Usar el límite fundamental.
+
+    \item \textbf{Ejemplo 8 - Análisis de Continuidad:}
+
+    Determinar si $f(x) = \frac{x^2-1}{x-1}$ es continua en $x = 1$.
+
+    \textit{Objetivo:} Relacionar límites con continuidad.
+\end{enumerate}
+
+\vspace{0.5cm}
+\textit{Nota:} Cada ejemplo debe tener gráfica con pgfplots mostrando el comportamiento.
+\end{seccionbox}
+
+\newpage
+
+\begin{seccionbox}[Pregunta 11: Ejercicios Propuestos]
+\textbf{Respuesta:}
+
+8-10 ejercicios propuestos
+
+\vspace{0.5cm}
+\textbf{Distribución por tipo:}
+
+\subsection*{Categoría 1: Límites Algebraicos Básicos (2-3 ejercicios)}
+\begin{enumerate}
+    \item $\lim_{x \to 5} (2x^2 - 3x + 7)$
+    \item $\lim_{x \to -1} \frac{x^3 + 1}{x + 1}$
+    \item $\lim_{x \to 4} \frac{x^2 - 16}{x - 4}$
+\end{enumerate}
+
+\subsection*{Categoría 2: Límites con Indeterminaciones (2-3 ejercicios)}
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    \item $\lim_{x \to 0} \frac{\sqrt{x+9} - 3}{x}$
+    \item $\lim_{x \to 2} \frac{x^3 - 8}{x^2 - 4}$
+    \item $\lim_{x \to 0} \frac{1-\cos x}{x^2}$
+\end{enumerate}
+
+\subsection*{Categoría 3: Límites Laterales (2 ejercicios)}
+\begin{enumerate}
+    \setcounter{enumi}{6}
+    \item $\lim_{x \to 0} \frac{|x|}{x}$ (calcular límites laterales)
+    \item Dada $f(x) = \begin{cases} x^2 + 1 & \text{si } x \leq 2 \\ 3x - 1 & \text{si } x > 2 \end{cases}$, calcular $\lim_{x \to 2} f(x)$
+\end{enumerate}
+
+\subsection*{Categoría 4: Límites al Infinito (1-2 ejercicios)}
+\begin{enumerate}
+    \setcounter{enumi}{8}
+    \item $\lim_{x \to \infty} \frac{5x^3 - 2x + 1}{2x^3 + 7x^2}$
+    \item $\lim_{x \to -\infty} \frac{\sqrt{4x^2 + 1}}{x + 3}$
+\end{enumerate}
+\end{seccionbox}
+
+\newpage
+
+\begin{seccionbox}[Pregunta 12: ¿Necesitas dos tipos de ejercicios?]
+\textbf{Respuesta:}
+
+Sí
+
+\vspace{0.5cm}
+\textbf{Explicación:}
+
+\subsection*{Ejercicios Directos (ya descritos arriba)}
+Calcular el valor de límites dados.
+
+\subsection*{Ejercicios Inversos (5 ejercicios)}
+
+Este tipo de ejercicios desarrolla el pensamiento inverso y profundiza la comprensión:
+
+\begin{enumerate}
+    \item \textbf{Determinar constantes para que exista el límite:}
+
+    Hallar el valor de $k$ para que $\lim_{x \to 2} \frac{x^2 + kx - 10}{x - 2}$ exista.
+
+    \item \textbf{Continuidad condicionada:}
+
+    Determinar $a$ y $b$ para que $f(x) = \begin{cases} ax + b & \text{si } x < 1 \\ x^2 & \text{si } x \geq 1 \end{cases}$ sea continua en $x = 1$.
+
+    \item \textbf{Construir función con comportamiento dado:}
+
+    Construir una función que tenga $\lim_{x \to 3^-} f(x) = 5$ y $\lim_{x \to 3^+} f(x) = 7$.
+
+    \item \textbf{Hallar asíntotas:}
+
+    Dada $f(x) = \frac{2x^2 - 5x + 3}{x - 1}$, determinar todas sus asíntotas.
+
+    \item \textbf{Intervalos de continuidad:}
+
+    Para $f(x) = \frac{x^2 - 4}{x^2 - 3x + 2}$, determinar los intervalos donde es continua.
+\end{enumerate}
+\end{seccionbox}
+
+\newpage
+
+\section{Ubicación y Archivo}
+
+\begin{infobox}[Pregunta 13: Carpeta de guardado]
+\textbf{Respuesta:}
+
+\texttt{Clases De Sheyra/Cálculo/Límites}
+
+\vspace{0.3cm}
+\textit{Ruta completa:}
+
+\texttt{/Users/toribioarrieta/Documents/LaTeX-GitHub/LaTeX-Varios/}
+
+\texttt{Clases De Sheyra/Cálculo/Límites}
+
+\vspace{0.3cm}
+\textit{Alternativas:}
+\begin{itemize}
+    \item \texttt{Grado 11/Cálculo/Límites}
+    \item \texttt{Matemáticas/Cálculo/Límites}
+\end{itemize}
+\end{infobox}
+
+\begin{infobox}[Pregunta 14: Nombre del archivo]
+\textbf{Respuesta:}
+
+\texttt{GuiaLimiteFunciones.tex}
+
+\vspace{0.3cm}
+\textit{Alternativas:}
+\begin{itemize}
+    \item \texttt{GuiaLimites.tex}
+    \item \texttt{GuiaLimitesGrado11.tex}
+\end{itemize}
+\end{infobox}
+
+\newpage
+
+\section{Resumen de Respuestas (Formato Rápido)}
+
+Para copiar y pegar directamente:
+
+\begin{tcolorbox}[colback=naranja!5!white, colframe=naranja!75!black, title=\textbf{RESPUESTAS COMPLETAS}]
+
+\textbf{1. Título:} Límites de Funciones Reales: Fundamentos y Aplicaciones
+
+\textbf{2. Autor:} Prof. Toribio de J Arrieta F
+
+\textbf{3. Institución:} La Pruebita
+
+\textbf{4. Fecha:} Noviembre 2025
+
+\textbf{5. Tema:} Límites de Funciones Reales
+
+\textbf{6. Grado:} 11
+
+\textbf{7. Asignatura:} Cálculo Diferencial
+
+\textbf{8. Elementos clave:} definición intuitiva, notación lim(x→a)f(x)=L, límites laterales, propiedades de límites, indeterminaciones 0/0 y ∞/∞, factorización, racionalización, límites al infinito, límites infinitos, asíntotas verticales y horizontales, continuidad, límites trigonométricos fundamentales
+
+\textbf{9. Aplicaciones:} velocidad instantánea en física, costo marginal en economía, análisis de circuitos eléctricos en estado estacionario, modelos de crecimiento poblacional (capacidad de carga), concentración de medicamentos (vida media), análisis de estructuras bajo cargas variables
+
+\textbf{10. Ejemplos resueltos:} 7
+
+\textbf{11. Ejercicios propuestos:} 8
+
+\textbf{12. Ejercicios inversos:} Sí
+
+\textbf{13. Carpeta:} Clases De Sheyra/Cálculo/Límites
+
+\textbf{14. Archivo:} GuiaLimiteFunciones.tex
+
+\end{tcolorbox}
+
+\newpage
+
+\section{Estructura Detallada de la Guía}
+
+La guía generada tendrá aproximadamente \textbf{25-30 páginas} con la siguiente estructura:
+
+\subsection*{Páginas 1-3: Introducción}
+\begin{itemize}
+    \item Portada
+    \item ¿Qué son los límites? (enfoque intuitivo)
+    \item Ejemplo numérico con tabla de valores
+    \item Aplicaciones en el mundo real
+\end{itemize}
+
+\subsection*{Páginas 4-7: Conceptos Fundamentales}
+\begin{itemize}
+    \item Definición formal de límite
+    \item Notación matemática
+    \item Interpretación gráfica (con gráficas pgfplots)
+    \item Límites laterales
+    \item Existencia del límite
+\end{itemize}
+
+\subsection*{Páginas 8-10: Propiedades}
+\begin{itemize}
+    \item Propiedades algebraicas de límites
+    \item Teoremas fundamentales
+    \item Ejemplos de aplicación de propiedades
+\end{itemize}
+
+\subsection*{Páginas 11-18: Ejemplos Resueltos}
+\begin{itemize}
+    \item 7-8 ejemplos completos
+    \item Cada ejemplo con:
+    \begin{itemize}
+        \item Enunciado claro
+        \item Solución paso a paso detallada
+        \item Gráfica pgfplots
+        \item Interpretación del resultado
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Página 19: Ejercicios Propuestos Directos}
+\begin{itemize}
+    \item 8-10 ejercicios numerados
+    \item Dificultad progresiva
+\end{itemize}
+
+\subsection*{Páginas 20-26: Soluciones Detalladas (Directos)}
+\begin{itemize}
+    \item Un ejercicio por página
+    \item Procedimiento completo
+    \item Gráfica para cada solución
+\end{itemize}
+
+\subsection*{Página 27: Ejercicios Inversos}
+\begin{itemize}
+    \item 5 ejercicios de tipo inverso
+\end{itemize}
+
+\subsection*{Páginas 28-30: Soluciones Inversas}
+\begin{itemize}
+    \item Procedimiento detallado
+    \item Justificación matemática
+\end{itemize}
+
+\vspace{1cm}
+
+\begin{center}
+\Large\textbf{Documento listo para generar la guía}
+
+\vspace{0.5cm}
+
+\textit{Todas las respuestas han sido diseñadas para crear\\
+una guía completa y pedagógicamente sólida sobre límites}
+\end{center}
+
+\end{document}

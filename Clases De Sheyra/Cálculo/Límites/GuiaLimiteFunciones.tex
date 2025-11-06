@@ -1,0 +1,1109 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\pgfplotsset{compat=1.18}
+
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+\title{\textbf{\Large Límites de Funciones Reales:\\ Fundamentos y Aplicaciones}}
+\author{\textbf{Prof. Toribio de J Arrieta F}}
+\date{
+    \textbf{Institución:} La Pruebita\\
+    \textbf{Asignatura:} Cálculo Diferencial\\
+    \textbf{Grado:} 11\\
+    Noviembre 2025
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introducción}
+
+El concepto de límite es uno de los pilares fundamentales del cálculo diferencial e integral. A través del estudio de límites, podemos analizar el comportamiento de funciones en puntos específicos o cuando las variables tienden a infinito, lo que nos permite comprender fenómenos dinámicos en física, ingeniería, economía y otras ciencias aplicadas.
+
+Esta guía presenta de manera rigurosa y sistemática los fundamentos teóricos de los límites de funciones reales, junto con técnicas de cálculo, aplicaciones prácticas y ejercicios que desarrollarán su capacidad analítica y resolución de problemas.
+
+\section{Fundamentos Teóricos}
+
+\subsection{Definición Intuitiva de Límite}
+
+Sea $f(x)$ una función definida en un intervalo abierto que contiene a $a$, excepto posiblemente en $a$ mismo. Decimos que el límite de $f(x)$ cuando $x$ tiende a $a$ es $L$, y escribimos:
+
+\[
+\lim_{x \to a} f(x) = L
+\]
+
+si podemos hacer que $f(x)$ esté arbitrariamente cerca de $L$ tomando valores de $x$ suficientemente cercanos a $a$, pero diferentes de $a$.
+
+\textbf{Interpretación intuitiva:} El límite describe el valor al cual se aproxima la función cuando la variable independiente se acerca a un punto determinado, sin importar si la función está o no definida en ese punto.
+
+\subsection{Notación Matemática}
+
+La notación estándar para límites es:
+
+\[
+\lim_{x \to a} f(x) = L
+\]
+
+Se lee: El límite de $f(x)$ cuando $x$ tiende a $a$ es igual a $L$.
+
+Esta notación fue introducida por el matemático alemán Karl Weierstrass en el siglo XIX y se ha convertido en el estándar universal para el cálculo.
+
+\subsection{Interpretación Gráfica}
+
+Gráficamente, el límite representa el valor de altura al cual se aproxima la curva de la función cuando nos acercamos al punto $x = a$ desde ambos lados. Es importante notar que:
+
+\begin{itemize}[leftmargin=*]
+    \item El límite puede existir incluso si la función no está definida en $x = a$
+    \item El valor del límite puede ser diferente del valor de la función en $x = a$
+    \item La función puede tener una discontinuidad en $x = a$ y aún así tener límite
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1, xmax=5,
+        ymin=-1, ymax=5,
+        grid=both,
+        samples=100,
+        legend pos=north west,
+    ]
+    % Función con discontinuidad removible
+    \addplot[red, very thick, domain=-1:1.95] {x + 2};
+    \addplot[red, very thick, domain=2.05:5] {x + 2};
+    \addplot[blue, only marks, mark size=3pt] coordinates {(2,3)};
+    \draw[blue, fill=white] (axis cs:2,4) circle (3pt);
+    \node at (axis cs:3.5,2) {\Large $\displaystyle \lim_{x \to 2} f(x) = 4$};
+    \node at (axis cs:3.5,1.3) {pero \Large $\displaystyle f(2) = 3$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Límites Laterales}
+
+Los límites laterales describen el comportamiento de una función cuando nos aproximamos a un punto desde una dirección específica.
+
+\textbf{Límite por la derecha (límite lateral derecho):}
+\[
+\lim_{x \to a^+} f(x) = L^+
+\]
+significa que $f(x)$ se aproxima a $L^+$ cuando $x$ se acerca a $a$ por valores mayores que $a$.
+
+\textbf{Límite por la izquierda (límite lateral izquierdo):}
+\[
+\lim_{x \to a^-} f(x) = L^-
+\]
+significa que $f(x)$ se aproxima a $L^-$ cuando $x$ se acerca a $a$ por valores menores que $a$.
+
+\subsection{Existencia del Límite}
+
+\textbf{Teorema (Existencia del Límite):} El límite $\displaystyle\lim_{x \to a} f(x)$ existe y es igual a $L$ si y solo si:
+
+\[
+\lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L
+\]
+
+Es decir, el límite existe cuando los límites laterales existen y son iguales.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1, xmax=5,
+        ymin=-1, ymax=5,
+        grid=both,
+        samples=100,
+        legend pos=north west,
+    ]
+    % Función con límites laterales diferentes
+    \addplot[red, very thick, domain=-1:2] {0.5*x + 1};
+    \addplot[red, very thick, domain=2:5] {-0.5*x + 4};
+    \draw[blue, fill=white] (axis cs:2,2) circle (3pt);
+    \draw[blue, fill=white] (axis cs:2,3) circle (3pt);
+    \node at (axis cs:3.5,2.5) {$\lim_{x \to 2^{-}} f(x) = 2$};
+    \node at (axis cs:3.5,1.8) {$\lim_{x \to 2^{+}} f(x) = 3$};
+    \node at (axis cs:3.5,1.1) {$\therefore \lim_{x \to 2} f(x)$ no existe};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Propiedades de los Límites}
+
+Sean $\displaystyle\lim_{x \to a} f(x) = L$ y $\displaystyle\lim_{x \to a} g(x) = M$, donde $L$ y $M$ son números reales. Entonces:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Límite de una constante:} $\displaystyle\lim_{x \to a} c = c$
+
+    \item \textbf{Límite de la función identidad:} $\displaystyle\lim_{x \to a} x = a$
+
+    \item \textbf{Suma:} $\displaystyle\lim_{x \to a} [f(x) + g(x)] = L + M$
+
+    \item \textbf{Diferencia:} $\displaystyle\lim_{x \to a} [f(x) - g(x)] = L - M$
+
+    \item \textbf{Producto por constante:} $\displaystyle\lim_{x \to a} [c \cdot f(x)] = c \cdot L$
+
+    \item \textbf{Producto:} $\displaystyle\lim_{x \to a} [f(x) \cdot g(x)] = L \cdot M$
+
+    \item \textbf{Cociente:} $\displaystyle\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{L}{M}$, siempre que $M \neq 0$
+
+    \item \textbf{Potencia:} $\displaystyle\lim_{x \to a} [f(x)]^n = L^n$, donde $n$ es un entero positivo
+
+    \item \textbf{Raíz:} $\displaystyle\lim_{x \to a} \sqrt[n]{f(x)} = \sqrt[n]{L}$, donde $n$ es un entero positivo (si $n$ es par, se requiere $L \geq 0$)
+\end{enumerate}
+
+\subsection{Indeterminaciones}
+
+Cuando aplicamos las propiedades de límites, pueden surgir expresiones indeterminadas que requieren técnicas especiales:
+
+\textbf{Formas indeterminadas comunes:}
+\[
+\frac{0}{0}, \quad \frac{\infty}{\infty}, \quad 0 \cdot \infty, \quad \infty - \infty, \quad 0^0, \quad 1^\infty, \quad \infty^0
+\]
+
+Las más frecuentes en cálculo elemental son $\dfrac{0}{0}$ y $\dfrac{\infty}{\infty}$.
+
+\subsection{Técnicas para Resolver Indeterminaciones}
+
+\subsubsection{Factorización}
+
+Útil cuando aparece la indeterminación $\dfrac{0}{0}$ en expresiones polinómicas. Se factoriza el numerador y denominador para cancelar factores comunes.
+
+\subsubsection{Racionalización}
+
+Se emplea cuando hay radicales en el numerador o denominador. Consiste en multiplicar por el conjugado para eliminar la raíz.
+
+\subsubsection{Simplificación Algebraica}
+
+Incluye operaciones como combinar fracciones, expandir productos notables, o realizar sustituciones apropiadas.
+
+\subsection{Límites al Infinito}
+
+Cuando $x$ crece o decrece sin límite, estudiamos el comportamiento de $f(x)$ mediante:
+
+\[
+\lim_{x \to \infty} f(x) \quad \text{o} \quad \lim_{x \to -\infty} f(x)
+\]
+
+\textbf{Para funciones racionales:} Si $f(x) = \dfrac{P(x)}{Q(x)}$ donde $P$ y $Q$ son polinomios:
+
+\begin{itemize}[leftmargin=*]
+    \item Si grado$(P) <$ grado$(Q)$: $\displaystyle\lim_{x \to \infty} f(x) = 0$
+    \item Si grado$(P) =$ grado$(Q)$: $\displaystyle\lim_{x \to \infty} f(x) = \frac{a_n}{b_m}$ (razón de coeficientes principales)
+    \item Si grado$(P) >$ grado$(Q)$: $\displaystyle\lim_{x \to \infty} f(x) = \pm\infty$
+\end{itemize}
+
+\subsection{Límites Infinitos (Asíntotas Verticales)}
+
+Un límite es infinito cuando $f(x)$ crece o decrece sin límite cuando $x$ se aproxima a $a$:
+
+\[
+\lim_{x \to a} f(x) = \infty \quad \text{o} \quad \lim_{x \to a} f(x) = -\infty
+\]
+
+Esto indica la presencia de una \textbf{asíntota vertical} en $x = a$.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1, xmax=5,
+        ymin=-8, ymax=8,
+        grid=both,
+        samples=200,
+        restrict y to domain=-10:10,
+    ]
+    \addplot[red, very thick, domain=-1:1.8] {1/(x-2)};
+    \addplot[red, very thick, domain=2.2:5] {1/(x-2)};
+    \draw[blue, dashed, very thick] (axis cs:2,-8) -- (axis cs:2,8);
+    \node[blue] at (axis cs:2.5,-6) {Asíntota vertical: $x = 2$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Asíntotas Horizontales}
+
+Si $\displaystyle\lim_{x \to \infty} f(x) = L$ o $\displaystyle\lim_{x \to -\infty} f(x) = L$, entonces la recta $y = L$ es una \textbf{asíntota horizontal}.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-5, xmax=5,
+        ymin=-1, ymax=4,
+        grid=both,
+        samples=200,
+    ]
+    \addplot[red, very thick, domain=-5:5] {2 + 3/(x^2+1)};
+    \draw[blue, dashed, very thick] (axis cs:-5,2) -- (axis cs:5,2);
+    \node[blue] at (axis cs:3,2.5) {Asíntota horizontal: $y = 2$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Continuidad de Funciones}
+
+Una función $f$ es \textbf{continua} en $x = a$ si se cumplen tres condiciones:
+
+\begin{enumerate}[leftmargin=*]
+    \item $f(a)$ está definida
+    \item $\displaystyle\lim_{x \to a} f(x)$ existe
+    \item $\displaystyle\lim_{x \to a} f(x) = f(a)$
+\end{enumerate}
+
+Si alguna de estas condiciones no se cumple, la función es \textbf{discontinua} en $x = a$.
+
+\textbf{Tipos de discontinuidad:}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Evitable (removible):} El límite existe pero $f(a) \neq \lim_{x \to a} f(x)$ o $f(a)$ no está definida
+    \item \textbf{De salto:} Los límites laterales existen pero son diferentes
+    \item \textbf{Infinita:} Al menos uno de los límites laterales es infinito
+    \item \textbf{Esencial:} Ninguno de los límites laterales existe
+\end{itemize}
+
+\subsection{Límites Trigonométricos Fundamentales}
+
+Dos límites trigonométricos son fundamentales en el cálculo:
+
+\[
+\lim_{x \to 0} \frac{\sin x}{x} = 1
+\]
+
+\[
+\lim_{x \to 0} \frac{1 - \cos x}{x} = 0
+\]
+
+Estos límites son esenciales para derivar funciones trigonométricas y resolver problemas aplicados.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-6.5, xmax=6.5,
+        ymin=-0.5, ymax=1.5,
+        grid=both,
+        samples=300,
+        legend pos=north east,
+    ]
+    \addplot[red, very thick, domain=-6.28:6.28] {sin(deg(x))/x};
+    \addplot[blue, dashed] coordinates {(-6.5,1) (6.5,1)};
+    \addplot[blue, only marks, mark size=3pt] coordinates {(0,1)};
+    \legend{$y = \frac{\sin x}{x}$, $y = 1$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\section{Aplicaciones de los Límites}
+
+\subsection{Aplicación 1: Velocidad Instantánea en Física}
+
+En física, la velocidad instantánea de un objeto en movimiento se define mediante un límite. Si $s(t)$ representa la posición de un objeto en el tiempo $t$, la velocidad instantánea en $t = t_0$ es:
+
+\[
+v(t_0) = \lim_{h \to 0} \frac{s(t_0 + h) - s(t_0)}{h}
+\]
+
+Este límite representa la derivada de la posición respecto al tiempo y es fundamental en cinemática.
+
+\textbf{Ejemplo:} Un objeto cae libremente desde el reposo. Su posición está dada por $s(t) = 4.9t^2$ metros. La velocidad instantánea en $t = 2$ segundos es:
+
+\[
+v(2) = \lim_{h \to 0} \frac{4.9(2+h)^2 - 4.9(2)^2}{h} = \lim_{h \to 0} \frac{4.9(4 + 4h + h^2) - 19.6}{h} = \lim_{h \to 0} \frac{19.6h + 4.9h^2}{h} = 19.6 \text{ m/s}
+\]
+
+\subsection{Aplicación 2: Costo Marginal en Economía}
+
+El costo marginal es el costo de producir una unidad adicional y se calcula mediante:
+
+\[
+C'(x) = \lim_{h \to 0} \frac{C(x + h) - C(x)}{h}
+\]
+
+donde $C(x)$ es la función de costo total para producir $x$ unidades.
+
+\textbf{Ejemplo:} Si $C(x) = 1000 + 50x + 0.5x^2$ es el costo total (en dólares) de producir $x$ unidades, el costo marginal cuando $x = 100$ es:
+
+\[
+C'(100) = \lim_{h \to 0} \frac{[1000 + 50(100+h) + 0.5(100+h)^2] - [1000 + 5000 + 5000]}{h} = 150 \text{ dólares/unidad}
+\]
+
+\subsection{Aplicación 3: Circuitos Eléctricos en Estado Estacionario}
+
+En circuitos RC (resistencia-capacitor), la corriente $i(t)$ tiende a cero cuando $t \to \infty$:
+
+\[
+\lim_{t \to \infty} i(t) = \lim_{t \to \infty} \frac{V}{R}e^{-t/(RC)} = 0
+\]
+
+donde $V$ es el voltaje, $R$ la resistencia, y $C$ la capacitancia. Esto describe el comportamiento del circuito en estado estacionario.
+
+\subsection{Aplicación 4: Modelos de Crecimiento Poblacional}
+
+El modelo logístico de crecimiento poblacional está dado por:
+
+\[
+P(t) = \frac{K}{1 + Ae^{-rt}}
+\]
+
+donde $K$ es la capacidad de carga del ambiente. El límite cuando $t \to \infty$ es:
+
+\[
+\lim_{t \to \infty} P(t) = \lim_{t \to \infty} \frac{K}{1 + Ae^{-rt}} = K
+\]
+
+Esto indica que la población se estabiliza en la capacidad de carga del ecosistema.
+
+\subsection{Aplicación 5: Concentración de Medicamentos (Vida Media)}
+
+La concentración de un medicamento en la sangre disminuye exponencialmente:
+
+\[
+C(t) = C_0 e^{-kt}
+\]
+
+donde $C_0$ es la concentración inicial y $k$ es la constante de eliminación. El límite cuando $t \to \infty$ es:
+
+\[
+\lim_{t \to \infty} C(t) = \lim_{t \to \infty} C_0 e^{-kt} = 0
+\]
+
+Esto indica que eventualmente el medicamento es completamente eliminado del organismo.
+
+\subsection{Aplicación 6: Análisis de Estructuras}
+
+En ingeniería estructural, el esfuerzo en una viga bajo carga distribuida $w(x)$ requiere calcular:
+
+\[
+\sigma(x_0) = \lim_{\Delta x \to 0} \frac{M(x_0 + \Delta x) - M(x_0)}{\Delta x}
+\]
+
+donde $M(x)$ es el momento flector. Este límite determina la distribución de esfuerzos y es crucial para el diseño seguro de estructuras.
+
+\section{Ejemplos Resueltos}
+
+\subsection{Ejemplo 1: Límite por Sustitución Directa}
+
+\textbf{Problema:} Calcular $\displaystyle\lim_{x \to 2} (3x^2 - 5x + 1)$
+
+\textbf{Solución:}
+
+Paso 1: Verificamos si la función es continua en $x = 2$. Como se trata de una función polinómica, es continua en todos los números reales.
+
+Paso 2: Aplicamos sustitución directa:
+\begin{align*}
+\lim_{x \to 2} (3x^2 - 5x + 1) &= 3(2)^2 - 5(2) + 1\\
+&= 3(4) - 10 + 1\\
+&= 12 - 10 + 1\\
+&= 3
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\displaystyle\lim_{x \to 2} (3x^2 - 5x + 1) = 3}$
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1, xmax=4,
+        ymin=-2, ymax=8,
+        grid=both,
+        samples=100,
+    ]
+    \addplot[red, very thick, domain=-1:4] {3*x^2 - 5*x + 1};
+    \addplot[blue, only marks, mark size=4pt] coordinates {(2,3)};
+    \node[blue] at (axis cs:2.8,3.5) {$(2, 3)$};
+    \draw[green!60!black, dashed] (axis cs:2,-2) -- (axis cs:2,3);
+    \draw[green!60!black, dashed] (axis cs:-1,3) -- (axis cs:2,3);
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ejemplo 2: Indeterminación $\dfrac{0}{0}$ con Factorización}
+
+\textbf{Problema:} Calcular $\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x - 3}$
+
+\textbf{Solución:}
+
+Paso 1: Intentamos sustitución directa:
+\[
+\frac{3^2 - 9}{3 - 3} = \frac{0}{0} \quad \text{(Indeterminación)}
+\]
+
+Paso 2: Factorizamos el numerador usando diferencia de cuadrados:
+\[
+x^2 - 9 = (x - 3)(x + 3)
+\]
+
+Paso 3: Simplificamos la expresión:
+\begin{align*}
+\lim_{x \to 3} \frac{x^2 - 9}{x - 3} &= \lim_{x \to 3} \frac{(x - 3)(x + 3)}{x - 3}\\
+&= \lim_{x \to 3} (x + 3) \quad \text{(para } x \neq 3\text{)}
+\end{align*}
+
+Paso 4: Ahora aplicamos sustitución directa:
+\[
+\lim_{x \to 3} (x + 3) = 3 + 3 = 6
+\]
+
+\textbf{Respuesta:} $\boxed{\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x - 3} = 6}$
+
+\textbf{Interpretación gráfica:}
+
+La función tiene una discontinuidad removible en $x = 3$. El límite existe y es igual a 6, aunque la función no está definida en ese punto.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1, xmax=6,
+        ymin=-2, ymax=10,
+        grid=both,
+        samples=100,
+    ]
+    \addplot[red, very thick, domain=-1:2.9] {x + 3};
+    \addplot[red, very thick, domain=3.1:6] {x + 3};
+    \draw[blue, fill=white] (axis cs:3,6) circle (3pt);
+    \node[blue] at (axis cs:4,6.5) {Discontinuidad removible en $(3, 6)$};
+    \draw[green!60!black, dashed] (axis cs:3,-2) -- (axis cs:3,6);
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ejemplo 3: Racionalización}
+
+\textbf{Problema:} Calcular $\displaystyle\lim_{x \to 0} \frac{\sqrt{x + 4} - 2}{x}$
+
+\textbf{Solución:}
+
+Paso 1: Verificamos si hay indeterminación:
+\[
+\frac{\sqrt{0 + 4} - 2}{0} = \frac{2 - 2}{0} = \frac{0}{0} \quad \text{(Indeterminación)}
+\]
+
+Paso 2: Multiplicamos numerador y denominador por el conjugado del numerador:
+\begin{align*}
+\lim_{x \to 0} \frac{\sqrt{x + 4} - 2}{x} &= \lim_{x \to 0} \frac{\sqrt{x + 4} - 2}{x} \cdot \frac{\sqrt{x + 4} + 2}{\sqrt{x + 4} + 2}
+\end{align*}
+
+Paso 3: Aplicamos diferencia de cuadrados en el numerador:
+\begin{align*}
+&= \lim_{x \to 0} \frac{(\sqrt{x + 4})^2 - 2^2}{x(\sqrt{x + 4} + 2)}\\
+&= \lim_{x \to 0} \frac{x + 4 - 4}{x(\sqrt{x + 4} + 2)}\\
+&= \lim_{x \to 0} \frac{x}{x(\sqrt{x + 4} + 2)}
+\end{align*}
+
+Paso 4: Simplificamos cancelando $x$ (para $x \neq 0$):
+\begin{align*}
+&= \lim_{x \to 0} \frac{1}{\sqrt{x + 4} + 2}
+\end{align*}
+
+Paso 5: Aplicamos sustitución directa:
+\[
+= \frac{1}{\sqrt{0 + 4} + 2} = \frac{1}{2 + 2} = \frac{1}{4}
+\]
+
+\textbf{Respuesta:} $\boxed{\displaystyle\lim_{x \to 0} \frac{\sqrt{x + 4} - 2}{x} = \frac{1}{4}}$
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-3, xmax=3,
+        ymin=-0.2, ymax=0.8,
+        grid=both,
+        samples=200,
+    ]
+    \addplot[red, very thick, domain=-3.9:-0.05] {(sqrt(x + 4) - 2)/x};
+    \addplot[red, very thick, domain=0.05:3] {(sqrt(x + 4) - 2)/x};
+    \draw[blue, fill=white] (axis cs:0,0.25) circle (3pt);
+    \addplot[green!60!black, dashed] coordinates {(-3,0.25) (3,0.25)};
+    \node[blue] at (axis cs:1.8,0.35) {$\lim_{x \to 0} f(x) = \frac{1}{4}$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ejemplo 4: Límites Laterales con Función por Partes}
+
+\textbf{Problema:} Dada la función por partes
+\[
+f(x) = \begin{cases}
+x^2 + 1 & \text{si } x < 2\\
+3x - 1 & \text{si } x \geq 2
+\end{cases}
+\]
+Calcular $\displaystyle\lim_{x \to 2^-} f(x)$, $\displaystyle\lim_{x \to 2^+} f(x)$ y $\displaystyle\lim_{x \to 2} f(x)$.
+
+\textbf{Solución:}
+
+Paso 1: Calculamos el límite lateral izquierdo ($x \to 2^-$):
+
+Cuando $x$ se aproxima a 2 por la izquierda, usamos la primera expresión:
+\begin{align*}
+\lim_{x \to 2^-} f(x) &= \lim_{x \to 2^-} (x^2 + 1)\\
+&= 2^2 + 1\\
+&= 5
+\end{align*}
+
+Paso 2: Calculamos el límite lateral derecho ($x \to 2^+$):
+
+Cuando $x$ se aproxima a 2 por la derecha, usamos la segunda expresión:
+\begin{align*}
+\lim_{x \to 2^+} f(x) &= \lim_{x \to 2^+} (3x - 1)\\
+&= 3(2) - 1\\
+&= 5
+\end{align*}
+
+Paso 3: Determinamos si existe el límite:
+
+Como $\displaystyle\lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x) = 5$, concluimos que:
+\[
+\lim_{x \to 2} f(x) = 5
+\]
+
+Paso 4: Verificamos continuidad:
+
+El valor de la función en $x = 2$ es:
+\[
+f(2) = 3(2) - 1 = 5
+\]
+
+Como $\displaystyle\lim_{x \to 2} f(x) = f(2) = 5$, la función es continua en $x = 2$.
+
+\textbf{Respuesta:} $\boxed{\displaystyle\lim_{x \to 2^-} f(x) = 5, \quad \lim_{x \to 2^+} f(x) = 5, \quad \lim_{x \to 2} f(x) = 5}$
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1, xmax=5,
+        ymin=-1, ymax=12,
+        grid=both,
+        samples=100,
+    ]
+    \addplot[red, very thick, domain=-1:2] {x^2 + 1};
+    \addplot[red, very thick, domain=2:5] {3*x - 1};
+    \addplot[blue, only marks, mark size=4pt] coordinates {(2,5)};
+    \draw[green!60!black, dashed] (axis cs:2,-1) -- (axis cs:2,5);
+    \draw[green!60!black, dashed] (axis cs:-1,5) -- (axis cs:2,5);
+    \node[blue] at (axis cs:3.5,6) {Función continua en $x = 2$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ejemplo 5: Límite al Infinito}
+
+\textbf{Problema:} Calcular $\displaystyle\lim_{x \to \infty} \frac{3x^2 + 5x - 1}{2x^2 - x + 7}$
+
+\textbf{Solución:}
+
+Paso 1: Identificamos los grados del numerador y denominador:
+\begin{itemize}
+    \item Grado del numerador: 2
+    \item Grado del denominador: 2
+\end{itemize}
+
+Como los grados son iguales, el límite es la razón de los coeficientes principales.
+
+Paso 2: Método alternativo (dividir por la mayor potencia):
+
+Dividimos numerador y denominador por $x^2$:
+\begin{align*}
+\lim_{x \to \infty} \frac{3x^2 + 5x - 1}{2x^2 - x + 7} &= \lim_{x \to \infty} \frac{\dfrac{3x^2}{x^2} + \dfrac{5x}{x^2} - \dfrac{1}{x^2}}{\dfrac{2x^2}{x^2} - \dfrac{x}{x^2} + \dfrac{7}{x^2}}\\
+&= \lim_{x \to \infty} \frac{3 + \dfrac{5}{x} - \dfrac{1}{x^2}}{2 - \dfrac{1}{x} + \dfrac{7}{x^2}}
+\end{align*}
+
+Paso 3: Aplicamos los límites:
+
+Sabemos que $\displaystyle\lim_{x \to \infty} \frac{1}{x} = 0$ y $\displaystyle\lim_{x \to \infty} \frac{1}{x^2} = 0$
+
+Por lo tanto:
+\begin{align*}
+\lim_{x \to \infty} \frac{3 + \dfrac{5}{x} - \dfrac{1}{x^2}}{2 - \dfrac{1}{x} + \dfrac{7}{x^2}} &= \frac{3 + 0 - 0}{2 - 0 + 0}\\
+&= \frac{3}{2}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\displaystyle\lim_{x \to \infty} \frac{3x^2 + 5x - 1}{2x^2 - x + 7} = \frac{3}{2}}$
+
+\textbf{Interpretación:} La función tiene una asíntota horizontal en $y = \dfrac{3}{2}$.
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-5, xmax=20,
+        ymin=0, ymax=3,
+        grid=both,
+        samples=200,
+    ]
+    \addplot[red, very thick, domain=-5:20] {(3*x^2 + 5*x - 1)/(2*x^2 - x + 7)};
+    \addplot[blue, dashed, very thick] coordinates {(-5,1.5) (20,1.5)};
+    \node[blue] at (axis cs:15,1.8) {Asíntota horizontal: $y = \frac{3}{2}$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ejemplo 6: Límite Infinito (Asíntota Vertical)}
+
+\textbf{Problema:} Calcular $\displaystyle\lim_{x \to 2^+} \frac{1}{x - 2}$
+
+\textbf{Solución:}
+
+Paso 1: Analizamos el comportamiento cerca de $x = 2$ por la derecha.
+
+Cuando $x \to 2^+$, tenemos $x > 2$, por lo tanto:
+\begin{itemize}
+    \item $x - 2 > 0$ (el denominador es positivo)
+    \item $x - 2 \to 0^+$ (el denominador se aproxima a cero por valores positivos)
+\end{itemize}
+
+Paso 2: Construimos una tabla de valores para $x$ cercano a 2 por la derecha:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$x$ & $x - 2$ & $f(x) = \dfrac{1}{x-2}$\\
+\hline
+2.1 & 0.1 & 10\\
+2.01 & 0.01 & 100\\
+2.001 & 0.001 & 1000\\
+2.0001 & 0.0001 & 10000\\
+\hline
+\end{tabular}
+\end{center}
+
+Paso 3: Conclusión:
+
+A medida que $x$ se aproxima a 2 por la derecha, el denominador se hace cada vez más pequeño (pero positivo), causando que la fracción crezca sin límite hacia valores positivos.
+
+\[
+\lim_{x \to 2^+} \frac{1}{x - 2} = +\infty
+\]
+
+\textbf{Respuesta:} $\boxed{\displaystyle\lim_{x \to 2^+} \frac{1}{x - 2} = +\infty}$
+
+\textbf{Interpretación:} La función tiene una asíntota vertical en $x = 2$.
+
+\textbf{Nota adicional:} Si calculáramos $\displaystyle\lim_{x \to 2^-} \frac{1}{x - 2}$, obtendríamos $-\infty$ porque el denominador sería negativo.
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=10cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=0, xmax=4,
+        ymin=-10, ymax=10,
+        grid=both,
+        samples=500,
+        restrict y to domain=-15:15,
+    ]
+    \addplot[red, very thick, domain=0:1.9] {1/(x-2)};
+    \addplot[red, very thick, domain=2.1:4] {1/(x-2)};
+    \draw[blue, dashed, very thick] (axis cs:2,-10) -- (axis cs:2,10);
+    \node[blue] at (axis cs:3,8) {Asíntota vertical};
+    \node[blue] at (axis cs:3,7) {$x = 2$};
+    \draw[green!60!black, ->, very thick] (axis cs:2.3,5) -- (axis cs:2.05,8);
+    \node[green!60!black] at (axis cs:2.8,5) {$\lim_{x \to 2^{+}} f(x) = +\infty$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ejemplo 7: Límite Trigonométrico}
+
+\textbf{Problema:} Calcular $\displaystyle\lim_{x \to 0} \frac{\sin(3x)}{x}$
+
+\textbf{Solución:}
+
+Paso 1: Intentamos sustitución directa:
+\[
+\frac{\sin(3 \cdot 0)}{0} = \frac{0}{0} \quad \text{(Indeterminación)}
+\]
+
+Paso 2: Utilizamos el límite fundamental $\displaystyle\lim_{u \to 0} \frac{\sin u}{u} = 1$.
+
+Multiplicamos y dividimos por 3 para crear la forma del límite fundamental:
+\begin{align*}
+\lim_{x \to 0} \frac{\sin(3x)}{x} &= \lim_{x \to 0} \frac{\sin(3x)}{x} \cdot \frac{3}{3}\\
+&= \lim_{x \to 0} 3 \cdot \frac{\sin(3x)}{3x}\\
+&= 3 \cdot \lim_{x \to 0} \frac{\sin(3x)}{3x}
+\end{align*}
+
+Paso 3: Realizamos la sustitución $u = 3x$:
+
+Cuando $x \to 0$, entonces $u = 3x \to 0$.
+
+\begin{align*}
+3 \cdot \lim_{x \to 0} \frac{\sin(3x)}{3x} &= 3 \cdot \lim_{u \to 0} \frac{\sin u}{u}\\
+&= 3 \cdot 1\\
+&= 3
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\displaystyle\lim_{x \to 0} \frac{\sin(3x)}{x} = 3}$
+
+\textbf{Verificación numérica:}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$x$ & $\dfrac{\sin(3x)}{x}$\\
+\hline
+0.1 & 2.9552\\
+0.01 & 2.9996\\
+0.001 & 3.0000\\
+-0.1 & 2.9552\\
+-0.01 & 2.9996\\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=2,
+        ymin=-1, ymax=5,
+        grid=both,
+        samples=500,
+        restrict y to domain=-2:6,
+    ]
+    \addplot[red, very thick, domain=-2:-0.05] {sin(3*deg(x))/x};
+    \addplot[red, very thick, domain=0.05:2] {sin(3*deg(x))/x};
+    \draw[blue, fill=white] (axis cs:0,3) circle (3pt);
+    \addplot[green!60!black, dashed] coordinates {(-2,3) (2,3)};
+    \node[blue] at (axis cs:1,3.8) {$\lim_{x \to 0} \frac{\sin(3x)}{x} = 3$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\section{Ejercicios Propuestos}
+
+Resuelva los siguientes ejercicios aplicando las técnicas estudiadas. Justifique cada paso de su solución.
+
+\subsection{Límites Algebraicos}
+
+\begin{enumerate}[leftmargin=*]
+    \item Calcular $\displaystyle\lim_{x \to 4} \frac{x^2 - 16}{x - 4}$
+
+    \item Calcular $\displaystyle\lim_{x \to 1} \frac{x^3 - 1}{x^2 - 1}$
+
+    \item Calcular $\displaystyle\lim_{x \to 0} \frac{\sqrt{1 + x} - 1}{x}$
+\end{enumerate}
+
+\subsection{Indeterminaciones}
+
+\begin{enumerate}[leftmargin=*, resume]
+    \item Calcular $\displaystyle\lim_{x \to 2} \frac{x^3 - 8}{x^2 - 4}$
+
+    \item Calcular $\displaystyle\lim_{x \to 0} \frac{(1 + x)^3 - 1}{x}$
+\end{enumerate}
+
+\subsection{Límites al Infinito}
+
+\begin{enumerate}[leftmargin=*, resume]
+    \item Calcular $\displaystyle\lim_{x \to \infty} \frac{5x^3 - 2x + 1}{3x^3 + x^2 - 7}$
+
+    \item Calcular $\displaystyle\lim_{x \to -\infty} \frac{4x^2 + 3x - 1}{2x^3 - x + 5}$
+\end{enumerate}
+
+\subsection{Límites Trigonométricos}
+
+\begin{enumerate}[leftmargin=*, resume]
+    \item Calcular $\displaystyle\lim_{x \to 0} \frac{\sin(5x)}{\sin(2x)}$
+\end{enumerate}
+
+\section{Ejercicios Inversos}
+
+Estos ejercicios requieren un enfoque de análisis inverso, donde se proporciona información sobre el límite y se debe determinar características de la función.
+
+\subsection{Ejercicio Inverso 1: Determinar Constantes}
+
+Dada la función
+\[
+f(x) = \begin{cases}
+ax^2 + b & \text{si } x < 3\\
+2x + 1 & \text{si } x \geq 3
+\end{cases}
+\]
+
+Determine los valores de $a$ y $b$ para que $\displaystyle\lim_{x \to 3} f(x)$ exista y sea igual a 7.
+
+\textbf{Pista:} Para que el límite exista, los límites laterales deben ser iguales. Además, ambos deben ser iguales a 7.
+
+\subsection{Ejercicio Inverso 2: Continuidad Condicionada}
+
+Determine el valor de la constante $k$ para que la función
+\[
+g(x) = \begin{cases}
+\dfrac{x^2 - 4}{x - 2} & \text{si } x \neq 2\\
+k & \text{si } x = 2
+\end{cases}
+\]
+sea continua en $x = 2$.
+
+\textbf{Pista:} Para que sea continua, se debe cumplir que $g(2) = \displaystyle\lim_{x \to 2} g(x)$.
+
+\subsection{Ejercicio Inverso 3: Construir Función con Comportamiento Dado}
+
+Construya una función racional $h(x) = \dfrac{P(x)}{Q(x)}$ (donde $P$ y $Q$ son polinomios) que satisfaga las siguientes condiciones:
+
+\begin{itemize}[leftmargin=*]
+    \item Tiene una asíntota vertical en $x = 1$
+    \item Tiene una asíntota horizontal en $y = 2$
+    \item $h(0) = 3$
+\end{itemize}
+
+\textbf{Pista:} Una asíntota vertical en $x = 1$ sugiere que $(x - 1)$ es factor del denominador. Una asíntota horizontal en $y = 2$ cuando los grados del numerador y denominador son iguales con razón de coeficientes 2.
+
+\subsection{Ejercicio Inverso 4: Hallar Asíntotas}
+
+Dada la función $f(x) = \dfrac{2x^3 + 3x^2 - 5x + 1}{x^2 - 4}$:
+
+\begin{enumerate}[label=\alph*), leftmargin=*]
+    \item Determine todas las asíntotas verticales
+    \item Investigue si existe asíntota horizontal
+    \item Determine el comportamiento asintótico cuando $x \to \infty$ y cuando $x \to -\infty$
+\end{enumerate}
+
+\textbf{Pista:} Para asíntotas verticales, busque donde el denominador es cero. Para asíntotas horizontales, compare los grados del numerador y denominador.
+
+\subsection{Ejercicio Inverso 5: Intervalos de Continuidad}
+
+Dada la función
+\[
+f(x) = \frac{x^2 - 9}{|x - 3|}
+\]
+
+\begin{enumerate}[label=\alph*), leftmargin=*]
+    \item Determine el dominio de $f(x)$
+    \item Calcule $\displaystyle\lim_{x \to 3^-} f(x)$ y $\displaystyle\lim_{x \to 3^+} f(x)$
+    \item Determine los intervalos donde la función es continua
+    \item Clasifique el tipo de discontinuidad en $x = 3$
+\end{enumerate}
+
+\textbf{Pista:} Recuerde que $|x - 3| = \begin{cases} x - 3 & \text{si } x \geq 3\\ -(x - 3) & \text{si } x < 3 \end{cases}$
+
+\section{Teoremas Importantes sobre Límites}
+
+\subsection{Teorema del Sandwich (o del Emparedado)}
+
+Si $g(x) \leq f(x) \leq h(x)$ para todo $x$ en un intervalo abierto que contiene a $a$ (excepto posiblemente en $a$), y si
+\[
+\lim_{x \to a} g(x) = \lim_{x \to a} h(x) = L
+\]
+entonces
+\[
+\lim_{x \to a} f(x) = L
+\]
+
+Este teorema es especialmente útil para demostrar límites trigonométricos.
+
+\subsection{Teorema de Existencia de Límites}
+
+Si $f$ es una función creciente (o decreciente) en un intervalo $(a, b)$ y está acotada superiormente (o inferiormente), entonces los límites $\displaystyle\lim_{x \to a^+} f(x)$ y $\displaystyle\lim_{x \to b^-} f(x)$ existen.
+
+\subsection{Teorema del Valor Intermedio}
+
+Si $f$ es continua en el intervalo cerrado $[a, b]$ y $N$ es cualquier número entre $f(a)$ y $f(b)$, entonces existe al menos un número $c$ en $(a, b)$ tal que $f(c) = N$.
+
+Este teorema garantiza que una función continua toma todos los valores intermedios entre dos puntos.
+
+\section{Estrategias Generales para Calcular Límites}
+
+\subsection{Procedimiento Sistemático}
+
+Al enfrentar un problema de límites, siga este proceso:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Sustitución directa:} Intente evaluar la función en el punto. Si obtiene un valor definido, ese es el límite.
+
+    \item \textbf{Identificar indeterminaciones:} Si obtiene $\dfrac{0}{0}$, $\dfrac{\infty}{\infty}$, u otra forma indeterminada, proceda al siguiente paso.
+
+    \item \textbf{Simplificación algebraica:}
+    \begin{itemize}
+        \item Factorización (para expresiones polinómicas)
+        \item Racionalización (para expresiones con radicales)
+        \item Operaciones con fracciones complejas
+    \end{itemize}
+
+    \item \textbf{Límites al infinito:} Divida por la mayor potencia de $x$ en el denominador.
+
+    \item \textbf{Límites laterales:} Para funciones por partes, evalúe cada expresión según corresponda.
+
+    \item \textbf{Límites trigonométricos:} Use identidades y los límites fundamentales.
+\end{enumerate}
+
+\subsection{Errores Comunes a Evitar}
+
+\begin{itemize}[leftmargin=*]
+    \item No confunda $\dfrac{0}{0}$ (indeterminado) con $\dfrac{k}{0}$ donde $k \neq 0$ (infinito)
+
+    \item No cancele términos antes de verificar que son factores
+
+    \item No asuma que si hay una discontinuidad, el límite no existe
+
+    \item En límites al infinito, no ignore términos de menor grado antes de dividir
+
+    \item Para límites laterales, use la expresión correcta de la función por partes
+\end{itemize}
+
+\section{Conexión con la Derivada}
+
+El concepto de límite es fundamental para definir la derivada. La derivada de una función $f$ en un punto $x = a$ se define como:
+
+\[
+f'(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h}
+\]
+
+Este límite representa la pendiente de la recta tangente a la curva en el punto $(a, f(a))$ y es la base del cálculo diferencial.
+
+\textbf{Interpretación geométrica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=0, xmax=5,
+        ymin=0, ymax=10,
+        grid=both,
+        samples=100,
+    ]
+    \addplot[red, very thick, domain=0:5] {0.5*x^2 + 1};
+    \addplot[blue, thick, domain=1:4] {2*x - 0.5};
+    \addplot[green!60!black, only marks, mark size=3pt] coordinates {(2,3)};
+    \draw[green!60!black, dashed] (axis cs:2,0) -- (axis cs:2,3);
+    \node[red] at (axis cs:4,8.5) {$y = f(x)$};
+    \node[blue] at (axis cs:4,6.5) {Recta tangente};
+    \node[green!60!black] at (axis cs:2.5,3.5) {$(a, f(a))$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\section{Ejercicios Adicionales de Desafío}
+
+\subsection{Desafío 1}
+
+Calcular $\displaystyle\lim_{x \to 0} \frac{\sqrt{1 + x} - \sqrt{1 - x}}{x}$
+
+\subsection{Desafío 2}
+
+Si $\displaystyle\lim_{x \to 2} \frac{f(x) - 5}{x - 2} = 3$, determine $\displaystyle\lim_{x \to 2} f(x)$.
+
+\subsection{Desafío 3}
+
+Demuestre que $\displaystyle\lim_{x \to 0} x^2 \sin\left(\frac{1}{x}\right) = 0$ usando el teorema del sandwich.
+
+\textbf{Pista:} Use que $-1 \leq \sin\left(\dfrac{1}{x}\right) \leq 1$ para todo $x \neq 0$.
+
+\subsection{Desafío 4}
+
+Calcular $\displaystyle\lim_{x \to 1} \frac{\sqrt{x} - 1}{\sqrt[3]{x} - 1}$
+
+\subsection{Desafío 5}
+
+Determine para qué valores de $a$ y $b$ la función
+\[
+f(x) = \begin{cases}
+\dfrac{x^2 - 1}{x - 1} & \text{si } x < 1\\
+ax + b & \text{si } 1 \leq x < 2\\
+3x - 2 & \text{si } x \geq 2
+\end{cases}
+\]
+es continua en todo $\mathbb{R}$.
+
+\section{Conclusiones}
+
+El estudio de límites es esencial para:
+
+\begin{itemize}[leftmargin=*]
+    \item Comprender el comportamiento de funciones cerca de puntos específicos
+    \item Analizar asíntotas y comportamiento en el infinito
+    \item Determinar la continuidad de funciones
+    \item Preparar el terreno para el cálculo de derivadas e integrales
+    \item Modelar fenómenos dinámicos en ciencias e ingeniería
+\end{itemize}
+
+El dominio de las técnicas de cálculo de límites proporciona las herramientas necesarias para avanzar en temas más complejos del cálculo diferencial e integral, incluyendo derivadas, aplicaciones de la derivada, integración y series infinitas.
+
+\section{Referencias y Lecturas Recomendadas}
+
+\begin{enumerate}[leftmargin=*]
+    \item Stewart, J. (2016). \textit{Cálculo de una Variable: Trascendentes Tempranas}. Cengage Learning.
+
+    \item Larson, R. \& Edwards, B. (2018). \textit{Cálculo I}. Cengage Learning.
+
+    \item Thomas, G. B. (2015). \textit{Cálculo: Una Variable}. Pearson Educación.
+
+    \item Leithold, L. (1998). \textit{El Cálculo}. Oxford University Press.
+
+    \item Apostol, T. M. (1967). \textit{Calculus, Volume I}. John Wiley \& Sons.
+\end{enumerate}
+
+\vfill
+
+\begin{center}
+\line(1,0){400}
+
+\textbf{Fin de la Guía}
+
+Prof. Toribio de J Arrieta F\\
+La Pruebita\\
+Noviembre 2025
+\end{center}
+
+\end{document}
