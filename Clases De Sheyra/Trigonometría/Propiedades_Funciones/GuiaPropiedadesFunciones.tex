@@ -1,0 +1,2206 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\pgfplotsset{compat=1.18}
+
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Estilos personalizados
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{definicion}{
+    colback=maincolor!5,
+    colframe=maincolor,
+    fonttitle=\bfseries,
+    title=Definición,
+    breakable
+}
+
+\newtcolorbox{ejemplo}{
+    colback=accentcolor!5,
+    colframe=accentcolor,
+    fonttitle=\bfseries,
+    title=Ejemplo,
+    breakable
+}
+
+\newtcolorbox{nota}{
+    colback=yellow!10,
+    colframe=orange,
+    fonttitle=\bfseries,
+    title=Nota Importante,
+    breakable
+}
+
+\title{\textbf{\color{maincolor}Propiedades de las Funciones}}
+\author{Prof. Toribio de J Arrieta F\\
+\small Institución: La Pruebita\\
+\small Asignatura: Trigonometría --- Grado 10}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+\subsection{¿Qué son las propiedades de las funciones?}
+
+Hola, bienvenido a esta guía sobre las propiedades de las funciones. Seguramente ya has trabajado con funciones antes: esas máquinas matemáticas que toman un valor de entrada y te dan un valor de salida. Pero, ¿alguna vez te has preguntado si todas las funciones se comportan de la misma manera?
+
+La respuesta es ¡NO! Algunas funciones tienen características especiales que las hacen únicas y muy útiles para resolver problemas específicos. En esta guía vamos a explorar esas características o \textbf{propiedades} que hacen que algunas funciones sean más interesantes que otras.
+
+Piensa en las funciones como si fueran personas: todas son diferentes, pero algunas comparten ciertas características. Algunas funciones son \textbf{inyectivas} (no se repiten), otras son \textbf{sobreyectivas} (cubren todo el terreno disponible), y las más especiales son \textbf{biyectivas} (tienen lo mejor de ambos mundos). Además, algunas funciones tienen una función ``amiga'' llamada \textbf{función inversa} que deshace lo que la original hace.
+
+¿Por qué es importante conocer estas propiedades? Porque te ayudan a:
+\begin{itemize}
+    \item Entender mejor el comportamiento de las funciones
+    \item Resolver problemas de la vida real de manera más eficiente
+    \item Determinar si una función puede ``revertirse'' o no
+    \item Predecir resultados y analizar relaciones entre variables
+\end{itemize}
+
+\subsection{Aplicaciones en la vida real}
+
+Las propiedades de las funciones no son solo teoría matemática aburrida. ¡Se usan en muchas situaciones cotidianas! Aquí te presento algunas:
+
+\begin{enumerate}
+    \item \textbf{Códigos y encriptación:} Cuando envías un mensaje por WhatsApp, tu teléfono usa funciones inyectivas para codificar la información. Cada mensaje original debe convertirse en un código único diferente. Si dos mensajes diferentes produjeran el mismo código, ¡sería un desastre de seguridad!
+
+    \item \textbf{Conversiones reversibles:} ¿Alguna vez has convertido de Celsius a Fahrenheit o de kilómetros a millas? Estas son funciones biyectivas perfectas: cada temperatura en Celsius corresponde a UNA temperatura en Fahrenheit, y viceversa. Puedes ir y volver sin perder información.
+
+    \item \textbf{Sistemas de identificación:} Tu cédula de identidad es un ejemplo de función inyectiva: cada número de cédula identifica a UNA persona única. No puede haber dos personas con la misma cédula (inyectividad).
+
+    \item \textbf{Análisis de tendencias:} En economía y negocios, se estudia si las ventas están creciendo o decreciendo. Una función creciente significa que las cosas van mejorando, mientras que una decreciente indica que hay que cambiar la estrategia.
+
+    \item \textbf{Sistemas de calificaciones:} Si tu profesor asigna una nota numérica a cada estudiante, esto es una función. Si dos estudiantes pueden tener la misma nota, la función NO es inyectiva (y eso está bien en este caso).
+
+    \item \textbf{Compresión de archivos:} Cuando comprimes un archivo ZIP, usas una función que debe ser reversible (biyectiva) para poder descomprimir y recuperar el archivo original.
+
+    \item \textbf{Funciones trigonométricas en física:} El movimiento de un péndulo, las ondas de sonido y la luz se modelan con funciones que tienen propiedades específicas como simetría (funciones pares o impares).
+\end{enumerate}
+
+Como ves, estas propiedades están en todas partes. Ahora, vamos a estudiarlas con detalle para que puedas identificarlas y usarlas.
+
+\newpage
+\section{Conceptos Fundamentales}
+
+\subsection{Función Inyectiva (Uno a Uno)}
+
+\begin{definicion}
+Una función $f: A \to B$ es \textbf{inyectiva} (o \textbf{uno a uno}) si elementos diferentes del dominio siempre producen imágenes diferentes en el codominio.
+
+\textbf{Definición formal:} $f$ es inyectiva si y solo si:
+\[
+\text{Si } f(x_1) = f(x_2) \text{, entonces } x_1 = x_2
+\]
+
+O equivalentemente (por la contrapositiva):
+\[
+\text{Si } x_1 \neq x_2 \text{, entonces } f(x_1) \neq f(x_2)
+\]
+\end{definicion}
+
+\subsubsection{Explicación intuitiva}
+
+Imagina que eres un profesor asignando números de lista a tus estudiantes. Si tu sistema es inyectivo, significa que ningún número se repite: cada estudiante tiene su propio número único. Si Juan es el número 5, nadie más puede ser el número 5.
+
+En términos de funciones: \textbf{no hay dos entradas diferentes que produzcan la misma salida}.
+
+\subsubsection{Prueba de la línea horizontal}
+
+Existe una prueba visual muy útil para saber si una función es inyectiva:
+
+\begin{nota}
+\textbf{Prueba de la línea horizontal (Horizontal Line Test):}
+
+Una función es inyectiva si y solo si cualquier línea horizontal corta la gráfica de la función en \textbf{a lo más un punto}.
+
+Si encuentras una línea horizontal que corta la gráfica en dos o más puntos, la función NO es inyectiva.
+\end{nota}
+
+\subsubsection{Ejemplos gráficos}
+
+Veamos algunos ejemplos visuales:
+
+\begin{center}
+\begin{tikzpicture}[scale=.8]
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-4, xmax=4,
+        ymin=-2, ymax=10,
+        grid=both,
+        samples=100,
+        title={\textbf{$f(x) = 2x + 3$ (INYECTIVA)}},
+        legend style={
+		at={(0.42,0.8)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+		},
+    ]
+    \addplot[blue, thick, domain=-4:4] {2*x+3};
+    \addplot[red, dashed, domain=-4:4] {5};
+    \addplot[red, dashed, domain=-4:4] {1};
+    \addplot[red, dashed, domain=-4:4] {7};
+    \legend{$f(x)=2x+3$, Líneas horizontales}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Observa que las líneas horizontales cortan la función lineal en \textbf{exactamente un punto}. Esto confirma que $f(x) = 2x + 3$ es inyectiva.
+
+\begin{center}
+\begin{tikzpicture}[scale=.8]
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-4, xmax=4,
+        ymin=-1, ymax=16,
+        grid=both,
+        samples=100,
+        title={\textbf{$g(x) = x^2$ (NO INYECTIVA)}},
+        legend style={
+			at={(0.92,0.8)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+	},
+    ]
+    \addplot[blue, thick, domain=-4:4] {x^2};
+    \addplot[red, dashed, domain=-4:4] {4};
+    \addplot[red, dashed, domain=-4:4] {9};
+    \legend{$g(x)=x^2$, Líneas horizontales}
+
+    % Marcar los puntos de intersección
+    \node[circle,fill=red,inner sep=1.5pt] at (axis cs:-2,4) {};
+    \node[circle,fill=red,inner sep=1.5pt] at (axis cs:2,4) {};
+    \node[circle,fill=red,inner sep=1.5pt] at (axis cs:-3,9) {};
+    \node[circle,fill=red,inner sep=1.5pt] at (axis cs:3,9) {};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+En este caso, las líneas horizontales cortan la parábola en \textbf{dos puntos}. Por ejemplo, $g(-2) = 4$ y $g(2) = 4$, es decir, dos entradas diferentes ($-2$ y $2$) producen la misma salida ($4$). Por lo tanto, $g(x) = x^2$ \textbf{NO es inyectiva} en $\mathbb{R}$.
+
+\subsubsection{Diagrama sagital}
+
+Otra forma de visualizar la inyectividad es mediante diagramas de flechas:
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+	\centering
+\begin{tikzpicture}[scale=0.7]
+	% Conjunto A
+	\draw[thick] (0,0) ellipse (1.2cm and 3cm);
+	\node at (0,3.5) {$A$ (Dominio)};
+	\foreach \y/\label in {2/a, 1/b, 0/c, -1/d, -2/e} {
+		\node[circle,fill=blue!30,inner sep=2pt] (A\label) at (0,\y) {};
+		\node[left] at (-0.3,\y) {$\label$};
+	}
+	
+	% Conjunto B
+	\draw[thick] (5,0) ellipse (1.2cm and 3cm);
+	\node at (5,3.5) {$B$ (Codominio)};
+	\foreach \y/\label in {2/1, 1/2, 0/3, -1/4, -2/5} {
+		\node[circle,fill=red!30,inner sep=2pt] (B\label) at (5,\y) {};
+		\node[right] at (5.3,\y) {$\label$};
+	}
+	
+	% Flechas (función inyectiva)
+	\draw[->,thick,blue] (Aa) -- (B1);
+	\draw[->,thick,blue] (Ab) -- (B2);
+	\draw[->,thick,blue] (Ac) -- (B3);
+	\draw[->,thick,blue] (Ad) -- (B5);
+	\draw[->,thick,blue] (Ae) -- (B4);
+\end{tikzpicture}
+	\centering
+	\textbf{INYECTIVA}: Cada elemento del dominio
+	\textbf{va a un elemento diferente del codominio}
+	
+\end{minipage}
+\begin{minipage}[t]{0.48\textwidth}
+	\centering
+\begin{tikzpicture}[scale=0.7]
+	% Conjunto A
+	\draw[thick] (0,0) ellipse (1.2cm and 2.5cm);
+	\node at (0,3) {$A$ (Dominio)};
+	\foreach \y/\label in {1.5/a, 0.5/b, -0.5/c, -1.5/d} {
+		\node[circle,fill=blue!30,inner sep=2pt] (A\label) at (0,\y) {};
+		\node[left] at (-0.3,\y) {$\label$};
+	}
+	
+	% Conjunto B
+	\draw[thick] (5,0) ellipse (1.2cm and 2.5cm);
+	\node at (5,3) {$B$ (Codominio)};
+	\foreach \y/\label in {1.5/1, 0.5/2, -0.5/3, -1.5/4} {
+		\node[circle,fill=red!30,inner sep=2pt] (B\label) at (5,\y) {};
+		\node[right] at (5.3,\y) {$\label$};
+	}
+	
+	% Flechas (función NO inyectiva)
+	\draw[->,thick,blue] (Aa) -- (B2);
+	\draw[->,thick,blue] (Ab) -- (B2);
+	\draw[->,thick,blue] (Ac) -- (B3);
+	\draw[->,thick,blue] (Ad) -- (B4);
+\end{tikzpicture}
+
+\centering
+\textbf{NO INYECTIVA}: Dos elementos del dominio (a y b)
+\textbf{van al mismo elemento del codominio (2)}
+	
+\end{minipage}
+
+\subsection{Función Sobreyectiva (Sobre)}
+
+\begin{definicion}
+Una función $f: A \to B$ es \textbf{sobreyectiva} (o \textbf{sobre}) si cada elemento del codominio $B$ es la imagen de al menos un elemento del dominio $A$.
+
+\textbf{Definición formal:} $f$ es sobreyectiva si y solo si:
+\[
+\text{Para todo } y \in B, \text{ existe al menos un } x \in A \text{ tal que } f(x) = y
+\]
+
+En otras palabras: el \textbf{rango} de $f$ es igual al \textbf{codominio} $B$.
+\end{definicion}
+
+\subsubsection{Explicación intuitiva}
+
+Imagina que organizas una fiesta y tienes un grupo de amigos (dominio) y un conjunto de sillas (codominio). La función asigna a cada amigo una silla. La función es sobreyectiva si \textbf{todas las sillas están ocupadas}, es decir, no sobran sillas vacías.
+
+En términos matemáticos: \textbf{todos los valores posibles de salida son alcanzados por la función}.
+
+\subsubsection{Diferencia entre rango y codominio}
+
+\begin{nota}
+\begin{itemize}
+    \item El \textbf{codominio} es el conjunto donde \textit{pueden} caer las imágenes (se define al principio).
+    \item El \textbf{rango} (o imagen) es el conjunto de valores que \textit{realmente} alcanza la función.
+    \item Una función es sobreyectiva cuando \textbf{Rango = Codominio}.
+\end{itemize}
+\end{nota}
+
+\subsubsection{Ejemplos gráficos}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-4, xmax=4,
+        ymin=-2, ymax=10,
+        grid=both,
+        samples=100,
+        title={\textbf{$f(x) = 2x + 3$, con $f: \mathbb{R} \to \mathbb{R}$ (SOBREYECTIVA)}},
+    ]
+    \addplot[blue, thick, domain=-4:4] {2*x+3};
+
+    \node[align=center] at (axis cs:2,2) {Esta función alcanza\\todos los valores\\reales posibles};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+La función $f(x) = 2x + 3$ es sobreyectiva de $\mathbb{R}$ a $\mathbb{R}$ porque para cualquier valor $y$ que quieras en $\mathbb{R}$, puedes encontrar un $x$ tal que $f(x) = y$. Por ejemplo, si quieres $y = 10$, resuelves $2x + 3 = 10 \Rightarrow x = 3.5$.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-4, xmax=4,
+        ymin=-5, ymax=16,
+        grid=both,
+        samples=100,
+        title={\textbf{$g(x) = x^2$, con $g: \mathbb{R} \to \mathbb{R}$ (NO SOBREYECTIVA)}},
+    ]
+    \addplot[blue, thick, domain=-4:4] {x^2};
+
+    \draw[red, thick, dashed] (axis cs:-4,-1) -- (axis cs:4,-1);
+    \node[align=center,red,scale=.85] at (axis cs:0,-2.7) {Valores negativos\\nunca se alcanzan};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+La función $g(x) = x^2$ NO es sobreyectiva de $\mathbb{R}$ a $\mathbb{R}$ porque no alcanza valores negativos. El rango es $[0, \infty)$, pero el codominio es $\mathbb{R}$.
+
+Sin embargo, si redefinimos $g: \mathbb{R} \to [0,\infty)$, entonces SÍ sería sobreyectiva.
+
+\subsubsection{Diagrama sagital}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+	\centering
+\begin{tikzpicture}[scale=0.8]
+    % Conjunto A
+    \draw[thick] (0,0) ellipse (1.2cm and 3cm);
+    \node at (0,3.5) {$A$ (Dominio)};
+    \foreach \y/\label in {2/a, 1/b, 0/c, -1/d, -2/e} {
+        \node[circle,fill=blue!30,inner sep=2pt] (A\label) at (0,\y) {};
+        \node[left] at (-0.3,\y) {$\label$};
+    }
+
+    % Conjunto B
+    \draw[thick] (5,0) ellipse (1.2cm and 2.2cm);
+    \node at (5,2.8) {$B$ (Codominio)};
+    \foreach \y/\label in {1.2/1, 0.4/2, -0.4/3, -1.2/4} {
+        \node[circle,fill=red!30,inner sep=2pt] (B\label) at (5,\y) {};
+        \node[right] at (5.3,\y) {$\label$};
+    }
+
+    % Flechas (función sobreyectiva)
+    \draw[->,thick,blue] (Aa) -- (B1);
+    \draw[->,thick,blue] (Ab) -- (B2);
+    \draw[->,thick,blue] (Ac) -- (B3);
+    \draw[->,thick,blue] (Ad) -- (B2);
+    \draw[->,thick,blue] (Ae) -- (B4);
+\end{tikzpicture}
+\textbf{SOBREYECTIVA}: Todos los elementos del codominio
+\textbf{reciben al menos una flecha}
+\end{minipage}
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Conjunto A
+    \draw[thick] (0,0) ellipse (1.2cm and 2.5cm);
+    \node at (0,3) {$A$ (Dominio)};
+    \foreach \y/\label in {1.5/a, 0.5/b, -0.5/c, -1.5/d} {
+        \node[circle,fill=blue!30,inner sep=2pt] (A\label) at (0,\y) {};
+        \node[left] at (-0.3,\y) {$\label$};
+    }
+
+    % Conjunto B
+    \draw[thick] (5,0) ellipse (1.2cm and 3cm);
+    \node at (5,3.5) {$B$ (Codominio)};
+    \foreach \y/\label in {2/1, 1/2, 0/3, -1/4, -2/5} {
+        \node[circle,fill=red!30,inner sep=2pt] (B\label) at (5,\y) {};
+        \node[right] at (5.3,\y) {$\label$};
+    }
+
+    % Flechas (función NO sobreyectiva)
+    \draw[->,thick,blue] (Aa) -- (B1);
+    \draw[->,thick,blue] (Ab) -- (B2);
+    \draw[->,thick,blue] (Ac) -- (B3);
+    \draw[->,thick,blue] (Ad) -- (B4);
+\end{tikzpicture}
+\textbf{NO SOBREYECTIVA}: El elemento 5 del codominio
+\textbf{no recibe ninguna flecha (no es alcanzado)}
+\end{minipage}
+
+\subsection{Función Biyectiva}
+
+\begin{definicion}
+Una función $f: A \to B$ es \textbf{biyectiva} si es \textbf{inyectiva Y sobreyectiva} al mismo tiempo.
+
+Esto significa que:
+\begin{itemize}
+    \item Cada elemento del dominio va a un elemento diferente del codominio (inyectiva)
+    \item Todos los elementos del codominio son alcanzados (sobreyectiva)
+\end{itemize}
+
+En otras palabras: existe una correspondencia \textbf{uno a uno perfecta} entre $A$ y $B$.
+\end{definicion}
+
+\subsubsection{Explicación intuitiva}
+
+Las funciones biyectivas son las ``perfectas''. Imagina que tienes un grupo de estudiantes y un grupo de pupitres. Una asignación biyectiva significa que:
+\begin{itemize}
+    \item Cada estudiante tiene su propio pupitre (inyectiva)
+    \item No sobran pupitres vacíos (sobreyectiva)
+\end{itemize}
+
+Es como un emparejamiento perfecto, donde cada elemento del dominio tiene su ``pareja'' única en el codominio, y viceversa.
+
+\subsubsection{¿Por qué son importantes?}
+
+\begin{nota}
+Las funciones biyectivas son especiales porque \textbf{tienen función inversa}.
+
+Si $f$ es biyectiva, podemos ``deshacer'' lo que hace $f$ mediante su inversa $f^{-1}$.
+\end{nota}
+
+\subsubsection{Ejemplo gráfico}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-4, xmax=4,
+        ymin=-10, ymax=10,
+        grid=both,
+        samples=100,
+        title={\textbf{$f(x) = 2x + 3$, con $f: \mathbb{R} \to \mathbb{R}$ (BIYECTIVA)}},
+    ]
+    \addplot[blue, thick, domain=-4:4] {2*x+3};
+
+    % Líneas horizontales para prueba
+    \addplot[red, dashed, domain=-4:4] {5};
+    \addplot[red, dashed, domain=-4:4] {-3};
+
+    \node[align=center] at (axis cs:-2.5,7) {Pasa la prueba\\horizontal\\(inyectiva)};
+    \node[align=center] at (axis cs:1.9,-7) {Alcanza todos\\los valores de $\mathbb{R}$\\(sobreyectiva)};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Diagrama sagital}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Conjunto A
+    \draw[thick] (0,0) ellipse (1.2cm and 2.5cm);
+    \node at (0,3) {$A$ (Dominio)};
+    \foreach \y/\label in {1.5/a, 0.5/b, -0.5/c, -1.5/d} {
+        \node[circle,fill=blue!30,inner sep=2pt] (A\label) at (0,\y) {};
+        \node[left] at (-0.3,\y) {$\label$};
+    }
+
+    % Conjunto B
+    \draw[thick] (5,0) ellipse (1.2cm and 2.5cm);
+    \node at (5,3) {$B$ (Codominio)};
+    \foreach \y/\label in {1.5/1, 0.5/2, -0.5/3, -1.5/4} {
+        \node[circle,fill=red!30,inner sep=2pt] (B\label) at (5,\y) {};
+        \node[right] at (5.3,\y) {$\label$};
+    }
+
+    % Flechas (función biyectiva)
+    \draw[->,thick,blue] (Aa) -- (B1);
+    \draw[->,thick,blue] (Ab) -- (B3);
+    \draw[->,thick,blue] (Ac) -- (B2);
+    \draw[->,thick,blue] (Ad) -- (B4);
+
+    \node at (2.5,-2.8) {\textbf{BIYECTIVA}: Correspondencia uno a uno perfecta};
+    \node at (2.5,-3.3) {\textbf{Cada elemento se empareja con exactamente uno del otro conjunto}};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Función Inversa}
+
+\begin{definicion}
+Sea $f: A \to B$ una función biyectiva. La \textbf{función inversa} de $f$, denotada $f^{-1}: B \to A$, es la función que ``deshace'' lo que hace $f$.
+
+Formalmente:
+\[
+f^{-1}(y) = x \quad \Leftrightarrow \quad f(x) = y
+\]
+
+Propiedades fundamentales:
+\begin{align}
+f(f^{-1}(x)) &= x \quad \text{para todo } x \in B\\
+f^{-1}(f(x)) &= x \quad \text{para todo } x \in A
+\end{align}
+\end{definicion}
+
+\subsubsection{Condición necesaria y suficiente}
+
+\begin{nota}
+Una función tiene inversa \textbf{si y solo si} es biyectiva.
+
+\begin{itemize}
+    \item Si $f$ NO es inyectiva, no podemos definir $f^{-1}$ porque habría ambigüedad (dos entradas darían la misma salida).
+    \item Si $f$ NO es sobreyectiva, algunos elementos del codominio no tendrían preimagen en $f^{-1}$.
+\end{itemize}
+\end{nota}
+
+\subsubsection{Procedimiento para encontrar la función inversa}
+
+Para encontrar $f^{-1}$ de una función $f$:
+
+\begin{enumerate}
+    \item Verifica que $f$ sea biyectiva
+    \item Escribe $y = f(x)$
+    \item Despeja $x$ en términos de $y$
+    \item Intercambia $x$ por $y$ (opcional, para usar la variable independiente tradicional)
+    \item La expresión resultante es $f^{-1}(x)$
+\end{enumerate}
+
+\subsubsection{Simetría respecto a $y = x$}
+
+Una propiedad geométrica hermosa de las funciones inversas:
+
+\begin{nota}
+Las gráficas de $f$ y $f^{-1}$ son \textbf{simétricas respecto a la recta $y = x$}.
+
+Esto significa que si $(a, b)$ está en la gráfica de $f$, entonces $(b, a)$ está en la gráfica de $f^{-1}$.
+\end{nota}
+
+\subsubsection{Ejemplo gráfico}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=12cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-5, xmax=10,
+        ymin=-5, ymax=10,
+        grid=both,
+        samples=100,
+        title={\textbf{$f(x) = 2x - 3$ y su inversa $f^{-1}(x) = \frac{x+3}{2}$}},
+        legend pos=south east,
+    ]
+    % Función original
+    \addplot[blue, thick, domain=-2:6] {2*x-3};
+
+    % Función inversa
+    \addplot[red, thick, domain=-3:9] {(x+3)/2};
+
+    % Línea y = x
+    \addplot[gray, dashed, domain=-5:10] {x};
+
+    % Puntos de ejemplo
+    \addplot[only marks, mark=*, blue] coordinates {(0,-3) (2,1) (4,5)};
+    \addplot[only marks, mark=*, red] coordinates {(-3,0) (1,2) (5,4)};
+
+    \legend{$f(x)=2x-3$, $f^{-1}(x)=\frac{x+3}{2}$, $y=x$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Observa cómo las gráficas son espejos una de la otra respecto a la línea $y = x$.
+
+\subsection{Otras propiedades importantes}
+
+\subsubsection{Funciones crecientes y decrecientes}
+
+\begin{definicion}
+Sea $f$ una función definida en un intervalo $I$:
+
+\begin{itemize}
+    \item $f$ es \textbf{creciente} en $I$ si para todo $x_1, x_2 \in I$ con $x_1 < x_2$, se cumple $f(x_1) < f(x_2)$.
+    \item $f$ es \textbf{decreciente} en $I$ si para todo $x_1, x_2 \in I$ con $x_1 < x_2$, se cumple $f(x_1) > f(x_2)$.
+\end{itemize}
+\end{definicion}
+
+Intuitivamente: una función es creciente si ``va hacia arriba'' conforme $x$ aumenta, y es decreciente si ``va hacia abajo''.
+
+\subsubsection{Funciones pares e impares (simetría)}
+
+\begin{definicion}
+Sea $f$ una función con dominio simétrico respecto al origen:
+
+\begin{itemize}
+    \item $f$ es \textbf{par} si $f(-x) = f(x)$ para todo $x$ en el dominio. Su gráfica es simétrica respecto al eje $y$.
+    \item $f$ es \textbf{impar} si $f(-x) = -f(x)$ para todo $x$ en el dominio. Su gráfica es simétrica respecto al origen.
+\end{itemize}
+\end{definicion}
+
+\textbf{Ejemplos:}
+\begin{itemize}
+    \item $f(x) = x^2$ es par porque $f(-x) = (-x)^2 = x^2 = f(x)$
+    \item $g(x) = x^3$ es impar porque $g(-x) = (-x)^3 = -x^3 = -g(x)$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm, height=7cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-3, xmax=3,
+        ymin=-1, ymax=9,
+        grid=both,
+        samples=100,
+        title={\textbf{Función PAR: $f(x) = x^2$}},
+    ]
+    \addplot[blue, thick, domain=-3:3] {x^2};
+    \end{axis}
+\end{tikzpicture}
+\hspace{1cm}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm, height=7cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-3, xmax=3,
+        ymin=-27, ymax=27,
+        grid=both,
+        samples=100,
+        title={\textbf{Función IMPAR: $g(x) = x^3$}},
+    ]
+    \addplot[red, thick, domain=-3:3] {x^3};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Intersecciones con los ejes}
+
+\begin{definicion}
+\begin{itemize}
+    \item La \textbf{intersección con el eje $y$} (ordenada al origen) se obtiene evaluando $f(0)$.
+    \item Las \textbf{intersecciones con el eje $x$} (raíces o ceros) se obtienen resolviendo $f(x) = 0$.
+\end{itemize}
+\end{definicion}
+
+Estas intersecciones son importantes para graficar y entender el comportamiento de la función.
+
+\newpage
+\section{Ejemplos Resueltos}
+
+\subsection{Ejemplo 1: Determinar si una función es inyectiva}
+
+\begin{ejemplo}
+\textbf{Problema:} Determina si la función $f(x) = 3x - 5$ es inyectiva usando tanto el método algebraico como el gráfico.
+
+\textbf{Solución:}
+
+\textbf{Método 1: Prueba algebraica}
+
+Para demostrar que $f$ es inyectiva, debemos probar que si $f(x_1) = f(x_2)$, entonces $x_1 = x_2$.
+
+\textbf{Paso 1:} Supongamos que $f(x_1) = f(x_2)$.
+
+\begin{align*}
+f(x_1) &= f(x_2)\\
+3x_1 - 5 &= 3x_2 - 5\\
+3x_1 &= 3x_2 \quad \text{(sumando 5 a ambos lados)}\\
+x_1 &= x_2 \quad \text{(dividiendo por 3)}
+\end{align*}
+
+\textbf{Paso 2:} Hemos demostrado que $f(x_1) = f(x_2)$ implica $x_1 = x_2$. Por lo tanto, $f$ es inyectiva.
+
+\textbf{Método 2: Prueba gráfica (línea horizontal)}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-3, xmax=5,
+        ymin=-15, ymax=10,
+        grid=both,
+        samples=100,
+    ]
+    \addplot[blue, thick, domain=-3:5] {3*x-5};
+
+    % Líneas horizontales de prueba
+    \addplot[red, dashed, domain=-3:5] {4};
+    \addplot[red, dashed, domain=-3:5] {-8};
+    \addplot[red, dashed, domain=-3:5] {1};
+
+    \node[blue] at (axis cs:1,5) {$f(x) = 3x - 5$};
+    \node[align=center] at (axis cs:2.5,-12) {Cada línea horizontal\\corta la gráfica en\\exactamente un punto};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 3:} Como podemos ver, cualquier línea horizontal corta la gráfica en exactamente un punto. Esto confirma que la función es inyectiva.
+
+\textbf{Respuesta:} $\boxed{\text{La función } f(x) = 3x - 5 \text{ es INYECTIVA}}$
+
+\textbf{Interpretación:} Cada salida de la función corresponde a una única entrada. No hay dos valores de $x$ diferentes que produzcan el mismo $f(x)$.
+\end{ejemplo}
+
+\subsection{Ejemplo 2: Determinar si una función es sobreyectiva}
+
+\begin{ejemplo}
+\textbf{Problema:} Determina si la función $g(x) = x^2 - 4$ con dominio $\mathbb{R}$ es sobreyectiva en cada uno de los siguientes casos:
+\begin{enumerate}[label=\alph*)]
+    \item $g: \mathbb{R} \to \mathbb{R}$
+    \item $g: \mathbb{R} \to [-4, \infty)$
+\end{enumerate}
+
+\textbf{Solución:}
+
+\textbf{Caso a): $g: \mathbb{R} \to \mathbb{R}$}
+
+\textbf{Paso 1:} Para que $g$ sea sobreyectiva, debe alcanzar todos los valores reales. Analicemos el rango de $g$.
+
+La función $g(x) = x^2 - 4$ es una parábola con vértice en $(0, -4)$ que abre hacia arriba.
+
+\textbf{Paso 2:} Encontremos el valor mínimo:
+\[
+g(x) = x^2 - 4 \geq -4 \quad \text{para todo } x \in \mathbb{R}
+\]
+
+El valor mínimo es $-4$ (cuando $x = 0$), y la función puede alcanzar cualquier valor mayor o igual a $-4$.
+
+\textbf{Paso 3:} Por lo tanto, el rango es $[-4, \infty)$.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-5, xmax=5,
+        ymin=-7, ymax=12,
+        grid=both,
+        samples=100,
+    ]
+    \addplot[blue, thick, domain=-5:5] {x^2-4};
+
+    % Marcar valores que no se alcanzan
+    \draw[red, thick, dashed] (axis cs:-5,-5) -- (axis cs:5,-5);
+    \node[red] at (axis cs:0,-5.5) {$y = -5$ nunca se alcanza};
+
+    \node[blue] at (axis cs:1.5,8) {$g(x) = x^2 - 4$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 4:} Como el rango $[-4, \infty)$ es diferente del codominio $\mathbb{R}$, la función NO es sobreyectiva. Por ejemplo, el valor $-5$ está en el codominio pero no en el rango.
+
+\textbf{Respuesta caso a):} $\boxed{\text{NO es sobreyectiva de } \mathbb{R} \text{ a } \mathbb{R}}$
+
+\textbf{Caso b): $g: \mathbb{R} \to [-4, \infty)$}
+
+\textbf{Paso 5:} Ahora el codominio es $[-4, \infty)$, que es exactamente el rango que encontramos antes.
+
+Para cualquier $y \geq -4$, podemos encontrar un $x$ tal que $g(x) = y$:
+\begin{align*}
+x^2 - 4 &= y\\
+x^2 &= y + 4\\
+x &= \pm\sqrt{y + 4}
+\end{align*}
+
+Como $y \geq -4$, entonces $y + 4 \geq 0$ y la raíz cuadrada existe.
+
+\textbf{Respuesta caso b):} $\boxed{\text{SÍ es sobreyectiva de } \mathbb{R} \text{ a } [-4, \infty)}$
+
+\textbf{Conclusión:} La sobreyectividad depende de cómo definamos el codominio. Una función puede ser sobreyectiva con un codominio y no serlo con otro.
+\end{ejemplo}
+
+\subsection{Ejemplo 3: Verificar si una función es biyectiva}
+
+\begin{ejemplo}
+\textbf{Problema:} Determina si la función $h(x) = \frac{2x + 1}{x - 3}$ con dominio $\mathbb{R} \setminus \{3\}$ es biyectiva de $\mathbb{R} \setminus \{3\}$ a $\mathbb{R} \setminus \{2\}$.
+
+\textbf{Solución:}
+
+Para que $h$ sea biyectiva, debe ser inyectiva Y sobreyectiva.
+
+\textbf{Parte 1: Verificar inyectividad}
+
+\textbf{Paso 1:} Supongamos que $h(x_1) = h(x_2)$.
+
+\begin{align*}
+\frac{2x_1 + 1}{x_1 - 3} &= \frac{2x_2 + 1}{x_2 - 3}\\
+(2x_1 + 1)(x_2 - 3) &= (2x_2 + 1)(x_1 - 3) \quad \text{(producto cruzado)}\\
+2x_1 x_2 - 6x_1 + x_2 - 3 &= 2x_1 x_2 - 6x_2 + x_1 - 3\\
+-6x_1 + x_2 &= -6x_2 + x_1\\
+x_2 + 6x_2 &= x_1 + 6x_1\\
+7x_2 &= 7x_1\\
+x_2 &= x_1
+\end{align*}
+
+\textbf{Paso 2:} Como $h(x_1) = h(x_2)$ implica $x_1 = x_2$, la función es inyectiva. $\checkmark$
+
+\textbf{Parte 2: Verificar sobreyectividad}
+
+\textbf{Paso 3:} Para que sea sobreyectiva de $\mathbb{R} \setminus \{3\}$ a $\mathbb{R} \setminus \{2\}$, debemos verificar que para cualquier $y \in \mathbb{R} \setminus \{2\}$, existe un $x \in \mathbb{R} \setminus \{3\}$ tal que $h(x) = y$.
+
+Despejemos $x$ en términos de $y$:
+\begin{align*}
+y &= \frac{2x + 1}{x - 3}\\
+y(x - 3) &= 2x + 1\\
+yx - 3y &= 2x + 1\\
+yx - 2x &= 3y + 1\\
+x(y - 2) &= 3y + 1\\
+x &= \frac{3y + 1}{y - 2}
+\end{align*}
+
+\textbf{Paso 4:} La expresión $x = \frac{3y + 1}{y - 2}$ está bien definida para todo $y \neq 2$.
+
+Además, debemos verificar que este $x$ no sea igual a 3:
+\[
+\frac{3y + 1}{y - 2} = 3 \quad \Rightarrow \quad 3y + 1 = 3(y - 2) \quad \Rightarrow \quad 3y + 1 = 3y - 6 \quad \Rightarrow \quad 1 = -6
+\]
+
+Esto es una contradicción, por lo que $x \neq 3$ para ningún $y \in \mathbb{R} \setminus \{2\}$.
+
+\textbf{Paso 5:} Como para cada $y \in \mathbb{R} \setminus \{2\}$ existe un $x \in \mathbb{R} \setminus \{3\}$ tal que $h(x) = y$, la función es sobreyectiva. $\checkmark$
+
+\textbf{Respuesta:} $\boxed{\text{La función } h \text{ es BIYECTIVA}}$
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-5, xmax=10,
+        ymin=-5, ymax=10,
+        grid=both,
+        samples=200,
+    ]
+    \addplot[blue, thick, domain=-5:2.7] {(2*x+1)/(x-3)};
+    \addplot[blue, thick, domain=3.3:10] {(2*x+1)/(x-3)};
+
+    % Asíntotas
+    \addplot[red, dashed, domain=-5:10] {2};
+    \draw[red, dashed] (axis cs:3,-5) -- (axis cs:3,10);
+
+    \node[red] at (axis cs:3.5,2.5) {$y = 2$ (asíntota horizontal)};
+    \node[red, rotate=90] at (axis cs:2.6,8) {$x = 3$};
+    \node[blue] at (axis cs:7,6) {$h(x) = \frac{2x+1}{x-3}$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Nota:} La gráfica pasa la prueba de la línea horizontal y cubre todo $\mathbb{R} \setminus \{2\}$, confirmando que es biyectiva.
+\end{ejemplo}
+
+\subsection{Ejemplo 4: Encontrar la función inversa}
+
+\begin{ejemplo}
+\textbf{Problema:} Encuentra la función inversa de $f(x) = 2x - 3$ y verifica que $f(f^{-1}(x)) = x$ y $f^{-1}(f(x)) = x$.
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Verificar que $f$ sea biyectiva.
+
+Ya sabemos que las funciones lineales con pendiente no nula son biyectivas de $\mathbb{R}$ a $\mathbb{R}$. Como la pendiente de $f$ es 2 (diferente de cero), $f$ es biyectiva. $\checkmark$
+
+\textbf{Paso 2:} Escribir $y = f(x)$.
+\[
+y = 2x - 3
+\]
+
+\textbf{Paso 3:} Despejar $x$ en términos de $y$.
+\begin{align*}
+y &= 2x - 3\\
+y + 3 &= 2x\\
+x &= \frac{y + 3}{2}
+\end{align*}
+
+\textbf{Paso 4:} Intercambiar $x$ por $y$ para obtener $f^{-1}$.
+\[
+f^{-1}(x) = \frac{x + 3}{2}
+\]
+
+\textbf{Respuesta:} $\boxed{f^{-1}(x) = \frac{x + 3}{2}}$
+
+\textbf{Paso 5: Verificación 1:} Comprobar que $f(f^{-1}(x)) = x$.
+\begin{align*}
+f(f^{-1}(x)) &= f\left(\frac{x + 3}{2}\right)\\
+&= 2 \cdot \frac{x + 3}{2} - 3\\
+&= (x + 3) - 3\\
+&= x \quad \checkmark
+\end{align*}
+
+\textbf{Paso 6: Verificación 2:} Comprobar que $f^{-1}(f(x)) = x$.
+\begin{align*}
+f^{-1}(f(x)) &= f^{-1}(2x - 3)\\
+&= \frac{(2x - 3) + 3}{2}\\
+&= \frac{2x}{2}\\
+&= x \quad \checkmark
+\end{align*}
+
+\textbf{Paso 7: Representación gráfica}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=12cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-5, xmax=7,
+        ymin=-5, ymax=7,
+        grid=both,
+        samples=100,
+        legend pos=south east,
+    ]
+    % Función original
+    \addplot[blue, thick, domain=-2:5] {2*x-3};
+
+    % Función inversa
+    \addplot[red, thick, domain=-3:8] {(x+3)/2};
+
+    % Línea y = x
+    \addplot[gray, dashed, domain=-5:7] {x};
+
+    % Puntos de ejemplo
+    \addplot[only marks, mark=*, blue, mark size=3pt] coordinates {(0,-3) (1,-1) (2,1) (3,5)};
+    \addplot[only marks, mark=*, red, mark size=3pt] coordinates {(-3,0) (-1,1) (1,2) (5,3)};
+
+    \legend{$f(x)=2x-3$, $f^{-1}(x)=\frac{x+3}{2}$, $y=x$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación:} Las gráficas de $f$ y $f^{-1}$ son simétricas respecto a la línea $y = x$. Si un punto $(a, b)$ está en $f$, entonces el punto $(b, a)$ está en $f^{-1}$.
+\end{ejemplo}
+
+\subsection{Ejemplo 5: Aplicación práctica - Conversión Celsius-Fahrenheit}
+
+\begin{ejemplo}
+\textbf{Problema:} La fórmula para convertir grados Celsius ($C$) a grados Fahrenheit ($F$) es:
+\[
+F(C) = \frac{9}{5}C + 32
+\]
+
+\begin{enumerate}[label=\alph*)]
+    \item Demuestra que esta función es biyectiva.
+    \item Encuentra la función inversa $F^{-1}$ que convierte Fahrenheit a Celsius.
+    \item Usa la función inversa para encontrar cuántos grados Celsius son 68°F.
+\end{enumerate}
+
+\textbf{Solución:}
+
+\textbf{Parte a): Demostrar que $F$ es biyectiva}
+
+\textbf{Paso 1: Inyectividad}
+
+Supongamos que $F(C_1) = F(C_2)$.
+\begin{align*}
+\frac{9}{5}C_1 + 32 &= \frac{9}{5}C_2 + 32\\
+\frac{9}{5}C_1 &= \frac{9}{5}C_2\\
+C_1 &= C_2
+\end{align*}
+
+Por lo tanto, $F$ es inyectiva. $\checkmark$
+
+\textbf{Paso 2: Sobreyectividad}
+
+Para cualquier valor $y \in \mathbb{R}$ (cualquier temperatura en Fahrenheit), debemos encontrar un $C$ tal que $F(C) = y$.
+
+\begin{align*}
+y &= \frac{9}{5}C + 32\\
+y - 32 &= \frac{9}{5}C\\
+C &= \frac{5}{9}(y - 32)
+\end{align*}
+
+Esta expresión está definida para todo $y \in \mathbb{R}$, por lo que $F$ es sobreyectiva. $\checkmark$
+
+\textbf{Conclusión:} Como $F$ es inyectiva y sobreyectiva, es \textbf{biyectiva}. $\boxed{\checkmark}$
+
+\textbf{Parte b): Encontrar la función inversa}
+
+\textbf{Paso 3:} Del paso anterior, ya despejamos $C$ en términos de $F$:
+\[
+C = \frac{5}{9}(F - 32)
+\]
+
+Por lo tanto, la función inversa es:
+\[
+\boxed{F^{-1}(x) = \frac{5}{9}(x - 32)}
+\]
+
+Esta fórmula convierte Fahrenheit a Celsius.
+
+\textbf{Parte c): Convertir 68°F a Celsius}
+
+\textbf{Paso 4:} Usamos la función inversa:
+\begin{align*}
+F^{-1}(68) &= \frac{5}{9}(68 - 32)\\
+&= \frac{5}{9} \cdot 36\\
+&= \frac{180}{9}\\
+&= 20
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{68°F = 20°C}$
+
+\textbf{Paso 5: Verificación}
+
+Comprobemos convirtiendo 20°C de vuelta a Fahrenheit:
+\begin{align*}
+F(20) &= \frac{9}{5} \cdot 20 + 32\\
+&= 36 + 32\\
+&= 68°F \quad \checkmark
+\end{align*}
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=10cm,
+        axis lines=middle,
+        xlabel={$C$ (Celsius)}, ylabel={$F$ (Fahrenheit)},
+        xmin=-40, xmax=50,
+        ymin=-40, ymax=120,
+        grid=both,
+        samples=100,
+        legend pos=south east,
+    ]
+    % Función C → F
+    \addplot[blue, thick, domain=-40:50] {(9/5)*x+32};
+
+    % Puntos importantes
+    \addplot[only marks, mark=*, blue, mark size=3pt] coordinates {(0,32) (20,68) (100,212)};
+    \node[blue, above right] at (axis cs:0,25) {$(0, 32)$};
+    \node[blue, above right] at (axis cs:20,62) {$(20, 68)$};
+    \node[blue, above right] at (axis cs:100,212) {$(100, 212)$};
+
+    \legend{$F(C)=\frac{9}{5}C+32$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación física:}
+\begin{itemize}
+    \item El agua se congela a 0°C = 32°F
+    \item Una temperatura agradable es 20°C = 68°F
+    \item El agua hierve a 100°C = 212°F
+\end{itemize}
+
+Esta es una aplicación perfecta de funciones biyectivas: podemos convertir libremente entre las dos escalas sin perder información.
+\end{ejemplo}
+
+\newpage
+\section{Ejercicios Propuestos}
+
+Resuelve los siguientes ejercicios. Las soluciones detalladas se encuentran en la siguiente sección.
+
+\begin{enumerate}
+    \item Determina si la función $f(x) = 5 - 2x$ es inyectiva, sobreyectiva o biyectiva de $\mathbb{R}$ a $\mathbb{R}$.
+
+    \item Considera la función $g(x) = x^2 + 1$ con dominio $[0, \infty)$. ¿Es inyectiva? ¿Es sobreyectiva de $[0, \infty)$ a $[1, \infty)$? ¿Es biyectiva?
+
+    \item Demuestra algebraicamente que la función $h(x) = x^3$ es inyectiva en $\mathbb{R}$.
+
+    \item Encuentra la función inversa de $f(x) = \frac{3x + 2}{x - 1}$ con dominio $\mathbb{R} \setminus \{1\}$ y codominio $\mathbb{R} \setminus \{3\}$. Verifica tu respuesta.
+
+    \item Una tienda de ropa aplica un descuento del 25\% sobre el precio original $p$. La función que da el precio final es $f(p) = 0.75p$. ¿Es esta función biyectiva? Si lo es, encuentra la función inversa e interpreta su significado.
+
+    \item Considera la función $f(x) = |x - 2|$ con dominio $\mathbb{R}$. ¿Es inyectiva? ¿Es sobreyectiva de $\mathbb{R}$ a $[0, \infty)$? Justifica gráficamente.
+
+    \item Determina si la función $f(x) = \sqrt{x + 4}$ con dominio $[-4, \infty)$ es biyectiva de $[-4, \infty)$ a $[0, \infty)$. Si lo es, encuentra su inversa.
+\end{enumerate}
+
+\newpage
+\section{Soluciones Detalladas}
+
+\subsection{Solución Ejercicio 1}
+
+\textbf{Ejercicio:} Determina si la función $f(x) = 5 - 2x$ es inyectiva, sobreyectiva o biyectiva de $\mathbb{R}$ a $\mathbb{R}$.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Verificar inyectividad}
+
+Supongamos que $f(x_1) = f(x_2)$.
+\begin{align*}
+5 - 2x_1 &= 5 - 2x_2\\
+-2x_1 &= -2x_2\\
+x_1 &= x_2
+\end{align*}
+
+Como $f(x_1) = f(x_2)$ implica $x_1 = x_2$, la función es \textbf{inyectiva}. $\checkmark$
+
+\textbf{Paso 2: Verificar sobreyectividad}
+
+Para cualquier $y \in \mathbb{R}$, debemos encontrar un $x$ tal que $f(x) = y$.
+\begin{align*}
+y &= 5 - 2x\\
+2x &= 5 - y\\
+x &= \frac{5 - y}{2}
+\end{align*}
+
+Esta expresión está definida para todo $y \in \mathbb{R}$, por lo que la función es \textbf{sobreyectiva}. $\checkmark$
+
+\textbf{Paso 3: Conclusión}
+
+Como $f$ es inyectiva Y sobreyectiva, es \textbf{biyectiva}.
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-3, xmax=6,
+        ymin=-8, ymax=12,
+        grid=both,
+        samples=100,
+    ]
+    \addplot[blue, thick, domain=-3:6] {5-2*x};
+
+    % Líneas horizontales de prueba
+    \addplot[red, dashed, domain=-3:6] {3};
+    \addplot[red, dashed, domain=-3:6] {-5};
+    \addplot[red, dashed, domain=-3:6] {9};
+
+    \node[blue] at (axis cs:4,2) {$f(x) = 5 - 2x$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} $\boxed{\text{La función } f(x) = 5 - 2x \text{ es BIYECTIVA}}$
+
+\subsection{Solución Ejercicio 2}
+
+\textbf{Ejercicio:} Considera la función $g(x) = x^2 + 1$ con dominio $[0, \infty)$. ¿Es inyectiva? ¿Es sobreyectiva de $[0, \infty)$ a $[1, \infty)$? ¿Es biyectiva?
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Verificar inyectividad en $[0, \infty)$}
+
+Supongamos que $g(x_1) = g(x_2)$ con $x_1, x_2 \in [0, \infty)$.
+\begin{align*}
+x_1^2 + 1 &= x_2^2 + 1\\
+x_1^2 &= x_2^2\\
+x_1 &= \pm x_2
+\end{align*}
+
+Como $x_1, x_2 \geq 0$, tenemos $x_1 = x_2$ (descartamos la solución negativa).
+
+Por lo tanto, $g$ es \textbf{inyectiva} en $[0, \infty)$. $\checkmark$
+
+\textbf{Nota importante:} Si el dominio fuera $\mathbb{R}$, la función NO sería inyectiva porque $g(-2) = g(2) = 5$. Pero al restringir el dominio a $[0, \infty)$, eliminamos esta ambigüedad.
+
+\textbf{Paso 2: Verificar sobreyectividad de $[0, \infty)$ a $[1, \infty)$}
+
+Para cualquier $y \in [1, \infty)$, debemos encontrar un $x \in [0, \infty)$ tal que $g(x) = y$.
+\begin{align*}
+y &= x^2 + 1\\
+x^2 &= y - 1\\
+x &= \pm\sqrt{y - 1}
+\end{align*}
+
+Como $y \geq 1$, entonces $y - 1 \geq 0$ y la raíz cuadrada existe. Además, como $x \in [0, \infty)$, tomamos la raíz positiva:
+\[
+x = \sqrt{y - 1}
+\]
+
+Este valor de $x$ está en $[0, \infty)$ para todo $y \in [1, \infty)$, por lo que $g$ es \textbf{sobreyectiva}. $\checkmark$
+
+\textbf{Paso 3: Conclusión}
+
+Como $g$ es inyectiva Y sobreyectiva de $[0, \infty)$ a $[1, \infty)$, es \textbf{biyectiva}.
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1, xmax=5,
+        ymin=0, ymax=15,
+        grid=both,
+        samples=100,
+    ]
+    % Solo graficar para x ≥ 0
+    \addplot[blue, thick, domain=0:5] {x^2+1};
+
+    % Marcar el punto mínimo
+    \addplot[only marks, mark=*, red, mark size=3pt] coordinates {(0,1)};
+    \node[red, below right] at (axis cs:0,1) {$(0, 1)$ (mínimo)};
+
+    % Líneas horizontales de prueba
+    \addplot[red, dashed, domain=0:5] {5};
+    \addplot[red, dashed, domain=0:5] {10};
+
+    \node[blue] at (axis cs:1.9,9) {$g(x) = x^2 + 1$};
+    \node[align=center] at (axis cs:3.5,1) {Dominio: $[0, \infty)$};
+    \node[align=center, rotate=90] at (axis cs:0.3,8.7) {Codominio: $[1, \infty)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\begin{itemize}
+    \item $\boxed{\text{SÍ es inyectiva en } [0, \infty)}$
+    \item $\boxed{\text{SÍ es sobreyectiva de } [0, \infty) \text{ a } [1, \infty)}$
+    \item $\boxed{\text{SÍ es biyectiva de } [0, \infty) \text{ a } [1, \infty)}$
+\end{itemize}
+
+\subsection{Solución Ejercicio 3}
+
+\textbf{Ejercicio:} Demuestra algebraicamente que la función $h(x) = x^3$ es inyectiva en $\mathbb{R}$.
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Supongamos que $h(x_1) = h(x_2)$.
+
+\begin{align*}
+x_1^3 &= x_2^3\\
+x_1^3 - x_2^3 &= 0
+\end{align*}
+
+\textbf{Paso 2:} Factorizamos la diferencia de cubos:
+\[
+x_1^3 - x_2^3 = (x_1 - x_2)(x_1^2 + x_1 x_2 + x_2^2) = 0
+\]
+
+\textbf{Paso 3:} Esto implica que:
+\[
+x_1 - x_2 = 0 \quad \text{o} \quad x_1^2 + x_1 x_2 + x_2^2 = 0
+\]
+
+\textbf{Paso 4:} Analicemos la segunda ecuación. Completando el cuadrado:
+\begin{align*}
+x_1^2 + x_1 x_2 + x_2^2 &= \left(x_1 + \frac{x_2}{2}\right)^2 + x_2^2 - \frac{x_2^2}{4}\\
+&= \left(x_1 + \frac{x_2}{2}\right)^2 + \frac{3x_2^2}{4}
+\end{align*}
+
+Como ambos términos son no negativos (son cuadrados), su suma solo puede ser cero si ambos son cero:
+\[
+\left(x_1 + \frac{x_2}{2}\right)^2 = 0 \quad \text{y} \quad \frac{3x_2^2}{4} = 0
+\]
+
+De la segunda ecuación: $x_2 = 0$.
+
+De la primera ecuación: $x_1 + 0 = 0 \Rightarrow x_1 = 0$.
+
+Por lo tanto, si $x_1^2 + x_1 x_2 + x_2^2 = 0$, entonces $x_1 = x_2 = 0$, que también implica $x_1 = x_2$.
+
+\textbf{Paso 5:} En cualquier caso, tenemos $x_1 = x_2$.
+
+\textbf{Conclusión:} Como $h(x_1) = h(x_2)$ implica $x_1 = x_2$, la función $h(x) = x^3$ es inyectiva en $\mathbb{R}$.
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-3, xmax=3,
+        ymin=-27, ymax=27,
+        grid=both,
+        samples=100,
+    ]
+    \addplot[blue, thick, domain=-3:3] {x^3};
+
+    % Líneas horizontales de prueba
+    \addplot[red, dashed, domain=-3:3] {8};
+    \addplot[red, dashed, domain=-3:3] {-15};
+    \addplot[red, dashed, domain=-3:3] {20};
+
+    \node[blue] at (axis cs:1.8,15) {$h(x) = x^3$};
+    \node[align=center] at (axis cs:1.5,-18) {Cada línea horizontal\\corta exactamente\\una vez};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} $\boxed{\text{La función } h(x) = x^3 \text{ es INYECTIVA en } \mathbb{R}}$
+
+\subsection{Solución Ejercicio 4}
+
+\textbf{Ejercicio:} Encuentra la función inversa de $f(x) = \frac{3x + 2}{x - 1}$ con dominio $\mathbb{R} \setminus \{1\}$ y codominio $\mathbb{R} \setminus \{3\}$. Verifica tu respuesta.
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Escribir $y = f(x)$.
+\[
+y = \frac{3x + 2}{x - 1}
+\]
+
+\textbf{Paso 2:} Despejar $x$ en términos de $y$.
+\begin{align*}
+y(x - 1) &= 3x + 2\\
+yx - y &= 3x + 2\\
+yx - 3x &= y + 2\\
+x(y - 3) &= y + 2\\
+x &= \frac{y + 2}{y - 3}
+\end{align*}
+
+\textbf{Paso 3:} Intercambiar $x$ por $y$ para obtener $f^{-1}$.
+\[
+f^{-1}(x) = \frac{x + 2}{x - 3}
+\]
+
+\textbf{Respuesta:} $\boxed{f^{-1}(x) = \frac{x + 2}{x - 3}}$
+
+\textbf{Paso 4: Verificación 1:} Comprobar que $f(f^{-1}(x)) = x$.
+\begin{align*}
+f(f^{-1}(x)) &= f\left(\frac{x + 2}{x - 3}\right)\\
+&= \frac{3 \cdot \frac{x + 2}{x - 3} + 2}{\frac{x + 2}{x - 3} - 1}\\
+&= \frac{\frac{3(x + 2) + 2(x - 3)}{x - 3}}{\frac{(x + 2) - (x - 3)}{x - 3}}\\
+&= \frac{3x + 6 + 2x - 6}{x + 2 - x + 3}\\
+&= \frac{5x}{5}\\
+&= x \quad \checkmark
+\end{align*}
+
+\textbf{Paso 5: Verificación 2:} Comprobar que $f^{-1}(f(x)) = x$.
+\begin{align*}
+f^{-1}(f(x)) &= f^{-1}\left(\frac{3x + 2}{x - 1}\right)\\
+&= \frac{\frac{3x + 2}{x - 1} + 2}{\frac{3x + 2}{x - 1} - 3}\\
+&= \frac{\frac{3x + 2 + 2(x - 1)}{x - 1}}{\frac{3x + 2 - 3(x - 1)}{x - 1}}\\
+&= \frac{3x + 2 + 2x - 2}{3x + 2 - 3x + 3}\\
+&= \frac{5x}{5}\\
+&= x \quad \checkmark
+\end{align*}
+
+\textbf{Observación interesante:} ¡La función $f$ es su propia inversa en forma! Es decir, $f^{-1}$ tiene la misma estructura que $f$.
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=12cm, height=10cm,
+			axis lines=middle,
+			xlabel={$x$}, ylabel={$y$},
+			xmin=-8, xmax=8,
+			ymin=-8, ymax=8,
+			grid=both,
+			samples=200,
+			legend pos=north west,
+			legend style={fill=white, draw=none, font=\small}, % opcional
+			]
+			
+			% --- f(x) = (3x+2)/(x-1) ---
+			\addplot[blue, thick, domain=-8:0.7] {(3*x+2)/(x-1)};
+			\addlegendentry{$f(x)=\dfrac{3x+2}{x-1}$}
+			\addplot[blue, thick, domain=1.3:8, forget plot] {(3*x+2)/(x-1)}; % no entra a la leyenda
+			
+			% --- f^{-1}(x) = (x+2)/(x-3) ---
+			\addplot[red, thick, domain=-8:2.7] {(x+2)/(x-3)};
+			\addlegendentry{$f^{-1}(x)=\dfrac{x+2}{x-3}$}
+			\addplot[red, thick, domain=3.3:8, forget plot] {(x+2)/(x-3)};   % no entra a la leyenda
+			
+			% --- y = x (gris) ---
+			\addplot[gray, dashed, domain=-8:8] {x};
+			\addlegendentry{$y=x$}
+			
+			% --- Asíntotas (todas fuera de la leyenda) ---
+			\addplot[blue, dashed, thin, forget plot] coordinates {(1,-8) (1,8)}; % x=1
+			\addplot[red,  dashed, thin, forget plot] coordinates {(3,-8) (3,8)}; % x=3
+			\addplot[blue, dashed, thin, domain=-8:8, forget plot] {3};           % y=3 de f
+			\addplot[red,  dashed, thin, domain=-8:8, forget plot] {1};           % y=1 de f^{-1}
+			
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+
+\subsection{Solución Ejercicio 5}
+
+\textbf{Ejercicio:} Una tienda de ropa aplica un descuento del 25\% sobre el precio original $p$. La función que da el precio final es $f(p) = 0.75p$. ¿Es esta función biyectiva? Si lo es, encuentra la función inversa e interpreta su significado.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Verificar inyectividad}
+
+Supongamos que $f(p_1) = f(p_2)$ con $p_1, p_2 > 0$ (los precios son positivos).
+\begin{align*}
+0.75p_1 &= 0.75p_2\\
+p_1 &= p_2
+\end{align*}
+
+Por lo tanto, $f$ es \textbf{inyectiva}. $\checkmark$
+
+Esto tiene sentido: dos precios originales diferentes siempre producen precios finales diferentes.
+
+\textbf{Paso 2: Verificar sobreyectividad}
+
+Consideremos el dominio y codominio como $(0, \infty)$ (precios positivos).
+
+Para cualquier precio final $y > 0$, debemos encontrar un precio original $p > 0$ tal que $f(p) = y$.
+\begin{align*}
+y &= 0.75p\\
+p &= \frac{y}{0.75} = \frac{4y}{3}
+\end{align*}
+
+Como $y > 0$, entonces $p > 0$. Por lo tanto, $f$ es \textbf{sobreyectiva}. $\checkmark$
+
+\textbf{Paso 3: Conclusión}
+
+La función es \textbf{biyectiva} de $(0, \infty)$ a $(0, \infty)$.
+
+\textbf{Paso 4: Encontrar la función inversa}
+
+De la ecuación anterior:
+\[
+f^{-1}(x) = \frac{x}{0.75} = \frac{4x}{3}
+\]
+
+O equivalentemente:
+\[
+f^{-1}(x) = \frac{x}{0.75} = x \div 0.75 = x \cdot \frac{100}{75} = \frac{4x}{3}
+\]
+
+\textbf{Respuesta:} $\boxed{f^{-1}(x) = \frac{4x}{3}}$
+
+\textbf{Paso 5: Interpretación}
+
+La función inversa $f^{-1}$ nos dice \textbf{cuál era el precio original} dado el precio con descuento.
+
+Por ejemplo:
+\begin{itemize}
+    \item Si una camisa cuesta \$30 después del descuento, el precio original era:
+    \[
+    f^{-1}(30) = \frac{4 \cdot 30}{3} = 40 \text{ dólares}
+    \]
+
+    \item Si unos zapatos cuestan \$60 después del descuento, el precio original era:
+    \[
+    f^{-1}(60) = \frac{4 \cdot 60}{3} = 80 \text{ dólares}
+    \]
+\end{itemize}
+
+\textbf{Verificación con ejemplo:}
+
+Precio original: \$40 $\xrightarrow{f}$ Precio con descuento: $0.75 \cdot 40 = \$30$
+
+Precio con descuento: \$30 $\xrightarrow{f^{-1}}$ Precio original: $\frac{4 \cdot 30}{3} = \$40$ $\checkmark$
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=10cm,
+        axis lines=middle,
+        xlabel={Precio ($\$$)}, ylabel={Precio final o original ($\$$)},
+        xmin=0, xmax=100,
+        ymin=0, ymax=100,
+        grid=both,
+        samples=100,
+        legend style={
+		at={(0.52,0.75)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+		},
+    ]
+    % Función de descuento
+    \addplot[blue, thick, domain=0:100] {0.75*x};
+
+    % Función inversa
+    \addplot[red, thick, domain=0:75] {(4/3)*x};
+
+    % Línea y = x
+    \addplot[gray, dashed, domain=0:100] {x};
+
+    % Puntos de ejemplo
+    \addplot[only marks, mark=*, blue, mark size=3pt] coordinates {(40,30) (60,45) (80,60)};
+    \addplot[only marks, mark=*, red, mark size=3pt] coordinates {(30,40) (45,60) (60,80)};
+
+    \legend{$f(p)=0.75p$ (descuento), $f^{-1}(x)=\frac{4x}{3}$ (original), $y=x$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Solución Ejercicio 6}
+
+\textbf{Ejercicio:} Considera la función $f(x) = |x - 2|$ con dominio $\mathbb{R}$. ¿Es inyectiva? ¿Es sobreyectiva de $\mathbb{R}$ a $[0, \infty)$? Justifica gráficamente.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Analizar inyectividad}
+
+Observemos que:
+\begin{align*}
+f(0) &= |0 - 2| = |-2| = 2\\
+f(4) &= |4 - 2| = |2| = 2
+\end{align*}
+
+Como $f(0) = f(4) = 2$ pero $0 \neq 4$, la función \textbf{NO es inyectiva}.
+
+\textbf{Análisis gráfico:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=6,
+        ymin=-1, ymax=5,
+        grid=both,
+        samples=200,
+    ]
+    \addplot[blue, thick, domain=-2:6] {abs(x-2)};
+
+    % Línea horizontal de prueba
+    \addplot[red, dashed, domain=-2:6] {2};
+
+    % Marcar los puntos donde la línea horizontal corta
+    \addplot[only marks, mark=*, red, mark size=3pt] coordinates {(0,2) (4,2)};
+    \node[red, above] at (axis cs:0.45,2) {$(0, 2)$};
+    \node[red, above] at (axis cs:3.5,2) {$(4, 2)$};
+
+    \node[blue, rotate=45] at (axis cs:4.75,3.2) {$f(x) = |x - 2|$};
+    \node[align=center] at (axis cs:2,-0.8) {Vértice en $(2, 0)$};
+
+    \node[align=center,red] at (axis cs:2,4) {La línea $y=2$ corta\\en DOS puntos\\NO INYECTIVA};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+La prueba de la línea horizontal falla porque las líneas horizontales (excepto $y = 0$) cortan la gráfica en dos puntos.
+
+\textbf{Paso 2: Analizar sobreyectividad de $\mathbb{R}$ a $[0, \infty)$}
+
+Para cualquier $y \geq 0$, debemos encontrar un $x \in \mathbb{R}$ tal que $f(x) = y$.
+
+\begin{align*}
+|x - 2| &= y\\
+x - 2 &= y \quad \text{o} \quad x - 2 = -y\\
+x &= y + 2 \quad \text{o} \quad x = 2 - y
+\end{align*}
+
+Ambas soluciones están en $\mathbb{R}$ para cualquier $y \geq 0$. Por ejemplo:
+\begin{itemize}
+    \item Para $y = 3$: $x = 5$ o $x = -1$ (ambos funcionan)
+    \item Para $y = 0$: $x = 2$ (único punto)
+    \item Para $y = 1.5$: $x = 3.5$ o $x = 0.5$ (ambos funcionan)
+\end{itemize}
+
+Por lo tanto, la función \textbf{SÍ es sobreyectiva} de $\mathbb{R}$ a $[0, \infty)$. $\checkmark$
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item $\boxed{\text{NO es inyectiva}}$ (contraejemplo: $f(0) = f(4) = 2$)
+    \item $\boxed{\text{SÍ es sobreyectiva de } \mathbb{R} \text{ a } [0, \infty)}$
+    \item $\boxed{\text{NO es biyectiva}}$ (no puede ser biyectiva si no es inyectiva)
+\end{itemize}
+
+\textbf{Nota:} Si restringiéramos el dominio a $[2, \infty)$, la función SÍ sería inyectiva (y por tanto biyectiva de $[2, \infty)$ a $[0, \infty)$).
+
+\subsection{Solución Ejercicio 7}
+
+\textbf{Ejercicio:} Determina si la función $f(x) = \sqrt{x + 4}$ con dominio $[-4, \infty)$ es biyectiva de $[-4, \infty)$ a $[0, \infty)$. Si lo es, encuentra su inversa.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Verificar inyectividad en $[-4, \infty)$}
+
+Supongamos que $f(x_1) = f(x_2)$ con $x_1, x_2 \in [-4, \infty)$.
+\begin{align*}
+\sqrt{x_1 + 4} &= \sqrt{x_2 + 4}\\
+x_1 + 4 &= x_2 + 4 \quad \text{(elevando al cuadrado, válido porque ambos lados son $\geq 0$)}\\
+x_1 &= x_2
+\end{align*}
+
+Por lo tanto, $f$ es \textbf{inyectiva}. $\checkmark$
+
+\textbf{Paso 2: Verificar sobreyectividad de $[-4, \infty)$ a $[0, \infty)$}
+
+Para cualquier $y \in [0, \infty)$, debemos encontrar un $x \in [-4, \infty)$ tal que $f(x) = y$.
+\begin{align*}
+y &= \sqrt{x + 4}\\
+y^2 &= x + 4\\
+x &= y^2 - 4
+\end{align*}
+
+Debemos verificar que $x \in [-4, \infty)$:
+\[
+x = y^2 - 4 \geq -4 \quad \Leftrightarrow \quad y^2 \geq 0
+\]
+
+Como $y \in [0, \infty)$, se cumple $y^2 \geq 0$. Por lo tanto, $f$ es \textbf{sobreyectiva}. $\checkmark$
+
+\textbf{Paso 3: Conclusión}
+
+La función es \textbf{biyectiva} de $[-4, \infty)$ a $[0, \infty)$.
+
+\textbf{Paso 4: Encontrar la función inversa}
+
+Del paso anterior:
+\[
+f^{-1}(x) = x^2 - 4
+\]
+
+\textbf{Respuesta:} $\boxed{f^{-1}(x) = x^2 - 4 \text{ con dominio } [0, \infty)}$
+
+\textbf{Paso 5: Verificación}
+
+Comprobemos que $f(f^{-1}(x)) = x$:
+\begin{align*}
+f(f^{-1}(x)) &= f(x^2 - 4)\\
+&= \sqrt{(x^2 - 4) + 4}\\
+&= \sqrt{x^2}\\
+&= |x|\\
+&= x \quad \text{(porque } x \geq 0 \text{ en el dominio de } f^{-1})
+\end{align*}
+$\checkmark$
+
+Comprobemos que $f^{-1}(f(x)) = x$:
+\begin{align*}
+f^{-1}(f(x)) &= f^{-1}(\sqrt{x + 4})\\
+&= (\sqrt{x + 4})^2 - 4\\
+&= (x + 4) - 4\\
+&= x
+\end{align*}
+$\checkmark$
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=12cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-5, xmax=8,
+        ymin=-5, ymax=8,
+        grid=both,
+        samples=100,
+        legend pos=north west,
+    ]
+    % Función original
+    \addplot[blue, thick, domain=-4:8] {sqrt(x+4)};
+
+    % Función inversa
+    \addplot[red, thick, domain=0:8] {x^2-4};
+
+    % Línea y = x
+    \addplot[gray, dashed, domain=-5:8] {x};
+
+    % Puntos importantes
+    \addplot[only marks, mark=*, blue, mark size=3pt] coordinates {(-4,0) (0,2) (5,3)};
+    \addplot[only marks, mark=*, red, mark size=3pt] coordinates {(0,-4) (2,0) (3,5)};
+
+    \legend{$f(x)=\sqrt{x+4}$, $f^{-1}(x)=x^2-4$, $y=x$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación importante:}
+\begin{itemize}
+    \item La función $f(x) = \sqrt{x + 4}$ es biyectiva de $[-4, \infty)$ a $[0, \infty)$.
+    \item Su inversa es $f^{-1}(x) = x^2 - 4$, que es biyectiva de $[0, \infty)$ a $[-4, \infty)$.
+    \item Nota cómo la función cuadrática $x^2 - 4$, que normalmente NO es inyectiva en $\mathbb{R}$, SÍ lo es cuando restringimos el dominio a $[0, \infty)$.
+\end{itemize}
+
+\newpage
+\section{Ejercicios Inversos}
+
+Estos ejercicios te desafían a construir funciones con propiedades específicas. En lugar de analizar una función dada, debes crear una función que cumpla ciertos requisitos.
+
+\begin{enumerate}
+    \item Construye una función lineal $f(x) = ax + b$ que sea biyectiva de $\mathbb{R}$ a $\mathbb{R}$ y que pase por el punto $(2, 5)$. ¿Cuántas soluciones hay?
+
+    \item Encuentra una función cuadrática $g(x) = x^2 + bx + c$ que sea inyectiva en $[1, \infty)$ y que tenga como imagen el intervalo $[0, \infty)$.
+
+    \item Construye una función racional $h(x) = \frac{ax + b}{cx + d}$ (con $a, b, c, d$ constantes) que sea biyectiva y tenga exactamente dos asíntotas: una vertical en $x = 2$ y una horizontal en $y = 3$.
+
+    \item Diseña una función definida por partes que sea:
+    \begin{itemize}
+        \item Creciente en todo su dominio
+        \item Continua
+        \item Biyectiva de $\mathbb{R}$ a $\mathbb{R}$
+        \item Lineal en $(-\infty, 0]$ con pendiente 1
+        \item Cuadrática en $(0, \infty)$
+    \end{itemize}
+\end{enumerate}
+
+\newpage
+\section{Soluciones de Ejercicios Inversos}
+
+\subsection{Solución Ejercicio Inverso 1}
+
+\textbf{Problema:} Construye una función lineal $f(x) = ax + b$ que sea biyectiva de $\mathbb{R}$ a $\mathbb{R}$ y que pase por el punto $(2, 5)$. ¿Cuántas soluciones hay?
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Condiciones para biyectividad}
+
+Para que una función lineal $f(x) = ax + b$ sea biyectiva de $\mathbb{R}$ a $\mathbb{R}$, debe cumplir:
+\begin{itemize}
+    \item \textbf{Inyectividad:} Se cumple si y solo si $a \neq 0$ (pendiente no nula)
+    \item \textbf{Sobreyectividad:} Se cumple automáticamente si $a \neq 0$
+\end{itemize}
+
+Por lo tanto, la única condición es $a \neq 0$.
+
+\textbf{Paso 2: Condición del punto}
+
+La función debe pasar por $(2, 5)$:
+\[
+f(2) = 5 \quad \Rightarrow \quad a(2) + b = 5 \quad \Rightarrow \quad 2a + b = 5
+\]
+
+\textbf{Paso 3: Despejar $b$}
+\[
+b = 5 - 2a
+\]
+
+\textbf{Paso 4: Construir la familia de soluciones}
+
+Para cualquier $a \neq 0$, tenemos:
+\[
+f(x) = ax + (5 - 2a)
+\]
+
+\textbf{Respuesta general:} $\boxed{f(x) = ax + (5 - 2a) \text{ con } a \neq 0}$
+
+\textbf{Conclusión:} Hay \textbf{infinitas soluciones} (una para cada valor de $a \neq 0$).
+
+\textbf{Ejemplos específicos:}
+
+\begin{enumerate}
+    \item Si $a = 1$: $f(x) = x + 3$
+    \item Si $a = 2$: $f(x) = 2x + 1$
+    \item Si $a = -1$: $f(x) = -x + 7$
+    \item Si $a = 0.5$: $f(x) = 0.5x + 4$
+\end{enumerate}
+
+\textbf{Verificación con $a = 2$:}
+\[
+f(2) = 2(2) + 1 = 4 + 1 = 5 \quad \checkmark
+\]
+
+\textbf{Representación gráfica de algunas soluciones:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=10cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=6,
+        ymin=-2, ymax=10,
+        grid=both,
+        samples=100,
+        legend style={
+       	at={(0.77,0.17)},    % ubica cerca de la esquina inferior derecha
+       	anchor=south east, % “pega” la esquina inferior derecha de la caja
+      	font=\scriptsize
+        },
+    ]
+    % Varias soluciones
+    \addplot[blue, thick, domain=-2:6] {x+3};
+    \addplot[red, thick, domain=-2:6] {2*x+1};
+    \addplot[green!60!black, thick, domain=-2:6] {-x+7};
+    \addplot[orange, thick, domain=-2:6] {0.5*x+4};
+
+    % Marcar el punto (2,5)
+    \addplot[only marks, mark=*, black, mark size=4pt] coordinates {(2,5)};
+    \node[black, above right] at (axis cs:1.4,5.3) {$(2, 5)$};
+
+    \legend{$f(x)=x+3$ ($a=1$), $f(x)=2x+1$ ($a=2$), $f(x)=-x+7$ ($a=-1$), $f(x)=0.5x+4$ ($a=0.5$)}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Todas estas funciones son biyectivas y pasan por $(2, 5)$.
+
+\subsection{Solución Ejercicio Inverso 2}
+
+\textbf{Problema:} Encuentra una función cuadrática $g(x) = x^2 + bx + c$ que sea inyectiva en $[1, \infty)$ y que tenga como imagen el intervalo $[0, \infty)$.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Análisis de inyectividad}
+
+Una función cuadrática $g(x) = x^2 + bx + c$ es inyectiva en $[1, \infty)$ si el vértice de la parábola está en $x \leq 1$ (porque la parábola es creciente a la derecha del vértice).
+
+El vértice está en:
+\[
+x_v = -\frac{b}{2}
+\]
+
+Para que sea inyectiva en $[1, \infty)$:
+\[
+-\frac{b}{2} \leq 1 \quad \Rightarrow \quad b \geq -2
+\]
+
+\textbf{Paso 2: Análisis de sobreyectividad}
+
+Para que la imagen sea $[0, \infty)$, el valor mínimo de $g$ en $[1, \infty)$ debe ser 0.
+
+Hay dos casos:
+
+\textbf{Caso 1:} El vértice está en $x_v \leq 1$, y el mínimo en $[1, \infty)$ se alcanza en $x = 1$.
+
+En este caso:
+\[
+g(1) = 0 \quad \Rightarrow \quad 1 + b + c = 0 \quad \Rightarrow \quad c = -1 - b
+\]
+
+\textbf{Caso 2:} El vértice está exactamente en $x_v = 1$, y el mínimo es el valor en el vértice.
+
+En este caso:
+\[
+-\frac{b}{2} = 1 \quad \Rightarrow \quad b = -2
+\]
+
+Y el valor mínimo es:
+\[
+g(1) = 1 - 2 + c = 0 \quad \Rightarrow \quad c = 1
+\]
+
+\textbf{Paso 3: Soluciones}
+
+\textbf{Solución específica (Caso 2):}
+\[
+\boxed{g(x) = x^2 - 2x + 1 = (x - 1)^2}
+\]
+
+Esta es la solución más simple y natural.
+
+\textbf{Familia de soluciones (Caso 1):}
+
+Para $b \geq -2$:
+\[
+\boxed{g(x) = x^2 + bx + (-1 - b) \text{ con } b \geq -2}
+\]
+
+\textbf{Paso 4: Verificación con la solución específica}
+
+Tomemos $g(x) = (x - 1)^2$:
+
+\begin{itemize}
+    \item \textbf{Inyectividad en $[1, \infty)$:} El vértice está en $x = 1$, y la función es creciente para $x \geq 1$. $\checkmark$
+    \item \textbf{Imagen:}
+    \begin{itemize}
+        \item $g(1) = 0$
+        \item $\lim_{x \to \infty} g(x) = \infty$
+        \item Como $g$ es continua y creciente en $[1, \infty)$, la imagen es $[0, \infty)$. $\checkmark$
+    \end{itemize}
+\end{itemize}
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=9cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1, xmax=5,
+        ymin=-1, ymax=10,
+        grid=both,
+        samples=100,
+    ]
+    % Función completa (para contexto)
+    \addplot[blue!30, domain=-1:5] {(x-1)^2};
+
+    % Función restringida a [1,∞)
+    \addplot[blue, thick, domain=1:5] {(x-1)^2};
+
+    % Marcar el vértice
+    \addplot[only marks, mark=*, red, mark size=3pt] coordinates {(1,0)};
+    \node[red, above right] at (axis cs:0.4,0.5) {Vértice $(1, 0)$};
+
+    % Línea vertical en x=1
+    \draw[dashed, red] (axis cs:1,-1) -- (axis cs:1,10);
+    \node[red] at (axis cs:3.5,0.5) {Dominio: $[1, \infty)$};
+
+    \node[blue] at (axis cs:2.2,5) {$g(x) = (x-1)^2$};
+    \node[align=center, rotate=90] at (axis cs:0.2,6.5) {Imagen: $[0, \infty)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Otro ejemplo con $b = 0$:}
+
+$g(x) = x^2 - 1$ con $c = -1$:
+\begin{itemize}
+    \item Vértice en $x = 0 \leq 1$ $\checkmark$
+    \item $g(1) = 1 - 1 = 0$ $\checkmark$
+    \item Inyectiva en $[1, \infty)$ $\checkmark$
+    \item Imagen: $[0, \infty)$ $\checkmark$
+\end{itemize}
+
+\subsection{Solución Ejercicio Inverso 3}
+
+\textbf{Problema:} Construye una función racional $h(x) = \frac{ax + b}{cx + d}$ que sea biyectiva y tenga exactamente dos asíntotas: una vertical en $x = 2$ y una horizontal en $y = 3$.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Asíntota vertical en $x = 2$}
+
+Una función racional tiene una asíntota vertical donde el denominador se hace cero. Por lo tanto:
+\[
+cx + d = 0 \quad \text{cuando } x = 2
+\]
+\[
+2c + d = 0 \quad \Rightarrow \quad d = -2c
+\]
+
+\textbf{Paso 2: Asíntota horizontal en $y = 3$}
+
+Para funciones racionales de la forma $\frac{ax + b}{cx + d}$, la asíntota horizontal es:
+\[
+y = \frac{a}{c}
+\]
+
+Para que sea $y = 3$:
+\[
+\frac{a}{c} = 3 \quad \Rightarrow \quad a = 3c
+\]
+
+\textbf{Paso 3: Construir la función}
+
+Sustituyendo $a = 3c$ y $d = -2c$:
+\[
+h(x) = \frac{3cx + b}{cx - 2c} = \frac{3cx + b}{c(x - 2)} = \frac{3x + \frac{b}{c}}{x - 2}
+\]
+
+Para simplificar, tomemos $c = 1$. Entonces:
+\[
+h(x) = \frac{3x + b}{x - 2}
+\]
+
+donde $b$ es un parámetro libre.
+
+\textbf{Paso 4: Verificar biyectividad}
+
+Tomemos un valor específico, por ejemplo $b = 1$:
+\[
+h(x) = \frac{3x + 1}{x - 2}
+\]
+
+\textbf{Inyectividad:} Supongamos $h(x_1) = h(x_2)$:
+\begin{align*}
+\frac{3x_1 + 1}{x_1 - 2} &= \frac{3x_2 + 1}{x_2 - 2}\\
+(3x_1 + 1)(x_2 - 2) &= (3x_2 + 1)(x_1 - 2)\\
+3x_1 x_2 - 6x_1 + x_2 - 2 &= 3x_1 x_2 - 6x_2 + x_1 - 2\\
+-6x_1 + x_2 &= -6x_2 + x_1\\
+7x_2 &= 7x_1\\
+x_1 &= x_2
+\end{align*}
+
+Por lo tanto, es inyectiva. $\checkmark$
+
+\textbf{Sobreyectividad:} Para cualquier $y \neq 3$ (el codominio debe ser $\mathbb{R} \setminus \{3\}$), podemos encontrar $x$:
+\begin{align*}
+y &= \frac{3x + 1}{x - 2}\\
+y(x - 2) &= 3x + 1\\
+yx - 2y &= 3x + 1\\
+yx - 3x &= 2y + 1\\
+x(y - 3) &= 2y + 1\\
+x &= \frac{2y + 1}{y - 3}
+\end{align*}
+
+Como $y \neq 3$, esta expresión está bien definida. Por lo tanto, es sobreyectiva de $\mathbb{R} \setminus \{2\}$ a $\mathbb{R} \setminus \{3\}$. $\checkmark$
+
+\textbf{Respuesta:} $\boxed{h(x) = \frac{3x + 1}{x - 2}}$ (o más general: $h(x) = \frac{3x + b}{x - 2}$ para cualquier $b$)
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=10cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-5, xmax=8,
+        ymin=-5, ymax=10,
+        grid=both,
+        samples=200,
+    ]
+    % Función
+    \addplot[blue, thick, domain=-5:1.7] {(3*x+1)/(x-2)};
+    \addplot[blue, thick, domain=2.3:8] {(3*x+1)/(x-2)};
+
+    % Asíntota vertical
+    \draw[red, dashed, thick] (axis cs:2,-5) -- (axis cs:2,10);
+    \node[red, right, rotate=90] at (axis cs:1.7,6.5) {$x = 2$};
+
+    % Asíntota horizontal
+    \addplot[red, dashed, thick, domain=-5:8] {3};
+    \node[red, above] at (axis cs:6,3) {$y = 3$};
+
+    \node[blue] at (axis cs:5.7,7) {$h(x) = \frac{3x+1}{x-2}$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Verificación de las asíntotas:}
+\begin{itemize}
+    \item \textbf{Vertical:} $\lim_{x \to 2^-} h(x) = -\infty$ y $\lim_{x \to 2^+} h(x) = +\infty$ $\checkmark$
+    \item \textbf{Horizontal:} $\lim_{x \to \pm\infty} h(x) = \lim_{x \to \pm\infty} \frac{3x + 1}{x - 2} = 3$ $\checkmark$
+\end{itemize}
+
+\subsection{Solución Ejercicio Inverso 4}
+
+\textbf{Problema:} Diseña una función definida por partes que sea:
+\begin{itemize}
+    \item Creciente en todo su dominio
+    \item Continua
+    \item Biyectiva de $\mathbb{R}$ a $\mathbb{R}$
+    \item Lineal en $(-\infty, 0]$ con pendiente 1
+    \item Cuadrática en $(0, \infty)$
+\end{itemize}
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Definir la parte lineal}
+
+Para $x \leq 0$, con pendiente 1:
+\[
+f(x) = x + c \quad \text{para } x \leq 0
+\]
+
+donde $c$ es una constante a determinar.
+
+\textbf{Paso 2: Definir la parte cuadrática}
+
+Para $x > 0$, necesitamos una función cuadrática creciente. Una opción es:
+\[
+f(x) = ax^2 + bx + d \quad \text{para } x > 0
+\]
+
+Para que sea creciente en $(0, \infty)$, el vértice debe estar en $x_v \leq 0$.
+
+\textbf{Paso 3: Continuidad en $x = 0$}
+
+Para que la función sea continua:
+\[
+\lim_{x \to 0^-} f(x) = \lim_{x \to 0^+} f(x) = f(0)
+\]
+
+Desde la izquierda: $\lim_{x \to 0^-} (x + c) = c$
+
+Desde la derecha: $\lim_{x \to 0^+} (ax^2 + bx + d) = d$
+
+Por lo tanto: $c = d$.
+
+Además, $f(0) = 0 + c = c$.
+
+\textbf{Paso 4: Continuidad de la derivada (para evitar ``esquinas'')}
+
+Para que sea suave (no obligatorio pero deseable):
+\[
+\lim_{x \to 0^-} f'(x) = \lim_{x \to 0^+} f'(x)
+\]
+
+La derivada desde la izquierda: $f'(x) = 1$ para $x < 0$.
+
+La derivada desde la derecha: $f'(x) = 2ax + b$ para $x > 0$, entonces $\lim_{x \to 0^+} f'(x) = b$.
+
+Para continuidad de la derivada: $b = 1$.
+
+\textbf{Paso 5: Construir una solución específica}
+
+Tomemos $c = 0$ (pasa por el origen) y $a = 1$ (parábola estándar):
+
+\[
+f(x) = \begin{cases}
+x & \text{si } x \leq 0\\
+x^2 + x & \text{si } x > 0
+\end{cases}
+\]
+
+\textbf{Verificación:}
+
+\begin{enumerate}
+    \item \textbf{Continuidad en $x = 0$:}
+    \begin{itemize}
+        \item $\lim_{x \to 0^-} x = 0$
+        \item $\lim_{x \to 0^+} (x^2 + x) = 0$
+        \item $f(0) = 0$
+    \end{itemize}
+    Continua. $\checkmark$
+
+    \item \textbf{Creciente:}
+    \begin{itemize}
+        \item Para $x \leq 0$: $f'(x) = 1 > 0$ $\checkmark$
+        \item Para $x > 0$: $f'(x) = 2x + 1 > 1 > 0$ (siempre positiva) $\checkmark$
+    \end{itemize}
+
+    \item \textbf{Biyectiva:}
+    \begin{itemize}
+        \item \textbf{Inyectiva:} Como la función es estrictamente creciente en todo $\mathbb{R}$, es inyectiva. $\checkmark$
+        \item \textbf{Sobreyectiva:}
+        \begin{itemize}
+            \item $\lim_{x \to -\infty} f(x) = -\infty$
+            \item $\lim_{x \to +\infty} f(x) = +\infty$
+            \item Por el teorema del valor intermedio y continuidad, alcanza todos los valores reales. $\checkmark$
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Respuesta:}
+\[
+\boxed{f(x) = \begin{cases}
+x & \text{si } x \leq 0\\
+x^2 + x & \text{si } x > 0
+\end{cases}}
+\]
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=10cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-4, xmax=4,
+        ymin=-4, ymax=12,
+        grid=both,
+        samples=100,
+    ]
+    % Parte lineal
+    \addplot[blue, thick, domain=-4:0] {x};
+
+    % Parte cuadrática
+    \addplot[red, thick, domain=0:4] {x^2+x};
+
+    % Marcar el punto de unión
+    \addplot[only marks, mark=*, black, mark size=3pt] coordinates {(0,0)};
+
+    \node[blue] at (axis cs:-1.5,-2.6) {$f(x) = x$};
+    \node[red] at (axis cs:1.2,8) {$f(x) = x^2 + x$};
+    \node[align=center] at (axis cs:1,3) {Unión suave\\en $(0,0)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Función inversa:}
+
+La función inversa existe porque $f$ es biyectiva:
+
+\[
+f^{-1}(y) = \begin{cases}
+y & \text{si } y \leq 0\\
+\frac{-1 + \sqrt{1 + 4y}}{2} & \text{si } y > 0
+\end{cases}
+\]
+
+Para $y > 0$, resolvemos $x^2 + x = y$:
+\[
+x^2 + x - y = 0 \quad \Rightarrow \quad x = \frac{-1 \pm \sqrt{1 + 4y}}{2}
+\]
+
+Como $x > 0$, tomamos la raíz positiva.
+
+\textbf{Verificación gráfica de la inversa:}
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=12cm, height=12cm,
+			axis lines=middle,
+			xlabel={$x$}, ylabel={$y$},
+			xmin=-4, xmax=12,
+			ymin=-4, ymax=12,
+			grid=both,
+			samples=100,
+			legend pos=north west,
+			]
+			
+			% --- f(x) ---
+			\addplot[blue, thick, domain=-4:0] {x};
+			\addlegendentry{$f(x)$}
+			\addplot[blue, thick, domain=0:4, forget plot] {x^2+x}; % no entra a la leyenda
+			
+			% --- f^{-1}(x) ---
+			\addplot[red, thick, domain=-4:0] {x};
+			\addlegendentry{$f^{-1}(x)$}
+			\addplot[red, thick, domain=0:12, forget plot] {(-1+sqrt(1+4*x))/2}; % no entra a la leyenda
+			
+			% --- y = x (gris) ---
+			\addplot[gray, dashed, domain=-4:12] {x};
+			\addlegendentry{$y=x$}
+			
+		\end{axis}
+	\end{tikzpicture}
+\end{center}
+
+
+Las gráficas son simétricas respecto a $y = x$, confirmando que hemos encontrado correctamente la función inversa.
+
+\end{document}

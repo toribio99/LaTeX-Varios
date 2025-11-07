@@ -1,0 +1,1871 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Estilos personalizados
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems,skins,breakable}
+
+\newtcolorbox{definicion}[1][]{
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+\newtcolorbox{ejemplo}[1][]{
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejemplo,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+\title{\textcolor{maincolor}{\textbf{Funciones de Variable Real}}}
+\author{Prof. Toribio De J Arrieta F}
+\date{\today}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+
+{\Huge\textcolor{maincolor}{\textbf{Funciones de Variable Real}}\par}
+\vspace{1.5cm}
+
+{\Large\textbf{Grado 10}\par}
+\vspace{0.5cm}
+
+{\large Asignatura: Trigonometría\par}
+\vspace{2cm}
+
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-3:3,
+    samples=100,
+    xmin=-3.5, xmax=3.5,
+    ymin=-2, ymax=8,
+    grid=major,
+    thick
+]
+\addplot[maincolor, very thick] {x^2};
+\addplot[accentcolor, very thick] {2*x + 1};
+\addplot[red!70!black, very thick] {sin(deg(x))*3 + 3};
+\end{axis}
+\end{tikzpicture}
+
+\vspace{2cm}
+{\Large\textbf{Prof. Toribio De J Arrieta F}\par}
+\vspace{0.5cm}
+{\large La Pruebita\par}
+\vspace{1cm}
+{\large\today\par}
+
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Bienvenidos! En esta guía vamos a explorar uno de los temas más importantes y útiles de las matemáticas: las \textbf{funciones de variable real}. Pero tranquilos, no se asusten con el nombre tan formal. Las funciones están por todos lados en nuestra vida diaria, aunque no nos demos cuenta.
+
+¿Han notado cómo el precio que pagan en la tienda depende de cuántos productos compran? ¿O cómo la distancia que recorre un carro depende del tiempo que lleva viajando? ¿O cómo la temperatura cambia a lo largo del día? Todos estos son ejemplos de funciones.
+
+Una función es básicamente una relación entre dos cantidades donde a cada valor de entrada le corresponde exactamente un valor de salida. Piensen en una máquina: le meten un número (entrada), la máquina hace su trabajo, y sale otro número (salida).
+
+\subsection{¿Por qué son importantes las funciones?}
+
+Las funciones nos permiten:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Modelar situaciones reales:} Como el crecimiento de una población, el costo de producir artículos, o el movimiento de un proyectil.
+    \item \textbf{Predecir comportamientos:} Si conocemos la función, podemos saber qué pasará en el futuro.
+    \item \textbf{Optimizar procesos:} Encontrar el máximo o mínimo de una función nos ayuda a tomar mejores decisiones.
+    \item \textbf{Entender el cambio:} Las funciones nos muestran cómo cambian las cosas y a qué ritmo.
+\end{itemize}
+
+\subsection{¿Qué vamos a aprender?}
+
+En esta guía estudiaremos diferentes tipos de funciones y sus características:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Funciones crecientes, decrecientes y constantes:} Aprenderemos a identificar cómo se comporta una función.
+    \item \textbf{Funciones pares e impares:} Veremos funciones con simetrías especiales.
+    \item \textbf{Funciones periódicas:} Funciones que se repiten cada cierto intervalo.
+    \item \textbf{Funciones lineales y afines:} Las funciones más sencillas pero súper útiles.
+    \item \textbf{Funciones cuadráticas y cúbicas:} Funciones con potencias que nos permiten modelar situaciones más complejas.
+\end{enumerate}
+
+Además, veremos aplicaciones reales en física (movimiento), biología (crecimiento poblacional), economía (costos), meteorología (temperatura) y deportes (trayectorias).
+
+¡Así que prepárense para un viaje fascinante por el mundo de las funciones!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Función Creciente}
+
+\begin{definicion}
+Una función $f(x)$ es \textbf{creciente} en un intervalo si para cualesquiera dos valores $x_1$ y $x_2$ en ese intervalo, con $x_1 < x_2$, se cumple que $f(x_1) \leq f(x_2)$.
+
+En palabras más simples: mientras más grande sea el valor de $x$, más grande es el valor de $f(x)$. La función "sube" de izquierda a derecha.
+\end{definicion}
+
+\begin{nota}
+Si la desigualdad es estricta ($f(x_1) < f(x_2)$), decimos que la función es \textbf{estrictamente creciente}.
+\end{nota}
+
+\textbf{Ejemplo visual:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-2:4,
+    samples=100,
+    xmin=-2.5, xmax=4.5,
+    ymin=-1, ymax=5,
+    grid=major,
+    legend pos=north west
+]
+\addplot[maincolor, very thick] {0.5*x + 1};
+\addlegendentry{$f(x) = 0.5x + 1$}
+\addplot[accentcolor, very thick] {0.3*x^2};
+\addlegendentry{$g(x) = 0.3x^2$ (en $[0,\infty)$)}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Función Decreciente}
+
+\begin{definicion}
+Una función $f(x)$ es \textbf{decreciente} en un intervalo si para cualesquiera dos valores $x_1$ y $x_2$ en ese intervalo, con $x_1 < x_2$, se cumple que $f(x_1) \geq f(x_2)$.
+
+Es decir: mientras más grande sea el valor de $x$, más pequeño es el valor de $f(x)$. La función "baja" de izquierda a derecha.
+\end{definicion}
+
+\textbf{Ejemplo visual:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-2:8,
+    samples=100,
+    xmin=-2.5, xmax=8,
+    ymin=-1, ymax=5,
+    grid=major,
+    legend pos=north east
+]
+\addplot[maincolor, very thick] {-0.5*x + 3};
+\addlegendentry{$f(x) = -0.5x + 3$}
+\addplot[accentcolor, very thick] {4*exp(-0.4*x)};
+\addlegendentry{$g(x) = 4e^{-0.4x}$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Función Constante}
+
+\begin{definicion}
+Una función $f(x)$ es \textbf{constante} en un intervalo si para todos los valores de $x$ en ese intervalo, $f(x)$ toma el mismo valor.
+
+Es una función que no cambia, es decir, $f(x) = c$ donde $c$ es una constante.
+\end{definicion}
+
+\textbf{Ejemplo visual:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-3:3,
+    samples=2,
+    xmin=-3.5, xmax=3.5,
+    ymin=-2, ymax=4,
+    grid=major,
+    legend pos=north west
+]
+\addplot[maincolor, very thick] {2};
+\addlegendentry{$f(x) = 2$}
+\addplot[accentcolor, very thick] {-0.5};
+\addlegendentry{$g(x) = -0.5$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Función Par}
+
+\begin{definicion}
+Una función $f(x)$ es \textbf{par} si cumple que $f(-x) = f(x)$ para todo $x$ en su dominio.
+
+Las funciones pares tienen simetría respecto al eje $y$. Si doblas la gráfica por el eje vertical, ambas mitades coinciden.
+\end{definicion}
+
+\textbf{Ejemplos de funciones pares:}
+\begin{itemize}
+    \item $f(x) = x^2$
+    \item $f(x) = \cos(x)$
+    \item $f(x) = |x|$
+\end{itemize}
+
+\textbf{Ejemplo visual:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-3:3,
+    samples=100,
+    xmin=-3.5, xmax=3.5,
+    ymin=-1, ymax=14,
+    grid=major,
+    legend pos=north east
+]
+\addplot[maincolor, very thick] {x^2};
+\addlegendentry{$f(x) = x^2$}
+\addplot[accentcolor, very thick] {cos(deg(x))*3 + 4};
+\addlegendentry{$g(x) = 3\cos(x) + 4$}
+\draw[dashed, thick, gray] (axis cs:0,-1) -- (axis cs:0,10);
+\addplot[green!75!black, very thick] {abs(3.5*x)};
+\addlegendentry{$f(x) = |x|$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Función Impar}
+
+\begin{definicion}
+Una función $f(x)$ es \textbf{impar} si cumple que $f(-x) = -f(x)$ para todo $x$ en su dominio.
+
+Las funciones impares tienen simetría respecto al origen. Si rotas la gráfica 180° alrededor del origen, obtienes la misma gráfica.
+\end{definicion}
+
+\textbf{Ejemplos de funciones impares:}
+\begin{itemize}
+    \item $f(x) = x$
+    \item $f(x) = x^3$
+    \item $f(x) = \sin(x)$
+\end{itemize}
+
+\textbf{Ejemplo visual:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-3:3,
+    samples=100,
+    xmin=-3.5, xmax=3.5,
+    ymin=-8, ymax=8,
+    grid=major,
+    legend pos=north west
+]
+\addplot[maincolor, very thick] {x^3};
+\addlegendentry{$f(x) = x^3$}
+\addplot[accentcolor, very thick] {sin(deg(x))*4};
+\addlegendentry{$g(x) = 4\sin(x)$}
+\addplot[green!75!black, very thick] {x};
+\addlegendentry{$h(x) = x$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Funciones Periódicas}
+
+\begin{definicion}
+Una función $f(x)$ es \textbf{periódica} si existe un número positivo $T$ (llamado \textbf{periodo}) tal que:
+\[f(x + T) = f(x)\]
+para todo $x$ en el dominio de la función.
+
+Esto significa que la función se repite cada $T$ unidades. El valor más pequeño de $T$ que cumple esto se llama \textbf{periodo fundamental}.
+\end{definicion}
+
+\textbf{Ejemplos comunes:}
+\begin{itemize}
+    \item $\sin(x)$ tiene periodo $2\pi$
+    \item $\cos(x)$ tiene periodo $2\pi$
+    \item $\tan(x)$ tiene periodo $\pi$
+\end{itemize}
+
+\textbf{Ejemplo visual:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-6.28:6.28,
+    samples=200,
+    xmin=-7, xmax=7,
+    ymin=-3, ymax=3,
+    grid=major,
+    xtick={-6.28,-3.14,0,3.14,6.28},
+    xticklabels={$-2\pi$,$-\pi$,$0$,$\pi$,$2\pi$},
+    legend pos=north east
+]
+\addplot[maincolor, very thick] {sin(deg(x))};
+\addlegendentry{$f(x) = \sin(x)$}
+\addplot[accentcolor, very thick] {cos(deg(x))};
+\addlegendentry{$g(x) = \cos(x)$}
+\addplot[green!75!black, very thick] {tan(deg(x))};
+\addlegendentry{$h(x) = \tan(x)$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Función Lineal}
+
+\begin{definicion}
+Una función \textbf{lineal} es de la forma:
+\[f(x) = mx\]
+donde $m$ es una constante llamada \textbf{pendiente}.
+
+Su gráfica es una recta que pasa por el origen $(0,0)$.
+\end{definicion}
+
+\begin{nota}
+\begin{itemize}
+    \item Si $m > 0$, la función es creciente.
+    \item Si $m < 0$, la función es decreciente.
+    \item Si $m = 0$, la función es constante.
+\end{itemize}
+\end{nota}
+
+\textbf{Ejemplo visual:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-3:3,
+    samples=2,
+    xmin=-3.5, xmax=3.5,
+    ymin=-5, ymax=5,
+    grid=major,
+    legend pos=south east
+]
+\addplot[maincolor, very thick] {2*x};
+\addlegendentry{$f(x) = 2x$ ($m=2$)}
+\addplot[accentcolor, very thick] {-1.5*x};
+\addlegendentry{$g(x) = -1.5x$ ($m=-1.5$)}
+\addplot[red!70!black, very thick] {0.5*x};
+\addlegendentry{$h(x) = 0.5x$ ($m=0.5$)}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Función Afín}
+
+\begin{definicion}
+Una función \textbf{afín} es de la forma:
+\[f(x) = mx + b\]
+donde $m$ es la \textbf{pendiente} y $b$ es el \textbf{intercepto} con el eje $y$ (también llamado ordenada al origen).
+
+Su gráfica es una recta que puede o no pasar por el origen.
+\end{definicion}
+
+\begin{nota}
+Cuando $b \neq 0$, la función es afín pero no lineal. La función lineal es un caso particular de la función afín (cuando $b = 0$).
+\end{nota}
+
+\textbf{Ejemplo visual:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-3:3,
+    samples=2,
+    xmin=-3.5, xmax=3.5,
+    ymin=-4, ymax=6,
+    grid=major,
+    legend pos=south east
+]
+\addplot[maincolor, very thick] {1.5*x + 2};
+\addlegendentry{$f(x) = 1.5x + 2$}
+\addplot[accentcolor, very thick] {-x + 3};
+\addlegendentry{$g(x) = -x + 3$}
+\addplot[red!70!black, very thick] {0.8*x - 1};
+\addlegendentry{$h(x) = 0.8x - 1$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Función Cuadrática}
+
+\begin{definicion}
+Una función \textbf{cuadrática} es de la forma:
+\[f(x) = ax^2 + bx + c\]
+donde $a$, $b$ y $c$ son constantes con $a \neq 0$.
+
+Su gráfica es una \textbf{parábola}.
+\end{definicion}
+
+\textbf{Características importantes:}
+\begin{itemize}
+    \item Si $a > 0$, la parábola abre hacia arriba (tiene un mínimo).
+    \item Si $a < 0$, la parábola abre hacia abajo (tiene un máximo).
+    \item El vértice está en $x = -\frac{b}{2a}$.
+    \item El eje de simetría es la recta vertical $x = -\frac{b}{2a}$.
+\end{itemize}
+
+\textbf{Ejemplo visual:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=9cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-2.5:5,
+    samples=100,
+    xmin=-2.5, xmax=5,
+    ymin=-7, ymax=8,
+    grid=major,
+    legend pos=south east
+]
+\addplot[maincolor, very thick] {x^2 - 2*x - 1};
+\addlegendentry{$f(x) = x^2 - 2x - 1$ ($a>0$)}
+\addplot[accentcolor, very thick] {-0.5*x^2 + 2*x + 3};
+\addlegendentry{$g(x) = -0.5x^2 + 2x + 3$ ($a<0$)}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Función Cúbica}
+
+\begin{definicion}
+Una función \textbf{cúbica} es de la forma:
+\[f(x) = ax^3 + bx^2 + cx + d\]
+donde $a$, $b$, $c$ y $d$ son constantes con $a \neq 0$.
+
+Su gráfica tiene forma de "S" y puede tener hasta dos puntos de inflexión.
+\end{definicion}
+
+\textbf{Características importantes:}
+\begin{itemize}
+    \item Si $a > 0$, la función crece hacia $+\infty$ cuando $x \to +\infty$.
+    \item Si $a < 0$, la función decrece hacia $-\infty$ cuando $x \to +\infty$.
+    \item Puede tener hasta 3 raíces reales.
+    \item Puede tener hasta 2 puntos críticos (máximo y mínimo locales).
+\end{itemize}
+
+\textbf{Ejemplo visual:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=10cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-3:3,
+    samples=100,
+    xmin=-3, xmax=3,
+    ymin=-8, ymax=10,
+    grid=major,
+    legend pos=south east
+]
+\addplot[maincolor, very thick] {x^3 - 3*x};
+\addlegendentry{$f(x) = x^3 - 3x$}
+\addplot[accentcolor, very thick] {-0.5*x^3 + x^2 + 2*x};
+\addlegendentry{$g(x) = -0.5x^3 + x^2 + 2x$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Aplicaciones de las Funciones}
+
+Las funciones no son solo teoría abstracta, están presentes en muchas situaciones de la vida real. Veamos algunas aplicaciones importantes:
+
+\subsubsection{Movimiento Rectilíneo}
+
+En física, la posición de un objeto que se mueve en línea recta se puede describir con una función.
+
+\textbf{Movimiento Rectilíneo Uniforme (MRU):}
+\[x(t) = x_0 + vt\]
+donde $x_0$ es la posición inicial, $v$ es la velocidad constante y $t$ es el tiempo. Esta es una función lineal.
+
+\textbf{Movimiento Rectilíneo Uniformemente Acelerado (MRUA):}
+\[x(t) = x_0 + v_0t + \frac{1}{2}at^2\]
+donde $a$ es la aceleración. Esta es una función cuadrática.
+
+\subsubsection{Crecimiento Poblacional}
+
+El número de individuos en una población puede modelarse con diferentes funciones:
+
+\textbf{Crecimiento lineal:}
+\[P(t) = P_0 + kt\]
+donde $P_0$ es la población inicial y $k$ es la tasa de crecimiento constante.
+
+\textbf{Crecimiento exponencial:}
+\[P(t) = P_0 e^{rt}\]
+donde $r$ es la tasa de crecimiento relativa.
+
+\subsubsection{Economía y Costos}
+
+Las funciones lineales y cuadráticas son muy usadas en economía:
+
+\textbf{Costo total:}
+\[C(x) = C_f + C_v \cdot x\]
+donde $C_f$ son los costos fijos, $C_v$ es el costo variable por unidad y $x$ es el número de unidades producidas. Esta es una función afín.
+
+\textbf{Ingreso:}
+\[I(x) = p \cdot x\]
+donde $p$ es el precio por unidad. Esta es una función lineal.
+
+\subsubsection{Temperatura y Clima}
+
+La temperatura durante el día puede modelarse con funciones periódicas:
+
+\[T(t) = T_m + A\sin\left(\frac{2\pi}{24}(t - t_0)\right)\]
+donde $T_m$ es la temperatura media, $A$ es la amplitud de variación y $t_0$ es el desfase.
+
+\subsubsection{Trayectorias Parabólicas}
+
+Cuando lanzas una pelota o disparas un proyectil, su trayectoria es una parábola:
+
+\[y(x) = x\tan(\theta) - \frac{g x^2}{2v_0^2\cos^2(\theta)}\]
+donde $\theta$ es el ángulo de lanzamiento, $v_0$ es la velocidad inicial y $g$ es la gravedad. Esta es una función cuadrática.
+
+\newpage
+
+\section{Ejemplos Resueltos}
+
+\subsection{Ejemplo 1: Identificación de Funciones Crecientes y Decrecientes}
+
+\begin{ejemplo}
+Dada la función $f(x) = x^2 - 4x + 3$, determina los intervalos donde la función es creciente y donde es decreciente.
+\end{ejemplo}
+
+\textbf{Solución paso a paso:}
+
+\textbf{Paso 1:} Grafiquemos primero la función para tener una idea visual.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-1:5,
+    samples=100,
+    xmin=-1, xmax=5,
+    ymin=-2, ymax=8,
+    grid=major
+]
+\addplot[maincolor, very thick] {x^2 - 4*x + 3};
+\addplot[accentcolor, mark=*, only marks, mark size=3pt] coordinates {(2,-1)};
+\node[above=3.5mm] at (axis cs:2,-1) {Vértice $(2,-1)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 2:} Esta es una función cuadrática con $a = 1 > 0$, por lo que la parábola abre hacia arriba. El vértice está en:
+\[x_v = -\frac{b}{2a} = -\frac{-4}{2(1)} = \frac{4}{2} = 2\]
+
+\textbf{Paso 3:} Calculamos el valor de la función en el vértice:
+\[f(2) = (2)^2 - 4(2) + 3 = 4 - 8 + 3 = -1\]
+
+Entonces el vértice es el punto $(2, -1)$.
+
+\textbf{Paso 4:} Como la parábola abre hacia arriba y el vértice es el punto más bajo:
+\begin{itemize}
+    \item La función es \textbf{decreciente} en $(-\infty, 2]$
+    \item La función es \textbf{creciente} en $[2, +\infty)$
+\end{itemize}
+
+\textbf{Respuesta:} La función $f(x) = x^2 - 4x + 3$ es decreciente en $(-\infty, 2]$ y creciente en $[2, +\infty)$.
+
+\newpage
+
+\subsection{Ejemplo 2: Función Par o Impar}
+
+\begin{ejemplo}
+Determina si las siguientes funciones son pares, impares o ninguna de las dos:
+\begin{enumerate}[label=\alph*)]
+    \item $f(x) = 3x^4 - 2x^2 + 5$
+    \item $g(x) = 2x^3 - 5x$
+    \item $h(x) = x^2 + x$
+\end{enumerate}
+\end{ejemplo}
+
+\textbf{Solución paso a paso:}
+
+\textbf{a) $f(x) = 3x^4 - 2x^2 + 5$}
+
+\textbf{Paso 1:} Para verificar si es par, calculamos $f(-x)$:
+\begin{align*}
+f(-x) &= 3(-x)^4 - 2(-x)^2 + 5\\
+&= 3x^4 - 2x^2 + 5\\
+&= f(x)
+\end{align*}
+
+Como $f(-x) = f(x)$, la función es \textbf{PAR}.
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-1.5:1.5,
+    samples=100,
+    xmin=-2, xmax=2,
+    ymin=0, ymax=10,
+    grid=major
+]
+\addplot[maincolor, very thick] {3*x^4 - 2*x^2 + 5};
+\draw[dashed, thick, gray] (axis cs:0,0) -- (axis cs:0,10);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Observamos que la gráfica es simétrica respecto al eje $y$.
+
+\textbf{b) $g(x) = 2x^3 - 5x$}
+
+\textbf{Paso 1:} Calculamos $g(-x)$:
+\begin{align*}
+g(-x) &= 2(-x)^3 - 5(-x)\\
+&= -2x^3 + 5x\\
+&= -(2x^3 - 5x)\\
+&= -g(x)
+\end{align*}
+
+Como $g(-x) = -g(x)$, la función es \textbf{IMPAR}.
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-2:2,
+    samples=100,
+    xmin=-2.5, xmax=2.5,
+    ymin=-10, ymax=10,
+    grid=major
+]
+\addplot[maincolor, very thick] {2*x^3 - 5*x};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Observamos que la gráfica tiene simetría respecto al origen.
+
+\textbf{c) $h(x) = x^2 + x$}
+
+\textbf{Paso 1:} Calculamos $h(-x)$:
+\begin{align*}
+h(-x) &= (-x)^2 + (-x)\\
+&= x^2 - x
+\end{align*}
+
+Observamos que $h(-x) = x^2 - x \neq h(x)$ y también $h(-x) \neq -h(x)$ porque:
+\[-h(x) = -(x^2 + x) = -x^2 - x\]
+
+Por lo tanto, la función \textbf{NO ES PAR NI IMPAR}.
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-3:2,
+    samples=100,
+    xmin=-3.5, xmax=2.5,
+    ymin=-2, ymax=6,
+    grid=major
+]
+\addplot[maincolor, very thick] {x^2 + x};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+La gráfica no tiene simetría especial.
+
+\newpage
+
+\subsection{Ejemplo 3: Función Periódica}
+
+\begin{ejemplo}
+Determina si la función $f(x) = 2\sin(3x) + 1$ es periódica. Si lo es, encuentra su periodo.
+\end{ejemplo}
+
+\textbf{Solución paso a paso:}
+
+\textbf{Paso 1:} Recordemos que $\sin(x)$ tiene periodo fundamental $2\pi$, es decir, $\sin(x + 2\pi) = \sin(x)$.
+
+\textbf{Paso 2:} Para una función de la forma $f(x) = A\sin(Bx) + C$, el periodo es:
+\[T = \frac{2\pi}{|B|}\]
+
+\textbf{Paso 3:} En nuestro caso, $A = 2$, $B = 3$ y $C = 1$. Entonces:
+\[T = \frac{2\pi}{3}\]
+
+\textbf{Paso 4:} Verifiquemos que efectivamente $f(x + T) = f(x)$:
+\begin{align*}
+f\left(x + \frac{2\pi}{3}\right) &= 2\sin\left(3\left(x + \frac{2\pi}{3}\right)\right) + 1\\
+&= 2\sin(3x + 2\pi) + 1\\
+&= 2\sin(3x) + 1\\
+&= f(x)
+\end{align*}
+
+\textbf{Paso 5:} Grafiquemos la función para visualizar la periodicidad:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=0:4.2,
+    samples=200,
+    xmin=0, xmax=4.5,
+    ymin=-1.5, ymax=3.5,
+    grid=major,
+    xtick={0,0.524,1.047,1.571,2.094,2.618,3.142,3.665,4.189},
+    xticklabels={$0$,$\frac{\pi}{6}$,$\frac{\pi}{3}$,$\frac{\pi}{2}$,$\frac{2\pi}{3}$,$\frac{5\pi}{6}$,$\pi$,$\frac{7\pi}{6}$,$\frac{4\pi}{3}$},
+    xticklabel style={font=\tiny}
+]
+\addplot[maincolor, very thick] {2*sin(deg(3*x)) + 1};
+\draw[accentcolor, dashed, thick] (axis cs:0,3) -- (axis cs:0,-1.5);
+\draw[accentcolor, dashed, thick] (axis cs:2.094,3) -- (axis cs:2.094,-1.5);
+\draw[accentcolor, <->, thick] (axis cs:0,3.2) -- (axis cs:2.094,3.2);
+\node[above] at (axis cs:1.047,3.2) {$T = \frac{2\pi}{3}$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} La función $f(x) = 2\sin(3x) + 1$ es periódica con periodo $T = \frac{2\pi}{3}$.
+
+\newpage
+
+\subsection{Ejemplo 4: Aplicación - Movimiento Rectilíneo}
+
+\begin{ejemplo}
+Un automóvil parte del reposo con aceleración constante de $3 \text{ m/s}^2$.
+\begin{enumerate}[label=\alph*)]
+    \item Escribe la función que describe su posición en función del tiempo.
+    \item ¿Qué distancia habrá recorrido después de 5 segundos?
+    \item ¿En qué momento alcanzará una distancia de 54 metros?
+\end{enumerate}
+\end{ejemplo}
+
+\textbf{Solución paso a paso:}
+
+\textbf{a) Función posición}
+
+\textbf{Paso 1:} Usamos la ecuación del MRUA:
+\[x(t) = x_0 + v_0t + \frac{1}{2}at^2\]
+
+\textbf{Paso 2:} Como parte del reposo, $v_0 = 0$. Asumiendo que parte del origen, $x_0 = 0$. La aceleración es $a = 3 \text{ m/s}^2$. Entonces:
+\[x(t) = \frac{1}{2}(3)t^2 = 1.5t^2\]
+
+\textbf{Respuesta a):} La función posición es $x(t) = 1.5t^2$ (en metros, con $t$ en segundos).
+
+\textbf{b) Distancia a los 5 segundos}
+
+\textbf{Paso 1:} Sustituimos $t = 5$ en la función:
+\[x(5) = 1.5(5)^2 = 1.5 \cdot 25 = 37.5 \text{ m}\]
+
+\textbf{Respuesta b):} Habrá recorrido 37.5 metros.
+
+\textbf{c) Tiempo para recorrer 54 metros}
+
+\textbf{Paso 1:} Igualamos $x(t) = 54$:
+\[1.5t^2 = 54\]
+
+\textbf{Paso 2:} Despejamos $t^2$:
+\[t^2 = \frac{54}{1.5} = 36\]
+
+\textbf{Paso 3:} Sacamos raíz cuadrada:
+\[t = \sqrt{36} = 6 \text{ s}\]
+
+(Tomamos solo la raíz positiva porque el tiempo no puede ser negativo)
+
+\textbf{Respuesta c):} Alcanzará 54 metros después de 6 segundos.
+
+\textbf{Gráfica de la posición vs tiempo:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={Tiempo (s)},
+    ylabel={Posición (m)},
+    domain=0:7,
+    samples=100,
+    xmin=0, xmax=7.5,
+    ymin=0, ymax=80,
+    grid=major
+]
+\addplot[maincolor, very thick] {1.5*x^2};
+\addplot[accentcolor, mark=*, only marks, mark size=3pt] coordinates {(5,37.5) (6,54)};
+\node[right] at (axis cs:5,37.5) {$(5, 37.5)$};
+\node[right] at (axis cs:6,54) {$(6, 54)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Ejemplo 5: Aplicación - Economía}
+
+\begin{ejemplo}
+Una empresa de producción de camisetas tiene costos fijos de \$2000 al mes y cada camiseta cuesta \$15 producir. Si venden cada camiseta a \$35:
+\begin{enumerate}[label=\alph*)]
+    \item Encuentra la función de costo total $C(x)$.
+    \item Encuentra la función de ingreso $I(x)$.
+    \item Encuentra la función de ganancia $G(x)$.
+    \item ¿Cuántas camisetas deben vender para tener ganancias?
+    \item ¿Cuál es la ganancia si venden 200 camisetas?
+\end{enumerate}
+\end{ejemplo}
+
+\textbf{Solución paso a paso:}
+
+\textbf{a) Función de costo total}
+
+\textbf{Paso 1:} El costo total es la suma de costos fijos y costos variables:
+\[C(x) = \text{Costos fijos} + \text{Costo variable por unidad} \times x\]
+
+\textbf{Paso 2:} Sustituimos los valores:
+\[C(x) = 2000 + 15x\]
+
+\textbf{Respuesta a):} $C(x) = 2000 + 15x$ dólares.
+
+\textbf{b) Función de ingreso}
+
+\textbf{Paso 1:} El ingreso es el precio de venta multiplicado por la cantidad vendida:
+\[I(x) = 35x\]
+
+\textbf{Respuesta b):} $I(x) = 35x$ dólares.
+
+\textbf{c) Función de ganancia}
+
+\textbf{Paso 1:} La ganancia es el ingreso menos el costo:
+\[G(x) = I(x) - C(x) = 35x - (2000 + 15x)\]
+
+\textbf{Paso 2:} Simplificamos:
+\[G(x) = 35x - 2000 - 15x = 20x - 2000\]
+
+\textbf{Respuesta c):} $G(x) = 20x - 2000$ dólares.
+
+\textbf{d) Cantidad para tener ganancias}
+
+\textbf{Paso 1:} Para tener ganancias, necesitamos $G(x) > 0$:
+\[20x - 2000 > 0\]
+
+\textbf{Paso 2:} Despejamos $x$:
+\[20x > 2000\]
+\[x > 100\]
+
+\textbf{Respuesta d):} Deben vender más de 100 camisetas. El punto de equilibrio (ganancia cero) es exactamente en 100 camisetas.
+
+\textbf{e) Ganancia con 200 camisetas}
+
+\textbf{Paso 1:} Sustituimos $x = 200$ en $G(x)$:
+\[G(200) = 20(200) - 2000 = 4000 - 2000 = 2000\]
+
+\textbf{Respuesta e):} La ganancia será de \$2000.
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=13cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={Camisetas vendidas},
+    ylabel={Dinero (\$)},
+    domain=0:250,
+    samples=2,
+    xmin=0, xmax=260,
+    ymin=-500, ymax=9000,
+    grid=major,
+    legend style={at={(0.5,0.9)}, anchor=center},
+]
+\addplot[maincolor, very thick] {2000 + 15*x};
+\addlegendentry{Costo $C(x)$}
+\addplot[accentcolor, very thick] {35*x};
+\addlegendentry{Ingreso $I(x)$}
+\addplot[red!70!black, very thick] {20*x - 2000};
+\addlegendentry{Ganancia $G(x)$}
+\addplot[black, dashed, thick, samples=2] {0};
+\addplot[mark=*, only marks, mark size=3pt] coordinates {(100,0)};
+\node[above] at (axis cs:100,0) {Punto de equilibrio (100, 0)};
+\addplot[mark=*, only marks, mark size=3pt] coordinates {(200,2000)};
+\node[below right] at (axis cs:200,2000) {(200, 2000)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\section{Ejercicios Propuestos}
+
+Resuelve los siguientes ejercicios. Las soluciones detalladas se encuentran en la siguiente sección.
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Función cuadrática:} La función $f(x) = -x^2 + 6x - 5$ representa la altura (en metros) de un proyectil en función del tiempo (en segundos).
+    \begin{enumerate}[label=\alph*)]
+        \item Encuentra el vértice de la parábola.
+        \item ¿Cuál es la altura máxima alcanzada?
+        \item ¿En qué intervalos la función es creciente y decreciente?
+        \item ¿En qué momentos el proyectil está a nivel del suelo ($f(x) = 0$)?
+    \end{enumerate}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Función par o impar:} Determina si las siguientes funciones son pares, impares o ninguna de las dos. Justifica tu respuesta.
+    \begin{enumerate}[label=\alph*)]
+        \item $f(x) = x^4 - 6x^2$
+        \item $g(x) = x^5 + 2x^3 - x$
+        \item $h(x) = x^3 + 2$
+    \end{enumerate}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Función periódica:} La temperatura en una ciudad durante un día puede modelarse con la función:
+    \[T(t) = 20 + 8\cos\left(\frac{\pi}{12}(t - 14)\right)\]
+    donde $t$ es la hora del día (de 0 a 24) y $T$ es la temperatura en grados Celsius.
+    \begin{enumerate}[label=\alph*)]
+        \item ¿Cuál es el periodo de esta función?
+        \item ¿Cuál es la temperatura máxima y mínima?
+        \item ¿A qué horas se alcanzan estas temperaturas?
+    \end{enumerate}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Función lineal - Conversión:} La relación entre grados Celsius ($C$) y Fahrenheit ($F$) está dada por:
+    \[F = \frac{9}{5}C + 32\]
+    \begin{enumerate}[label=\alph*)]
+        \item ¿Cuál es la pendiente y qué representa físicamente?
+        \item ¿A qué temperatura en Fahrenheit corresponden 25°C?
+        \item ¿A qué temperatura en Celsius corresponden 98.6°F?
+    \end{enumerate}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Aplicación - Crecimiento poblacional:} Una población de bacterias crece según la función lineal $P(t) = 500 + 120t$, donde $t$ está en horas y $P(t)$ es el número de bacterias.
+    \begin{enumerate}[label=\alph*)]
+        \item ¿Cuántas bacterias hay inicialmente?
+        \item ¿Cuántas bacterias habrá después de 6 horas?
+        \item ¿Cuánto tiempo tardará la población en alcanzar 2000 bacterias?
+    \end{enumerate}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Función cuadrática - Parábola:} Un puente tiene forma de arco parabólico. Su altura $h$ (en metros) en función de la distancia horizontal $x$ (en metros) desde un extremo está dada por:
+    \[h(x) = -0.04x^2 + 2.4x\]
+    \begin{enumerate}[label=\alph*)]
+        \item ¿Cuál es la altura máxima del puente?
+        \item ¿A qué distancia del extremo se alcanza esta altura?
+        \item ¿Cuál es la longitud total del puente (donde $h(x) = 0$)?
+    \end{enumerate}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Función cúbica:} Analiza la función $f(x) = x^3 - 3x^2 - 9x + 5$.
+    \begin{enumerate}[label=\alph*)]
+        \item Determina si la función es par, impar o ninguna de las dos.
+        \item Encuentra las intersecciones con el eje $x$ (aproximadamente usando la gráfica).
+        \item Identifica visualmente los intervalos donde la función es creciente y decreciente.
+    \end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+\section{Soluciones Detalladas de los Ejercicios Propuestos}
+
+\subsection{Solución del Ejercicio 1}
+
+\textbf{Función:} $f(x) = -x^2 + 6x - 5$
+
+\textbf{a) Vértice de la parábola}
+
+Como $a = -1$, $b = 6$ y $c = -5$:
+\[x_v = -\frac{b}{2a} = -\frac{6}{2(-1)} = \frac{6}{2} = 3\]
+
+Calculamos $f(3)$:
+\[f(3) = -(3)^2 + 6(3) - 5 = -9 + 18 - 5 = 4\]
+
+\textbf{Respuesta:} El vértice es $(3, 4)$.
+
+\textbf{b) Altura máxima}
+
+Como $a = -1 < 0$, la parábola abre hacia abajo, por lo que el vértice es un máximo.
+
+\textbf{Respuesta:} La altura máxima es 4 metros, alcanzada a los 3 segundos.
+
+\textbf{c) Intervalos de crecimiento y decrecimiento}
+
+Como la parábola abre hacia abajo con vértice en $x = 3$:
+\begin{itemize}
+    \item Creciente en $(-\infty, 3]$
+    \item Decreciente en $[3, +\infty)$
+\end{itemize}
+
+\textbf{d) Momentos en el suelo}
+
+Resolvemos $f(x) = 0$:
+\[-x^2 + 6x - 5 = 0\]
+\[x^2 - 6x + 5 = 0\]
+
+Factorizamos:
+\[(x - 1)(x - 5) = 0\]
+
+Por lo tanto, $x = 1$ o $x = 5$.
+
+\textbf{Respuesta:} El proyectil está a nivel del suelo en $t = 1$ s y $t = 5$ s.
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={Tiempo (s)},
+    ylabel={Altura (m)},
+    domain=0:6,
+    samples=100,
+    xmin=0, xmax=6.5,
+    ymin=-1, ymax=5,
+    grid=major
+]
+\addplot[maincolor, very thick] {-x^2 + 6*x - 5};
+\addplot[accentcolor, mark=*, only marks, mark size=3pt] coordinates {(3,4) (1,0) (5,0)};
+\node[above] at (axis cs:3,4) {Vértice $(3,4)$};
+\node[below left] at (axis cs:1,0) {$(1,0)$};
+\node[below right] at (axis cs:5,0) {$(5,0)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Solución del Ejercicio 2}
+
+\textbf{a) $f(x) = x^4 - 6x^2$}
+
+Calculamos $f(-x)$:
+\[f(-x) = (-x)^4 - 6(-x)^2 = x^4 - 6x^2 = f(x)\]
+
+\textbf{Respuesta:} La función es \textbf{PAR}.
+
+\textbf{b) $g(x) = x^5 + 2x^3 - x$}
+
+Calculamos $g(-x)$:
+\[g(-x) = (-x)^5 + 2(-x)^3 - (-x) = -x^5 - 2x^3 + x = -(x^5 + 2x^3 - x) = -g(x)\]
+
+\textbf{Respuesta:} La función es \textbf{IMPAR}.
+
+\textbf{c) $h(x) = x^3 + 2$}
+
+Calculamos $h(-x)$:
+\[h(-x) = (-x)^3 + 2 = -x^3 + 2\]
+
+Observamos que $h(-x) \neq h(x)$ porque $-x^3 + 2 \neq x^3 + 2$.
+
+También, $-h(x) = -(x^3 + 2) = -x^3 - 2 \neq h(-x)$.
+
+\textbf{Respuesta:} La función \textbf{NO ES PAR NI IMPAR}.
+
+\textbf{Gráficas:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-2:2,
+    samples=100,
+    xmin=-2.5, xmax=2.5,
+    ymin=-2, ymax=10,
+    grid=major,
+    title={$f(x) = x^4 - 6x^2$ (PAR)}
+]
+\addplot[maincolor, very thick] {x^4 - 6*x^2};
+\draw[dashed, thick, gray] (axis cs:0,-2) -- (axis cs:0,10);
+\end{axis}
+\end{tikzpicture}
+\hspace{0.5cm}
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-2:2,
+    samples=100,
+    xmin=-2.5, xmax=2.5,
+    ymin=-40, ymax=40,
+    grid=major,
+    title={$g(x) = x^5 + 2x^3 - x$ (IMPAR)}
+]
+\addplot[accentcolor, very thick] {x^5 + 2*x^3 - x};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-2:2,
+    samples=100,
+    xmin=-2.5, xmax=2.5,
+    ymin=-8, ymax=12,
+    grid=major,
+    title={$h(x) = x^3 + 2$ (NI PAR NI IMPAR)}
+]
+\addplot[red!70!black, very thick] {x^3 + 2};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Solución del Ejercicio 3}
+
+\textbf{Función:} $T(t) = 20 + 8\cos\left(\frac{\pi}{12}(t - 14)\right)$
+
+\textbf{a) Periodo}
+
+Para una función $f(t) = A + B\cos(C(t - D))$, el periodo es:
+\[T = \frac{2\pi}{|C|}\]
+
+En nuestro caso, $C = \frac{\pi}{12}$:
+\[T = \frac{2\pi}{\frac{\pi}{12}} = 2\pi \cdot \frac{12}{\pi} = 24 \text{ horas}\]
+
+\textbf{Respuesta:} El periodo es 24 horas (un día completo).
+
+\textbf{b) Temperaturas máxima y mínima}
+
+La función coseno oscila entre -1 y 1. Entonces:
+\begin{itemize}
+    \item \textbf{Máximo:} $T_{\max} = 20 + 8(1) = 28°\text{C}$
+    \item \textbf{Mínimo:} $T_{\min} = 20 + 8(-1) = 12°\text{C}$
+\end{itemize}
+
+\textbf{c) Horas de temperaturas extremas}
+
+La temperatura máxima ocurre cuando $\cos\left(\frac{\pi}{12}(t - 14)\right) = 1$:
+\[\frac{\pi}{12}(t - 14) = 0\]
+\[t - 14 = 0\]
+\[t = 14\]
+
+\textbf{Respuesta:} La temperatura máxima (28°C) se alcanza a las 14:00 (2:00 PM).
+
+La temperatura mínima ocurre cuando $\cos\left(\frac{\pi}{12}(t - 14)\right) = -1$:
+\[\frac{\pi}{12}(t - 14) = \pi\]
+\[t - 14 = 12\]
+\[t = 26\]
+
+Como estamos en un ciclo de 24 horas, $t = 26$ equivale a $t = 2$ (2:00 AM del día siguiente).
+
+\textbf{Respuesta:} La temperatura mínima (12°C) se alcanza a las 2:00 AM.
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={Hora del día},
+    ylabel={Temperatura (°C)},
+    domain=0:24,
+    samples=200,
+    xmin=0, xmax=25,
+    ymin=10, ymax=30,
+    grid=major,
+    xtick={0,2,6,10,14,18,22,24}
+]
+\addplot[maincolor, very thick] {20 + 8*cos(deg(pi/12*(x-14)))};
+\addplot[accentcolor, mark=*, only marks, mark size=3pt] coordinates {(14,28) (2,12)};
+\node[above] at (axis cs:14,28) {Máximo (14:00, 28°C)};
+\node[below] at (axis cs:2,12) {Mínimo (2:00, 12°C)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Solución del Ejercicio 4}
+
+\textbf{Función:} $F = \frac{9}{5}C + 32$
+
+\textbf{a) Pendiente y su significado}
+
+La pendiente es $m = \frac{9}{5} = 1.8$.
+
+\textbf{Respuesta:} La pendiente es 1.8, lo que significa que por cada grado que aumenta la temperatura en Celsius, la temperatura en Fahrenheit aumenta 1.8 grados.
+
+\textbf{b) Conversión de 25°C a Fahrenheit}
+
+\[F = \frac{9}{5}(25) + 32 = 9 \cdot 5 + 32 = 45 + 32 = 77\]
+
+\textbf{Respuesta:} 25°C equivalen a 77°F.
+
+\textbf{c) Conversión de 98.6°F a Celsius}
+
+Despejamos $C$ de la ecuación:
+\[F = \frac{9}{5}C + 32\]
+\[F - 32 = \frac{9}{5}C\]
+\[C = \frac{5}{9}(F - 32)\]
+
+Sustituimos $F = 98.6$:
+\[C = \frac{5}{9}(98.6 - 32) = \frac{5}{9}(66.6) = \frac{333}{9} = 37\]
+
+\textbf{Respuesta:} 98.6°F equivalen a 37°C (temperatura corporal normal).
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={Celsius (°C)},
+    ylabel={Fahrenheit (°F)},
+    domain=-20:50,
+    samples=2,
+    xmin=-20, xmax=50,
+    ymin=-10, ymax=130,
+    grid=major
+]
+\addplot[maincolor, very thick] {9/5*x + 32};
+\addplot[accentcolor, mark=*, only marks, mark size=3pt] coordinates {(25,77) (37,98.6) (0,32)};
+\node[above left] at (axis cs:25,77) {$(25, 77)$};
+\node[above left] at (axis cs:37,98.6) {$(37, 98.6)$};
+\node[below right] at (axis cs:0,32) {$(0, 32)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Solución del Ejercicio 5}
+
+\textbf{Función:} $P(t) = 500 + 120t$
+
+\textbf{a) Población inicial}
+
+La población inicial corresponde a $t = 0$:
+\[P(0) = 500 + 120(0) = 500\]
+
+\textbf{Respuesta:} Hay 500 bacterias inicialmente.
+
+\textbf{b) Población después de 6 horas}
+
+\[P(6) = 500 + 120(6) = 500 + 720 = 1220\]
+
+\textbf{Respuesta:} Habrá 1220 bacterias después de 6 horas.
+
+\textbf{c) Tiempo para alcanzar 2000 bacterias}
+
+Igualamos $P(t) = 2000$:
+\[500 + 120t = 2000\]
+\[120t = 1500\]
+\[t = \frac{1500}{120} = 12.5\]
+
+\textbf{Respuesta:} La población alcanzará 2000 bacterias en 12.5 horas (12 horas y 30 minutos).
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={Tiempo (horas)},
+    ylabel={Población (bacterias)},
+    domain=0:14,
+    samples=2,
+    xmin=0, xmax=15,
+    ymin=0, ymax=2500,
+    grid=major
+]
+\addplot[maincolor, very thick] {500 + 120*x};
+\addplot[accentcolor, mark=*, only marks, mark size=3pt] coordinates {(0,500) (6,1220) (12.5,2000)};
+\node[below right] at (axis cs:0,500) {$(0, 500)$};
+\node[above left] at (axis cs:6,1220) {$(6, 1220)$};
+\node[above left] at (axis cs:12.5,2000) {$(12.5, 2000)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Solución del Ejercicio 6}
+
+\textbf{Función:} $h(x) = -0.04x^2 + 2.4x$
+
+\textbf{a) Altura máxima}
+
+Como $a = -0.04 < 0$, la parábola abre hacia abajo. Encontramos el vértice:
+\[x_v = -\frac{b}{2a} = -\frac{2.4}{2(-0.04)} = \frac{2.4}{0.08} = 30\]
+
+Calculamos $h(30)$:
+\[h(30) = -0.04(30)^2 + 2.4(30) = -0.04(900) + 72 = -36 + 72 = 36\]
+
+\textbf{Respuesta:} La altura máxima es 36 metros.
+
+\textbf{b) Distancia al extremo}
+
+\textbf{Respuesta:} La altura máxima se alcanza a 30 metros del extremo.
+
+\textbf{c) Longitud del puente}
+
+Resolvemos $h(x) = 0$:
+\[-0.04x^2 + 2.4x = 0\]
+\[x(-0.04x + 2.4) = 0\]
+
+Por lo tanto, $x = 0$ o $-0.04x + 2.4 = 0$:
+\[-0.04x = -2.4\]
+\[x = \frac{2.4}{0.04} = 60\]
+
+\textbf{Respuesta:} El puente tiene una longitud de 60 metros (desde $x = 0$ hasta $x = 60$).
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=13cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={Distancia horizontal (m)},
+    ylabel={Altura (m)},
+    domain=0:60,
+    samples=100,
+    xmin=0, xmax=65,
+    ymin=0, ymax=40,
+    grid=major
+]
+\addplot[maincolor, very thick] {-0.04*x^2 + 2.4*x};
+\addplot[accentcolor, mark=*, only marks, mark size=3pt] coordinates {(0,0) (30,36) (60,0)};
+\node[above right] at (axis cs:0,0) {$(0, 0)$};
+\node[above] at (axis cs:30,36) {Vértice $(30, 36)$};
+\node[above=5mm] at (axis cs:60,0) {$(60, 0)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Solución del Ejercicio 7}
+
+\textbf{Función:} $f(x) = x^3 - 3x^2 - 9x + 5$
+
+\textbf{a) ¿Es par, impar o ninguna?}
+
+Calculamos $f(-x)$:
+\begin{align*}
+f(-x) &= (-x)^3 - 3(-x)^2 - 9(-x) + 5\\
+&= -x^3 - 3x^2 + 9x + 5
+\end{align*}
+
+Observamos que $f(-x) \neq f(x)$ y $f(-x) \neq -f(x)$.
+
+\textbf{Respuesta:} La función \textbf{NO ES PAR NI IMPAR}.
+
+\textbf{b) Intersecciones con el eje $x$}
+
+Para encontrarlas exactamente necesitaríamos métodos numéricos, pero podemos estimarlas gráficamente.
+
+De la gráfica, aproximadamente:
+\begin{itemize}
+    \item $x \approx -2.15$
+    \item $x \approx 0.42$
+    \item $x \approx 4.73$
+\end{itemize}
+
+\textbf{c) Intervalos de crecimiento y decrecimiento}
+
+De la gráfica observamos que la función:
+\begin{itemize}
+    \item Es \textbf{creciente} en $(-\infty, -1)$ aproximadamente
+    \item Es \textbf{decreciente} en $(-1, 3)$ aproximadamente
+    \item Es \textbf{creciente} en $(3, +\infty)$ aproximadamente
+\end{itemize}
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=13cm,
+    height=9cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-3:6,
+    samples=150,
+    xmin=-3, xmax=6,
+    ymin=-30, ymax=30,
+    grid=major
+]
+\addplot[maincolor, very thick] {x^3 - 3*x^2 - 9*x + 5};
+\addplot[accentcolor, dashed, thick] {0};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+En estos ejercicios, en lugar de analizar una función dada, debes construir una función que cumpla ciertas condiciones. Estos ejercicios desarrollan tu comprensión profunda de las funciones.
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Construir una función cuadrática:} Encuentra la ecuación de una función cuadrática que:
+    \begin{itemize}
+        \item Tenga vértice en el punto $(2, -3)$
+        \item Pase por el punto $(0, 5)$
+    \end{itemize}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Construir una función lineal:} Una empresa de taxis cobra una tarifa base más un costo por kilómetro. Si un viaje de 5 km cuesta \$12 y un viaje de 10 km cuesta \$19:
+    \begin{enumerate}[label=\alph*)]
+        \item Encuentra la función lineal $C(x)$ que relaciona el costo con los kilómetros recorridos.
+        \item ¿Cuál es la tarifa base y cuál es el costo por kilómetro?
+    \end{enumerate}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Construir una función impar:} Crea una función polinómica de grado 3 que sea impar y que pase por el punto $(1, 4)$. Muestra que efectivamente es impar.
+
+    \vspace{0.5cm}
+
+    \item \textbf{Aplicación - Trayectoria parabólica:} Un jugador de baloncesto lanza el balón desde una altura de 2 metros. El balón alcanza una altura máxima de 5 metros cuando ha recorrido 3 metros horizontalmente.
+    \begin{enumerate}[label=\alph*)]
+        \item Encuentra la función cuadrática $h(x)$ que describe la altura del balón en función de la distancia horizontal.
+        \item Si la canasta está a 4.5 metros de altura y a 6 metros de distancia, ¿entrará el balón en la canasta?
+    \end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+\section{Soluciones de los Ejercicios Inversos}
+
+\subsection{Solución del Ejercicio Inverso 1}
+
+Necesitamos encontrar $f(x) = ax^2 + bx + c$ con vértice en $(2, -3)$ y que pase por $(0, 5)$.
+
+\textbf{Método: Forma de vértice}
+
+La forma de vértice de una parábola es:
+\[f(x) = a(x - h)^2 + k\]
+donde $(h, k)$ es el vértice.
+
+\textbf{Paso 1:} Con vértice en $(2, -3)$:
+\[f(x) = a(x - 2)^2 - 3\]
+
+\textbf{Paso 2:} Usamos que pasa por $(0, 5)$:
+\[5 = a(0 - 2)^2 - 3\]
+\[5 = 4a - 3\]
+\[8 = 4a\]
+\[a = 2\]
+
+\textbf{Paso 3:} La función es:
+\[f(x) = 2(x - 2)^2 - 3\]
+
+\textbf{Paso 4:} Expandimos para obtener la forma estándar:
+\begin{align*}
+f(x) &= 2(x^2 - 4x + 4) - 3\\
+&= 2x^2 - 8x + 8 - 3\\
+&= 2x^2 - 8x + 5
+\end{align*}
+
+\textbf{Respuesta:} $f(x) = 2x^2 - 8x + 5$
+
+\textbf{Verificación:}
+\begin{itemize}
+    \item Vértice: $x_v = -\frac{-8}{2(2)} = 2$ ✓
+    \item $f(2) = 2(2)^2 - 8(2) + 5 = 8 - 16 + 5 = -3$ ✓
+    \item $f(0) = 0 - 0 + 5 = 5$ ✓
+\end{itemize}
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-1:5,
+    samples=100,
+    xmin=-1, xmax=5,
+    ymin=-4, ymax=10,
+    grid=major
+]
+\addplot[maincolor, very thick] {2*x^2 - 8*x + 5};
+\addplot[accentcolor, mark=*, only marks, mark size=3pt] coordinates {(2,-3) (0,5)};
+\node[below] at (axis cs:2,-3) {Vértice $(2,-3)$};
+\node[right] at (axis cs:0,5) {$(0,5)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Solución del Ejercicio Inverso 2}
+
+\textbf{Datos:}
+\begin{itemize}
+    \item 5 km cuestan \$12
+    \item 10 km cuestan \$19
+\end{itemize}
+
+\textbf{a) Encontrar la función $C(x)$}
+
+\textbf{Paso 1:} Sabemos que la función es lineal: $C(x) = mx + b$
+
+\textbf{Paso 2:} Tenemos dos puntos: $(5, 12)$ y $(10, 19)$. Calculamos la pendiente:
+\[m = \frac{19 - 12}{10 - 5} = \frac{7}{5} = 1.4\]
+
+\textbf{Paso 3:} Usamos el punto $(5, 12)$ para encontrar $b$:
+\[12 = 1.4(5) + b\]
+\[12 = 7 + b\]
+\[b = 5\]
+
+\textbf{Respuesta:} $C(x) = 1.4x + 5$ dólares.
+
+\textbf{b) Tarifa base y costo por kilómetro}
+
+\textbf{Respuesta:}
+\begin{itemize}
+    \item \textbf{Tarifa base:} \$5 (el valor de $b$)
+    \item \textbf{Costo por kilómetro:} \$1.40 (el valor de $m$)
+\end{itemize}
+
+\textbf{Verificación:}
+\begin{itemize}
+    \item $C(5) = 1.4(5) + 5 = 7 + 5 = 12$ ✓
+    \item $C(10) = 1.4(10) + 5 = 14 + 5 = 19$ ✓
+\end{itemize}
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={Distancia (km)},
+    ylabel={Costo (\$)},
+    domain=0:15,
+    samples=2,
+    xmin=0, xmax=16,
+    ymin=0, ymax=30,
+    grid=major
+]
+\addplot[maincolor, very thick] {1.4*x + 5};
+\addplot[accentcolor, mark=*, only marks, mark size=3pt] coordinates {(0,5) (5,12) (10,19)};
+\node[below right] at (axis cs:0,5) {Tarifa base $(0,5)$};
+\node[below right] at (axis cs:5,12) {$(5,12)$};
+\node[below right] at (axis cs:10,19) {$(10,19)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Solución del Ejercicio Inverso 3}
+
+Necesitamos una función cúbica impar que pase por $(1, 4)$.
+
+\textbf{Paso 1:} Una función impar debe cumplir $f(-x) = -f(x)$. Para un polinomio de grado 3, esto significa que solo puede tener términos impares:
+\[f(x) = ax^3 + bx\]
+(El término $x^2$ y la constante no pueden estar presentes)
+
+\textbf{Paso 2:} Usamos que pasa por $(1, 4)$:
+\[4 = a(1)^3 + b(1) = a + b\]
+
+Tenemos una ecuación con dos incógnitas, así que hay infinitas soluciones. Escojamos una simple, por ejemplo $a = 3$ y $b = 1$:
+
+\textbf{Respuesta:} $f(x) = 3x^3 + x$
+
+\textbf{Verificación de que es impar:}
+\begin{align*}
+f(-x) &= 3(-x)^3 + (-x)\\
+&= -3x^3 - x\\
+&= -(3x^3 + x)\\
+&= -f(x) \quad \checkmark
+\end{align*}
+
+\textbf{Verificación de que pasa por $(1, 4)$:}
+\[f(1) = 3(1)^3 + 1 = 3 + 1 = 4 \quad \checkmark\]
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    domain=-2:2,
+    samples=100,
+    xmin=-2.5, xmax=2.5,
+    ymin=-30, ymax=30,
+    grid=major
+]
+\addplot[maincolor, very thick] {3*x^3 + x};
+\addplot[accentcolor, mark=*, only marks, mark size=3pt] coordinates {(1,4) (-1,-4)};
+\node[above=3mm] at (axis cs:1,4) {$(1,4)$};
+\node[below=3mm] at (axis cs:-1,-4) {$(-1,-4)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Observamos la simetría respecto al origen, característica de las funciones impares.
+
+\newpage
+
+\subsection{Solución del Ejercicio Inverso 4}
+
+\textbf{Datos:}
+\begin{itemize}
+    \item Altura inicial: 2 m (cuando $x = 0$)
+    \item Altura máxima: 5 m (cuando $x = 3$)
+\end{itemize}
+
+\textbf{a) Encontrar $h(x)$}
+
+\textbf{Paso 1:} Usamos la forma de vértice: $h(x) = a(x - h)^2 + k$
+
+Con vértice en $(3, 5)$:
+\[h(x) = a(x - 3)^2 + 5\]
+
+\textbf{Paso 2:} Usamos que cuando $x = 0$, $h = 2$:
+\[2 = a(0 - 3)^2 + 5\]
+\[2 = 9a + 5\]
+\[-3 = 9a\]
+\[a = -\frac{1}{3}\]
+
+\textbf{Paso 3:} La función es:
+\[h(x) = -\frac{1}{3}(x - 3)^2 + 5\]
+
+Expandiendo:
+\begin{align*}
+h(x) &= -\frac{1}{3}(x^2 - 6x + 9) + 5\\
+&= -\frac{1}{3}x^2 + 2x - 3 + 5\\
+&= -\frac{1}{3}x^2 + 2x + 2
+\end{align*}
+
+\textbf{Respuesta a):} $h(x) = -\frac{1}{3}x^2 + 2x + 2$
+
+\textbf{b) ¿Entra en la canasta?}
+
+\textbf{Paso 1:} Calculamos la altura cuando $x = 6$:
+\[h(6) = -\frac{1}{3}(6)^2 + 2(6) + 2 = -\frac{36}{3} + 12 + 2 = -12 + 12 + 2 = 2\]
+
+\textbf{Paso 2:} La canasta está a 4.5 m de altura, pero el balón solo alcanza 2 m cuando está a 6 m de distancia.
+
+\textbf{Respuesta b):} \textbf{NO}, el balón no entrará en la canasta. Está demasiado bajo (2 m vs 4.5 m requeridos).
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=13cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={Distancia horizontal (m)},
+    ylabel={Altura (m)},
+    domain=0:9,
+    samples=100,
+    xmin=0, xmax=9.5,
+    ymin=0, ymax=6,
+    grid=major
+]
+\addplot[maincolor, very thick] {-1/3*x^2 + 2*x + 2};
+\addplot[accentcolor, mark=*, only marks, mark size=3pt] coordinates {(0,2) (3,5) (6,2)};
+\addplot[red, mark=*, only marks, mark size=4pt] coordinates {(6,4.5)};
+\node[right=3mm] at (axis cs:0,2) {Lanzamiento $(0,2)$};
+\node[above] at (axis cs:3,5) {Máximo $(3,5)$};
+\node[above right=1mm] at (axis cs:6,2) {Balón $(6,2)$};
+\node[right] at (axis cs:6,4.5) {Canasta $(6,4.5)$};
+\draw[red, dashed, thick] (axis cs:6,0) -- (axis cs:6,4.5);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Como se ve en la gráfica, el balón pasa por debajo de la canasta.
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicidades por llegar hasta aquí! Has completado un recorrido completo por el fascinante mundo de las funciones de variable real.
+
+\subsection{¿Qué hemos aprendido?}
+
+En esta guía hemos explorado:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Clasificación de funciones según su comportamiento:}
+    \begin{itemize}
+        \item Funciones crecientes, decrecientes y constantes
+        \item Funciones pares e impares (simetrías)
+        \item Funciones periódicas (que se repiten)
+    \end{itemize}
+
+    \item \textbf{Tipos específicos de funciones:}
+    \begin{itemize}
+        \item Funciones lineales: $f(x) = mx$
+        \item Funciones afines: $f(x) = mx + b$
+        \item Funciones cuadráticas: $f(x) = ax^2 + bx + c$
+        \item Funciones cúbicas: $f(x) = ax^3 + bx^2 + cx + d$
+    \end{itemize}
+
+    \item \textbf{Aplicaciones prácticas en:}
+    \begin{itemize}
+        \item Física: Movimiento rectilíneo
+        \item Biología: Crecimiento poblacional
+        \item Economía: Costos e ingresos
+        \item Meteorología: Variación de temperatura
+        \item Deportes: Trayectorias parabólicas
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Conceptos clave para recordar}
+
+\begin{itemize}[leftmargin=*]
+    \item Una función relaciona cada entrada con exactamente una salida.
+    \item Las funciones se pueden clasificar según su comportamiento (creciente, decreciente, constante).
+    \item Las simetrías nos ayudan a identificar funciones pares (simetría en el eje $y$) e impares (simetría en el origen).
+    \item Las funciones periódicas se repiten cada cierto intervalo.
+    \item La pendiente de una función lineal o afín indica la tasa de cambio.
+    \item Las funciones cuadráticas tienen forma de parábola y modelan muchas situaciones del mundo real.
+    \item Las funciones cúbicas tienen forma de "S" y pueden tener múltiples extremos.
+\end{itemize}
+
+\subsection{Próximos pasos}
+
+Ahora que dominas estos conceptos, estás preparado para:
+\begin{itemize}
+    \item Estudiar el cálculo diferencial (derivadas)
+    \item Analizar funciones más complejas
+    \item Resolver problemas de optimización
+    \item Aplicar estos conocimientos en física, economía y otras áreas
+\end{itemize}
+
+Recuerda que las matemáticas son como un deporte: se aprenden practicando. Resuelve muchos ejercicios, grafica funciones, busca patrones y, sobre todo, disfruta del proceso de aprendizaje.
+
+¡Éxito en tu viaje matemático!
+
+\end{document}
