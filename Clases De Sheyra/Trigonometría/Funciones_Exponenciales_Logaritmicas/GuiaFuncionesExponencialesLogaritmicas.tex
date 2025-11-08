@@ -1,0 +1,2225 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{maincolor}{Funciones Exponenciales y Logarítmicas}}
+\fancyhead[R]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\newtcolorbox{definicion}{
+    colback=maincolor!5,
+    colframe=maincolor,
+    fonttitle=\bfseries,
+    title=Definición,
+    breakable
+}
+
+\newtcolorbox{teorema}{
+    colback=accentcolor!5,
+    colframe=accentcolor,
+    fonttitle=\bfseries,
+    title=Propiedad/Teorema,
+    breakable
+}
+
+\newtcolorbox{ejemplo}{
+    colback=green!5,
+    colframe=green!70!black,
+    fonttitle=\bfseries,
+    title=Ejemplo,
+    breakable
+}
+
+\newtcolorbox{nota}{
+    colback=yellow!10,
+    colframe=yellow!80!black,
+    fonttitle=\bfseries,
+    title=Nota Importante,
+    breakable
+}
+
+\title{
+    \vspace{-2cm}
+    \Huge\textcolor{maincolor}{\textbf{Funciones Exponenciales y Logarítmicas}}\\
+    \vspace{0.5cm}
+    \Large Explorando el crecimiento y la escala
+}
+\author{
+    \textbf{Prof. Toribio De J Arrieta F}\\
+    \textit{La Pruebita}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\textcolor{maincolor}{\textbf{Grado 10 --- Trigonometría}}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=6cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        domain=-2:3,
+        samples=100,
+        grid=major,
+        legend pos=north east,
+        ymin=-1,
+        ymax=8
+    ]
+    \addplot[blue, thick, smooth] {exp(x)};
+    \addplot[red, thick, smooth, domain=0.01:8] {ln(x)};
+    \addplot[dashed, gray] {x};
+    \legend{$y=e^x$, $y=\ln(x)$, $y=x$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introducción}
+
+¿Alguna vez te has preguntado cómo se propaga un virus, cómo crece el dinero en una cuenta de ahorros, o por qué los terremotos se miden con la escala de Richter? Todas estas situaciones tienen algo en común: involucran funciones exponenciales y logarítmicas.
+
+Las funciones exponenciales son especiales porque describen procesos donde la tasa de cambio es proporcional a la cantidad actual. Imagínate que tienes una colonia de bacterias: entre más bacterias haya, más rápido se reproducen. Ese tipo de crecimiento \textit{acelerado} se modela con funciones exponenciales.
+
+Por otro lado, las funciones logarítmicas son las ``inversas'' de las exponenciales. Mientras que las exponenciales responden preguntas como ``¿A qué valor llega $2^{10}$?'', los logaritmos responden ``¿A qué potencia debo elevar 2 para obtener 1024?''. Los logaritmos son fundamentales para comprimir escalas enormes (como en los decibeles o el pH) en rangos manejables.
+
+\subsection{¿Qué vamos a aprender?}
+
+En esta guía vas a dominar:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Funciones exponenciales}: Su definición, propiedades y gráficas.
+    \item \textbf{El número $e$}: Un número mágico (aproximadamente 2.71828...) que aparece en todo: desde el interés compuesto hasta la probabilidad.
+    \item \textbf{Funciones logarítmicas}: La herramienta para ``deshacer'' exponenciales.
+    \item \textbf{Propiedades de logaritmos}: Cómo convertir multiplicaciones en sumas, divisiones en restas, y potencias en productos.
+    \item \textbf{Ecuaciones exponenciales y logarítmicas}: Técnicas para resolver problemas que involucran estas funciones.
+    \item \textbf{Aplicaciones reales}: Desde el crecimiento poblacional hasta la datación con carbono-14.
+\end{itemize}
+
+\subsection{¿Por qué son importantes?}
+
+Las funciones exponenciales y logarítmicas no son solo conceptos abstractos. Están por todas partes:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Finanzas}: El interés compuesto hace que tu dinero crezca exponencialmente.
+    \item \textbf{Biología}: Las poblaciones crecen exponencialmente bajo condiciones ideales.
+    \item \textbf{Física}: El decaimiento radiactivo sigue una función exponencial.
+    \item \textbf{Geología}: La escala de Richter usa logaritmos para medir terremotos.
+    \item \textbf{Química}: El pH es una escala logarítmica.
+    \item \textbf{Acústica}: Los decibeles también usan logaritmos.
+\end{itemize}
+
+Prepárate para explorar uno de los temas más fascinantes y útiles de las matemáticas. ¡Vamos a ello!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Función Exponencial}
+
+\begin{definicion}
+Una \textbf{función exponencial} es una función de la forma:
+\[
+f(x) = a^x
+\]
+donde $a$ es una constante positiva llamada \textbf{base} ($a > 0$, $a \neq 1$), y $x$ es el exponente (la variable independiente).
+\end{definicion}
+
+\begin{nota}
+\textbf{¿Por qué $a > 0$ y $a \neq 1$?}
+\begin{itemize}
+    \item Si $a \leq 0$, tendríamos problemas con exponentes fraccionarios (como $(-2)^{1/2}$, que no es un número real).
+    \item Si $a = 1$, la función sería $f(x) = 1^x = 1$ para todo $x$, lo cual es una función constante y no exponencial.
+\end{itemize}
+\end{nota}
+
+\subsubsection{Características de las funciones exponenciales}
+
+Para $f(x) = a^x$ con $a > 1$:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Dominio}: Todos los números reales, $\mathbb{R}$.
+    \item \textbf{Rango}: Todos los números positivos, $(0, \infty)$.
+    \item \textbf{Intercepto con el eje $y$}: El punto $(0, 1)$, porque $a^0 = 1$.
+    \item \textbf{Comportamiento}:
+    \begin{itemize}
+        \item Cuando $x \to \infty$, $f(x) \to \infty$ (crece sin límite).
+        \item Cuando $x \to -\infty$, $f(x) \to 0$ (se acerca al eje $x$ pero nunca lo toca).
+    \end{itemize}
+    \item \textbf{Crecimiento}: La función es \textit{creciente} en todo su dominio.
+    \item \textbf{Asíntota horizontal}: El eje $x$ (la recta $y = 0$) es una asíntota horizontal.
+\end{itemize}
+
+Para $f(x) = a^x$ con $0 < a < 1$:
+
+\begin{itemize}[leftmargin=*]
+    \item Las características de dominio, rango e intercepto son las mismas.
+    \item \textbf{Comportamiento}:
+    \begin{itemize}
+        \item Cuando $x \to \infty$, $f(x) \to 0$.
+        \item Cuando $x \to -\infty$, $f(x) \to \infty$.
+    \end{itemize}
+    \item \textbf{Decrecimiento}: La función es \textit{decreciente} en todo su dominio.
+\end{itemize}
+
+\subsubsection{Gráficas de funciones exponenciales}
+
+Veamos algunas gráficas para entender mejor el comportamiento:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        domain=-3:3,
+        samples=100,
+        grid=major,
+        legend pos=north west,
+        ymin=-0.5,
+        ymax=8,
+        xmin=-3,
+        xmax=3
+    ]
+    \addplot[blue, ultra thick, smooth] {2^x};
+    \addplot[red, ultra thick, smooth] {3^x};
+    \addplot[green!70!black, ultra thick, smooth] {(1/2)^x};
+    \addplot[dashed, gray] coordinates {(-3,1) (3,1)};
+    \node[blue] at (axis cs:2.3,3.3) {$y=2^x$};
+    \node[red] at (axis cs:1,5) {$y=3^x$};
+    \node[green!70!black] at (axis cs:-1.3,4.5) {$y=(1/2)^x$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observaciones}:
+\begin{itemize}
+    \item Todas pasan por $(0,1)$.
+    \item $y=2^x$ y $y=3^x$ son crecientes (bases mayores que 1).
+    \item $y=(1/2)^x$ es decreciente (base menor que 1).
+    \item Entre mayor sea la base, más rápido crece la función.
+\end{itemize}
+
+\subsection{El número $e$ (número de Euler)}
+
+\begin{definicion}
+El \textbf{número de Euler}, denotado por $e$, es un número irracional aproximadamente igual a:
+\[
+e \approx 2.718281828459045\ldots
+\]
+Se define como el límite:
+\[
+e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n
+\]
+\end{definicion}
+
+El número $e$ es la base más importante en matemáticas, especialmente en cálculo. La función $f(x) = e^x$ es conocida como la \textbf{función exponencial natural}.
+
+\subsubsection{¿Por qué es especial $e$?}
+
+\begin{itemize}[leftmargin=*]
+    \item En cálculo, la derivada de $e^x$ es ella misma: $\frac{d}{dx}(e^x) = e^x$. ¡Es la única función exponencial con esta propiedad!
+    \item Aparece naturalmente en problemas de crecimiento continuo, como el interés compuesto continuo.
+    \item Es fundamental en probabilidad, estadística y muchas áreas de la ciencia.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        domain=-2:3,
+        samples=100,
+        grid=major,
+        legend pos=north west,
+        ymin=-1,
+        ymax=10,
+        xmin=-2,
+        xmax=3
+    ]
+    \addplot[blue, ultra thick, smooth] {exp(x)};
+    \addplot[dashed, gray] coordinates {(-2,1) (3,1)};
+    \node[blue] at (axis cs:1.5,6) {$y=e^x$};
+    \addplot[only marks, red, mark=*, mark size=3pt] coordinates {(0,1) (1,2.718)};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Propiedades de las funciones exponenciales}
+
+\begin{teorema}
+Para $a > 0$, $a \neq 1$, y para cualesquiera números reales $x$ e $y$:
+
+\begin{enumerate}[leftmargin=*]
+    \item $a^x \cdot a^y = a^{x+y}$ \quad (Producto de potencias de igual base)
+    \item $\displaystyle\frac{a^x}{a^y} = a^{x-y}$ \quad (Cociente de potencias de igual base)
+    \item $(a^x)^y = a^{xy}$ \quad (Potencia de una potencia)
+    \item $(ab)^x = a^x \cdot b^x$ \quad (Potencia de un producto)
+    \item $\displaystyle\left(\frac{a}{b}\right)^x = \frac{a^x}{b^x}$ \quad (Potencia de un cociente)
+    \item $a^0 = 1$ \quad (Exponente cero)
+    \item $a^{-x} = \displaystyle\frac{1}{a^x}$ \quad (Exponente negativo)
+\end{enumerate}
+\end{teorema}
+
+Estas propiedades son fundamentales para simplificar expresiones y resolver ecuaciones exponenciales.
+
+\newpage
+
+\subsection{Función Logarítmica}
+
+Ya vimos que la función exponencial $f(x) = a^x$ toma un exponente $x$ y nos da un resultado. Ahora, ¿qué pasa si queremos el proceso inverso? Es decir, si sabemos el resultado y queremos encontrar el exponente. Ahí entran los logaritmos.
+
+\begin{definicion}
+El \textbf{logaritmo en base $a$} de un número positivo $x$, denotado $\log_a(x)$, es el exponente al que hay que elevar la base $a$ para obtener $x$.
+
+Matemáticamente:
+\[
+y = \log_a(x) \quad \Longleftrightarrow \quad a^y = x
+\]
+
+donde $a > 0$, $a \neq 1$, y $x > 0$.
+\end{definicion}
+
+\textbf{En palabras simples}: $\log_a(x)$ responde la pregunta: ``¿A qué potencia debo elevar $a$ para obtener $x$?''
+
+\textbf{Ejemplos}:
+\begin{itemize}
+    \item $\log_2(8) = 3$ porque $2^3 = 8$.
+    \item $\log_{10}(100) = 2$ porque $10^2 = 100$.
+    \item $\log_5(25) = 2$ porque $5^2 = 25$.
+    \item $\log_3(1/9) = -2$ porque $3^{-2} = 1/9$.
+\end{itemize}
+
+\subsubsection{Logaritmo natural y logaritmo común}
+
+Hay dos bases de logaritmos que son especialmente importantes:
+
+\begin{definicion}
+\begin{itemize}
+    \item \textbf{Logaritmo natural}: Es el logaritmo en base $e$. Se denota $\ln(x)$ en lugar de $\log_e(x)$.
+    \[
+    \ln(x) = \log_e(x)
+    \]
+
+    \item \textbf{Logaritmo común} (o decimal): Es el logaritmo en base 10. A menudo se escribe simplemente como $\log(x)$ (sin especificar la base).
+    \[
+    \log(x) = \log_{10}(x)
+    \]
+\end{itemize}
+\end{definicion}
+
+\textbf{Nota}: En matemáticas avanzadas y ciencias, $\log(x)$ suele referirse al logaritmo natural. En ingeniería y ciencias aplicadas, $\log(x)$ generalmente significa logaritmo en base 10. Siempre verifica el contexto.
+
+\subsubsection{Características de las funciones logarítmicas}
+
+Para $f(x) = \log_a(x)$ con $a > 1$:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Dominio}: Todos los números positivos, $(0, \infty)$.
+    \item \textbf{Rango}: Todos los números reales, $\mathbb{R}$.
+    \item \textbf{Intercepto con el eje $x$}: El punto $(1, 0)$, porque $\log_a(1) = 0$ (ya que $a^0 = 1$).
+    \item \textbf{Comportamiento}:
+    \begin{itemize}
+        \item Cuando $x \to \infty$, $f(x) \to \infty$ (crece, pero muy lentamente).
+        \item Cuando $x \to 0^+$, $f(x) \to -\infty$ (decrece sin límite).
+    \end{itemize}
+    \item \textbf{Crecimiento}: La función es \textit{creciente} en todo su dominio.
+    \item \textbf{Asíntota vertical}: El eje $y$ (la recta $x = 0$) es una asíntota vertical.
+\end{itemize}
+
+Para $f(x) = \log_a(x)$ con $0 < a < 1$:
+
+\begin{itemize}[leftmargin=*]
+    \item Las características de dominio, rango e intercepto son las mismas.
+    \item \textbf{Decrecimiento}: La función es \textit{decreciente} en todo su dominio.
+\end{itemize}
+
+\subsubsection{Gráficas de funciones logarítmicas}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        domain=0.01:10,
+        samples=100,
+        grid=major,
+        legend pos=south east,
+        ymin=-3,
+        ymax=3,
+        xmin=-0.5,
+        xmax=10
+    ]
+    \addplot[blue, ultra thick, smooth] {ln(x)/ln(2)};
+    \addplot[red, ultra thick, smooth] {ln(x)};
+    \addplot[green!70!black, ultra thick, smooth] {ln(x)/ln(10)};
+    \addplot[dashed, gray] coordinates {(1,-3) (1,3)};
+    \node[blue] at (axis cs:8,2.5) {$y=\log_2(x)$};
+    \node[red] at (axis cs:8,1.7) {$y=\ln(x)$};
+    \node[green!70!black] at (axis cs:8,0.6) {$y=\log_{10}(x)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observaciones}:
+\begin{itemize}
+    \item Todas pasan por $(1,0)$.
+    \item Todas tienen asíntota vertical en $x=0$.
+    \item Crecen lentamente para valores grandes de $x$.
+    \item Entre mayor la base, más lentamente crece el logaritmo.
+\end{itemize}
+
+\subsection{Relación entre funciones exponenciales y logarítmicas}
+
+Las funciones exponencial y logarítmica son \textbf{funciones inversas}. Esto significa que una ``deshace'' lo que la otra hace.
+
+\begin{teorema}[Propiedades de inversas]
+Para $a > 0$, $a \neq 1$:
+
+\begin{enumerate}[leftmargin=*]
+    \item $a^{\log_a(x)} = x$ para todo $x > 0$
+    \item $\log_a(a^x) = x$ para todo $x \in \mathbb{R}$
+\end{enumerate}
+\end{teorema}
+
+\textbf{En particular para la base $e$}:
+\begin{itemize}
+    \item $e^{\ln(x)} = x$ para todo $x > 0$
+    \item $\ln(e^x) = x$ para todo $x \in \mathbb{R}$
+\end{itemize}
+
+\subsubsection{Visualización geométrica}
+
+Las gráficas de funciones inversas son simétricas respecto a la recta $y = x$:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=10cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        domain=-2:4,
+        samples=100,
+        grid=major,
+        legend pos=south east,
+        ymin=-2,
+        ymax=4,
+        xmin=-2,
+        xmax=4,
+        axis equal image
+    ]
+    \addplot[blue, ultra thick, smooth, domain=-2:3] {exp(x)};
+    \addplot[red, ultra thick, smooth, domain=0.01:4] {ln(x)};
+    \addplot[dashed, gray, domain=-2:4] {x};
+    \legend{$y=e^x$, $y=\ln(x)$, $y=x$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Observa cómo las gráficas de $y=e^x$ y $y=\ln(x)$ son reflejos una de la otra respecto a la recta $y=x$.
+
+\subsection{Propiedades de los logaritmos}
+
+Los logaritmos tienen propiedades algebraicas muy útiles que nos permiten simplificar expresiones complicadas.
+
+\begin{teorema}[Propiedades fundamentales de logaritmos]
+Para $a > 0$, $a \neq 1$, y para $x, y > 0$:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Logaritmo de un producto}:
+    \[
+    \log_a(xy) = \log_a(x) + \log_a(y)
+    \]
+
+    \item \textbf{Logaritmo de un cociente}:
+    \[
+    \log_a\left(\frac{x}{y}\right) = \log_a(x) - \log_a(y)
+    \]
+
+    \item \textbf{Logaritmo de una potencia}:
+    \[
+    \log_a(x^r) = r \cdot \log_a(x) \quad \text{para cualquier } r \in \mathbb{R}
+    \]
+
+    \item \textbf{Cambio de base}:
+    \[
+    \log_a(x) = \frac{\log_b(x)}{\log_b(a)} \quad \text{para cualquier base } b > 0, b \neq 1
+    \]
+
+    \item \textbf{Identidades básicas}:
+    \begin{itemize}
+        \item $\log_a(1) = 0$ (porque $a^0 = 1$)
+        \item $\log_a(a) = 1$ (porque $a^1 = a$)
+        \item $\log_a(a^x) = x$
+        \item $a^{\log_a(x)} = x$
+    \end{itemize}
+\end{enumerate}
+\end{teorema}
+
+\subsubsection{Demostraciones de las propiedades}
+
+\textbf{Propiedad 1} (Logaritmo del producto):
+
+Sea $\log_a(x) = m$ y $\log_a(y) = n$. Entonces:
+\begin{align*}
+a^m &= x\\
+a^n &= y
+\end{align*}
+
+Multiplicando ambas ecuaciones:
+\[
+xy = a^m \cdot a^n = a^{m+n}
+\]
+
+Por definición de logaritmo:
+\[
+\log_a(xy) = m + n = \log_a(x) + \log_a(y)
+\]
+
+\textbf{Propiedad 2} (Logaritmo del cociente):
+
+De manera similar a la propiedad 1, dividiendo en lugar de multiplicar:
+\[
+\frac{x}{y} = \frac{a^m}{a^n} = a^{m-n}
+\]
+
+Por lo tanto:
+\[
+\log_a\left(\frac{x}{y}\right) = m - n = \log_a(x) - \log_a(y)
+\]
+
+\textbf{Propiedad 3} (Logaritmo de una potencia):
+
+Sea $\log_a(x) = m$, entonces $a^m = x$. Elevando ambos lados a la potencia $r$:
+\[
+x^r = (a^m)^r = a^{mr}
+\]
+
+Por definición de logaritmo:
+\[
+\log_a(x^r) = mr = r \cdot \log_a(x)
+\]
+
+\textbf{Propiedad 4} (Cambio de base):
+
+Sea $y = \log_a(x)$, entonces $a^y = x$. Aplicando $\log_b$ a ambos lados:
+\[
+\log_b(a^y) = \log_b(x)
+\]
+
+Usando la propiedad 3:
+\[
+y \cdot \log_b(a) = \log_b(x)
+\]
+
+Despejando $y$:
+\[
+y = \frac{\log_b(x)}{\log_b(a)} \quad \Rightarrow \quad \log_a(x) = \frac{\log_b(x)}{\log_b(a)}
+\]
+
+\subsection{Cambio de base}
+
+La fórmula de cambio de base es especialmente útil porque las calculadoras generalmente solo tienen botones para $\log$ (base 10) y $\ln$ (base $e$).
+
+\begin{nota}
+Para calcular $\log_a(x)$ usando una calculadora:
+\[
+\log_a(x) = \frac{\ln(x)}{\ln(a)} \quad \text{o} \quad \log_a(x) = \frac{\log(x)}{\log(a)}
+\]
+\end{nota}
+
+\textbf{Ejemplo}: Calcular $\log_2(50)$ usando una calculadora.
+
+\textbf{Solución}:
+\[
+\log_2(50) = \frac{\ln(50)}{\ln(2)} = \frac{3.912}{0.693} \approx 5.644
+\]
+
+O usando logaritmo común:
+\[
+\log_2(50) = \frac{\log(50)}{\log(2)} = \frac{1.699}{0.301} \approx 5.644
+\]
+
+\subsection{Ecuaciones exponenciales}
+
+Una ecuación exponencial es aquella donde la incógnita aparece en el exponente.
+
+\textbf{Estrategias para resolver ecuaciones exponenciales}:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Igualar las bases}: Si puedes expresar ambos lados con la misma base, iguala los exponentes.
+
+    \textbf{Ejemplo}: Resolver $2^{x+1} = 8$
+
+    Como $8 = 2^3$:
+    \[
+    2^{x+1} = 2^3 \quad \Rightarrow \quad x+1 = 3 \quad \Rightarrow \quad x = 2
+    \]
+
+    \item \textbf{Aplicar logaritmos}: Cuando no puedes igualar las bases, aplica logaritmos a ambos lados.
+
+    \textbf{Ejemplo}: Resolver $3^x = 10$
+
+    Aplicando logaritmo natural a ambos lados:
+    \[
+    \ln(3^x) = \ln(10)
+    \]
+    \[
+    x \cdot \ln(3) = \ln(10)
+    \]
+    \[
+    x = \frac{\ln(10)}{\ln(3)} \approx 2.096
+    \]
+\end{enumerate}
+
+\subsection{Ecuaciones logarítmicas}
+
+Una ecuación logarítmica es aquella que contiene logaritmos de expresiones con la incógnita.
+
+\textbf{Estrategias para resolver ecuaciones logarítmicas}:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Usar propiedades de logaritmos}: Simplifica usando las propiedades de suma, resta, etc.
+
+    \item \textbf{Convertir a forma exponencial}: Una vez simplificado, convierte la ecuación logarítmica a su forma exponencial.
+
+    \textbf{Ejemplo}: Resolver $\log_2(x) + \log_2(x-3) = 2$
+
+    Usando la propiedad del producto:
+    \[
+    \log_2[x(x-3)] = 2
+    \]
+
+    Convirtiendo a forma exponencial:
+    \[
+    x(x-3) = 2^2 = 4
+    \]
+    \[
+    x^2 - 3x - 4 = 0
+    \]
+    \[
+    (x-4)(x+1) = 0
+    \]
+
+    Por lo tanto $x = 4$ o $x = -1$. Como el logaritmo solo está definido para números positivos, y además $x-3$ debe ser positivo, la única solución válida es $x = 4$.
+\end{enumerate}
+
+\begin{nota}
+\textbf{¡Importante!} Siempre verifica tus soluciones en ecuaciones logarítmicas. Puede haber soluciones ``extrañas'' que no son válidas porque hacen que tomes logaritmos de números negativos o cero.
+\end{nota}
+
+\subsection{Aplicaciones de funciones exponenciales y logarítmicas}
+
+Las funciones exponenciales y logarítmicas modelan numerosos fenómenos del mundo real:
+
+\subsubsection{Crecimiento y decrecimiento exponencial}
+
+\textbf{Modelo general}:
+\[
+P(t) = P_0 \cdot a^{kt}
+\]
+
+o equivalentemente:
+\[
+P(t) = P_0 \cdot e^{kt}
+\]
+
+donde:
+\begin{itemize}
+    \item $P(t)$ es la cantidad en el tiempo $t$
+    \item $P_0$ es la cantidad inicial (cuando $t=0$)
+    \item $k$ es la tasa de crecimiento (si $k > 0$) o decrecimiento (si $k < 0$)
+\end{itemize}
+
+\textbf{Aplicaciones}:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Crecimiento poblacional}: Si $k > 0$, modela cómo crece una población.
+    \item \textbf{Interés compuesto}: El dinero en una cuenta crece exponencialmente.
+    \[
+    A = P\left(1 + \frac{r}{n}\right)^{nt}
+    \]
+    donde $P$ es el capital inicial, $r$ es la tasa de interés anual, $n$ es el número de veces que se capitaliza por año, y $t$ es el tiempo en años.
+
+    Para interés compuesto continuo:
+    \[
+    A = Pe^{rt}
+    \]
+
+    \item \textbf{Decaimiento radiactivo}: Los elementos radiactivos decaen exponencialmente con $k < 0$.
+    \[
+    N(t) = N_0 e^{-\lambda t}
+    \]
+    donde $\lambda$ es la constante de decaimiento.
+
+    La \textbf{vida media} $t_{1/2}$ es el tiempo que tarda la sustancia en reducirse a la mitad:
+    \[
+    t_{1/2} = \frac{\ln(2)}{\lambda}
+    \]
+
+    \item \textbf{Crecimiento bacteriano}: Las bacterias se reproducen exponencialmente bajo condiciones ideales.
+\end{itemize}
+
+\subsubsection{Escalas logarítmicas}
+
+Los logaritmos se usan para comprimir rangos enormes en escalas manejables:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Escala de Richter} (terremotos): Mide la magnitud de un terremoto.
+    \[
+    M = \log_{10}\left(\frac{I}{I_0}\right)
+    \]
+    donde $I$ es la intensidad del terremoto e $I_0$ es una intensidad de referencia.
+
+    Un aumento de 1 unidad en la escala de Richter representa un aumento de 10 veces en la amplitud de las ondas sísmicas.
+
+    \item \textbf{Escala de pH} (acidez): Mide la concentración de iones de hidrógeno.
+    \[
+    \text{pH} = -\log_{10}[\text{H}^+]
+    \]
+    donde $[\text{H}^+]$ es la concentración de iones de hidrógeno en moles por litro.
+
+    Un pH de 7 es neutro, menor que 7 es ácido, mayor que 7 es básico.
+
+    \item \textbf{Decibeles} (intensidad del sonido):
+    \[
+    \beta = 10\log_{10}\left(\frac{I}{I_0}\right)
+    \]
+    donde $I$ es la intensidad del sonido e $I_0$ es la intensidad de referencia (umbral de audición).
+
+    Un aumento de 10 dB representa un aumento de 10 veces en la intensidad del sonido.
+\end{itemize}
+
+\newpage
+
+\section{Ejemplos Resueltos}
+
+\begin{ejemplo}
+\textbf{Ejemplo 1: Crecimiento poblacional}
+
+Una ciudad tiene una población de 50,000 habitantes en el año 2020. Si la población crece a una tasa del 3\% anual, ¿cuántos habitantes tendrá en el año 2030? ¿En qué año la población alcanzará los 100,000 habitantes?
+
+\vspace{0.3cm}
+
+\textbf{Solución}:
+
+\textbf{Parte 1}: Población en 2030.
+
+El modelo de crecimiento exponencial es:
+\[
+P(t) = P_0 \cdot (1 + r)^t
+\]
+
+donde:
+\begin{itemize}
+    \item $P_0 = 50000$ (población inicial en 2020)
+    \item $r = 0.03$ (tasa de crecimiento del 3\%)
+    \item $t$ es el número de años desde 2020
+\end{itemize}
+
+Para el año 2030, $t = 10$ años:
+\[
+P(10) = 50000 \cdot (1.03)^{10}
+\]
+
+Calculando:
+\[
+(1.03)^{10} \approx 1.3439
+\]
+\[
+P(10) = 50000 \cdot 1.3439 \approx 67195 \text{ habitantes}
+\]
+
+\textbf{Respuesta}: En 2030 la ciudad tendrá aproximadamente 67,195 habitantes.
+
+\vspace{0.3cm}
+
+\textbf{Parte 2}: ¿Cuándo alcanzará 100,000 habitantes?
+
+Necesitamos resolver:
+\[
+100000 = 50000 \cdot (1.03)^t
+\]
+
+Dividiendo ambos lados por 50000:
+\[
+2 = (1.03)^t
+\]
+
+Aplicando logaritmo natural a ambos lados:
+\[
+\ln(2) = \ln[(1.03)^t]
+\]
+\[
+\ln(2) = t \cdot \ln(1.03)
+\]
+\[
+t = \frac{\ln(2)}{\ln(1.03)} = \frac{0.6931}{0.0296} \approx 23.45 \text{ años}
+\]
+
+\textbf{Respuesta}: La población alcanzará los 100,000 habitantes aproximadamente 23.45 años después de 2020, es decir, a mediados del año 2043.
+
+\vspace{0.3cm}
+
+\textbf{Gráfica del crecimiento}:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=left,
+        xlabel={Años desde 2020},
+        ylabel={Población (miles)},
+        domain=0:30,
+        samples=100,
+        grid=major,
+        ymin=40,
+        ymax=110,
+        xmin=0,
+        xmax=30
+    ]
+    \addplot[blue, ultra thick, smooth] {50*(1.03)^x};
+    \addplot[dashed, red] coordinates {(0,50) (30,50)};
+    \addplot[dashed, red] coordinates {(0,100) (30,100)};
+    \addplot[only marks, red, mark=*, mark size=3pt] coordinates {(10,67.195) (23.45,100)};
+    \node[red, below right] at (axis cs:12,70) {2030};
+    \node[red, below right] at (axis cs:25,103) {2043};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}
+\textbf{Ejemplo 2: Interés compuesto continuo}
+
+María invierte \$5,000 en una cuenta de ahorros que ofrece un 4.5\% de interés anual compuesto continuamente.
+
+a) ¿Cuánto dinero tendrá después de 10 años?
+
+b) ¿Cuánto tiempo tomará para que su inversión se duplique?
+
+c) Compare con el interés compuesto mensual.
+
+\vspace{0.3cm}
+
+\textbf{Solución}:
+
+\textbf{Parte a}: Dinero después de 10 años (interés continuo).
+
+La fórmula para interés compuesto continuo es:
+\[
+A = Pe^{rt}
+\]
+
+donde:
+\begin{itemize}
+    \item $P = 5000$ (capital inicial)
+    \item $r = 0.045$ (tasa de interés del 4.5\%)
+    \item $t = 10$ (años)
+\end{itemize}
+
+Sustituyendo:
+\[
+A = 5000 \cdot e^{0.045 \cdot 10} = 5000 \cdot e^{0.45}
+\]
+
+Calculando:
+\[
+e^{0.45} \approx 1.5683
+\]
+\[
+A = 5000 \cdot 1.5683 \approx 7841.56
+\]
+
+\textbf{Respuesta}: Después de 10 años, María tendrá aproximadamente \$7,841.56.
+
+\vspace{0.3cm}
+
+\textbf{Parte b}: Tiempo para duplicar la inversión.
+
+Necesitamos resolver:
+\[
+10000 = 5000 \cdot e^{0.045t}
+\]
+
+Dividiendo por 5000:
+\[
+2 = e^{0.045t}
+\]
+
+Aplicando logaritmo natural:
+\[
+\ln(2) = 0.045t
+\]
+\[
+t = \frac{\ln(2)}{0.045} = \frac{0.6931}{0.045} \approx 15.40 \text{ años}
+\]
+
+\textbf{Respuesta}: La inversión se duplicará en aproximadamente 15.4 años.
+
+\textbf{Nota}: Existe una regla práctica llamada ``Regla del 72'' que dice que el tiempo de duplicación es aproximadamente $72/r$ donde $r$ es el porcentaje de interés. En este caso: $72/4.5 = 16$ años, muy cercano a nuestro cálculo exacto.
+
+\vspace{0.3cm}
+
+\textbf{Parte c}: Comparación con interés compuesto mensual.
+
+Para interés compuesto $n$ veces al año:
+\[
+A = P\left(1 + \frac{r}{n}\right)^{nt}
+\]
+
+Con $n = 12$ (mensual), $t = 10$:
+\[
+A = 5000\left(1 + \frac{0.045}{12}\right)^{12 \cdot 10} = 5000(1.00375)^{120}
+\]
+
+Calculando:
+\[
+(1.00375)^{120} \approx 1.5657
+\]
+\[
+A = 5000 \cdot 1.5657 \approx 7828.50
+\]
+
+\textbf{Comparación}:
+\begin{itemize}
+    \item Interés continuo: \$7,841.56
+    \item Interés mensual: \$7,828.50
+    \item Diferencia: \$13.06
+\end{itemize}
+
+La diferencia es pequeña, pero el interés continuo siempre genera un poco más.
+
+\vspace{0.3cm}
+
+\textbf{Gráfica comparativa}:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=left,
+        xlabel={Años},
+        ylabel={Dinero (\$)},
+        domain=0:20,
+        samples=100,
+        grid=major,
+        legend pos=south east,
+        ymin=4000,
+        ymax=11000
+    ]
+    \addplot[blue, ultra thick, smooth] {5000*exp(0.045*x)};
+    \addplot[red, thick, smooth] {5000*(1+0.045/12)^(12*x)};
+    \addplot[dashed, gray] coordinates {(0,10000) (20,10000)};
+    \legend{Continuo, Mensual, Doble}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}
+\textbf{Ejemplo 3: Decaimiento radiactivo del Carbono-14}
+
+El Carbono-14 es un isótopo radiactivo usado para datar fósiles. Su vida media es de 5,730 años. Un fósil tiene actualmente el 25\% del Carbono-14 que tenía cuando el organismo estaba vivo.
+
+a) ¿Qué edad tiene el fósil?
+
+b) ¿Qué porcentaje de Carbono-14 quedará después de 10,000 años?
+
+\vspace{0.3cm}
+
+\textbf{Solución}:
+
+Primero, necesitamos encontrar la constante de decaimiento $\lambda$ usando la vida media.
+
+La fórmula del decaimiento es:
+\[
+N(t) = N_0 e^{-\lambda t}
+\]
+
+La vida media $t_{1/2}$ satisface:
+\[
+\frac{N_0}{2} = N_0 e^{-\lambda t_{1/2}}
+\]
+
+Dividiendo por $N_0$:
+\[
+\frac{1}{2} = e^{-\lambda t_{1/2}}
+\]
+
+Aplicando logaritmo natural:
+\[
+\ln(1/2) = -\lambda t_{1/2}
+\]
+\[
+-\ln(2) = -\lambda t_{1/2}
+\]
+\[
+\lambda = \frac{\ln(2)}{t_{1/2}} = \frac{0.6931}{5730} \approx 0.000121 \text{ año}^{-1}
+\]
+
+\vspace{0.3cm}
+
+\textbf{Parte a}: Edad del fósil.
+
+Si actualmente tiene 25\% del Carbono-14 original:
+\[
+0.25N_0 = N_0 e^{-0.000121t}
+\]
+
+Dividiendo por $N_0$:
+\[
+0.25 = e^{-0.000121t}
+\]
+
+Aplicando logaritmo natural:
+\[
+\ln(0.25) = -0.000121t
+\]
+\[
+t = \frac{\ln(0.25)}{-0.000121} = \frac{-1.3863}{-0.000121} \approx 11460 \text{ años}
+\]
+
+\textbf{Respuesta}: El fósil tiene aproximadamente 11,460 años de antigüedad.
+
+\textbf{Verificación}: Observa que 11,460 años son aproximadamente dos vidas medias ($2 \times 5730 = 11460$). Después de una vida media queda 50\%, después de dos vidas medias queda 25\%. ¡Tiene sentido!
+
+\vspace{0.3cm}
+
+\textbf{Parte b}: Porcentaje después de 10,000 años.
+
+\[
+N(10000) = N_0 e^{-0.000121 \cdot 10000} = N_0 e^{-1.21}
+\]
+
+Calculando:
+\[
+e^{-1.21} \approx 0.2982
+\]
+
+\textbf{Respuesta}: Después de 10,000 años quedará aproximadamente el 29.82\% del Carbono-14 original.
+
+\vspace{0.3cm}
+
+\textbf{Gráfica del decaimiento}:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=left,
+        xlabel={Tiempo (años)},
+        ylabel={Porcentaje de C-14 (\%)},
+        domain=0:20000,
+        samples=100,
+        grid=major,
+        ymin=0,
+        ymax=100
+    ]
+    \addplot[blue, ultra thick, smooth] {100*exp(-0.000121*x)};
+    \addplot[dashed, red] coordinates {(5730,0) (5730,50)};
+    \addplot[dashed, red] coordinates {(0,50) (5730,50)};
+    \addplot[dashed, green!70!black] coordinates {(11460,0) (11460,25)};
+    \addplot[dashed, green!70!black] coordinates {(0,25) (11460,25)};
+    \node[red] at (axis cs:6050,55) {$t_{1/2}$};
+    \node[green!70!black] at (axis cs:12460,30) {$2t_{1/2}$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}
+\textbf{Ejemplo 4: Escala de Richter y terremotos}
+
+El terremoto de San Francisco de 1906 tuvo una magnitud de 7.9 en la escala de Richter. El terremoto de Loma Prieta de 1989 tuvo una magnitud de 6.9.
+
+a) ¿Cuántas veces más intensa fue la amplitud de las ondas sísmicas del terremoto de 1906 comparado con el de 1989?
+
+b) Si un terremoto tiene una intensidad 1000 veces mayor que otro, ¿cuál es la diferencia en la escala de Richter?
+
+\vspace{0.3cm}
+
+\textbf{Solución}:
+
+La escala de Richter se define como:
+\[
+M = \log_{10}\left(\frac{I}{I_0}\right)
+\]
+
+donde $I$ es la intensidad del terremoto e $I_0$ es una intensidad de referencia.
+
+\vspace{0.3cm}
+
+\textbf{Parte a}: Comparación de intensidades.
+
+Para el terremoto de 1906 ($M_1 = 7.9$):
+\[
+7.9 = \log_{10}\left(\frac{I_1}{I_0}\right)
+\]
+
+Convirtiendo a forma exponencial:
+\[
+10^{7.9} = \frac{I_1}{I_0} \quad \Rightarrow \quad I_1 = I_0 \cdot 10^{7.9}
+\]
+
+Para el terremoto de 1989 ($M_2 = 6.9$):
+\[
+6.9 = \log_{10}\left(\frac{I_2}{I_0}\right)
+\]
+\[
+10^{6.9} = \frac{I_2}{I_0} \quad \Rightarrow \quad I_2 = I_0 \cdot 10^{6.9}
+\]
+
+La razón entre las intensidades es:
+\[
+\frac{I_1}{I_2} = \frac{I_0 \cdot 10^{7.9}}{I_0 \cdot 10^{6.9}} = 10^{7.9-6.9} = 10^{1.0} = 10
+\]
+
+\textbf{Respuesta}: El terremoto de 1906 fue 10 veces más intenso que el de 1989.
+
+\textbf{Regla general}: Cada unidad de diferencia en la escala de Richter representa un factor de 10 en la intensidad.
+
+\vspace{0.3cm}
+
+\textbf{Parte b}: Diferencia en magnitud.
+
+Si $I_1 = 1000 \cdot I_2$, entonces:
+\[
+\frac{I_1}{I_2} = 1000
+\]
+
+Las magnitudes son:
+\[
+M_1 = \log_{10}\left(\frac{I_1}{I_0}\right) \quad \text{y} \quad M_2 = \log_{10}\left(\frac{I_2}{I_0}\right)
+\]
+
+La diferencia es:
+\begin{align*}
+M_1 - M_2 &= \log_{10}\left(\frac{I_1}{I_0}\right) - \log_{10}\left(\frac{I_2}{I_0}\right)\\
+&= \log_{10}\left(\frac{I_1/I_0}{I_2/I_0}\right)\\
+&= \log_{10}\left(\frac{I_1}{I_2}\right)\\
+&= \log_{10}(1000)\\
+&= \log_{10}(10^3)\\
+&= 3
+\end{align*}
+
+\textbf{Respuesta}: La diferencia en la escala de Richter es 3 unidades.
+
+\vspace{0.3cm}
+
+\textbf{Visualización}:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=left,
+        xlabel={Magnitud de Richter},
+        ylabel={Intensidad relativa (escala log)},
+        domain=1:9,
+        samples=50,
+        grid=major,
+        ymode=log,
+        ymin=10,
+        ymax=1e8,
+        ytick={1e1,1e2,1e3,1e4,1e5,1e6,1e7,1e8}
+    ]
+    \addplot[blue, ultra thick, smooth] {10^x};
+    \addplot[only marks, red, mark=*, mark size=4pt] coordinates {(6.9,10^6.9) (7.9,10^7.9)};
+    \node[red] at (axis cs:6.9,2e6) {1989};
+    \node[red] at (axis cs:7.9,2e7) {1906};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}
+\textbf{Ejemplo 5: Ecuaciones exponenciales y logarítmicas}
+
+Resolver las siguientes ecuaciones:
+
+a) $5^{2x-1} = 25$
+
+b) $e^{3x} = 20$
+
+c) $\log_3(x+2) + \log_3(x-1) = 2$
+
+d) $\ln(x) + \ln(x-3) = \ln(4)$
+
+\vspace{0.3cm}
+
+\textbf{Solución}:
+
+\textbf{Parte a}: $5^{2x-1} = 25$
+
+Expresamos 25 como potencia de 5:
+\[
+5^{2x-1} = 5^2
+\]
+
+Como las bases son iguales, los exponentes deben ser iguales:
+\[
+2x - 1 = 2
+\]
+\[
+2x = 3
+\]
+\[
+x = \frac{3}{2}
+\]
+
+\textbf{Verificación}: $5^{2(3/2)-1} = 5^{3-1} = 5^2 = 25$ ✓
+
+\textbf{Respuesta}: $x = \frac{3}{2}$
+
+\vspace{0.3cm}
+
+\textbf{Parte b}: $e^{3x} = 20$
+
+Aplicamos logaritmo natural a ambos lados:
+\[
+\ln(e^{3x}) = \ln(20)
+\]
+
+Usando la propiedad $\ln(e^a) = a$:
+\[
+3x = \ln(20)
+\]
+\[
+x = \frac{\ln(20)}{3} = \frac{2.9957}{3} \approx 0.9986
+\]
+
+\textbf{Verificación}: $e^{3(0.9986)} = e^{2.9958} \approx 20$ ✓
+
+\textbf{Respuesta}: $x \approx 0.9986$
+
+\vspace{0.3cm}
+
+\textbf{Parte c}: $\log_3(x+2) + \log_3(x-1) = 2$
+
+Usando la propiedad del producto de logaritmos:
+\[
+\log_3[(x+2)(x-1)] = 2
+\]
+
+Convirtiendo a forma exponencial:
+\[
+(x+2)(x-1) = 3^2 = 9
+\]
+
+Expandiendo:
+\[
+x^2 + x - 2 = 9
+\]
+\[
+x^2 + x - 11 = 0
+\]
+
+Usando la fórmula cuadrática:
+\[
+x = \frac{-1 \pm \sqrt{1 + 44}}{2} = \frac{-1 \pm \sqrt{45}}{2} = \frac{-1 \pm 6.708}{2}
+\]
+
+Por lo tanto:
+\[
+x_1 = \frac{-1 + 6.708}{2} = 2.854 \quad \text{o} \quad x_2 = \frac{-1 - 6.708}{2} = -3.854
+\]
+
+\textbf{Verificación de dominios}:
+\begin{itemize}
+    \item Para $x_1 = 2.854$: $x+2 = 4.854 > 0$ ✓ y $x-1 = 1.854 > 0$ ✓
+    \item Para $x_2 = -3.854$: $x+2 = -1.854 < 0$ ✗ (logaritmo indefinido)
+\end{itemize}
+
+\textbf{Respuesta}: $x \approx 2.854$ (la solución negativa no es válida)
+
+\vspace{0.3cm}
+
+\textbf{Parte d}: $\ln(x) + \ln(x-3) = \ln(4)$
+
+Usando la propiedad del producto:
+\[
+\ln[x(x-3)] = \ln(4)
+\]
+
+Como $\ln$ es una función uno-a-uno, si $\ln(a) = \ln(b)$, entonces $a = b$:
+\[
+x(x-3) = 4
+\]
+\[
+x^2 - 3x - 4 = 0
+\]
+\[
+(x-4)(x+1) = 0
+\]
+
+Por lo tanto:
+\[
+x = 4 \quad \text{o} \quad x = -1
+\]
+
+\textbf{Verificación de dominios}:
+\begin{itemize}
+    \item Para $x = 4$: $\ln(4)$ está definido ✓ y $\ln(4-3) = \ln(1) = 0$ está definido ✓
+    \item Para $x = -1$: $\ln(-1)$ no está definido ✗
+\end{itemize}
+
+\textbf{Verificación completa para $x=4$}:
+\[
+\ln(4) + \ln(1) = \ln(4) + 0 = \ln(4) = \ln(4)
+\]
+
+\textbf{Respuesta}: $x = 4$ (la solución negativa no es válida)
+\end{ejemplo}
+
+\newpage
+
+\section{Ejercicios Propuestos}
+
+Resuelve los siguientes ejercicios. Las soluciones detalladas se encuentran en la siguiente sección.
+
+\begin{enumerate}[leftmargin=*]
+
+\item \textbf{Simplificación de expresiones}
+
+Simplifica las siguientes expresiones usando propiedades de exponentes y logaritmos:
+
+\begin{enumerate}
+    \item $\log_5(125) + \log_5(1/25)$
+    \item $\ln(e^3) - 2\ln(e)$
+    \item $e^{\ln(7)}$
+    \item $\log_2(8) \cdot \log_3(9)$
+\end{enumerate}
+
+\item \textbf{Ecuaciones exponenciales}
+
+Resuelve las siguientes ecuaciones:
+
+\begin{enumerate}
+    \item $3^{x+2} = 81$
+    \item $2^{3x} = 16^{x-1}$
+    \item $5^x = 12$
+    \item $e^{2x} - 6e^x + 5 = 0$
+\end{enumerate}
+
+\item \textbf{Ecuaciones logarítmicas}
+
+Resuelve las siguientes ecuaciones (verifica el dominio):
+
+\begin{enumerate}
+    \item $\log_2(x) = 5$
+    \item $\log_4(x+3) - \log_4(x-1) = 1$
+    \item $\ln(x^2) = 4$
+    \item $\log(x) + \log(x+3) = 1$
+\end{enumerate}
+
+\item \textbf{Cambio de base}
+
+Calcula usando la fórmula de cambio de base (usa calculadora si es necesario):
+
+\begin{enumerate}
+    \item $\log_7(50)$
+    \item $\log_4(1000)$
+\end{enumerate}
+
+\item \textbf{Interés compuesto}
+
+Pedro invierte \$8,000 en un fondo que paga 5.2\% de interés anual compuesto mensualmente. ¿Cuánto dinero tendrá después de 15 años?
+
+\item \textbf{Decaimiento radiactivo}
+
+El Yodo-131 tiene una vida media de 8 días. Si un paciente recibe una dosis de 100 mg:
+
+\begin{enumerate}
+    \item ¿Cuánto Yodo-131 quedará después de 24 días?
+    \item ¿Cuánto tiempo tomará para que quede solo 5 mg?
+\end{enumerate}
+
+\item \textbf{Escala de pH}
+
+El jugo de limón tiene una concentración de iones de hidrógeno de $[\text{H}^+] = 0.01$ moles/litro. El agua pura tiene $[\text{H}^+] = 10^{-7}$ moles/litro.
+
+\begin{enumerate}
+    \item Calcula el pH del jugo de limón.
+    \item Calcula el pH del agua pura.
+    \item ¿Cuántas veces más ácido es el jugo de limón que el agua pura?
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+\section{Soluciones Detalladas}
+
+\subsection{Solución Ejercicio 1: Simplificación de expresiones}
+
+\textbf{a) $\log_5(125) + \log_5(1/25)$}
+
+Primero, expresamos 125 y 25 como potencias de 5:
+\[
+125 = 5^3 \quad \text{y} \quad 25 = 5^2 \quad \Rightarrow \quad \frac{1}{25} = 5^{-2}
+\]
+
+Usando la propiedad $\log_a(a^x) = x$:
+\[
+\log_5(125) + \log_5(1/25) = \log_5(5^3) + \log_5(5^{-2}) = 3 + (-2) = 1
+\]
+
+\textbf{Método alternativo} usando la propiedad del producto:
+\[
+\log_5(125) + \log_5(1/25) = \log_5\left(125 \cdot \frac{1}{25}\right) = \log_5(5) = 1
+\]
+
+\textbf{Respuesta}: 1
+
+\vspace{0.3cm}
+
+\textbf{b) $\ln(e^3) - 2\ln(e)$}
+
+Usando la propiedad $\ln(e^x) = x$:
+\[
+\ln(e^3) - 2\ln(e) = 3 - 2(1) = 3 - 2 = 1
+\]
+
+\textbf{Respuesta}: 1
+
+\vspace{0.3cm}
+
+\textbf{c) $e^{\ln(7)}$}
+
+Usando la propiedad de funciones inversas $e^{\ln(x)} = x$:
+\[
+e^{\ln(7)} = 7
+\]
+
+\textbf{Respuesta}: 7
+
+\vspace{0.3cm}
+
+\textbf{d) $\log_2(8) \cdot \log_3(9)$}
+
+Calculamos cada logaritmo por separado:
+\[
+\log_2(8) = \log_2(2^3) = 3
+\]
+\[
+\log_3(9) = \log_3(3^2) = 2
+\]
+
+Por lo tanto:
+\[
+\log_2(8) \cdot \log_3(9) = 3 \cdot 2 = 6
+\]
+
+\textbf{Respuesta}: 6
+
+\subsection{Solución Ejercicio 2: Ecuaciones exponenciales}
+
+\textbf{a) $3^{x+2} = 81$}
+
+Expresamos 81 como potencia de 3:
+\[
+81 = 3^4
+\]
+
+Por lo tanto:
+\[
+3^{x+2} = 3^4
+\]
+
+Igualando exponentes:
+\[
+x + 2 = 4
+\]
+\[
+x = 2
+\]
+
+\textbf{Respuesta}: $x = 2$
+
+\vspace{0.3cm}
+
+\textbf{b) $2^{3x} = 16^{x-1}$}
+
+Expresamos 16 como potencia de 2:
+\[
+16 = 2^4
+\]
+
+Por lo tanto:
+\[
+2^{3x} = (2^4)^{x-1} = 2^{4(x-1)} = 2^{4x-4}
+\]
+
+Igualando exponentes:
+\[
+3x = 4x - 4
+\]
+\[
+-x = -4
+\]
+\[
+x = 4
+\]
+
+\textbf{Respuesta}: $x = 4$
+
+\vspace{0.3cm}
+
+\textbf{c) $5^x = 12$}
+
+No podemos expresar 12 como potencia de 5, así que aplicamos logaritmos:
+\[
+\ln(5^x) = \ln(12)
+\]
+\[
+x \cdot \ln(5) = \ln(12)
+\]
+\[
+x = \frac{\ln(12)}{\ln(5)} = \frac{2.4849}{1.6094} \approx 1.544
+\]
+
+\textbf{Respuesta}: $x \approx 1.544$
+
+\vspace{0.3cm}
+
+\textbf{d) $e^{2x} - 6e^x + 5 = 0$}
+
+Esta es una ecuación cuadrática en $e^x$. Hagamos la sustitución $u = e^x$:
+\[
+u^2 - 6u + 5 = 0
+\]
+
+Factorizando:
+\[
+(u-5)(u-1) = 0
+\]
+
+Por lo tanto:
+\[
+u = 5 \quad \text{o} \quad u = 1
+\]
+
+Regresando a $x$:
+\begin{itemize}
+    \item Si $e^x = 5$, entonces $x = \ln(5) \approx 1.609$
+    \item Si $e^x = 1$, entonces $x = \ln(1) = 0$
+\end{itemize}
+
+\textbf{Respuesta}: $x = 0$ o $x = \ln(5) \approx 1.609$
+
+\subsection{Solución Ejercicio 3: Ecuaciones logarítmicas}
+
+\textbf{a) $\log_2(x) = 5$}
+
+Convirtiendo a forma exponencial:
+\[
+x = 2^5 = 32
+\]
+
+\textbf{Respuesta}: $x = 32$
+
+\vspace{0.3cm}
+
+\textbf{b) $\log_4(x+3) - \log_4(x-1) = 1$}
+
+Usando la propiedad del cociente:
+\[
+\log_4\left(\frac{x+3}{x-1}\right) = 1
+\]
+
+Convirtiendo a forma exponencial:
+\[
+\frac{x+3}{x-1} = 4^1 = 4
+\]
+
+Resolviendo:
+\[
+x + 3 = 4(x-1)
+\]
+\[
+x + 3 = 4x - 4
+\]
+\[
+7 = 3x
+\]
+\[
+x = \frac{7}{3} \approx 2.333
+\]
+
+\textbf{Verificación del dominio}:
+\begin{itemize}
+    \item $x+3 = 7/3 + 3 = 16/3 > 0$ ✓
+    \item $x-1 = 7/3 - 1 = 4/3 > 0$ ✓
+\end{itemize}
+
+\textbf{Respuesta}: $x = \frac{7}{3}$
+
+\vspace{0.3cm}
+
+\textbf{c) $\ln(x^2) = 4$}
+
+Usando la propiedad de la potencia:
+\[
+2\ln(x) = 4
+\]
+\[
+\ln(x) = 2
+\]
+
+Convirtiendo a forma exponencial:
+\[
+x = e^2 \approx 7.389
+\]
+
+\textbf{Nota}: También podríamos tener $x = -e^2$, pero solo $x = e^2$ es válido si interpretamos $\ln(x^2)$ estrictamente (requiere $x^2 > 0$, lo cual es cierto para cualquier $x \neq 0$).
+
+Si usamos $\ln(x^2) = e^4$, entonces $x^2 = e^4$, y $x = \pm e^2$. Sin embargo, típicamente en este contexto buscamos la solución positiva.
+
+\textbf{Respuesta}: $x = e^2 \approx 7.389$
+
+\vspace{0.3cm}
+
+\textbf{d) $\log(x) + \log(x+3) = 1$}
+
+Usando la propiedad del producto:
+\[
+\log[x(x+3)] = 1
+\]
+
+Convirtiendo a forma exponencial (asumiendo base 10):
+\[
+x(x+3) = 10^1 = 10
+\]
+\[
+x^2 + 3x - 10 = 0
+\]
+\[
+(x+5)(x-2) = 0
+\]
+
+Por lo tanto:
+\[
+x = -5 \quad \text{o} \quad x = 2
+\]
+
+\textbf{Verificación del dominio}:
+\begin{itemize}
+    \item Para $x = -5$: $\log(-5)$ no está definido ✗
+    \item Para $x = 2$: $\log(2)$ está definido ✓ y $\log(5)$ está definido ✓
+\end{itemize}
+
+\textbf{Respuesta}: $x = 2$
+
+\subsection{Solución Ejercicio 4: Cambio de base}
+
+\textbf{a) $\log_7(50)$}
+
+Usando la fórmula de cambio de base:
+\[
+\log_7(50) = \frac{\ln(50)}{\ln(7)} = \frac{3.912}{1.946} \approx 2.010
+\]
+
+O usando base 10:
+\[
+\log_7(50) = \frac{\log(50)}{\log(7)} = \frac{1.699}{0.845} \approx 2.010
+\]
+
+\textbf{Respuesta}: $\log_7(50) \approx 2.010$
+
+\vspace{0.3cm}
+
+\textbf{b) $\log_4(1000)$}
+
+Usando la fórmula de cambio de base:
+\[
+\log_4(1000) = \frac{\ln(1000)}{\ln(4)} = \frac{6.908}{1.386} \approx 4.983
+\]
+
+O usando base 10:
+\[
+\log_4(1000) = \frac{\log(1000)}{\log(4)} = \frac{3}{0.602} \approx 4.983
+\]
+
+\textbf{Respuesta}: $\log_4(1000) \approx 4.983$
+
+\subsection{Solución Ejercicio 5: Interés compuesto}
+
+Pedro invierte \$8,000 al 5.2\% anual compuesto mensualmente por 15 años.
+
+La fórmula es:
+\[
+A = P\left(1 + \frac{r}{n}\right)^{nt}
+\]
+
+donde:
+\begin{itemize}
+    \item $P = 8000$
+    \item $r = 0.052$
+    \item $n = 12$ (mensual)
+    \item $t = 15$
+\end{itemize}
+
+Sustituyendo:
+\[
+A = 8000\left(1 + \frac{0.052}{12}\right)^{12 \cdot 15} = 8000(1.004333)^{180}
+\]
+
+Calculando:
+\[
+(1.004333)^{180} \approx 2.1700
+\]
+\[
+A = 8000 \cdot 2.1700 \approx 17360
+\]
+
+\textbf{Respuesta}: Pedro tendrá aproximadamente \$17,360 después de 15 años.
+
+\subsection{Solución Ejercicio 6: Decaimiento radiactivo}
+
+El Yodo-131 tiene vida media de 8 días, dosis inicial de 100 mg.
+
+Primero calculamos la constante de decaimiento:
+\[
+\lambda = \frac{\ln(2)}{t_{1/2}} = \frac{0.6931}{8} \approx 0.0866 \text{ día}^{-1}
+\]
+
+La fórmula del decaimiento es:
+\[
+N(t) = N_0 e^{-\lambda t} = 100e^{-0.0866t}
+\]
+
+\textbf{a) Después de 24 días}:
+\[
+N(24) = 100e^{-0.0866 \cdot 24} = 100e^{-2.078} \approx 100 \cdot 0.125 = 12.5 \text{ mg}
+\]
+
+\textbf{Verificación}: 24 días son 3 vidas medias ($3 \times 8 = 24$). Después de 1 vida media queda 50 mg, después de 2 queda 25 mg, después de 3 queda 12.5 mg. ✓
+
+\textbf{Respuesta a)}: Quedarán 12.5 mg.
+
+\vspace{0.3cm}
+
+\textbf{b) ¿Cuándo quedan 5 mg?}
+\[
+5 = 100e^{-0.0866t}
+\]
+\[
+0.05 = e^{-0.0866t}
+\]
+\[
+\ln(0.05) = -0.0866t
+\]
+\[
+t = \frac{\ln(0.05)}{-0.0866} = \frac{-2.996}{-0.0866} \approx 34.6 \text{ días}
+\]
+
+\textbf{Respuesta b)}: Tomarán aproximadamente 34.6 días para que queden 5 mg.
+
+\subsection{Solución Ejercicio 7: Escala de pH}
+
+La fórmula del pH es:
+\[
+\text{pH} = -\log_{10}[\text{H}^+]
+\]
+
+\textbf{a) pH del jugo de limón} ($[\text{H}^+] = 0.01 = 10^{-2}$):
+\[
+\text{pH} = -\log_{10}(10^{-2}) = -(-2) = 2
+\]
+
+\textbf{Respuesta a)}: El pH del jugo de limón es 2 (ácido).
+
+\vspace{0.3cm}
+
+\textbf{b) pH del agua pura} ($[\text{H}^+] = 10^{-7}$):
+\[
+\text{pH} = -\log_{10}(10^{-7}) = -(-7) = 7
+\]
+
+\textbf{Respuesta b)}: El pH del agua pura es 7 (neutro).
+
+\vspace{0.3cm}
+
+\textbf{c) ¿Cuántas veces más ácido es el jugo de limón?}
+
+La acidez está determinada por la concentración de iones H$^+$:
+\[
+\frac{[\text{H}^+]_{\text{limón}}}{[\text{H}^+]_{\text{agua}}} = \frac{10^{-2}}{10^{-7}} = 10^{-2-(-7)} = 10^5 = 100000
+\]
+
+\textbf{Respuesta c)}: El jugo de limón es 100,000 veces más ácido que el agua pura.
+
+\textbf{Nota}: Cada unidad de diferencia en pH representa un factor de 10 en acidez. La diferencia aquí es $7 - 2 = 5$ unidades, por lo que el factor es $10^5 = 100,000$.
+
+\newpage
+
+\section{Ejercicios Inversos (Modelado)}
+
+Los siguientes ejercicios requieren que plantees un modelo matemático usando funciones exponenciales o logarítmicas, y luego lo resuelvas.
+
+\begin{enumerate}[leftmargin=*]
+
+\item \textbf{Crecimiento bacteriano}
+
+Una colonia de bacterias tiene inicialmente 500 individuos. Después de observarla durante 3 horas, se determina que la población se duplica cada hora.
+
+\begin{enumerate}
+    \item Plantea un modelo matemático para la población $P(t)$ en función del tiempo $t$ (en horas).
+    \item ¿Cuántas bacterias habrá después de 6 horas?
+    \item ¿Cuánto tiempo tomará para que la población alcance 50,000 bacterias?
+\end{enumerate}
+
+\item \textbf{Temperatura de enfriamiento}
+
+Una taza de café se saca del microondas a 90°C. La temperatura ambiente es de 20°C. Según la Ley de Enfriamiento de Newton, la temperatura $T(t)$ del café después de $t$ minutos está dada por:
+\[
+T(t) = T_a + (T_0 - T_a)e^{-kt}
+\]
+donde $T_a$ es la temperatura ambiente, $T_0$ es la temperatura inicial, y $k$ es una constante.
+
+Se observa que después de 5 minutos, el café está a 70°C.
+
+\begin{enumerate}
+    \item Determina el valor de la constante $k$.
+    \item ¿Cuál será la temperatura del café después de 15 minutos?
+    \item ¿Cuánto tiempo tomará para que el café alcance 40°C?
+\end{enumerate}
+
+\item \textbf{Nivel de ruido}
+
+En un concierto, el nivel de ruido cerca del escenario es de 110 dB (decibeles). La fórmula de los decibeles es:
+\[
+\beta = 10\log_{10}\left(\frac{I}{I_0}\right)
+\]
+donde $I$ es la intensidad del sonido e $I_0 = 10^{-12}$ W/m² es la intensidad de referencia (umbral de audición).
+
+\begin{enumerate}
+    \item ¿Cuál es la intensidad del sonido cerca del escenario (en W/m²)?
+    \item Si te alejas del escenario y el nivel baja a 80 dB, ¿cuántas veces menos intensa es la intensidad del sonido?
+    \item ¿A qué nivel de decibeles corresponde una intensidad de $10^{-5}$ W/m²?
+\end{enumerate}
+
+\item \textbf{Inversión y tasa de interés}
+
+Lucía quiere tener \$20,000 en 8 años para comprar un auto. Un banco le ofrece una cuenta de ahorros con interés compuesto anualmente.
+
+\begin{enumerate}
+    \item Si Lucía invierte \$10,000 hoy, ¿qué tasa de interés anual necesita para alcanzar su meta?
+    \item Si la tasa de interés disponible es del 6\% anual, ¿cuánto debe invertir hoy para tener \$20,000 en 8 años?
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+\section{Soluciones de Ejercicios Inversos}
+
+\subsection{Solución Ejercicio Inverso 1: Crecimiento bacteriano}
+
+\textbf{a) Modelo matemático}
+
+Sabemos que:
+\begin{itemize}
+    \item Población inicial: $P_0 = 500$
+    \item La población se duplica cada hora: período de duplicación $T_d = 1$ hora
+\end{itemize}
+
+El modelo exponencial general es:
+\[
+P(t) = P_0 \cdot 2^{t/T_d}
+\]
+
+Sustituyendo:
+\[
+P(t) = 500 \cdot 2^{t/1} = 500 \cdot 2^t
+\]
+
+\textbf{Respuesta a)}: $P(t) = 500 \cdot 2^t$ bacterias después de $t$ horas.
+
+\vspace{0.3cm}
+
+\textbf{b) Población después de 6 horas}
+\[
+P(6) = 500 \cdot 2^6 = 500 \cdot 64 = 32000 \text{ bacterias}
+\]
+
+\textbf{Respuesta b)}: Habrá 32,000 bacterias.
+
+\vspace{0.3cm}
+
+\textbf{c) Tiempo para alcanzar 50,000 bacterias}
+
+Necesitamos resolver:
+\[
+50000 = 500 \cdot 2^t
+\]
+\[
+100 = 2^t
+\]
+
+Aplicando logaritmo:
+\[
+\ln(100) = t \cdot \ln(2)
+\]
+\[
+t = \frac{\ln(100)}{\ln(2)} = \frac{4.605}{0.693} \approx 6.64 \text{ horas}
+\]
+
+\textbf{Respuesta c)}: Tomará aproximadamente 6.64 horas (o 6 horas y 38 minutos).
+
+\vspace{0.3cm}
+
+\textbf{Gráfica del crecimiento}:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=left,
+        xlabel={Tiempo (horas)},
+        ylabel={Población (bacterias)},
+        domain=0:8,
+        samples=100,
+        grid=major,
+        ymin=0,
+        ymax=60000,
+        legend pos=north west
+    ]
+    \addplot[blue, ultra thick, smooth] {500*2^x};
+    \addplot[dashed, red] coordinates {(6,0) (6,32000)};
+    \addplot[dashed, green!70!black] coordinates {(6.64,0) (6.64,50000)};
+    \addplot[only marks, red, mark=*, mark size=3pt] coordinates {(6,32000)};
+    \addplot[only marks, green!70!black, mark=*, mark size=3pt] coordinates {(6.64,50000)};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Solución Ejercicio Inverso 2: Temperatura de enfriamiento}
+
+Datos:
+\begin{itemize}
+    \item $T_0 = 90$°C (temperatura inicial)
+    \item $T_a = 20$°C (temperatura ambiente)
+    \item $T(5) = 70$°C (temperatura después de 5 minutos)
+\end{itemize}
+
+Modelo:
+\[
+T(t) = 20 + (90-20)e^{-kt} = 20 + 70e^{-kt}
+\]
+
+\textbf{a) Determinar $k$}
+
+Usamos la condición $T(5) = 70$:
+\[
+70 = 20 + 70e^{-5k}
+\]
+\[
+50 = 70e^{-5k}
+\]
+\[
+\frac{50}{70} = e^{-5k}
+\]
+\[
+\frac{5}{7} = e^{-5k}
+\]
+
+Aplicando logaritmo natural:
+\[
+\ln\left(\frac{5}{7}\right) = -5k
+\]
+\[
+k = -\frac{1}{5}\ln\left(\frac{5}{7}\right) = -\frac{1}{5}(\ln(5) - \ln(7))
+\]
+\[
+k = -\frac{1}{5}(1.609 - 1.946) = -\frac{-0.337}{5} \approx 0.0673 \text{ min}^{-1}
+\]
+
+\textbf{Respuesta a)}: $k \approx 0.0673$ min$^{-1}$
+
+\vspace{0.3cm}
+
+\textbf{b) Temperatura después de 15 minutos}
+
+Usando $k = 0.0673$:
+\[
+T(15) = 20 + 70e^{-0.0673 \cdot 15} = 20 + 70e^{-1.010}
+\]
+\[
+e^{-1.010} \approx 0.364
+\]
+\[
+T(15) = 20 + 70(0.364) = 20 + 25.5 = 45.5\text{°C}
+\]
+
+\textbf{Respuesta b)}: La temperatura será aproximadamente 45.5°C.
+
+\vspace{0.3cm}
+
+\textbf{c) Tiempo para alcanzar 40°C}
+
+Necesitamos resolver:
+\[
+40 = 20 + 70e^{-0.0673t}
+\]
+\[
+20 = 70e^{-0.0673t}
+\]
+\[
+\frac{20}{70} = e^{-0.0673t}
+\]
+\[
+\frac{2}{7} = e^{-0.0673t}
+\]
+
+Aplicando logaritmo:
+\[
+\ln\left(\frac{2}{7}\right) = -0.0673t
+\]
+\[
+t = \frac{\ln(2/7)}{-0.0673} = \frac{-1.253}{-0.0673} \approx 18.6 \text{ minutos}
+\]
+
+\textbf{Respuesta c)}: Tomará aproximadamente 18.6 minutos.
+
+\vspace{0.3cm}
+
+\textbf{Gráfica del enfriamiento}:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=left,
+        xlabel={Tiempo (minutos)},
+        ylabel={Temperatura (°C)},
+        domain=0:30,
+        samples=100,
+        grid=major,
+        ymin=15,
+        ymax=95
+    ]
+    \addplot[blue, ultra thick, smooth] {20+70*exp(-0.0673*x)};
+    \addplot[dashed, red] coordinates {(0,20) (30,20)};
+    \addplot[only marks, green!70!black, mark=*, mark size=3pt] coordinates {(5,70) (15,45.5) (18.6,40)};
+    \node[green!70!black,right=1mm] at (axis cs:5,73) {5 min};
+    \node[green!70!black,right=1mm] at (axis cs:15,48) {15 min};
+    \node[green!70!black,right=1mm] at (axis cs:18.6,43) {18.6 min};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Solución Ejercicio Inverso 3: Nivel de ruido}
+
+La fórmula de decibeles es:
+\[
+\beta = 10\log_{10}\left(\frac{I}{I_0}\right)
+\]
+donde $I_0 = 10^{-12}$ W/m².
+
+\textbf{a) Intensidad cerca del escenario} ($\beta = 110$ dB)
+
+\[
+110 = 10\log_{10}\left(\frac{I}{10^{-12}}\right)
+\]
+\[
+11 = \log_{10}\left(\frac{I}{10^{-12}}\right)
+\]
+
+Convirtiendo a forma exponencial:
+\[
+10^{11} = \frac{I}{10^{-12}}
+\]
+\[
+I = 10^{11} \cdot 10^{-12} = 10^{-1} = 0.1 \text{ W/m}^2
+\]
+
+\textbf{Respuesta a)}: La intensidad es 0.1 W/m².
+
+\vspace{0.3cm}
+
+\textbf{b) Comparación con 80 dB}
+
+Para $\beta = 80$ dB:
+\[
+80 = 10\log_{10}\left(\frac{I'}{10^{-12}}\right)
+\]
+\[
+8 = \log_{10}\left(\frac{I'}{10^{-12}}\right)
+\]
+\[
+10^8 = \frac{I'}{10^{-12}}
+\]
+\[
+I' = 10^8 \cdot 10^{-12} = 10^{-4} \text{ W/m}^2
+\]
+
+La razón es:
+\[
+\frac{I}{I'} = \frac{10^{-1}}{10^{-4}} = 10^3 = 1000
+\]
+
+\textbf{Respuesta b)}: A 80 dB, la intensidad es 1000 veces menor.
+
+\textbf{Nota}: Una diferencia de 30 dB ($110 - 80 = 30$) corresponde a un factor de $10^{30/10} = 10^3 = 1000$ en intensidad.
+
+\vspace{0.3cm}
+
+\textbf{c) Decibeles para $I = 10^{-5}$ W/m²}
+
+\[
+\beta = 10\log_{10}\left(\frac{10^{-5}}{10^{-12}}\right) = 10\log_{10}(10^7) = 10 \cdot 7 = 70 \text{ dB}
+\]
+
+\textbf{Respuesta c)}: Corresponde a 70 dB.
+
+\subsection{Solución Ejercicio Inverso 4: Inversión y tasa de interés}
+
+\textbf{a) Tasa de interés necesaria}
+
+Datos:
+\begin{itemize}
+    \item Capital inicial: $P = 10000$
+    \item Monto final: $A = 20000$
+    \item Tiempo: $t = 8$ años
+    \item Interés compuesto anualmente: $n = 1$
+\end{itemize}
+
+Fórmula:
+\[
+A = P(1+r)^t
+\]
+\[
+20000 = 10000(1+r)^8
+\]
+\[
+2 = (1+r)^8
+\]
+
+Aplicando raíz octava (o logaritmo):
+\[
+1+r = 2^{1/8}
+\]
+
+Calculando:
+\[
+2^{1/8} = 2^{0.125} \approx 1.0905
+\]
+\[
+r = 0.0905 = 9.05\%
+\]
+
+\textbf{Respuesta a)}: Necesita una tasa de interés del 9.05\% anual.
+
+\textbf{Método alternativo usando logaritmos}:
+\[
+\ln(2) = 8\ln(1+r)
+\]
+\[
+\ln(1+r) = \frac{\ln(2)}{8} = \frac{0.6931}{8} = 0.0866
+\]
+\[
+1+r = e^{0.0866} \approx 1.0905
+\]
+\[
+r \approx 0.0905 = 9.05\%
+\]
+
+\vspace{0.3cm}
+
+\textbf{b) Capital inicial necesario con $r = 6\%$}
+
+Necesitamos encontrar $P$ tal que:
+\[
+20000 = P(1.06)^8
+\]
+
+Calculando:
+\[
+(1.06)^8 \approx 1.5938
+\]
+\[
+P = \frac{20000}{1.5938} \approx 12549
+\]
+
+\textbf{Respuesta b)}: Debe invertir aproximadamente \$12,549 hoy.
+
+\vspace{1cm}
+
+\begin{center}
+\textcolor{maincolor}{\rule{10cm}{0.5pt}}
+
+\vspace{0.5cm}
+
+\textbf{\Large ¡Felicitaciones!}
+
+\vspace{0.3cm}
+
+Has completado la guía de Funciones Exponenciales y Logarítmicas.
+
+Ahora dominas herramientas matemáticas que modelan desde el crecimiento de poblaciones hasta la medición de terremotos.
+
+\vspace{0.3cm}
+
+\textcolor{maincolor}{\rule{10cm}{0.5pt}}
+\end{center}
+
+\end{document}

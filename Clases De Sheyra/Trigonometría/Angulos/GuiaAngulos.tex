@@ -1,0 +1,1960 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+\usepackage{array} % ← necesario para usar m{}
+
+
+% Definición de entornos personalizados
+\usepackage{tcolorbox}
+\tcbuselibrary{most}
+
+\newtcolorbox{conceptbox}[1]{
+    colback=maincolor!5,
+    colframe=maincolor,
+    fonttitle=\bfseries,
+    title=#1,
+    sharp corners
+}
+
+\newtcolorbox{examplebox}[1]{
+    colback=accentcolor!5,
+    colframe=accentcolor,
+    fonttitle=\bfseries,
+    title=#1,
+    sharp corners
+}
+
+\newtcolorbox{notebox}{
+    colback=yellow!10,
+    colframe=orange!80!black,
+    fonttitle=\bfseries,
+    title=Nota Importante,
+    sharp corners
+}
+
+% Configuración de título
+\title{\textbf{\color{maincolor}Ángulos: Fundamentos de Trigonometría}}
+\author{\textbf{Prof. Toribio De J Arrieta F}\\
+\textit{La pruebita}\\
+\textcolor{accentcolor}{Trigonometría -- Grado 10}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\begin{tikzpicture}
+\draw[maincolor, line width=2pt] (0,0) circle (2);
+\draw[-{Latex},line width=1.5pt,accentcolor] (0,0) -- (2,0);
+\draw[-{Latex},line width=1.5pt,maincolor] (0,0) -- (1.414,1.414);
+\draw[accentcolor,line width=1pt] (0.7,0) arc (0:45:0.7);
+\node[accentcolor] at (1,0.3) {$\theta$};
+\end{tikzpicture}
+\end{center}
+
+\vfill
+
+\begin{center}
+\textit{``Los ángulos son la puerta de entrada al fascinante mundo de la trigonometría''}
+\end{center}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introducción}
+
+¡Hola! Bienvenidos a esta guía sobre ángulos en trigonometría. Seguramente te has preguntado: ¿por qué necesito estudiar ángulos? Bueno, la respuesta es simple: los ángulos están en todas partes. Desde el movimiento de las manecillas de un reloj, pasando por las ruedas de tu bicicleta, hasta la navegación de aviones y barcos, e incluso en la forma en que los satélites GPS determinan tu ubicación exacta.
+
+En esta guía vamos a explorar todo lo relacionado con los ángulos desde una perspectiva trigonométrica. No te preocupes si algunos conceptos te parecen nuevos al principio; vamos a ir paso a paso, con muchos ejemplos y explicaciones claras.
+
+\subsection{¿Qué aprenderás en esta guía?}
+
+A lo largo de esta guía, aprenderás a:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Entender qué es un ángulo} desde el punto de vista geométrico y trigonométrico
+    \item \textbf{Medir ángulos} en dos sistemas diferentes: grados y radianes
+    \item \textbf{Trabajar con ángulos en posición estándar} y encontrar ángulos coterminales
+    \item \textbf{Convertir entre grados y radianes} sin problemas
+    \item \textbf{Calcular longitudes de arco} y áreas de sectores circulares
+    \item \textbf{Resolver problemas de velocidad angular y lineal} aplicados a situaciones reales
+\end{itemize}
+
+\subsection{Aplicaciones en el mundo real}
+
+Antes de empezar con los conceptos formales, déjame contarte algunas aplicaciones fascinantes de los ángulos:
+
+\begin{description}[leftmargin=*]
+    \item[Navegación y Orientación:] Los pilotos y marineros usan ángulos para determinar rumbos y direcciones. Un cambio de 1 grado en el rumbo puede significar kilómetros de diferencia en el destino final.
+
+    \item[Astronomía:] Los astrónomos miden las posiciones de estrellas y planetas usando ángulos. La distancia angular entre dos estrellas nos ayuda a entender sus posiciones relativas en el universo.
+
+    \item[Arquitectura y Construcción:] Los arquitectos usan ángulos para diseñar estructuras estables. Desde la inclinación de un techo hasta el ángulo de una rampa para sillas de ruedas, todo requiere cálculos angulares precisos.
+
+    \item[Ruedas y Engranajes:] En ingeniería mecánica, los ángulos nos ayudan a calcular velocidades de rotación, distancias recorridas y sincronización entre diferentes partes móviles.
+
+    \item[Relojes Analógicos:] Las manecillas de un reloj se mueven formando ángulos específicos. La manecilla de los minutos gira 360 grados cada hora, mientras que la de las horas gira 30 grados por hora.
+
+    \item[Deportes:] En baloncesto, el ángulo de lanzamiento es crucial para encestar. En golf, el ángulo del palo determina la trayectoria de la pelota. En fútbol, el ángulo de tiro afecta las posibilidades de gol.
+
+    \item[GPS y Geolocalización:] Tu teléfono usa ángulos para triangular tu posición usando señales de múltiples satélites. Sin un entendimiento preciso de los ángulos, ¡el GPS no funcionaría!
+\end{description}
+
+Como puedes ver, los ángulos no son solo conceptos abstractos de matemáticas; son herramientas prácticas que usamos todos los días, aunque no nos demos cuenta. Así que ponte cómodo, toma lápiz y papel, y ¡empecemos este viaje por el mundo de los ángulos!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{¿Qué es un ángulo?}
+
+Un \textbf{ángulo} es una figura geométrica formada por dos rayos (o semirrectas) que comparten un punto de origen común llamado \textbf{vértice}. Los dos rayos se llaman \textbf{lados del ángulo}.
+
+\begin{conceptbox}{Definición de Ángulo}
+Un ángulo se forma cuando un rayo (lado inicial) rota alrededor de su punto de origen (vértice) hasta llegar a una posición final (lado terminal). La cantidad de rotación es la medida del ángulo.
+\end{conceptbox}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+% Ángulo básico
+\draw[thick,maincolor] (0,0) -- (3,0) node[right] {Lado Terminal};
+\draw[thick,maincolor] (0,0) -- (2.121,2.121) node[above right] {Lado Inicial};
+\draw[accentcolor,thick] (1,0) arc (0:45:1);
+\node[accentcolor] at (1.3,0.4) {$\theta$};
+\fill[maincolor] (0,0) circle (2pt) node[below left] {Vértice};
+
+% Flecha de rotación
+\draw[-{Latex},line width=1.5pt,blue!60] (1.5,0.3) arc (10:35:1.5);
+\node[blue!60] at (2.2,0.8) {\small rotación};
+\end{tikzpicture}
+\end{center}
+
+Piensa en un ángulo como el resultado de girar una puerta: el vértice sería la bisagra, el lado inicial sería la posición cuando la puerta está cerrada, y el lado terminal sería la posición después de abrir la puerta. ¡El ángulo mide cuánto has abierto esa puerta!
+
+\subsection{Ángulos en Posición Estándar}
+
+En trigonometría, trabajamos mucho con algo llamado \textbf{ángulos en posición estándar} (o posición normal). Esto nos ayuda a tener un punto de referencia común para todos los ángulos.
+
+\begin{conceptbox}{Ángulo en Posición Estándar}
+Un ángulo está en \textbf{posición estándar} cuando:
+\begin{itemize}
+    \item Su vértice está en el origen de un sistema de coordenadas $(0,0)$
+    \item Su lado inicial coincide con el eje $x$ positivo
+    \item Su lado terminal se obtiene rotando el lado inicial
+\end{itemize}
+
+La rotación es:
+\begin{itemize}
+    \item \textbf{Positiva} si es en sentido contrario a las manecillas del reloj (antihorario)
+    \item \textbf{Negativa} si es en el sentido de las manecillas del reloj (horario)
+\end{itemize}
+\end{conceptbox}
+
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1]
+% Ejes coordenados
+\draw[-{Latex},thick] (-2.5,0) -- (2.5,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,-2.5) -- (0,2.5) node[above] {$y$};
+
+% Ángulo positivo
+\draw[thick,maincolor,-{Latex}] (0,0) -- (2,0) node[midway,below] {\small Lado Inicial};
+\draw[thick,accentcolor,-{Latex}] (0,0) -- (1.414,1.414) node[below right] {\small Lado Terminal};
+\draw[accentcolor,thick,-{Latex}] (0.8,0) arc (0:45:0.8);
+\node[accentcolor] at (1.4,0.3) {$\theta > 0$};
+
+% Vértice
+\fill[black] (0,0) circle (2pt) node[below left] {$(0,0)$};
+
+% Cuadrantes
+\node[gray] at (1.5,1.5) {\small I};
+\node[gray] at (-1.5,1.5) {\small II};
+\node[gray] at (-1.5,-1.5) {\small III};
+\node[gray] at (1.5,-1.5) {\small IV};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\vrule
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=1]
+% Ejes coordenados
+\draw[-{Latex},thick] (-2.5,0) -- (2.5,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,-2.5) -- (0,2.5) node[above] {$y$};
+
+% Ángulo negativo
+\draw[thick,maincolor,-{Latex}] (0,0) -- (2,0);
+\draw[thick,accentcolor,-{Latex}] (0,0) -- (1.414,-1.414) node[above right] {\small Lado Terminal};
+\draw[accentcolor,thick,-{Latex}] (0.8,0) arc (0:-45:0.8);
+\node[accentcolor] at (1.3,-0.4) {$\theta < 0$};
+
+% Vértice
+\fill[black] (0,0) circle (2pt) node[above left] {$(0,0)$};
+
+% Cuadrantes
+\node[gray] at (1.5,1.5) {\small I};
+\node[gray] at (-1.5,1.5) {\small II};
+\node[gray] at (-1.5,-1.5) {\small III};
+\node[gray] at (1.5,-1.5) {\small IV};
+\end{tikzpicture}
+\end{minipage}
+
+\textbf{Los cuatro cuadrantes:} El plano se divide en cuatro cuadrantes numerados con números romanos I, II, III y IV. El cuadrante en el que termina el lado terminal del ángulo nos dice mucho sobre las propiedades del ángulo.
+
+\subsection{Sistema Sexagesimal: Grados, Minutos y Segundos}
+
+El sistema más común para medir ángulos es el \textbf{sistema sexagesimal}, donde dividimos una rotación completa en 360 partes iguales llamadas \textbf{grados}.
+
+\begin{conceptbox}{Sistema Sexagesimal}
+En el sistema sexagesimal:
+\begin{itemize}
+    \item Una rotación completa = $360°$
+    \item $1°$ (un grado) = $60'$ (sesenta minutos)
+    \item $1'$ (un minuto) = $60''$ (sesenta segundos)
+\end{itemize}
+
+Notación: $\theta = a° \, b' \, c''$
+\end{conceptbox}
+
+\begin{notebox}
+¿Por qué 360 grados? Los antiguos babilonios usaban un sistema de numeración en base 60. Además, 360 es un número muy conveniente porque tiene muchos divisores: 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, 120, 180, 360. ¡Esto facilita las divisiones!
+\end{notebox}
+
+\textbf{Ejemplos de medidas sexagesimales:}
+
+\begin{itemize}
+    \item Un ángulo recto: $90°$
+    \item Un ángulo llano (media vuelta): $180°$
+    \item Un ángulo de una vuelta completa: $360°$
+    \item El ángulo entre cada hora en un reloj: $30°$ (porque $360° \div 12 = 30°$)
+    \item Un ángulo con subdivisiones: $45° \, 30' \, 15''$
+\end{itemize}
+
+\textbf{Conversiones dentro del sistema sexagesimal:}
+
+Para convertir de grados decimales a grados-minutos-segundos:
+\begin{enumerate}
+    \item La parte entera son los grados
+    \item Multiplica la parte decimal por 60 para obtener los minutos
+    \item Si hay parte decimal en los minutos, multiplícala por 60 para obtener los segundos
+\end{enumerate}
+
+\textbf{Ejemplo:} Convertir $45.625°$ a formato DMS (grados-minutos-segundos):
+\begin{align*}
+45.625° &= 45° + 0.625° \\
+0.625° \times 60 &= 37.5' = 37' + 0.5' \\
+0.5' \times 60 &= 30'' \\
+\text{Resultado: } &45° \, 37' \, 30''
+\end{align*}
+
+\subsection{Ángulos Coterminales}
+
+Dos ángulos son \textbf{coterminales} si comparten el mismo lado inicial y el mismo lado terminal, aunque hayan dado diferente cantidad de vueltas.
+
+\begin{conceptbox}{Ángulos Coterminales}
+Dos ángulos $\alpha$ y $\beta$ son coterminales si:
+$$\beta = \alpha + 360°n$$
+donde $n$ es un número entero (puede ser positivo, negativo o cero).
+\end{conceptbox}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+% Ejes
+\draw[-{Latex},thick] (-2.2,0) -- (2.2,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,-2.2) -- (0,2.2) node[above] {$y$};
+
+% Círculo de referencia
+\draw[black,dashed] (0,0) circle (1.8);
+
+% Ángulos coterminales
+\draw[thick,maincolor,-{Latex}] (0,0) -- (2,0);
+\draw[thick,accentcolor,-{Latex}] (0,0) -- (1.273,1.273);
+
+% Arcos
+\draw[blue,thick,-{Latex}] (0.6,0) arc (0:45:0.6);
+\node[blue] at (0.35,0.12) {\small $45°$};
+
+\draw[red,thick,-{Latex}] (1,0) arc (0:405:1);
+\node[red] at (1.20,0.4) {\small $405°$};
+
+\draw[green!70!black,thick,-{Latex}] (1.4,0) arc (0:-315:1.4);
+\node[green!70!black] at (1.7,-0.3) {\small $-315°$};
+
+\node[below] at (0,-2.5) {$45°$, $405°$ y $-315°$ son \textbf{coterminales}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{¿Por qué son importantes los ángulos coterminales?}
+
+En muchas aplicaciones prácticas, lo que importa es la posición final, no cuántas vueltas diste para llegar ahí. Por ejemplo, si una rueda da 1.5 vueltas, termina en la misma posición que si diera solo media vuelta (pero obviamente recorrió más distancia).
+
+\textbf{Encontrar ángulos coterminales:}
+\begin{itemize}
+    \item Para encontrar un ángulo coterminal positivo: suma $360°$
+    \item Para encontrar un ángulo coterminal negativo: resta $360°$
+    \item Para encontrar el ángulo coterminal entre $0°$ y $360°$: suma o resta múltiplos de $360°$ hasta que el resultado esté en ese rango
+\end{itemize}
+
+\subsection{Sistema Cíclico: Radianes}
+
+El \textbf{radián} es una unidad de medida angular que se basa en el radio de un círculo. Es la medida angular más natural desde el punto de vista matemático.
+
+\begin{conceptbox}{Definición de Radián}
+Un \textbf{radián} es el ángulo central que subtiende un arco de longitud igual al radio del círculo.
+
+En otras palabras: si tomas el radio de un círculo y lo ``doblas'' sobre la circunferencia, el ángulo que se forma en el centro mide exactamente 1 radián.
+
+Una vuelta completa = $2\pi$ radianes = $360°$
+\end{conceptbox}
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+% Círculo
+\draw[thick,maincolor] (0,0) circle (1.5);
+
+% Radio inicial
+\draw[thick,red] (0,0) -- (1.5,0) node[midway,below] {$r$};
+
+% Ángulo de 1 radián
+\draw[thick,blue] (0,0) -- ({1.5*cos(57.3)},{1.5*sin(57.3)});
+\draw[accentcolor,thick,-{Latex}] (0.5,0) arc (0:57.3:0.5);
+\node[accentcolor] at (0.7,0.25) {$1$ rad};
+
+% Arco
+\draw[line width=2pt,green!70!black] (1.5,0) arc (0:57.3:1.5);
+\node[green!70!black] at (1.7,0.6) {$s = r$};
+
+% Centro
+\fill[black] (0,0) circle (1.5pt);
+\end{tikzpicture}
+\end{center}
+
+\textbf{¿Por qué usar radianes?}
+
+Aunque los grados son más intuitivos, los radianes son más naturales matemáticamente porque:
+\begin{itemize}
+    \item Simplifican muchas fórmulas (como verás en longitud de arco)
+    \item Son adimensionales (es una razón de longitudes)
+    \item Aparecen naturalmente en cálculo y análisis matemático
+    \item Relacionan directamente el ángulo con la longitud del arco
+\end{itemize}
+
+\textbf{El círculo unitario y ángulos notables:}
+
+El \textbf{círculo unitario} es un círculo con radio 1 centrado en el origen. Es fundamental en trigonometría porque simplifica muchos cálculos.
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+% Círculo unitario
+\draw[thick,maincolor] (0,0) circle (1);
+
+% Ejes
+\draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+% Ángulos notables
+\foreach \angle/\label/\pos in {
+    0/{$0, 2\pi$}/right,
+    30/{$\frac{\pi}{6}$}/above right,
+    45/{$\frac{\pi}{4}$}/above right,
+    60/{$\frac{\pi}{3}$}/above right,
+    90/{$\frac{\pi}{2}$}/above right,
+    120/{$\frac{2\pi}{3}$}/above left,
+    135/{$\frac{3\pi}{4}$}/above left,
+    150/{$\frac{5\pi}{6}$}/above left,
+    180/{$\pi$}/left,
+    210/{$\frac{7\pi}{6}$}/below left,
+    225/{$\frac{5\pi}{4}$}/below left,
+    240/{$\frac{4\pi}{3}$}/below left,
+    270/{$\frac{3\pi}{2}$}/below,
+    300/{$\frac{5\pi}{3}$}/below right,
+    315/{$\frac{7\pi}{4}$}/below right,
+    330/{$\frac{11\pi}{6}$}/below right
+} {
+    \draw[gray] (0,0) -- (\angle:1);
+    \fill[accentcolor] (\angle:1) circle (0.5pt);
+    \node[font=\small] at (\angle:1.15) {\label};
+}
+
+% Radio = 1
+\draw[thick,red] (0,0) -- (1,0) node[midway,below] {\small $r=1$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Conversión entre Grados y Radianes}
+
+La conversión entre grados y radianes se basa en la equivalencia fundamental:
+$$180° = \pi \text{ radianes}$$
+
+\begin{conceptbox}{Fórmulas de Conversión}
+\begin{itemize}
+    \item \textbf{De grados a radianes:}
+    $$\text{radianes} = \text{grados} \times \frac{\pi}{180°}$$
+
+    \item \textbf{De radianes a grados:}
+    $$\text{grados} = \text{radianes} \times \frac{180°}{\pi}$$
+\end{itemize}
+\end{conceptbox}
+
+\textbf{Tabla de ángulos notables:}
+
+\begin{center}
+	\renewcommand{\arraystretch}{3} % aumenta la altura de las filas
+	
+	\begin{tabular}{|
+			>{\centering\arraybackslash}m{2.5cm}|
+			>{\centering\arraybackslash}m{3cm}||
+			>{\centering\arraybackslash}m{2.5cm}|
+			>{\centering\arraybackslash}m{3cm}|}
+		\hline
+		\textbf{Grados} & \textbf{Radianes} & \textbf{Grados} & \textbf{Radianes} \\
+		\hline\hline
+		$0°$ & $0$ & $180°$ & $\pi$ \\
+		\hline
+		$30°$ & $\dfrac{\pi}{6}$ & $210°$ & $\dfrac{7\pi}{6}$ \\
+		\hline
+		$45°$ & $\dfrac{\pi}{4}$ & $225°$ & $\dfrac{5\pi}{4}$ \\
+		\hline
+		$60°$ & $\dfrac{\pi}{3}$ & $240°$ & $\dfrac{4\pi}{3}$ \\
+		\hline
+		$90°$ & $\dfrac{\pi}{2}$ & $270°$ & $\dfrac{3\pi}{2}$ \\
+		\hline
+		$120°$ & $\dfrac{2\pi}{3}$ & $300°$ & $\dfrac{5\pi}{3}$ \\
+		\hline
+		$135°$ & $\dfrac{3\pi}{4}$ & $315°$ & $\dfrac{7\pi}{4}$ \\
+		\hline
+		$150°$ & $\dfrac{5\pi}{6}$ & $330°$ & $\dfrac{11\pi}{6}$ \\
+		\hline
+		$360°$ & $2\pi$ & & \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\begin{notebox}
+Memoriza esta equivalencia: $\pi \text{ rad} = 180°$
+
+A partir de ahí puedes derivar todas las demás. Por ejemplo:
+\begin{itemize}
+    \item $\dfrac{\pi}{2} = 90°$ (la mitad)
+    \item $\dfrac{\pi}{3} = 60°$ (un tercio de 180°)
+    \item $\dfrac{\pi}{4} = 45°$ (un cuarto de 180°)
+    \item $\dfrac{\pi}{6} = 30°$ (un sexto de 180°)
+\end{itemize}
+\end{notebox}
+
+\subsection{Longitud de Arco}
+
+Cuando tienes un ángulo central $\theta$ (en radianes) en un círculo de radio $r$, el \textbf{arco} es la porción de circunferencia que subtiende ese ángulo.
+
+\begin{conceptbox}{Fórmula de Longitud de Arco}
+La longitud $s$ de un arco está dada por:
+$$s = r\theta$$
+donde:
+\begin{itemize}
+    \item $s$ = longitud del arco
+    \item $r$ = radio del círculo
+    \item $\theta$ = ángulo central en \textbf{radianes}
+\end{itemize}
+\end{conceptbox}
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+% Círculo
+\draw[thick,gray!40] (0,0) circle (1.8);
+
+% Radios
+\draw[thick,maincolor] (0,0) -- (1.8,0) node[midway,below] {$r$};
+\draw[thick,maincolor] (0,0) -- ({1.8*cos(60)},{1.8*sin(60)});
+
+% Ángulo
+\draw[accentcolor,thick,-{Latex}] (0.6,0) arc (0:60:0.6);
+\node[accentcolor] at (0.8,0.3) {$\theta$};
+
+% Arco
+\draw[line width=3pt,red] (1.8,0) arc (0:60:1.8);
+\node[red] at (2.1,0.9) {$s = r\theta$};
+
+% Centro
+\fill[black] (0,0) circle (1.5pt) node[below left] {$O$};
+
+% Puntos extremos
+\fill[blue] (1.8,0) circle (1.5pt) node[below right] {$A$};
+\fill[blue] ({1.8*cos(60)},{1.8*sin(60)}) circle (1.5pt) node[above right] {$B$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observaciones importantes:}
+\begin{itemize}
+    \item Esta fórmula solo funciona cuando $\theta$ está en radianes
+    \item Si el ángulo está en grados, primero debes convertirlo a radianes
+    \item Cuando $\theta = 2\pi$ (una vuelta completa), obtenemos $s = r(2\pi) = 2\pi r$, que es la fórmula de la circunferencia completa. ¡Tiene sentido!
+\end{itemize}
+
+\textbf{Variaciones de la fórmula:}
+$$r = \frac{s}{\theta} \qquad \theta = \frac{s}{r}$$
+
+\subsection{Área de un Sector Circular}
+
+Un \textbf{sector circular} es la región del círculo delimitada por dos radios y el arco entre ellos. Piensa en él como una rebanada de pizza.
+
+\begin{conceptbox}{Fórmula del Área de un Sector Circular}
+El área $A$ de un sector circular está dada por:
+$$A = \frac{1}{2}r^2\theta$$
+donde:
+\begin{itemize}
+    \item $A$ = área del sector
+    \item $r$ = radio del círculo
+    \item $\theta$ = ángulo central en \textbf{radianes}
+\end{itemize}
+
+Otra forma (usando longitud de arco):
+$$A = \frac{1}{2}rs$$
+donde $s$ es la longitud del arco.
+\end{conceptbox}
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+% Sector sombreado
+\fill[accentcolor!20] (0,0) -- (1.8,0) arc (0:60:1.8) -- cycle;
+
+% Círculo completo (borde)
+\draw[thick,gray!40] (0,0) circle (1.8);
+
+% Radios del sector
+\draw[thick,maincolor] (0,0) -- (1.8,0) node[midway,below] {$r$};
+\draw[thick,maincolor] (0,0) -- ({1.8*cos(60)},{1.8*sin(60)}) node[midway,above left] {$r$};
+
+% Ángulo
+\draw[blue,thick,-{Latex}] (0.7,0) arc (0:60:0.7);
+\node[blue] at (0.25,0.15) {$\theta$};
+
+% Arco del sector
+\draw[line width=2pt,red] (1.8,0) arc (0:60:1.8);
+
+% Área
+\node at (1.15,0.4) {$A = \frac{1}{2}r^2\theta$};
+
+% Centro
+\fill[black] (0,0) circle (1.5pt) node[below left] {$O$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{¿De dónde viene esta fórmula?}
+
+El área de un círculo completo es $A = \pi r^2$. Un círculo completo corresponde a un ángulo de $2\pi$ radianes. Entonces, el área de un sector es proporcional al ángulo:
+
+$$A_{\text{sector}} = A_{\text{círculo}} \times \frac{\theta}{2\pi} = \pi r^2 \times \frac{\theta}{2\pi} = \frac{1}{2}r^2\theta$$
+
+\textbf{Aplicaciones:}
+\begin{itemize}
+    \item Calcular el área barrida por el limpiaparabrisas de un carro
+    \item Determinar el área de cobertura de un aspersor de riego
+    \item Calcular el área de una rebanada de pizza o de pastel
+    \item Diseñar engranajes y mecanismos circulares
+\end{itemize}
+
+\subsection{Velocidad Angular}
+
+La \textbf{velocidad angular} mide qué tan rápido está cambiando el ángulo de un objeto que rota.
+
+\begin{conceptbox}{Velocidad Angular}
+La velocidad angular $\omega$ (omega) se define como:
+$$\omega = \frac{\theta}{t}$$
+donde:
+\begin{itemize}
+    \item $\omega$ = velocidad angular
+    \item $\theta$ = ángulo recorrido (en radianes)
+    \item $t$ = tiempo transcurrido
+\end{itemize}
+
+Unidades comunes:
+\begin{itemize}
+    \item rad/s (radianes por segundo)
+    \item rpm (revoluciones por minuto)
+    \item grados/s
+\end{itemize}
+\end{conceptbox}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+% Círculo
+\draw[thick,maincolor] (0,0) circle (1.5);
+
+% Radio rotando
+\draw[thick,accentcolor,-{Latex}] (0,0) -- ({1.5*cos(45)},{1.5*sin(45)});
+\draw[thick,gray,dashed] (0,0) -- (1.5,0);
+
+% Ángulo
+\draw[blue,thick,-{Latex}] (0.7,0) arc (0:45:0.7);
+\node[blue] at (1,0.3) {$\theta$};
+
+% Flecha circular de rotación
+\draw[-{Latex},line width=2pt,red] (1.8,0.3) arc (0:180:0.3);
+\node[red] at (1,0.8) {$\omega$};
+
+% Centro
+\fill[black] (0,0) circle (2pt);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Ejemplos de velocidad angular:}
+\begin{itemize}
+    \item La Tierra rota sobre su eje con $\omega = \frac{2\pi}{24 \text{ horas}} \approx 0.2618$ rad/h
+    \item Una rueda de bicicleta girando a 60 rpm tiene $\omega = 60 \times \frac{2\pi}{60} = 2\pi$ rad/s
+    \item El segundero de un reloj: $\omega = \frac{2\pi}{60} \approx 0.1047$ rad/s
+\end{itemize}
+
+\subsection{Velocidad Lineal}
+
+La \textbf{velocidad lineal} es la velocidad a la que se mueve un punto en la circunferencia de un objeto que rota.
+
+\begin{conceptbox}{Velocidad Lineal}
+La velocidad lineal $v$ se relaciona con la velocidad angular mediante:
+$$v = r\omega$$
+donde:
+\begin{itemize}
+    \item $v$ = velocidad lineal
+    \item $r$ = radio (distancia desde el centro hasta el punto)
+    \item $\omega$ = velocidad angular (en rad/s)
+\end{itemize}
+\end{conceptbox}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+% Círculo
+\draw[thick,maincolor] (0,0) circle (1.5);
+
+% Radio
+\draw[thick,gray] (0,0) -- ({1.5*cos(45)},{1.5*sin(45)}) node[midway,above left] {$r$};
+
+% Punto en la circunferencia
+\fill[accentcolor] ({1.5*cos(45)},{1.5*sin(45)}) circle (2pt) node[above right] {$P$};
+
+% Velocidad tangencial
+\draw[-{Latex},line width=2pt,red] ({1.5*cos(45)},{1.5*sin(45)}) --
+({1.5*cos(45) - 0.8*sin(45)},{1.5*sin(45) + 0.8*cos(45)}) node[right] {$\vec{v} = r\omega$};
+
+% Velocidad angular
+\draw[-{Latex},line width=1.5pt,blue] (0.7,0) arc (0:30:0.7);
+\node[blue] at (0.9,0.2) {$\omega$};
+
+% Centro
+\fill[black] (0,0) circle (2pt) node[below left] {$O$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación clave:}
+
+Todos los puntos en un objeto rígido que rota tienen la misma velocidad angular $\omega$, pero los puntos más alejados del centro tienen mayor velocidad lineal. Por eso, en un carrusel, es más emocionante estar en la parte exterior que cerca del centro.
+
+\textbf{Ejemplo:} Una rueda de carro con radio $r = 30$ cm gira a $\omega = 10$ rad/s. Un punto en el borde se mueve a:
+$$v = r\omega = 0.3 \times 10 = 3 \text{ m/s}$$
+
+Pero un punto a $15$ cm del centro solo se mueve a:
+$$v = 0.15 \times 10 = 1.5 \text{ m/s}$$
+
+\newpage
+
+\section{Ejemplos Resueltos}
+
+A continuación veremos cinco ejemplos completamente resueltos que te ayudarán a entender cómo aplicar todos los conceptos que hemos estudiado.
+
+\subsection{Ejemplo 1: Conversión de Grados a Radianes}
+
+\begin{examplebox}{Ejemplo 1}
+Convierte los siguientes ángulos de grados a radianes:
+\begin{enumerate}[label=\alph*)]
+    \item $135°$
+    \item $-45°$
+    \item $270°$
+\end{enumerate}
+\end{examplebox}
+
+\textbf{Solución:}
+
+Recordemos la fórmula de conversión:
+$$\text{radianes} = \text{grados} \times \frac{\pi}{180°}$$
+
+\textbf{a) $135°$ a radianes:}
+
+\begin{align*}
+\theta_{\text{rad}} &= 135° \times \frac{\pi}{180°} \\
+&= \frac{135\pi}{180} \\
+&= \frac{135\pi}{180} \quad \text{(simplificamos dividiendo por 45)} \\
+&= \frac{3\pi}{4} \text{ radianes}
+\end{align*}
+
+\textbf{Verificación:} $\frac{3\pi}{4}$ es $\frac{3}{4}$ de $\pi$, y $\pi = 180°$, entonces $\frac{3}{4} \times 180° = 135°$. ¡Correcto!
+
+\textbf{b) $-45°$ a radianes:}
+
+\begin{align*}
+\theta_{\text{rad}} &= -45° \times \frac{\pi}{180°} \\
+&= \frac{-45\pi}{180} \\
+&= -\frac{\pi}{4} \text{ radianes}
+\end{align*}
+
+El ángulo negativo indica rotación en sentido horario.
+
+\textbf{c) $270°$ a radianes:}
+
+\begin{align*}
+\theta_{\text{rad}} &= 270° \times \frac{\pi}{180°} \\
+&= \frac{270\pi}{180} \\
+&= \frac{3\pi}{2} \text{ radianes}
+\end{align*}
+
+\textbf{Representación gráfica:}
+
+\begin{minipage}[t]{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=1]
+% Ejes
+\draw[-{Latex},thick] (-2,0) -- (2,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,-2) -- (0,2) node[above] {$y$};
+
+% Círculo
+\draw[gray!30] (0,0) circle (1.5);
+
+% Ángulo de 135°
+\draw[thick,maincolor,-{Latex}] (0,0) -- (1.5,0);
+\draw[thick,accentcolor,-{Latex}] (0,0) -- ({-1.5*cos(45)},{1.5*sin(45)});
+\draw[blue,thick,-{Latex}] (0.5,0) arc (0:135:0.5);
+\node at (0,-2.2) {$135° = \frac{3\pi}{4}$ rad};
+\end{tikzpicture}
+\end{minipage}
+{\color{green!75!black}\vrule}
+\begin{minipage}[t]{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=1]
+% Ejes
+\draw[-{Latex},thick] (-2,0) -- (2,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,-2) -- (0,2) node[above] {$y$};
+
+% Círculo
+\draw[gray!30] (0,0) circle (1.5);
+
+% Ángulo de -45°
+\draw[thick,maincolor,-{Latex}] (0,0) -- (1.5,0);
+\draw[thick,accentcolor,-{Latex}] (0,0) -- ({1.5*cos(45)},{-1.5*sin(45)});
+\draw[red,thick,-{Latex}] (0.5,0) arc (0:-45:0.5);
+\node at (0,-2.2) {$-45° = -\frac{\pi}{4}$ rad};
+\end{tikzpicture}
+\end{minipage}
+{\color{green!75!black}\vrule}
+\begin{minipage}[t]{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=1]
+% Ejes
+\draw[-{Latex},thick] (-2,0) -- (2,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,-2) -- (0,2) node[above] {$y$};
+
+% Círculo
+\draw[gray!30] (0,0) circle (1.5);
+
+% Ángulo de 270°
+\draw[thick,maincolor,-{Latex}] (0,0) -- (1.5,0);
+\draw[thick,accentcolor,-{Latex}] (0,0) -- (0,-1.5);
+\draw[purple,thick,-{Latex}] (0.5,0) arc (0:270:0.5);
+\node at (0,-2.2) {$270° = \frac{3\pi}{2}$ rad};
+\end{tikzpicture}
+\end{minipage}
+
+\subsection{Ejemplo 2: Encontrar Ángulos Coterminales}
+
+\begin{examplebox}{Ejemplo 2}
+Para el ángulo $\theta = 420°$:
+\begin{enumerate}[label=\alph*)]
+    \item Encuentra el ángulo coterminal positivo más pequeño (entre $0°$ y $360°$)
+    \item Encuentra dos ángulos coterminales negativos
+    \item Representa gráficamente el ángulo y su coterminal más pequeño
+\end{enumerate}
+\end{examplebox}
+
+\textbf{Solución:}
+
+\textbf{a) Ángulo coterminal entre $0°$ y $360°$:}
+
+Para encontrar el ángulo coterminal más pequeño, restamos vueltas completas de $360°$ hasta que el resultado esté en el rango deseado:
+
+\begin{align*}
+\theta_1 &= 420° - 360° \\
+&= 60°
+\end{align*}
+
+Verificamos: $60°$ está entre $0°$ y $360°$, así que es nuestra respuesta.
+
+\textbf{Interpretación:} $420°$ significa dar una vuelta completa ($360°$) más $60°$ adicionales. Al final, terminas en la misma posición que si solo hubieras rotado $60°$.
+
+\textbf{b) Dos ángulos coterminales negativos:}
+
+Para encontrar ángulos coterminales negativos, restamos múltiplos de $360°$ del ángulo original:
+
+\textbf{Primer ángulo negativo:}
+\begin{align*}
+\theta_2 &= 420° - 2(360°) \\
+&= 420° - 720° \\
+&= -300°
+\end{align*}
+
+\textbf{Segundo ángulo negativo:}
+\begin{align*}
+\theta_3 &= 420° - 3(360°) \\
+&= 420° - 1080° \\
+&= -660°
+\end{align*}
+
+\textbf{c) Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+% Ejes
+\draw[-{Latex},thick] (-1.8,0) -- (1.8,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,-1.8) -- (0,1.8) node[above] {$y$};
+
+% Círculo
+\draw[green!75!black] (0,0) circle (1.5);
+
+% Lado inicial
+\draw[thick,maincolor,-{Latex}] (0,0) -- (1.5,0) node[below right] {\small Lado inicial};
+
+% Lado terminal (60°)
+\draw[thick,accentcolor,-{Latex}] (0,0) -- ({1.5*cos(60)},{1.5*sin(60)})
+node[above right] {\small Lado terminal};
+
+% Arco de 60°
+\draw[blue,thick,-{Latex}] (0.6,0) arc (0:60:0.6);
+\node[blue] at (0.26,0.1) {\small $60°$};
+
+% Arco de 420° (mostrando la vuelta completa + 60°)
+\draw[red,thick,-{Latex}] (1,0) arc (0:420:1);
+\node[red] at (1.05,0.6) {\small $420°$};
+
+% Centro
+\fill[black] (0,0) circle (1.5pt);
+
+% Cuadrantes
+\node[gray,font=\small] at (1,1) {I};
+\node[gray,font=\small] at (-1,1) {II};
+\node[gray,font=\small] at (-1,-1) {III};
+\node[gray,font=\small] at (1,-1) {IV};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} Los ángulos $60°$, $420°$, $-300°$ y $-660°$ son todos coterminales porque todos terminan en la misma posición angular.
+
+\subsection{Ejemplo 3: Calcular Longitud de Arco}
+
+\begin{examplebox}{Ejemplo 3}
+Una rueda de bicicleta tiene un radio de 35 cm. ¿Qué distancia recorre un punto en el borde de la rueda cuando esta gira $150°$?
+\end{examplebox}
+
+\textbf{Solución:}
+
+Para calcular la longitud de arco, usamos la fórmula $s = r\theta$, pero recuerda que $\theta$ debe estar en radianes.
+
+\textbf{Paso 1: Convertir el ángulo a radianes}
+
+\begin{align*}
+\theta_{\text{rad}} &= 150° \times \frac{\pi}{180°} \\
+&= \frac{150\pi}{180} \\
+&= \frac{5\pi}{6} \text{ radianes}
+\end{align*}
+
+\textbf{Paso 2: Calcular la longitud del arco}
+
+Datos:
+\begin{itemize}
+    \item $r = 35$ cm
+    \item $\theta = \frac{5\pi}{6}$ rad
+\end{itemize}
+
+\begin{align*}
+s &= r\theta \\
+&= 35 \times \frac{5\pi}{6} \\
+&= \frac{175\pi}{6} \text{ cm} \\
+&\approx 91.63 \text{ cm}
+\end{align*}
+
+\textbf{Respuesta:} Un punto en el borde de la rueda recorre aproximadamente 91.63 cm (o $\frac{175\pi}{6}$ cm de forma exacta).
+
+\textbf{Interpretación:} Si la circunferencia completa de la rueda es:
+$$C = 2\pi r = 2\pi(35) = 70\pi \approx 219.91 \text{ cm}$$
+
+Entonces, $150°$ representa:
+$$\frac{150°}{360°} = \frac{5}{12}$$
+
+de la circunferencia completa. Y efectivamente:
+$$\frac{5}{12} \times 70\pi = \frac{175\pi}{6} \approx 91.63 \text{ cm}$$
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+% Círculo completo (punteado)
+\draw[gray!30,dashed] (0,0) circle (2);
+
+% Radios
+\draw[thick,maincolor] (0,0) -- (2,0) node[midway,below] {\small $r=35$ cm};
+\draw[thick,maincolor] (0,0) -- ({2*cos(150)},{2*sin(150)});
+
+% Ángulo
+\draw[blue,thick,-{Latex}] (0.7,0) arc (0:150:0.7);
+\node[blue] at (0.18,0.3) {\small $150°$};
+
+% Arco recorrido
+\draw[line width=3pt,red] (2,0) arc (0:150:2);
+\node[red] at (0.5,2.3) {\small $s = 91.63$ cm};
+
+% Centro
+\fill[black] (0,0) circle (2pt) node[below right] {\small $O$};
+
+% Punto en movimiento
+\fill[accentcolor] (2,0) circle (2pt) node[right] {\small inicio};
+\fill[accentcolor] ({2*cos(150)},{2*sin(150)}) circle (2pt) node[left] {\small final};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ejemplo 4: Calcular Área de Sector Circular}
+
+\begin{examplebox}{Ejemplo 4}
+Un aspersor de riego cubre un ángulo de $120°$ y tiene un alcance de 8 metros. ¿Qué área de césped puede regar?
+\end{examplebox}
+
+\textbf{Solución:}
+
+Este es un problema de área de sector circular. Usaremos la fórmula $A = \frac{1}{2}r^2\theta$.
+
+\textbf{Paso 1: Convertir el ángulo a radianes}
+
+\begin{align*}
+\theta_{\text{rad}} &= 120° \times \frac{\pi}{180°} \\
+&= \frac{120\pi}{180} \\
+&= \frac{2\pi}{3} \text{ radianes}
+\end{align*}
+
+\textbf{Paso 2: Calcular el área del sector}
+
+Datos:
+\begin{itemize}
+    \item $r = 8$ m (alcance del aspersor)
+    \item $\theta = \frac{2\pi}{3}$ rad
+\end{itemize}
+
+\begin{align*}
+A &= \frac{1}{2}r^2\theta \\
+&= \frac{1}{2}(8)^2 \times \frac{2\pi}{3} \\
+&= \frac{1}{2}(64) \times \frac{2\pi}{3} \\
+&= 32 \times \frac{2\pi}{3} \\
+&= \frac{64\pi}{3} \text{ m}^2 \\
+&\approx 67.02 \text{ m}^2
+\end{align*}
+
+\textbf{Respuesta:} El aspersor puede regar aproximadamente 67.02 m² de césped.
+
+\textbf{Verificación usando porcentaje del círculo completo:}
+
+El área de un círculo completo con $r = 8$ m sería:
+$$A_{\text{círculo}} = \pi r^2 = \pi(8)^2 = 64\pi \approx 201.06 \text{ m}^2$$
+
+El ángulo de $120°$ representa:
+$$\frac{120°}{360°} = \frac{1}{3}$$
+
+del círculo completo. Entonces:
+$$A_{\text{sector}} = \frac{1}{3} \times 64\pi = \frac{64\pi}{3} \approx 67.02 \text{ m}^2$$
+
+¡La respuesta coincide!
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+% Sector sombreado
+\fill[green!20] (0,0) -- (3,0) arc (0:120:3) -- cycle;
+
+% Círculo completo (borde punteado)
+\draw[red!70!black,dashed] (0,0) circle (3);
+
+% Radios del sector
+\draw[thick,maincolor] (0,0) -- (3,0) node[midway,below right] {\small $8$ m};
+\draw[thick,maincolor] (0,0) -- ({3*cos(120)},{3*sin(120)}) node[midway,above left=1mm] {\small $8$ m};
+
+% Ángulo
+\draw[blue,thick,-{Latex}] (1,0) arc (0:120:1);
+\node[blue] at (0.3,0.35) {\small $120°$};
+
+% Arco del sector
+\draw[line width=2pt,accentcolor] (3,0) arc (0:120:3);
+
+% Área
+\node[font=\large, rotate=-45] at (1.5,1.5) {$A \approx 67.02$ m$^2$};
+
+% Centro (aspersor)
+\fill[red] (0,0) circle (3pt) node[below right] {\small aspersor};
+
+% Etiqueta de césped
+\node[green!70!black, rotate=-45] at (0.7,1.1) {\small césped regado};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ejemplo 5: Velocidad Angular y Lineal}
+
+\begin{examplebox}{Ejemplo 5}
+Una rueda de automóvil tiene un radio de 30 cm y gira a 600 revoluciones por minuto (rpm).
+\begin{enumerate}[label=\alph*)]
+    \item ¿Cuál es la velocidad angular de la rueda en rad/s?
+    \item ¿Cuál es la velocidad lineal de un punto en el borde de la rueda?
+    \item ¿Qué distancia recorre el automóvil en 1 minuto?
+\end{enumerate}
+\end{examplebox}
+
+\textbf{Solución:}
+
+\textbf{a) Velocidad angular en rad/s:}
+
+Primero convertimos de rpm (revoluciones por minuto) a rad/s:
+
+\begin{itemize}
+    \item 1 revolución = $2\pi$ radianes
+    \item 1 minuto = 60 segundos
+\end{itemize}
+
+\begin{align*}
+\omega &= 600 \frac{\text{rev}}{\text{min}} \times \frac{2\pi \text{ rad}}{1 \text{ rev}} \times \frac{1 \text{ min}}{60 \text{ s}} \\
+&= \frac{600 \times 2\pi}{60} \text{ rad/s} \\
+&= 20\pi \text{ rad/s} \\
+&\approx 62.83 \text{ rad/s}
+\end{align*}
+
+\textbf{b) Velocidad lineal:}
+
+Usamos la fórmula $v = r\omega$:
+
+Datos:
+\begin{itemize}
+    \item $r = 30$ cm $= 0.3$ m
+    \item $\omega = 20\pi$ rad/s
+\end{itemize}
+
+\begin{align*}
+v &= r\omega \\
+&= 0.3 \times 20\pi \\
+&= 6\pi \text{ m/s} \\
+&\approx 18.85 \text{ m/s}
+\end{align*}
+
+Para convertir a km/h:
+$$v = 18.85 \frac{\text{m}}{\text{s}} \times \frac{3600 \text{ s}}{1 \text{ h}} \times \frac{1 \text{ km}}{1000 \text{ m}} = 67.86 \text{ km/h}$$
+
+\textbf{c) Distancia recorrida en 1 minuto:}
+
+En 1 minuto, la rueda da 600 revoluciones. La circunferencia de la rueda es:
+$$C = 2\pi r = 2\pi(0.3) = 0.6\pi \text{ m}$$
+
+La distancia total recorrida es:
+\begin{align*}
+d &= \text{número de revoluciones} \times \text{circunferencia} \\
+&= 600 \times 0.6\pi \\
+&= 360\pi \text{ m} \\
+&\approx 1130.97 \text{ m} \\
+&\approx 1.13 \text{ km}
+\end{align*}
+
+\textbf{Verificación alternativa:}
+$$d = v \times t = 18.85 \text{ m/s} \times 60 \text{ s} = 1131 \text{ m}$$
+
+¡La respuesta coincide!
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+% Rueda
+\draw[thick,maincolor,fill=gray!10] (0,0) circle (1.2);
+
+% Radio
+\draw[thick,red] (0,0) -- (1.2,0) node[midway,below] {\small $r=30$ cm};
+
+% Punto en el borde
+\fill[accentcolor] (1.2,0) circle (2pt);
+
+% Velocidad angular
+\draw[-{Latex},line width=1pt,blue] (0.75,0) arc (0:60:0.6);
+\node[blue] at (-0.25,0.2) {$\omega = 20\pi$ rad/s};
+
+% Velocidad lineal
+\draw[-{Latex},line width=2pt,purple] (1.2,0) -- (2.5,0) node[midway,above]
+{\small $v = 6\pi$ m/s};
+
+% Centro
+\fill[black] (0,0) circle (2pt);
+
+% RPM
+\node[font=\bfseries] at (0,-1.7) {600 rpm};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Resumen de resultados:}
+\begin{itemize}
+    \item Velocidad angular: $\omega = 20\pi \approx 62.83$ rad/s
+    \item Velocidad lineal: $v = 6\pi \approx 18.85$ m/s $\approx 67.86$ km/h
+    \item Distancia en 1 minuto: $d = 360\pi \approx 1131$ m $\approx 1.13$ km
+\end{itemize}
+
+\newpage
+
+\section{Ejercicios Propuestos}
+
+Resuelve los siguientes ejercicios aplicando los conceptos aprendidos. Las soluciones detalladas se encuentran en la siguiente sección.
+
+\begin{enumerate}
+    \item \textbf{Conversión de grados a radianes:} Convierte los siguientes ángulos a radianes (deja la respuesta en términos de $\pi$):
+    \begin{multicols}{3}
+    \begin{enumerate}[label=\alph*)]
+        \item $60°$
+        \item $225°$
+        \item $-150°$
+    \end{enumerate}
+    \end{multicols}
+
+    \item \textbf{Conversión de radianes a grados:} Convierte los siguientes ángulos a grados:
+    \begin{multicols}{3}
+    \begin{enumerate}[label=\alph*)]
+        \item $\dfrac{5\pi}{6}$
+        \item $\dfrac{7\pi}{4}$
+        \item $-\dfrac{2\pi}{3}$
+    \end{enumerate}
+    \end{multicols}
+
+    \item \textbf{Ángulos coterminales:} Para el ángulo $\theta = 495°$:
+    \begin{enumerate}[label=\alph*)]
+        \item Encuentra el ángulo coterminal entre $0°$ y $360°$
+        \item Encuentra un ángulo coterminal negativo
+    \end{enumerate}
+
+    \item \textbf{Longitud de arco:} Un arco de circunferencia subtiende un ángulo central de $\dfrac{2\pi}{5}$ radianes en un círculo de radio 15 cm. Calcula la longitud del arco.
+
+    \item \textbf{Área de sector:} Un sector circular tiene un radio de 10 m y un ángulo central de $72°$. Calcula:
+    \begin{enumerate}[label=\alph*)]
+        \item El área del sector
+        \item La longitud del arco que lo delimita
+    \end{enumerate}
+
+    \item \textbf{Velocidad angular:} Una polea industrial gira a 180 rpm. Calcula su velocidad angular en rad/s.
+
+    \item \textbf{Velocidad lineal:} Un ventilador tiene aspas de 60 cm de longitud (desde el centro hasta la punta) y gira a 90 rpm. Calcula:
+    \begin{enumerate}[label=\alph*)]
+        \item La velocidad angular en rad/s
+        \item La velocidad lineal de la punta de un aspa
+        \item La velocidad lineal de un punto ubicado a 30 cm del centro
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\section{Soluciones Detalladas de los Ejercicios Propuestos}
+
+\subsection{Solución del Ejercicio 1}
+
+\textbf{Conversión de grados a radianes}
+
+Usamos la fórmula: $\text{radianes} = \text{grados} \times \dfrac{\pi}{180°}$
+
+\textbf{a) $60°$:}
+\begin{align*}
+\theta_{\text{rad}} &= 60° \times \frac{\pi}{180°} \\
+&= \frac{60\pi}{180} \\
+&= \frac{\pi}{3} \text{ radianes}
+\end{align*}
+
+\textbf{b) $225°$:}
+\begin{align*}
+\theta_{\text{rad}} &= 225° \times \frac{\pi}{180°} \\
+&= \frac{225\pi}{180} \\
+&= \frac{5\pi}{4} \text{ radianes}
+\end{align*}
+
+\textbf{c) $-150°$:}
+\begin{align*}
+\theta_{\text{rad}} &= -150° \times \frac{\pi}{180°} \\
+&= \frac{-150\pi}{180} \\
+&= -\frac{5\pi}{6} \text{ radianes}
+\end{align*}
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item a) $\dfrac{\pi}{3}$ rad
+    \item b) $\dfrac{5\pi}{4}$ rad
+    \item c) $-\dfrac{5\pi}{6}$ rad
+\end{itemize}
+
+\subsection{Solución del Ejercicio 2}
+
+\textbf{Conversión de radianes a grados}
+
+Usamos la fórmula: $\text{grados} = \text{radianes} \times \dfrac{180°}{\pi}$
+
+\textbf{a) $\dfrac{5\pi}{6}$:}
+\begin{align*}
+\theta_{\text{grados}} &= \frac{5\pi}{6} \times \frac{180°}{\pi} \\
+&= \frac{5 \times 180°}{6} \\
+&= \frac{900°}{6} \\
+&= 150°
+\end{align*}
+
+\textbf{b) $\dfrac{7\pi}{4}$:}
+\begin{align*}
+\theta_{\text{grados}} &= \frac{7\pi}{4} \times \frac{180°}{\pi} \\
+&= \frac{7 \times 180°}{4} \\
+&= \frac{1260°}{4} \\
+&= 315°
+\end{align*}
+
+\textbf{c) $-\dfrac{2\pi}{3}$:}
+\begin{align*}
+\theta_{\text{grados}} &= -\frac{2\pi}{3} \times \frac{180°}{\pi} \\
+&= -\frac{2 \times 180°}{3} \\
+&= -\frac{360°}{3} \\
+&= -120°
+\end{align*}
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item a) $150°$
+    \item b) $315°$
+    \item c) $-120°$
+\end{itemize}
+
+\subsection{Solución del Ejercicio 3}
+
+\textbf{Ángulos coterminales de $\theta = 495°$}
+
+\textbf{a) Ángulo coterminal entre $0°$ y $360°$:}
+
+Para encontrarlo, restamos vueltas completas de $360°$ hasta que el resultado esté en el rango deseado:
+
+\begin{align*}
+\theta_1 &= 495° - 360° \\
+&= 135°
+\end{align*}
+
+Como $135°$ está entre $0°$ y $360°$, esta es nuestra respuesta.
+
+\textbf{Verificación:} $495° = 360° + 135°$ (una vuelta completa más $135°$)
+
+\textbf{b) Ángulo coterminal negativo:}
+
+Restamos dos vueltas completas del ángulo original:
+
+\begin{align*}
+\theta_2 &= 495° - 2(360°) \\
+&= 495° - 720° \\
+&= -225°
+\end{align*}
+
+\textbf{Otra opción:}
+\begin{align*}
+\theta_3 &= 495° - 3(360°) \\
+&= 495° - 1080° \\
+&= -585°
+\end{align*}
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+% Ejes
+\draw[-{Latex},thick] (-1.8,0) -- (1.8,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,-1.8) -- (0,1.8) node[above] {$y$};
+
+% Círculo
+\draw[gray!30] (0,0) circle (1.5);
+
+% Lado inicial
+\draw[thick,maincolor,-{Latex}] (0,0) -- (1.5,0);
+
+% Lado terminal (135°)
+\draw[thick,accentcolor,-{Latex}] (0,0) -- ({-1.5*cos(45)},{1.5*sin(45)});
+
+% Arcos
+\draw[blue,thick,-{Latex}] (0.5,0) arc (0:135:0.5);
+\node[blue] at (0.3,0.7) {\small $135°$};
+
+\draw[red,thick,-{Latex}] (1,0) arc (0:495:1);
+\node[red] at (1.2,0.4) {\small $495°$};
+
+% Centro
+\fill[black] (0,0) circle (1.5pt);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item a) $135°$
+    \item b) $-225°$ (o cualquier otro como $-585°$)
+\end{itemize}
+
+\subsection{Solución del Ejercicio 4}
+
+\textbf{Longitud de arco}
+
+Datos:
+\begin{itemize}
+    \item $r = 15$ cm
+    \item $\theta = \dfrac{2\pi}{5}$ rad
+\end{itemize}
+
+Usamos la fórmula: $s = r\theta$
+
+\begin{align*}
+s &= r\theta \\
+&= 15 \times \frac{2\pi}{5} \\
+&= \frac{30\pi}{5} \\
+&= 6\pi \text{ cm} \\
+&\approx 18.85 \text{ cm}
+\end{align*}
+
+\textbf{Verificación:}
+
+El ángulo $\dfrac{2\pi}{5}$ rad representa:
+$$\frac{\frac{2\pi}{5}}{2\pi} = \frac{2\pi}{5} \times \frac{1}{2\pi} = \frac{1}{5}$$
+
+de la circunferencia completa.
+
+La circunferencia completa es:
+$$C = 2\pi r = 2\pi(15) = 30\pi \text{ cm}$$
+
+Entonces, el arco es:
+$$s = \frac{1}{5} \times 30\pi = 6\pi \text{ cm}$$
+
+¡Coincide con nuestra respuesta!
+
+\textbf{Respuesta:} La longitud del arco es $6\pi \approx 18.85$ cm.
+
+\subsection{Solución del Ejercicio 5}
+
+\textbf{Área de sector circular}
+
+Datos:
+\begin{itemize}
+    \item $r = 10$ m
+    \item $\theta = 72°$
+\end{itemize}
+
+\textbf{a) Área del sector:}
+
+Primero convertimos el ángulo a radianes:
+\begin{align*}
+\theta_{\text{rad}} &= 72° \times \frac{\pi}{180°} \\
+&= \frac{72\pi}{180} \\
+&= \frac{2\pi}{5} \text{ rad}
+\end{align*}
+
+Ahora calculamos el área usando $A = \dfrac{1}{2}r^2\theta$:
+
+\begin{align*}
+A &= \frac{1}{2}r^2\theta \\
+&= \frac{1}{2}(10)^2 \times \frac{2\pi}{5} \\
+&= \frac{1}{2}(100) \times \frac{2\pi}{5} \\
+&= 50 \times \frac{2\pi}{5} \\
+&= \frac{100\pi}{5} \\
+&= 20\pi \text{ m}^2 \\
+&\approx 62.83 \text{ m}^2
+\end{align*}
+
+\textbf{b) Longitud del arco:}
+
+Usamos $s = r\theta$ (con $\theta$ en radianes):
+
+\begin{align*}
+s &= r\theta \\
+&= 10 \times \frac{2\pi}{5} \\
+&= \frac{20\pi}{5} \\
+&= 4\pi \text{ m} \\
+&\approx 12.57 \text{ m}
+\end{align*}
+
+\textbf{Verificación alternativa del área:}
+
+El ángulo de $72°$ representa:
+$$\frac{72°}{360°} = \frac{1}{5}$$
+
+del círculo completo. El área del círculo completo es:
+$$A_{\text{círculo}} = \pi r^2 = \pi(10)^2 = 100\pi \text{ m}^2$$
+
+Entonces:
+$$A_{\text{sector}} = \frac{1}{5} \times 100\pi = 20\pi \text{ m}^2$$
+
+¡Coincide!
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+% Sector sombreado
+\fill[accentcolor!20] (0,0) -- (3,0) arc (0:72:3) -- cycle;
+
+% Círculo (borde punteado)
+\draw[red!70!black!40,dashed] (0,0) circle (3);
+
+% Radios
+\draw[thick,maincolor] (0,0) -- (3,0) node[midway,below] {\small $10$ m};
+\draw[thick,maincolor] (0,0) -- ({3*cos(72)},{3*sin(72)}) node[midway,above left] {\small $10$ m};
+
+% Ángulo
+\draw[blue,thick,-{Latex}] (1.2,0) arc (0:72:1.2);
+\node[blue] at (0.65,0.5) {\small $72°$};
+
+% Arco
+\draw[line width=2pt,red] (3,0) arc (0:72:3);
+\node[red] at (3.45,1.5) {\small $s = 4\pi$ m};
+
+% Área
+\node[rotate=-45] at (1.8,1.2) {$A = 20\pi$ m$^2$};
+
+% Centro
+\fill[black] (0,0) circle (2pt);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item a) Área: $20\pi \approx 62.83$ m$^2$
+    \item b) Longitud del arco: $4\pi \approx 12.57$ m
+\end{itemize}
+
+\subsection{Solución del Ejercicio 6}
+
+\textbf{Velocidad angular de una polea}
+
+Dato: $180$ rpm
+
+Convertimos de revoluciones por minuto a radianes por segundo:
+
+\begin{align*}
+\omega &= 180 \frac{\text{rev}}{\text{min}} \times \frac{2\pi \text{ rad}}{1 \text{ rev}} \times \frac{1 \text{ min}}{60 \text{ s}} \\
+&= \frac{180 \times 2\pi}{60} \text{ rad/s} \\
+&= \frac{360\pi}{60} \text{ rad/s} \\
+&= 6\pi \text{ rad/s} \\
+&\approx 18.85 \text{ rad/s}
+\end{align*}
+
+\textbf{Interpretación:} La polea rota $6\pi$ radianes (aproximadamente 18.85 radianes o unas 3 revoluciones completas) cada segundo.
+
+\textbf{Respuesta:} $\omega = 6\pi \approx 18.85$ rad/s
+
+\subsection{Solución del Ejercicio 7}
+
+\textbf{Velocidad lineal de un ventilador}
+
+Datos:
+\begin{itemize}
+    \item Longitud del aspa: 60 cm $= 0.6$ m (este es el radio)
+    \item Velocidad de rotación: 90 rpm
+\end{itemize}
+
+\textbf{a) Velocidad angular en rad/s:}
+
+\begin{align*}
+\omega &= 90 \frac{\text{rev}}{\text{min}} \times \frac{2\pi \text{ rad}}{1 \text{ rev}} \times \frac{1 \text{ min}}{60 \text{ s}} \\
+&= \frac{90 \times 2\pi}{60} \text{ rad/s} \\
+&= \frac{180\pi}{60} \text{ rad/s} \\
+&= 3\pi \text{ rad/s} \\
+&\approx 9.42 \text{ rad/s}
+\end{align*}
+
+\textbf{b) Velocidad lineal de la punta del aspa:}
+
+Usamos $v = r\omega$ con $r = 0.6$ m:
+
+\begin{align*}
+v &= r\omega \\
+&= 0.6 \times 3\pi \\
+&= 1.8\pi \text{ m/s} \\
+&\approx 5.65 \text{ m/s}
+\end{align*}
+
+\textbf{c) Velocidad lineal a 30 cm del centro:}
+
+Usamos $v = r\omega$ con $r = 0.3$ m:
+
+\begin{align*}
+v &= r\omega \\
+&= 0.3 \times 3\pi \\
+&= 0.9\pi \text{ m/s} \\
+&\approx 2.83 \text{ m/s}
+\end{align*}
+
+\textbf{Observación:} La velocidad lineal a mitad del radio es exactamente la mitad de la velocidad en la punta. Esto tiene sentido porque la velocidad lineal es proporcional al radio.
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+% Aspa
+\draw[thick,maincolor,fill=gray!20] (0,0) -- (0.3,0.1) -- (2.5,0.1) -- (2.5,-0.1) -- (0.3,-0.1) -- cycle;
+
+% Centro
+\fill[black] (0,0) circle (3pt) node[below] {\small motor};
+
+% Punto a 30 cm
+\fill[blue] (1.25,0) circle (2pt) node[above] {\small 30 cm};
+\draw[-{Latex},line width=2pt,blue] (1.25,0) -- (1.25,1) node[above] {\small $v_1 = 0.9\pi$ m/s};
+
+% Punta
+\fill[red] (2.5,0) circle (2pt) node[below] {\small 60 cm (punta)};
+\draw[-{Latex},line width=2pt,red] (2.5,0) -- (2.5,1.5) node[above] {\small $v_2 = 1.8\pi$ m/s};
+
+% Velocidad angular
+\draw[-{Latex},line width=1.5pt,green!70!black] (0.5,0) arc (0:50:0.5);
+\node[green!70!black] at (0.4,0.6) {\small $\omega = 3\pi$ rad/s};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item a) $\omega = 3\pi \approx 9.42$ rad/s
+    \item b) $v_{\text{punta}} = 1.8\pi \approx 5.65$ m/s
+    \item c) $v_{30\text{cm}} = 0.9\pi \approx 2.83$ m/s
+\end{itemize}
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+Los ejercicios inversos te desafían a trabajar ``al revés'': conoces el resultado final y debes encontrar los datos iniciales. Estos problemas desarrollan tu pensamiento crítico y habilidades de resolución de problemas.
+
+\begin{enumerate}
+    \item \textbf{Longitud de arco inversa:} Un arco de circunferencia mide 24 cm de longitud y subtiende un ángulo central de $\dfrac{3\pi}{4}$ radianes. ¿Cuál es el radio del círculo?
+
+    \item \textbf{Área de sector inversa:} Un sector circular tiene un área de $50\pi$ cm$^2$ y un radio de 10 cm. ¿Cuál es el ángulo central del sector (en radianes y en grados)?
+
+    \item \textbf{Velocidad angular inversa:} Un punto en el borde de una rueda de radio 25 cm se mueve con una velocidad lineal de 5 m/s. ¿Cuál es la velocidad angular de la rueda en rad/s y en rpm?
+
+    \item \textbf{Problema aplicado:} Un satélite geoestacionario orbita la Tierra a una altura de 35,786 km sobre el ecuador. El radio de la Tierra es aproximadamente 6,371 km. Si el satélite completa exactamente una órbita en 24 horas (el mismo periodo de rotación de la Tierra):
+    \begin{enumerate}[label=\alph*)]
+        \item ¿Cuál es el radio de la órbita del satélite?
+        \item ¿Cuál es su velocidad angular en rad/s?
+        \item ¿Cuál es su velocidad lineal en km/h?
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\section{Soluciones de los Ejercicios Inversos}
+
+\subsection{Solución del Ejercicio Inverso 1}
+
+\textbf{Longitud de arco inversa}
+
+Datos:
+\begin{itemize}
+    \item $s = 24$ cm
+    \item $\theta = \dfrac{3\pi}{4}$ rad
+    \item Incógnita: $r = ?$
+\end{itemize}
+
+Usamos la fórmula $s = r\theta$ y la despejamos para $r$:
+
+$$r = \frac{s}{\theta}$$
+
+Sustituimos:
+\begin{align*}
+r &= \frac{24}{\frac{3\pi}{4}} \\
+&= 24 \times \frac{4}{3\pi} \\
+&= \frac{96}{3\pi} \\
+&= \frac{32}{\pi} \text{ cm} \\
+&\approx 10.19 \text{ cm}
+\end{align*}
+
+\textbf{Verificación:}
+$$s = r\theta = \frac{32}{\pi} \times \frac{3\pi}{4} = \frac{32 \times 3\pi}{4\pi} = \frac{96}{4} = 24 \text{ cm}$$
+
+¡Correcto!
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+% Círculo
+\draw[gray!30,dashed] (0,0) circle (1.5);
+
+% Radios
+\draw[thick,maincolor] (0,0) -- (1.5,0) node[midway,below] {\small $r = \frac{32}{\pi}$ cm};
+\draw[thick,maincolor] (0,0) -- ({1.5*cos(135)},{1.5*sin(135)});
+
+% Ángulo
+\draw[blue,thick,-{Latex}] (0.7,0) arc (0:135:0.7);
+\node[blue] at (0.5,0.7) {\small $\frac{3\pi}{4}$};
+
+% Arco
+\draw[line width=3pt,red] (1.5,0) arc (0:135:1.5);
+\node[red] at (1.5,1.5) {\small $s = 24$ cm};
+
+% Centro
+\fill[black] (0,0) circle (2pt);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} El radio del círculo es $\dfrac{32}{\pi} \approx 10.19$ cm.
+
+\subsection{Solución del Ejercicio Inverso 2}
+
+\textbf{Área de sector inversa}
+
+Datos:
+\begin{itemize}
+    \item $A = 50\pi$ cm$^2$
+    \item $r = 10$ cm
+    \item Incógnita: $\theta = ?$
+\end{itemize}
+
+Usamos la fórmula $A = \dfrac{1}{2}r^2\theta$ y la despejamos para $\theta$:
+
+$$\theta = \frac{2A}{r^2}$$
+
+Sustituimos:
+\begin{align*}
+\theta &= \frac{2(50\pi)}{(10)^2} \\
+&= \frac{100\pi}{100} \\
+&= \pi \text{ rad}
+\end{align*}
+
+Convertimos a grados:
+\begin{align*}
+\theta_{\text{grados}} &= \pi \times \frac{180°}{\pi} \\
+&= 180°
+\end{align*}
+
+\textbf{Interpretación:} El sector es exactamente un semicírculo (media circunferencia).
+
+\textbf{Verificación:}
+
+El área de un semicírculo con $r = 10$ cm es:
+$$A = \frac{1}{2}\pi r^2 = \frac{1}{2}\pi(10)^2 = 50\pi \text{ cm}^2$$
+
+¡Coincide!
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+% Semicírculo sombreado
+\fill[accentcolor!20] (0,0) -- (2.5,0) arc (0:180:2.5) -- cycle;
+
+% Círculo completo (borde)
+\draw[red!70!black!40,dashed] (0,0) circle (2.5);
+
+% Diámetro
+\draw[thick,maincolor] (-2.5,0) -- (2.5,0) node[midway,below] {\small $r = 10$ cm};
+
+% Radios verticales
+\draw[thick,maincolor] (0,0) -- (0,2.5) node[midway,left=1mm] {\small $r = 10$ cm};
+
+% Ángulo
+\draw[blue,thick,-{Latex}] (1,0) arc (0:180:1);
+\node[blue] at (0,0.3) {\small $\theta = \pi$ rad $= 180°$};
+
+% Área
+\node[rotate=-45] at (1.2,1.4) {$A = 50\pi$ cm$^2$};
+
+% Centro
+\fill[black] (0,0) circle (2pt);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} El ángulo central es $\pi$ radianes o $180°$.
+
+\subsection{Solución del Ejercicio Inverso 3}
+
+\textbf{Velocidad angular inversa}
+
+Datos:
+\begin{itemize}
+    \item $r = 25$ cm $= 0.25$ m
+    \item $v = 5$ m/s
+    \item Incógnita: $\omega = ?$
+\end{itemize}
+
+Usamos la fórmula $v = r\omega$ y la despejamos para $\omega$:
+
+$$\omega = \frac{v}{r}$$
+
+Sustituimos:
+\begin{align*}
+\omega &= \frac{5}{0.25} \\
+&= 20 \text{ rad/s}
+\end{align*}
+
+Convertimos a rpm (revoluciones por minuto):
+
+\begin{align*}
+\omega_{\text{rpm}} &= 20 \frac{\text{rad}}{\text{s}} \times \frac{1 \text{ rev}}{2\pi \text{ rad}} \times \frac{60 \text{ s}}{1 \text{ min}} \\
+&= \frac{20 \times 60}{2\pi} \text{ rpm} \\
+&= \frac{1200}{2\pi} \text{ rpm} \\
+&= \frac{600}{\pi} \text{ rpm} \\
+&\approx 190.99 \text{ rpm}
+\end{align*}
+
+\textbf{Verificación:}
+$$v = r\omega = 0.25 \times 20 = 5 \text{ m/s}$$
+
+¡Correcto!
+
+\textbf{Interpretación:} Una rueda relativamente pequeña (25 cm de radio) necesita girar muy rápido (casi 191 rpm) para que un punto en su borde se mueva a 5 m/s. Esto es equivalente a 18 km/h.
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+% Rueda
+\draw[thick,maincolor,fill=gray!10] (0,0) circle (1);
+
+% Radio
+\draw[thick,red] (0,0) -- (1,0) node[midway,below left] {\small $r = 25$ cm};
+
+% Punto en el borde
+\fill[accentcolor] (1,0) circle (2pt);
+
+% Velocidad lineal (conocida)
+\draw[-{Latex},line width=2pt,blue] (1,0) -- (2.5,0) node[midway,above] {\small $v = 5$ m/s};
+
+% Velocidad angular (calculada)
+\draw[-{Latex},line width=1pt,green!70!black] (0.5,0) arc (0:60:0.5);
+\node[green!70!black] at (0,0.25) {\small $\omega = ?$};
+
+% Centro
+\fill[black] (0,0) circle (2pt);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} La velocidad angular es $\omega = 20$ rad/s o $\dfrac{600}{\pi} \approx 190.99$ rpm.
+
+\subsection{Solución del Ejercicio Inverso 4}
+
+\textbf{Satélite geoestacionario}
+
+Datos:
+\begin{itemize}
+    \item Altura sobre el ecuador: $h = 35,786$ km
+    \item Radio de la Tierra: $R_T = 6,371$ km
+    \item Periodo orbital: $T = 24$ horas
+\end{itemize}
+
+\textbf{a) Radio de la órbita:}
+
+El radio de la órbita es la distancia desde el centro de la Tierra hasta el satélite:
+
+\begin{align*}
+r &= R_T + h \\
+&= 6,371 + 35,786 \\
+&= 42,157 \text{ km}
+\end{align*}
+
+\textbf{b) Velocidad angular:}
+
+El satélite completa una vuelta ($2\pi$ radianes) en 24 horas:
+
+\begin{align*}
+\omega &= \frac{\theta}{t} \\
+&= \frac{2\pi}{24 \text{ horas}} \\
+&= \frac{\pi}{12} \text{ rad/hora}
+\end{align*}
+
+Convertimos a rad/s:
+\begin{align*}
+\omega &= \frac{\pi}{12} \frac{\text{rad}}{\text{h}} \times \frac{1 \text{ h}}{3600 \text{ s}} \\
+&= \frac{\pi}{43200} \text{ rad/s} \\
+&\approx 7.27 \times 10^{-5} \text{ rad/s}
+\end{align*}
+
+\textbf{c) Velocidad lineal:}
+
+Usamos $v = r\omega$:
+
+\begin{align*}
+v &= r\omega \\
+&= 42,157 \times \frac{\pi}{43200} \text{ km/s} \\
+&= \frac{42,157\pi}{43200} \text{ km/s} \\
+&\approx 3.065 \text{ km/s}
+\end{align*}
+
+Convertimos a km/h:
+\begin{align*}
+v &= 3.065 \frac{\text{km}}{\text{s}} \times \frac{3600 \text{ s}}{1 \text{ h}} \\
+&= 11,034 \text{ km/h}
+\end{align*}
+
+\textbf{Verificación alternativa:}
+
+El perímetro de la órbita es:
+$$C = 2\pi r = 2\pi(42,157) \approx 264,924 \text{ km}$$
+
+El satélite recorre esta distancia en 24 horas:
+$$v = \frac{264,924}{24} \approx 11,038.5 \text{ km/h}$$
+
+¡Muy cercano a nuestra respuesta! (La pequeña diferencia se debe al redondeo)
+
+\textbf{Representación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Tierra
+\fill[brown!30] (0,0) circle (1.2) node {Tierra};
+\draw[thick,blue!50] (0,0) circle (1.2);
+
+% Órbita del satélite
+\draw[thick,red!70!black,dashed] (0,0) circle (4);
+
+% Radio de la Tierra
+\draw[thick,green!70!black] (0,0) -- (0,1.2) node[midway,left] {\tiny $R_T = 6371$ km};
+
+% Radio de la órbita
+\draw[thick,orange] (0,0) -- ({4*cos(45)},{4*sin(45)})
+node[font=\tiny, rotate=45] at(1.75,2.2){$r = 42157$ km};
+
+% Altura
+\draw[thick,purple,<-{Latex}] (0,1.2) -- (0,4) node[right,font=\tiny, rotate=90] at(-0.25,1.2){$h = 35786$ km};
+
+% Satélite
+\fill[red] ({4*cos(45)},{4*sin(45)}) circle (4pt);
+\node[red] at ({4.5*cos(45)},{4.5*sin(45)}) {\tiny Satélite};
+
+% Velocidad
+\draw[-{Latex},line width=1.5pt,blue] ({4*cos(45)},{4*sin(45)}) --
+({4*cos(45)-0.8*sin(45)},{4*sin(45)+0.8*cos(45)}) node[font=\tiny] at(4.3,2.8){$v = 11034$ km/h};
+
+% Rotación
+\draw[-{Latex},line width=1pt,green!70!black] (1.6,0) arc (0:85:1.5);
+\node[green!70!black,font=\tiny] at (2.6,0.6) {$\omega = \frac{\pi}{12}$ rad/h};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Datos interesantes:}
+\begin{itemize}
+    \item El satélite viaja a más de 11,000 km/h, ¡pero parece estar inmóvil en el cielo!
+    \item Esta velocidad es necesaria para contrarrestar la gravedad y mantenerse en órbita
+    \item Los satélites geoestacionarios son cruciales para comunicaciones y televisión
+\end{itemize}
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item a) Radio de la órbita: $r = 42,157$ km
+    \item b) Velocidad angular: $\omega = \dfrac{\pi}{12}$ rad/h $\approx 7.27 \times 10^{-5}$ rad/s
+    \item c) Velocidad lineal: $v \approx 11,034$ km/h $\approx 3.065$ km/s
+\end{itemize}
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicidades por completar esta guía sobre ángulos en trigonometría! Has recorrido un camino importante desde los conceptos básicos hasta aplicaciones complejas.
+
+\subsection{Resumen de lo aprendido}
+
+En esta guía has aprendido:
+
+\begin{enumerate}
+    \item \textbf{Concepto de ángulo:} Entiendes que un ángulo es la medida de rotación entre dos rayos que comparten un vértice.
+
+    \item \textbf{Ángulos en posición estándar:} Sabes colocar ángulos con el vértice en el origen y el lado inicial en el eje $x$ positivo.
+
+    \item \textbf{Sistemas de medición:}
+    \begin{itemize}
+        \item Sistema sexagesimal: grados, minutos y segundos
+        \item Sistema cíclico: radianes
+    \end{itemize}
+
+    \item \textbf{Conversiones:} Puedes convertir entre grados y radianes con facilidad.
+
+    \item \textbf{Ángulos coterminales:} Reconoces que diferentes ángulos pueden tener la misma posición terminal.
+
+    \item \textbf{Longitud de arco:} Calculas la longitud de un arco usando $s = r\theta$.
+
+    \item \textbf{Área de sector:} Determinas el área de un sector circular con $A = \frac{1}{2}r^2\theta$.
+
+    \item \textbf{Velocidades:}
+    \begin{itemize}
+        \item Velocidad angular: $\omega = \frac{\theta}{t}$
+        \item Velocidad lineal: $v = r\omega$
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Conexiones con otros temas}
+
+Los conceptos que has aprendido son fundamentales para:
+
+\begin{itemize}
+    \item \textbf{Funciones trigonométricas:} Seno, coseno y tangente se definen usando ángulos
+    \item \textbf{Identidades trigonométricas:} Muchas identidades involucran conversiones angulares
+    \item \textbf{Cálculo:} Las derivadas e integrales de funciones trigonométricas requieren radianes
+    \item \textbf{Física:} Movimiento circular, ondas, oscilaciones
+    \item \textbf{Ingeniería:} Diseño de engranajes, análisis de estructuras, sistemas de control
+    \item \textbf{Geometría analítica:} Transformaciones, rotaciones, coordenadas polares
+\end{itemize}
+
+\subsection{Consejos para seguir aprendiendo}
+
+\begin{enumerate}
+    \item \textbf{Practica regularmente:} La trigonometría requiere práctica constante. Resuelve problemas variados.
+
+    \item \textbf{Visualiza:} Siempre dibuja un diagrama. La visualización es clave en trigonometría.
+
+    \item \textbf{Memoriza lo esencial:} Aprende de memoria los ángulos notables y sus equivalencias.
+
+    \item \textbf{Entiende, no memorices:} Comprende de dónde vienen las fórmulas en lugar de solo memorizarlas.
+
+    \item \textbf{Busca aplicaciones:} Conecta los conceptos con situaciones reales que te interesen.
+
+    \item \textbf{Usa tecnología:} Programas como GeoGebra, Desmos o calculadoras gráficas son excelentes herramientas.
+\end{enumerate}
+
+\subsection{Fórmulas importantes para recordar}
+
+\begin{tcolorbox}[colback=maincolor!10,colframe=maincolor,title=Fórmulas Clave]
+\textbf{Conversiones:}
+\begin{itemize}
+    \item $\pi$ rad $= 180°$
+    \item grados $\to$ radianes: $\theta_{\text{rad}} = \theta_{\text{grados}} \times \dfrac{\pi}{180°}$
+    \item radianes $\to$ grados: $\theta_{\text{grados}} = \theta_{\text{rad}} \times \dfrac{180°}{\pi}$
+\end{itemize}
+
+\textbf{Ángulos coterminales:}
+$$\theta_{\text{coterminal}} = \theta + 360°n \quad \text{o} \quad \theta + 2\pi n$$
+
+\textbf{Longitud de arco y área:}
+\begin{itemize}
+    \item $s = r\theta$ (con $\theta$ en radianes)
+    \item $A = \dfrac{1}{2}r^2\theta$ (con $\theta$ en radianes)
+\end{itemize}
+
+\textbf{Velocidades:}
+\begin{itemize}
+    \item $\omega = \dfrac{\theta}{t}$
+    \item $v = r\omega$
+\end{itemize}
+\end{tcolorbox}
+
+\vfill
+
+\begin{center}
+\Large\textbf{¡Sigue practicando y explorando el mundo de la trigonometría!}
+\end{center}
+
+\end{document}

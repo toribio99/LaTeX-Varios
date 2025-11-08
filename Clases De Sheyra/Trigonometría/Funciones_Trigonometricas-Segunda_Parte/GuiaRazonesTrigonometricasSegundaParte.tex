@@ -1,0 +1,1535 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+
+\pgfplotsset{compat=1.18}
+
+\definecolor{maincolor}{RGB}{0,51,102}
+\definecolor{accentcolor}{RGB}{204,85,0}
+
+\title{\textbf{\color{maincolor}Funciones Trigonométricas Segunda Parte}}
+\author{Prof. Toribio De J Arrieta F}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{center}
+\Large \textbf{La Pruebita}\\[0.3cm]
+\large Grado 10 - Trigonometría
+\end{center}
+
+\vspace{2cm}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Círculo unitario
+    \draw[thick,maincolor] (0,0) circle (2);
+
+    % Ejes
+    \draw[-{Latex},thick] (-2.5,0)--(2.5,0) node[right]{$x$};
+    \draw[-{Latex},thick] (0,-2.5)--(0,2.5) node[above]{$y$};
+
+    % Ángulo de 45 grados
+    \draw[thick,red] (0,0)--(1.414,1.414);
+    \draw[red,thick] (0.5,0) arc (0:45:0.5);
+    \node[red] at (0.7,0.3) {$45°$};
+
+    % Punto en el círculo
+    \fill[blue] (1.414,1.414) circle (0.08);
+
+    % Coordenadas
+    \draw[dashed,blue] (1.414,0)--(1.414,1.414)--(0,1.414);
+    \node[below] at (1.414,0) {\small $\cos 45°$};
+    \node[left] at (0,1.414) {\small $\sen 45°$};
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Hola! En esta guía vamos a profundizar en las funciones trigonométricas, esas herramientas matemáticas súper útiles que nos ayudan a resolver problemas del mundo real. Ya sabemos que la trigonometría nació para medir triángulos, pero, digamos que ahora vamos a ver cómo estas funciones aparecen en todas partes: desde calcular la altura de un edificio hasta entender cómo funciona el GPS de tu celular.
+
+\subsection*{¿Qué vamos a aprender?}
+
+En esta segunda parte de razones trigonométricas, vamos a explorar:
+
+\begin{itemize}[leftmargin=2cm]
+    \item \textbf{Las seis razones trigonométricas:} No solo seno, coseno y tangente, sino también sus "hermanas" cosecante, secante y cotangente.
+
+    \item \textbf{Ángulos especiales:} Los famosos ángulos de 30°, 45° y 60°. Estos son como los números mágicos de la trigonometría, entonces es súper importante memorizarlos.
+
+    \item \textbf{Cofunciones:} Vas a ver que hay una relación súper interesante entre funciones de ángulos complementarios. Es como si fueran funciones gemelas.
+
+    \item \textbf{Ángulos de referencia:} Una técnica genial para calcular funciones trigonométricas de cualquier ángulo, usando solo ángulos agudos.
+
+    \item \textbf{Ángulos coterminales:} Ángulos que, digamos, terminan en el mismo lugar aunque den vueltas diferentes.
+
+    \item \textbf{Uso de la calculadora:} Porque sí, está bien usar tecnología cuando la sabemos usar correctamente.
+\end{itemize}
+
+\subsection*{¿Para qué sirve esto en la vida real?}
+
+Bueno, resulta que la trigonometría está en todos lados. Por ejemplo:
+
+\begin{itemize}[leftmargin=2cm]
+    \item \textcolor{accentcolor}{\textbf{En arquitectura:}} Los arquitectos calculan ángulos y distancias para diseñar edificios seguros y bonitos.
+
+    \item \textcolor{accentcolor}{\textbf{En navegación:}} Los pilotos de aviones y capitanes de barcos usan trigonometría para trazar rutas. Tu GPS también.
+
+    \item \textcolor{accentcolor}{\textbf{En topografía:}} Para medir terrenos y montañas sin tener que escalarlas todas.
+
+    \item \textcolor{accentcolor}{\textbf{En astronomía:}} Para calcular distancias a las estrellas y planetas.
+
+    \item \textcolor{accentcolor}{\textbf{En ingeniería:}} Para diseñar puentes, rampas, torres de comunicación, etc.
+\end{itemize}
+
+Entonces, como ves, no estamos estudiando esto solo porque sí. La trigonometría es una herramienta poderosa que te va a servir en muchísimas carreras profesionales.
+
+\subsection*{Un consejo antes de empezar}
+
+La trigonometría puede parecer complicada al principio, pero la clave está en practicar. No te preocupes si no entiendes todo de una vez. Es como aprender a andar en bicicleta: al principio te caes, pero con práctica te vuelves experto. ¡Vamos a ello!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Las Seis Razones Trigonométricas en el Triángulo Rectángulo}
+
+Bien, entonces empecemos con lo básico. Ya conoces seno, coseno y tangente. Pero resulta que hay tres más que son igual de importantes. Veamos el triángulo rectángulo:
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Triángulo rectángulo
+    \draw[very thick,maincolor] (0,0)--(4,0)--(4,3)--cycle;
+
+    % Ángulo recto
+    \draw[thick] (3.8,0)--(3.8,0.2)--(4,0.2);
+
+    % Ángulo theta
+    \draw[thick,red] (0.6,0) arc (0:36.87:0.6);
+    \node[red] at (0.9,0.2) {$\theta$};
+
+    % Etiquetas de los lados
+    \node[below] at (2,0) {\large Cateto adyacente};
+    \node[right] at (4,1.5) {\large Cateto opuesto};
+    \node[above left] at (2,1.7) {\large Hipotenusa};
+
+    % Medidas
+    \node[below,blue] at (2,-0.3) {$b$};
+    \node[right,blue] at (4.3,1.5) {$a$};
+    \node[above left,blue] at (1.8,1.9) {$c$};
+\end{tikzpicture}
+\end{center}
+
+Ahora, las seis razones trigonométricas se definen así:
+
+\begin{tcolorbox}[colback=maincolor!5,colframe=maincolor,title=Las Seis Razones Trigonométricas]
+\begin{multicols}{2}
+\textbf{Funciones básicas:}
+\begin{align*}
+\sen \theta &= \frac{\text{opuesto}}{\text{hipotenusa}} = \frac{a}{c}\\[0.3cm]
+\cos \theta &= \frac{\text{adyacente}}{\text{hipotenusa}} = \frac{b}{c}\\[0.3cm]
+\tan \theta &= \frac{\text{opuesto}}{\text{adyacente}} = \frac{a}{b}
+\end{align*}
+
+\textbf{Funciones recíprocas:}
+\begin{align*}
+\csc \theta &= \frac{\text{hipotenusa}}{\text{opuesto}} = \frac{c}{a}\\[0.3cm]
+\sec \theta &= \frac{\text{hipotenusa}}{\text{adyacente}} = \frac{c}{b}\\[0.3cm]
+\cot \theta &= \frac{\text{adyacente}}{\text{opuesto}} = \frac{b}{a}
+\end{align*}
+\end{multicols}
+\end{tcolorbox}
+
+Fíjate bien: las tres funciones de la derecha son simplemente los recíprocos de las tres de la izquierda. O sea:
+
+\begin{align*}
+\csc \theta &= \frac{1}{\sen \theta} \quad\quad \sec \theta = \frac{1}{\cos \theta} \quad\quad \cot \theta = \frac{1}{\tan \theta}
+\end{align*}
+
+\subsection{Ángulos Especiales: 30°, 45° y 60°}
+
+Estos tres ángulos son súper importantes porque aparecen todo el tiempo. La buena noticia es que podemos calcular sus razones trigonométricas de manera exacta usando geometría.
+
+\subsubsection*{Triángulo de 45°-45°-90°}
+
+Este es un triángulo rectángulo isósceles. Si los catetos miden 1, entonces por Pitágoras la hipotenusa mide $\sqrt{2}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    % Triángulo 45-45-90
+    \draw[very thick,maincolor] (0,0)--(2,0)--(2,2)--cycle;
+
+    % Ángulo recto
+    \draw[thick] (1.85,0)--(1.85,0.15)--(2,0.15);
+
+    % Ángulos de 45 grados
+    \draw[thick,red] (0.3,0) arc (0:45:0.3);
+    \node[red] at (0.5,0.15) {$45°$};
+    \draw[thick,red] (2,1.7) arc (270:225:0.3);
+    \node[red] at (1.65,1.7) {$45°$};
+
+    % Etiquetas
+    \node[below] at (1,-0.1) {$1$};
+    \node[right] at (2.1,1) {$1$};
+    \node[above left] at (0.9,1.2) {$\sqrt{2}$};
+\end{tikzpicture}
+\end{center}
+
+Entonces, para el ángulo de 45°:
+
+\begin{align*}
+\sen 45° = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2} \quad\quad
+\cos 45° = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2} \quad\quad
+\tan 45° = \frac{1}{1} = 1
+\end{align*}
+
+\subsubsection*{Triángulo de 30°-60°-90°}
+
+Este triángulo se obtiene cortando un triángulo equilátero por la mitad. Si el cateto menor mide 1, entonces el cateto mayor mide $\sqrt{3}$ y la hipotenusa mide 2.
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    % Triángulo 30-60-90
+    \draw[very thick,maincolor] (0,0)--(3.464,0)--(3.464,2)--cycle;
+
+    % Ángulo recto
+    \draw[thick] (3.364,0)--(3.364,0.1)--(3.464,0.1);
+
+    % Ángulos
+    \draw[thick,red] (0.5,0) arc (0:30:0.5);
+    \node[red] at (0.75,0.15) {$30°$};
+    \draw[thick,blue] (3.464,1.7) arc (270:210:0.3);
+    \node[blue] at (3.0,1.7) {$60°$};
+
+    % Etiquetas
+    \node[below] at (1.732,-0.1) {$\sqrt{3}$};
+    \node[right] at (3.564,1) {$1$};
+    \node[above left] at (1.5,1.2) {$2$};
+\end{tikzpicture}
+\end{center}
+
+Para el ángulo de 30°:
+\begin{align*}
+\sen 30° = \frac{1}{2} \quad\quad
+\cos 30° = \frac{\sqrt{3}}{2} \quad\quad
+\tan 30° = \frac{1}{\sqrt{3}} = \frac{\sqrt{3}}{3}
+\end{align*}
+
+Para el ángulo de 60°:
+\begin{align*}
+\sen 60° = \frac{\sqrt{3}}{2} \quad\quad
+\cos 60° = \frac{1}{2} \quad\quad
+\tan 60° = \sqrt{3}
+\end{align*}
+
+\subsubsection*{Tabla de Valores Exactos}
+
+Es muy útil tener esta tabla memorizada:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Ángulo} & $\sen$ & $\cos$ & $\tan$ & $\csc$ & $\sec$ & $\cot$ \\
+\hline
+$0°$ & $0$ & $1$ & $0$ & indefinido & $1$ & indefinido \\
+\hline
+$30°$ & $\frac{1}{2}$ & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{3}}{3}$ & $2$ & $\frac{2\sqrt{3}}{3}$ & $\sqrt{3}$ \\
+\hline
+$45°$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{2}}{2}$ & $1$ & $\sqrt{2}$ & $\sqrt{2}$ & $1$ \\
+\hline
+$60°$ & $\frac{\sqrt{3}}{2}$ & $\frac{1}{2}$ & $\sqrt{3}$ & $\frac{2\sqrt{3}}{3}$ & $2$ & $\frac{\sqrt{3}}{3}$ \\
+\hline
+$90°$ & $1$ & $0$ & indefinido & $1$ & indefinido & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\subsection{Razones Trigonométricas de Ángulos Complementarios - Cofunciones}
+
+Aquí viene algo bien interesante. Dos ángulos son complementarios si suman 90°. Por ejemplo, 30° y 60° son complementarios. Resulta que hay una relación muy bonita entre las funciones trigonométricas de ángulos complementarios.
+
+\begin{tcolorbox}[colback=accentcolor!5,colframe=accentcolor,title=Identidades de Cofunciones]
+Si $\alpha$ y $\beta$ son complementarios (o sea, $\alpha + \beta = 90°$), entonces:
+
+\begin{multicols}{2}
+\begin{align*}
+\sen \alpha &= \cos \beta\\
+\cos \alpha &= \sen \beta\\
+\tan \alpha &= \cot \beta
+\end{align*}
+
+\begin{align*}
+\csc \alpha &= \sec \beta\\
+\sec \alpha &= \csc \beta\\
+\cot \alpha &= \tan \beta
+\end{align*}
+\end{multicols}
+
+O también podemos escribir:
+\begin{align*}
+\sen \theta &= \cos(90° - \theta) \quad\quad \cos \theta = \sen(90° - \theta)\\
+\tan \theta &= \cot(90° - \theta) \quad\quad \cot \theta = \tan(90° - \theta)\\
+\sec \theta &= \csc(90° - \theta) \quad\quad \csc \theta = \sec(90° - \theta)
+\end{align*}
+\end{tcolorbox}
+
+Por ejemplo:
+\begin{itemize}
+\item $\sen 30° = \cos 60° = \frac{1}{2}$
+\item $\cos 30° = \sen 60° = \frac{\sqrt{3}}{2}$
+\item $\tan 30° = \cot 60° = \frac{\sqrt{3}}{3}$
+\end{itemize}
+
+¿Ves el patrón? El seno de un ángulo es igual al coseno de su complemento. Por eso se llaman CO-funciones: ¡COseno es la COfunción del seno!
+
+\subsection{Ángulos de Referencia}
+
+Bueno, entonces ahora viene un concepto súper útil. ¿Qué pasa si queremos calcular el seno de 150°? ¿O la tangente de 225°? Aquí es donde entran los ángulos de referencia.
+
+El \textbf{ángulo de referencia} es el ángulo agudo que forma el lado terminal del ángulo con el eje $x$. Es como si redujéramos cualquier ángulo a uno entre 0° y 90°.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    \begin{axis}[
+        width=10cm, height=10cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1.5, xmax=1.5,
+        ymin=-1.5, ymax=1.5,
+        xtick={-1,1},
+        ytick={-1,1},
+        axis equal,
+        samples=100,
+    ]
+
+    % Círculo unitario
+    \addplot[thick,maincolor,domain=0:360] ({cos(x)}, {sin(x)});
+
+    % Cuadrantes
+    \node[maincolor] at (axis cs:0.7,0.7) {\Large I};
+    \node[maincolor] at (axis cs:-0.7,0.7) {\Large II};
+    \node[maincolor] at (axis cs:-0.7,-0.7) {\Large III};
+    \node[maincolor] at (axis cs:0.7,-0.7) {\Large IV};
+
+    % Ángulo de 150 grados
+    \draw[-{Latex},thick,red] (axis cs:0,0)--(axis cs:-0.866,0.5);
+    \draw[red,thick] (axis cs:0.3,0) arc (0:150:0.3);
+    \node[red] at (axis cs:0.15,0.15) {$150°$};
+
+    % Ángulo de referencia
+    \draw[blue,thick] (axis cs:-0.3,0) arc (180:150:0.3);
+    \node[blue] at (axis cs:-0.45,0.1) {$30°$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Cómo encontrar el ángulo de referencia:}
+
+\begin{itemize}
+\item \textbf{Cuadrante I} (0° a 90°): El ángulo de referencia es el mismo ángulo.
+\item \textbf{Cuadrante II} (90° a 180°): Ángulo de referencia = $180° - \theta$
+\item \textbf{Cuadrante III} (180° a 270°): Ángulo de referencia = $\theta - 180°$
+\item \textbf{Cuadrante IV} (270° a 360°): Ángulo de referencia = $360° - \theta$
+\end{itemize}
+
+\textbf{Signos de las funciones trigonométricas en cada cuadrante:}
+
+Para saber el signo, hay una regla mnemotécnica: "Todo Seno Tangente Coseno" (TSTC) o mejor aún: "Todas Son Tan Cositas"
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Ejes
+    \draw[-{Latex},thick] (-2.5,0)--(2.5,0) node[right]{$x$};
+    \draw[-{Latex},thick] (0,-2.5)--(0,2.5) node[above]{$y$};
+
+    % Cuadrante I - Todas positivas
+    \node[align=center] at (1.2,1.2) {\textbf{Cuadrante I}\\Todas\\positivas};
+
+    % Cuadrante II - Solo seno positivo
+    \node[align=center] at (-1.2,1.2) {\textbf{Cuadrante II}\\Solo $\sen$\\positivo};
+
+    % Cuadrante III - Solo tangente positiva
+    \node[align=center] at (-1.2,-1.2) {\textbf{Cuadrante III}\\Solo $\tan$\\positiva};
+
+    % Cuadrante IV - Solo coseno positivo
+    \node[align=center] at (1.2,-1.2) {\textbf{Cuadrante IV}\\Solo $\cos$\\positivo};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Funciones Trigonométricas de Ángulos Coterminales}
+
+Los ángulos coterminales son ángulos que tienen el mismo lado terminal. Se obtienen sumando o restando múltiplos de 360° (o $2\pi$ radianes).
+
+Por ejemplo, 30°, 390°, 750° y -330° son todos coterminales porque:
+\begin{align*}
+30° + 360° &= 390°\\
+30° + 720° &= 750°\\
+30° - 360° &= -330°
+\end{align*}
+
+\begin{tcolorbox}[colback=maincolor!5,colframe=maincolor,title=Propiedad de Ángulos Coterminales]
+Si $\alpha$ y $\beta$ son coterminales, entonces:
+\[\sen \alpha = \sen \beta \quad\quad \cos \alpha = \cos \beta \quad\quad \tan \alpha = \tan \beta\]
+
+Y lo mismo para las demás funciones trigonométricas.
+\end{tcolorbox}
+
+Entonces, para calcular las funciones trigonométricas de cualquier ángulo, podemos encontrar un ángulo coterminal entre 0° y 360° y usar ángulos de referencia.
+
+\subsection{Uso de la Calculadora}
+
+Bien, ahora hablemos de algo práctico. Tu calculadora tiene botones para $\sen$, $\cos$ y $\tan$. Pero hay algunas cosas importantes que debes saber:
+
+\begin{enumerate}
+\item \textbf{Modo de ángulos:} Asegúrate de que tu calculadora esté en modo \textbf{DEG} (grados) o \textbf{RAD} (radianes) según lo que necesites. Para esta guía usamos grados.
+
+\item \textbf{Para calcular $\csc$, $\sec$ y $\cot$:} Como la mayoría de calculadoras no tienen botones para estas funciones, usa:
+\begin{align*}
+\csc \theta &= \frac{1}{\sen \theta} \quad \text{(teclea: } 1 \div \sen(\theta) \text{)}\\
+\sec \theta &= \frac{1}{\cos \theta} \quad \text{(teclea: } 1 \div \cos(\theta) \text{)}\\
+\cot \theta &= \frac{1}{\tan \theta} \quad \text{(teclea: } 1 \div \tan(\theta) \text{)}
+\end{align*}
+
+\item \textbf{Funciones inversas:} Para encontrar un ángulo cuando conoces el valor de su función trigonométrica, usa los botones $\sen^{-1}$, $\cos^{-1}$ o $\tan^{-1}$ (también escritos como arcsen, arccos, arctan).
+\end{enumerate}
+
+\newpage
+
+\section{Ejemplos Resueltos}
+
+Ahora sí, vamos a ver cómo aplicar todo lo que hemos aprendido. Presta mucha atención a cada paso.
+
+\subsection*{\color{accentcolor}Ejemplo 1: Calcular las seis razones trigonométricas}
+
+\textbf{Enunciado:} En un triángulo rectángulo, el cateto opuesto a un ángulo $\theta$ mide 5 cm y la hipotenusa mide 13 cm. Encuentra las seis razones trigonométricas de $\theta$.
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Dibujamos el triángulo y lo que conocemos.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Triángulo rectángulo
+    \draw[very thick,maincolor] (0,0)--(5,0)--(5,2)--cycle;
+
+    % Ángulo recto
+    \draw[thick] (4.8,0)--(4.8,0.2)--(5,0.2);
+
+    % Ángulo theta
+    \draw[thick,red] (0.6,0) arc (0:21.8:0.6);
+    \node[red] at (1,0.2) {$\theta$};
+
+    % Etiquetas
+    \node[below] at (2.5,-0.1) {$b = ?$};
+    \node[right] at (5.2,1) {$a = 5$};
+    \node[above left] at (2.3,1.3) {$c = 13$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 2:} Primero necesitamos encontrar el cateto adyacente usando el teorema de Pitágoras:
+
+\begin{align*}
+a^2 + b^2 &= c^2\\
+5^2 + b^2 &= 13^2\\
+25 + b^2 &= 169\\
+b^2 &= 169 - 25\\
+b^2 &= 144\\
+b &= 12 \text{ cm}
+\end{align*}
+
+\textbf{Paso 3:} Ahora calculamos las seis razones trigonométricas:
+
+\begin{multicols}{2}
+\textbf{Funciones principales:}
+\begin{align*}
+\sen \theta &= \frac{\text{opuesto}}{\text{hipotenusa}} = \frac{5}{13}\\[0.3cm]
+\cos \theta &= \frac{\text{adyacente}}{\text{hipotenusa}} = \frac{12}{13}\\[0.3cm]
+\tan \theta &= \frac{\text{opuesto}}{\text{adyacente}} = \frac{5}{12}
+\end{align*}
+
+\textbf{Funciones recíprocas:}
+\begin{align*}
+\csc \theta &= \frac{\text{hipotenusa}}{\text{opuesto}} = \frac{13}{5}\\[0.3cm]
+\sec \theta &= \frac{\text{hipotenusa}}{\text{adyacente}} = \frac{13}{12}\\[0.3cm]
+\cot \theta &= \frac{\text{adyacente}}{\text{opuesto}} = \frac{12}{5}
+\end{align*}
+\end{multicols}
+
+\textbf{Respuesta:}
+\[\boxed{\sen \theta = \frac{5}{13}, \quad \cos \theta = \frac{12}{13}, \quad \tan \theta = \frac{5}{12}, \quad \csc \theta = \frac{13}{5}, \quad \sec \theta = \frac{13}{12}, \quad \cot \theta = \frac{12}{5}}\]
+
+\textbf{Verificación:} Podemos verificar que $\sen^2 \theta + \cos^2 \theta = 1$:
+\[\left(\frac{5}{13}\right)^2 + \left(\frac{12}{13}\right)^2 = \frac{25}{169} + \frac{144}{169} = \frac{169}{169} = 1 \quad \checkmark\]
+
+\newpage
+
+\subsection*{\color{accentcolor}Ejemplo 2: Usar ángulos de referencia}
+
+\textbf{Enunciado:} Calcula el valor exacto de $\sen 150°$, $\cos 150°$ y $\tan 150°$ usando ángulos de referencia.
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar en qué cuadrante está el ángulo. 150° está entre 90° y 180°, entonces está en el \textbf{Cuadrante II}.
+
+\textbf{Paso 2:} Encontrar el ángulo de referencia. Para el Cuadrante II:
+\[\text{Ángulo de referencia} = 180° - 150° = 30°\]
+
+\textbf{Paso 3:} Determinar los signos. En el Cuadrante II:
+\begin{itemize}
+\item El seno es \textbf{positivo}
+\item El coseno es \textbf{negativo}
+\item La tangente es \textbf{negativa}
+\end{itemize}
+
+\textbf{Paso 4:} Calcular usando los valores del ángulo de referencia (30°):
+
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+    \begin{axis}[
+        width=10cm, height=10cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1.3, xmax=1.3,
+        ymin=-0.5, ymax=1.3,
+        xtick={-1,1},
+        ytick={-1,1},
+        axis equal,
+        samples=100,
+    ]
+
+    % Círculo unitario
+    \addplot[thick,maincolor,domain=0:360] ({cos(x)}, {sin(x)});
+
+    % Ángulo de 150 grados
+    \draw[-{Latex},very thick,red] (axis cs:0,0)--(axis cs:-0.866,0.5);
+    \draw[red,thick] (axis cs:0.3,0) arc (0:150:0.3);
+    \node[red] at (axis cs:0.2,0.25) {$150°$};
+
+    % Ángulo de referencia
+    \draw[blue,thick] (axis cs:-0.3,0) arc (180:150:0.3);
+    \node[blue] at (axis cs:-0.5,0.12) {$30°$};
+
+    % Punto en el círculo
+    \fill[red] (axis cs:-0.866,0.5) circle (0.05);
+
+    % Coordenadas
+    \draw[dashed,blue] (axis cs:-0.866,0)--(axis cs:-0.866,0.5)--(axis cs:0,0.5);
+    \node[below,blue] at (axis cs:-0.866,0) {$-\frac{\sqrt{3}}{2}$};
+    \node[left,blue] at (axis cs:0,0.5) {$\frac{1}{2}$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{align*}
+\sen 150° &= +\sen 30° = +\frac{1}{2} = \frac{1}{2}\\[0.3cm]
+\cos 150° &= -\cos 30° = -\frac{\sqrt{3}}{2} = -\frac{\sqrt{3}}{2}\\[0.3cm]
+\tan 150° &= -\tan 30° = -\frac{\sqrt{3}}{3} = -\frac{\sqrt{3}}{3}
+\end{align*}
+
+\textbf{Respuesta:}
+\[\boxed{\sen 150° = \frac{1}{2}, \quad \cos 150° = -\frac{\sqrt{3}}{2}, \quad \tan 150° = -\frac{\sqrt{3}}{3}}\]
+
+\textbf{Verificación:} Podemos usar una calculadora para verificar:
+\begin{align*}
+\sen 150° &\approx 0.5 = \frac{1}{2} \quad \checkmark\\
+\cos 150° &\approx -0.866 \approx -\frac{\sqrt{3}}{2} \quad \checkmark
+\end{align*}
+
+\newpage
+
+\subsection*{\color{accentcolor}Ejemplo 3: Ángulos coterminales y funciones trigonométricas}
+
+\textbf{Enunciado:} Encuentra dos ángulos coterminales con 50° (uno positivo y uno negativo). Luego verifica que $\sen 50° = \sen(\text{ángulo coterminal})$.
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Para encontrar un ángulo coterminal positivo, sumamos 360°:
+\[50° + 360° = 410°\]
+
+\textbf{Paso 2:} Para encontrar un ángulo coterminal negativo, restamos 360°:
+\[50° - 360° = -310°\]
+
+\textbf{Paso 3:} Visualicemos estos tres ángulos en el círculo unitario:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+    \begin{axis}[
+        width=10cm, height=10cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1.3, xmax=1.3,
+        ymin=-1.3, ymax=1.3,
+        xtick={-1,1},
+        ytick={-1,1},
+        axis equal,
+        samples=100,
+    ]
+
+    % Círculo unitario
+    \addplot[thick,maincolor,domain=0:360] ({cos(x)}, {sin(x)});
+
+    % Ángulo de 50 grados
+    \draw[-{Latex},very thick,red] (axis cs:0,0)--(axis cs:0.643,0.766);
+
+    % Punto en el círculo
+    \fill[red] (axis cs:0.643,0.766) circle (0.05);
+    \node[red,above right] at (axis cs:0.643,0.766) {$(0.643, 0.766)$};
+
+    % Etiquetas de ángulos
+    \node[red] at (axis cs:0.4,0.3) {$50°$};
+    \node[blue] at (axis cs:0.5,0.5) {$410°$};
+    \node[green!60!black] at (axis cs:0.6,0.65) {$-310°$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 4:} Verificamos con calculadora:
+\begin{align*}
+\sen 50° &\approx 0.766\\
+\sen 410° &\approx 0.766\\
+\sen(-310°) &\approx 0.766
+\end{align*}
+
+¡Todos dan el mismo valor!
+
+\textbf{Respuesta:}
+\[\boxed{\text{Ángulos coterminales: } 410° \text{ y } -310°. \quad \sen 50° = \sen 410° = \sen(-310°) \approx 0.766}\]
+
+\textbf{Interpretación:} Los ángulos coterminales tienen el mismo lado terminal, por eso todas sus funciones trigonométricas son iguales. Esto es muy útil porque podemos convertir cualquier ángulo (por más grande que sea) en un ángulo entre 0° y 360°.
+
+\newpage
+
+\subsection*{\color{accentcolor}Ejemplo 4: Aplicación - Altura de un edificio}
+
+\textbf{Enunciado:} Un topógrafo está a 50 metros de distancia de un edificio. Mide el ángulo de elevación desde el suelo hasta la parte superior del edificio y obtiene 60°. ¿Cuál es la altura del edificio?
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Dibujamos la situación:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.08]
+    % Suelo
+    \draw[very thick] (0,0)--(80,0);
+
+    % Edificio
+    \draw[very thick,maincolor,fill=maincolor!20] (50,0) rectangle (60,86.6);
+
+    % Observador
+    \fill[red] (0,0) circle (1.5);
+    \node[red,below] at (0,-5) {Topógrafo};
+
+    % Línea de visión
+    \draw[thick,red,dashed] (0,0)--(50,86.6);
+
+    % Ángulo
+    \draw[thick,blue] (10,0) arc (0:60:10);
+    \node[blue] at (15,5) {$60°$};
+
+    % Etiquetas
+    \node[below] at (25,-3) {50 m};
+    \node[right] at (60,43) {$h = ?$};
+
+    % Flechas de medida
+    \draw[{Latex}-{Latex}] (0,-8)--(50,-8);
+    \draw[{Latex}-{Latex}] (63,0)--(63,86.6);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 2:} Identificamos que tenemos un triángulo rectángulo donde:
+\begin{itemize}
+\item El cateto adyacente al ángulo de 60° es 50 m (distancia horizontal)
+\item El cateto opuesto es $h$ (la altura que buscamos)
+\item El ángulo es 60°
+\end{itemize}
+
+\textbf{Paso 3:} Usamos la tangente porque relaciona el cateto opuesto con el adyacente:
+\[\tan 60° = \frac{\text{cateto opuesto}}{\text{cateto adyacente}} = \frac{h}{50}\]
+
+\textbf{Paso 4:} Despejamos $h$:
+\begin{align*}
+h &= 50 \cdot \tan 60°\\
+h &= 50 \cdot \sqrt{3}\\
+h &= 50 \times 1.732\\
+h &\approx 86.6 \text{ metros}
+\end{align*}
+
+\textbf{Respuesta:}
+\[\boxed{h \approx 86.6 \text{ metros}}\]
+
+\textbf{Verificación:} Podemos verificar usando el teorema de Pitágoras. La hipotenusa (línea de visión) debería ser:
+\begin{align*}
+c &= \sqrt{50^2 + 86.6^2} = \sqrt{2500 + 7499.56} = \sqrt{9999.56} \approx 100 \text{ m}
+\end{align*}
+
+Y efectivamente, en un triángulo 30-60-90, si el cateto menor (50 m) es $x$, entonces el cateto mayor es $x\sqrt{3} \approx 86.6$ m y la hipotenusa es $2x = 100$ m. ¡Todo cuadra!
+
+\textbf{Interpretación práctica:} Este es exactamente el tipo de problema que resuelven los topógrafos y arquitectos. No necesitan subir al edificio para medirlo, solo miden el ángulo desde el suelo y usan trigonometría.
+
+\newpage
+
+\subsection*{\color{accentcolor}Ejemplo 5: Aplicación - Navegación}
+
+\textbf{Enunciado:} Un barco zarpa del puerto y navega 40 km hacia el norte, luego gira y navega 30 km hacia el este. ¿A qué distancia está del puerto? ¿Qué ángulo forma su posición actual con el norte?
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Dibujamos el recorrido del barco:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.12]
+    % Ejes como referencia
+    \draw[-{Latex},thick,gray] (0,-5)--(0,55) node[above] {Norte};
+    \draw[-{Latex},thick,gray] (-5,0)--(40,0) node[right] {Este};
+
+    % Puerto
+    \fill[red] (0,0) circle (1.5);
+    \node[red,below left] at (0,-3) {Puerto};
+
+    % Trayectoria
+    \draw[very thick,blue,-{Latex}] (0,0)--(0,40) node[midway,left] {40 km};
+    \draw[very thick,blue,-{Latex}] (0,40)--(30,40) node[midway,above] {30 km};
+
+    % Posición final
+    \fill[green!60!black] (30,40) circle (1.5);
+    \node[green!60!black,above right] at (30,40) {Barco};
+
+    % Línea directa desde el puerto
+    \draw[thick,red,dashed] (0,0)--(30,40) node[midway,above left] {$d = ?$};
+
+    % Ángulo con el norte
+    \draw[thick,orange] (0,15) arc (90:53.13:15);
+    \node[orange] at (4,18) {$\theta$};
+
+    % Triángulo rectángulo
+    \draw[thick,maincolor] (0,0) rectangle (2,2);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 2:} Calculamos la distancia directa usando el teorema de Pitágoras:
+\begin{align*}
+d^2 &= 40^2 + 30^2\\
+d^2 &= 1600 + 900\\
+d^2 &= 2500\\
+d &= 50 \text{ km}
+\end{align*}
+
+\textbf{Paso 3:} Para encontrar el ángulo $\theta$ que forma con el norte, usamos la tangente:
+\[\tan \theta = \frac{\text{cateto opuesto}}{\text{cateto adyacente}} = \frac{30}{40} = \frac{3}{4} = 0.75\]
+
+\textbf{Paso 4:} Para encontrar $\theta$, usamos la función inversa de la tangente:
+\begin{align*}
+\theta &= \tan^{-1}(0.75)\\
+\theta &\approx 36.87°
+\end{align*}
+
+\textbf{Respuesta:}
+\[\boxed{\text{Distancia al puerto: } d = 50 \text{ km}, \quad \text{Ángulo con el norte: } \theta \approx 36.87° \text{ hacia el este}}\]
+
+\textbf{Verificación:} Podemos verificar usando las razones trigonométricas:
+\begin{align*}
+\sen \theta &= \frac{30}{50} = 0.6 \quad\quad \sen(36.87°) \approx 0.6 \quad \checkmark\\
+\cos \theta &= \frac{40}{50} = 0.8 \quad\quad \cos(36.87°) \approx 0.8 \quad \checkmark
+\end{align*}
+
+\textbf{Interpretación práctica:} En navegación, este tipo de cálculos son esenciales. Los navegantes usan ángulos medidos desde el norte (llamados "rumbos") para indicar direcciones. En este caso, el barco está a un rumbo de aproximadamente 37° Este desde el norte, a 50 km del puerto.
+
+Este también es el principio detrás del GPS: triangula tu posición usando distancias y ángulos desde puntos conocidos (satélites).
+
+\newpage
+
+\section{Ejercicios Propuestos}
+
+Ahora es tu turno. Resuelve estos ejercicios aplicando todo lo que has aprendido. Las soluciones completas están más adelante, pero intenta resolverlos primero sin mirar.
+
+\subsection*{Ejercicio 1: Razones trigonométricas en un triángulo}
+
+En un triángulo rectángulo, un ángulo agudo $\alpha$ tiene $\cos \alpha = \frac{4}{5}$.
+\begin{enumerate}[label=\alph*)]
+    \item Dibuja el triángulo rectángulo correspondiente.
+    \item Calcula las otras cinco razones trigonométricas de $\alpha$.
+    \item Verifica tu respuesta usando la identidad pitagórica $\sen^2 \alpha + \cos^2 \alpha = 1$.
+\end{enumerate}
+
+\subsection*{Ejercicio 2: Ángulos especiales y cofunciones}
+
+\begin{enumerate}[label=\alph*)]
+    \item Demuestra que $\sen 30° = \cos 60°$ usando los valores exactos.
+    \item Calcula $\sec 45°$ y $\csc 45°$ sin usar calculadora.
+    \item Si $\tan \theta = \sqrt{3}$, ¿cuál es el valor de $\cot(90° - \theta)$?
+\end{enumerate}
+
+\subsection*{Ejercicio 3: Ángulos de referencia}
+
+Calcula el valor exacto de las siguientes expresiones usando ángulos de referencia:
+\begin{enumerate}[label=\alph*)]
+    \item $\sen 210°$
+    \item $\cos 315°$
+    \item $\tan 135°$
+    \item $\csc 240°$
+\end{enumerate}
+
+\subsection*{Ejercicio 4: Ángulos coterminales}
+
+\begin{enumerate}[label=\alph*)]
+    \item Encuentra dos ángulos coterminales con 75° (uno entre 360° y 720°, otro negativo).
+    \item ¿Cuál es el ángulo coterminal más pequeño positivo de 1000°?
+    \item Demuestra que $\cos 120° = \cos 480°$ usando una calculadora.
+\end{enumerate}
+
+\subsection*{Ejercicio 5: Aplicación - Torre de comunicaciones}
+
+Una torre de comunicaciones proyecta una sombra de 35 metros cuando el ángulo de elevación del sol es de 45°. ¿Cuál es la altura de la torre?
+
+\subsection*{Ejercicio 6: Aplicación - Rampa de acceso}
+
+Se necesita construir una rampa de acceso para personas con discapacidad. Las normas establecen que el ángulo de inclinación no debe superar los 5° y la rampa debe subir una altura de 1.2 metros. ¿Cuál es la longitud mínima que debe tener la rampa?
+
+\subsection*{Ejercicio 7: Aplicación - Distancia entre dos montañas}
+
+Desde la cima de una montaña de 800 m de altura, se observa la cima de otra montaña con un ángulo de depresión de 30°. Si ambas montañas tienen la misma altura, ¿cuál es la distancia horizontal entre ellas?
+
+\newpage
+
+\section{Soluciones Detalladas de los Ejercicios Propuestos}
+
+\subsection*{Solución Ejercicio 1: Razones trigonométricas}
+
+\textbf{Dato:} $\cos \alpha = \frac{4}{5}$
+
+\textbf{Parte a:} Dibujo del triángulo.
+
+Si $\cos \alpha = \frac{4}{5} = \frac{\text{adyacente}}{\text{hipotenusa}}$, entonces el cateto adyacente mide 4 y la hipotenusa mide 5.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+    % Triángulo rectángulo
+    \draw[very thick,maincolor] (0,0)--(4,0)--(4,3)--cycle;
+
+    % Ángulo recto
+    \draw[thick] (3.8,0)--(3.8,0.2)--(4,0.2);
+
+    % Ángulo alpha
+    \draw[thick,red] (0.7,0) arc (0:36.87:0.7);
+    \node[red] at (1.1,0.25) {$\alpha$};
+
+    % Etiquetas
+    \node[below] at (2,-0.1) {$4$};
+    \node[right] at (4.2,1.5) {$?$};
+    \node[above left] at (1.8,1.7) {$5$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Parte b:} Calculamos las otras cinco razones.
+
+Primero, encontramos el cateto opuesto usando Pitágoras:
+\begin{align*}
+4^2 + b^2 &= 5^2\\
+16 + b^2 &= 25\\
+b^2 &= 9\\
+b &= 3
+\end{align*}
+
+Ahora calculamos todas las razones:
+
+\begin{multicols}{2}
+\begin{align*}
+\sen \alpha &= \frac{3}{5}\\[0.3cm]
+\cos \alpha &= \frac{4}{5} \quad \text{(dado)}\\[0.3cm]
+\tan \alpha &= \frac{3}{4}
+\end{align*}
+
+\begin{align*}
+\csc \alpha &= \frac{5}{3}\\[0.3cm]
+\sec \alpha &= \frac{5}{4}\\[0.3cm]
+\cot \alpha &= \frac{4}{3}
+\end{align*}
+\end{multicols}
+
+\textbf{Parte c:} Verificación con la identidad pitagórica:
+\begin{align*}
+\sen^2 \alpha + \cos^2 \alpha &= \left(\frac{3}{5}\right)^2 + \left(\frac{4}{5}\right)^2\\
+&= \frac{9}{25} + \frac{16}{25}\\
+&= \frac{25}{25}\\
+&= 1 \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:}
+\[\boxed{\sen \alpha = \frac{3}{5}, \quad \tan \alpha = \frac{3}{4}, \quad \csc \alpha = \frac{5}{3}, \quad \sec \alpha = \frac{5}{4}, \quad \cot \alpha = \frac{4}{3}}\]
+
+\newpage
+
+\subsection*{Solución Ejercicio 2: Ángulos especiales y cofunciones}
+
+\textbf{Parte a:} Demostrar que $\sen 30° = \cos 60°$
+
+De la tabla de valores exactos:
+\begin{align*}
+\sen 30° &= \frac{1}{2}\\
+\cos 60° &= \frac{1}{2}
+\end{align*}
+
+Por lo tanto, $\sen 30° = \cos 60° = \frac{1}{2}$ ✓
+
+Esto se cumple porque 30° y 60° son complementarios (30° + 60° = 90°), y el seno de un ángulo es igual al coseno de su complemento.
+
+\textbf{Parte b:} Calcular $\sec 45°$ y $\csc 45°$
+
+Sabemos que $\cos 45° = \frac{\sqrt{2}}{2}$ y $\sen 45° = \frac{\sqrt{2}}{2}$
+
+Entonces:
+\begin{align*}
+\sec 45° &= \frac{1}{\cos 45°} = \frac{1}{\frac{\sqrt{2}}{2}} = \frac{2}{\sqrt{2}} = \frac{2\sqrt{2}}{2} = \sqrt{2}\\[0.3cm]
+\csc 45° &= \frac{1}{\sen 45°} = \frac{1}{\frac{\sqrt{2}}{2}} = \frac{2}{\sqrt{2}} = \frac{2\sqrt{2}}{2} = \sqrt{2}
+\end{align*}
+
+\textbf{Parte c:} Si $\tan \theta = \sqrt{3}$, calcular $\cot(90° - \theta)$
+
+De la tabla de valores especiales, si $\tan \theta = \sqrt{3}$, entonces $\theta = 60°$.
+
+Por la identidad de cofunciones: $\cot(90° - \theta) = \tan \theta$
+
+Por lo tanto:
+\[\cot(90° - 60°) = \cot 30° = \tan 60° = \sqrt{3}\]
+
+\textbf{Respuestas:}
+\[\boxed{\text{a) Demostrado. } \quad \text{b) } \sec 45° = \csc 45° = \sqrt{2} \quad \text{c) } \cot(90° - \theta) = \sqrt{3}}\]
+
+\subsection*{Solución Ejercicio 3: Ángulos de referencia}
+
+\textbf{Parte a:} $\sen 210°$
+
+210° está en el Cuadrante III (entre 180° y 270°).
+
+Ángulo de referencia: $210° - 180° = 30°$
+
+En el Cuadrante III, el seno es negativo.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    \begin{axis}[
+        width=8cm, height=8cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1.3, xmax=1.3,
+        ymin=-1.3, ymax=1.3,
+        xtick={-1,1},
+        ytick={-1,1},
+        axis equal,
+        samples=100,
+    ]
+
+    % Círculo unitario
+    \addplot[thick,maincolor,domain=0:360] ({cos(x)}, {sin(x)});
+
+    % Ángulo de 210 grados
+    \draw[-{Latex},very thick,red] (axis cs:0,0)--(axis cs:-0.866,-0.5);
+    \fill[red] (axis cs:-0.866,-0.5) circle (0.05);
+
+    % Ángulo de referencia
+    \draw[blue,thick] (axis cs:-0.3,0) arc (180:210:0.3);
+    \node[blue] at (axis cs:-0.45,-0.15) {$30°$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\[\sen 210° = -\sen 30° = -\frac{1}{2}\]
+
+\textbf{Parte b:} $\cos 315°$
+
+315° está en el Cuadrante IV (entre 270° y 360°).
+
+Ángulo de referencia: $360° - 315° = 45°$
+
+En el Cuadrante IV, el coseno es positivo.
+
+\[\cos 315° = +\cos 45° = \frac{\sqrt{2}}{2}\]
+
+\textbf{Parte c:} $\tan 135°$
+
+135° está en el Cuadrante II (entre 90° y 180°).
+
+Ángulo de referencia: $180° - 135° = 45°$
+
+En el Cuadrante II, la tangente es negativa.
+
+\[\tan 135° = -\tan 45° = -1\]
+
+\textbf{Parte d:} $\csc 240°$
+
+240° está en el Cuadrante III (entre 180° y 270°).
+
+Ángulo de referencia: $240° - 180° = 60°$
+
+En el Cuadrante III, la cosecante (igual que el seno) es negativa.
+
+\[\csc 240° = -\csc 60° = -\frac{2}{\sqrt{3}} = -\frac{2\sqrt{3}}{3}\]
+
+\textbf{Respuestas:}
+\[\boxed{\text{a) } -\frac{1}{2} \quad \text{b) } \frac{\sqrt{2}}{2} \quad \text{c) } -1 \quad \text{d) } -\frac{2\sqrt{3}}{3}}\]
+
+\newpage
+
+\subsection*{Solución Ejercicio 4: Ángulos coterminales}
+
+\textbf{Parte a:} Ángulos coterminales con 75°
+
+Para un ángulo entre 360° y 720°, sumamos 360°:
+\[75° + 360° = 435°\]
+
+Para un ángulo negativo, restamos 360°:
+\[75° - 360° = -285°\]
+
+\textbf{Parte b:} Ángulo coterminal más pequeño positivo de 1000°
+
+Dividimos 1000° entre 360° para ver cuántas vueltas completas da:
+\[1000° \div 360° = 2.777...\]
+
+Esto significa que da 2 vueltas completas más un poco más.
+
+Restamos las dos vueltas completas:
+\[1000° - 2(360°) = 1000° - 720° = 280°\]
+
+\textbf{Parte c:} Verificar que $\cos 120° = \cos 480°$
+
+Primero encontremos el ángulo coterminal de 480°:
+\[480° - 360° = 120°\]
+
+Entonces 480° y 120° son coterminales, por lo tanto deben tener el mismo coseno.
+
+Verificación con calculadora:
+\begin{align*}
+\cos 120° &\approx -0.5\\
+\cos 480° &\approx -0.5 \quad \checkmark
+\end{align*}
+
+Además, podemos calcular el valor exacto usando ángulos de referencia:
+\[\cos 120° = -\cos 60° = -\frac{1}{2}\]
+
+\textbf{Respuestas:}
+\[\boxed{\text{a) } 435° \text{ y } -285° \quad \text{b) } 280° \quad \text{c) Verificado: ambos = } -0.5}\]
+
+\subsection*{Solución Ejercicio 5: Torre de comunicaciones}
+
+\textbf{Dato:} Sombra = 35 m, ángulo de elevación del sol = 45°
+
+\begin{center}
+\begin{tikzpicture}[scale=0.1]
+    % Suelo
+    \draw[very thick] (0,0)--(60,0);
+
+    % Torre
+    \draw[very thick,maincolor,fill=maincolor!20] (35,0) rectangle (40,35);
+
+    % Sombra
+    \draw[very thick,blue] (0,0)--(35,0);
+    \node[blue,below] at (17.5,-3) {Sombra = 35 m};
+
+    % Rayo del sol
+    \draw[thick,orange,dashed] (0,0)--(40,35);
+
+    % Ángulo
+    \draw[thick,orange] (8,0) arc (0:45:8);
+    \node[orange] at (12,3) {$45°$};
+
+    % Altura
+    \node[right] at (42,17.5) {$h = ?$};
+    \draw[{Latex}-{Latex}] (42,0)--(42,35);
+\end{tikzpicture}
+\end{center}
+
+Tenemos un triángulo rectángulo donde:
+\begin{itemize}
+\item Cateto adyacente = 35 m (sombra)
+\item Cateto opuesto = $h$ (altura de la torre)
+\item Ángulo = 45°
+\end{itemize}
+
+Usando la tangente:
+\begin{align*}
+\tan 45° &= \frac{h}{35}\\
+1 &= \frac{h}{35}\\
+h &= 35 \text{ m}
+\end{align*}
+
+\textbf{Respuesta:}
+\[\boxed{h = 35 \text{ metros}}\]
+
+\textbf{Interpretación:} Cuando el ángulo del sol es de 45°, la altura del objeto es igual a la longitud de su sombra. Esto se debe a que $\tan 45° = 1$.
+
+\newpage
+
+\subsection*{Solución Ejercicio 6: Rampa de acceso}
+
+\textbf{Datos:} Ángulo máximo = 5°, altura = 1.2 m
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Suelo
+    \draw[very thick] (0,0)--(8,0);
+
+    % Rampa
+    \draw[very thick,maincolor,fill=maincolor!20] (0,0)--(7,0.61)--(7.2,0.61)--(0.2,0)--cycle;
+
+    % Altura
+    \draw[very thick,blue] (7,0)--(7,0.61);
+    \node[blue,right] at (7.2,0.305) {1.2 m};
+    \draw[{Latex}-{Latex},blue] (7.1,0)--(7.1,0.61);
+
+    % Longitud de la rampa
+    \node[above,red] at (3.5,0.4) {$L = ?$};
+
+    % Ángulo
+    \draw[thick,red] (1.5,0) arc (0:5:1.5);
+    \node[red] at (2,0.2) {$5°$};
+
+    % Ángulo recto
+    \draw[thick] (6.9,0)--(6.9,0.1)--(7,0.1);
+\end{tikzpicture}
+\end{center}
+
+Tenemos un triángulo rectángulo donde:
+\begin{itemize}
+\item Cateto opuesto = 1.2 m (altura)
+\item Hipotenusa = $L$ (longitud de la rampa)
+\item Ángulo = 5°
+\end{itemize}
+
+Usando el seno:
+\begin{align*}
+\sen 5° &= \frac{1.2}{L}\\
+L &= \frac{1.2}{\sen 5°}\\
+L &= \frac{1.2}{0.0872}\\
+L &\approx 13.76 \text{ m}
+\end{align*}
+
+\textbf{Respuesta:}
+\[\boxed{L \approx 13.76 \text{ metros}}\]
+
+\textbf{Interpretación:} La rampa debe tener una longitud mínima de aproximadamente 13.76 metros para cumplir con la norma de no superar los 5° de inclinación. Esto es importante para garantizar la accesibilidad de personas en silla de ruedas.
+
+\subsection*{Solución Ejercicio 7: Distancia entre montañas}
+
+\textbf{Datos:} Altura de ambas montañas = 800 m, ángulo de depresión = 30°
+
+\begin{center}
+\begin{tikzpicture}[scale=0.08]
+    % Suelo
+    \draw[very thick] (0,0)--(120,0);
+
+    % Primera montaña
+    \draw[very thick,maincolor,fill=maincolor!20] (0,0)--(5,0)--(5,80)--cycle;
+    \fill[red] (5,80) circle (1.5);
+    \node[red,above] at (5,82) {Observador};
+
+    % Segunda montaña
+    \draw[very thick,maincolor,fill=green!20] (100,0)--(105,0)--(105,80)--cycle;
+    \fill[blue] (105,80) circle (1.5);
+    \node[blue,above] at (105,82) {Cima};
+
+    % Línea de visión
+    \draw[thick,red,dashed] (5,80)--(105,80);
+
+    % Ángulo de depresión
+    \draw[thick,orange] (20,80) arc (0:-0:15);
+    \draw[thick,orange] (5,80)--(25,80);
+    \draw[thick,orange] (5,80)--(5,60);
+    \draw[thick,orange] (8,77) arc (180:270:3);
+    \node[orange] at (10,72) {$30°$};
+
+    % Distancia horizontal
+    \node[below] at (55,-5) {$d = ?$};
+    \draw[{Latex}-{Latex}] (5,-8)--(105,-8);
+
+    % Triángulo rectángulo imaginario
+    \draw[blue,dashed] (5,80)--(105,0);
+\end{tikzpicture}
+\end{center}
+
+Como ambas montañas tienen la misma altura (800 m), la línea de visión es horizontal. El ángulo de depresión de 30° se mide desde la horizontal hasta la línea que va hacia la base de la segunda montaña.
+
+Tenemos un triángulo rectángulo donde:
+\begin{itemize}
+\item Cateto opuesto = 800 m (altura de la montaña)
+\item Cateto adyacente = $d$ (distancia horizontal)
+\item Ángulo = 30° (ángulo de depresión)
+\end{itemize}
+
+\textbf{Importante:} El ángulo de depresión desde el observador es igual al ángulo de elevación desde la base de la segunda montaña hacia el observador (ángulos alternos internos).
+
+Usando la tangente:
+\begin{align*}
+\tan 30° &= \frac{800}{d}\\
+\frac{\sqrt{3}}{3} &= \frac{800}{d}\\
+d &= \frac{800}{\frac{\sqrt{3}}{3}}\\
+d &= \frac{800 \times 3}{\sqrt{3}}\\
+d &= \frac{2400}{\sqrt{3}}\\
+d &= \frac{2400\sqrt{3}}{3}\\
+d &= 800\sqrt{3}\\
+d &\approx 800 \times 1.732\\
+d &\approx 1385.6 \text{ m}
+\end{align*}
+
+\textbf{Respuesta:}
+\[\boxed{d \approx 1385.6 \text{ metros} = 1.39 \text{ km}}\]
+
+\textbf{Interpretación:} Las dos montañas están separadas por aproximadamente 1.39 kilómetros. Este es un problema típico de topografía, donde se calculan distancias inaccesibles usando ángulos de elevación y depresión.
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+Los problemas inversos son aquellos donde conocemos el valor de una función trigonométrica y necesitamos encontrar el ángulo. Para esto usamos las funciones inversas: $\sen^{-1}$, $\cos^{-1}$ y $\tan^{-1}$ (también llamadas arcoseno, arcocoseno y arcotangente).
+
+\subsection*{Ejercicio Inverso 1}
+
+Si $\sen \theta = 0.5$ y $\theta$ es un ángulo agudo, ¿cuál es el valor de $\theta$?
+
+\subsection*{Ejercicio Inverso 2}
+
+En un triángulo rectángulo, el cateto opuesto mide 7 cm y el cateto adyacente mide 24 cm. ¿Cuál es la medida del ángulo entre la hipotenusa y el cateto adyacente?
+
+\subsection*{Ejercicio Inverso 3}
+
+Si $\cos \alpha = \frac{5}{13}$ y $\alpha$ está en el primer cuadrante, encuentra:
+\begin{enumerate}[label=\alph*)]
+    \item El valor de $\alpha$ en grados
+    \item El valor de $\sen \alpha$
+    \item El valor de $\tan \alpha$
+\end{enumerate}
+
+\subsection*{Ejercicio Inverso 4}
+
+Una escalera de 10 metros está apoyada contra una pared. Si la base de la escalera está a 6 metros de la pared, ¿qué ángulo forma la escalera con el suelo?
+
+\subsection*{Ejercicio Inverso 5}
+
+Si $\tan \beta = 2$ y $\beta$ está en el tercer cuadrante, encuentra:
+\begin{enumerate}[label=\alph*)]
+    \item El ángulo de referencia de $\beta$
+    \item El valor de $\beta$ (entre 0° y 360°)
+    \item Los valores de $\sen \beta$ y $\cos \beta$
+\end{enumerate}
+
+\newpage
+
+\section{Soluciones de los Ejercicios Inversos}
+
+\subsection*{Solución Ejercicio Inverso 1}
+
+\textbf{Dato:} $\sen \theta = 0.5$ y $\theta$ es agudo
+
+Usamos la función inversa del seno:
+\begin{align*}
+\theta &= \sen^{-1}(0.5)\\
+\theta &= 30°
+\end{align*}
+
+También podríamos reconocer que 0.5 = $\frac{1}{2}$ = $\sen 30°$ de nuestra tabla de valores especiales.
+
+\textbf{Verificación:} $\sen 30° = \frac{1}{2} = 0.5$ ✓
+
+\textbf{Respuesta:} $\boxed{\theta = 30°}$
+
+\subsection*{Solución Ejercicio Inverso 2}
+
+\textbf{Datos:} Cateto opuesto = 7 cm, cateto adyacente = 24 cm
+
+\begin{center}
+\begin{tikzpicture}[scale=0.25]
+    % Triángulo rectángulo
+    \draw[very thick,maincolor] (0,0)--(24,0)--(24,7)--cycle;
+
+    % Ángulo recto
+    \draw[thick] (23.5,0)--(23.5,0.5)--(24,0.5);
+
+    % Ángulo theta
+    \draw[thick,red] (4,0) arc (0:16.26:4);
+    \node[red] at (6,1) {$\theta$};
+
+    % Etiquetas
+    \node[below] at (12,-0.5) {24 cm};
+    \node[right] at (24.5,3.5) {7 cm};
+\end{tikzpicture}
+\end{center}
+
+Para encontrar el ángulo $\theta$ entre la hipotenusa y el cateto adyacente, usamos la tangente:
+
+\begin{align*}
+\tan \theta &= \frac{\text{cateto opuesto}}{\text{cateto adyacente}} = \frac{7}{24}\\
+\theta &= \tan^{-1}\left(\frac{7}{24}\right)\\
+\theta &= \tan^{-1}(0.2917)\\
+\theta &\approx 16.26°
+\end{align*}
+
+\textbf{Verificación:} Podemos calcular la hipotenusa y verificar con el seno:
+\begin{align*}
+c &= \sqrt{7^2 + 24^2} = \sqrt{49 + 576} = \sqrt{625} = 25\\
+\sen \theta &= \frac{7}{25} = 0.28\\
+\sen^{-1}(0.28) &\approx 16.26° \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\theta \approx 16.26°}$
+
+\newpage
+
+\subsection*{Solución Ejercicio Inverso 3}
+
+\textbf{Dato:} $\cos \alpha = \frac{5}{13}$ en el primer cuadrante
+
+\textbf{Parte a:} Valor de $\alpha$ en grados
+
+\begin{align*}
+\alpha &= \cos^{-1}\left(\frac{5}{13}\right)\\
+\alpha &= \cos^{-1}(0.3846)\\
+\alpha &\approx 67.38°
+\end{align*}
+
+\textbf{Parte b:} Valor de $\sen \alpha$
+
+Si $\cos \alpha = \frac{5}{13}$, entonces en un triángulo rectángulo:
+- Cateto adyacente = 5
+- Hipotenusa = 13
+
+Usando Pitágoras para encontrar el cateto opuesto:
+\begin{align*}
+a^2 + 5^2 &= 13^2\\
+a^2 &= 169 - 25\\
+a^2 &= 144\\
+a &= 12
+\end{align*}
+
+Por lo tanto:
+\[\sen \alpha = \frac{12}{13}\]
+
+\textbf{Parte c:} Valor de $\tan \alpha$
+
+\[\tan \alpha = \frac{\sen \alpha}{\cos \alpha} = \frac{\frac{12}{13}}{\frac{5}{13}} = \frac{12}{5}\]
+
+O directamente del triángulo:
+\[\tan \alpha = \frac{\text{opuesto}}{\text{adyacente}} = \frac{12}{5}\]
+
+\textbf{Verificación:} $\sen^2 \alpha + \cos^2 \alpha = \left(\frac{12}{13}\right)^2 + \left(\frac{5}{13}\right)^2 = \frac{144 + 25}{169} = \frac{169}{169} = 1$ ✓
+
+\textbf{Respuestas:}
+\[\boxed{\text{a) } \alpha \approx 67.38° \quad \text{b) } \sen \alpha = \frac{12}{13} \quad \text{c) } \tan \alpha = \frac{12}{5}}\]
+
+\subsection*{Solución Ejercicio Inverso 4}
+
+\textbf{Datos:} Longitud de la escalera = 10 m (hipotenusa), distancia a la pared = 6 m (cateto adyacente)
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+    % Suelo y pared
+    \draw[very thick] (0,0)--(8,0);
+    \draw[very thick] (0,0)--(0,10);
+
+    % Escalera
+    \draw[very thick,blue] (6,0)--(0,8);
+    \node[blue,above left] at (3,4.5) {10 m};
+
+    % Ángulo
+    \draw[thick,red] (4,0) arc (180:126.87:2);
+    \node[red] at (3.5,0.8) {$\theta$};
+
+    % Distancias
+    \node[below] at (3,-0.5) {6 m};
+    \draw[{Latex}-{Latex}] (0,-1)--(6,-1);
+
+    % Ángulo recto
+    \draw[thick] (0,0.3)--(0.3,0.3)--(0.3,0);
+\end{tikzpicture}
+\end{center}
+
+Usamos el coseno porque conocemos el cateto adyacente y la hipotenusa:
+
+\begin{align*}
+\cos \theta &= \frac{\text{adyacente}}{\text{hipotenusa}} = \frac{6}{10} = 0.6\\
+\theta &= \cos^{-1}(0.6)\\
+\theta &\approx 53.13°
+\end{align*}
+
+\textbf{Verificación:} Calculemos la altura usando Pitágoras:
+\begin{align*}
+h &= \sqrt{10^2 - 6^2} = \sqrt{100 - 36} = \sqrt{64} = 8 \text{ m}\\
+\sen \theta &= \frac{8}{10} = 0.8\\
+\sen^{-1}(0.8) &\approx 53.13° \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\theta \approx 53.13°}$
+
+\textbf{Interpretación:} La escalera forma un ángulo de aproximadamente 53° con el suelo. Este es un ángulo seguro para una escalera (entre 70° y 75° es lo ideal, pero 53° es aceptable).
+
+\newpage
+
+\subsection*{Solución Ejercicio Inverso 5}
+
+\textbf{Dato:} $\tan \beta = 2$ en el tercer cuadrante
+
+\textbf{Parte a:} Ángulo de referencia
+
+Primero encontramos el ángulo cuya tangente es 2:
+\begin{align*}
+\beta_{\text{ref}} &= \tan^{-1}(2)\\
+\beta_{\text{ref}} &\approx 63.43°
+\end{align*}
+
+\textbf{Parte b:} Valor de $\beta$ entre 0° y 360°
+
+Como $\beta$ está en el tercer cuadrante (entre 180° y 270°), usamos la fórmula:
+\[\beta = 180° + \beta_{\text{ref}} = 180° + 63.43° = 243.43°\]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    \begin{axis}[
+        width=10cm, height=10cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-1.5, xmax=1.5,
+        ymin=-1.5, ymax=1.5,
+        xtick={-1,1},
+        ytick={-1,1},
+        axis equal,
+        samples=100,
+    ]
+
+    % Círculo unitario
+    \addplot[thick,maincolor,domain=0:360] ({cos(x)}, {sin(x)});
+
+    % Cuadrante III
+    \node[maincolor] at (axis cs:-0.7,-0.7) {\Large III};
+
+    % Ángulo de 243.43 grados
+    \draw[-{Latex},very thick,red] (axis cs:0,0)--(axis cs:-0.447,-0.894);
+    \fill[red] (axis cs:-0.447,-0.894) circle (0.05);
+
+    % Ángulo de referencia
+    \draw[blue,thick] (axis cs:-0.3,0) arc (180:243.43:0.3);
+    \node[blue] at (axis cs:-0.35,-0.2) {$63.43°$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Parte c:} Valores de $\sen \beta$ y $\cos \beta$
+
+Si $\tan \beta = 2 = \frac{2}{1}$, entonces en un triángulo de referencia:
+- Cateto opuesto = 2
+- Cateto adyacente = 1
+- Hipotenusa = $\sqrt{1^2 + 2^2} = \sqrt{5}$
+
+Para el ángulo de referencia:
+\[\sen \beta_{\text{ref}} = \frac{2}{\sqrt{5}} = \frac{2\sqrt{5}}{5} \quad\quad \cos \beta_{\text{ref}} = \frac{1}{\sqrt{5}} = \frac{\sqrt{5}}{5}\]
+
+En el tercer cuadrante, tanto el seno como el coseno son negativos:
+\begin{align*}
+\sen \beta &= -\frac{2\sqrt{5}}{5} \approx -0.894\\
+\cos \beta &= -\frac{\sqrt{5}}{5} \approx -0.447
+\end{align*}
+
+\textbf{Verificación:}
+\[\frac{\sen \beta}{\cos \beta} = \frac{-\frac{2\sqrt{5}}{5}}{-\frac{\sqrt{5}}{5}} = \frac{2\sqrt{5}}{5} \cdot \frac{5}{\sqrt{5}} = 2 \quad \checkmark\]
+
+\textbf{Respuestas:}
+\[\boxed{\text{a) Ángulo de referencia} = 63.43° \quad \text{b) } \beta = 243.43° \quad \text{c) } \sen \beta = -\frac{2\sqrt{5}}{5}, \; \cos \beta = -\frac{\sqrt{5}}{5}}\]
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado esta guía sobre funciones trigonométricas. Ahora tienes las herramientas necesarias para resolver una gran variedad de problemas usando trigonometría.
+
+\subsection*{Conceptos clave para recordar:}
+
+\begin{enumerate}
+    \item \textbf{Las seis razones trigonométricas:} Seno, coseno, tangente, cosecante, secante y cotangente. Las últimas tres son los recíprocos de las primeras tres.
+
+    \item \textbf{Ángulos especiales:} Memoriza los valores de 30°, 45° y 60°. Son fundamentales y aparecen constantemente.
+
+    \item \textbf{Cofunciones:} El seno de un ángulo es igual al coseno de su complemento: $\sen \theta = \cos(90° - \theta)$.
+
+    \item \textbf{Ángulos de referencia:} Cualquier ángulo puede reducirse a un ángulo agudo entre 0° y 90°. Solo hay que cuidar los signos según el cuadrante.
+
+    \item \textbf{Ángulos coterminales:} Difieren en múltiplos de 360° y tienen las mismas funciones trigonométricas.
+
+    \item \textbf{Signos por cuadrante:} "Todas Son Tan Cositas" - En el cuadrante I todas son positivas, en el II solo el seno, en el III solo la tangente, en el IV solo el coseno.
+\end{enumerate}
+
+\subsection*{Aplicaciones en la vida real:}
+
+La trigonometría no es solo teoría abstracta. Como vimos en los ejemplos:
+
+\begin{itemize}
+    \item Los arquitectos usan trigonometría para diseñar edificios y calcular estructuras.
+    \item Los navegantes usan ángulos y distancias para trazar rutas.
+    \item Los topógrafos miden terrenos inaccesibles sin tener que recorrerlos completamente.
+    \item Los ingenieros diseñan rampas, puentes y torres.
+    \item Los astrónomos calculan distancias a objetos celestes.
+\end{itemize}
+
+\subsection*{Consejos para seguir mejorando:}
+
+\begin{enumerate}
+    \item \textbf{Practica regularmente:} La trigonometría es como un idioma, se aprende usándola.
+
+    \item \textbf{Visualiza:} Siempre que puedas, dibuja el triángulo o el círculo unitario. La trigonometría es muy visual.
+
+    \item \textbf{Verifica tus respuestas:} Usa las identidades trigonométricas y la calculadora para comprobar que tus resultados tienen sentido.
+
+    \item \textbf{Entiende, no memorices:} Es mejor entender de dónde vienen las fórmulas que memorizarlas sin comprenderlas.
+
+    \item \textbf{Conecta con otras áreas:} La trigonometría aparece en física, química, biología, economía... ¡Búscala en tus otras materias!
+\end{enumerate}
+
+\vspace{1cm}
+
+\begin{center}
+\Large\textbf{¡La trigonometría abre puertas a entender el mundo!}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Círculo unitario final decorativo
+    \draw[thick,maincolor] (0,0) circle (2);
+
+    % Ejes
+    \draw[-{Latex},thick] (-2.3,0)--(2.3,0);
+    \draw[-{Latex},thick] (0,-2.3)--(0,2.3);
+
+    % Algunos ángulos especiales
+    \foreach \angle/\label in {30/30°, 45/45°, 60/60°, 90/90°, 120/120°, 135/135°, 150/150°, 180/180°, 210/210°, 225/225°, 240/240°, 270/270°, 300/300°, 315/315°, 330/330°} {
+        \draw[red] (0,0)--(\angle:2);
+        \fill[blue] (\angle:2) circle (0.05);
+    }
+
+    \node[maincolor] at (0,-2.8) {\large Círculo Unitario - Tu mejor amigo en trigonometría};
+\end{tikzpicture}
+\end{center}
+
+\end{document}

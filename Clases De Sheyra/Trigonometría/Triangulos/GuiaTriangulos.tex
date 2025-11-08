@@ -1,0 +1,1940 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Definir estilos de cajas
+\newtcolorbox{conceptbox}[1][]{
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=#1,
+  breakable,
+  enhanced
+}
+
+\newtcolorbox{examplebox}[1][]{
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=#1,
+  breakable,
+  enhanced
+}
+
+\newtcolorbox{notebox}[1][]{
+  colback=yellow!10,
+  colframe=orange!80,
+  fonttitle=\bfseries,
+  title=#1,
+  breakable,
+  enhanced
+}
+
+\title{\textcolor{maincolor}{\textbf{Triángulos: Fundamentos de Trigonometría}}}
+\author{Prof. Toribio De J Arrieta F}
+\date{\textbf{Institución:} La Pruebita \\ \textbf{Grado:} 10 \\ \textbf{Asignatura:} Trigonometría \\ \today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Bienvenidos a una de las figuras más importantes en toda la matemática! Los triángulos no son solo tres líneas conectadas, son la base de la trigonometría, la arquitectura, la navegación, y hasta de cómo funciona tu GPS. Si alguna vez te has preguntado cómo se calculan las alturas de los edificios, las distancias entre ciudades, o cómo los antiguos egipcios construyeron las pirámides con tanta precisión, la respuesta está en los triángulos.
+
+\subsection{¿Por qué son importantes los triángulos?}
+
+Los triángulos son las figuras geométricas más estables y versátiles que existen. Por eso los encontramos en:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Arquitectura y Construcción:} Los puentes, torres, y techos usan estructuras triangulares porque son súper resistentes y distribuyen las fuerzas de manera uniforme.
+
+    \item \textbf{Navegación:} Desde los antiguos marineros hasta los sistemas modernos de GPS, todos usan triangulación para determinar posiciones exactas.
+
+    \item \textbf{Topografía:} Los ingenieros usan triángulos para medir terrenos, calcular pendientes, y planificar construcciones.
+
+    \item \textbf{Astronomía:} Para calcular distancias a estrellas y planetas, los astrónomos usan triángulos imaginarios en el espacio.
+
+    \item \textbf{Diseño Gráfico y Videojuegos:} Todos los gráficos 3D se construyen usando millones de triángulos diminutos.
+\end{itemize}
+
+\subsection{¿Qué vamos a aprender?}
+
+En esta guía vamos a explorar todo sobre los triángulos, desde lo más básico hasta aplicaciones súper interesantes:
+
+\begin{enumerate}[leftmargin=*]
+    \item Cómo se clasifican los triángulos según sus lados y ángulos
+    \item El famoso Teorema de Pitágoras y por qué funciona
+    \item Los triángulos notables (45-45-90 y 30-60-90) que aparecen en todas partes
+    \item Diferentes formas de calcular el área de un triángulo
+    \item Aplicaciones prácticas que te van a sorprender
+\end{enumerate}
+
+\begin{notebox}[Nota Importante]
+A lo largo de esta guía vas a encontrar muchos ejemplos resueltos paso a paso. No te saltes ninguno, porque cada uno te va a enseñar algo nuevo. Además, al final hay ejercicios para que practiques, ¡y vienen con soluciones detalladas!
+\end{notebox}
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{¿Qué es un triángulo?}
+
+Un triángulo es un polígono de tres lados formado por tres segmentos de recta que se intersectan en tres puntos llamados vértices. Es la figura geométrica más simple (no puedes hacer un polígono con menos de tres lados) y también la más importante.
+
+\begin{conceptbox}[Propiedades fundamentales de todo triángulo]
+\begin{enumerate}
+    \item La suma de sus ángulos internos siempre es $180°$ (o $\pi$ radianes)
+    \item La suma de las longitudes de dos lados cualesquiera siempre es mayor que la longitud del tercer lado (desigualdad triangular)
+    \item Tiene tres lados, tres ángulos y tres vértices
+\end{enumerate}
+\end{conceptbox}
+
+\subsection{Clasificación de Triángulos según sus Lados}
+
+Los triángulos se pueden clasificar de varias formas. La primera clasificación es según la longitud de sus lados:
+
+\subsubsection{Triángulo Equilátero}
+
+Un triángulo equilátero tiene sus tres lados de igual longitud. Como consecuencia, sus tres ángulos internos también son iguales (cada uno mide $60°$).
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Triángulo equilátero
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (4,0);
+    \coordinate (C) at (2,{2*sqrt(3)});
+
+    % Dibujar el triángulo
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+
+    % Etiquetas de vértices
+    \node[below left] at (A) {\Large $A$};
+    \node[below right] at (B) {\Large $B$};
+    \node[above] at (C) {\Large $C$};
+
+    % Etiquetas de lados (todos iguales)
+    \node[below] at ($(A)!0.5!(B)$) {$a$};
+    \node[above right] at ($(B)!0.5!(C)$) {$a$};
+    \node[above left] at ($(A)!0.5!(C)$) {$a$};
+
+    % Ángulos
+    \node at (0.7,0.3) {$60°$};
+    \node at (3.3,0.3) {$60°$};
+    \node at (2,{2*sqrt(3)-0.5}) {$60°$};
+
+    % Marcas de lados iguales
+    \draw[accentcolor, line width=1pt] ($(A)!0.5!(B)$) ++(0,-0.1) -- ++(0,-0.2);
+    \draw[accentcolor, line width=1pt] ($(B)!0.5!(C)$) ++(-0.1,0.1) -- ++(-0.2,0.2);
+    \draw[accentcolor, line width=1pt] ($(A)!0.5!(C)$) ++(0.1,0.1) -- ++(0.2,0.2);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Características:}
+\begin{itemize}
+    \item Todos los lados miden lo mismo
+    \item Todos los ángulos miden $60°$
+    \item Es el triángulo más simétrico (tiene 3 ejes de simetría)
+\end{itemize}
+
+\subsubsection{Triángulo Isósceles}
+
+Un triángulo isósceles tiene exactamente dos lados de igual longitud. Los ángulos opuestos a estos lados iguales también son iguales.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Triángulo isósceles
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (4,0);
+    \coordinate (C) at (2,3);
+
+    % Dibujar el triángulo
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+
+    % Etiquetas de vértices
+    \node[below left] at (A) {\Large $A$};
+    \node[below right] at (B) {\Large $B$};
+    \node[above] at (C) {\Large $C$};
+
+    % Etiquetas de lados
+    \node[below] at ($(A)!0.5!(B)$) {$b$};
+    \node[above right] at ($(B)!0.5!(C)$) {$a$};
+    \node[above left] at ($(A)!0.5!(C)$) {$a$};
+
+    % Ángulos
+    \node at (0.6,0.3) {$\alpha$};
+    \node at (3.4,0.3) {$\alpha$};
+    \node at (2,2.5) {$\beta$};
+
+    % Marcas de lados iguales
+    \draw[accentcolor, line width=1pt] ($(B)!0.5!(C)$) ++(-0.15,0.1) -- ++(-0.3,0.2);
+    \draw[accentcolor, line width=1pt] ($(A)!0.5!(C)$) ++(0.15,0.1) -- ++(0.3,0.2);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Características:}
+\begin{itemize}
+    \item Dos lados miden lo mismo (llamados lados congruentes)
+    \item Dos ángulos miden lo mismo (ángulos de la base)
+    \item Tiene un eje de simetría (la altura desde el vértice opuesto a la base)
+\end{itemize}
+
+\subsubsection{Triángulo Escaleno}
+
+Un triángulo escaleno tiene todos sus lados de diferente longitud. Como consecuencia, todos sus ángulos también son diferentes.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Triángulo escaleno
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (4.5,0);
+    \coordinate (C) at (1.5,3);
+
+    % Dibujar el triángulo
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+
+    % Etiquetas de vértices
+    \node[below left] at (A) {\Large $A$};
+    \node[below right] at (B) {\Large $B$};
+    \node[above] at (C) {\Large $C$};
+
+    % Etiquetas de lados (todos diferentes)
+    \node[below] at ($(A)!0.5!(B)$) {$c = 4.5$};
+    \node[above right] at ($(B)!0.5!(C)$) {$a = 4.2$};
+    \node[above left] at ($(A)!0.5!(C)$) {$b = 3.4$};
+
+    % Ángulos
+    \node at (0.6,0.3) {$\alpha$};
+    \node at (3.8,0.3) {$\beta$};
+    \node at (1.5,2.5) {$\gamma$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Características:}
+\begin{itemize}
+    \item Todos los lados tienen diferente longitud
+    \item Todos los ángulos tienen diferente medida
+    \item No tiene ejes de simetría
+\end{itemize}
+
+\subsection{Clasificación de Triángulos según sus Ángulos}
+
+La segunda forma de clasificar triángulos es según la medida de sus ángulos internos:
+
+\subsubsection{Triángulo Acutángulo}
+
+Un triángulo acutángulo tiene todos sus ángulos internos menores que $90°$ (ángulos agudos).
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Triángulo acutángulo
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (4,0);
+    \coordinate (C) at (1.8,2.5);
+
+    % Dibujar el triángulo
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+
+    % Etiquetas de vértices
+    \node[below left] at (A) {\Large $A$};
+    \node[below right] at (B) {\Large $B$};
+    \node[above] at (C) {\Large $C$};
+
+    % Ángulos
+    \node at (0.7,0.3) {$70°$};
+    \node at (3.3,0.3) {$50°$};
+    \node at (1.8,2) {$60°$};
+
+    % Nota
+    \node[below, text width=6cm, align=center] at (2,-0.8)
+        {\textcolor{accentcolor}{Todos los ángulos $< 90°$}};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Triángulo Rectángulo}
+
+Un triángulo rectángulo tiene exactamente un ángulo de $90°$ (ángulo recto). Este es el triángulo más importante en trigonometría.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Triángulo rectángulo
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (4,0);
+    \coordinate (C) at (0,3);
+
+    % Dibujar el triángulo
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+
+    % Marca del ángulo recto
+    \draw[maincolor, line width=1pt] (A) rectangle ++(0.3,0.3);
+
+    % Etiquetas de vértices
+    \node[below left] at (A) {\Large $A$};
+    \node[below right] at (B) {\Large $B$};
+    \node[above left] at (C) {\Large $C$};
+
+    % Ángulos
+    \node at (0.6,0.5) {$90°$};
+    \node at (3,0.3) {$\theta$};
+    \node at (0.3,2.5) {$\phi$};
+
+    % Etiquetas de lados
+    \node[below] at (2,0) {cateto adyacente};
+    \node[left] at (0,1.5) {cateto opuesto};
+    \node[above right, text=accentcolor] at (2,1.5) {hipotenusa};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Características especiales:}
+\begin{itemize}
+    \item Tiene un ángulo de exactamente $90°$
+    \item Los otros dos ángulos son complementarios (suman $90°$)
+    \item El lado opuesto al ángulo recto se llama \textbf{hipotenusa} (el lado más largo)
+    \item Los otros dos lados se llaman \textbf{catetos}
+\end{itemize}
+
+\subsubsection{Triángulo Obtusángulo}
+
+Un triángulo obtusángulo tiene exactamente un ángulo mayor que $90°$ (ángulo obtuso).
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Triángulo obtusángulo
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (4,0);
+    \coordinate (C) at (0.5,2);
+
+    % Dibujar el triángulo
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+
+    % Etiquetas de vértices
+    \node[below left] at (A) {\Large $A$};
+    \node[below right] at (B) {\Large $B$};
+    \node[above] at (C) {\Large $C$};
+
+    % Ángulos
+    \node at (0.8,0.3) {$120°$};
+    \node at (2.78,0.3) {$35°$};
+    \node at (0.7,1.6) {$25°$};
+
+    % Nota
+    \node[below, text width=6cm, align=center] at (2,-0.8)
+        {\textcolor{accentcolor}{Un ángulo $> 90°$}};
+\end{tikzpicture}
+\end{center}
+
+\subsection{El Triángulo Rectángulo: Partes y Nomenclatura}
+
+Como el triángulo rectángulo es fundamental en trigonometría, vamos a estudiar sus partes con más detalle:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Triángulo rectángulo detallado
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (5,0);
+    \coordinate (C) at (0,3);
+
+    % Dibujar el triángulo con relleno
+    \fill[maincolor!10] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=2pt] (A) -- (B) -- (C) -- cycle;
+
+    % Marca del ángulo recto
+    \draw[maincolor, line width=1.5pt] (A) rectangle ++(0.4,0.4);
+
+    % Etiquetas de vértices
+    \node[below left, font=\Large\bfseries] at (A) {$A$};
+    \node[below right, font=\Large\bfseries] at (B) {$B$};
+    \node[above left, font=\Large\bfseries] at (C) {$C$};
+
+    % Ángulos con arcos
+    \draw[accentcolor, line width=1pt] (B) ++(-0.8,0) arc (180:143:0.8);
+    \node[accentcolor] at (3.8,0.4) {$\theta$};
+
+    \draw[accentcolor, line width=1pt] (C) ++(0,-0.6) arc (-90:-37:0.6);
+    \node[accentcolor] at (0.5,2.4) {$\phi$};
+
+    % Etiquetas de lados con flechas
+    \draw[->, accentcolor, line width=1pt] (2.5,-0.5) -- (2.5,-0.1);
+    \node[below, text=accentcolor, font=\bfseries] at (2.5,-0.5) {cateto adyacente a $\theta$};
+    \node[below, text=accentcolor, font=\small] at (2.5,-0.8) {(opuesto a $\phi$)};
+
+    \draw[->, accentcolor, line width=1pt] (-1,1.5) -- (-0.1,1.5);
+    \node[left, text=accentcolor, font=\bfseries] at (-1,1.5) {cateto opuesto a $\theta$};
+    \node[left, text=accentcolor, font=\small] at (-1,1.2) {(adyacente a $\phi$)};
+
+    \draw[->, maincolor, line width=1pt] (3.5,2.2) -- (2.7,1.6);
+    \node[right, text=maincolor, font=\Large\bfseries] at (3.5,2.2) {hipotenusa};
+    \node[right, text=maincolor, font=\small] at (3.5,1.9) {(lado más largo)};
+
+    % Medidas
+    \node[below, font=\small] at (2.5,0) {$b$};
+    \node[left, font=\small] at (0,1.5) {$a$};
+    \node[above, rotate=31, font=\small] at (2.5,1.5) {$c$};
+\end{tikzpicture}
+\end{center}
+
+\begin{conceptbox}[Nomenclatura del Triángulo Rectángulo]
+\begin{itemize}
+    \item \textbf{Hipotenusa ($c$):} El lado más largo, opuesto al ángulo recto. Siempre es el lado más largo del triángulo.
+
+    \item \textbf{Catetos ($a$ y $b$):} Los dos lados que forman el ángulo recto. Su nombre depende del ángulo de referencia:
+    \begin{itemize}
+        \item \textbf{Cateto opuesto:} El cateto que está enfrente del ángulo que estamos considerando
+        \item \textbf{Cateto adyacente:} El cateto que está al lado del ángulo que estamos considerando
+    \end{itemize}
+
+    \item \textbf{Nota importante:} Lo que es "opuesto" para un ángulo es "adyacente" para el otro ángulo agudo del triángulo.
+\end{itemize}
+\end{conceptbox}
+
+\subsection{El Teorema de Pitágoras}
+
+El teorema de Pitágoras es probablemente el teorema más famoso de toda la matemática. Establece una relación fundamental entre los lados de un triángulo rectángulo.
+
+\begin{conceptbox}[Teorema de Pitágoras]
+En todo triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.
+
+\begin{center}
+\Large
+$c^2 = a^2 + b^2$
+\end{center}
+
+Donde:
+\begin{itemize}
+    \item $c$ es la longitud de la hipotenusa
+    \item $a$ y $b$ son las longitudes de los catetos
+\end{itemize}
+\end{conceptbox}
+
+\subsubsection{Demostración Visual del Teorema de Pitágoras}
+
+Una de las demostraciones más bonitas del teorema de Pitágoras es visual. Vamos a construir cuadrados sobre cada lado del triángulo rectángulo:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+    % Triángulo rectángulo central
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3,0);
+    \coordinate (C) at (0,2);
+
+    % Cuadrado sobre el cateto horizontal (b)
+    \fill[blue!20] (A) rectangle (B |- A) +(0,-3);
+    \draw[blue!50, line width=1pt] (A) rectangle ($(B)+(0,-3)$);
+    \node[blue!70, font=\Large] at (2.2,-2.2) {$b^2$};
+    \node[blue!70, below] at (1.5,-3.2) {Área = $3^2 = 9$};
+
+    % Cuadrado sobre el cateto vertical (a)
+    \fill[green!20] (A) rectangle (C -| A) +(-2,0);
+    \draw[green!50, line width=1pt] (A) rectangle ($(-2,0)+(0,2)$);
+    \node[green!70, font=\Large] at (-1.3,1.3) {$a^2$};
+    \node[green!70, left] at (-2.1,1) {Área = $2^2 = 4$};
+
+    % Cuadrado sobre la hipotenusa (c)
+    \coordinate (D) at ($(C)!1!-90:(B)$);
+    \coordinate (E) at ($(B)!1!90:(C)$);
+    \fill[red!20] (B) -- (E) -- (D) -- (C) -- cycle;
+    \draw[red!50, line width=1pt] (B) -- (E) -- (D) -- (C) -- cycle;
+    \node[red!70, font=\Large] at ($(C)!0.5!(E)$) {$c^2$};
+
+    % Triángulo original
+    \draw[maincolor, line width=2pt] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1.5pt] (A) rectangle ++(0.3,0.3);
+
+    % Etiquetas de lados
+    \node[below] at (1.5,0) {$b = 3$};
+    \node[left] at (0,1) {$a = 2$};
+    \node[rotate=-34] at (1.5,1.3) {$c = \sqrt{13}$};
+
+    % Ecuación
+    \node[below, text width=8cm, align=center, font=\Large] at (1.5,-4.5)
+        {$c^2 = a^2 + b^2$};
+    \node[below, text width=8cm, align=center] at (1.5,-5.2)
+        {Área roja = Área azul + Área verde};
+    \node[below, text width=8cm, align=center] at (1.5,-5.7)
+        {$13 = 9 + 4$ \checkmark};
+\end{tikzpicture}
+\end{center}
+
+La demostración visual nos muestra que el área del cuadrado construido sobre la hipotenusa es exactamente igual a la suma de las áreas de los cuadrados construidos sobre los catetos.
+
+\subsection{Triángulos Notables}
+
+Hay dos triángulos rectángulos especiales que aparecen constantemente en trigonometría y tienen relaciones muy útiles entre sus lados. Los llamamos "triángulos notables".
+
+\subsubsection{Triángulo 45-45-90}
+
+Este es un triángulo rectángulo isósceles, donde los dos ángulos agudos miden $45°$ cada uno. Como es isósceles, los dos catetos tienen la misma longitud.
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Triángulo 45-45-90
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3,0);
+    \coordinate (C) at (0,3);
+
+    % Relleno
+    \fill[maincolor!10] (A) -- (B) -- (C) -- cycle;
+
+    % Triángulo
+    \draw[maincolor, line width=2pt] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1.5pt] (A) rectangle ++(0.3,0.3);
+
+    % Ángulos
+    \node at (2.4,0.2) {$45°$};
+    \node at (0.2,2.5) {$45°$};
+    \node at (0.5,0.5) {$90°$};
+
+    % Etiquetas de lados
+    \node[below, font=\Large] at (1.5,0) {$a$};
+    \node[left, font=\Large] at (0,1.5) {$a$};
+    \node[above right, font=\Large, text=accentcolor] at (1.5,1.5) {$a\sqrt{2}$};
+
+    % Marcas de lados iguales
+    \draw[accentcolor, line width=1.5pt] (1.5,0) ++(0,0.1) -- ++(0,-0.2);
+    \draw[accentcolor, line width=1.5pt] (0,1.5) ++(0.1,0) -- ++(-0.2,0);
+\end{tikzpicture}
+\end{center}
+
+\begin{conceptbox}[Relaciones en el Triángulo 45-45-90]
+Si los catetos miden $a$, entonces:
+\begin{center}
+\Large
+$\text{hipotenusa} = a\sqrt{2}$
+\end{center}
+
+O si la hipotenusa mide $h$, entonces:
+\begin{center}
+\Large
+$\text{cateto} = \frac{h}{\sqrt{2}} = \frac{h\sqrt{2}}{2}$
+\end{center}
+
+\textbf{Relación de lados:} $1 : 1 : \sqrt{2}$
+\end{conceptbox}
+
+\textbf{¿De dónde sale esto?} Si aplicamos el teorema de Pitágoras con catetos iguales a $a$:
+\[c^2 = a^2 + a^2 = 2a^2\]
+\[c = \sqrt{2a^2} = a\sqrt{2}\]
+
+\subsubsection{Triángulo 30-60-90}
+
+Este triángulo tiene ángulos de $30°$, $60°$, y $90°$. Sus relaciones de lados son un poco más complejas, pero igualmente útiles.
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Triángulo 30-60-90
+    \coordinate (A) at (0,0);
+    \coordinate (B) at ({sqrt(3)},0);
+    \coordinate (C) at (0,1);
+
+    % Relleno
+    \fill[maincolor!10] (A) -- (B) -- (C) -- cycle;
+
+    % Triángulo
+    \draw[maincolor, line width=2pt] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1.5pt] (A) rectangle ++(0.3,0.3);
+
+    % Ángulos
+    \node at (1.2,0.2) {$30°$};
+    \node at (0.2,0.7) {$60°$};
+    \node at (0.5,0.3) {$90°$};
+
+    % Etiquetas de lados
+    \node[below, font=\Large] at ({sqrt(3)/2},0) {$a\sqrt{3}$};
+    \node[left, font=\Large] at (0,0.5) {$a$};
+    \node[above right, font=\Large, text=accentcolor] at ({sqrt(3)/2},0.5) {$2a$};
+
+    % Etiquetas adicionales con valores
+    \node[below, font=\small, text=blue] at ({sqrt(3)/2},-0.3) {(cateto adyacente a 30°)};
+    \node[left, font=\small, text=blue] at (-0.2,0.5) {(cateto opuesto a 30°)};
+\end{tikzpicture}
+\end{center}
+
+\begin{conceptbox}[Relaciones en el Triángulo 30-60-90]
+Si el cateto opuesto al ángulo de $30°$ mide $a$, entonces:
+\begin{itemize}
+    \item Cateto opuesto a $30°$ = $a$
+    \item Cateto opuesto a $60°$ = $a\sqrt{3}$
+    \item Hipotenusa = $2a$
+\end{itemize}
+
+\textbf{Relación de lados:} $1 : \sqrt{3} : 2$
+\end{conceptbox}
+
+\textbf{¿De dónde sale esto?} Este triángulo se obtiene dividiendo un triángulo equilátero por la mitad. Si el triángulo equilátero tiene lado $2a$, al dividirlo:
+\begin{itemize}
+    \item La altura divide el lado opuesto en dos partes iguales de longitud $a$
+    \item La altura se puede calcular usando Pitágoras: $h = \sqrt{(2a)^2 - a^2} = \sqrt{3a^2} = a\sqrt{3}$
+\end{itemize}
+
+\subsection{Área de Triángulos}
+
+Hay varias formas de calcular el área de un triángulo, dependiendo de la información que tengamos disponible.
+
+\subsubsection{Fórmula Básica: Base por Altura}
+
+La fórmula más conocida para el área de un triángulo es:
+
+\begin{conceptbox}[Área usando Base y Altura]
+\begin{center}
+\Large
+$A = \frac{b \cdot h}{2}$
+\end{center}
+
+Donde:
+\begin{itemize}
+    \item $b$ es la longitud de la base (cualquier lado del triángulo)
+    \item $h$ es la altura perpendicular a esa base
+\end{itemize}
+\end{conceptbox}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+    % Triángulo con altura
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (5,0);
+    \coordinate (C) at (2,3);
+    \coordinate (H) at (2,0);
+
+    % Relleno
+    \fill[maincolor!10] (A) -- (B) -- (C) -- cycle;
+
+    % Base
+    \draw[maincolor, line width=2pt] (A) -- (B);
+    \draw[maincolor, line width=1.5pt] (B) -- (C) -- (A);
+
+    % Altura
+    \draw[accentcolor, line width=1.5pt, dashed] (C) -- (H);
+    \draw[accentcolor, line width=1pt] (H) rectangle ++(0.2,0.2);
+
+    % Etiquetas
+    \node[below, font=\Large] at (2.5,0) {$b$ (base)};
+    \node[right, font=\Large, text=accentcolor] at (2.1,1.5) {$h$ (altura)};
+
+    % Puntos
+    \fill (C) circle (2pt);
+    \fill (H) circle (2pt);
+
+    % Fórmula
+    \node[below, font=\Large] at (2.5,-1) {$A = \frac{5 \times 3}{2} = 7.5$ unidades cuadradas};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Fórmula de Herón}
+
+Cuando conocemos las longitudes de los tres lados pero no conocemos la altura, podemos usar la fórmula de Herón:
+
+\begin{conceptbox}[Fórmula de Herón]
+Primero calculamos el semiperímetro $s$:
+\begin{center}
+$s = \frac{a + b + c}{2}$
+\end{center}
+
+Luego el área es:
+\begin{center}
+\Large
+$A = \sqrt{s(s-a)(s-b)(s-c)}$
+\end{center}
+
+Donde $a$, $b$, y $c$ son las longitudes de los tres lados.
+\end{conceptbox}
+
+\textbf{Ejemplo:} Para un triángulo con lados $a=3$, $b=4$, $c=5$:
+\[s = \frac{3+4+5}{2} = 6\]
+\[A = \sqrt{6(6-3)(6-4)(6-5)} = \sqrt{6 \cdot 3 \cdot 2 \cdot 1} = \sqrt{36} = 6\]
+
+\subsection{Aplicaciones Prácticas de los Triángulos}
+
+Los triángulos no son solo teoría abstracta. Se usan en la vida real todos los días:
+
+\subsubsection{Arquitectura y Construcción}
+
+Las estructuras triangulares son las más estables porque distribuyen las fuerzas uniformemente. Por eso los puentes, torres, y techos usan triángulos.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Puente con estructura triangular
+    \draw[maincolor, line width=2pt] (0,0) -- (8,0);
+    \draw[maincolor, line width=1pt] (0,0) -- (2,2) -- (4,0) -- (6,2) -- (8,0);
+    \draw[maincolor, line width=1pt] (2,2) -- (4,0);
+    \draw[maincolor, line width=1pt] (4,0) -- (6,2);
+    \draw[maincolor, line width=1pt] (2,2) -- (6,2);
+
+    \node[below] at (4,-0.5) {Estructura de puente con triángulos};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Navegación y GPS}
+
+Los sistemas de navegación usan triangulación: si sabes tu distancia a tres puntos conocidos, puedes determinar tu posición exacta.
+
+\subsubsection{Topografía}
+
+Los topógrafos miden terrenos usando triángulos. Pueden medir ángulos y una distancia, y calcular las demás distancias sin necesidad de medirlas directamente.
+
+\subsubsection{Cálculo de Alturas Inaccesibles}
+
+Usando triángulos podemos calcular la altura de edificios, montañas, o árboles sin necesidad de subirlos.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Edificio
+    \draw[maincolor, line width=2pt] (0,0) rectangle (0.5,4);
+    \fill[maincolor!20] (0,0) rectangle (0.5,4);
+
+    % Línea de visión
+    \draw[accentcolor, line width=1.5pt, dashed] (3,0) -- (0,4);
+
+    % Base
+    \draw[maincolor, line width=1pt] (0,0) -- (3,0);
+
+    % Ángulo
+    \draw[accentcolor] (2.5,0) arc (180:127:0.5);
+    \node[accentcolor] at (2.2,0.3) {$\theta$};
+
+    % Etiquetas
+    \node[left] at (0,2) {$h = ?$};
+    \node[below] at (1.5,0) {$d$ (conocida)};
+    \node[right] at (3,0) {Observador};
+
+    % Fórmula
+    \node[below, text width=6cm, align=center] at (1.5,-0.8)
+        {$\tan(\theta) = \frac{h}{d}$};
+    \node[below, text width=6cm, align=center] at (1.5,-1.3)
+        {$h = d \cdot \tan(\theta)$};
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\section{Ejemplos Resueltos}
+
+Ahora vamos a resolver varios problemas paso a paso para que veas cómo aplicar todo lo que hemos aprendido.
+
+\begin{examplebox}[Ejemplo 1: Clasificación de Triángulos]
+Clasifica los siguientes triángulos según sus lados y ángulos:
+
+\textbf{a)} Triángulo con lados: $5$ cm, $5$ cm, $5$ cm
+
+\textbf{b)} Triángulo con lados: $3$ cm, $4$ cm, $5$ cm
+
+\textbf{c)} Triángulo con ángulos: $60°$, $60°$, $60°$
+
+\textbf{d)} Triángulo con ángulos: $30°$, $60°$, $90°$
+
+\textbf{Solución:}
+
+\textbf{a)} Lados: $5$ cm, $5$ cm, $5$ cm
+\begin{itemize}
+    \item \textbf{Según lados:} Los tres lados son iguales $\Rightarrow$ \textbf{Equilátero}
+    \item \textbf{Según ángulos:} En un triángulo equilátero todos los ángulos miden $60°$, entonces todos son agudos $\Rightarrow$ \textbf{Acutángulo}
+\end{itemize}
+
+\textbf{Respuesta:} Triángulo equilátero y acutángulo.
+
+\textbf{b)} Lados: $3$ cm, $4$ cm, $5$ cm
+\begin{itemize}
+    \item \textbf{Según lados:} Los tres lados son diferentes $\Rightarrow$ \textbf{Escaleno}
+    \item \textbf{Según ángulos:} Verificamos si cumple el teorema de Pitágoras:
+    \[5^2 = 3^2 + 4^2\]
+    \[25 = 9 + 16\]
+    \[25 = 25 \checkmark\]
+    Como cumple Pitágoras, tiene un ángulo de $90°$ $\Rightarrow$ \textbf{Rectángulo}
+\end{itemize}
+
+\textbf{Respuesta:} Triángulo escaleno y rectángulo.
+
+\textbf{c)} Ángulos: $60°$, $60°$, $60°$
+\begin{itemize}
+    \item \textbf{Según ángulos:} Todos los ángulos son iguales y menores que $90°$ $\Rightarrow$ \textbf{Acutángulo}
+    \item \textbf{Según lados:} Si todos los ángulos son iguales, todos los lados también son iguales $\Rightarrow$ \textbf{Equilátero}
+\end{itemize}
+
+\textbf{Respuesta:} Triángulo equilátero y acutángulo.
+
+\textbf{d)} Ángulos: $30°$, $60°$, $90°$
+\begin{itemize}
+    \item \textbf{Según ángulos:} Tiene un ángulo de $90°$ $\Rightarrow$ \textbf{Rectángulo}
+    \item \textbf{Según lados:} Es un triángulo notable 30-60-90, con lados en proporción $1:\sqrt{3}:2$ $\Rightarrow$ \textbf{Escaleno} (todos diferentes)
+\end{itemize}
+
+\textbf{Respuesta:} Triángulo escaleno y rectángulo.
+\end{examplebox}
+
+\begin{examplebox}[Ejemplo 2: Aplicación del Teorema de Pitágoras]
+Una escalera de $5$ metros de longitud está apoyada contra una pared. Si la base de la escalera está a $3$ metros de la pared, ¿a qué altura de la pared llega la escalera?
+
+\textbf{Solución:}
+
+Primero, hagamos un dibujo de la situación:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Pared
+    \draw[maincolor, line width=2pt] (0,0) -- (0,4);
+    \draw[maincolor, line width=1pt] (0,0) -- (3,0);
+    \draw[maincolor, line width=1pt] (0,0) rectangle (0.2,0.2);
+
+    % Escalera
+    \draw[accentcolor, line width=2pt] (0,4) -- (3,0);
+
+    % Etiquetas
+    \node[left] at (0,2) {$h = ?$};
+    \node[below] at (1.5,0) {$3$ m};
+    \node[above right] at (1.5,2) {$5$ m};
+
+    % Puntos
+    \fill (0,0) circle (2pt);
+    \fill (0,4) circle (2pt);
+    \fill (3,0) circle (2pt);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Datos:}
+\begin{itemize}
+    \item Hipotenusa (escalera): $c = 5$ m
+    \item Cateto horizontal (distancia a la pared): $b = 3$ m
+    \item Cateto vertical (altura en la pared): $h = ?$
+\end{itemize}
+
+\textbf{Paso 1:} Aplicamos el teorema de Pitágoras:
+\[c^2 = h^2 + b^2\]
+
+\textbf{Paso 2:} Sustituimos los valores conocidos:
+\[5^2 = h^2 + 3^2\]
+\[25 = h^2 + 9\]
+
+\textbf{Paso 3:} Despejamos $h^2$:
+\[h^2 = 25 - 9\]
+\[h^2 = 16\]
+
+\textbf{Paso 4:} Sacamos raíz cuadrada:
+\[h = \sqrt{16} = 4\]
+
+\textbf{Respuesta:} La escalera llega a una altura de $4$ metros en la pared.
+
+\textbf{Verificación:} $5^2 = 4^2 + 3^2 \Rightarrow 25 = 16 + 9 \Rightarrow 25 = 25$ \checkmark
+\end{examplebox}
+
+\begin{examplebox}[Ejemplo 3: Triángulo 45-45-90]
+Un cuadrado tiene un lado de $6$ cm. ¿Cuál es la longitud de su diagonal?
+
+\textbf{Solución:}
+
+La diagonal de un cuadrado divide al cuadrado en dos triángulos rectángulos isósceles (45-45-90).
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Cuadrado
+    \draw[maincolor, line width=1.5pt] (0,0) rectangle (4,4);
+
+    % Diagonal
+    \draw[accentcolor, line width=2pt, dashed] (0,0) -- (4,4);
+
+    % Etiquetas
+    \node[below] at (2,0) {$6$ cm};
+    \node[left] at (0,2) {$6$ cm};
+    \node[above right] at (2,2) {$d = ?$};
+
+    % Ángulos de 45°
+    \node at (0.5,0.3) {$45°$};
+    \node at (3.5,3.7) {$45°$};
+
+    % Triángulo destacado
+    \fill[accentcolor!10] (0,0) -- (4,0) -- (4,4) -- cycle;
+\end{tikzpicture}
+\end{center}
+
+\textbf{Método 1 - Usando el Teorema de Pitágoras:}
+
+\textbf{Paso 1:} Identificamos que tenemos un triángulo rectángulo con catetos iguales de $6$ cm.
+
+\textbf{Paso 2:} Aplicamos Pitágoras:
+\[d^2 = 6^2 + 6^2\]
+\[d^2 = 36 + 36\]
+\[d^2 = 72\]
+\[d = \sqrt{72} = \sqrt{36 \cdot 2} = 6\sqrt{2}\]
+
+\textbf{Método 2 - Usando la relación del triángulo 45-45-90:}
+
+En un triángulo 45-45-90, si los catetos miden $a$, la hipotenusa mide $a\sqrt{2}$.
+
+\textbf{Paso 1:} Identificamos que $a = 6$ cm
+
+\textbf{Paso 2:} Aplicamos la relación directamente:
+\[d = a\sqrt{2} = 6\sqrt{2} \text{ cm}\]
+
+\textbf{Valor numérico:} $d = 6\sqrt{2} \approx 6 \times 1.414 = 8.485$ cm
+
+\textbf{Respuesta:} La diagonal del cuadrado mide $6\sqrt{2}$ cm (aproximadamente $8.49$ cm).
+\end{examplebox}
+
+\begin{examplebox}[Ejemplo 4: Triángulo 30-60-90]
+En un triángulo rectángulo, uno de los ángulos agudos mide $30°$ y la hipotenusa mide $10$ cm. Calcula las longitudes de los dos catetos.
+
+\textbf{Solución:}
+
+Tenemos un triángulo 30-60-90 donde conocemos la hipotenusa.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Triángulo
+    \coordinate (A) at (0,0);
+    \coordinate (B) at ({sqrt(3)},0);
+    \coordinate (C) at (0,1);
+
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1pt] (A) rectangle (0.2,0.2);
+
+    % Ángulos
+    \node at (1,0.15) {$30°$};
+    \node at (0.2,0.7) {$60°$};
+
+    % Etiquetas
+    \node[below] at ({sqrt(3)/2},0) {$b = ?$};
+    \node[left] at (0,0.5) {$a = ?$};
+    \node[above right] at ({sqrt(3)/2},0.5) {$10$ cm};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Recordatorio:} En un triángulo 30-60-90, si el cateto opuesto a $30°$ mide $a$, entonces:
+\begin{itemize}
+    \item Cateto opuesto a $30°$ = $a$
+    \item Cateto opuesto a $60°$ = $a\sqrt{3}$
+    \item Hipotenusa = $2a$
+\end{itemize}
+
+\textbf{Paso 1:} Como la hipotenusa mide $10$ cm, usamos la relación:
+\[\text{hipotenusa} = 2a = 10\]
+
+\textbf{Paso 2:} Despejamos $a$:
+\[a = \frac{10}{2} = 5 \text{ cm}\]
+
+Este es el cateto opuesto al ángulo de $30°$.
+
+\textbf{Paso 3:} Calculamos el cateto opuesto a $60°$:
+\[b = a\sqrt{3} = 5\sqrt{3} \text{ cm}\]
+
+\textbf{Valor numérico:} $b = 5\sqrt{3} \approx 5 \times 1.732 = 8.66$ cm
+
+\textbf{Respuesta:}
+\begin{itemize}
+    \item Cateto opuesto a $30°$: $5$ cm
+    \item Cateto opuesto a $60°$: $5\sqrt{3}$ cm $\approx 8.66$ cm
+\end{itemize}
+
+\textbf{Verificación con Pitágoras:}
+\[10^2 = 5^2 + (5\sqrt{3})^2\]
+\[100 = 25 + 25 \cdot 3\]
+\[100 = 25 + 75\]
+\[100 = 100 \checkmark\]
+\end{examplebox}
+
+\begin{examplebox}[Ejemplo 5: Cálculo de Área]
+Un terreno triangular tiene lados de $13$ m, $14$ m, y $15$ m. El dueño quiere cercarlo y también necesita saber su área para calcular cuánto fertilizante comprar. Calcula:
+
+\textbf{a)} El perímetro del terreno
+
+\textbf{b)} El área del terreno usando la fórmula de Herón
+
+\textbf{Solución:}
+
+\textbf{Datos:}
+\begin{itemize}
+    \item Lado $a = 13$ m
+    \item Lado $b = 14$ m
+    \item Lado $c = 15$ m
+\end{itemize}
+
+\textbf{a) Perímetro:}
+
+El perímetro es simplemente la suma de todos los lados:
+\[P = a + b + c = 13 + 14 + 15 = 42 \text{ m}\]
+
+\textbf{b) Área usando la Fórmula de Herón:}
+
+\textbf{Paso 1:} Calculamos el semiperímetro $s$:
+\[s = \frac{a + b + c}{2} = \frac{13 + 14 + 15}{2} = \frac{42}{2} = 21 \text{ m}\]
+
+\textbf{Paso 2:} Calculamos cada término $(s-a)$, $(s-b)$, $(s-c)$:
+\begin{align*}
+s - a &= 21 - 13 = 8 \\
+s - b &= 21 - 14 = 7 \\
+s - c &= 21 - 15 = 6
+\end{align*}
+
+\textbf{Paso 3:} Aplicamos la fórmula de Herón:
+\[A = \sqrt{s(s-a)(s-b)(s-c)}\]
+\[A = \sqrt{21 \cdot 8 \cdot 7 \cdot 6}\]
+
+\textbf{Paso 4:} Calculamos el producto:
+\[21 \cdot 8 = 168\]
+\[168 \cdot 7 = 1176\]
+\[1176 \cdot 6 = 7056\]
+
+\textbf{Paso 5:} Sacamos la raíz cuadrada:
+\[A = \sqrt{7056} = 84 \text{ m}^2\]
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item \textbf{a)} El perímetro del terreno es $42$ metros. Se necesitarán $42$ metros de cerca.
+    \item \textbf{b)} El área del terreno es $84$ metros cuadrados. El dueño debe comprar fertilizante para $84$ m$^2$.
+\end{itemize}
+
+\begin{notebox}[Dato Curioso]
+El triángulo con lados $13$, $14$, y $15$ es especial porque su área es un número entero ($84$) sin necesidad de usar raíces cuadradas. Estos triángulos se llaman "triángulos heronianos".
+\end{notebox}
+\end{examplebox}
+
+\newpage
+
+\section{Ejercicios Propuestos}
+
+Ahora es tu turno. Resuelve los siguientes ejercicios. Las soluciones detalladas están en la siguiente sección, pero intenta resolverlos primero por tu cuenta.
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+    \item Un triángulo tiene lados de $7$ cm, $24$ cm, y $25$ cm.
+    \begin{itemize}
+        \item[a)] Clasifica el triángulo según sus lados.
+        \item[b)] Verifica si es un triángulo rectángulo.
+        \item[c)] Calcula su área.
+    \end{itemize}
+
+    \vspace{0.5cm}
+
+    \item La diagonal de un rectángulo mide $13$ cm y uno de sus lados mide $5$ cm. ¿Cuánto mide el otro lado?
+
+    \vspace{0.5cm}
+
+    \item En un triángulo 45-45-90, la hipotenusa mide $10\sqrt{2}$ cm. ¿Cuánto miden los catetos?
+
+    \vspace{0.5cm}
+
+    \item Un triángulo equilátero tiene un perímetro de $36$ cm. Calcula:
+    \begin{itemize}
+        \item[a)] La longitud de cada lado.
+        \item[b)] La altura del triángulo.
+        \item[c)] El área del triángulo.
+    \end{itemize}
+
+    \vspace{0.5cm}
+
+    \item En un triángulo 30-60-90, el cateto más corto mide $6$ cm. Calcula:
+    \begin{itemize}
+        \item[a)] La longitud del otro cateto.
+        \item[b)] La longitud de la hipotenusa.
+    \end{itemize}
+
+    \vspace{0.5cm}
+
+    \item Un poste vertical proyecta una sombra de $12$ metros cuando el ángulo de elevación del sol es de $45°$. ¿Cuál es la altura del poste?
+
+    \vspace{0.5cm}
+
+    \item Un triángulo tiene lados de $8$ cm, $10$ cm, y $12$ cm. Usa la fórmula de Herón para calcular su área.
+\end{enumerate}
+
+\begin{notebox}[Consejos para Resolver]
+\begin{itemize}
+    \item Siempre dibuja un diagrama de la situación
+    \item Identifica qué tipo de triángulo tienes
+    \item Escribe los datos conocidos y lo que buscas
+    \item Verifica tus respuestas cuando sea posible
+\end{itemize}
+\end{notebox}
+
+\newpage
+
+\section{Soluciones de los Ejercicios Propuestos}
+
+\begin{examplebox}[Solución Ejercicio 1]
+Un triángulo tiene lados de $7$ cm, $24$ cm, y $25$ cm.
+
+\textbf{a) Clasificación según lados:}
+
+Los tres lados tienen diferentes longitudes: $7 \neq 24 \neq 25$
+
+\textbf{Respuesta:} Es un triángulo \textbf{escaleno}.
+
+\textbf{b) Verificar si es rectángulo:}
+
+Para verificar si es rectángulo, comprobamos si cumple el teorema de Pitágoras. El lado más largo debe ser la hipotenusa.
+
+\textbf{Paso 1:} Identificamos el lado más largo: $c = 25$ cm
+
+\textbf{Paso 2:} Verificamos si $c^2 = a^2 + b^2$:
+\[25^2 = 7^2 + 24^2\]
+\[625 = 49 + 576\]
+\[625 = 625 \checkmark\]
+
+\textbf{Respuesta:} Sí, es un triángulo \textbf{rectángulo}.
+
+\textbf{c) Calcular el área:}
+
+Como es un triángulo rectángulo, podemos usar los catetos como base y altura:
+
+\[A = \frac{b \cdot h}{2} = \frac{7 \times 24}{2} = \frac{168}{2} = 84 \text{ cm}^2\]
+
+\textbf{Respuesta:} El área es $84$ cm$^2$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.4]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (7,0);
+    \coordinate (C) at (0,24);
+
+    \fill[maincolor!10] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1pt] (A) rectangle (0.5,0.5);
+
+    \node[below] at (3.5,0) {$7$ cm};
+    \node[left] at (0,12) {$24$ cm};
+    \node[above right] at (3.5,12) {$25$ cm};
+\end{tikzpicture}
+\end{center}
+\end{examplebox}
+
+\begin{examplebox}[Solución Ejercicio 2]
+La diagonal de un rectángulo mide $13$ cm y uno de sus lados mide $5$ cm. ¿Cuánto mide el otro lado?
+
+\textbf{Solución:}
+
+La diagonal de un rectángulo forma un triángulo rectángulo con los dos lados.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    \draw[maincolor, line width=1.5pt] (0,0) rectangle (5,3);
+    \draw[accentcolor, line width=1.5pt, dashed] (0,0) -- (5,3);
+    \draw[maincolor, line width=1pt] (0,0) rectangle (0.3,0.3);
+
+    \node[below] at (2.5,0) {$5$ cm};
+    \node[left] at (0,1.5) {$x = ?$};
+    \node[rotate=37] at (2.5,1.85) {$13$ cm};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Datos:}
+\begin{itemize}
+    \item Hipotenusa (diagonal): $c = 13$ cm
+    \item Cateto 1 (lado conocido): $a = 5$ cm
+    \item Cateto 2 (lado desconocido): $b = ?$
+\end{itemize}
+
+\textbf{Paso 1:} Aplicamos el teorema de Pitágoras:
+\[c^2 = a^2 + b^2\]
+\[13^2 = 5^2 + b^2\]
+\[169 = 25 + b^2\]
+
+\textbf{Paso 2:} Despejamos $b^2$:
+\[b^2 = 169 - 25 = 144\]
+
+\textbf{Paso 3:} Sacamos raíz cuadrada:
+\[b = \sqrt{144} = 12 \text{ cm}\]
+
+\textbf{Respuesta:} El otro lado del rectángulo mide $12$ cm.
+
+\textbf{Verificación:} $13^2 = 5^2 + 12^2 \Rightarrow 169 = 25 + 144 = 169$ \checkmark
+
+\begin{notebox}[Dato Interesante]
+Los números $5$, $12$, y $13$ forman una terna pitagórica (tres números enteros que cumplen el teorema de Pitágoras). Otras ternas famosas son $(3,4,5)$ y $(8,15,17)$.
+\end{notebox}
+\end{examplebox}
+
+\begin{examplebox}[Solución Ejercicio 3]
+En un triángulo 45-45-90, la hipotenusa mide $10\sqrt{2}$ cm. ¿Cuánto miden los catetos?
+
+\textbf{Solución:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3,0);
+    \coordinate (C) at (0,3);
+
+    \fill[maincolor!10] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1pt] (A) rectangle (0.3,0.3);
+
+    \node at (0.6,0.3) {$45°$};
+    \node at (0.3,2.5) {$45°$};
+    \node[below] at (1.5,0) {$a = ?$};
+    \node[left] at (0,1.5) {$a = ?$};
+    \node[above right, text=accentcolor] at (1.5,1.5) {$10\sqrt{2}$ cm};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Recordatorio:} En un triángulo 45-45-90, si los catetos miden $a$, la hipotenusa mide $a\sqrt{2}$.
+
+\textbf{Paso 1:} Usamos la relación:
+\[\text{hipotenusa} = a\sqrt{2} = 10\sqrt{2}\]
+
+\textbf{Paso 2:} Despejamos $a$:
+\[a\sqrt{2} = 10\sqrt{2}\]
+\[a = \frac{10\sqrt{2}}{\sqrt{2}} = 10 \text{ cm}\]
+
+\textbf{Respuesta:} Ambos catetos miden $10$ cm.
+
+\textbf{Verificación con Pitágoras:}
+\[(10\sqrt{2})^2 = 10^2 + 10^2\]
+\[100 \cdot 2 = 100 + 100\]
+\[200 = 200 \checkmark\]
+\end{examplebox}
+
+\begin{examplebox}[Solución Ejercicio 4]
+Un triángulo equilátero tiene un perímetro de $36$ cm.
+
+\textbf{a) Longitud de cada lado:}
+
+En un triángulo equilátero todos los lados son iguales. Si llamamos $\ell$ a la longitud de cada lado:
+
+\[P = 3\ell = 36\]
+\[\ell = \frac{36}{3} = 12 \text{ cm}\]
+
+\textbf{Respuesta:} Cada lado mide $12$ cm.
+
+\textbf{b) Altura del triángulo:}
+
+La altura de un triángulo equilátero divide al triángulo en dos triángulos rectángulos 30-60-90.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (4,0);
+    \coordinate (C) at (2,{2*sqrt(3)});
+    \coordinate (M) at (2,0);
+
+    \fill[maincolor!10] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+    \draw[accentcolor, line width=1.5pt, dashed] (C) -- (M);
+    \draw[maincolor, line width=1pt] (M) rectangle ++(0.2,0.2);
+
+    \node[below] at (1,0) {$6$ cm};
+    \node[below] at (3,0) {$6$ cm};
+    \node[right, text=accentcolor] at (2,{sqrt(3)}) {$h$};
+    \node[above right] at (3,{sqrt(3)}) {$12$ cm};
+    \node at (2.5,0.3) {$30°$};
+\end{tikzpicture}
+\end{center}
+
+Al dividir el triángulo equilátero por la mitad:
+\begin{itemize}
+    \item La base se divide en dos partes de $6$ cm cada una
+    \item Se forma un triángulo 30-60-90 con hipotenusa $12$ cm
+    \item El cateto menor (mitad de la base) es $6$ cm
+    \item El cateto mayor (altura) es $6\sqrt{3}$ cm
+\end{itemize}
+
+\textbf{Usando el triángulo 30-60-90:}
+
+En un triángulo 30-60-90, si el cateto menor mide $a$, el cateto mayor mide $a\sqrt{3}$.
+
+Como el cateto menor es $6$ cm:
+\[h = 6\sqrt{3} \text{ cm}\]
+
+\textbf{Valor numérico:} $h = 6\sqrt{3} \approx 6 \times 1.732 = 10.39$ cm
+
+\textbf{Respuesta:} La altura mide $6\sqrt{3}$ cm $\approx 10.39$ cm.
+
+\textbf{c) Área del triángulo:}
+
+\[A = \frac{b \cdot h}{2} = \frac{12 \times 6\sqrt{3}}{2} = \frac{72\sqrt{3}}{2} = 36\sqrt{3} \text{ cm}^2\]
+
+\textbf{Valor numérico:} $A = 36\sqrt{3} \approx 36 \times 1.732 = 62.35$ cm$^2$
+
+\textbf{Respuesta:} El área es $36\sqrt{3}$ cm$^2$ $\approx 62.35$ cm$^2$.
+
+\begin{notebox}[Fórmula Alternativa]
+Para un triángulo equilátero de lado $\ell$, el área se puede calcular directamente con:
+\[A = \frac{\ell^2\sqrt{3}}{4}\]
+
+En nuestro caso: $A = \frac{12^2\sqrt{3}}{4} = \frac{144\sqrt{3}}{4} = 36\sqrt{3}$ cm$^2$ \checkmark
+\end{notebox}
+\end{examplebox}
+
+\begin{examplebox}[Solución Ejercicio 5]
+En un triángulo 30-60-90, el cateto más corto mide $6$ cm.
+
+\textbf{a) Longitud del otro cateto:}
+
+En un triángulo 30-60-90:
+\begin{itemize}
+    \item El cateto más corto es el opuesto al ángulo de $30°$
+    \item El cateto más largo es el opuesto al ángulo de $60°$
+    \item Si el cateto corto mide $a$, el cateto largo mide $a\sqrt{3}$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at ({sqrt(3)},0);
+    \coordinate (C) at (0,1);
+
+    \fill[maincolor!10] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1pt] (A) rectangle (0.2,0.2);
+
+    \node at (1,0.15) {$30°$};
+    \node at (0.2,0.7) {$60°$};
+    \node[below] at ({sqrt(3)/2},0) {$b = ?$};
+    \node[left] at (0,0.5) {$6$ cm};
+    \node[above right] at ({sqrt(3)/2},0.5) {$c = ?$};
+\end{tikzpicture}
+\end{center}
+
+Como $a = 6$ cm, entonces:
+\[b = a\sqrt{3} = 6\sqrt{3} \text{ cm}\]
+
+\textbf{Valor numérico:} $b = 6\sqrt{3} \approx 6 \times 1.732 = 10.39$ cm
+
+\textbf{Respuesta:} El otro cateto mide $6\sqrt{3}$ cm $\approx 10.39$ cm.
+
+\textbf{b) Longitud de la hipotenusa:}
+
+En un triángulo 30-60-90, si el cateto corto mide $a$, la hipotenusa mide $2a$.
+
+\[c = 2a = 2 \times 6 = 12 \text{ cm}\]
+
+\textbf{Respuesta:} La hipotenusa mide $12$ cm.
+
+\textbf{Verificación con Pitágoras:}
+\[12^2 = 6^2 + (6\sqrt{3})^2\]
+\[144 = 36 + 36 \cdot 3\]
+\[144 = 36 + 108\]
+\[144 = 144 \checkmark\]
+
+\textbf{Resumen de relaciones 30-60-90:}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Lado} & \textbf{Longitud} \\
+\hline
+Cateto opuesto a $30°$ & $6$ cm \\
+Cateto opuesto a $60°$ & $6\sqrt{3}$ cm $\approx 10.39$ cm \\
+Hipotenusa & $12$ cm \\
+\hline
+\textbf{Relación} & $1 : \sqrt{3} : 2$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{examplebox}
+
+\begin{examplebox}[Solución Ejercicio 6]
+Un poste vertical proyecta una sombra de $12$ metros cuando el ángulo de elevación del sol es de $45°$. ¿Cuál es la altura del poste?
+
+\textbf{Solución:}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Poste
+    \draw[maincolor, line width=2pt] (0,0) -- (0,3);
+    \fill[maincolor!20] (-0.1,0) rectangle (0.1,3);
+
+    % Sombra
+    \draw[maincolor, line width=1.5pt] (0,0) -- (3,0);
+
+    % Rayo del sol
+    \draw[accentcolor, line width=1.5pt, dashed] (0,3) -- (3,0);
+
+    % Ángulo
+    \draw[accentcolor] (2.5,0) arc (180:135:0.5);
+    \node[accentcolor] at (2.2,0.3) {$45°$};
+
+    % Ángulo recto
+    \draw[maincolor, line width=1pt] (0,0) rectangle (0.2,0.2);
+
+    % Etiquetas
+    \node[left] at (0,1.5) {$h = ?$};
+    \node[below] at (1.5,0) {$12$ m};
+
+    % Sol
+    \draw[yellow, fill=yellow] (3.5,3.5) circle (0.3);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Análisis:}
+
+El poste, su sombra, y el rayo de sol forman un triángulo rectángulo. Como el ángulo de elevación del sol es $45°$, tenemos un triángulo 45-45-90.
+
+\textbf{Datos:}
+\begin{itemize}
+    \item Cateto horizontal (sombra): $12$ m
+    \item Ángulo de elevación: $45°$
+    \item Cateto vertical (altura del poste): $h = ?$
+\end{itemize}
+
+\textbf{Método 1 - Usando la propiedad del triángulo 45-45-90:}
+
+En un triángulo 45-45-90, los dos catetos son iguales.
+
+Por lo tanto:
+\[h = 12 \text{ m}\]
+
+\textbf{Método 2 - Usando trigonometría básica:}
+
+En el triángulo rectángulo formado:
+\[\tan(45°) = \frac{h}{12}\]
+
+Sabemos que $\tan(45°) = 1$, entonces:
+\[1 = \frac{h}{12}\]
+\[h = 12 \text{ m}\]
+
+\textbf{Respuesta:} La altura del poste es $12$ metros.
+
+\begin{notebox}[Observación]
+Cuando el ángulo de elevación del sol es exactamente $45°$, la altura de cualquier objeto vertical es igual a la longitud de su sombra. Esto ocurre porque los catetos de un triángulo 45-45-90 son siempre iguales.
+\end{notebox}
+\end{examplebox}
+
+\begin{examplebox}[Solución Ejercicio 7]
+Un triángulo tiene lados de $8$ cm, $10$ cm, y $12$ cm. Usa la fórmula de Herón para calcular su área.
+
+\textbf{Solución:}
+
+\textbf{Datos:}
+\begin{itemize}
+    \item $a = 8$ cm
+    \item $b = 10$ cm
+    \item $c = 12$ cm
+\end{itemize}
+
+\textbf{Paso 1:} Calculamos el semiperímetro $s$:
+\[s = \frac{a + b + c}{2} = \frac{8 + 10 + 12}{2} = \frac{30}{2} = 15 \text{ cm}\]
+
+\textbf{Paso 2:} Calculamos cada diferencia:
+\begin{align*}
+s - a &= 15 - 8 = 7 \\
+s - b &= 15 - 10 = 5 \\
+s - c &= 15 - 12 = 3
+\end{align*}
+
+\textbf{Paso 3:} Aplicamos la fórmula de Herón:
+\[A = \sqrt{s(s-a)(s-b)(s-c)}\]
+\[A = \sqrt{15 \cdot 7 \cdot 5 \cdot 3}\]
+
+\textbf{Paso 4:} Calculamos el producto paso a paso:
+\begin{align*}
+15 \cdot 7 &= 105 \\
+105 \cdot 5 &= 525 \\
+525 \cdot 3 &= 1575
+\end{align*}
+
+\textbf{Paso 5:} Simplificamos la raíz cuadrada:
+\[A = \sqrt{1575}\]
+
+Factorizamos $1575$:
+\begin{align*}
+1575 &= 25 \cdot 63 \\
+&= 25 \cdot 9 \cdot 7 \\
+&= 225 \cdot 7
+\end{align*}
+
+Entonces:
+\[A = \sqrt{225 \cdot 7} = \sqrt{225} \cdot \sqrt{7} = 15\sqrt{7} \text{ cm}^2\]
+
+\textbf{Valor numérico:} $A = 15\sqrt{7} \approx 15 \times 2.646 = 39.69$ cm$^2$
+
+\textbf{Respuesta:} El área del triángulo es $15\sqrt{7}$ cm$^2$ $\approx 39.69$ cm$^2$.
+
+\begin{notebox}[Verificación]
+Podemos verificar que nuestro cálculo es razonable. Un triángulo con lados $8$, $10$, $12$ tiene un perímetro de $30$ cm. Si fuera "casi rectangular", su área sería aproximadamente $\frac{8 \times 10}{2} = 40$ cm$^2$, que está muy cerca de nuestro resultado de $39.69$ cm$^2$. \checkmark
+\end{notebox}
+\end{examplebox}
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+Estos ejercicios son más desafiantes porque requieren que trabajes "al revés": te dan el resultado y debes encontrar los datos iniciales. También incluyen aplicaciones más complejas.
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+    \item Un triángulo rectángulo tiene un área de $54$ cm$^2$ y uno de sus catetos mide $9$ cm.
+    \begin{itemize}
+        \item[a)] ¿Cuánto mide el otro cateto?
+        \item[b)] ¿Cuánto mide la hipotenusa?
+        \item[c)] ¿Cuál es el perímetro del triángulo?
+    \end{itemize}
+
+    \vspace{0.5cm}
+
+    \item Un arquitecto está diseñando una rampa para sillas de ruedas. Las regulaciones dicen que la rampa debe tener un ángulo de inclinación de $30°$ y debe alcanzar una altura de $1.5$ metros.
+    \begin{itemize}
+        \item[a)] ¿Cuál debe ser la longitud de la rampa?
+        \item[b)] ¿Cuánto espacio horizontal ocupará la rampa?
+    \end{itemize}
+
+    \vspace{0.5cm}
+
+    \item Un carpintero corta una tabla cuadrada por su diagonal, creando dos triángulos. Si cada triángulo resultante tiene un área de $32$ cm$^2$:
+    \begin{itemize}
+        \item[a)] ¿Cuál era el área de la tabla cuadrada original?
+        \item[b)] ¿Cuánto medía cada lado del cuadrado?
+        \item[c)] ¿Cuánto mide la diagonal (el corte)?
+    \end{itemize}
+
+    \vspace{0.5cm}
+
+    \item Un avión vuela a una altura constante de $10,000$ metros. Desde un punto de observación en tierra, el ángulo de elevación al avión es de $60°$. Cinco minutos después, el ángulo de elevación es de $30°$ (el avión voló más lejos).
+    \begin{itemize}
+        \item[a)] ¿Qué distancia horizontal había entre el observador y el avión en la primera observación?
+        \item[b)] ¿Qué distancia horizontal había en la segunda observación?
+        \item[c)] ¿Cuántos metros horizontales voló el avión en esos $5$ minutos?
+        \item[d)] ¿Cuál es la velocidad horizontal del avión en km/h?
+    \end{itemize}
+\end{enumerate}
+
+\begin{notebox}[Consejo]
+Estos problemas requieren pensar con cuidado y dibujar buenos diagramas. No te desanimes si no los resuelves inmediatamente. Intenta diferentes enfoques y verifica que tu respuesta tenga sentido en el contexto del problema.
+\end{notebox}
+
+\newpage
+
+\section{Soluciones de los Ejercicios Inversos}
+
+\begin{examplebox}[Solución Ejercicio Inverso 1]
+Un triángulo rectángulo tiene un área de $54$ cm$^2$ y uno de sus catetos mide $9$ cm.
+
+\textbf{a) ¿Cuánto mide el otro cateto?}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3,0);
+    \coordinate (C) at (0,4);
+
+    \fill[maincolor!10] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1pt] (A) rectangle (0.3,0.3);
+
+    \node[below] at (1.5,0) {$b = ?$};
+    \node[left] at (0,2) {$9$ cm};
+    \node[rotate=-55, scale=.85, text=maincolor] at (1.2,1.7) {Área = $54$ cm$^2$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Datos:}
+\begin{itemize}
+    \item Área: $A = 54$ cm$^2$
+    \item Cateto 1: $a = 9$ cm
+    \item Cateto 2: $b = ?$
+\end{itemize}
+
+\textbf{Paso 1:} Usamos la fórmula del área para triángulos rectángulos:
+\[A = \frac{a \cdot b}{2}\]
+
+\textbf{Paso 2:} Sustituimos los valores conocidos:
+\[54 = \frac{9 \cdot b}{2}\]
+
+\textbf{Paso 3:} Despejamos $b$:
+\[54 = \frac{9b}{2}\]
+\[108 = 9b\]
+\[b = \frac{108}{9} = 12 \text{ cm}\]
+
+\textbf{Respuesta:} El otro cateto mide $12$ cm.
+
+\textbf{b) ¿Cuánto mide la hipotenusa?}
+
+\textbf{Paso 1:} Aplicamos el teorema de Pitágoras:
+\[c^2 = a^2 + b^2\]
+\[c^2 = 9^2 + 12^2\]
+\[c^2 = 81 + 144\]
+\[c^2 = 225\]
+\[c = \sqrt{225} = 15 \text{ cm}\]
+
+\textbf{Respuesta:} La hipotenusa mide $15$ cm.
+
+\begin{notebox}[Dato Interesante]
+El triángulo con lados $9$, $12$, $15$ es un triángulo pitagórico. De hecho, es el triple del famoso triángulo $3$-$4$-$5$: $(3 \times 3, 3 \times 4, 3 \times 5) = (9, 12, 15)$.
+\end{notebox}
+
+\textbf{c) ¿Cuál es el perímetro del triángulo?}
+
+\[P = a + b + c = 9 + 12 + 15 = 36 \text{ cm}\]
+
+\textbf{Respuesta:} El perímetro es $36$ cm.
+
+\textbf{Verificación del área:}
+\[A = \frac{9 \times 12}{2} = \frac{108}{2} = 54 \text{ cm}^2 \checkmark\]
+\end{examplebox}
+
+\begin{examplebox}[Solución Ejercicio Inverso 2]
+Un arquitecto está diseñando una rampa para sillas de ruedas con un ángulo de inclinación de $30°$ que debe alcanzar una altura de $1.5$ metros.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Rampa
+    \coordinate (A) at (0,0);
+    \coordinate (B) at ({1.5*sqrt(3)},0);
+    \coordinate (C) at (0,1.5);
+
+    \fill[maincolor!10] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=2pt] (C) -- (B);
+    \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=1pt] (A) rectangle (0.15,0.15);
+
+    % Ángulo
+    \draw[accentcolor] (2,0) arc (180:150:0.5);
+    \node[accentcolor] at (1.7,0.2) {$30°$};
+
+    % Etiquetas
+    \node[left] at (0,0.75) {$1.5$ m};
+    \node[below] at ({1.5*sqrt(3)/2},0) {$d = ?$};
+    \node[above right] at ({1.5*sqrt(3)/2},0.75) {$L = ?$};
+
+    % Silla de ruedas (representación simple)
+    \draw[accentcolor] (0.5,0.6) circle (0.1);
+    \draw[accentcolor] (0.8,0.6) circle (0.1);
+\end{tikzpicture}
+\end{center}
+
+Tenemos un triángulo 30-60-90 donde conocemos el cateto opuesto al ángulo de $30°$ (la altura).
+
+\textbf{a) ¿Cuál debe ser la longitud de la rampa?}
+
+En un triángulo 30-60-90, si el cateto opuesto a $30°$ mide $a$, la hipotenusa mide $2a$.
+
+\textbf{Paso 1:} Identificamos que $a = 1.5$ m
+
+\textbf{Paso 2:} Calculamos la hipotenusa (longitud de la rampa):
+\[L = 2a = 2 \times 1.5 = 3 \text{ m}\]
+
+\textbf{Respuesta:} La rampa debe tener una longitud de $3$ metros.
+
+\textbf{b) ¿Cuánto espacio horizontal ocupará la rampa?}
+
+En un triángulo 30-60-90, si el cateto opuesto a $30°$ mide $a$, el cateto opuesto a $60°$ mide $a\sqrt{3}$.
+
+\textbf{Paso 1:} Calculamos el cateto adyacente (distancia horizontal):
+\[d = a\sqrt{3} = 1.5\sqrt{3} \text{ m}\]
+
+\textbf{Valor numérico:} $d = 1.5\sqrt{3} \approx 1.5 \times 1.732 = 2.598$ m
+
+\textbf{Respuesta:} La rampa ocupará aproximadamente $2.6$ metros de espacio horizontal (o exactamente $1.5\sqrt{3}$ m).
+
+\textbf{Verificación con Pitágoras:}
+\[3^2 = 1.5^2 + (1.5\sqrt{3})^2\]
+\[9 = 2.25 + 2.25 \cdot 3\]
+\[9 = 2.25 + 6.75\]
+\[9 = 9 \checkmark\]
+
+\begin{notebox}[Aplicación Real]
+Las normativas de accesibilidad generalmente especifican que las rampas no deben tener una pendiente mayor a $30°$ (algunas recomiendan incluso menos). Una pendiente de $30°$ es bastante empinada; muchas regulaciones prefieren ángulos de $5°$ a $10°$ para mayor seguridad y comodidad.
+\end{notebox}
+\end{examplebox}
+
+\begin{examplebox}[Solución Ejercicio Inverso 3]
+Un carpintero corta una tabla cuadrada por su diagonal, creando dos triángulos. Cada triángulo resultante tiene un área de $32$ cm$^2$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Cuadrado completo (contorno)
+    \draw[maincolor, line width=2pt] (0,0) rectangle (4,4);
+
+    % Diagonal
+    \draw[accentcolor, line width=2pt, dashed] (0,0) -- (4,4);
+
+    % Relleno de los dos triángulos con colores diferentes
+    \fill[maincolor!10] (0,0) -- (4,0) -- (4,4) -- cycle;
+    \fill[blue!10] (0,0) -- (0,4) -- (4,4) -- cycle;
+
+    % Etiquetas
+    \node at (2.5,1.5) {$32$ cm$^2$};
+    \node at (1.5,2.5) {$32$ cm$^2$};
+    \node[below] at (2,0) {$\ell = ?$};
+
+    % Ángulos de 45°
+    \node at (0.5,0.3) {$45°$};
+    \node at (3.5,3.7) {$45°$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{a) ¿Cuál era el área de la tabla cuadrada original?}
+
+Si cada triángulo tiene un área de $32$ cm$^2$, y el cuadrado se divide en dos triángulos iguales:
+
+\[A_{\text{cuadrado}} = 2 \times 32 = 64 \text{ cm}^2\]
+
+\textbf{Respuesta:} El área del cuadrado original era $64$ cm$^2$.
+
+\textbf{b) ¿Cuánto medía cada lado del cuadrado?}
+
+El área de un cuadrado es $\ell^2$, donde $\ell$ es la longitud del lado.
+
+\textbf{Paso 1:} Planteamos la ecuación:
+\[\ell^2 = 64\]
+
+\textbf{Paso 2:} Sacamos raíz cuadrada:
+\[\ell = \sqrt{64} = 8 \text{ cm}\]
+
+\textbf{Respuesta:} Cada lado del cuadrado medía $8$ cm.
+
+\textbf{c) ¿Cuánto mide la diagonal (el corte)?}
+
+La diagonal de un cuadrado forma un triángulo 45-45-90 con dos lados del cuadrado.
+
+\textbf{Método 1 - Usando la relación 45-45-90:}
+
+Si los lados del cuadrado (catetos) miden $\ell = 8$ cm, la diagonal (hipotenusa) mide:
+\[d = \ell\sqrt{2} = 8\sqrt{2} \text{ cm}\]
+
+\textbf{Valor numérico:} $d = 8\sqrt{2} \approx 8 \times 1.414 = 11.31$ cm
+
+\textbf{Método 2 - Usando Pitágoras:}
+\[d^2 = \ell^2 + \ell^2 = 8^2 + 8^2 = 64 + 64 = 128\]
+\[d = \sqrt{128} = \sqrt{64 \cdot 2} = 8\sqrt{2} \text{ cm}\]
+
+\textbf{Respuesta:} La diagonal mide $8\sqrt{2}$ cm $\approx 11.31$ cm.
+
+\textbf{Verificación del área de cada triángulo:}
+\[A = \frac{8 \times 8}{2} = \frac{64}{2} = 32 \text{ cm}^2 \checkmark\]
+
+\begin{notebox}[Observación Importante]
+Este problema demuestra una relación clave: cuando conocemos el área de un triángulo 45-45-90, podemos "trabajar al revés" para encontrar las dimensiones. El proceso es:
+\begin{enumerate}
+    \item Área del triángulo $\rightarrow$ Área del cuadrado (doblar el área)
+    \item Área del cuadrado $\rightarrow$ Lado del cuadrado (raíz cuadrada)
+    \item Lado del cuadrado $\rightarrow$ Diagonal (multiplicar por $\sqrt{2}$)
+\end{enumerate}
+\end{notebox}
+\end{examplebox}
+
+\begin{examplebox}[Solución Ejercicio Inverso 4]
+Un avión vuela a una altura constante de $10,000$ metros. El ángulo de elevación cambia de $60°$ a $30°$ en $5$ minutos.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+    % Tierra
+    \draw[maincolor, line width=2pt] (0,0) -- (14,0);
+
+    % Observador
+    \fill[accentcolor] (0,0) circle (0.15);
+    \node[below] at (0,-0.5) {Observador};
+
+    % Altura constante del avión
+    \draw[maincolor, dashed] (0,6) -- (14,6);
+    \node[left] at (0,6) {$10{,}000$ m};
+
+    % Primera posición del avión
+    \fill[blue] (3.5,6) circle (0.15);
+    \node[above] at (3.5,6.4) {Posición 1};
+    \draw[blue, line width=1.5pt] (0,0) -- (3.5,6);
+    \draw[blue] (2.5,0) arc (0:60:2.6);
+    \node[blue] at (2.7,2.3) {$60°$};
+
+    % Segunda posición del avión
+    \fill[red] (10.4,6) circle (0.15);
+    \node[above] at (10.4,6.4) {Posición 2};
+    \draw[red, line width=1.5pt] (0,0) -- (10.4,6);
+    \draw[red] (4,0) arc (0:30:4);
+    \node[red] at (4.7,1.3) {$30°$};
+
+    % Distancia horizontal
+    \draw[accentcolor, <->, line width=1.5pt] (3.5,-1) -- (10.4,-1);
+    \node[below, accentcolor, font=\small] at (7,-1) {distancia horizontal = ?};
+
+    % Alturas verticales
+    \draw[dashed] (3.5,0) -- (3.5,6);
+    \draw[dashed] (10.4,0) -- (10.4,6);
+
+    \node[below, font=\small] at (3.5,0) {$d_1$};
+    \node[below, font=\small] at (10.4,0) {$d_2$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{a) Distancia horizontal en la primera observación:}
+
+En la primera posición, tenemos un triángulo 30-60-90 donde:
+\begin{itemize}
+    \item El ángulo de elevación es $60°$
+    \item La altura (cateto opuesto a $60°$) es $10,000$ m
+\end{itemize}
+
+En un triángulo 30-60-90, si el cateto opuesto a $60°$ mide $a\sqrt{3}$, entonces el cateto opuesto a $30°$ mide $a$.
+
+\textbf{Paso 1:} Planteamos:
+\[a\sqrt{3} = 10000\]
+
+\textbf{Paso 2:} Despejamos $a$:
+\[a = \frac{10000}{\sqrt{3}} = \frac{10000\sqrt{3}}{3} \text{ m}\]
+
+\textbf{Valor numérico:} $d_1 = \frac{10000\sqrt{3}}{3} \approx \frac{10000 \times 1.732}{3} = 5773.5$ m
+
+\textbf{Respuesta:} En la primera observación, la distancia horizontal era aproximadamente $5,774$ metros.
+
+\textbf{b) Distancia horizontal en la segunda observación:}
+
+En la segunda posición, el ángulo de elevación es $30°$. Ahora tenemos:
+\begin{itemize}
+    \item El ángulo de elevación es $30°$
+    \item La altura (cateto opuesto a $30°$) es $10,000$ m
+\end{itemize}
+
+En un triángulo 30-60-90, si el cateto opuesto a $30°$ mide $a$, entonces el cateto opuesto a $60°$ mide $a\sqrt{3}$.
+
+\[d_2 = 10000\sqrt{3} \text{ m}\]
+
+\textbf{Valor numérico:} $d_2 = 10000\sqrt{3} \approx 10000 \times 1.732 = 17320$ m
+
+\textbf{Respuesta:} En la segunda observación, la distancia horizontal era aproximadamente $17,320$ metros.
+
+\textbf{c) ¿Cuántos metros horizontales voló el avión?}
+
+\[\Delta d = d_2 - d_1 = 10000\sqrt{3} - \frac{10000\sqrt{3}}{3}\]
+
+\textbf{Paso 1:} Simplificamos:
+\[\Delta d = 10000\sqrt{3}\left(1 - \frac{1}{3}\right) = 10000\sqrt{3} \cdot \frac{2}{3} = \frac{20000\sqrt{3}}{3} \text{ m}\]
+
+\textbf{Valor numérico:} $\Delta d = \frac{20000\sqrt{3}}{3} \approx 11547$ m
+
+\textbf{Respuesta:} El avión voló aproximadamente $11,547$ metros (o $11.547$ km) en dirección horizontal.
+
+\textbf{d) ¿Cuál es la velocidad horizontal del avión?}
+
+\textbf{Paso 1:} Convertimos el tiempo a horas:
+\[t = 5 \text{ minutos} = \frac{5}{60} \text{ horas} = \frac{1}{12} \text{ horas}\]
+
+\textbf{Paso 2:} Calculamos la velocidad:
+\[v = \frac{\text{distancia}}{\text{tiempo}} = \frac{11547 \text{ m}}{\frac{1}{12} \text{ h}} = 11547 \times 12 = 138564 \text{ m/h}\]
+
+\textbf{Paso 3:} Convertimos a km/h:
+\[v = 138564 \text{ m/h} = 138.564 \text{ km/h}\]
+
+\textbf{Respuesta:} La velocidad horizontal del avión es aproximadamente $139$ km/h.
+
+\begin{notebox}[Análisis del Resultado]
+Una velocidad de $139$ km/h parece baja para un avión comercial (típicamente vuelan a $800$-$900$ km/h). Esto podría indicar:
+\begin{itemize}
+    \item Es un avión pequeño o una avioneta
+    \item El avión está en fase de aproximación para aterrizar
+    \item Hay un fuerte viento en contra
+\end{itemize}
+
+Si el problema pretendía representar un avión comercial, es posible que el tiempo real no sea $5$ minutos sino menos (por ejemplo, $30$ segundos daría una velocidad más realista de $1,385$ km/h).
+\end{notebox}
+
+\textbf{Resumen de resultados:}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Observación} & \textbf{Distancia Horizontal} & \textbf{Cálculo} \\
+\hline
+Primera ($60°$) & $\approx 5,774$ m & $\frac{10000}{\sqrt{3}}$ m \\
+Segunda ($30°$) & $\approx 17,320$ m & $10000\sqrt{3}$ m \\
+\hline
+Distancia recorrida & $\approx 11,547$ m & $\frac{20000\sqrt{3}}{3}$ m \\
+\hline
+Velocidad horizontal & $\approx 139$ km/h & - \\
+\hline
+\end{tabular}
+\end{center}
+\end{examplebox}
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado esta guía sobre triángulos y sus aplicaciones en trigonometría. Hemos cubierto:
+
+\begin{enumerate}
+    \item \textbf{Clasificación de triángulos} según sus lados (equilátero, isósceles, escaleno) y según sus ángulos (acutángulo, rectángulo, obtusángulo)
+
+    \item \textbf{El triángulo rectángulo} y sus partes especiales: catetos e hipotenusa
+
+    \item \textbf{El Teorema de Pitágoras} ($c^2 = a^2 + b^2$), uno de los teoremas más importantes en matemáticas
+
+    \item \textbf{Triángulos notables:}
+    \begin{itemize}
+        \item Triángulo 45-45-90 con relación de lados $1:1:\sqrt{2}$
+        \item Triángulo 30-60-90 con relación de lados $1:\sqrt{3}:2$
+    \end{itemize}
+
+    \item \textbf{Cálculo de áreas} usando diferentes métodos (base por altura y fórmula de Herón)
+
+    \item \textbf{Aplicaciones prácticas} en arquitectura, navegación, topografía, y más
+\end{enumerate}
+
+\subsection{Conceptos Clave para Recordar}
+
+\begin{conceptbox}[Fórmulas Esenciales]
+\textbf{Teorema de Pitágoras:}
+\[c^2 = a^2 + b^2\]
+
+\textbf{Triángulo 45-45-90:}
+\[\text{Si catetos} = a \Rightarrow \text{hipotenusa} = a\sqrt{2}\]
+
+\textbf{Triángulo 30-60-90:}
+\[\text{Si cateto menor} = a \Rightarrow \text{cateto mayor} = a\sqrt{3}, \text{ hipotenusa} = 2a\]
+
+\textbf{Área (base y altura):}
+\[A = \frac{b \cdot h}{2}\]
+
+\textbf{Fórmula de Herón:}
+\[s = \frac{a+b+c}{2}, \quad A = \sqrt{s(s-a)(s-b)(s-c)}\]
+\end{conceptbox}
+
+\subsection{Siguientes Pasos}
+
+Ahora que dominas los triángulos, estás listo para:
+
+\begin{itemize}
+    \item Estudiar las \textbf{razones trigonométricas} (seno, coseno, tangente) que relacionan los ángulos con los lados
+    \item Explorar el \textbf{círculo unitario} y cómo se extienden las funciones trigonométricas
+    \item Aplicar estos conceptos a \textbf{problemas del mundo real} en física, ingeniería, y navegación
+    \item Estudiar \textbf{identidades trigonométricas} y ecuaciones
+\end{itemize}
+
+\subsection{Consejos Finales}
+
+\begin{itemize}
+    \item \textbf{Practica regularmente:} Las matemáticas se aprenden haciendo, no solo leyendo
+    \item \textbf{Dibuja siempre:} Un buen diagrama es la mitad de la solución
+    \item \textbf{Verifica tus respuestas:} Usa el teorema de Pitágoras para verificar que tus cálculos tengan sentido
+    \item \textbf{Busca patrones:} Los triángulos notables aparecen en muchos problemas
+    \item \textbf{Relaciona con el mundo real:} Piensa en aplicaciones prácticas para cada concepto
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+    % Triángulo decorativo final
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (4,0);
+    \coordinate (C) at (2,3.5);
+
+    \fill[maincolor!20] (A) -- (B) -- (C) -- cycle;
+    \draw[maincolor, line width=2pt] (A) -- (B) -- (C) -- cycle;
+
+    \node[font=\Large\bfseries] at (2,1.5) {¡Éxito en tu};
+    \node[font=\Large\bfseries] at (2,1) {aprendizaje!};
+\end{tikzpicture}
+\end{center}
+
+\vfill
+
+\begin{center}
+\textcolor{maincolor}{\rule{0.5\textwidth}{0.4pt}}
+
+\textit{Recuerda: Los triángulos son la base de la trigonometría.}
+
+\textit{Domina los triángulos y dominarás la trigonometría.}
+
+\textcolor{maincolor}{\rule{0.5\textwidth}{0.4pt}}
+\end{center}
+
+\end{document}
