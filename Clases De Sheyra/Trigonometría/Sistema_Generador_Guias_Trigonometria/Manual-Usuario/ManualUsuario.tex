@@ -1,0 +1,940 @@
+% Manual de Usuario: Sistema Generador de Guías de Trigonometría v1.0
+\documentclass[12pt,a4paper]{article}
+
+% Paquetes esenciales
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+% Colores institucionales
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+\definecolor{successcolor}{RGB}{76,175,80}
+\definecolor{warningcolor}{RGB}{255,193,7}
+
+% Configuración de hipervínculos
+\hypersetup{
+    colorlinks=true,
+    linkcolor=maincolor,
+    urlcolor=accentcolor,
+    citecolor=maincolor
+}
+
+% Configuración de headers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Manual de Usuario}
+\fancyhead[R]{Sistema Generador v1.0}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+
+% Entornos personalizados
+\newtcolorbox{instruccion}{
+    colback=maincolor!5,
+    colframe=maincolor,
+    fonttitle=\bfseries,
+    title=Instrucción,
+    breakable
+}
+
+\newtcolorbox{ejemplo}{
+    colback=successcolor!5,
+    colframe=successcolor,
+    fonttitle=\bfseries,
+    title=Ejemplo de Uso,
+    breakable
+}
+
+\newtcolorbox{importante}{
+    colback=accentcolor!5,
+    colframe=accentcolor,
+    fonttitle=\bfseries,
+    title=Importante,
+    breakable
+}
+
+\newtcolorbox{consejo}{
+    colback=warningcolor!5,
+    colframe=warningcolor,
+    fonttitle=\bfseries,
+    title=Consejo,
+    breakable
+}
+
+% Título
+\title{
+    \Huge\bfseries Manual de Usuario\\
+    \LARGE Sistema Generador de Guías\\
+    \large Trigonometría v1.0
+}
+\author{Prof. Toribio De J Arrieta F}
+\date{Noviembre 2025}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+Este manual te guiará paso a paso en el uso del \textbf{Sistema Generador de Guías de Trigonometría v1.0}, optimizado con tecnología multi-agente para crear guías educativas de alta calidad en tiempo récord.
+
+\subsection{Características del Sistema}
+
+\begin{itemize}
+    \item \textbf{Optimización Multi-Agente:} Utiliza 3 subagentes trabajando en paralelo
+    \item \textbf{Rapidez:} Genera guías de 25--35 páginas en solo 2 minutos
+    \item \textbf{Eficiencia:} Ahorro de 60\% en tiempo vs. sistema tradicional
+    \item \textbf{Calidad:} Basado en plantilla verificada de 30 páginas
+    \item \textbf{Automatización:} Compilación y guardado en git automático
+\end{itemize}
+
+\subsection{¿Qué Genera el Sistema?}
+
+El sistema crea automáticamente:
+
+\begin{enumerate}
+    \item Archivo \texttt{.tex} completo (25--35 páginas)
+    \item PDF compilado profesional
+    \item Archivo \texttt{README.md} de documentación
+    \item Commit en repositorio git local
+    \item Push al repositorio remoto
+\end{enumerate}
+
+\newpage
+
+\section{Iniciar el Sistema}
+
+\begin{instruccion}
+Para iniciar el sistema, envía exactamente este mensaje al asistente de IA (Claude Code):
+\end{instruccion}
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt]
+\texttt{Quiero crear una nueva guía de Trigonometría usando el sistema en:\\
+Sistema\_Generador\_Guias\_Trigonometria/PROMPT\_TRIGONOMETRIA\_v1.0.md}
+\end{tcolorbox}
+
+\begin{importante}
+El asistente automáticamente:
+\begin{itemize}
+    \item Leerá el PROMPT con todas las especificaciones
+    \item Iniciará el proceso interactivo de 14 preguntas
+    \item Configurará los 3 subagentes para trabajar en paralelo
+\end{itemize}
+\end{importante}
+
+\newpage
+
+\section{Las 14 Preguntas}
+
+El sistema te hará 14 preguntas para configurar tu guía. A continuación se describe cada una:
+
+\subsection{Pregunta 1: Título de la Guía}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Cuál es el TÍTULO de la guía?
+\end{instruccion}
+
+\begin{consejo}
+Usa un título descriptivo y claro. Ejemplos:
+\begin{itemize}
+    \item ``Identidades Trigonométricas''
+    \item ``Ecuaciones Trigonométricas''
+    \item ``Ley de Senos y Cosenos''
+\end{itemize}
+\end{consejo}
+
+\subsection{Pregunta 2: Autor}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Quién es el AUTOR?
+\end{instruccion}
+
+\begin{ejemplo}
+\textbf{Respuesta típica:}\\
+\texttt{Prof. Toribio De J Arrieta F}
+\end{ejemplo}
+
+\subsection{Pregunta 3: Institución}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Cuál es la INSTITUCIÓN?
+\end{instruccion}
+
+\begin{ejemplo}
+\textbf{Respuesta típica:}\\
+\texttt{La Pruebita}
+\end{ejemplo}
+
+\subsection{Pregunta 4: Fecha}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Fecha de creación?
+\end{instruccion}
+
+\begin{consejo}
+Responde: \texttt{Toma la fecha de compilación}\\
+Esto hará que LaTeX use \texttt{\textbackslash today} automáticamente.
+\end{consejo}
+
+\subsection{Pregunta 5: Título Corto}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Título corto para encabezados?
+\end{instruccion}
+
+\begin{consejo}
+Usa una versión corta del título (máximo 40 caracteres).\\
+Ejemplo: Si el título es ``Identidades Trigonométricas Fundamentales'',\\
+el título corto puede ser: ``Identidades Trigonométricas''
+\end{consejo}
+
+\subsection{Pregunta 6: Grado}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Para qué GRADO es la guía?
+\end{instruccion}
+
+\begin{ejemplo}
+\textbf{Respuesta típica:}\\
+\texttt{10} (para Grado 10)
+\end{ejemplo}
+
+\subsection{Pregunta 7: Asignatura}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Qué ASIGNATURA/ÁREA?
+\end{instruccion}
+
+\begin{ejemplo}
+\textbf{Respuesta típica:}\\
+\texttt{Trigonometría}
+\end{ejemplo}
+
+\subsection{Pregunta 8: Elementos Clave}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Qué ELEMENTOS CLAVE debe incluir?
+\end{instruccion}
+
+\begin{importante}
+Esta es la pregunta MÁS IMPORTANTE. Aquí defines el contenido técnico de tu guía.
+\end{importante}
+
+\begin{consejo}
+Sé específico y enumera en orden lógico. Ejemplos:
+
+\textbf{Para Identidades Trigonométricas:}
+\begin{itemize}[leftmargin=1cm]
+    \item Identidades pitagóricas
+    \item Identidades recíprocas
+    \item Identidades de cociente
+    \item Identidades de suma y diferencia
+    \item Identidades de ángulo doble
+    \item Identidades de ángulo mitad
+    \item Simplificación de expresiones
+    \item Verificación de identidades
+\end{itemize}
+
+\textbf{Para Ecuaciones Trigonométricas:}
+\begin{itemize}[leftmargin=1cm]
+    \item Ecuaciones básicas
+    \item Ecuaciones cuadráticas en funciones trigonométricas
+    \item Ecuaciones con múltiples ángulos
+    \item Soluciones generales
+    \item Restricciones de dominio
+\end{itemize}
+\end{consejo}
+
+\subsection{Pregunta 9: Aplicaciones}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Qué APLICACIONES de la vida real mencionar?
+\end{instruccion}
+
+\begin{consejo}
+Menciona al menos 3--5 aplicaciones reales. Ejemplos:
+\begin{itemize}
+    \item Análisis de ondas
+    \item Ingeniería eléctrica
+    \item Física ondulatoria
+    \item Procesamiento de señales
+    \item Astronomía
+    \item Navegación
+    \item Arquitectura
+    \item Movimiento armónico simple
+\end{itemize}
+\end{consejo}
+
+\subsection{Pregunta 10: Ejemplos Resueltos}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Cuántos EJEMPLOS RESUELTOS deseas?
+\end{instruccion}
+
+\begin{consejo}
+Rango recomendado: 5--7 ejemplos\\
+Cada ejemplo será resuelto paso a paso con gráficas donde aplique.
+\end{consejo}
+
+\subsection{Pregunta 11: Ejercicios Propuestos}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Cuántos EJERCICIOS PROPUESTOS deseas?
+\end{instruccion}
+
+\begin{consejo}
+Rango recomendado: 7--8 ejercicios\\
+Cada ejercicio tendrá su solución detallada al final de la guía.
+\end{consejo}
+
+\subsection{Pregunta 12: Ejercicios Inversos}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Necesitas ejercicios inversos?
+\end{instruccion}
+
+\begin{consejo}
+Responde: \texttt{Sí}
+
+Los ejercicios inversos son creativos y ayudan a profundizar:
+\begin{itemize}
+    \item Construcción de funciones
+    \item Diseño de problemas
+    \item Análisis inverso
+\end{itemize}
+\end{consejo}
+
+\subsection{Pregunta 13: Carpeta}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿En qué CARPETA se guardará la guía?
+\end{instruccion}
+
+\begin{importante}
+Usa el formato: \texttt{Clases De Sheyra/Trigonometría/Nombre\_Tema}
+
+Donde \texttt{Nombre\_Tema} usa:
+\begin{itemize}
+    \item Mayúsculas en cada palabra
+    \item Guiones bajos (\_) en lugar de espacios
+    \item Sin tildes ni caracteres especiales
+\end{itemize}
+\end{importante}
+
+\begin{ejemplo}
+\textbf{Ejemplos correctos:}
+\begin{itemize}
+    \item \texttt{Clases De Sheyra/Trigonometría/Identidades\_Trigonometricas}
+    \item \texttt{Clases De Sheyra/Trigonometría/Ley\_Senos\_Cosenos}
+    \item \texttt{Clases De Sheyra/Trigonometría/Ecuaciones\_Trigonometricas}
+\end{itemize}
+
+\textbf{Ejemplos incorrectos:}
+\begin{itemize}
+    \item \texttt{identidades trigonométricas} (minúsculas y espacios)
+    \item \texttt{Identidades-Trig} (guión medio en lugar de bajo)
+\end{itemize}
+\end{ejemplo}
+
+\subsection{Pregunta 14: Nombre de Archivo}
+
+\begin{instruccion}
+\textbf{Pregunta:} ¿Nombre del archivo .tex?
+\end{instruccion}
+
+\begin{importante}
+Usa el formato: \texttt{GuiaTemaEnCamelCase.tex}
+
+Donde:
+\begin{itemize}
+    \item Inicia con ``Guia''
+    \item Usa CamelCase (primera letra de cada palabra en mayúscula)
+    \item Sin espacios ni guiones
+    \item Extensión \texttt{.tex}
+\end{itemize}
+\end{importante}
+
+\begin{ejemplo}
+\textbf{Ejemplos correctos:}
+\begin{itemize}
+    \item \texttt{GuiaIdentidadesTrigonometricas.tex}
+    \item \texttt{GuiaLeySenos.tex}
+    \item \texttt{GuiaEcuacionesTrigonometricas.tex}
+\end{itemize}
+
+\textbf{Ejemplos incorrectos:}
+\begin{itemize}
+    \item \texttt{guia\_identidades.tex} (minúsculas y guiones bajos)
+    \item \texttt{Identidades.tex} (falta prefijo ``Guia'')
+\end{itemize}
+\end{ejemplo}
+
+\newpage
+
+\section{Confirmación}
+
+\subsection{Resumen}
+
+Después de responder las 14 preguntas, el asistente mostrará un resumen completo:
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt, breakable]
+\textbf{=== RESUMEN DE CONFIGURACIÓN ===}
+
+\textbf{DOCUMENTO:}
+\begin{itemize}[leftmargin=1cm]
+    \item Título: [tu título]
+    \item Autor: [tu nombre]
+    \item Institución: [tu institución]
+    \item Fecha: \textbackslash today
+\end{itemize}
+
+\textbf{ACADÉMICO:}
+\begin{itemize}[leftmargin=1cm]
+    \item Tema: [tu tema]
+    \item Grado: [tu grado]
+    \item Asignatura: [tu asignatura]
+\end{itemize}
+
+\textbf{CONTENIDO:}
+\begin{itemize}[leftmargin=1cm]
+    \item Elementos clave: [tus elementos]
+    \item Aplicaciones: [tus aplicaciones]
+    \item Ejemplos resueltos: [cantidad]
+    \item Ejercicios propuestos: [cantidad]
+    \item Ejercicios inversos: [Sí/No]
+\end{itemize}
+
+\textbf{UBICACIÓN:}
+\begin{itemize}[leftmargin=1cm]
+    \item Carpeta: [ruta de carpeta]
+    \item Archivo: [nombre.tex]
+    \item Ruta completa: [ruta completa]
+\end{itemize}
+
+¿Es correcta esta información? (Sí/No)
+\end{tcolorbox}
+
+\subsection{Confirmación}
+
+\begin{instruccion}
+Si todo está correcto, responde: \texttt{Sí}\\
+Si necesitas corregir algo, responde: \texttt{No} y el sistema reiniciará las preguntas.
+\end{instruccion}
+
+\newpage
+
+\section{Generación Automática}
+
+\subsection{Proceso Multi-Agente}
+
+Una vez confirmado, el sistema ejecuta automáticamente:
+
+\begin{enumerate}
+    \item \textbf{Fase 1: Invocación Paralela (30 segundos)}
+    \begin{itemize}
+        \item El asistente principal invoca 3 subagentes simultáneamente
+        \item Usa UN SOLO MENSAJE con 3 llamadas a \texttt{Task tool}
+    \end{itemize}
+
+    \item \textbf{Fase 2: Generación Paralela (1--1.5 minutos)}
+    \begin{itemize}
+        \item \textbf{Subagente 1:} Genera estructura base (preámbulo, intro, conceptos, conclusión)
+        \item \textbf{Subagente 2:} Genera ejemplos resueltos con gráficas + ejercicios inversos
+        \item \textbf{Subagente 3:} Genera ejercicios propuestos + soluciones detalladas
+    \end{itemize}
+
+    \item \textbf{Fase 3: Ensamblaje y Finalización (1 minuto)}
+    \begin{itemize}
+        \item El asistente principal ensambla las 3 partes
+        \item Compila con \texttt{lualatex} (2 pasadas)
+        \item Crea \texttt{README.md}
+        \item Guarda en git local
+        \item Envía a repositorio remoto
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Tiempo Total}
+
+\begin{tcolorbox}[colback=successcolor!10, colframe=successcolor, boxrule=1pt]
+\textbf{Tiempo total estimado:} 2--3 minutos
+
+\textbf{Distribución:}
+\begin{itemize}
+    \item Preguntas y respuestas: 1--2 min (depende de ti)
+    \item Generación automática: 2 min (sistema paralelo)
+\end{itemize}
+\end{tcolorbox}
+
+\subsection{Resultados}
+
+Al finalizar, verás mensajes de confirmación:
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt]
+✅ Directorio creado: [nombre carpeta]/\\
+✅ Archivo generado: [nombre.tex]\\
+✅ Compilación exitosa: [X] páginas, [Y] KB\\
+✅ README.md creado\\
+✅ Guardado en git local (commit [hash])\\
+✅ Enviado a repositorio remoto
+\end{tcolorbox}
+
+\newpage
+
+\section{Consejos y Mejores Prácticas}
+
+\subsection{Elementos Clave (Pregunta 8)}
+
+\begin{consejo}
+\textbf{Sé específico y ordenado:}
+\begin{itemize}
+    \item ✅ ``Identidades pitagóricas, de suma y diferencia, ángulo doble''
+    \item ❌ ``Identidades trigonométricas en general''
+\end{itemize}
+
+El orden que proporciones será el orden en que se presentarán los conceptos.
+\end{consejo}
+
+\subsection{Aplicaciones (Pregunta 9)}
+
+\begin{consejo}
+\textbf{Menciona al menos 3--5 aplicaciones:}
+
+El sistema las desarrollará en la introducción y conclusión, haciendo la guía más práctica y relevante.
+\end{consejo}
+
+\subsection{Número de Ejemplos y Ejercicios}
+
+\begin{consejo}
+\textbf{Cantidades recomendadas:}
+\begin{itemize}
+    \item \textbf{5--7 ejemplos} resueltos (muy detallados con gráficas)
+    \item \textbf{7--8 ejercicios} propuestos (con soluciones completas)
+    \item \textbf{Sí} a ejercicios inversos (agregan profundidad)
+\end{itemize}
+
+Esto genera guías de 25--35 páginas con contenido balanceado.
+\end{consejo}
+
+\subsection{Nombres de Archivos y Carpetas}
+
+\begin{importante}
+\textbf{Formato de carpetas:}
+\begin{itemize}
+    \item Usar: \texttt{Tema\_Con\_Mayusculas\_Y\_Guiones\_Bajos}
+    \item Evitar: espacios, tildes, guiones medios
+\end{itemize}
+
+\textbf{Formato de archivos .tex:}
+\begin{itemize}
+    \item Usar: \texttt{GuiaTemaEnCamelCase.tex}
+    \item Siempre iniciar con ``Guia''
+    \item Sin espacios ni guiones
+\end{itemize}
+\end{importante}
+
+\newpage
+
+\section{Verificación de Calidad}
+
+\subsection{Checklist Post-Generación}
+
+Después de que el sistema genere tu guía, verifica:
+
+\begin{itemize}
+    \item[$\square$] PDF compilado sin errores
+    \item[$\square$] Nombre del profesor visible en páginas pares
+    \item[$\square$] Todas las secciones presentes:
+    \begin{itemize}
+        \item[$\square$] Portada
+        \item[$\square$] Tabla de contenidos
+        \item[$\square$] Introducción
+        \item[$\square$] Conceptos fundamentales
+        \item[$\square$] Ejemplos resueltos
+        \item[$\square$] Ejercicios propuestos
+        \item[$\square$] Soluciones detalladas
+        \item[$\square$] Ejercicios inversos (si solicitados)
+        \item[$\square$] Soluciones de inversos
+        \item[$\square$] Conclusión
+    \end{itemize}
+    \item[$\square$] Gráficas correctamente renderizadas
+    \item[$\square$] README.md creado en el directorio
+    \item[$\square$] Commit creado en git
+    \item[$\square$] Push exitoso al repositorio remoto
+\end{itemize}
+
+\subsection{Estadísticas Típicas}
+
+Una guía generada típicamente tiene:
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt]
+\textbf{Páginas:} 25--35 páginas\\
+\textbf{Tamaño PDF:} 150--250 KB\\
+\textbf{Tiempo de generación:} 2 minutos\\
+\textbf{Archivos creados:} 2 (.tex y README.md)\\
+\textbf{Commits git:} 1 commit automático
+\end{tcolorbox}
+
+\newpage
+
+\section{Solución de Problemas}
+
+\subsection{Error de Compilación}
+
+\begin{importante}
+Si el PDF no se genera correctamente:
+\begin{enumerate}
+    \item Revisa el archivo \texttt{.log} para ver el error específico
+    \item El asistente puede corregir automáticamente errores comunes
+    \item Pide al asistente: ``Revisa el archivo .log y corrige los errores''
+\end{enumerate}
+\end{importante}
+
+\subsection{Contenido Incorrecto}
+
+Si el contenido no es lo esperado:
+
+\begin{consejo}
+Puedes pedir ajustes específicos:
+\begin{itemize}
+    \item ``Agrega más ejemplos sobre identidades de suma''
+    \item ``Cambia el tono a más formal''
+    \item ``Agrega una sección sobre aplicaciones en física''
+\end{itemize}
+\end{consejo}
+
+\subsection{Sistema No Encuentra el PROMPT}
+
+\begin{importante}
+Asegúrate de estar en el directorio correcto:
+
+\texttt{cd "/Users/toribioarrieta/Documents/LaTeX-GitHub/LaTeX-Varios/\\
+Clases De Sheyra/Trigonometría"}
+
+Luego especifica la ruta completa del PROMPT:
+
+\texttt{Sistema\_Generador\_Guias\_Trigonometria/PROMPT\_TRIGONOMETRIA\_v1.0.md}
+\end{importante}
+
+\newpage
+
+\section{Ejemplo Completo}
+
+A continuación se presenta un ejemplo completo de una sesión de generación:
+
+\subsection{Paso 1: Iniciar}
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt]
+\textbf{Usuario:}\\
+Quiero crear una nueva guía de Trigonometría usando el sistema en:\\
+Sistema\_Generador\_Guias\_Trigonometria/PROMPT\_TRIGONOMETRIA\_v1.0.md
+\end{tcolorbox}
+
+\subsection{Paso 2: Responder Preguntas}
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt, breakable]
+\textbf{Pregunta 1:} ¿Cuál es el TÍTULO de la guía?\\
+\textbf{Respuesta:} Identidades Trigonométricas
+
+\textbf{Pregunta 2:} ¿Quién es el AUTOR?\\
+\textbf{Respuesta:} Prof. Toribio De J Arrieta F
+
+\textbf{Pregunta 3:} ¿Cuál es la INSTITUCIÓN?\\
+\textbf{Respuesta:} La Pruebita
+
+\textbf{Pregunta 4:} ¿Fecha de creación?\\
+\textbf{Respuesta:} Toma la fecha de compilación
+
+\textbf{Pregunta 5:} ¿Título corto para encabezados?\\
+\textbf{Respuesta:} Identidades Trigonométricas
+
+\textbf{Pregunta 6:} ¿Para qué GRADO es la guía?\\
+\textbf{Respuesta:} 10
+
+\textbf{Pregunta 7:} ¿Qué ASIGNATURA/ÁREA?\\
+\textbf{Respuesta:} Trigonometría
+
+\textbf{Pregunta 8:} ¿Qué ELEMENTOS CLAVE debe incluir?\\
+\textbf{Respuesta:} Identidades pitagóricas, identidades recíprocas, identidades de cociente, identidades de suma y diferencia, identidades de ángulo doble, identidades de ángulo mitad, simplificación de expresiones, verificación de identidades
+
+\textbf{Pregunta 9:} ¿Qué APLICACIONES de la vida real mencionar?\\
+\textbf{Respuesta:} Análisis de ondas, ingeniería eléctrica, física ondulatoria, procesamiento de señales, astronomía
+
+\textbf{Pregunta 10:} ¿Cuántos EJEMPLOS RESUELTOS deseas?\\
+\textbf{Respuesta:} 7
+
+\textbf{Pregunta 11:} ¿Cuántos EJERCICIOS PROPUESTOS deseas?\\
+\textbf{Respuesta:} 8
+
+\textbf{Pregunta 12:} ¿Necesitas ejercicios inversos?\\
+\textbf{Respuesta:} Sí
+
+\textbf{Pregunta 13:} ¿En qué CARPETA se guardará la guía?\\
+\textbf{Respuesta:} Clases De Sheyra/Trigonometría/Identidades\_Trigonometricas
+
+\textbf{Pregunta 14:} ¿Nombre del archivo .tex?\\
+\textbf{Respuesta:} GuiaIdentidadesTrigonometricas.tex
+\end{tcolorbox}
+
+\subsection{Paso 3: Confirmar}
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt]
+\textbf{Asistente muestra resumen completo}
+
+\textbf{Usuario:}\\
+Sí. Es correcta esta información
+\end{tcolorbox}
+
+\subsection{Paso 4: Generación Automática}
+
+\begin{tcolorbox}[colback=successcolor!10, colframe=successcolor, boxrule=1pt, breakable]
+El sistema automáticamente:
+\begin{itemize}
+    \item Invoca 3 subagentes en paralelo
+    \item Genera las 3 partes simultáneamente (2 min)
+    \item Ensambla el documento completo
+    \item Compila con lualatex
+    \item Crea README.md
+    \item Guarda en git local y remoto
+\end{itemize}
+
+\textbf{Resultado:}\\
+✅ GuiaIdentidadesTrigonometricas.tex (código fuente)\\
+✅ GuiaIdentidadesTrigonometricas.pdf (32 páginas, 185 KB)\\
+✅ README.md (documentación)\\
+✅ Commit en git (guardado)\\
+✅ Push remoto (respaldo)
+\end{tcolorbox}
+
+\newpage
+
+\section{Ventajas del Sistema}
+
+\subsection{Comparación con Método Manual}
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Aspecto} & \textbf{Manual} & \textbf{Sistema v1.0} \\
+\hline
+Tiempo total & 5--8 horas & 2 minutos \\
+\hline
+Páginas generadas & Variable & 25--35 \\
+\hline
+Calidad & Variable & Estandarizada \\
+\hline
+Formato & Inconsistente & Uniforme \\
+\hline
+Compilación & Manual & Automática \\
+\hline
+Git & Manual & Automático \\
+\hline
+Documentación & Opcional & Incluida \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Beneficios Clave}
+
+\begin{enumerate}
+    \item \textbf{Ahorro de Tiempo:} De horas a minutos
+    \item \textbf{Consistencia:} Todas las guías con mismo formato profesional
+    \item \textbf{Calidad:} Basado en plantilla verificada de 30 páginas
+    \item \textbf{Eficiencia:} Sistema multi-agente paralelo
+    \item \textbf{Automatización:} Compilación, documentación y git
+    \item \textbf{Escalabilidad:} Fácil crear múltiples guías
+    \item \textbf{Mantenibilidad:} Control de versiones con git
+\end{enumerate}
+
+\newpage
+
+\section{Preguntas Frecuentes}
+
+\subsection{¿Puedo modificar la guía después de generarla?}
+
+Sí, el archivo \texttt{.tex} es completamente editable. Puedes:
+\begin{itemize}
+    \item Agregar o quitar secciones
+    \item Modificar ejemplos
+    \item Cambiar gráficas
+    \item Ajustar el formato
+\end{itemize}
+
+Después de modificar, solo compila de nuevo:
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt]
+\texttt{lualatex NombreArchivo.tex}\\
+\texttt{lualatex NombreArchivo.tex}
+\end{tcolorbox}
+
+\subsection{¿Qué hago si necesito más ejemplos?}
+
+Puedes pedirle al asistente:
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt]
+\texttt{Agrega 3 ejemplos más sobre [tema específico] en la guía}
+\end{tcolorbox}
+
+\subsection{¿Puedo usar el sistema para otras asignaturas?}
+
+Este sistema está optimizado para Trigonometría (Grado 10). Para otras asignaturas, consulta el sistema general en:
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt]
+\texttt{Sistema\_Generador\_Guias\_v3.1/}
+\end{tcolorbox}
+
+\subsection{¿Cómo compilo el PDF manualmente?}
+
+Si necesitas compilar manualmente:
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt]
+\texttt{cd [directorio de la guía]}\\
+\texttt{lualatex NombreArchivo.tex}\\
+\texttt{lualatex NombreArchivo.tex}  \# Segunda pasada para TOC
+\end{tcolorbox}
+
+\subsection{¿Qué motor de LaTeX debo usar?}
+
+\begin{importante}
+Debes usar \textbf{LuaLaTeX}.
+
+No uses:
+\begin{itemize}
+    \item pdflatex (no soporta fontspec)
+    \item xelatex (puede tener problemas con pgfplots)
+\end{itemize}
+\end{importante}
+
+\newpage
+
+\section{Soporte y Contacto}
+
+\subsection{Reportar Problemas}
+
+Si encuentras algún problema con el sistema:
+
+\begin{enumerate}
+    \item Verifica que seguiste todos los pasos del manual
+    \item Revisa el archivo \texttt{.log} si hay errores de compilación
+    \item Contacta al autor con los detalles del error
+\end{enumerate}
+
+\subsection{Sugerencias de Mejora}
+
+Si tienes sugerencias para mejorar el sistema:
+\begin{itemize}
+    \item Crea un issue en el repositorio
+    \item Contacta directamente al autor
+    \item Documenta tu propuesta de mejora
+\end{itemize}
+
+\subsection{Información del Autor}
+
+\begin{tcolorbox}[colback=maincolor!5, colframe=maincolor, boxrule=1pt]
+\textbf{Autor:} Prof. Toribio De J Arrieta F\\
+\textbf{Institución:} La Pruebita\\
+\textbf{Repositorio:} \url{https://github.com/toribio99/LaTeX-Varios}\\
+\textbf{Versión del Sistema:} 1.0 - Trigonometría\\
+\textbf{Fecha:} Noviembre 2025
+\end{tcolorbox}
+
+\newpage
+
+\section{Recursos Adicionales}
+
+\subsection{Documentación del Sistema}
+
+El sistema incluye documentación completa:
+
+\begin{itemize}
+    \item \texttt{README.md} - Instrucciones generales
+    \item \texttt{PROMPT\_TRIGONOMETRIA\_v1.0.md} - Especificaciones técnicas
+    \item \texttt{EJEMPLO\_USO.md} - Ejemplos paso a paso
+    \item \texttt{ANALISIS\_MULTI\_AGENTE.md} - Análisis técnico
+    \item \texttt{DIAGRAMA\_FLUJO.md} - Diagramas visuales
+    \item \texttt{Manual-Usuario/ManualUsuario.pdf} - Este manual
+\end{itemize}
+
+\subsection{Archivo de Referencia}
+
+El archivo de referencia verificado está en:
+\begin{tcolorbox}[colback=gray!10, colframe=gray!50, boxrule=1pt]
+\texttt{Referencia/GuiaFuncionesTrigonometricas.tex}
+\end{tcolorbox}
+
+Este archivo de 30 páginas es la plantilla base que el sistema usa.
+
+\subsection{Guías Generadas Previamente}
+
+Puedes consultar las 9 guías ya generadas como ejemplos:
+\begin{enumerate}
+    \item Funciones: Concepto y Aplicaciones
+    \item Propiedades de las Funciones
+    \item Funciones de Variable Real
+    \item Funciones Exponenciales y Logarítmicas
+    \item Ángulos
+    \item Triángulos
+    \item Funciones Trigonométricas
+    \item Funciones Trigonométricas Segunda Parte
+    \item Gráficas de Funciones Trigonométricas
+\end{enumerate}
+
+\newpage
+
+\section{Conclusión}
+
+El \textbf{Sistema Generador de Guías de Trigonometría v1.0} es una herramienta poderosa que te permite crear guías educativas profesionales en minutos.
+
+\subsection{Resumen de Pasos}
+
+\begin{enumerate}
+    \item Inicia el sistema con el comando correcto
+    \item Responde las 14 preguntas interactivas
+    \item Confirma la información
+    \item Espera 2 minutos mientras el sistema genera todo
+    \item Obtén tu guía completa lista para usar
+\end{enumerate}
+
+\subsection{Ventajas Principales}
+
+\begin{itemize}
+    \item ✅ \textbf{60\% más rápido} que sistema tradicional
+    \item ✅ \textbf{3 agentes en paralelo} para máxima eficiencia
+    \item ✅ \textbf{Calidad garantizada} basada en plantilla verificada
+    \item ✅ \textbf{Completamente automático} hasta el guardado en git
+    \item ✅ \textbf{Documentación incluida} con README.md
+\end{itemize}
+
+\subsection{Próximos Pasos}
+
+Ahora estás listo para:
+\begin{enumerate}
+    \item Crear tu primera guía usando el sistema
+    \item Explorar las opciones de personalización
+    \item Generar múltiples guías rápidamente
+    \item Contribuir al mejoramiento del sistema
+\end{enumerate}
+
+\begin{center}
+\rule{10cm}{0.5pt}
+
+\vspace{1cm}
+
+\Large\textbf{¡Listo para crear guías de alta calidad!}
+
+\vspace{0.5cm}
+
+\normalsize
+Sistema Generador de Guías - Trigonometría v1.0\\
+Noviembre 2025
+\end{center}
+
+\end{document}
