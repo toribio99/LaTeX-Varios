@@ -161,7 +161,7 @@ Observar:
 #### PREÁMBULO ESTÁNDAR
 ```latex
 % !TEX program = lualatex
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt,a4paper,twoside]{article}
 \usepackage{fontspec}
 \usepackage[spanish,es-nodecimaldot]{babel}
 \usepackage{amsmath,amssymb}
