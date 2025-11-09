@@ -89,6 +89,7 @@ Gráficamente, el límite representa el valor de altura al cual se aproxima la c
         ymin=-1, ymax=5,
         grid=both,
         samples=100,
+        axis background/.style={fill=yellow!2},
         legend pos=north west,
     ]
     % Función con discontinuidad removible
@@ -145,9 +146,9 @@ Es decir, el límite existe cuando los límites laterales existen y son iguales.
     \addplot[red, very thick, domain=2:5] {-0.5*x + 4};
     \draw[blue, fill=white] (axis cs:2,2) circle (3pt);
     \draw[blue, fill=white] (axis cs:2,3) circle (3pt);
-    \node at (axis cs:3.5,2.5) {$\lim_{x \to 2^{-}} f(x) = 2$};
-    \node at (axis cs:3.5,1.8) {$\lim_{x \to 2^{+}} f(x) = 3$};
-    \node at (axis cs:3.5,1.1) {$\therefore \lim_{x \to 2} f(x)$ no existe};
+    \node at (axis cs:1.2,2.3) {$\lim_{x \to 2^{-}} f(x) = 2$};
+    \node at (axis cs:2.1,3.4) {$\lim_{x \to 2^{+}} f(x) = 3$};
+    \node at (axis cs:2.2,1) {$\therefore \lim_{x \to 2} f(x)$ no existe};
     \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -242,7 +243,7 @@ Esto indica la presencia de una \textbf{asíntota vertical} en $x = a$.
     \addplot[red, very thick, domain=-1:1.8] {1/(x-2)};
     \addplot[red, very thick, domain=2.2:5] {1/(x-2)};
     \draw[blue, dashed, very thick] (axis cs:2,-8) -- (axis cs:2,8);
-    \node[blue] at (axis cs:2.5,-6) {Asíntota vertical: $x = 2$};
+    \node[blue, rotate=90] at (axis cs:1.8,2) {Asíntota vertical: $x = 2$};
     \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -261,10 +262,11 @@ Si $\displaystyle\lim_{x \to \infty} f(x) = L$ o $\displaystyle\lim_{x \to -\inf
         ymin=-1, ymax=4,
         grid=both,
         samples=200,
+        axis background/.style={fill=yellow!2},
     ]
     \addplot[red, very thick, domain=-5:5] {2 + 3/(x^2+1)};
     \draw[blue, dashed, very thick] (axis cs:-5,2) -- (axis cs:5,2);
-    \node[blue] at (axis cs:3,2.5) {Asíntota horizontal: $y = 2$};
+    \node[blue] at (axis cs:0,2.25) {Asíntota horizontal: $y = 2$};
     \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -313,8 +315,13 @@ Estos límites son esenciales para derivar funciones trigonométricas y resolver
         xmin=-6.5, xmax=6.5,
         ymin=-0.5, ymax=1.5,
         grid=both,
+        grid style={line width=.2pt, draw=gray!40},
         samples=300,
-        legend pos=north east,
+		legend style={
+		text=black,       % color del texto
+		font=\small,
+		axis background/.style={fill=yellow!2},
+		},
     ]
     \addplot[red, very thick, domain=-6.28:6.28] {sin(deg(x))/x};
     \addplot[blue, dashed] coordinates {(-6.5,1) (6.5,1)};
@@ -499,7 +506,7 @@ La función tiene una discontinuidad removible en $x = 3$. El límite existe y e
     \addplot[red, very thick, domain=-1:2.9] {x + 3};
     \addplot[red, very thick, domain=3.1:6] {x + 3};
     \draw[blue, fill=white] (axis cs:3,6) circle (3pt);
-    \node[blue] at (axis cs:4,6.5) {Discontinuidad removible en $(3, 6)$};
+    \node[blue, rotate=18.5] at (axis cs:3,6.8) {Discontinuidad removible en $(3, 6)$};
     \draw[green!60!black, dashed] (axis cs:3,-2) -- (axis cs:3,6);
     \end{axis}
 \end{tikzpicture}
@@ -557,7 +564,7 @@ Paso 5: Aplicamos sustitución directa:
     \addplot[red, very thick, domain=0.05:3] {(sqrt(x + 4) - 2)/x};
     \draw[blue, fill=white] (axis cs:0,0.25) circle (3pt);
     \addplot[green!60!black, dashed] coordinates {(-3,0.25) (3,0.25)};
-    \node[blue] at (axis cs:1.8,0.35) {$\lim_{x \to 0} f(x) = \frac{1}{4}$};
+    \node[blue] at (axis cs:0.9,0.3) {$\lim_{x \to 0} f(x) = \frac{1}{4}$};
     \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -629,7 +636,7 @@ Como $\displaystyle\lim_{x \to 2} f(x) = f(2) = 5$, la función es continua en $
     \addplot[blue, only marks, mark size=4pt] coordinates {(2,5)};
     \draw[green!60!black, dashed] (axis cs:2,-1) -- (axis cs:2,5);
     \draw[green!60!black, dashed] (axis cs:-1,5) -- (axis cs:2,5);
-    \node[blue] at (axis cs:3.5,6) {Función continua en $x = 2$};
+    \node[blue] at (axis cs:3.5,4.9) {Función continua en $x = 2$};
     \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -679,13 +686,13 @@ Por lo tanto:
         axis lines=middle,
         xlabel={$x$}, ylabel={$y$},
         xmin=-5, xmax=20,
-        ymin=0, ymax=3,
+        ymin=-0.5, ymax=3,
         grid=both,
         samples=200,
     ]
     \addplot[red, very thick, domain=-5:20] {(3*x^2 + 5*x - 1)/(2*x^2 - x + 7)};
     \addplot[blue, dashed, very thick] coordinates {(-5,1.5) (20,1.5)};
-    \node[blue] at (axis cs:15,1.8) {Asíntota horizontal: $y = \frac{3}{2}$};
+    \node[blue] at (axis cs:13,1.3) {Asíntota horizontal: $y = \frac{3}{2}$};
     \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -750,10 +757,10 @@ A medida que $x$ se aproxima a 2 por la derecha, el denominador se hace cada vez
     \addplot[red, very thick, domain=0:1.9] {1/(x-2)};
     \addplot[red, very thick, domain=2.1:4] {1/(x-2)};
     \draw[blue, dashed, very thick] (axis cs:2,-10) -- (axis cs:2,10);
-    \node[blue] at (axis cs:3,8) {Asíntota vertical};
-    \node[blue] at (axis cs:3,7) {$x = 2$};
-    \draw[green!60!black, ->, very thick] (axis cs:2.3,5) -- (axis cs:2.05,8);
-    \node[green!60!black] at (axis cs:2.8,5) {$\lim_{x \to 2^{+}} f(x) = +\infty$};
+    \node[blue, rotate=90] at (axis cs:1.85,3.5) {Asíntota vertical};
+    \node[blue, rotate=90] at (axis cs:1.85,8.5) {$x = 2$};
+    \draw[green!60!black, -{Latex}, very thick] (axis cs:2.3,6) -- (axis cs:2.05,8);
+    \node[green!60!black] at (axis cs:3,6) {$\lim_{x \to 2^{+}} f(x) = +\infty$};
     \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -824,7 +831,7 @@ $x$ & $\dfrac{\sin(3x)}{x}$\\
     \addplot[red, very thick, domain=0.05:2] {sin(3*deg(x))/x};
     \draw[blue, fill=white] (axis cs:0,3) circle (3pt);
     \addplot[green!60!black, dashed] coordinates {(-2,3) (2,3)};
-    \node[blue] at (axis cs:1,3.8) {$\lim_{x \to 0} \frac{\sin(3x)}{x} = 3$};
+    \node[blue] at (axis cs:0.65,3.3) {$\lim_{x \to 0} \frac{\sin(3x)}{x} = 3$};
     \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -1024,12 +1031,12 @@ Este límite representa la pendiente de la recta tangente a la curva en el punto
         samples=100,
     ]
     \addplot[red, very thick, domain=0:5] {0.5*x^2 + 1};
-    \addplot[blue, thick, domain=1:4] {2*x - 0.5};
+    \addplot[blue, thick, domain=1:4] {2*x - 1};
     \addplot[green!60!black, only marks, mark size=3pt] coordinates {(2,3)};
     \draw[green!60!black, dashed] (axis cs:2,0) -- (axis cs:2,3);
-    \node[red] at (axis cs:4,8.5) {$y = f(x)$};
-    \node[blue] at (axis cs:4,6.5) {Recta tangente};
-    \node[green!60!black] at (axis cs:2.5,3.5) {$(a, f(a))$};
+    \node[red, rotate=50] at (axis cs:4.2,8.8) {$y = f(x)$};
+    \node[blue, rotate=35] at (axis cs:4,6.5) {Recta tangente};
+    \node[green!60!black] at (axis cs:1.5,3.5) {$(a, f(a))$};
     \end{axis}
 \end{tikzpicture}
 \end{center}

@@ -228,26 +228,29 @@ Otra forma de visualizar la inyectividad es mediante diagramas de flechas:
 	\draw[->,thick,blue] (Ac) -- (B3);
 	\draw[->,thick,blue] (Ad) -- (B5);
 	\draw[->,thick,blue] (Ae) -- (B4);
-\end{tikzpicture}
+\end{tikzpicture} \\
 	\centering
 	\textbf{INYECTIVA}: Cada elemento del dominio
 	\textbf{va a un elemento diferente del codominio}
 	
 \end{minipage}
+\hfill
+\vrule
+\hfill
 \begin{minipage}[t]{0.48\textwidth}
 	\centering
 \begin{tikzpicture}[scale=0.7]
 	% Conjunto A
-	\draw[thick] (0,0) ellipse (1.2cm and 2.5cm);
-	\node at (0,3) {$A$ (Dominio)};
+	\draw[thick] (0,0) ellipse (1.2cm and 3cm);
+	\node at (0,3.5) {$A$ (Dominio)};
 	\foreach \y/\label in {1.5/a, 0.5/b, -0.5/c, -1.5/d} {
 		\node[circle,fill=blue!30,inner sep=2pt] (A\label) at (0,\y) {};
 		\node[left] at (-0.3,\y) {$\label$};
 	}
 	
 	% Conjunto B
-	\draw[thick] (5,0) ellipse (1.2cm and 2.5cm);
-	\node at (5,3) {$B$ (Codominio)};
+	\draw[thick] (5,0) ellipse (1.2cm and 3cm);
+	\node at (5,3.5) {$B$ (Codominio)};
 	\foreach \y/\label in {1.5/1, 0.5/2, -0.5/3, -1.5/4} {
 		\node[circle,fill=red!30,inner sep=2pt] (B\label) at (5,\y) {};
 		\node[right] at (5.3,\y) {$\label$};
@@ -258,7 +261,7 @@ Otra forma de visualizar la inyectividad es mediante diagramas de flechas:
 	\draw[->,thick,blue] (Ab) -- (B2);
 	\draw[->,thick,blue] (Ac) -- (B3);
 	\draw[->,thick,blue] (Ad) -- (B4);
-\end{tikzpicture}
+\end{tikzpicture} \\
 
 \centering
 \textbf{NO INYECTIVA}: Dos elementos del dominio (a y b)
@@ -357,8 +360,8 @@ Sin embargo, si redefinimos $g: \mathbb{R} \to [0,\infty)$, entonces SÍ sería 
     }
 
     % Conjunto B
-    \draw[thick] (5,0) ellipse (1.2cm and 2.2cm);
-    \node at (5,2.8) {$B$ (Codominio)};
+    \draw[thick] (5,0) ellipse (1.2cm and 3cm);
+    \node at (5,3.5) {$B$ (Codominio)};
     \foreach \y/\label in {1.2/1, 0.4/2, -0.4/3, -1.2/4} {
         \node[circle,fill=red!30,inner sep=2pt] (B\label) at (5,\y) {};
         \node[right] at (5.3,\y) {$\label$};
@@ -370,16 +373,19 @@ Sin embargo, si redefinimos $g: \mathbb{R} \to [0,\infty)$, entonces SÍ sería 
     \draw[->,thick,blue] (Ac) -- (B3);
     \draw[->,thick,blue] (Ad) -- (B2);
     \draw[->,thick,blue] (Ae) -- (B4);
-\end{tikzpicture}
+\end{tikzpicture} \\
 \textbf{SOBREYECTIVA}: Todos los elementos del codominio
 \textbf{reciben al menos una flecha}
 \end{minipage}
+\hfill
+\vrule
+\hfill
 \begin{minipage}[t]{0.48\textwidth}
 \centering
 \begin{tikzpicture}[scale=0.8]
     % Conjunto A
-    \draw[thick] (0,0) ellipse (1.2cm and 2.5cm);
-    \node at (0,3) {$A$ (Dominio)};
+    \draw[thick] (0,0) ellipse (1.2cm and 3cm);
+    \node at (0,3.5) {$A$ (Dominio)};
     \foreach \y/\label in {1.5/a, 0.5/b, -0.5/c, -1.5/d} {
         \node[circle,fill=blue!30,inner sep=2pt] (A\label) at (0,\y) {};
         \node[left] at (-0.3,\y) {$\label$};
@@ -398,7 +404,7 @@ Sin embargo, si redefinimos $g: \mathbb{R} \to [0,\infty)$, entonces SÍ sería 
     \draw[->,thick,blue] (Ab) -- (B2);
     \draw[->,thick,blue] (Ac) -- (B3);
     \draw[->,thick,blue] (Ad) -- (B4);
-\end{tikzpicture}
+\end{tikzpicture} \\
 \textbf{NO SOBREYECTIVA}: El elemento 5 del codominio
 \textbf{no recibe ninguna flecha (no es alcanzado)}
 \end{minipage}

@@ -143,9 +143,9 @@ Un triángulo equilátero tiene sus tres lados de igual longitud. Como consecuen
     \node at (2,{2*sqrt(3)-0.5}) {$60°$};
 
     % Marcas de lados iguales
-    \draw[accentcolor, line width=1pt] ($(A)!0.5!(B)$) ++(0,-0.1) -- ++(0,-0.2);
-    \draw[accentcolor, line width=1pt] ($(B)!0.5!(C)$) ++(-0.1,0.1) -- ++(-0.2,0.2);
-    \draw[accentcolor, line width=1pt] ($(A)!0.5!(C)$) ++(0.1,0.1) -- ++(0.2,0.2);
+    \draw[accentcolor, line width=1pt] ($(A)!0.5!(B)$) ++(0,-0.1) -- ++(0,0.2);
+    \draw[accentcolor, line width=1pt] ($(B)!0.5!(C)$) ++(0.1,0.1) -- ++(-0.2,-0.1);
+    \draw[accentcolor, line width=1pt] ($(A)!0.5!(C)$) ++(0.1,0) -- ++(-0.2,0.2);
 \end{tikzpicture}
 \end{center}
 
@@ -186,8 +186,8 @@ Un triángulo isósceles tiene exactamente dos lados de igual longitud. Los áng
     \node at (2,2.5) {$\beta$};
 
     % Marcas de lados iguales
-    \draw[accentcolor, line width=1pt] ($(B)!0.5!(C)$) ++(-0.15,0.1) -- ++(-0.3,0.2);
-    \draw[accentcolor, line width=1pt] ($(A)!0.5!(C)$) ++(0.15,0.1) -- ++(0.3,0.2);
+    \draw[accentcolor, line width=1pt] ($(B)!0.5!(C)$) ++(0.15,0.1) -- ++(-0.3,-0.2);
+    \draw[accentcolor, line width=1pt] ($(A)!0.5!(C)$) ++(0.15,0) -- ++(-0.3,0.1);
 \end{tikzpicture}
 \end{center}
 
@@ -373,11 +373,11 @@ Como el triángulo rectángulo es fundamental en trigonometría, vamos a estudia
     \node[accentcolor] at (0.5,2.4) {$\phi$};
 
     % Etiquetas de lados con flechas
-    \draw[->, accentcolor, line width=1pt] (2.5,-0.5) -- (2.5,-0.1);
+    \draw[->, accentcolor, line width=1pt] (2.3,-0.5) -- (2.3,-0.1);
     \node[below, text=accentcolor, font=\bfseries] at (2.5,-0.5) {cateto adyacente a $\theta$};
     \node[below, text=accentcolor, font=\small] at (2.5,-0.8) {(opuesto a $\phi$)};
 
-    \draw[->, accentcolor, line width=1pt] (-1,1.5) -- (-0.1,1.5);
+    \draw[->, accentcolor, line width=1pt] (-1,1.3) -- (-0.1,1.3);
     \node[left, text=accentcolor, font=\bfseries] at (-1,1.5) {cateto opuesto a $\theta$};
     \node[left, text=accentcolor, font=\small] at (-1,1.2) {(adyacente a $\phi$)};
 
@@ -553,7 +553,7 @@ Este triángulo tiene ángulos de $30°$, $60°$, y $90°$. Sus relaciones de la
     \draw[maincolor, line width=1.5pt] (A) rectangle ++(0.3,0.3);
 
     % Ángulos
-    \node at (1.2,0.2) {$30°$};
+    \node at (1.2,0.1) {$30°$};
     \node at (0.2,0.7) {$60°$};
     \node at (0.5,0.3) {$90°$};
 
@@ -627,7 +627,7 @@ Donde:
 
     % Etiquetas
     \node[below, font=\Large] at (2.5,0) {$b$ (base)};
-    \node[right, font=\Large, text=accentcolor] at (2.1,1.5) {$h$ (altura)};
+    \node[right, font=\Large, text=accentcolor] at (2.1,0.7) {$h$ (altura)};
 
     % Puntos
     \fill (C) circle (2pt);
@@ -1173,8 +1173,8 @@ En un triángulo 45-45-90, la hipotenusa mide $10\sqrt{2}$ cm. ¿Cuánto miden l
     \draw[maincolor, line width=1.5pt] (A) -- (B) -- (C) -- cycle;
     \draw[maincolor, line width=1pt] (A) rectangle (0.3,0.3);
 
-    \node at (0.6,0.3) {$45°$};
-    \node at (0.3,2.5) {$45°$};
+    \node at (2.2,0.3) {$45°$};
+    \node at (0.3,2.2) {$45°$};
     \node[below] at (1.5,0) {$a = ?$};
     \node[left] at (0,1.5) {$a = ?$};
     \node[above right, text=accentcolor] at (1.5,1.5) {$10\sqrt{2}$ cm};
@@ -1230,7 +1230,7 @@ La altura de un triángulo equilátero divide al triángulo en dos triángulos r
     \node[below] at (3,0) {$6$ cm};
     \node[right, text=accentcolor] at (2,{sqrt(3)}) {$h$};
     \node[above right] at (3,{sqrt(3)}) {$12$ cm};
-    \node at (2.5,0.3) {$30°$};
+    \node at (3.4,0.3) {$30°$};
 \end{tikzpicture}
 \end{center}
 

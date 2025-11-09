@@ -46,6 +46,9 @@
 \author{Prof. Toribio de J Arrieta F \\ \small Institución La Pruebita}
 \date{\today}
 
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=violet!75!black,urlcolor=blue}
+
 \begin{document}
 
 \maketitle
@@ -433,14 +436,14 @@ El problema está en $x=2$: tiene dos valores de $y$ asociados (4 y 6). Esto vio
 \noindent
 Por lo tanto, la relación (b) \textbf{NO es una función}.
 
-\textbf{Respuesta:} $\boxed{\text{Solo (a) es función}}$ \\[.5mm]
+\textbf{Respuesta:} $\boxed{\text{Solo (a) es función}}$
 
 \textbf{Visualización con diagramas sagitales:}
-\begin{multicols}{2}
-%\begin{center}
+
+\begin{minipage}[t]{0.48\textwidth}
 \centering
 \textbf{Relación (a) - ES función} 
-\begin{tikzpicture}[scale=0.55]
+\begin{tikzpicture}[scale=0.85]
     \draw[thick] (-1.5,0) ellipse (0.7cm and 2cm);
     \node at (-1.5,2.3) {\small Dominio};
     \node (x1) at (-1.5,1.2) {$1$};
@@ -460,12 +463,12 @@ Por lo tanto, la relación (b) \textbf{NO es una función}.
     \draw[-{Latex}, thick, blue] (x3) -- (y3);
     \draw[-{Latex}, thick, blue] (x4) -- (y4);
 \end{tikzpicture}
-%\hspace{2cm}
-\columnbreak
-
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
 \centering
-\textbf{Relación (b) - NO ES función} \\[1mm]
-\begin{tikzpicture}[scale=0.5]
+\textbf{Relación (b) - NO ES función}
+\begin{tikzpicture}[scale=0.85]
     \draw[thick] (-1.5,0) ellipse (0.7cm and 2cm);
     \node at (-1.5,2.3) {\small Dominio};
     \node (x1) at (-1.5,1.2) {$1$};
@@ -484,11 +487,10 @@ Por lo tanto, la relación (b) \textbf{NO es una función}.
     \draw[-{Latex}, thick, red] (x2) -- (y2);
     \draw[-{Latex}, thick, red] (x3) -- (y3);
     \draw[-{Latex}, thick, blue] (x4) -- (y4);
-
     \node[red] at (0,-2.8) {\small Una $x$ con dos $y$!};
 \end{tikzpicture}
-%\end{center}
-\end{multicols}
+\end{minipage}
+
 
 \subsection{Ejemplo 2: Evaluar una función en puntos específicos}
 
