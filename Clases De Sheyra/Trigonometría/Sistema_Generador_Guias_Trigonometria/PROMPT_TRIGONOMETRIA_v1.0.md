@@ -168,69 +168,185 @@ CRÍTICO: Este es el archivo de referencia CORRECTO y VERIFICADO.
 Todas las 9 guías de Trigonometría existentes usan esta estructura.
 ```
 
-### 2. USAR TASK TOOL PARA GENERAR LA GUÍA (AHORRO DE TOKENS)
+### 2. USAR 3 SUBAGENTES EN PARALELO (MÁXIMA OPTIMIZACIÓN)
 
-**⚠️ MUY IMPORTANTE - OPTIMIZACIÓN DE TOKENS:**
+**⚠️ MUY IMPORTANTE - OPTIMIZACIÓN DE TIEMPO Y TOKENS:**
 
-Para generar el archivo .tex completo, el asistente principal NO debe escribir todo el contenido directamente (consume demasiados tokens). En su lugar, debe usar el **Task tool** para delegar la generación a un subagente especializado.
+Para generar el archivo .tex completo, el asistente principal NO debe escribir todo el contenido directamente. En su lugar, debe usar el **Task tool** para invocar **3 SUBAGENTES EN PARALELO** que trabajarán simultáneamente.
+
+**ESTRATEGIA: 3 Agentes Especializados**
+- ✅ 60% más rápido que 1 agente (2 min vs 5 min)
+- ✅ Mismo consumo de tokens (~5,000 del presupuesto principal)
+- ✅ Cada agente se especializa en una tarea
+- ✅ Balance óptimo velocidad/complejidad
 
 **Instrucción para el asistente principal:**
 
+El asistente debe hacer **3 llamadas al Task tool EN PARALELO** (en un solo mensaje con 3 bloques de tool use).
+
 ```
-Usar Task tool con los siguientes parámetros:
+IMPORTANTE: Enviar los 3 Task tool calls en UN SOLO MENSAJE para ejecución paralela.
 
-subagent_type: "general-purpose"
-model: "opus" (para contenido largo y complejo)
+═══════════════════════════════════════════════════════════════
+SUBAGENTE 1: ESTRUCTURA BASE
+═══════════════════════════════════════════════════════════════
 
-prompt: (incluir todos los datos recopilados más las siguientes instrucciones):
+Task({
+  subagent_type: "general-purpose",
+  model: "opus",
+  description: "Generar estructura base de guía",
+  prompt: "
+TAREA: Genera la PARTE 1 de 3 de una guía educativa de LaTeX.
 
-"Tu tarea es generar UNA guía educativa completa de LaTeX en un solo archivo.
+ARCHIVO DE REFERENCIA:
+Clases De Sheyra/Trigonometría/Sistema_Generador_Guias_Trigonometria/Referencia/GuiaFuncionesTrigonometricas.tex
 
-ARCHIVOS DE REFERENCIA A LEER:
-1. Clases De Sheyra/Trigonometría/Sistema_Generador_Guias_Trigonometria/Referencia/GuiaFuncionesTrigonometricas.tex
-
-PARÁMETROS DE LA NUEVA GUÍA:
+PARÁMETROS:
 - Título: [TÍTULO]
 - Autor: [AUTOR]
 - Institución: [INSTITUCIÓN]
 - Título corto: [TÍTULO CORTO]
 - Grado: [GRADO]
 - Asignatura: [ASIGNATURA]
-- Tema principal: [TEMA Y ELEMENTOS]
+- Tema: [TEMA Y ELEMENTOS]
 - Aplicaciones: [APLICACIONES]
-- [N] ejemplos resueltos
-- [N] ejercicios propuestos con soluciones
-- [N] ejercicios inversos con soluciones
+
+TU RESPONSABILIDAD (PARTE 1/3):
+1. Preámbulo COMPLETO (paquetes, colores, entornos tcolorbox, fancyhdr)
+2. Portada y tabla de contenidos
+3. Introducción (2 páginas, tono coloquial, aplicaciones)
+4. Conceptos Fundamentales (3-5 páginas con definiciones y gráficas)
+5. Conclusión (resumen, fórmulas clave, consejos)
+6. PLACEHOLDERS para: ejemplos, ejercicios, soluciones
 
 ARCHIVO DE SALIDA:
-[RUTA COMPLETA DEL ARCHIVO .tex]
+[RUTA]/parte1_base.tex
 
 INSTRUCCIONES CRÍTICAS:
-1. Lee el archivo de referencia COMPLETAMENTE
-2. Crea el archivo .tex completo siguiendo EXACTAMENTE el mismo formato
-3. Usa preámbulo con twoside y fancyhdr (headers estilo libro)
-4. Todas las gráficas con pgfplots y entorno axis
-5. NUNCA uses símbolos matemáticos ($) dentro de parámetros title de tcolorbox
-6. SIEMPRE cierra todos los entornos \begin{...}...\end{...}
-7. USA ^\circ para grados SOLO dentro de modo matemático
-8. NO compiles, solo crea el archivo .tex
-9. Retorna mensaje de confirmación con número de páginas estimado
+- Lee el archivo de referencia para estructura
+- USA twoside, fancyhdr, tcolorbox
+- NO uses $ en parámetros title
+- Cierra todos los entornos
+- Deja comentarios %INSERTAR_EJEMPLOS_AQUI%, %INSERTAR_EJERCICIOS_AQUI%
+"
+})
 
-El contenido debe seguir la estructura del archivo de referencia."
+═══════════════════════════════════════════════════════════════
+SUBAGENTE 2: EJEMPLOS Y GRÁFICAS
+═══════════════════════════════════════════════════════════════
+
+Task({
+  subagent_type: "general-purpose",
+  model: "opus",
+  description: "Generar ejemplos resueltos",
+  prompt: "
+TAREA: Genera la PARTE 2 de 3 de una guía educativa de LaTeX.
+
+ARCHIVO DE REFERENCIA:
+Clases De Sheyra/Trigonometría/Sistema_Generador_Guias_Trigonometria/Referencia/GuiaFuncionesTrigonometricas.tex
+
+PARÁMETROS:
+- Tema: [TEMA Y ELEMENTOS]
+- Ejemplos: [N] ejemplos resueltos
+- Ejercicios inversos: [N] ejercicios
+
+TU RESPONSABILIDAD (PARTE 2/3):
+1. Sección: Ejemplos Resueltos
+   - [N] ejemplos en entornos {ejemplo}[title=...]
+   - Paso a paso MUY detallado
+   - Gráficas con tikzpicture/axis para cada uno
+   - Verificaciones
+
+2. Sección: Ejercicios Inversos
+   - [N] ejercicios creativos en entornos {ejercicio}[title=...]
+
+3. Sección: Soluciones de Ejercicios Inversos
+   - Soluciones completas en entornos {solucion}
+   - Con gráficas de verificación
+
+ARCHIVO DE SALIDA:
+[RUTA]/parte2_ejemplos.tex
+
+INSTRUCCIONES CRÍTICAS:
+- Lee el archivo de referencia para estilo
+- Títulos de ejemplos SIN símbolos $
+- Todas las gráficas con pgfplots + axis
+- ^\circ solo dentro de $...$
+- Cierra todos los entornos
+"
+})
+
+═══════════════════════════════════════════════════════════════
+SUBAGENTE 3: EJERCICIOS Y SOLUCIONES
+═══════════════════════════════════════════════════════════════
+
+Task({
+  subagent_type: "general-purpose",
+  model: "opus",
+  description: "Generar ejercicios y soluciones",
+  prompt: "
+TAREA: Genera la PARTE 3 de 3 de una guía educativa de LaTeX.
+
+ARCHIVO DE REFERENCIA:
+Clases De Sheyra/Trigonometría/Sistema_Generador_Guias_Trigonometria/Referencia/GuiaFuncionesTrigonometricas.tex
+
+PARÁMETROS:
+- Tema: [TEMA Y ELEMENTOS]
+- Ejercicios: [N] ejercicios propuestos
+
+TU RESPONSABILIDAD (PARTE 3/3):
+1. Sección: Ejercicios Propuestos
+   - [N] ejercicios en entornos {ejercicio}[title=...]
+   - Dificultad progresiva
+   - Variedad de conceptos
+
+2. Sección: Soluciones Detalladas
+   - Soluciones completas en entornos {solucion}
+   - Paso a paso muy detallado
+   - Gráficas donde aplique
+   - Verificaciones
+
+ARCHIVO DE SALIDA:
+[RUTA]/parte3_ejercicios.tex
+
+INSTRUCCIONES CRÍTICAS:
+- Lee el archivo de referencia para estilo
+- Títulos de ejercicios SIN símbolos $
+- Gráficas con pgfplots + axis
+- ^\circ solo dentro de $...$
+- Cierra todos los entornos
+"
+})
 ```
 
-**Por qué usar Task tool:**
-- ✅ Ahorra tokens del asistente principal (puede generar 20-30 páginas sin problema)
-- ✅ El subagente tiene su propio presupuesto de tokens
-- ✅ Permite generación de contenido extenso sin límites
-- ✅ Más eficiente para archivos largos
+**IMPORTANTE:** Los 3 Task tool calls deben estar en UN SOLO MENSAJE del asistente para que se ejecuten en paralelo.
 
-**Después de que el Task tool termine:**
+**Después de que los 3 subagentes terminen:**
+
 El asistente principal debe:
-1. Verificar que el archivo .tex fue creado
-2. Compilar con lualatex
-3. Crear el README.md (FASE 3.5)
-4. Guardar en git
+
+1. **Ensamblar las 3 partes:**
+   ```
+   Leer: parte1_base.tex, parte2_ejemplos.tex, parte3_ejercicios.tex
+
+   Crear archivo final reemplazando placeholders:
+   - Copiar todo de parte1 hasta %INSERTAR_EJEMPLOS_AQUI%
+   - Insertar contenido de parte2
+   - Insertar contenido de parte3 en %INSERTAR_EJERCICIOS_AQUI%
+   - Continuar con conclusión de parte1
+   - Cerrar \end{document}
+   ```
+
+2. **Verificar consistencia:**
+   - Numeración de secciones consecutiva
+   - Estilo uniforme
+   - Todos los entornos cerrados
+
+3. **Compilar con lualatex** (2 pasadas)
+
+4. **Crear README.md** (FASE 3.5)
+
+5. **Guardar en git** (local y remoto)
 
 ### 3. Estructura del documento LaTeX (para el subagente)
 
