@@ -1,0 +1,1438 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad Funciones Trigonométricas}}
+\fancyhead[RO]{\small\textcolor{maincolor}{Funciones Trigonométricas \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+% Título
+\title{\textbf{\Huge Funciones Trigonométricas}\\[0.5cm]
+\Large Guía de Trigonometría}
+\author{Prof. Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Bienvenidos al fascinante mundo de las funciones trigonométricas! Si alguna vez te has preguntado cómo los ingenieros diseñan puentes, cómo los músicos analizan ondas sonoras, o cómo los astrónomos predicen el movimiento de los planetas, la respuesta está en la trigonometría.
+
+Las funciones trigonométricas son herramientas matemáticas super poderosas que nos permiten relacionar ángulos con razones numéricas. Aunque nacieron estudiando triángulos (de ahí viene su nombre: \textit{trigon} = triángulo, \textit{metría} = medida), hoy en día se usan para modelar cualquier fenómeno que se repite periódicamente: las olas del mar, el movimiento de un péndulo, las señales de radio, ¡y hasta el ritmo de tu corazón!
+
+\subsection*{¿Por qué son importantes?}
+
+Las funciones trigonométricas aparecen en todas partes:
+
+\begin{itemize}
+    \item \textbf{Física:} Movimiento circular, ondas, oscilaciones, luz, sonido
+    \item \textbf{Ingeniería:} Diseño de estructuras, análisis de señales eléctricas, navegación
+    \item \textbf{Astronomía:} Órbitas planetarias, posición de estrellas
+    \item \textbf{Medicina:} Electrocardiogramas, análisis de ritmos biológicos
+    \item \textbf{Música:} Análisis de frecuencias, síntesis de sonido
+    \item \textbf{Tecnología:} GPS, telecomunicaciones, procesamiento de imágenes
+\end{itemize}
+
+\subsection*{¿Qué vamos a aprender?}
+
+En esta guía vamos a explorar:
+\begin{enumerate}
+    \item La \textbf{circunferencia unitaria}: el círculo mágico de radio 1
+    \item Las \textbf{seis funciones trigonométricas}: seno, coseno, tangente y sus recíprocas
+    \item Cómo calcular valores para ángulos especiales
+    \item Las propiedades y relaciones entre estas funciones
+    \item Aplicaciones prácticas que te harán decir: ``¡Eso se usa para esto!''
+\end{enumerate}
+
+Prepárate para cambiar tu forma de ver los ángulos. No solo son medidas abstractas, ¡son las llaves que abren las puertas del universo matemático!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{La Circunferencia Unitaria}
+
+La circunferencia unitaria es el corazón de la trigonometría moderna. Es simplemente un círculo con radio igual a 1, centrado en el origen del plano cartesiano.
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+    % Ejes
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    % Circunferencia unitaria
+    \draw[maincolor,very thick] (0,0) circle (1);
+
+    % Radio = 1
+    \draw[accentcolor,thick,-{Latex}] (0,0) -- (1,0) node[midway,below] {$r=1$};
+
+    % Punto en la circunferencia
+    \def\angulo{40}
+    \coordinate (P) at ({\angulo}:1);
+    \filldraw[maincolor] (P) circle (0.03) node[above right] {$(x,y)$};
+
+    % Radio hacia el punto
+    \draw[accentcolor,thick,-{Latex}] (0,0) -- (P);
+
+    % Ángulo
+    \draw[accentcolor,-{Latex}] (0.3,0) arc (0:\angulo:0.3) node[midway,right] {$\theta$};
+
+    % Proyecciones
+    \draw[dashed,gray] (P) -- ({\angulo}:1 |- 0,0) node[below] {$x$};
+    \draw[dashed,gray] (P) -- (0,0 -| {\angulo}:1) node[left] {$y$};
+
+    % Marcas en los ejes
+    \foreach \x in {-1,1}
+        \draw (\x,0.05) -- (\x,-0.05) node[below] {$\x$};
+    \foreach \y in {-1,1}
+        \draw (0.05,\y) -- (-0.05,\y) node[left] {$\y$};
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+La ecuación de la circunferencia unitaria es: $x^2 + y^2 = 1$
+\end{nota}
+
+\subsection{Puntos en la Circunferencia Unitaria}
+
+Aquí viene la parte genial: cualquier punto $(x,y)$ que esté sobre la circunferencia unitaria tiene coordenadas especiales. Si trazamos un radio desde el origen hasta ese punto, y ese radio forma un ángulo $\theta$ con el eje $x$ positivo, entonces:
+
+\[
+\boxed{(x,y) = (\cos\theta, \sin\theta)}
+\]
+
+¡Sí, leíste bien! La coordenada $x$ del punto ES el coseno del ángulo, y la coordenada $y$ ES el seno del ángulo. Esta es la definición más fundamental de las funciones trigonométricas.
+
+\begin{center}
+	\begin{tikzpicture}[scale=1.5]
+		% Círculo unitario
+		\draw[thick,maincolor] (0,0) circle (2);
+		
+		% Ejes
+		\draw[-{Latex},thick] (-2.3,0)--(2.3,0) node[right] {$x$};
+		\draw[-{Latex},thick] (0,-2.3)--(0,2.3) node[above] {$y$};
+		
+		% Ángulos especiales con etiquetas
+		\foreach \angle/\label in {
+			30/30°, 45/45°, 60/60°, 90/90°, 120/120°, 135/135°, 150/150°, 
+			180/180°, 210/210°, 225/225°, 240/240°, 270/270°, 300/300°, 315/315°, 330/330°} {
+			% Radio y punto
+			\draw[red!70!black] (0,0)--(\angle:2);
+			\fill[blue] (\angle:2) circle (0.05);
+			
+			\node[font=\small, rotate=\angle, anchor=south] at (\angle:2.3) {\label};;
+		}
+		
+		% Título inferior
+		\node[maincolor] at (0,-2.8) {\large Círculo Unitario - Tu mejor amigo en trigonometría};
+	\end{tikzpicture}
+\end{center}
+
+
+\subsection{Definición de las Funciones Trigonométricas}
+
+Las funciones trigonométricas se pueden definir de dos maneras equivalentes: usando triángulos rectángulos o usando la circunferencia unitaria. Veamos ambas.
+
+\subsubsection{Usando el Triángulo Rectángulo}
+
+Para un ángulo agudo $\theta$ en un triángulo rectángulo:
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Triángulo
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3,0);
+    \coordinate (C) at (3,2);
+
+    \draw[thick] (A) -- (B) node[midway,below] {cateto adyacente} -- (C) node[midway,right] {cateto opuesto} -- cycle node[midway,above left] {hipotenusa};
+
+    % Ángulo recto
+    \draw (2.8,0) -- (2.8,0.2) -- (3,0.2);
+
+    % Ángulo theta
+    \draw[accentcolor,-{Latex}] (0.5,0) arc (0:33.69:0.5) node[midway,right] {$\theta$};
+
+    % Etiquetas
+    \node at (A) [below left] {$A$};
+    \node at (B) [below right] {$B$};
+    \node at (C) [above right] {$C$};
+\end{tikzpicture}
+\end{center}
+
+\begin{align*}
+\sin\theta &= \frac{\text{cateto opuesto}}{\text{hipotenusa}} \\[0.3cm]
+\cos\theta &= \frac{\text{cateto adyacente}}{\text{hipotenusa}} \\[0.3cm]
+\tan\theta &= \frac{\text{cateto opuesto}}{\text{cateto adyacente}} = \frac{\sin\theta}{\cos\theta}
+\end{align*}
+
+\subsubsection{Usando la Circunferencia Unitaria}
+
+En la circunferencia unitaria, para cualquier ángulo $\theta$ (no solo agudos):
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-1.2,0) -- (1.2,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.2) -- (0,1.2) node[above] {$y$};
+
+    \def\angulo{50}
+    \coordinate (P) at ({\angulo}:1);
+
+    % Triángulo en el círculo
+    \draw[thick] (0,0) -- ({\angulo}:1 |- 0,0) -- (P) -- cycle;
+
+    % Radio
+    \draw[accentcolor,very thick,-{Latex}] (0,0) -- (P) node[midway,above,sloped] {$r=1$};
+
+    % Punto
+    \filldraw[maincolor] (P) circle (0.03) node[above right] {$P(\cos\theta, \sin\theta)$};
+
+    % Ángulo
+    \draw[accentcolor,-{Latex}] (0.3,0) arc (0:\angulo:0.3) node[midway,right] {$\theta$};
+
+    % Proyecciones con etiquetas
+    \draw[very thick,blue,-{Latex}] (0,0) -- ({\angulo}:1 |- 0,0) node[midway,below] {$\cos\theta$};
+    \draw[very thick,red,-{Latex}] ({\angulo}:1 |- 0,0) -- (P) node[midway,right] {$\sin\theta$};
+
+    % Tangente (línea desde (1,0) hasta que toca el radio extendido)
+    \coordinate (T) at (1,{tan(\angulo)});
+    \draw[dashed] (0,0) -- (1.3,{1.3*tan(\angulo)});
+    \draw[very thick,green!60!black] (1,0) -- (T) node[midway,right] {$\tan\theta$};
+    \filldraw[green!60!black] (T) circle (0.02);
+\end{tikzpicture}
+\end{center}
+
+\begin{align*}
+\sin\theta &= \text{coordenada } y \text{ del punto en el círculo} \\[0.3cm]
+\cos\theta &= \text{coordenada } x \text{ del punto en el círculo} \\[0.3cm]
+\tan\theta &= \frac{\sin\theta}{\cos\theta} = \frac{y}{x}
+\end{align*}
+
+\subsection{Las Seis Funciones Trigonométricas}
+
+Además de seno, coseno y tangente, existen tres funciones más que son sus recíprocas:
+
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Función} & \textbf{Definición} & \textbf{Relación} \\
+\hline
+Seno & $\sin\theta = \frac{y}{r}$ & --- \\
+\hline
+Coseno & $\cos\theta = \frac{x}{r}$ & --- \\
+\hline
+Tangente & $\tan\theta = \frac{y}{x}$ & $\tan\theta = \frac{\sin\theta}{\cos\theta}$ \\
+\hline
+\hline
+Cosecante & $\csc\theta = \frac{r}{y}$ & $\csc\theta = \frac{1}{\sin\theta}$ \\
+\hline
+Secante & $\sec\theta = \frac{r}{x}$ & $\sec\theta = \frac{1}{\cos\theta}$ \\
+\hline
+Cotangente & $\cot\theta = \frac{x}{y}$ & $\cot\theta = \frac{1}{\tan\theta} = \frac{\cos\theta}{\sin\theta}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+En la circunferencia unitaria, donde $r=1$, estas definiciones se simplifican aún más.
+
+\subsection{Identidades Recíprocas}
+
+Las relaciones entre las funciones y sus recíprocas son fundamentales:
+
+\[
+\boxed{
+\begin{aligned}
+\sin\theta \cdot \csc\theta &= 1 \\[0.2cm]
+\cos\theta \cdot \sec\theta &= 1 \\[0.2cm]
+\tan\theta \cdot \cot\theta &= 1
+\end{aligned}
+}
+\]
+
+\textbf{Demostración:}
+\begin{align*}
+\sin\theta \cdot \csc\theta &= \sin\theta \cdot \frac{1}{\sin\theta} = 1 \quad \checkmark \\[0.2cm]
+\cos\theta \cdot \sec\theta &= \cos\theta \cdot \frac{1}{\cos\theta} = 1 \quad \checkmark \\[0.2cm]
+\tan\theta \cdot \cot\theta &= \frac{\sin\theta}{\cos\theta} \cdot \frac{\cos\theta}{\sin\theta} = 1 \quad \checkmark
+\end{align*}
+
+\subsection{Ángulos Cuadrantales}
+
+Los ángulos cuadrantales son aquellos cuyos lados terminales coinciden con los ejes coordenados: $0°$, $90°$, $180°$, $270°$ y $360°$.
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    % Puntos cuadrantales
+    \filldraw[red] (1,0) circle (0.03) node[below right] {$0°$ $(360°)$};
+    \filldraw[red] (0,1) circle (0.03) node[above left] {$90°$};
+    \filldraw[red] (-1,0) circle (0.03) node[above left] {$180°$};
+    \filldraw[red] (0,-1) circle (0.03) node[below left] {$270°$};
+
+    % Cuadrantes
+    \node[maincolor] at (0.5,0.5) {\small I};
+    \node[maincolor] at (-0.5,0.5) {\small II};
+    \node[maincolor] at (-0.5,-0.5) {\small III};
+    \node[maincolor] at (0.5,-0.5) {\small IV};
+\end{tikzpicture}
+\end{center}
+
+Veamos los valores de las funciones trigonométricas para estos ángulos:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$\theta$ & $(x,y)$ & $\sin\theta$ & $\cos\theta$ & $\tan\theta$ & $\csc\theta$ & $\sec\theta$ & $\cot\theta$ \\
+\hline
+$0°$ & $(1,0)$ & $0$ & $1$ & $0$ & Indef. & $1$ & Indef. \\
+\hline
+$90°$ & $(0,1)$ & $1$ & $0$ & Indef. & $1$ & Indef. & $0$ \\
+\hline
+$180°$ & $(-1,0)$ & $0$ & $-1$ & $0$ & Indef. & $-1$ & Indef. \\
+\hline
+$270°$ & $(0,-1)$ & $-1$ & $0$ & Indef. & $-1$ & Indef. & $0$ \\
+\hline
+$360°$ & $(1,0)$ & $0$ & $1$ & $0$ & Indef. & $1$ & Indef. \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{nota}
+``Indef.'' significa que la función no está definida para ese ángulo (porque implicaría dividir por cero).
+\end{nota}
+
+\subsection{Signos de las Funciones en Cada Cuadrante}
+
+El signo de cada función trigonométrica depende del cuadrante en el que se encuentre el ángulo. Recuerda que en la circunferencia unitaria:
+\begin{itemize}
+    \item $\sin\theta = y$ (positivo arriba, negativo abajo)
+    \item $\cos\theta = x$ (positivo a la derecha, negativo a la izquierda)
+    \item $\tan\theta = \frac{y}{x}$ (depende de los signos de $x$ e $y$)
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+    \draw[maincolor,very thick] (0,0) circle (1);
+
+    % Cuadrante I
+    \node[align=center,scale=.85] at (0.35,0.35) {
+        \textbf{Cuadrante I} \\
+        $x>0, y>0$ \\
+        \color{green!60!black}$\sin(+)$ \\
+        \color{green!60!black}$\cos(+)$ \\
+        \color{green!60!black}$\tan(+)$
+    };
+
+    % Cuadrante II
+    \node[align=center, scale=.85] at (-0.35,0.35) {
+        \textbf{Cuadrante II} \\
+        $x<0, y>0$ \\
+        \color{green!60!black}$\sin(+)$ \\
+        \color{red}$\cos(-)$ \\
+        \color{red}$\tan(-)$
+    };
+
+    % Cuadrante III
+    \node[align=center,scale=.85] at (-0.35,-0.35) {
+        \textbf{Cuadrante III} \\
+        $x<0, y<0$ \\
+        \color{red}$\sin(-)$ \\
+        \color{red}$\cos(-)$ \\
+        \color{green!60!black}$\tan(+)$
+    };
+
+    % Cuadrante IV
+    \node[align=center,scale=.85] at (0.37,-0.35) {
+        \textbf{Cuadrante IV} \\
+        $x>0, y<0$ \\
+        \color{red}$\sin(-)$ \\
+        \color{green!60!black}$\cos(+)$ \\
+        \color{red}$\tan(-)$
+    };
+\end{tikzpicture}
+\end{center}
+
+\textbf{Truco mnemotécnico:} ``\textbf{T}odo \textbf{S}tudent \textbf{T}akes \textbf{C}alculus''
+\begin{itemize}
+    \item Cuadrante I: \textbf{T}odo es positivo
+    \item Cuadrante II: Solo \textbf{S}eno (y su recíproca cosecante) es positivo
+    \item Cuadrante III: Solo \textbf{T}angente (y su recíproca cotangente) es positivo
+    \item Cuadrante IV: Solo \textbf{C}oseno (y su recíproca secante) es positivo
+\end{itemize}
+
+\subsection{Funciones Pares e Impares}
+
+Las funciones trigonométricas tienen propiedades de simetría importantes:
+
+\begin{nota}[title=Función Par]
+Una función $f$ es PAR si $f(-x) = f(x)$ para todo $x$. Geométricamente, es simétrica respecto al eje $y$.
+
+\textbf{El coseno es una función par:}
+\[
+\boxed{\cos(-\theta) = \cos\theta}
+\]
+\end{nota}
+
+\begin{nota}[title=Función Impar]
+Una función $f$ es IMPAR si $f(-x) = -f(x)$ para todo $x$. Geométricamente, es simétrica respecto al origen.
+
+\textbf{El seno es una función impar:}
+\[
+\boxed{\sin(-\theta) = -\sin\theta}
+\]
+\end{nota}
+
+\textbf{Verificación geométrica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{40}
+
+    % Ángulo positivo
+    \coordinate (P1) at ({\angulo}:1);
+    \filldraw[blue] (P1) circle (0.02);
+    \draw[blue,thick,-{Latex}] (0,0) -- (P1);
+    \draw[blue,-{Latex}] (0.3,0) arc (0:\angulo:0.3) node[midway,right] {\tiny $\theta$};
+    \node[blue,above right] at (P1) {\tiny $(\cos\theta, \sin\theta)$};
+
+    % Ángulo negativo
+    \coordinate (P2) at ({-\angulo}:1);
+    \filldraw[red] (P2) circle (0.02);
+    \draw[red,thick,-{Latex}] (0,0) -- (P2);
+    \draw[red,-{Latex}] (0.3,0) arc (0:-\angulo:0.3) node[midway,right] {\tiny $-\theta$};
+    \node[red,below right] at (P2) {\tiny $(\cos\theta, -\sin\theta)$};
+
+    % Proyecciones
+    \draw[dashed,blue] (P1) -- ({\angulo}:1 |- 0,0);
+    \draw[dashed,red] (P2) -- ({-\angulo}:1 |- 0,0);
+\end{tikzpicture}
+\end{center}
+
+Observa que los puntos $(\cos\theta, \sin\theta)$ y $(\cos(-\theta), \sin(-\theta))$ tienen:
+\begin{itemize}
+    \item La misma coordenada $x$: $\cos(-\theta) = \cos\theta$
+    \item Coordenadas $y$ opuestas: $\sin(-\theta) = -\sin\theta$
+\end{itemize}
+
+Para la tangente (función impar):
+\[
+\tan(-\theta) = \frac{\sin(-\theta)}{\cos(-\theta)} = \frac{-\sin\theta}{\cos\theta} = -\tan\theta
+\]
+
+\subsection{Aplicaciones Prácticas}
+
+Las funciones trigonométricas modelan fenómenos periódicos en múltiples disciplinas:
+
+\subsubsection{Ondas Sonoras}
+
+El sonido viaja como ondas que pueden representarse mediante funciones seno o coseno:
+\[
+y(t) = A\sin(2\pi ft + \phi)
+\]
+donde $A$ es la amplitud (volumen), $f$ es la frecuencia (tono), y $\phi$ es la fase inicial.
+
+\subsubsection{Movimiento Circular}
+
+Un objeto que se mueve en círculo tiene coordenadas:
+\[
+x(t) = r\cos(\omega t), \quad y(t) = r\sin(\omega t)
+\]
+donde $r$ es el radio y $\omega$ es la velocidad angular.
+
+\subsubsection{Mareas}
+
+La altura del agua en función del tiempo se modela con:
+\[
+h(t) = h_0 + A\cos\left(\frac{2\pi}{T}t\right)
+\]
+donde $h_0$ es el nivel medio, $A$ es la amplitud de la marea, y $T$ es el período (aproximadamente 12.4 horas).
+
+\subsubsection{Señales Eléctricas}
+
+La corriente alterna (AC) que llega a tu casa varía según:
+\[
+I(t) = I_0\sin(2\pi \cdot 60 \cdot t)
+\]
+En la mayoría de países, la frecuencia es 60 Hz.
+
+\subsubsection{Movimiento Armónico Simple}
+
+Un péndulo o un resorte oscilando siguen:
+\[
+x(t) = A\cos(\omega t + \phi)
+\]
+
+\subsubsection{Astronomía}
+
+La posición de planetas en órbitas elípticas se calcula usando funciones trigonométricas. La ecuación del tiempo (diferencia entre tiempo solar real y tiempo medio) también es una combinación de funciones trigonométricas.
+
+\subsubsection{Ingeniería Civil}
+
+El diseño de puentes colgantes, la distribución de fuerzas en estructuras, y el análisis de vibraciones requieren funciones trigonométricas.
+
+\newpage
+
+\section{Ejemplos Resueltos}
+
+Ahora vamos a poner en práctica todo lo que hemos aprendido. Cada ejemplo está completamente desarrollado para que entiendas el proceso.
+
+\begin{ejemplo}[title=Ejemplo 1: Encontrar las seis funciones trigonométricas]
+Dado que el punto $P\left(\frac{3}{5}, \frac{4}{5}\right)$ está sobre la circunferencia unitaria, encuentra los valores de las seis funciones trigonométricas del ángulo $\theta$ formado por el radio $\overline{OP}$ y el eje $x$ positivo.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Verificar que el punto está en la circunferencia unitaria.
+\begin{align*}
+x^2 + y^2 &= \left(\frac{3}{5}\right)^2 + \left(\frac{4}{5}\right)^2 \\
+&= \frac{9}{25} + \frac{16}{25} \\
+&= \frac{25}{25} = 1 \quad \checkmark
+\end{align*}
+
+\textbf{Paso 2:} Identificar las coordenadas.
+
+En la circunferencia unitaria: $(x,y) = (\cos\theta, \sin\theta)$
+
+Por lo tanto:
+\[
+\cos\theta = \frac{3}{5}, \quad \sin\theta = \frac{4}{5}
+\]
+
+\textbf{Paso 3:} Calcular la tangente.
+\[
+\tan\theta = \frac{\sin\theta}{\cos\theta} = \frac{4/5}{3/5} = \frac{4}{5} \cdot \frac{5}{3} = \frac{4}{3}
+\]
+
+\textbf{Paso 4:} Calcular las funciones recíprocas.
+\begin{align*}
+\csc\theta &= \frac{1}{\sin\theta} = \frac{1}{4/5} = \frac{5}{4} \\[0.2cm]
+\sec\theta &= \frac{1}{\cos\theta} = \frac{1}{3/5} = \frac{5}{3} \\[0.2cm]
+\cot\theta &= \frac{1}{\tan\theta} = \frac{1}{4/3} = \frac{3}{4}
+\end{align*}
+
+\textbf{Respuesta final:}
+\[
+\boxed{
+\begin{aligned}
+\sin\theta &= \frac{4}{5}, \quad \cos\theta = \frac{3}{5}, \quad \tan\theta = \frac{4}{3} \\[0.2cm]
+\csc\theta &= \frac{5}{4}, \quad \sec\theta = \frac{5}{3}, \quad \cot\theta = \frac{3}{4}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 2: Determinar el cuadrante y signos]
+Si $\sin\theta = \frac{2}{3}$ y $\cos\theta < 0$, determina:
+\begin{itemize}
+    \item[a)] En qué cuadrante está el ángulo $\theta$
+    \item[b)] El valor de $\cos\theta$
+    \item[c)] Los valores de las otras cuatro funciones trigonométricas
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Parte a):} Determinar el cuadrante.
+
+\begin{itemize}
+    \item $\sin\theta = \frac{2}{3} > 0$ (positivo)
+    \item $\cos\theta < 0$ (negativo)
+\end{itemize}
+
+El seno es positivo en los cuadrantes I y II.\\
+El coseno es negativo en los cuadrantes II y III.
+
+Por lo tanto: $\theta$ está en el \textbf{Cuadrante II}.
+
+\textbf{Parte b):} Encontrar $\cos\theta$.
+
+Usamos la identidad fundamental: $\sin^2\theta + \cos^2\theta = 1$
+
+\begin{align*}
+\left(\frac{2}{3}\right)^2 + \cos^2\theta &= 1 \\
+\frac{4}{9} + \cos^2\theta &= 1 \\
+\cos^2\theta &= 1 - \frac{4}{9} = \frac{9-4}{9} = \frac{5}{9} \\
+\cos\theta &= \pm\frac{\sqrt{5}}{3}
+\end{align*}
+
+Como sabemos que $\cos\theta < 0$:
+\[
+\boxed{\cos\theta = -\frac{\sqrt{5}}{3}}
+\]
+
+\textbf{Parte c):} Calcular las otras funciones.
+
+\begin{align*}
+\tan\theta &= \frac{\sin\theta}{\cos\theta} = \frac{2/3}{-\sqrt{5}/3} = \frac{2}{3} \cdot \frac{3}{-\sqrt{5}} = -\frac{2}{\sqrt{5}} = -\frac{2\sqrt{5}}{5} \\[0.3cm]
+\csc\theta &= \frac{1}{\sin\theta} = \frac{1}{2/3} = \frac{3}{2} \\[0.3cm]
+\sec\theta &= \frac{1}{\cos\theta} = \frac{1}{-\sqrt{5}/3} = -\frac{3}{\sqrt{5}} = -\frac{3\sqrt{5}}{5} \\[0.3cm]
+\cot\theta &= \frac{1}{\tan\theta} = -\frac{\sqrt{5}}{2} \quad \text{o} \quad \cot\theta = \frac{\cos\theta}{\sin\theta} = \frac{-\sqrt{5}/3}{2/3} = -\frac{\sqrt{5}}{2}
+\end{align*}
+
+\textbf{Respuesta final:}
+\[
+\boxed{
+\begin{aligned}
+&\text{a) Cuadrante II} \\
+&\text{b) } \cos\theta = -\frac{\sqrt{5}}{3} \\
+&\text{c) } \tan\theta = -\frac{2\sqrt{5}}{5}, \quad \csc\theta = \frac{3}{2}, \quad \sec\theta = -\frac{3\sqrt{5}}{5}, \quad \cot\theta = -\frac{\sqrt{5}}{2}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 3: Usar funciones pares e impares]
+Simplifica las siguientes expresiones usando las propiedades de funciones pares e impares:
+
+\begin{itemize}
+    \item[a)] $\sin(-45°) + \cos(-45°)$
+    \item[b)] $\frac{\sin(-\theta)\cos(-\theta)}{\tan(-\theta)}$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Parte a):} $\sin(-45°) + \cos(-45°)$
+
+Recordemos que:
+\begin{itemize}
+    \item El seno es impar: $\sin(-\theta) = -\sin\theta$
+    \item El coseno es par: $\cos(-\theta) = \cos\theta$
+\end{itemize}
+
+Entonces:
+\begin{align*}
+\sin(-45°) + \cos(-45°) &= -\sin(45°) + \cos(45°) \\
+&= -\frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2} \\
+&= 0
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{0}$
+
+\textbf{Parte b):} $\frac{\sin(-\theta)\cos(-\theta)}{\tan(-\theta)}$
+
+Aplicamos las propiedades:
+\begin{align*}
+\frac{\sin(-\theta)\cos(-\theta)}{\tan(-\theta)} &= \frac{(-\sin\theta)(\cos\theta)}{-\tan\theta} \\
+&= \frac{-\sin\theta \cos\theta}{-\tan\theta} \\
+&= \frac{\sin\theta \cos\theta}{\tan\theta}
+\end{align*}
+
+Ahora sustituimos $\tan\theta = \frac{\sin\theta}{\cos\theta}$:
+\begin{align*}
+\frac{\sin\theta \cos\theta}{\tan\theta} &= \frac{\sin\theta \cos\theta}{\sin\theta/\cos\theta} \\
+&= \sin\theta \cos\theta \cdot \frac{\cos\theta}{\sin\theta} \\
+&= \cos^2\theta
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\cos^2\theta}$
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 4: Verificar una identidad trigonométrica]
+Verifica la identidad: $\tan\theta \cdot \cos\theta = \sin\theta$
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+Para verificar una identidad, trabajamos con uno de los lados (generalmente el más complicado) hasta transformarlo en el otro lado.
+
+\textbf{Partimos del lado izquierdo:}
+\begin{align*}
+\tan\theta \cdot \cos\theta &= \frac{\sin\theta}{\cos\theta} \cdot \cos\theta \quad \text{(definición de tangente)} \\
+&= \sin\theta \cdot \frac{\cos\theta}{\cos\theta} \\
+&= \sin\theta \cdot 1 \\
+&= \sin\theta \quad \checkmark
+\end{align*}
+
+Hemos llegado al lado derecho, por lo tanto la identidad es verdadera.
+
+\textbf{Conclusión:} $\boxed{\text{Identidad verificada}}$
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 5: Problema aplicado - Movimiento circular]
+Una rueda de la fortuna tiene un radio de 20 metros y gira en sentido antihorario. Un pasajero inicia su recorrido en el punto más a la derecha (el punto $(20, 0)$ si ponemos el centro en el origen). Después de girar un ángulo de $120°$, determina:
+
+\begin{itemize}
+    \item[a)] La posición $(x, y)$ del pasajero
+    \item[b)] La altura del pasajero sobre el centro de la rueda
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Entender el problema.
+
+El pasajero se mueve en un círculo de radio $r = 20$ m. La posición en cualquier punto está dada por:
+\[
+(x, y) = (r\cos\theta, r\sin\theta)
+\]
+
+\textbf{Parte a):} Posición después de $120°$.
+
+\begin{align*}
+x &= 20\cos(120°) \\
+y &= 20\sin(120°)
+\end{align*}
+
+Necesitamos los valores de $\sin(120°)$ y $\cos(120°)$.
+
+$120° = 180° - 60°$ (ángulo en el segundo cuadrante)
+
+En el segundo cuadrante:
+\begin{itemize}
+    \item $\sin(120°) = \sin(180° - 60°) = \sin(60°) = \frac{\sqrt{3}}{2}$
+    \item $\cos(120°) = \cos(180° - 60°) = -\cos(60°) = -\frac{1}{2}$
+\end{itemize}
+
+Por lo tanto:
+\begin{align*}
+x &= 20 \cdot \left(-\frac{1}{2}\right) = -10 \text{ m} \\
+y &= 20 \cdot \frac{\sqrt{3}}{2} = 10\sqrt{3} \approx 17.32 \text{ m}
+\end{align*}
+
+\textbf{Respuesta a):} $\boxed{(x, y) = (-10, 10\sqrt{3}) \text{ metros}}$
+
+\textbf{Parte b):} Altura sobre el centro.
+
+La altura sobre el centro es simplemente la coordenada $y$:
+
+\textbf{Respuesta b):} $\boxed{h = 10\sqrt{3} \approx 17.32 \text{ metros}}$
+
+\textbf{Interpretación:} El pasajero está a la izquierda del centro (porque $x < 0$) y arriba del centro (porque $y > 0$), a una altura de aproximadamente 17.32 metros.
+\end{ejemplo}
+
+\newpage
+
+\section{Ejercicios Propuestos}
+
+Ahora es tu turno. Resuelve los siguientes ejercicios aplicando lo que has aprendido. Las soluciones detalladas están en la siguiente sección, pero intenta resolverlos primero por tu cuenta.
+
+\begin{ejercicio}[title=Ejercicio 1]
+El punto $P\left(-\frac{5}{13}, \frac{12}{13}\right)$ está sobre la circunferencia unitaria. Encuentra los valores de las seis funciones trigonométricas del ángulo $\theta$ formado por el radio $\overline{OP}$ y el eje $x$ positivo.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 2]
+Si $\tan\theta = -\frac{4}{3}$ y $\sin\theta > 0$, determina:
+\begin{itemize}
+    \item[a)] En qué cuadrante está $\theta$
+    \item[b)] Los valores de $\sin\theta$ y $\cos\theta$
+    \item[c)] Los valores de $\csc\theta$, $\sec\theta$ y $\cot\theta$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 3]
+Evalúa sin usar calculadora:
+\[
+\sin(90°) \cdot \cos(0°) + \tan(180°) - \cos(270°)
+\]
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 4]
+Simplifica la expresión usando propiedades de funciones pares e impares:
+\[
+\frac{\cos(-\theta) \cdot \sin(-\theta)}{\tan(-\theta)} + \cos^2(-\theta)
+\]
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 5]
+Verifica la identidad:
+\[
+\frac{\sin\theta}{\cos\theta} + \frac{\cos\theta}{\sin\theta} = \frac{1}{\sin\theta \cos\theta}
+\]
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 6]
+Si $\sec\theta = \frac{5}{3}$ y $\theta$ está en el cuarto cuadrante, encuentra los valores de las otras cinco funciones trigonométricas.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 7: Problema aplicado]
+Un satélite orbita la Tierra en una órbita circular de radio 8000 km (medido desde el centro de la Tierra). Si el satélite inicia en la posición $(8000, 0)$ y gira $210°$ en sentido antihorario, determina:
+\begin{itemize}
+    \item[a)] Su posición $(x, y)$ en kilómetros
+    \item[b)] Su distancia vertical por debajo del centro de la Tierra
+\end{itemize}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones Detalladas}
+
+\begin{solucion}[title=Solución Ejercicio 1]
+\textbf{Dado:} $P\left(-\frac{5}{13}, \frac{12}{13}\right)$ en la circunferencia unitaria.
+
+\textbf{Paso 1:} Verificar que está en la circunferencia unitaria.
+\begin{align*}
+x^2 + y^2 &= \left(-\frac{5}{13}\right)^2 + \left(\frac{12}{13}\right)^2 \\
+&= \frac{25}{169} + \frac{144}{169} = \frac{169}{169} = 1 \quad \checkmark
+\end{align*}
+
+\textbf{Paso 2:} En la circunferencia unitaria: $(x,y) = (\cos\theta, \sin\theta)$
+\[
+\cos\theta = -\frac{5}{13}, \quad \sin\theta = \frac{12}{13}
+\]
+
+\textbf{Paso 3:} Calcular tangente.
+\[
+\tan\theta = \frac{\sin\theta}{\cos\theta} = \frac{12/13}{-5/13} = \frac{12}{13} \cdot \frac{13}{-5} = -\frac{12}{5}
+\]
+
+\textbf{Paso 4:} Funciones recíprocas.
+\begin{align*}
+\csc\theta &= \frac{1}{\sin\theta} = \frac{13}{12} \\[0.2cm]
+\sec\theta &= \frac{1}{\cos\theta} = \frac{1}{-5/13} = -\frac{13}{5} \\[0.2cm]
+\cot\theta &= \frac{1}{\tan\theta} = \frac{1}{-12/5} = -\frac{5}{12}
+\end{align*}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+\sin\theta &= \frac{12}{13}, \quad \cos\theta = -\frac{5}{13}, \quad \tan\theta = -\frac{12}{5} \\[0.2cm]
+\csc\theta &= \frac{13}{12}, \quad \sec\theta = -\frac{13}{5}, \quad \cot\theta = -\frac{5}{12}
+\end{aligned}
+}
+\]
+
+\textbf{Nota:} El ángulo está en el cuadrante II porque $\sin\theta > 0$ y $\cos\theta < 0$.
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 2]
+\textbf{Dado:} $\tan\theta = -\frac{4}{3}$ y $\sin\theta > 0$
+
+\textbf{Parte a):} Determinar el cuadrante.
+\begin{itemize}
+    \item $\tan\theta = -\frac{4}{3} < 0$ (negativo)
+    \item $\sin\theta > 0$ (positivo)
+\end{itemize}
+
+La tangente es negativa en los cuadrantes II y IV.\\
+El seno es positivo en los cuadrantes I y II.
+
+Por lo tanto: $\boxed{\theta \text{ está en el Cuadrante II}}$
+
+\textbf{Parte b):} Encontrar $\sin\theta$ y $\cos\theta$.
+
+Sabemos que $\tan\theta = \frac{\sin\theta}{\cos\theta} = -\frac{4}{3}$
+
+Esto significa: $\frac{\sin\theta}{\cos\theta} = -\frac{4}{3}$, entonces $\sin\theta = -\frac{4}{3}\cos\theta$
+
+Pero sabemos que $\sin\theta > 0$, así que $\sin\theta = \frac{4}{3}|\cos\theta|$
+
+Como estamos en el cuadrante II, $\cos\theta < 0$, entonces $|\cos\theta| = -\cos\theta$
+
+Por lo tanto: $\sin\theta = -\frac{4}{3}\cos\theta$
+
+Usando $\sin^2\theta + \cos^2\theta = 1$:
+\begin{align*}
+\left(-\frac{4}{3}\cos\theta\right)^2 + \cos^2\theta &= 1 \\
+\frac{16}{9}\cos^2\theta + \cos^2\theta &= 1 \\
+\cos^2\theta\left(\frac{16}{9} + 1\right) &= 1 \\
+\cos^2\theta \cdot \frac{25}{9} &= 1 \\
+\cos^2\theta &= \frac{9}{25} \\
+\cos\theta &= \pm\frac{3}{5}
+\end{align*}
+
+Como estamos en el cuadrante II: $\cos\theta = -\frac{3}{5}$
+
+Ahora:
+\[
+\sin\theta = -\frac{4}{3}\cos\theta = -\frac{4}{3} \cdot \left(-\frac{3}{5}\right) = \frac{4}{5}
+\]
+
+\textbf{Respuesta b):} $\boxed{\sin\theta = \frac{4}{5}, \quad \cos\theta = -\frac{3}{5}}$
+
+\textbf{Parte c):} Funciones recíprocas.
+\begin{align*}
+\csc\theta &= \frac{1}{\sin\theta} = \frac{5}{4} \\[0.2cm]
+\sec\theta &= \frac{1}{\cos\theta} = -\frac{5}{3} \\[0.2cm]
+\cot\theta &= \frac{1}{\tan\theta} = -\frac{3}{4}
+\end{align*}
+
+\textbf{Respuesta c):} $\boxed{\csc\theta = \frac{5}{4}, \quad \sec\theta = -\frac{5}{3}, \quad \cot\theta = -\frac{3}{4}}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 3]
+\textbf{Evaluar:} $\sin(90°) \cdot \cos(0°) + \tan(180°) - \cos(270°)$
+
+Usando la tabla de valores de ángulos cuadrantales:
+\begin{align*}
+\sin(90°) &= 1 \\
+\cos(0°) &= 1 \\
+\tan(180°) &= 0 \\
+\cos(270°) &= 0
+\end{align*}
+
+Sustituyendo:
+\begin{align*}
+\sin(90°) \cdot \cos(0°) + \tan(180°) - \cos(270°) &= 1 \cdot 1 + 0 - 0 \\
+&= 1
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{1}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 4]
+\textbf{Simplificar:} $\frac{\cos(-\theta) \cdot \sin(-\theta)}{\tan(-\theta)} + \cos^2(-\theta)$
+
+\textbf{Paso 1:} Aplicar propiedades de funciones pares e impares.
+\begin{itemize}
+    \item $\cos(-\theta) = \cos\theta$ (par)
+    \item $\sin(-\theta) = -\sin\theta$ (impar)
+    \item $\tan(-\theta) = -\tan\theta$ (impar)
+\end{itemize}
+
+\begin{align*}
+\frac{\cos(-\theta) \cdot \sin(-\theta)}{\tan(-\theta)} + \cos^2(-\theta) &= \frac{\cos\theta \cdot (-\sin\theta)}{-\tan\theta} + \cos^2\theta \\
+&= \frac{-\cos\theta \sin\theta}{-\tan\theta} + \cos^2\theta \\
+&= \frac{\cos\theta \sin\theta}{\tan\theta} + \cos^2\theta
+\end{align*}
+
+\textbf{Paso 2:} Sustituir $\tan\theta = \frac{\sin\theta}{\cos\theta}$
+\begin{align*}
+\frac{\cos\theta \sin\theta}{\tan\theta} + \cos^2\theta &= \frac{\cos\theta \sin\theta}{\sin\theta/\cos\theta} + \cos^2\theta \\
+&= \cos\theta \sin\theta \cdot \frac{\cos\theta}{\sin\theta} + \cos^2\theta \\
+&= \cos^2\theta + \cos^2\theta \\
+&= 2\cos^2\theta
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{2\cos^2\theta}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 5]
+\textbf{Verificar:} $\frac{\sin\theta}{\cos\theta} + \frac{\cos\theta}{\sin\theta} = \frac{1}{\sin\theta \cos\theta}$
+
+\textbf{Trabajamos con el lado izquierdo:}
+\begin{align*}
+\frac{\sin\theta}{\cos\theta} + \frac{\cos\theta}{\sin\theta} &= \frac{\sin\theta}{\cos\theta} \cdot \frac{\sin\theta}{\sin\theta} + \frac{\cos\theta}{\sin\theta} \cdot \frac{\cos\theta}{\cos\theta} \\
+&= \frac{\sin^2\theta}{\sin\theta\cos\theta} + \frac{\cos^2\theta}{\sin\theta\cos\theta} \\
+&= \frac{\sin^2\theta + \cos^2\theta}{\sin\theta\cos\theta}
+\end{align*}
+
+Usando la identidad fundamental $\sin^2\theta + \cos^2\theta = 1$:
+\[
+= \frac{1}{\sin\theta\cos\theta} \quad \checkmark
+\]
+
+Hemos llegado al lado derecho.
+
+\textbf{Conclusión:} $\boxed{\text{Identidad verificada}}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 6]
+\textbf{Dado:} $\sec\theta = \frac{5}{3}$ y $\theta$ en el cuarto cuadrante.
+
+\textbf{Paso 1:} Encontrar $\cos\theta$.
+\[
+\sec\theta = \frac{1}{\cos\theta} = \frac{5}{3}
+\]
+Por lo tanto:
+\[
+\cos\theta = \frac{3}{5}
+\]
+
+Esto es consistente con el cuarto cuadrante donde $\cos\theta > 0$. $\checkmark$
+
+\textbf{Paso 2:} Encontrar $\sin\theta$ usando $\sin^2\theta + \cos^2\theta = 1$
+\begin{align*}
+\sin^2\theta + \left(\frac{3}{5}\right)^2 &= 1 \\
+\sin^2\theta + \frac{9}{25} &= 1 \\
+\sin^2\theta &= 1 - \frac{9}{25} = \frac{16}{25} \\
+\sin\theta &= \pm\frac{4}{5}
+\end{align*}
+
+Como estamos en el cuarto cuadrante, $\sin\theta < 0$:
+\[
+\sin\theta = -\frac{4}{5}
+\]
+
+\textbf{Paso 3:} Calcular las otras funciones.
+\begin{align*}
+\tan\theta &= \frac{\sin\theta}{\cos\theta} = \frac{-4/5}{3/5} = -\frac{4}{3} \\[0.2cm]
+\csc\theta &= \frac{1}{\sin\theta} = \frac{1}{-4/5} = -\frac{5}{4} \\[0.2cm]
+\cot\theta &= \frac{1}{\tan\theta} = -\frac{3}{4}
+\end{align*}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+\sin\theta &= -\frac{4}{5}, \quad \cos\theta = \frac{3}{5}, \quad \tan\theta = -\frac{4}{3} \\[0.2cm]
+\csc\theta &= -\frac{5}{4}, \quad \cot\theta = -\frac{3}{4}
+\end{aligned}
+}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 7]
+\textbf{Dado:} Satélite en órbita circular de radio $r = 8000$ km, gira $210°$ desde $(8000, 0)$.
+
+\textbf{Parte a):} Posición $(x, y)$.
+
+La posición está dada por:
+\begin{align*}
+x &= r\cos\theta = 8000\cos(210°) \\
+y &= r\sin\theta = 8000\sin(210°)
+\end{align*}
+
+Necesitamos evaluar $\sin(210°)$ y $\cos(210°)$.
+
+$210° = 180° + 30°$ (ángulo en el tercer cuadrante)
+
+En el tercer cuadrante, tanto seno como coseno son negativos:
+\begin{align*}
+\sin(210°) &= \sin(180° + 30°) = -\sin(30°) = -\frac{1}{2} \\
+\cos(210°) &= \cos(180° + 30°) = -\cos(30°) = -\frac{\sqrt{3}}{2}
+\end{align*}
+
+Por lo tanto:
+\begin{align*}
+x &= 8000 \cdot \left(-\frac{\sqrt{3}}{2}\right) = -4000\sqrt{3} \approx -6928.2 \text{ km} \\
+y &= 8000 \cdot \left(-\frac{1}{2}\right) = -4000 \text{ km}
+\end{align*}
+
+\textbf{Respuesta a):} $\boxed{(x, y) = (-4000\sqrt{3}, -4000) \approx (-6928.2, -4000) \text{ km}}$
+
+\textbf{Parte b):} Distancia vertical por debajo del centro.
+
+La coordenada $y$ nos da la posición vertical. Como $y = -4000$ km, el satélite está 4000 km por debajo del centro de la Tierra.
+
+\textbf{Respuesta b):} $\boxed{4000 \text{ km por debajo del centro}}$
+
+\textbf{Interpretación:} El satélite está en el tercer cuadrante, a la izquierda y por debajo del centro de la Tierra.
+\end{solucion}
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+Los ejercicios inversos te desafían a trabajar ``al revés'': en lugar de darte un ángulo y pedirte las funciones, te dan información sobre las funciones y tú debes encontrar el ángulo o determinar otras propiedades.
+
+\begin{ejercicio}[title=Ejercicio Inverso 1]
+Encuentra todos los ángulos $\theta$ en el intervalo $[0°, 360°)$ tales que:
+\[
+\cos\theta = \frac{1}{2}
+\]
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 2]
+Si un punto $P(x, y)$ está en la circunferencia unitaria en el tercer cuadrante, y su coordenada $x$ es el triple de su coordenada $y$, encuentra:
+\begin{itemize}
+    \item[a)] Las coordenadas exactas del punto
+    \item[b)] Los valores de las seis funciones trigonométricas del ángulo correspondiente
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 3]
+Determina todos los ángulos cuadrantales $\theta$ en $[0°, 360°]$ para los cuales:
+\[
+\sin\theta \cdot \cos\theta = 0
+\]
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 4]
+Un ingeniero necesita diseñar una rampa circular. El punto final de la rampa debe estar a una altura de 15 metros y a una distancia horizontal de 8 metros del centro (hacia la izquierda). Si la rampa sigue un arco de circunferencia centrado en el origen, determina:
+\begin{itemize}
+    \item[a)] El radio de la circunferencia
+    \item[b)] El ángulo que forma el punto final con el eje $x$ positivo
+    \item[c)] Los valores de $\sin\theta$ y $\cos\theta$ para ese ángulo
+\end{itemize}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones de Ejercicios Inversos}
+
+\begin{solucion}[title=Solución Ejercicio Inverso 1]
+\textbf{Encontrar:} Todos los $\theta \in [0°, 360°)$ tales que $\cos\theta = \frac{1}{2}$
+
+\textbf{Paso 1:} Identificar el ángulo de referencia.
+
+Sabemos que $\cos(60°) = \frac{1}{2}$. Entonces $60°$ es nuestro ángulo de referencia.
+
+\textbf{Paso 2:} Determinar en qué cuadrantes el coseno es positivo.
+
+El coseno es la coordenada $x$ en la circunferencia unitaria. Es positivo cuando $x > 0$, es decir, en los cuadrantes I y IV.
+
+\textbf{Paso 3:} Encontrar los ángulos en cada cuadrante.
+
+\textbf{Cuadrante I:} El ángulo es directamente el ángulo de referencia:
+\[
+\theta_1 = 60°
+\]
+
+\textbf{Cuadrante IV:} El ángulo se calcula como $360° - \text{ángulo de referencia}$:
+\[
+\theta_2 = 360° - 60° = 300°
+\]
+
+\textbf{Verificación:}
+\begin{align*}
+\cos(60°) &= \frac{1}{2} \quad \checkmark \\
+\cos(300°) &= \cos(360° - 60°) = \cos(60°) = \frac{1}{2} \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\theta = 60° \text{ y } \theta = 300°}$
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-1.2,0) -- (1.2,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.2) -- (0,1.2) node[above] {$y$};
+
+    % 60 grados
+    \draw[blue,thick,-{Latex}] (0,0) -- (60:1);
+    \filldraw[blue] (60:1) circle (0.02) node[above right] {$60°$};
+    \draw[blue,-{Latex}] (0.3,0) arc (0:60:0.3) node[midway,right] {\tiny $60°$};
+
+    % 300 grados
+    \draw[red,thick,-{Latex}] (0,0) -- (300:1);
+    \filldraw[red] (300:1) circle (0.02) node[below right] {$300°$};
+    \draw[red,-{Latex}] (0.3,0) arc (0:-60:0.3) node[midway,right] {\tiny $-60°$};
+
+    % Línea vertical en x = 1/2
+    \draw[dashed,green!60!black] (0.5,-1) -- (0.5,1) node[above] {$x=\frac{1}{2}$};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio Inverso 2]
+\textbf{Dado:} Punto $P(x,y)$ en la circunferencia unitaria, tercer cuadrante, $x = 3y$
+
+\textbf{Parte a):} Encontrar las coordenadas.
+
+\textbf{Condiciones:}
+\begin{enumerate}
+    \item $x^2 + y^2 = 1$ (está en la circunferencia unitaria)
+    \item $x = 3y$ (relación dada)
+    \item Tercer cuadrante: $x < 0$ y $y < 0$
+\end{enumerate}
+
+Sustituyendo la condición 2 en la condición 1:
+\begin{align*}
+(3y)^2 + y^2 &= 1 \\
+9y^2 + y^2 &= 1 \\
+10y^2 &= 1 \\
+y^2 &= \frac{1}{10} \\
+y &= \pm\frac{1}{\sqrt{10}} = \pm\frac{\sqrt{10}}{10}
+\end{align*}
+
+Como estamos en el tercer cuadrante, $y < 0$:
+\[
+y = -\frac{\sqrt{10}}{10}
+\]
+
+Entonces:
+\[
+x = 3y = 3 \cdot \left(-\frac{\sqrt{10}}{10}\right) = -\frac{3\sqrt{10}}{10}
+\]
+
+\textbf{Verificación:}
+\begin{align*}
+x^2 + y^2 &= \left(-\frac{3\sqrt{10}}{10}\right)^2 + \left(-\frac{\sqrt{10}}{10}\right)^2 \\
+&= \frac{9 \cdot 10}{100} + \frac{10}{100} = \frac{90 + 10}{100} = \frac{100}{100} = 1 \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta a):} $\boxed{P\left(-\frac{3\sqrt{10}}{10}, -\frac{\sqrt{10}}{10}\right)}$
+
+\textbf{Parte b):} Funciones trigonométricas.
+
+En la circunferencia unitaria: $(x,y) = (\cos\theta, \sin\theta)$
+\begin{align*}
+\cos\theta &= -\frac{3\sqrt{10}}{10} \\[0.2cm]
+\sin\theta &= -\frac{\sqrt{10}}{10}
+\end{align*}
+
+\begin{align*}
+\tan\theta &= \frac{\sin\theta}{\cos\theta} = \frac{-\sqrt{10}/10}{-3\sqrt{10}/10} = \frac{1}{3} \\[0.3cm]
+\csc\theta &= \frac{1}{\sin\theta} = \frac{1}{-\sqrt{10}/10} = -\frac{10}{\sqrt{10}} = -\sqrt{10} \\[0.3cm]
+\sec\theta &= \frac{1}{\cos\theta} = \frac{1}{-3\sqrt{10}/10} = -\frac{10}{3\sqrt{10}} = -\frac{\sqrt{10}}{3} \\[0.3cm]
+\cot\theta &= \frac{1}{\tan\theta} = 3
+\end{align*}
+
+\textbf{Respuesta b):}
+\[
+\boxed{
+\begin{aligned}
+\sin\theta &= -\frac{\sqrt{10}}{10}, \quad \cos\theta = -\frac{3\sqrt{10}}{10}, \quad \tan\theta = \frac{1}{3} \\[0.2cm]
+\csc\theta &= -\sqrt{10}, \quad \sec\theta = -\frac{\sqrt{10}}{3}, \quad \cot\theta = 3
+\end{aligned}
+}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio Inverso 3]
+\textbf{Encontrar:} Ángulos cuadrantales en $[0°, 360°]$ tales que $\sin\theta \cdot \cos\theta = 0$
+
+\textbf{Análisis:}
+
+Un producto es cero si y solo si al menos uno de los factores es cero:
+\[
+\sin\theta \cdot \cos\theta = 0 \quad \Leftrightarrow \quad \sin\theta = 0 \text{ o } \cos\theta = 0
+\]
+
+\textbf{Caso 1:} $\sin\theta = 0$
+
+El seno es la coordenada $y$ en la circunferencia unitaria. Es cero cuando el punto está en el eje $x$.
+
+Ángulos cuadrantales con $\sin\theta = 0$:
+\[
+\theta = 0°, \quad \theta = 180°, \quad \theta = 360°
+\]
+
+\textbf{Caso 2:} $\cos\theta = 0$
+
+El coseno es la coordenada $x$ en la circunferencia unitaria. Es cero cuando el punto está en el eje $y$.
+
+Ángulos cuadrantales con $\cos\theta = 0$:
+\[
+\theta = 90°, \quad \theta = 270°
+\]
+
+\textbf{Unión de ambos casos:}
+\[
+\boxed{\theta = 0°, 90°, 180°, 270°, 360°}
+\]
+
+\textbf{Verificación:}
+\begin{align*}
+\theta = 0°: \quad &\sin(0°)\cos(0°) = 0 \cdot 1 = 0 \quad \checkmark \\
+\theta = 90°: \quad &\sin(90°)\cos(90°) = 1 \cdot 0 = 0 \quad \checkmark \\
+\theta = 180°: \quad &\sin(180°)\cos(180°) = 0 \cdot (-1) = 0 \quad \checkmark \\
+\theta = 270°: \quad &\sin(270°)\cos(270°) = (-1) \cdot 0 = 0 \quad \checkmark \\
+\theta = 360°: \quad &\sin(360°)\cos(360°) = 0 \cdot 1 = 0 \quad \checkmark
+\end{align*}
+
+\textbf{Conclusión:} Todos los ángulos cuadrantales satisfacen la ecuación.
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio Inverso 4]
+\textbf{Dado:} Punto a altura 15 m, distancia horizontal 8 m a la izquierda del centro.
+
+Las coordenadas del punto son: $(x, y) = (-8, 15)$
+
+\textbf{Parte a):} Radio de la circunferencia.
+
+El radio es la distancia del origen al punto:
+\begin{align*}
+r &= \sqrt{x^2 + y^2} \\
+&= \sqrt{(-8)^2 + 15^2} \\
+&= \sqrt{64 + 225} \\
+&= \sqrt{289} \\
+&= 17 \text{ m}
+\end{align*}
+
+\textbf{Respuesta a):} $\boxed{r = 17 \text{ metros}}$
+
+\textbf{Parte b):} Ángulo con el eje $x$ positivo.
+
+El punto $(-8, 15)$ está en el segundo cuadrante (porque $x < 0$ y $y > 0$).
+
+Para encontrar el ángulo, primero encontramos el ángulo de referencia usando:
+\[
+\tan(\alpha) = \frac{|y|}{|x|} = \frac{15}{8}
+\]
+
+Entonces: $\alpha = \arctan\left(\frac{15}{8}\right)$
+
+Calculando (o usando tablas): $\alpha \approx 61.93°$
+
+Como el punto está en el segundo cuadrante, el ángulo $\theta$ medido desde el eje $x$ positivo es:
+\[
+\theta = 180° - \alpha = 180° - 61.93° \approx 118.07°
+\]
+
+\textbf{Respuesta b):} $\boxed{\theta \approx 118.07°}$ (o en forma exacta: $\theta = 180° - \arctan\left(\frac{15}{8}\right)$)
+
+\textbf{Parte c):} Valores de $\sin\theta$ y $\cos\theta$.
+
+En una circunferencia de radio $r = 17$, las coordenadas de un punto son:
+\[
+(x, y) = (r\cos\theta, r\sin\theta)
+\]
+
+Por lo tanto:
+\begin{align*}
+r\cos\theta &= -8 \quad \Rightarrow \quad \cos\theta = -\frac{8}{17} \\[0.2cm]
+r\sin\theta &= 15 \quad \Rightarrow \quad \sin\theta = \frac{15}{17}
+\end{align*}
+
+\textbf{Verificación:}
+\[
+\sin^2\theta + \cos^2\theta = \left(\frac{15}{17}\right)^2 + \left(-\frac{8}{17}\right)^2 = \frac{225 + 64}{289} = \frac{289}{289} = 1 \quad \checkmark
+\]
+
+\textbf{Respuesta c):} $\boxed{\sin\theta = \frac{15}{17}, \quad \cos\theta = -\frac{8}{17}}$
+
+\textbf{Diagrama:}
+\begin{center}
+\begin{tikzpicture}[scale=0.3]
+    \draw[-{Latex},thick] (-10,0) -- (10,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-2) -- (0,18) node[above] {$y$};
+
+    % Punto
+    \coordinate (P) at (-8,15);
+    \filldraw[maincolor] (P) circle (0.2) node[above left] {$(-8, 15)$};
+
+    % Radio
+    \draw[accentcolor,very thick,-{Latex}] (0,0) -- (P) node[midway,above,sloped] {$r=17$ m};
+
+    % Ángulo
+    \draw[accentcolor,-{Latex}] (3,0) arc (0:118:3) node[midway,above] {$\theta$};
+
+    % Proyecciones
+    \draw[dashed] (P) -- (-8,0) node[below] {$-8$};
+    \draw[dashed] (P) -- (0,15) node[left] {$15$};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado esta guía sobre funciones trigonométricas. Ahora tienes las herramientas para:
+
+\begin{itemize}
+    \item Entender la circunferencia unitaria y su relación con las funciones trigonométricas
+    \item Calcular las seis funciones trigonométricas para cualquier ángulo
+    \item Determinar signos según el cuadrante
+    \item Usar propiedades de funciones pares e impares
+    \item Aplicar las funciones trigonométricas a problemas reales
+\end{itemize}
+
+\subsection*{Resumen de Conceptos Clave}
+
+\begin{tcolorbox}[enhanced,colback=maincolor!10,colframe=maincolor,title=Fórmulas Fundamentales]
+\textbf{En la circunferencia unitaria:}
+\[
+(x, y) = (\cos\theta, \sin\theta)
+\]
+
+\textbf{Identidad pitagórica:}
+\[
+\sin^2\theta + \cos^2\theta = 1
+\]
+
+\textbf{Funciones recíprocas:}
+\[
+\csc\theta = \frac{1}{\sin\theta}, \quad \sec\theta = \frac{1}{\cos\theta}, \quad \cot\theta = \frac{1}{\tan\theta}
+\]
+
+\textbf{Funciones pares e impares:}
+\[
+\cos(-\theta) = \cos\theta, \quad \sin(-\theta) = -\sin\theta, \quad \tan(-\theta) = -\tan\theta
+\]
+\end{tcolorbox}
+
+\subsection*{Próximos Pasos}
+
+Para continuar tu aprendizaje en trigonometría, los siguientes temas serían:
+
+\begin{enumerate}
+    \item Identidades trigonométricas (suma, diferencia, ángulo doble)
+    \item Gráficas de funciones trigonométricas
+    \item Ecuaciones trigonométricas
+    \item Funciones trigonométricas inversas
+    \item Aplicaciones avanzadas: vectores, números complejos
+\end{enumerate}
+
+\subsection*{Consejo Final}
+
+La trigonometría es como un idioma: se aprende mejor con práctica constante. No te desanimes si algunos problemas parecen difíciles al principio. Con el tiempo, los patrones se vuelven más claros y las soluciones más naturales.
+
+¡Sigue practicando y explorando el fascinante mundo de las funciones trigonométricas!
+
+\vspace{1cm}
+
+\begin{center}
+\textit{``La matemática es el alfabeto con el cual Dios ha escrito el universo.''} \\
+--- Galileo Galilei
+\end{center}
+
+\end{document}
