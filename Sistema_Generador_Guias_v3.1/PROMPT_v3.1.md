@@ -8,6 +8,7 @@ Sistema optimizado para crear guías didácticas de matemáticas con LaTeX, dise
 - ✅ Especificado uso correcto de axis y addplot
 - ✅ Añadido .gitignore recomendado
 - ✅ NUEVO: Creación automática de README.md para cada guía (FASE 3.5)
+- ✅ NUEVO: Encabezados estilo libro con fancyhdr (alternancia par/impar)
 
 ---
 
@@ -181,14 +182,16 @@ Observar:
 \definecolor{maincolor}{RGB}{26,35,126}
 \definecolor{accentcolor}{RGB}{255,87,34}
 
-% Configuración de encabezados y pies de página
+% Configuración de encabezados y pies de página (estilo libro)
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\textcolor{maincolor}{[TÍTULO CORTO]}}
-\fancyhead[R]{\small\textcolor{maincolor}{Grado [X] - [ASIGNATURA]}}
-\fancyfoot[C]{\thepage}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad [TÍTULO CORTO]}}
+\fancyhead[RO]{\small\textcolor{maincolor}{[TÍTULO CORTO] \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado [X] - [ASIGNATURA]}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. [AUTOR]}}
+\fancyfoot[C]{}
 \renewcommand{\headrulewidth}{0.5pt}
-\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
 \setlength{\headheight}{14pt}
 
 % Definición de cajas de colores
