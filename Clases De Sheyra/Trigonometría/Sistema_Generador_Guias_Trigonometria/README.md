@@ -62,7 +62,17 @@ El sistema general (`Sistema_Generador_Guias_v3.1/`) apuntaba a un archivo de re
 
 ## 🚀 Cómo Usar el Sistema
 
-### Opción 1: Uso con Asistente de IA (Claude Code)
+### ⚡ Optimización de Tokens
+
+Este sistema está configurado para usar el **Task tool** (subagentes) para generar las guías, lo que:
+- ✅ **Ahorra tokens** del asistente principal
+- ✅ **Permite generar guías de 25-40 páginas** sin problemas
+- ✅ **Es más eficiente** (el subagente tiene su propio presupuesto)
+- ✅ **Evita límites de output** del asistente principal
+
+El asistente principal solo hace las preguntas y coordina, el subagente genera todo el contenido.
+
+### Opción 1: Uso con Asistente de IA (Claude Code) - RECOMENDADO
 
 1. **Abrir Claude Code** en el directorio de Trigonometría:
    ```bash

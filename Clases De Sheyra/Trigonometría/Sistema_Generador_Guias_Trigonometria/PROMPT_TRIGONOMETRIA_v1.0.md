@@ -168,7 +168,71 @@ CRÍTICO: Este es el archivo de referencia CORRECTO y VERIFICADO.
 Todas las 9 guías de Trigonometría existentes usan esta estructura.
 ```
 
-### 2. Crear el documento LaTeX con esta estructura:
+### 2. USAR TASK TOOL PARA GENERAR LA GUÍA (AHORRO DE TOKENS)
+
+**⚠️ MUY IMPORTANTE - OPTIMIZACIÓN DE TOKENS:**
+
+Para generar el archivo .tex completo, el asistente principal NO debe escribir todo el contenido directamente (consume demasiados tokens). En su lugar, debe usar el **Task tool** para delegar la generación a un subagente especializado.
+
+**Instrucción para el asistente principal:**
+
+```
+Usar Task tool con los siguientes parámetros:
+
+subagent_type: "general-purpose"
+model: "opus" (para contenido largo y complejo)
+
+prompt: (incluir todos los datos recopilados más las siguientes instrucciones):
+
+"Tu tarea es generar UNA guía educativa completa de LaTeX en un solo archivo.
+
+ARCHIVOS DE REFERENCIA A LEER:
+1. Clases De Sheyra/Trigonometría/Sistema_Generador_Guias_Trigonometria/Referencia/GuiaFuncionesTrigonometricas.tex
+
+PARÁMETROS DE LA NUEVA GUÍA:
+- Título: [TÍTULO]
+- Autor: [AUTOR]
+- Institución: [INSTITUCIÓN]
+- Título corto: [TÍTULO CORTO]
+- Grado: [GRADO]
+- Asignatura: [ASIGNATURA]
+- Tema principal: [TEMA Y ELEMENTOS]
+- Aplicaciones: [APLICACIONES]
+- [N] ejemplos resueltos
+- [N] ejercicios propuestos con soluciones
+- [N] ejercicios inversos con soluciones
+
+ARCHIVO DE SALIDA:
+[RUTA COMPLETA DEL ARCHIVO .tex]
+
+INSTRUCCIONES CRÍTICAS:
+1. Lee el archivo de referencia COMPLETAMENTE
+2. Crea el archivo .tex completo siguiendo EXACTAMENTE el mismo formato
+3. Usa preámbulo con twoside y fancyhdr (headers estilo libro)
+4. Todas las gráficas con pgfplots y entorno axis
+5. NUNCA uses símbolos matemáticos ($) dentro de parámetros title de tcolorbox
+6. SIEMPRE cierra todos los entornos \begin{...}...\end{...}
+7. USA ^\circ para grados SOLO dentro de modo matemático
+8. NO compiles, solo crea el archivo .tex
+9. Retorna mensaje de confirmación con número de páginas estimado
+
+El contenido debe seguir la estructura del archivo de referencia."
+```
+
+**Por qué usar Task tool:**
+- ✅ Ahorra tokens del asistente principal (puede generar 20-30 páginas sin problema)
+- ✅ El subagente tiene su propio presupuesto de tokens
+- ✅ Permite generación de contenido extenso sin límites
+- ✅ Más eficiente para archivos largos
+
+**Después de que el Task tool termine:**
+El asistente principal debe:
+1. Verificar que el archivo .tex fue creado
+2. Compilar con lualatex
+3. Crear el README.md (FASE 3.5)
+4. Guardar en git
+
+### 3. Estructura del documento LaTeX (para el subagente)
 
 #### PREÁMBULO ESTÁNDAR
 ```latex
