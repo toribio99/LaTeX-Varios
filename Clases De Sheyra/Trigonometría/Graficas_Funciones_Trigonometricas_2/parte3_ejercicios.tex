@@ -1,0 +1,820 @@
+\section{Ejercicios Propuestos}
+
+Ahora es tu turno. Resuelve los siguientes ejercicios aplicando lo que has aprendido sobre gráficas de funciones trigonométricas. Las soluciones detalladas están en la siguiente sección, pero intenta resolverlos primero por tu cuenta.
+
+\begin{ejercicio}[title=Ejercicio 1]
+Grafica la función $f(x) = 2\sin(x)$ en el intervalo $[0, 2\pi]$ e identifica:
+\begin{itemize}
+    \item[a)] La amplitud
+    \item[b)] El período
+    \item[c)] Los puntos máximos y mínimos
+    \item[d)] Las intersecciones con el eje $x$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 2]
+Determina la amplitud, el período y el desplazamiento de fase de la función:
+\[
+g(x) = 3\cos\left(2x - \frac{\pi}{3}\right)
+\]
+Luego, bosqueja su gráfica en el intervalo $[0, 2\pi]$.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 3]
+Considera la función $h(x) = -\sin\left(\frac{x}{2}\right) + 1$.
+\begin{itemize}
+    \item[a)] Identifica todas las transformaciones aplicadas a $\sin(x)$
+    \item[b)] Determina la amplitud, el período y el desplazamiento vertical
+    \item[c)] Encuentra el valor máximo y mínimo de la función
+    \item[d)] Grafica la función en el intervalo $[0, 4\pi]$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 4]
+Grafica la función tangente $f(x) = \tan(x)$ en el intervalo $\left[-\frac{3\pi}{2}, \frac{3\pi}{2}\right]$ e identifica:
+\begin{itemize}
+    \item[a)] Las asíntotas verticales
+    \item[b)] El período
+    \item[c)] Los ceros de la función
+    \item[d)] Los intervalos donde la función es creciente
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 5]
+Dada la gráfica de una función sinusoidal que pasa por los puntos $(0, 2)$, $\left(\frac{\pi}{2}, 5\right)$, $(\pi, 2)$, $\left(\frac{3\pi}{2}, -1\right)$ y $(2\pi, 2)$, determina:
+\begin{itemize}
+    \item[a)] La amplitud
+    \item[b)] El desplazamiento vertical
+    \item[c)] El período
+    \item[d)] Una ecuación de la forma $f(x) = A\sin(Bx) + D$ o $f(x) = A\cos(Bx) + D$ que representa esta función
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 6]
+Compara las gráficas de $f(x) = \sin(x)$ y $g(x) = \cos(x)$ en el intervalo $[0, 2\pi]$.
+\begin{itemize}
+    \item[a)] Encuentra el desplazamiento horizontal que transforma una función en la otra
+    \item[b)] Identifica los puntos donde ambas funciones se intersectan
+    \item[c)] Determina los intervalos donde $\sin(x) > \cos(x)$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 7: Problema aplicado]
+La altura (en metros) de la marea en un puerto está modelada por la función:
+\[
+h(t) = 2.5\sin\left(\frac{\pi}{6}t - \frac{\pi}{2}\right) + 3.5
+\]
+donde $t$ es el tiempo en horas después de la medianoche.
+\begin{itemize}
+    \item[a)] ¿Cuál es la altura máxima y mínima de la marea?
+    \item[b)] ¿Cuál es el período de la marea (tiempo entre dos mareas altas consecutivas)?
+    \item[c)] ¿A qué hora ocurre la primera marea alta después de la medianoche?
+    \item[d)] Grafica la función en el intervalo $[0, 24]$
+\end{itemize}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones Detalladas}
+
+\begin{solucion}[title=Solución Ejercicio 1]
+\textbf{Graficar:} $f(x) = 2\sin(x)$ en $[0, 2\pi]$
+
+\textbf{Paso 1:} Identificar los parámetros.
+
+La función tiene la forma $f(x) = A\sin(Bx)$ donde:
+\begin{itemize}
+    \item $A = 2$ (amplitud)
+    \item $B = 1$ (frecuencia)
+\end{itemize}
+
+\textbf{Parte a):} Amplitud
+\[
+\boxed{\text{Amplitud} = |A| = |2| = 2}
+\]
+
+\textbf{Parte b):} Período
+\[
+\boxed{\text{Período} = \frac{2\pi}{B} = \frac{2\pi}{1} = 2\pi}
+\]
+
+\textbf{Parte c):} Puntos máximos y mínimos.
+
+Para $f(x) = 2\sin(x)$:
+\begin{itemize}
+    \item Máximo cuando $\sin(x) = 1$: $x = \frac{\pi}{2}$, $f\left(\frac{\pi}{2}\right) = 2$
+    \item Mínimo cuando $\sin(x) = -1$: $x = \frac{3\pi}{2}$, $f\left(\frac{3\pi}{2}\right) = -2$
+\end{itemize}
+
+\[
+\boxed{\text{Máximo: } \left(\frac{\pi}{2}, 2\right), \quad \text{Mínimo: } \left(\frac{3\pi}{2}, -2\right)}
+\]
+
+\textbf{Parte d):} Intersecciones con el eje $x$.
+
+$f(x) = 0$ cuando $2\sin(x) = 0$, es decir, cuando $\sin(x) = 0$
+
+En $[0, 2\pi]$: $x = 0, \pi, 2\pi$
+
+\[
+\boxed{\text{Intersecciones: } x = 0, \pi, 2\pi}
+\]
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=6.5,
+    ymin=-2.5, ymax=2.5,
+    xtick={0, 1.5708, 3.14159, 4.71239, 6.28318},
+    xticklabels={$0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-2,-1,0,1,2},
+    grid=major,
+    samples=200,
+    domain=0:2*pi,
+    thick,
+]
+    \addplot[maincolor, very thick] {2*sin(deg(x))};
+
+    % Puntos destacados
+    \addplot[mark=*, only marks, mark size=3pt, accentcolor] coordinates {
+        (1.5708, 2)
+        (4.71239, -2)
+        (0, 0)
+        (3.14159, 0)
+        (6.28318, 0)
+    };
+
+    \node[accentcolor, above right] at (axis cs:1.5708, 2) {Máximo};
+    \node[accentcolor, below right] at (axis cs:4.71239, -2) {Mínimo};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación:} La función $f(x) = 2\sin(x)$ es la función seno estándar estirada verticalmente por un factor de 2, lo que duplica su amplitud pero mantiene el mismo período.
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 2]
+\textbf{Analizar:} $g(x) = 3\cos\left(2x - \frac{\pi}{3}\right)$
+
+\textbf{Paso 1:} Reescribir en la forma estándar.
+
+Factorizando el 2:
+\[
+g(x) = 3\cos\left(2\left(x - \frac{\pi}{6}\right)\right)
+\]
+
+Esta es la forma $A\cos(B(x - C))$ donde:
+\begin{itemize}
+    \item $A = 3$
+    \item $B = 2$
+    \item $C = \frac{\pi}{6}$
+\end{itemize}
+
+\textbf{Paso 2:} Identificar parámetros.
+
+\textbf{Amplitud:}
+\[
+\boxed{|A| = |3| = 3}
+\]
+
+\textbf{Período:}
+\[
+\boxed{\text{Período} = \frac{2\pi}{B} = \frac{2\pi}{2} = \pi}
+\]
+
+\textbf{Desplazamiento de fase:}
+\[
+\boxed{C = \frac{\pi}{6} \text{ (hacia la derecha)}}
+\]
+
+\textbf{Paso 3:} Puntos clave para graficar.
+
+Para $\cos(u)$, un ciclo completo va de $u = 0$ a $u = 2\pi$.
+
+En nuestro caso, $u = 2\left(x - \frac{\pi}{6}\right)$
+
+\begin{itemize}
+    \item Inicio del ciclo: $2\left(x - \frac{\pi}{6}\right) = 0 \Rightarrow x = \frac{\pi}{6}$
+    \item Fin del ciclo: $2\left(x - \frac{\pi}{6}\right) = 2\pi \Rightarrow x = \frac{\pi}{6} + \pi = \frac{7\pi}{6}$
+\end{itemize}
+
+Puntos importantes:
+\begin{align*}
+x = \frac{\pi}{6}: &\quad g\left(\frac{\pi}{6}\right) = 3\cos(0) = 3 \quad \text{(máximo)} \\
+x = \frac{\pi}{6} + \frac{\pi}{4} = \frac{5\pi}{12}: &\quad g\left(\frac{5\pi}{12}\right) = 3\cos\left(\frac{\pi}{2}\right) = 0 \\
+x = \frac{\pi}{6} + \frac{\pi}{2} = \frac{2\pi}{3}: &\quad g\left(\frac{2\pi}{3}\right) = 3\cos(\pi) = -3 \quad \text{(mínimo)} \\
+x = \frac{\pi}{6} + \frac{3\pi}{4} = \frac{11\pi}{12}: &\quad g\left(\frac{11\pi}{12}\right) = 3\cos\left(\frac{3\pi}{2}\right) = 0 \\
+x = \frac{\pi}{6} + \pi = \frac{7\pi}{6}: &\quad g\left(\frac{7\pi}{6}\right) = 3\cos(2\pi) = 3 \quad \text{(máximo)}
+\end{align*}
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=6.5,
+    ymin=-3.5, ymax=3.5,
+    xtick={0, 0.5236, 1.5708, 2.0944, 3.14159, 4.71239, 6.28318},
+    xticklabels={$0$, $\frac{\pi}{6}$, $\frac{\pi}{2}$, $\frac{2\pi}{3}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-3,-2,-1,0,1,2,3},
+    grid=major,
+    samples=300,
+    domain=0:2*pi,
+    thick,
+]
+    \addplot[maincolor, very thick] {3*cos(deg(2*x - 60))};
+
+    % Puntos destacados
+    \addplot[mark=*, only marks, mark size=3pt, accentcolor] coordinates {
+        (0.5236, 3)
+        (2.0944, -3)
+        (3.665, 3)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} La función tiene una amplitud de 3, completa dos ciclos en el intervalo $[0, 2\pi]$ (período de $\pi$), y está desplazada $\frac{\pi}{6}$ unidades a la derecha.
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 3]
+\textbf{Analizar:} $h(x) = -\sin\left(\frac{x}{2}\right) + 1$
+
+\textbf{Parte a):} Transformaciones aplicadas.
+
+Partiendo de $\sin(x)$, se aplican las siguientes transformaciones:
+
+\begin{enumerate}
+    \item Compresión horizontal por factor de $\frac{1}{2}$ (o estiramiento por factor 2): $\sin\left(\frac{x}{2}\right)$
+    \item Reflexión sobre el eje $x$: $-\sin\left(\frac{x}{2}\right)$
+    \item Desplazamiento vertical hacia arriba 1 unidad: $-\sin\left(\frac{x}{2}\right) + 1$
+\end{enumerate}
+
+\[
+\boxed{\text{Transformaciones: estiramiento horizontal, reflexión vertical, traslación vertical}}
+\]
+
+\textbf{Parte b):} Parámetros.
+
+En la forma $A\sin(Bx) + D$:
+\begin{itemize}
+    \item $A = -1$ (negativo indica reflexión)
+    \item $B = \frac{1}{2}$
+    \item $D = 1$
+\end{itemize}
+
+\textbf{Amplitud:}
+\[
+\boxed{|A| = |-1| = 1}
+\]
+
+\textbf{Período:}
+\[
+\boxed{\text{Período} = \frac{2\pi}{B} = \frac{2\pi}{1/2} = 4\pi}
+\]
+
+\textbf{Desplazamiento vertical:}
+\[
+\boxed{D = 1}
+\]
+
+\textbf{Parte c):} Valores máximo y mínimo.
+
+El rango de $\sin(u)$ es $[-1, 1]$.
+
+El rango de $-\sin(u)$ es $[-1, 1]$ (invertido: cuando seno es máximo, esto es mínimo).
+
+El rango de $-\sin(u) + 1$ es:
+\begin{itemize}
+    \item Cuando $-\sin(u) = 1$ (mínimo de seno): $h(x) = 1 + 1 = 2$ \textbf{(máximo)}
+    \item Cuando $-\sin(u) = -1$ (máximo de seno): $h(x) = -1 + 1 = 0$ \textbf{(mínimo)}
+\end{itemize}
+
+\[
+\boxed{\text{Máximo} = 2, \quad \text{Mínimo} = 0}
+\]
+
+Alternativamente: El rango es $[D - |A|, D + |A|] = [1 - 1, 1 + 1] = [0, 2]$
+
+\textbf{Parte d):} Gráfica en $[0, 4\pi]$.
+
+Puntos clave (un ciclo completo):
+\begin{align*}
+x = 0: &\quad h(0) = -\sin(0) + 1 = 1 \\
+x = \pi: &\quad h(\pi) = -\sin\left(\frac{\pi}{2}\right) + 1 = -1 + 1 = 0 \quad \text{(mínimo)} \\
+x = 2\pi: &\quad h(2\pi) = -\sin(\pi) + 1 = 0 + 1 = 1 \\
+x = 3\pi: &\quad h(3\pi) = -\sin\left(\frac{3\pi}{2}\right) + 1 = -(-1) + 1 = 2 \quad \text{(máximo)} \\
+x = 4\pi: &\quad h(4\pi) = -\sin(2\pi) + 1 = 0 + 1 = 1
+\end{align*}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=13,
+    ymin=-0.5, ymax=2.5,
+    xtick={0, 3.14159, 6.28318, 9.42478, 12.56637},
+    xticklabels={$0$, $\pi$, $2\pi$, $3\pi$, $4\pi$},
+    ytick={0,1,2},
+    grid=major,
+    samples=300,
+    domain=0:4*pi,
+    thick,
+]
+    \addplot[maincolor, very thick] {-sin(deg(x/2)) + 1};
+
+    % Puntos destacados
+    \addplot[mark=*, only marks, mark size=3pt, accentcolor] coordinates {
+        (3.14159, 0)
+        (9.42478, 2)
+    };
+
+    \node[accentcolor, below] at (axis cs:3.14159, 0) {Mínimo};
+    \node[accentcolor, above] at (axis cs:9.42478, 2) {Máximo};
+
+    % Línea del eje central
+    \addplot[dashed, gray] {1};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación:} La función oscila entre 0 y 2, con línea central en $y = 1$. La reflexión hace que la función empiece en el valor medio, decrezca primero (en lugar de crecer como el seno normal), y complete un ciclo en $4\pi$.
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 4]
+\textbf{Graficar:} $f(x) = \tan(x)$ en $\left[-\frac{3\pi}{2}, \frac{3\pi}{2}\right]$
+
+\textbf{Parte a):} Asíntotas verticales.
+
+La función tangente $\tan(x) = \frac{\sin(x)}{\cos(x)}$ tiene asíntotas verticales donde $\cos(x) = 0$.
+
+$\cos(x) = 0$ cuando $x = \frac{\pi}{2} + n\pi$ para $n \in \mathbb{Z}$
+
+En el intervalo $\left[-\frac{3\pi}{2}, \frac{3\pi}{2}\right]$:
+
+\[
+\boxed{x = -\frac{3\pi}{2}, \quad x = -\frac{\pi}{2}, \quad x = \frac{\pi}{2}, \quad x = \frac{3\pi}{2}}
+\]
+
+\textbf{Nota:} Los extremos del intervalo son asíntotas.
+
+\textbf{Parte b):} Período.
+
+La función tangente tiene período $\pi$ (no $2\pi$ como seno y coseno).
+
+\[
+\boxed{\text{Período} = \pi}
+\]
+
+\textbf{Parte c):} Ceros de la función.
+
+$\tan(x) = 0$ cuando $\sin(x) = 0$
+
+$\sin(x) = 0$ cuando $x = n\pi$ para $n \in \mathbb{Z}$
+
+En el intervalo $\left[-\frac{3\pi}{2}, \frac{3\pi}{2}\right]$:
+
+\[
+\boxed{x = -\pi, \quad x = 0, \quad x = \pi}
+\]
+
+\textbf{Parte d):} Intervalos donde es creciente.
+
+La función tangente es creciente en cada uno de sus intervalos de definición (entre asíntotas consecutivas).
+
+\[
+\boxed{\left(-\frac{3\pi}{2}, -\frac{\pi}{2}\right), \quad \left(-\frac{\pi}{2}, \frac{\pi}{2}\right), \quad \left(\frac{\pi}{2}, \frac{3\pi}{2}\right)}
+\]
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-5, xmax=5,
+    ymin=-5, ymax=5,
+    xtick={-4.71239, -3.14159, -1.5708, 0, 1.5708, 3.14159, 4.71239},
+    xticklabels={$-\frac{3\pi}{2}$, $-\pi$, $-\frac{\pi}{2}$, $0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$},
+    ytick={-4,-2,0,2,4},
+    grid=major,
+    samples=200,
+    domain=-1.4:1.4,
+    thick,
+    restrict y to domain=-8:8,
+]
+    % Tangente en tres períodos
+    \addplot[maincolor, very thick, domain=-4.5:-1.67] {tan(deg(x))};
+    \addplot[maincolor, very thick, domain=-1.47:1.47] {tan(deg(x))};
+    \addplot[maincolor, very thick, domain=1.67:4.5] {tan(deg(x))};
+
+    % Asíntotas verticales
+    \addplot[dashed, red, samples=2] coordinates {(-4.71239,-8) (-4.71239,8)};
+    \addplot[dashed, red, samples=2] coordinates {(-1.5708,-8) (-1.5708,8)};
+    \addplot[dashed, red, samples=2] coordinates {(1.5708,-8) (1.5708,8)};
+    \addplot[dashed, red, samples=2] coordinates {(4.71239,-8) (4.71239,8)};
+
+    % Ceros
+    \addplot[mark=*, only marks, mark size=3pt, accentcolor] coordinates {
+        (-3.14159, 0)
+        (0, 0)
+        (3.14159, 0)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Características importantes:}
+\begin{itemize}
+    \item La tangente no está acotada (no tiene valores máximos ni mínimos)
+    \item Crece desde $-\infty$ hasta $+\infty$ en cada intervalo entre asíntotas
+    \item Es una función impar: $\tan(-x) = -\tan(x)$, simétrica respecto al origen
+    \item Cruza el eje $x$ en múltiplos enteros de $\pi$
+\end{itemize}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 5]
+\textbf{Dado:} Puntos $(0, 2)$, $\left(\frac{\pi}{2}, 5\right)$, $(\pi, 2)$, $\left(\frac{3\pi}{2}, -1\right)$, $(2\pi, 2)$
+
+\textbf{Paso 1:} Analizar los datos.
+
+Observemos que:
+\begin{itemize}
+    \item La función vuelve al mismo valor en $x = 0, \pi, 2\pi$: $f(x) = 2$
+    \item El máximo es 5 en $x = \frac{\pi}{2}$
+    \item El mínimo es $-1$ en $x = \frac{3\pi}{2}$
+\end{itemize}
+
+\textbf{Parte a):} Amplitud.
+
+\[
+\text{Amplitud} = \frac{\text{Máximo} - \text{Mínimo}}{2} = \frac{5 - (-1)}{2} = \frac{6}{2} = 3
+\]
+
+\[
+\boxed{\text{Amplitud} = 3}
+\]
+
+\textbf{Parte b):} Desplazamiento vertical.
+
+\[
+D = \frac{\text{Máximo} + \text{Mínimo}}{2} = \frac{5 + (-1)}{2} = \frac{4}{2} = 2
+\]
+
+\[
+\boxed{D = 2}
+\]
+
+\textbf{Verificación:} El valor medio de la función es 2, que coincide con $f(0) = f(\pi) = f(2\pi) = 2$. $\checkmark$
+
+\textbf{Parte c):} Período.
+
+La función alcanza su máximo en $x = \frac{\pi}{2}$ y vuelve al mismo valor máximo después de un período completo.
+
+De $x = 0$ a $x = 2\pi$ vemos un ciclo completo (empieza en 2, sube a 5, baja a 2, sigue bajando a $-1$, y regresa a 2).
+
+\[
+\boxed{\text{Período} = 2\pi}
+\]
+
+Por lo tanto: $B = \frac{2\pi}{\text{Período}} = \frac{2\pi}{2\pi} = 1$
+
+\textbf{Parte d):} Ecuación de la función.
+
+Tenemos:
+\begin{itemize}
+    \item $A = 3$
+    \item $B = 1$
+    \item $D = 2$
+\end{itemize}
+
+Necesitamos decidir entre seno o coseno.
+
+\textbf{Opción 1: Usando coseno}
+
+$f(x) = A\cos(Bx) + D = 3\cos(x) + 2$
+
+Verificamos:
+\begin{align*}
+f(0) &= 3\cos(0) + 2 = 3(1) + 2 = 5 \quad \text{(¡Error! Debería ser 2)}
+\end{align*}
+
+No funciona directamente. Necesitamos un coseno que valga 0 en $x = 0$.
+
+\textbf{Opción 2: Usando seno}
+
+$f(x) = A\sin(Bx) + D = 3\sin(x) + 2$
+
+Verificamos:
+\begin{align*}
+f(0) &= 3\sin(0) + 2 = 3(0) + 2 = 2 \quad \checkmark \\
+f\left(\frac{\pi}{2}\right) &= 3\sin\left(\frac{\pi}{2}\right) + 2 = 3(1) + 2 = 5 \quad \checkmark \\
+f(\pi) &= 3\sin(\pi) + 2 = 3(0) + 2 = 2 \quad \checkmark \\
+f\left(\frac{3\pi}{2}\right) &= 3\sin\left(\frac{3\pi}{2}\right) + 2 = 3(-1) + 2 = -1 \quad \checkmark \\
+f(2\pi) &= 3\sin(2\pi) + 2 = 3(0) + 2 = 2 \quad \checkmark
+\end{align*}
+
+¡Perfecto! Todos los puntos coinciden.
+
+\[
+\boxed{f(x) = 3\sin(x) + 2}
+\]
+
+\textbf{Alternativa con coseno:}
+
+También podríamos usar $f(x) = 3\cos\left(x - \frac{\pi}{2}\right) + 2$, ya que $\cos\left(x - \frac{\pi}{2}\right) = \sin(x)$.
+
+\textbf{Gráfica de verificación:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=6.5,
+    ymin=-2, ymax=6,
+    xtick={0, 1.5708, 3.14159, 4.71239, 6.28318},
+    xticklabels={$0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-1,0,1,2,3,4,5},
+    grid=major,
+    samples=200,
+    domain=0:2*pi,
+    thick,
+]
+    \addplot[maincolor, very thick] {3*sin(deg(x)) + 2};
+
+    % Puntos dados
+    \addplot[mark=*, only marks, mark size=4pt, accentcolor] coordinates {
+        (0, 2)
+        (1.5708, 5)
+        (3.14159, 2)
+        (4.71239, -1)
+        (6.28318, 2)
+    };
+
+    % Línea del eje central
+    \addplot[dashed, gray] {2};
+
+    \node[gray, right] at (axis cs:5.5, 2) {Eje central: $y=2$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 6]
+\textbf{Comparar:} $f(x) = \sin(x)$ y $g(x) = \cos(x)$ en $[0, 2\pi]$
+
+\textbf{Parte a):} Desplazamiento horizontal entre las funciones.
+
+Recordemos la identidad fundamental:
+\[
+\cos(x) = \sin\left(x + \frac{\pi}{2}\right)
+\]
+
+Alternativamente:
+\[
+\sin(x) = \cos\left(x - \frac{\pi}{2}\right)
+\]
+
+\[
+\boxed{\text{El coseno es el seno desplazado } \frac{\pi}{2} \text{ unidades a la izquierda}}
+\]
+
+O equivalentemente:
+\[
+\boxed{\text{El seno es el coseno desplazado } \frac{\pi}{2} \text{ unidades a la derecha}}
+\]
+
+\textbf{Parte b):} Puntos de intersección.
+
+Necesitamos resolver $\sin(x) = \cos(x)$ en $[0, 2\pi]$.
+
+Dividiendo ambos lados por $\cos(x)$ (cuando $\cos(x) \neq 0$):
+\[
+\frac{\sin(x)}{\cos(x)} = 1 \quad \Rightarrow \quad \tan(x) = 1
+\]
+
+$\tan(x) = 1$ cuando $x = \frac{\pi}{4} + n\pi$ para $n \in \mathbb{Z}$
+
+En $[0, 2\pi]$:
+\[
+x = \frac{\pi}{4}, \quad x = \frac{\pi}{4} + \pi = \frac{5\pi}{4}
+\]
+
+Verificación:
+\begin{align*}
+x = \frac{\pi}{4}: &\quad \sin\left(\frac{\pi}{4}\right) = \frac{\sqrt{2}}{2}, \quad \cos\left(\frac{\pi}{4}\right) = \frac{\sqrt{2}}{2} \quad \checkmark \\
+x = \frac{5\pi}{4}: &\quad \sin\left(\frac{5\pi}{4}\right) = -\frac{\sqrt{2}}{2}, \quad \cos\left(\frac{5\pi}{4}\right) = -\frac{\sqrt{2}}{2} \quad \checkmark
+\end{align*}
+
+Los puntos de intersección son:
+\[
+\boxed{\left(\frac{\pi}{4}, \frac{\sqrt{2}}{2}\right) \text{ y } \left(\frac{5\pi}{4}, -\frac{\sqrt{2}}{2}\right)}
+\]
+
+\textbf{Parte c):} Intervalos donde $\sin(x) > \cos(x)$.
+
+De la gráfica y el análisis anterior, sabemos que las funciones se intersectan en $x = \frac{\pi}{4}$ y $x = \frac{5\pi}{4}$.
+
+Evaluemos en puntos de prueba:
+
+\begin{itemize}
+    \item $x = 0$: $\sin(0) = 0$, $\cos(0) = 1$ $\Rightarrow$ $\sin(0) < \cos(0)$
+    \item $x = \frac{\pi}{2}$: $\sin\left(\frac{\pi}{2}\right) = 1$, $\cos\left(\frac{\pi}{2}\right) = 0$ $\Rightarrow$ $\sin\left(\frac{\pi}{2}\right) > \cos\left(\frac{\pi}{2}\right)$
+    \item $x = \pi$: $\sin(\pi) = 0$, $\cos(\pi) = -1$ $\Rightarrow$ $\sin(\pi) > \cos(\pi)$
+    \item $x = \frac{3\pi}{2}$: $\sin\left(\frac{3\pi}{2}\right) = -1$, $\cos\left(\frac{3\pi}{2}\right) = 0$ $\Rightarrow$ $\sin\left(\frac{3\pi}{2}\right) < \cos\left(\frac{3\pi}{2}\right)$
+\end{itemize}
+
+\[
+\boxed{\sin(x) > \cos(x) \text{ en } \left(\frac{\pi}{4}, \frac{5\pi}{4}\right)}
+\]
+
+\textbf{Gráfica comparativa:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=6.5,
+    ymin=-1.5, ymax=1.5,
+    xtick={0, 0.7854, 1.5708, 3.14159, 3.927, 4.71239, 6.28318},
+    xticklabels={$0$, $\frac{\pi}{4}$, $\frac{\pi}{2}$, $\pi$, $\frac{5\pi}{4}$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-1,-0.5,0,0.5,1},
+    grid=major,
+    samples=200,
+    domain=0:2*pi,
+    thick,
+    legend pos=north east,
+]
+    \addplot[blue, very thick] {sin(deg(x))};
+    \addplot[red, very thick] {cos(deg(x))};
+
+    % Puntos de intersección
+    \addplot[mark=*, only marks, mark size=4pt, maincolor] coordinates {
+        (0.7854, 0.7071)
+        (3.927, -0.7071)
+    };
+
+    \legend{$\sin(x)$, $\cos(x)$}
+
+    \node[maincolor] at (axis cs:0.7854, 0.9) {Intersección};
+    \node[maincolor] at (axis cs:3.927, -0.9) {Intersección};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación importante:} En el intervalo $\left(\frac{\pi}{4}, \frac{5\pi}{4}\right)$, la curva del seno (azul) está por encima de la curva del coseno (roja).
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 7]
+\textbf{Modelo de marea:} $h(t) = 2.5\sin\left(\frac{\pi}{6}t - \frac{\pi}{2}\right) + 3.5$
+
+\textbf{Paso 1:} Reescribir en forma estándar.
+
+Factorizando $\frac{\pi}{6}$:
+\[
+h(t) = 2.5\sin\left(\frac{\pi}{6}\left(t - 3\right)\right) + 3.5
+\]
+
+Parámetros:
+\begin{itemize}
+    \item $A = 2.5$ (amplitud)
+    \item $B = \frac{\pi}{6}$ (frecuencia)
+    \item $C = 3$ (desplazamiento de fase)
+    \item $D = 3.5$ (desplazamiento vertical, altura promedio)
+\end{itemize}
+
+\textbf{Parte a):} Altura máxima y mínima.
+
+La altura oscila alrededor de $D = 3.5$ metros con amplitud $A = 2.5$ metros.
+
+\begin{align*}
+h_{\text{máx}} &= D + A = 3.5 + 2.5 = 6 \text{ metros} \\
+h_{\text{mín}} &= D - A = 3.5 - 2.5 = 1 \text{ metro}
+\end{align*}
+
+\[
+\boxed{\text{Altura máxima} = 6 \text{ m}, \quad \text{Altura mínima} = 1 \text{ m}}
+\]
+
+\textbf{Parte b):} Período de la marea.
+
+\[
+\text{Período} = \frac{2\pi}{B} = \frac{2\pi}{\pi/6} = 2\pi \cdot \frac{6}{\pi} = 12 \text{ horas}
+\]
+
+\[
+\boxed{\text{Período} = 12 \text{ horas}}
+\]
+
+Esto significa que hay dos mareas altas y dos mareas bajas cada día (cada 24 horas).
+
+\textbf{Parte c):} Primera marea alta después de medianoche.
+
+La marea es alta cuando $\sin\left(\frac{\pi}{6}t - \frac{\pi}{2}\right) = 1$
+
+Esto ocurre cuando:
+\[
+\frac{\pi}{6}t - \frac{\pi}{2} = \frac{\pi}{2}
+\]
+
+Resolviendo para $t$:
+\begin{align*}
+\frac{\pi}{6}t &= \frac{\pi}{2} + \frac{\pi}{2} \\
+\frac{\pi}{6}t &= \pi \\
+t &= \pi \cdot \frac{6}{\pi} \\
+t &= 6 \text{ horas}
+\end{align*}
+
+\[
+\boxed{\text{Primera marea alta a las } 6:00 \text{ a.m.}}
+\]
+
+\textbf{Verificación:}
+\[
+h(6) = 2.5\sin\left(\frac{\pi}{6}(6) - \frac{\pi}{2}\right) + 3.5 = 2.5\sin\left(\pi - \frac{\pi}{2}\right) + 3.5 = 2.5\sin\left(\frac{\pi}{2}\right) + 3.5 = 2.5(1) + 3.5 = 6 \text{ m} \quad \checkmark
+\]
+
+\textbf{Parte d):} Gráfica en $[0, 24]$.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$t$ (horas)},
+    ylabel={$h$ (metros)},
+    xmin=0, xmax=25,
+    ymin=0, ymax=7,
+    xtick={0, 3, 6, 9, 12, 15, 18, 21, 24},
+    ytick={0,1,2,3,4,5,6},
+    grid=major,
+    samples=300,
+    domain=0:24,
+    thick,
+]
+    \addplot[maincolor, very thick] {2.5*sin(deg(pi*x/6 - pi/2)) + 3.5};
+
+    % Puntos importantes: mareas altas y bajas
+    \addplot[mark=*, only marks, mark size=3pt, red] coordinates {
+        (6, 6)
+        (18, 6)
+    };
+
+    \addplot[mark=*, only marks, mark size=3pt, blue] coordinates {
+        (0, 1)
+        (12, 1)
+        (24, 1)
+    };
+
+    % Línea del nivel promedio
+    \addplot[dashed, gray] {3.5};
+
+    \node[red, above] at (axis cs:6, 6) {Marea alta};
+    \node[red, above] at (axis cs:18, 6) {Marea alta};
+    \node[blue, below] at (axis cs:12, 1) {Marea baja};
+    \node[gray, right] at (axis cs:20, 3.5) {Nivel promedio};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Análisis del modelo:}
+
+\begin{itemize}
+    \item A medianoche ($t = 0$): $h(0) = 2.5\sin\left(-\frac{\pi}{2}\right) + 3.5 = 2.5(-1) + 3.5 = 1$ m (marea baja)
+    \item A las 6:00 a.m. ($t = 6$): marea alta de 6 m
+    \item A las 12:00 p.m. ($t = 12$): marea baja de 1 m
+    \item A las 6:00 p.m. ($t = 18$): marea alta de 6 m
+    \item A medianoche siguiente ($t = 24$): marea baja de 1 m
+\end{itemize}
+
+Este patrón se repite cada 24 horas, con dos ciclos completos de marea (dos altas y dos bajas) por día, lo cual es característico de mareas semidiurnas.
+\end{solucion}

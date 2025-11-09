@@ -1,0 +1,3281 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad Gráficas de Funciones Trigonométricas}}
+\fancyhead[RO]{\small\textcolor{maincolor}{Gráficas de Funciones Trigonométricas \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+% Título
+\title{\textbf{\Huge Graficas De Las Funciones Trigonometricas}\\[0.5cm]
+\Large Guía de Trigonometría}
+\author{Prof. Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Bienvenidos al emocionante mundo de las gráficas de las funciones trigonométricas! Si alguna vez te has preguntado cómo se ven las ondas del mar, cómo se representan las señales de radio, o cómo vibra una cuerda de guitarra, estás a punto de descubrirlo. Las gráficas de las funciones trigonométricas son la clave para visualizar y entender todos estos fenómenos ondulatorios que nos rodean.
+
+En el tema anterior estudiamos las funciones trigonométricas desde el punto de vista del círculo unitario: definimos el seno, coseno, tangente y sus recíprocas, y aprendimos a calcular sus valores para diferentes ángulos. Ahora vamos a dar un paso más: vamos a \textbf{graficar} estas funciones, es decir, vamos a dibujar sus comportamientos en el plano cartesiano. Esto nos permitirá ver patrones, identificar propiedades visuales, y aplicar estas funciones a problemas del mundo real.
+
+\subsection*{¿Por qué son importantes las gráficas trigonométricas?}
+
+Las gráficas de las funciones trigonométricas aparecen constantemente en la ciencia y la tecnología:
+
+\begin{itemize}
+    \item \textbf{Ondas sonoras:} Cuando hablas, tu voz genera ondas que tienen forma de función seno. Los ingenieros de audio usan estas gráficas para procesar y mejorar el sonido.
+    \item \textbf{Señales eléctricas:} La corriente alterna (AC) que llega a tu casa tiene forma senoidal. Los electricistas deben entender estas gráficas para diseñar circuitos seguros y eficientes.
+    \item \textbf{Movimiento armónico simple:} Un péndulo oscilando, un resorte vibrando, o las ruedas de un carro girando, todos describen movimientos que se grafican con funciones trigonométricas.
+    \item \textbf{Mareas:} El nivel del mar sube y baja siguiendo un patrón cosenoidal. Los navegantes usan estas gráficas para predecir las mareas.
+    \item \textbf{Análisis de fenómenos periódicos:} Cualquier cosa que se repite en el tiempo (como el día y la noche, las estaciones del año, o los latidos del corazón) puede modelarse con funciones trigonométricas.
+    \item \textbf{Ingeniería de señales:} En telecomunicaciones, radio, televisión, WiFi, y celulares, todas las señales son combinaciones de ondas senoidales. Sin entender estas gráficas, no existiría la tecnología moderna.
+\end{itemize}
+
+\subsection*{¿Qué vamos a aprender?}
+
+En esta guía vamos a explorar las gráficas de las seis funciones trigonométricas:
+
+\begin{enumerate}
+    \item \textbf{Función seno} ($y = \sin(x)$): La onda más básica y fundamental
+    \item \textbf{Función coseno} ($y = \cos(x)$): El hermano gemelo del seno, desplazado en fase
+    \item \textbf{Función tangente} ($y = \tan(x)$): Con sus características asíntotas verticales
+    \item \textbf{Función cotangente} ($y = \cot(x)$): La tangente invertida
+    \item \textbf{Función secante} ($y = \sec(x)$): Con sus curvas en forma de U
+    \item \textbf{Función cosecante} ($y = \csc(x)$): El recíproco del seno
+\end{enumerate}
+
+Para cada función vamos a estudiar:
+\begin{itemize}
+    \item Su forma básica y características principales
+    \item Dominio y rango
+    \item Período (cada cuánto se repite)
+    \item Amplitud (qué tan alto/bajo llega)
+    \item Asíntotas (si existen)
+    \item Simetrías y propiedades especiales
+    \item Transformaciones (desplazamientos, estiramientos, reflexiones)
+\end{itemize}
+
+Prepárate para ver las funciones trigonométricas desde una nueva perspectiva. No solo son números y fórmulas, ¡son ondas, oscilaciones, y patrones visuales que describen el comportamiento del universo!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+Antes de graficar las funciones trigonométricas, necesitamos recordar algunos conceptos clave y establecer un vocabulario común. Esta sección te dará las herramientas necesarias para entender y analizar las gráficas que estudiaremos.
+
+\subsection{Repaso: Las Seis Funciones Trigonométricas}
+
+Recordemos las definiciones de las seis funciones trigonométricas en el círculo unitario. Para un ángulo $\theta$, si el punto correspondiente en el círculo unitario es $(x, y)$, entonces:
+
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Función} & \textbf{Definición} & \textbf{Valor en círculo unitario} \\
+\hline
+Seno & $\sin\theta = \dfrac{\text{cateto opuesto}}{\text{hipotenusa}}$ & $\sin\theta = y$ \\
+\hline
+Coseno & $\cos\theta = \dfrac{\text{cateto adyacente}}{\text{hipotenusa}}$ & $\cos\theta = x$ \\
+\hline
+Tangente & $\tan\theta = \dfrac{\text{cateto opuesto}}{\text{cateto adyacente}}$ & $\tan\theta = \dfrac{y}{x} = \dfrac{\sin\theta}{\cos\theta}$ \\
+\hline
+Cosecante & $\csc\theta = \dfrac{\text{hipotenusa}}{\text{cateto opuesto}}$ & $\csc\theta = \dfrac{1}{y} = \dfrac{1}{\sin\theta}$ \\
+\hline
+Secante & $\sec\theta = \dfrac{\text{hipotenusa}}{\text{cateto adyacente}}$ & $\sec\theta = \dfrac{1}{x} = \dfrac{1}{\cos\theta}$ \\
+\hline
+Cotangente & $\cot\theta = \dfrac{\text{cateto adyacente}}{\text{cateto opuesto}}$ & $\cot\theta = \dfrac{x}{y} = \dfrac{\cos\theta}{\sin\theta}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{nota}
+Cuando graficamos funciones trigonométricas, usualmente escribimos la variable independiente como $x$ (en lugar de $\theta$) y la variable dependiente como $y$. Así, en lugar de escribir $\sin\theta$, escribimos $y = \sin(x)$.
+\end{nota}
+
+\subsection{Ángulos en Radianes}
+
+Aunque hasta ahora hemos trabajado principalmente con grados, cuando graficamos funciones trigonométricas es más conveniente usar \textbf{radianes}. Un radián es la medida del ángulo que subtiende un arco de longitud igual al radio del círculo.
+
+\textbf{Conversión entre grados y radianes:}
+\[
+\boxed{180° = \pi \text{ radianes}}
+\]
+
+De aquí se obtiene:
+\[
+1° = \frac{\pi}{180} \text{ rad} \quad \text{y} \quad 1 \text{ rad} = \frac{180°}{\pi}
+\]
+
+\textbf{Ángulos importantes en radianes:}
+
+\begin{center}
+\begin{tabular}{|c|c||c|c|}
+\hline
+\textbf{Grados} & \textbf{Radianes} & \textbf{Grados} & \textbf{Radianes} \\
+\hline
+$0°$ & $0$ & $180°$ & $\pi$ \\
+\hline
+$30°$ & $\dfrac{\pi}{6}$ & $210°$ & $\dfrac{7\pi}{6}$ \\
+\hline
+$45°$ & $\dfrac{\pi}{4}$ & $225°$ & $\dfrac{5\pi}{4}$ \\
+\hline
+$60°$ & $\dfrac{\pi}{3}$ & $240°$ & $\dfrac{4\pi}{3}$ \\
+\hline
+$90°$ & $\dfrac{\pi}{2}$ & $270°$ & $\dfrac{3\pi}{2}$ \\
+\hline
+$120°$ & $\dfrac{2\pi}{3}$ & $300°$ & $\dfrac{5\pi}{3}$ \\
+\hline
+$135°$ & $\dfrac{3\pi}{4}$ & $315°$ & $\dfrac{7\pi}{4}$ \\
+\hline
+$150°$ & $\dfrac{5\pi}{6}$ & $360°$ & $2\pi$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{nota}
+De ahora en adelante, cuando grafiquemos funciones trigonométricas, usaremos radianes en el eje horizontal (eje $x$).
+\end{nota}
+
+\subsection{Periodicidad}
+
+Una función es \textbf{periódica} si sus valores se repiten a intervalos regulares. El intervalo más pequeño después del cual la función se repite se llama \textbf{período}.
+
+\textbf{Definición formal:} Una función $f$ es periódica con período $P$ si:
+\[
+f(x + P) = f(x) \quad \text{para todo } x
+\]
+
+Las funciones trigonométricas son todas periódicas:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Función} & \textbf{Período} \\
+\hline
+$y = \sin(x)$ & $2\pi$ \\
+\hline
+$y = \cos(x)$ & $2\pi$ \\
+\hline
+$y = \tan(x)$ & $\pi$ \\
+\hline
+$y = \cot(x)$ & $\pi$ \\
+\hline
+$y = \sec(x)$ & $2\pi$ \\
+\hline
+$y = \csc(x)$ & $2\pi$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Interpretación:} Por ejemplo, $\sin(x)$ tiene período $2\pi$ significa que:
+\[
+\sin(x + 2\pi) = \sin(x), \quad \sin(x + 4\pi) = \sin(x), \quad \sin(x + 6\pi) = \sin(x), \ldots
+\]
+
+En otras palabras, la gráfica se repite cada $2\pi$ unidades.
+
+\subsection{Amplitud}
+
+La \textbf{amplitud} de una función periódica es la mitad de la distancia entre su valor máximo y su valor mínimo. Es una medida de ``qué tan alto'' oscila la función.
+
+Para las funciones seno y coseno básicas:
+\[
+\text{Amplitud} = \frac{\text{máximo} - \text{mínimo}}{2}
+\]
+
+\textbf{Ejemplos:}
+\begin{itemize}
+    \item $y = \sin(x)$ tiene máximo $1$ y mínimo $-1$, entonces: Amplitud $= \dfrac{1-(-1)}{2} = 1$
+    \item $y = \cos(x)$ tiene máximo $1$ y mínimo $-1$, entonces: Amplitud $= 1$
+    \item $y = 3\sin(x)$ tiene máximo $3$ y mínimo $-3$, entonces: Amplitud $= 3$
+\end{itemize}
+
+\begin{nota}
+Las funciones tangente, cotangente, secante y cosecante no tienen amplitud definida porque sus valores se extienden desde $-\infty$ hasta $+\infty$.
+\end{nota}
+
+\subsection{Dominio y Rango}
+
+El \textbf{dominio} de una función es el conjunto de todos los valores de $x$ para los cuales la función está definida.
+
+El \textbf{rango} es el conjunto de todos los valores posibles de $y$ que la función puede tomar.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Función} & \textbf{Dominio} & \textbf{Rango} \\
+\hline
+$y = \sin(x)$ & $\mathbb{R}$ (todos los reales) & $[-1, 1]$ \\
+\hline
+$y = \cos(x)$ & $\mathbb{R}$ & $[-1, 1]$ \\
+\hline
+$y = \tan(x)$ & $x \neq \dfrac{\pi}{2} + n\pi, \, n \in \mathbb{Z}$ & $\mathbb{R}$ \\
+\hline
+$y = \cot(x)$ & $x \neq n\pi, \, n \in \mathbb{Z}$ & $\mathbb{R}$ \\
+\hline
+$y = \sec(x)$ & $x \neq \dfrac{\pi}{2} + n\pi, \, n \in \mathbb{Z}$ & $(-\infty, -1] \cup [1, \infty)$ \\
+\hline
+$y = \csc(x)$ & $x \neq n\pi, \, n \in \mathbb{Z}$ & $(-\infty, -1] \cup [1, \infty)$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Asíntotas}
+
+Una \textbf{asíntota vertical} es una recta vertical $x = a$ donde la función crece o decrece sin límite (tiende a $\pm\infty$) cuando $x$ se acerca a $a$.
+
+Las funciones tangente, cotangente, secante y cosecante tienen asíntotas verticales:
+
+\begin{itemize}
+    \item $y = \tan(x)$ tiene asíntotas en $x = \dfrac{\pi}{2} + n\pi$ para $n \in \mathbb{Z}$
+    \item $y = \cot(x)$ tiene asíntotas en $x = n\pi$ para $n \in \mathbb{Z}$
+    \item $y = \sec(x)$ tiene asíntotas en $x = \dfrac{\pi}{2} + n\pi$ para $n \in \mathbb{Z}$
+    \item $y = \csc(x)$ tiene asíntotas en $x = n\pi$ para $n \in \mathbb{Z}$
+\end{itemize}
+
+\textbf{¿Por qué existen estas asíntotas?}
+
+\begin{itemize}
+    \item $\tan(x) = \dfrac{\sin(x)}{\cos(x)}$ tiene asíntotas donde $\cos(x) = 0$ (división por cero)
+    \item $\cot(x) = \dfrac{\cos(x)}{\sin(x)}$ tiene asíntotas donde $\sin(x) = 0$
+    \item $\sec(x) = \dfrac{1}{\cos(x)}$ tiene asíntotas donde $\cos(x) = 0$
+    \item $\csc(x) = \dfrac{1}{\sin(x)}$ tiene asíntotas donde $\sin(x) = 0$
+\end{itemize}
+
+\subsection{Gráfica de la Función Seno: y = sen(x)}
+
+La función seno es la función trigonométrica más fundamental. Su gráfica tiene forma de onda y se repite infinitamente en ambas direcciones.
+
+\textbf{Propiedades principales:}
+\begin{itemize}
+    \item \textbf{Dominio:} $\mathbb{R}$ (todos los números reales)
+    \item \textbf{Rango:} $[-1, 1]$
+    \item \textbf{Período:} $2\pi$ (la onda se repite cada $2\pi$ radianes)
+    \item \textbf{Amplitud:} $1$
+    \item \textbf{Ceros:} $x = n\pi$ para $n \in \mathbb{Z}$ (es decir, $x = 0, \pm\pi, \pm2\pi, \pm3\pi, \ldots$)
+    \item \textbf{Máximos:} $y = 1$ cuando $x = \dfrac{\pi}{2} + 2n\pi$
+    \item \textbf{Mínimos:} $y = -1$ cuando $x = \dfrac{3\pi}{2} + 2n\pi$
+    \item \textbf{Función impar:} $\sin(-x) = -\sin(x)$ (simétrica respecto al origen)
+\end{itemize}
+
+\textbf{Valores importantes:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $0$ & $\dfrac{\pi}{6}$ & $\dfrac{\pi}{4}$ & $\dfrac{\pi}{3}$ & $\dfrac{\pi}{2}$ & $\pi$ & $\dfrac{3\pi}{2}$ & $2\pi$ \\
+\hline
+$\sin(x)$ & $0$ & $\dfrac{1}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{\sqrt{3}}{2}$ & $1$ & $0$ & $-1$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Gráfica de $y = \sin(x)$:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xlabel style={at={(axis description cs:1,0.5)},anchor=north},
+    ylabel style={at={(axis description cs:0.5,1)},anchor=south},
+    xmin=-6.5, xmax=6.5,
+    ymin=-1.5, ymax=1.5,
+    xtick={-6.28318, -4.7124, -3.14159, -1.5708, 0, 1.5708, 3.14159, 4.7124, 6.28318},
+    xticklabels={$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $-\frac{\pi}{2}$, $0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-1, -0.5, 0, 0.5, 1},
+    grid=major,
+    grid style={dashed, gray!30},
+    samples=200,
+    domain=-6.5:6.5,
+]
+\addplot[maincolor, very thick] {sin(deg(x))};
+\addplot[accentcolor, only marks, mark=*, mark size=2pt] coordinates {
+    (0,0) (1.5708,1) (3.14159,0) (4.7124,-1) (6.28318,0)
+    (-1.5708,-1) (-3.14159,0) (-4.7124,1) (-6.28318,0)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observaciones importantes:}
+\begin{enumerate}
+    \item La función oscila suavemente entre $-1$ y $1$
+    \item Cruza el eje $x$ en múltiplos de $\pi$
+    \item Alcanza su máximo ($1$) en $\dfrac{\pi}{2}, \dfrac{5\pi}{2}, \dfrac{9\pi}{2}, \ldots$
+    \item Alcanza su mínimo ($-1$) en $\dfrac{3\pi}{2}, \dfrac{7\pi}{2}, \dfrac{11\pi}{2}, \ldots$
+    \item La gráfica se repite exactamente cada $2\pi$ unidades
+\end{enumerate}
+
+\subsection{Gráfica de la Función Coseno: y = cos(x)}
+
+La función coseno es muy similar al seno, pero está desplazada horizontalmente. De hecho, $\cos(x) = \sin(x + \frac{\pi}{2})$.
+
+\textbf{Propiedades principales:}
+\begin{itemize}
+    \item \textbf{Dominio:} $\mathbb{R}$
+    \item \textbf{Rango:} $[-1, 1]$
+    \item \textbf{Período:} $2\pi$
+    \item \textbf{Amplitud:} $1$
+    \item \textbf{Ceros:} $x = \dfrac{\pi}{2} + n\pi$ para $n \in \mathbb{Z}$
+    \item \textbf{Máximos:} $y = 1$ cuando $x = 2n\pi$
+    \item \textbf{Mínimos:} $y = -1$ cuando $x = \pi + 2n\pi$
+    \item \textbf{Función par:} $\cos(-x) = \cos(x)$ (simétrica respecto al eje $y$)
+\end{itemize}
+
+\textbf{Valores importantes:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $0$ & $\dfrac{\pi}{6}$ & $\dfrac{\pi}{4}$ & $\dfrac{\pi}{3}$ & $\dfrac{\pi}{2}$ & $\pi$ & $\dfrac{3\pi}{2}$ & $2\pi$ \\
+\hline
+$\cos(x)$ & $1$ & $\dfrac{\sqrt{3}}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{1}{2}$ & $0$ & $-1$ & $0$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Gráfica de $y = \cos(x)$:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=6cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xlabel style={at={(axis description cs:1,0.5)},anchor=north},
+    ylabel style={at={(axis description cs:0.5,1)},anchor=south},
+    xmin=-6.5, xmax=6.5,
+    ymin=-1.5, ymax=1.5,
+    xtick={-6.28318, -4.7124, -3.14159, -1.5708, 0, 1.5708, 3.14159, 4.7124, 6.28318},
+    xticklabels={$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $-\frac{\pi}{2}$, $0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-1, -0.5, 0, 0.5, 1},
+    grid=major,
+    grid style={dashed, gray!30},
+    samples=200,
+    domain=-6.5:6.5,
+]
+\addplot[maincolor, very thick] {cos(deg(x))};
+\addplot[accentcolor, only marks, mark=*, mark size=2pt] coordinates {
+    (0,1) (1.5708,0) (3.14159,-1) (4.7124,0) (6.28318,1)
+    (-1.5708,0) (-3.14159,-1) (-4.7124,0) (-6.28318,1)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Comparación entre seno y coseno:}
+\begin{itemize}
+    \item Ambas tienen la misma forma de onda
+    \item El coseno está desplazado $\dfrac{\pi}{2}$ radianes a la izquierda del seno
+    \item El coseno comienza en su máximo ($1$) cuando $x = 0$
+    \item El seno comienza en cero cuando $x = 0$
+    \item Relación: $\cos(x) = \sin\left(x + \dfrac{\pi}{2}\right)$ y $\sin(x) = \cos\left(x - \dfrac{\pi}{2}\right)$
+\end{itemize}
+
+\subsection{Gráfica de la Función Tangente: y = tan(x)}
+
+La función tangente tiene un comportamiento muy diferente al seno y coseno. En lugar de oscilar entre valores fijos, la tangente crece sin límite cerca de sus asíntotas.
+
+\textbf{Propiedades principales:}
+\begin{itemize}
+    \item \textbf{Dominio:} $\mathbb{R} - \left\{\dfrac{\pi}{2} + n\pi : n \in \mathbb{Z}\right\}$ (todos los reales excepto $\pm\dfrac{\pi}{2}, \pm\dfrac{3\pi}{2}, \ldots$)
+    \item \textbf{Rango:} $\mathbb{R}$ (todos los números reales)
+    \item \textbf{Período:} $\pi$ (más corto que seno y coseno)
+    \item \textbf{Amplitud:} No definida (la función crece sin límite)
+    \item \textbf{Ceros:} $x = n\pi$ para $n \in \mathbb{Z}$
+    \item \textbf{Asíntotas verticales:} $x = \dfrac{\pi}{2} + n\pi$ para $n \in \mathbb{Z}$
+    \item \textbf{Función impar:} $\tan(-x) = -\tan(x)$
+\end{itemize}
+
+\textbf{Valores importantes:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $0$ & $\dfrac{\pi}{6}$ & $\dfrac{\pi}{4}$ & $\dfrac{\pi}{3}$ & $\pi$ & $-\dfrac{\pi}{4}$ & $-\dfrac{\pi}{3}$ \\
+\hline
+$\tan(x)$ & $0$ & $\dfrac{\sqrt{3}}{3}$ & $1$ & $\sqrt{3}$ & $0$ & $-1$ & $-\sqrt{3}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Gráfica de $y = \tan(x)$:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xlabel style={at={(axis description cs:1,0.5)},anchor=north},
+    ylabel style={at={(axis description cs:0.5,1)},anchor=south},
+    xmin=-5, xmax=5,
+    ymin=-5, ymax=5,
+    xtick={-4.7124, -3.14159, -1.5708, 0, 1.5708, 3.14159, 4.7124},
+    xticklabels={$-\frac{3\pi}{2}$, $-\pi$, $-\frac{\pi}{2}$, $0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$},
+    ytick={-4, -2, 0, 2, 4},
+    grid=major,
+    grid style={dashed, gray!30},
+    samples=200,
+    restrict y to domain=-10:10,
+]
+\addplot[maincolor, very thick, domain=-1.4:1.4] {tan(deg(x))};
+\addplot[maincolor, very thick, domain=1.75:4.55] {tan(deg(x))};
+\addplot[maincolor, very thick, domain=-4.55:-1.75] {tan(deg(x))};
+% Asíntotas
+\addplot[red, dashed, thick] coordinates {(1.5708,-10) (1.5708,10)};
+\addplot[red, dashed, thick] coordinates {(-1.5708,-10) (-1.5708,10)};
+\addplot[red, dashed, thick] coordinates {(4.7124,-10) (4.7124,10)};
+\addplot[red, dashed, thick] coordinates {(-4.7124,-10) (-4.7124,10)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observaciones importantes:}
+\begin{enumerate}
+    \item La función tiene asíntotas verticales en $x = \pm\dfrac{\pi}{2}, \pm\dfrac{3\pi}{2}, \ldots$
+    \item Entre cada par de asíntotas, la función crece continuamente de $-\infty$ a $+\infty$
+    \item El período es $\pi$ (la mitad del período de seno y coseno)
+    \item Cruza el eje $x$ en los mismos puntos que el seno: $x = 0, \pm\pi, \pm2\pi, \ldots$
+    \item Es creciente en todo su dominio (dentro de cada intervalo entre asíntotas)
+\end{enumerate}
+
+\subsection{Gráfica de la Función Cotangente: y = cot(x)}
+
+La cotangente es el recíproco de la tangente: $\cot(x) = \dfrac{1}{\tan(x)} = \dfrac{\cos(x)}{\sin(x)}$.
+
+\textbf{Propiedades principales:}
+\begin{itemize}
+    \item \textbf{Dominio:} $\mathbb{R} - \{n\pi : n \in \mathbb{Z}\}$ (todos los reales excepto $0, \pm\pi, \pm2\pi, \ldots$)
+    \item \textbf{Rango:} $\mathbb{R}$
+    \item \textbf{Período:} $\pi$
+    \item \textbf{Amplitud:} No definida
+    \item \textbf{Ceros:} $x = \dfrac{\pi}{2} + n\pi$ para $n \in \mathbb{Z}$
+    \item \textbf{Asíntotas verticales:} $x = n\pi$ para $n \in \mathbb{Z}$
+    \item \textbf{Función impar:} $\cot(-x) = -\cot(x)$
+\end{itemize}
+
+\textbf{Gráfica de $y = \cot(x)$:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xlabel style={at={(axis description cs:1,0.5)},anchor=north},
+    ylabel style={at={(axis description cs:0.5,1)},anchor=south},
+    xmin=-5, xmax=5,
+    ymin=-5, ymax=5,
+    xtick={-3.14159, -1.5708, 0, 1.5708, 3.14159},
+    xticklabels={$-\pi$, $-\frac{\pi}{2}$, $0$, $\frac{\pi}{2}$, $\pi$},
+    ytick={-4, -2, 0, 2, 4},
+    grid=major,
+    grid style={dashed, gray!30},
+    samples=200,
+    restrict y to domain=-10:10,
+]
+\addplot[maincolor, very thick, domain=0.2:3.04] {cot(deg(x))};
+\addplot[maincolor, very thick, domain=3.24:6.18] {cot(deg(x))};
+\addplot[maincolor, very thick, domain=-3.04:-0.2] {cot(deg(x))};
+% Asíntotas
+\addplot[red, dashed, thick] coordinates {(0,-10) (0,10)};
+\addplot[red, dashed, thick] coordinates {(3.14159,-10) (3.14159,10)};
+\addplot[red, dashed, thick] coordinates {(-3.14159,-10) (-3.14159,10)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Diferencias entre tangente y cotangente:}
+\begin{itemize}
+    \item La tangente es creciente, la cotangente es decreciente
+    \item Sus asíntotas están en lugares diferentes
+    \item La tangente pasa por el origen, la cotangente tiene una asíntota en el origen
+\end{itemize}
+
+\subsection{Gráfica de la Función Secante: y = sec(x)}
+
+La secante es el recíproco del coseno: $\sec(x) = \dfrac{1}{\cos(x)}$.
+
+\textbf{Propiedades principales:}
+\begin{itemize}
+    \item \textbf{Dominio:} $\mathbb{R} - \left\{\dfrac{\pi}{2} + n\pi : n \in \mathbb{Z}\right\}$
+    \item \textbf{Rango:} $(-\infty, -1] \cup [1, \infty)$ (nunca está entre $-1$ y $1$)
+    \item \textbf{Período:} $2\pi$
+    \item \textbf{Amplitud:} No definida
+    \item \textbf{Asíntotas verticales:} $x = \dfrac{\pi}{2} + n\pi$ para $n \in \mathbb{Z}$
+    \item \textbf{Función par:} $\sec(-x) = \sec(x)$
+\end{itemize}
+
+\textbf{Gráfica de $y = \sec(x)$ junto con $y = \cos(x)$:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xlabel style={at={(axis description cs:1,0.5)},anchor=north},
+    ylabel style={at={(axis description cs:0.5,1)},anchor=south},
+    xmin=-6.5, xmax=6.5,
+    ymin=-4, ymax=4,
+    xtick={-6.28318, -4.7124, -3.14159, -1.5708, 0, 1.5708, 3.14159, 4.7124, 6.28318},
+    xticklabels={$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $-\frac{\pi}{2}$, $0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-3, -2, -1, 0, 1, 2, 3},
+    grid=major,
+    grid style={dashed, gray!30},
+    samples=200,
+    restrict y to domain=-10:10,
+    legend pos=north east,
+]
+% Coseno (para referencia)
+\addplot[blue!50, dashed, thick] {cos(deg(x))};
+% Secante
+\addplot[maincolor, very thick, domain=-1.4:1.4] {1/cos(deg(x))};
+\addplot[maincolor, very thick, domain=1.75:4.55] {1/cos(deg(x))};
+\addplot[maincolor, very thick, domain=4.85:7.8] {1/cos(deg(x))};
+\addplot[maincolor, very thick, domain=-4.55:-1.75] {1/cos(deg(x))};
+\addplot[maincolor, very thick, domain=-7.8:-4.85] {1/cos(deg(x))};
+% Asíntotas
+\addplot[red, dashed, thick] coordinates {(1.5708,-10) (1.5708,10)};
+\addplot[red, dashed, thick] coordinates {(-1.5708,-10) (-1.5708,10)};
+\addplot[red, dashed, thick] coordinates {(4.7124,-10) (4.7124,10)};
+\addplot[red, dashed, thick] coordinates {(-4.7124,-10) (-4.7124,10)};
+\legend{$y=\cos(x)$, $y=\sec(x)$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observaciones importantes:}
+\begin{enumerate}
+    \item La secante tiene forma de ``U'' invertida y normal, alternadas
+    \item Tiene asíntotas exactamente donde el coseno es cero
+    \item Cuando $|\cos(x)|$ es pequeño, $|\sec(x)|$ es grande
+    \item Los valores mínimos locales de secante son $1$ y los máximos locales son $-1$
+    \item La secante nunca toma valores entre $-1$ y $1$
+\end{enumerate}
+
+\subsection{Gráfica de la Función Cosecante: y = csc(x)}
+
+La cosecante es el recíproco del seno: $\csc(x) = \dfrac{1}{\sin(x)}$.
+
+\textbf{Propiedades principales:}
+\begin{itemize}
+    \item \textbf{Dominio:} $\mathbb{R} - \{n\pi : n \in \mathbb{Z}\}$
+    \item \textbf{Rango:} $(-\infty, -1] \cup [1, \infty)$
+    \item \textbf{Período:} $2\pi$
+    \item \textbf{Amplitud:} No definida
+    \item \textbf{Asíntotas verticales:} $x = n\pi$ para $n \in \mathbb{Z}$
+    \item \textbf{Función impar:} $\csc(-x) = -\csc(x)$
+\end{itemize}
+
+\textbf{Gráfica de $y = \csc(x)$ junto con $y = \sin(x)$:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xlabel style={at={(axis description cs:1,0.5)},anchor=north},
+    ylabel style={at={(axis description cs:0.5,1)},anchor=south},
+    xmin=-6.5, xmax=6.5,
+    ymin=-4, ymax=4,
+    xtick={-6.28318, -4.7124, -3.14159, -1.5708, 0, 1.5708, 3.14159, 4.7124, 6.28318},
+    xticklabels={$-2\pi$, $-\frac{3\pi}{2}$, $-\pi$, $-\frac{\pi}{2}$, $0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-3, -2, -1, 0, 1, 2, 3},
+    grid=major,
+    grid style={dashed, gray!30},
+    samples=200,
+    restrict y to domain=-10:10,
+    legend pos=north east,
+]
+% Seno (para referencia)
+\addplot[blue!50, dashed, thick] {sin(deg(x))};
+% Cosecante
+\addplot[maincolor, very thick, domain=0.3:2.84] {1/sin(deg(x))};
+\addplot[maincolor, very thick, domain=3.44:6.0] {1/sin(deg(x))};
+\addplot[maincolor, very thick, domain=-2.84:-0.3] {1/sin(deg(x))};
+\addplot[maincolor, very thick, domain=-6.0:-3.44] {1/sin(deg(x))};
+% Asíntotas
+\addplot[red, dashed, thick] coordinates {(0,-10) (0,10)};
+\addplot[red, dashed, thick] coordinates {(3.14159,-10) (3.14159,10)};
+\addplot[red, dashed, thick] coordinates {(-3.14159,-10) (-3.14159,10)};
+\addplot[red, dashed, thick] coordinates {(6.28318,-10) (6.28318,10)};
+\addplot[red, dashed, thick] coordinates {(-6.28318,-10) (-6.28318,10)};
+\legend{$y=\sin(x)$, $y=\csc(x)$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observaciones importantes:}
+\begin{enumerate}
+    \item La cosecante tiene forma similar a la secante, pero desplazada
+    \item Tiene asíntotas exactamente donde el seno es cero
+    \item Los puntos donde $|\sin(x)| = 1$ corresponden a puntos donde $|\csc(x)| = 1$
+    \item Como el seno, la cosecante es una función impar
+\end{enumerate}
+
+\newpage
+
+\section{Ejemplos Resueltos}
+
+Ahora vamos a ver cómo graficar las seis funciones trigonométricas. Cada ejemplo incluye una construcción detallada de la gráfica paso a paso, para que entiendas no solo cómo se ve, sino también por qué se ve así.
+
+\begin{ejemplo}[title=Ejemplo 1: Graficar la funcion seno]
+Grafica la función $y = \sin(x)$ en el intervalo $[0°, 360°]$ e identifica sus características principales.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Construir una tabla de valores para ángulos especiales.
+
+Vamos a usar los ángulos especiales que conocemos: $0°, 30°, 45°, 60°, 90°, 120°, 135°, 150°, 180°$, etc.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $0°$ & $30°$ & $60°$ & $90°$ & $120°$ & $150°$ & $180°$ & $210°$ & $240°$ \\
+\hline
+$\sin(x)$ & $0$ & $0.5$ & $0.87$ & $1$ & $0.87$ & $0.5$ & $0$ & $-0.5$ & $-0.87$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$x$ & $270°$ & $300°$ & $330°$ & $360°$ \\
+\hline
+$\sin(x)$ & $-1$ & $-0.87$ & $-0.5$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 2:} Analizar el comportamiento de la función.
+
+\begin{itemize}
+    \item La función \textbf{comienza en 0} cuando $x = 0°$
+    \item \textbf{Crece} hasta alcanzar el máximo valor de 1 en $x = 90°$
+    \item \textbf{Decrece} volviendo a 0 en $x = 180°$
+    \item \textbf{Continúa decreciendo} hasta el mínimo valor de $-1$ en $x = 270°$
+    \item \textbf{Regresa a 0} cuando $x = 360°$
+\end{itemize}
+
+\textbf{Paso 3:} Trazar la gráfica.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=6cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-1.5, ymax=1.5,
+    xtick={0,30,60,90,120,150,180,210,240,270,300,330,360},
+    xticklabels={$0°$,$30°$,$60°$,$90°$,$120°$,$150°$,$180°$,$210°$,$240°$,$270°$,$300°$,$330°$,$360°$},
+    xticklabel style={font=\tiny},
+    ytick={-1,-0.5,0,0.5,1},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+]
+    % Gráfica de seno
+    \addplot[
+        domain=0:360,
+        samples=200,
+        smooth,
+        thick,
+        color=blue,
+    ] {sin(x)};
+    \legend{$y = \sin(x)$}
+
+    % Puntos importantes
+    \addplot[only marks, mark=*, mark size=2pt, color=red] coordinates {
+        (0,0) (90,1) (180,0) (270,-1) (360,0)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 4:} Identificar las características.
+
+\begin{itemize}
+    \item \textbf{Dominio:} Todos los números reales (en este caso, todos los ángulos)
+    \item \textbf{Rango:} $[-1, 1]$
+    \item \textbf{Período:} $360°$ (la función se repite cada $360°$)
+    \item \textbf{Amplitud:} 1 (distancia del centro a un máximo o mínimo)
+    \item \textbf{Máximos:} En $x = 90°, 450°, 810°,\ldots$ (cada $90° + 360°k$)
+    \item \textbf{Mínimos:} En $x = 270°, 630°, 990°,\ldots$ (cada $270° + 360°k$)
+    \item \textbf{Ceros:} En $x = 0°, 180°, 360°, 540°,\ldots$ (cada $180°k$)
+    \item \textbf{Simetría:} Impar (simétrica respecto al origen)
+\end{itemize}
+
+\textbf{Respuesta:} La gráfica muestra el comportamiento ondulatorio característico de la función seno, con oscilaciones suaves entre $-1$ y $1$.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 2: Graficar la funcion coseno]
+Grafica la función $y = \cos(x)$ en el intervalo $[0°, 360°]$ y compárala con la función seno.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Construir tabla de valores.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $0°$ & $30°$ & $60°$ & $90°$ & $120°$ & $150°$ & $180°$ & $210°$ & $240°$ \\
+\hline
+$\cos(x)$ & $1$ & $0.87$ & $0.5$ & $0$ & $-0.5$ & $-0.87$ & $-1$ & $-0.87$ & $-0.5$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$x$ & $270°$ & $300°$ & $330°$ & $360°$ \\
+\hline
+$\cos(x)$ & $0$ & $0.5$ & $0.87$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 2:} Analizar el comportamiento.
+
+\begin{itemize}
+    \item La función \textbf{comienza en su máximo} valor de 1 cuando $x = 0°$
+    \item \textbf{Decrece} hasta llegar a 0 en $x = 90°$
+    \item \textbf{Continúa decreciendo} hasta el mínimo de $-1$ en $x = 180°$
+    \item \textbf{Crece} nuevamente hasta 0 en $x = 270°$
+    \item \textbf{Regresa al máximo} de 1 cuando $x = 360°$
+\end{itemize}
+
+\textbf{Paso 3:} Trazar la gráfica.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=6cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-1.5, ymax=1.5,
+    xtick={0,30,60,90,120,150,180,210,240,270,300,330,360},
+    xticklabels={$0°$,$30°$,$60°$,$90°$,$120°$,$150°$,$180°$,$210°$,$240°$,$270°$,$300°$,$330°$,$360°$},
+    xticklabel style={font=\tiny},
+    ytick={-1,-0.5,0,0.5,1},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+]
+    % Gráfica de coseno
+    \addplot[
+        domain=0:360,
+        samples=200,
+        smooth,
+        thick,
+        color=green!60!black,
+    ] {cos(x)};
+    \legend{$y = \cos(x)$}
+
+    % Puntos importantes
+    \addplot[only marks, mark=*, mark size=2pt, color=red] coordinates {
+        (0,1) (90,0) (180,-1) (270,0) (360,1)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 4:} Identificar características.
+
+\begin{itemize}
+    \item \textbf{Dominio:} Todos los números reales
+    \item \textbf{Rango:} $[-1, 1]$
+    \item \textbf{Período:} $360°$
+    \item \textbf{Amplitud:} 1
+    \item \textbf{Máximos:} En $x = 0°, 360°, 720°,\ldots$ (cada $360°k$)
+    \item \textbf{Mínimos:} En $x = 180°, 540°, 900°,\ldots$ (cada $180° + 360°k$)
+    \item \textbf{Ceros:} En $x = 90°, 270°, 450°,\ldots$ (cada $90° + 180°k$)
+    \item \textbf{Simetría:} Par (simétrica respecto al eje y)
+\end{itemize}
+
+\textbf{Paso 5:} Comparación con la función seno.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=6cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-1.5, ymax=1.5,
+    xtick={0,90,180,270,360},
+    xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$},
+    ytick={-1,-0.5,0,0.5,1},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+]
+    % Seno
+    \addplot[
+        domain=0:360,
+        samples=200,
+        smooth,
+        thick,
+        color=blue,
+    ] {sin(x)};
+
+    % Coseno
+    \addplot[
+        domain=0:360,
+        samples=200,
+        smooth,
+        thick,
+        color=green!60!black,
+        dashed,
+    ] {cos(x)};
+
+    \legend{$y = \sin(x)$, $y = \cos(x)$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación clave:} La gráfica del coseno es idéntica a la del seno, pero \textbf{desplazada $90°$ hacia la izquierda}. De hecho, se cumple que: $\cos(x) = \sin(x + 90°)$
+
+\textbf{Respuesta:} La función coseno tiene la misma forma ondulante que la función seno, pero comienza en su valor máximo.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 3: Graficar la funcion tangente]
+Grafica la función $y = \tan(x)$ en el intervalo $[0°, 360°]$ e identifica las asíntotas verticales.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Recordar la definición.
+
+La tangente se define como:
+\[
+\tan(x) = \frac{\sin(x)}{\cos(x)}
+\]
+
+Esto significa que la tangente \textbf{no está definida} cuando $\cos(x) = 0$, es decir, en $x = 90°, 270°, 450°,\ldots$
+
+\textbf{Paso 2:} Construir tabla de valores (evitando los puntos donde no está definida).
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $0°$ & $30°$ & $45°$ & $60°$ & $120°$ & $135°$ & $150°$ \\
+\hline
+$\tan(x)$ & $0$ & $0.58$ & $1$ & $1.73$ & $-1.73$ & $-1$ & $-0.58$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$x$ & $180°$ & $210°$ & $225°$ & $240°$ & $300°$ & $360°$ \\
+\hline
+$\tan(x)$ & $0$ & $0.58$ & $1$ & $1.73$ & $-1.73$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 3:} Identificar las asíntotas verticales.
+
+La función tiene asíntotas verticales (líneas que la función se acerca pero nunca toca) en:
+\[
+x = 90°, \quad x = 270°
+\]
+
+\textbf{Paso 4:} Trazar la gráfica.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-5, ymax=5,
+    xtick={0,45,90,135,180,225,270,315,360},
+    xticklabels={$0°$,$45°$,$90°$,$135°$,$180°$,$225°$,$270°$,$315°$,$360°$},
+    xticklabel style={font=\tiny},
+    ytick={-4,-2,0,2,4},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+    restrict y to domain=-6:6,
+]
+    % Asíntotas verticales
+    \addplot[dashed, gray, thick, samples=2] coordinates {(90,-5) (90,5)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(270,-5) (270,5)};
+
+    % Gráfica de tangente
+    \addplot[
+        domain=0:89,
+        samples=100,
+        smooth,
+        thick,
+        color=orange,
+    ] {tan(x)};
+
+    \addplot[
+        domain=91:269,
+        samples=100,
+        smooth,
+        thick,
+        color=orange,
+    ] {tan(x)};
+
+    \addplot[
+        domain=271:360,
+        samples=100,
+        smooth,
+        thick,
+        color=orange,
+    ] {tan(x)};
+
+    \legend{$y = \tan(x)$}
+
+    % Puntos importantes
+    \addplot[only marks, mark=*, mark size=2pt, color=red] coordinates {
+        (0,0) (45,1) (180,0) (225,1) (360,0)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 5:} Identificar características.
+
+\begin{itemize}
+    \item \textbf{Dominio:} Todos los reales excepto $x = 90° + 180°k$ (donde $k$ es un entero)
+    \item \textbf{Rango:} Todos los números reales $(-\infty, \infty)$
+    \item \textbf{Período:} $180°$ (¡la mitad que seno y coseno!)
+    \item \textbf{Asíntotas verticales:} En $x = 90°, 270°, 450°,\ldots$
+    \item \textbf{Ceros:} En $x = 0°, 180°, 360°,\ldots$ (cada $180°k$)
+    \item \textbf{Simetría:} Impar (simétrica respecto al origen)
+    \item \textbf{Comportamiento:} Crece sin límite al acercarse a las asíntotas
+\end{itemize}
+
+\textbf{Verificación:} Comprobemos algunos valores:
+\begin{align*}
+\tan(0°) &= \frac{\sin(0°)}{\cos(0°)} = \frac{0}{1} = 0 \quad \checkmark \\
+\tan(45°) &= \frac{\sin(45°)}{\cos(45°)} = \frac{\sqrt{2}/2}{\sqrt{2}/2} = 1 \quad \checkmark \\
+\tan(90°) &= \frac{\sin(90°)}{\cos(90°)} = \frac{1}{0} = \text{indefinido} \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} La función tangente tiene un comportamiento periódico con asíntotas verticales y crece indefinidamente entre ellas.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 4: Graficar la funcion cotangente]
+Grafica la función $y = \cot(x)$ en el intervalo $[0°, 360°]$ y compárala con la tangente.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Recordar la definición.
+
+La cotangente es la recíproca de la tangente:
+\[
+\cot(x) = \frac{1}{\tan(x)} = \frac{\cos(x)}{\sin(x)}
+\]
+
+Por lo tanto, \textbf{no está definida} cuando $\sin(x) = 0$, es decir, en $x = 0°, 180°, 360°,\ldots$
+
+\textbf{Paso 2:} Construir tabla de valores.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $30°$ & $45°$ & $60°$ & $90°$ & $120°$ & $135°$ & $150°$ \\
+\hline
+$\cot(x)$ & $1.73$ & $1$ & $0.58$ & $0$ & $-0.58$ & $-1$ & $-1.73$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$x$ & $210°$ & $225°$ & $240°$ & $270°$ & $300°$ \\
+\hline
+$\cot(x)$ & $1.73$ & $1$ & $0.58$ & $0$ & $-0.58$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 3:} Identificar las asíntotas verticales.
+
+Las asíntotas verticales están en:
+\[
+x = 0°, \quad x = 180°, \quad x = 360°
+\]
+
+\textbf{Paso 4:} Trazar la gráfica.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-5, ymax=5,
+    xtick={0,45,90,135,180,225,270,315,360},
+    xticklabels={$0°$,$45°$,$90°$,$135°$,$180°$,$225°$,$270°$,$315°$,$360°$},
+    xticklabel style={font=\tiny},
+    ytick={-4,-2,0,2,4},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+    restrict y to domain=-6:6,
+]
+    % Asíntotas verticales
+    \addplot[dashed, gray, thick, samples=2] coordinates {(0,-5) (0,5)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(180,-5) (180,5)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(360,-5) (360,5)};
+
+    % Gráfica de cotangente
+    \addplot[
+        domain=1:179,
+        samples=100,
+        smooth,
+        thick,
+        color=purple,
+    ] {cot(x)};
+
+    \addplot[
+        domain=181:359,
+        samples=100,
+        smooth,
+        thick,
+        color=purple,
+    ] {cot(x)};
+
+    \legend{$y = \cot(x)$}
+
+    % Puntos importantes
+    \addplot[only marks, mark=*, mark size=2pt, color=red] coordinates {
+        (45,1) (90,0) (135,-1) (225,1) (270,0) (315,-1)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 5:} Identificar características.
+
+\begin{itemize}
+    \item \textbf{Dominio:} Todos los reales excepto $x = 180°k$ (donde $k$ es un entero)
+    \item \textbf{Rango:} Todos los números reales $(-\infty, \infty)$
+    \item \textbf{Período:} $180°$
+    \item \textbf{Asíntotas verticales:} En $x = 0°, 180°, 360°,\ldots$
+    \item \textbf{Ceros:} En $x = 90°, 270°, 450°,\ldots$ (cada $90° + 180°k$)
+    \item \textbf{Simetría:} Impar (simétrica respecto al origen)
+    \item \textbf{Comportamiento:} Decrece desde $+\infty$ hasta $-\infty$ en cada período
+\end{itemize}
+
+\textbf{Paso 6:} Comparación con la tangente.
+
+\begin{nota}
+Observa que la cotangente es como una "reflexión" de la tangente:
+\begin{itemize}
+    \item Donde la tangente es cero, la cotangente tiene asíntotas
+    \item Donde la tangente tiene asíntotas, la cotangente es cero
+    \item La tangente crece; la cotangente decrece
+\end{itemize}
+\end{nota}
+
+\textbf{Respuesta:} La función cotangente decrece continuamente en cada intervalo entre asíntotas, comportándose como la función recíproca de la tangente.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 5: Graficar la funcion secante]
+Grafica la función $y = \sec(x)$ en el intervalo $[0°, 360°]$ junto con $y = \cos(x)$ para visualizar su relación.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Recordar la definición.
+
+La secante es la recíproca del coseno:
+\[
+\sec(x) = \frac{1}{\cos(x)}
+\]
+
+Por lo tanto, \textbf{no está definida} cuando $\cos(x) = 0$, es decir, en $x = 90°, 270°,\ldots$
+
+\textbf{Paso 2:} Analizar el comportamiento.
+
+\begin{itemize}
+    \item Cuando $\cos(x) = 1$, entonces $\sec(x) = 1$
+    \item Cuando $\cos(x) = -1$, entonces $\sec(x) = -1$
+    \item Cuando $\cos(x) \to 0^+$, entonces $\sec(x) \to +\infty$
+    \item Cuando $\cos(x) \to 0^-$, entonces $\sec(x) \to -\infty$
+    \item Cuando $|\cos(x)| < 1$, entonces $|\sec(x)| > 1$
+\end{itemize}
+
+\textbf{Paso 3:} Construir tabla de valores.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $0°$ & $30°$ & $45°$ & $60°$ & $120°$ & $135°$ & $150°$ \\
+\hline
+$\sec(x)$ & $1$ & $1.15$ & $1.41$ & $2$ & $-2$ & $-1.41$ & $-1.15$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 4:} Trazar la gráfica junto con el coseno.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-4, ymax=4,
+    xtick={0,45,90,135,180,225,270,315,360},
+    xticklabels={$0°$,$45°$,$90°$,$135°$,$180°$,$225°$,$270°$,$315°$,$360°$},
+    xticklabel style={font=\tiny},
+    ytick={-3,-2,-1,0,1,2,3},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+    restrict y to domain=-5:5,
+]
+    % Asíntotas verticales
+    \addplot[dashed, gray, thick, samples=2] coordinates {(90,-4) (90,4)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(270,-4) (270,4)};
+
+    % Gráfica de coseno (para referencia)
+    \addplot[
+        domain=0:360,
+        samples=200,
+        smooth,
+        thin,
+        color=green!60!black,
+        opacity=0.4,
+    ] {cos(x)};
+
+    % Gráfica de secante
+    \addplot[
+        domain=0:88,
+        samples=100,
+        smooth,
+        thick,
+        color=red,
+    ] {1/cos(x)};
+
+    \addplot[
+        domain=92:268,
+        samples=100,
+        smooth,
+        thick,
+        color=red,
+    ] {1/cos(x)};
+
+    \addplot[
+        domain=272:360,
+        samples=100,
+        smooth,
+        thick,
+        color=red,
+    ] {1/cos(x)};
+
+    \legend{$y = \cos(x)$, $y = \sec(x)$}
+
+    % Puntos importantes
+    \addplot[only marks, mark=*, mark size=2pt, color=blue] coordinates {
+        (0,1) (180,-1) (360,1)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 5:} Identificar características.
+
+\begin{itemize}
+    \item \textbf{Dominio:} Todos los reales excepto $x = 90° + 180°k$
+    \item \textbf{Rango:} $(-\infty, -1] \cup [1, \infty)$ (¡nunca toma valores entre $-1$ y $1$!)
+    \item \textbf{Período:} $360°$
+    \item \textbf{Asíntotas verticales:} En $x = 90°, 270°, 450°,\ldots$
+    \item \textbf{Valores extremos:} Mínimo de 1 en $x = 0°, 360°$; máximo de $-1$ en $x = 180°$
+    \item \textbf{Simetría:} Par (simétrica respecto al eje y)
+\end{itemize}
+
+\textbf{Paso 6:} Relación con el coseno.
+
+\begin{nota}
+Observaciones importantes:
+\begin{itemize}
+    \item La gráfica de la secante \textbf{toca} la gráfica del coseno solo en los puntos donde $\cos(x) = \pm 1$
+    \item Entre esos puntos, la secante forma "ramas" en forma de U (o U invertida)
+    \item La secante está siempre \textbf{por encima} o \textbf{por debajo} del coseno, nunca entre $-1$ y $1$
+\end{itemize}
+\end{nota}
+
+\textbf{Verificación:}
+\begin{align*}
+\sec(0°) &= \frac{1}{\cos(0°)} = \frac{1}{1} = 1 \quad \checkmark \\
+\sec(60°) &= \frac{1}{\cos(60°)} = \frac{1}{1/2} = 2 \quad \checkmark \\
+\sec(180°) &= \frac{1}{\cos(180°)} = \frac{1}{-1} = -1 \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} La función secante forma ramas parabólicas que se alejan de la función coseno, con asíntotas donde el coseno se anula.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 6: Graficar la funcion cosecante]
+Grafica la función $y = \csc(x)$ en el intervalo $[0°, 360°]$ junto con $y = \sin(x)$ para entender su comportamiento.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Recordar la definición.
+
+La cosecante es la recíproca del seno:
+\[
+\csc(x) = \frac{1}{\sin(x)}
+\]
+
+Por lo tanto, \textbf{no está definida} cuando $\sin(x) = 0$, es decir, en $x = 0°, 180°, 360°,\ldots$
+
+\textbf{Paso 2:} Analizar el comportamiento.
+
+Similar a la secante con el coseno, la cosecante tiene una relación especial con el seno:
+
+\begin{itemize}
+    \item Cuando $\sin(x) = 1$, entonces $\csc(x) = 1$
+    \item Cuando $\sin(x) = -1$, entonces $\csc(x) = -1$
+    \item Cuando $\sin(x) \to 0^+$, entonces $\csc(x) \to +\infty$
+    \item Cuando $\sin(x) \to 0^-$, entonces $\csc(x) \to -\infty$
+    \item Cuando $|\sin(x)| < 1$, entonces $|\csc(x)| > 1$
+\end{itemize}
+
+\textbf{Paso 3:} Construir tabla de valores.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $30°$ & $45°$ & $60°$ & $90°$ & $120°$ & $135°$ & $150°$ \\
+\hline
+$\csc(x)$ & $2$ & $1.41$ & $1.15$ & $1$ & $1.15$ & $1.41$ & $2$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$x$ & $210°$ & $225°$ & $240°$ & $270°$ & $300°$ \\
+\hline
+$\csc(x)$ & $-2$ & $-1.41$ & $-1.15$ & $-1$ & $-1.15$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 4:} Trazar la gráfica junto con el seno.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-4, ymax=4,
+    xtick={0,45,90,135,180,225,270,315,360},
+    xticklabels={$0°$,$45°$,$90°$,$135°$,$180°$,$225°$,$270°$,$315°$,$360°$},
+    xticklabel style={font=\tiny},
+    ytick={-3,-2,-1,0,1,2,3},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+    restrict y to domain=-5:5,
+]
+    % Asíntotas verticales
+    \addplot[dashed, gray, thick, samples=2] coordinates {(0,-4) (0,4)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(180,-4) (180,4)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(360,-4) (360,4)};
+
+    % Gráfica de seno (para referencia)
+    \addplot[
+        domain=0:360,
+        samples=200,
+        smooth,
+        thin,
+        color=blue,
+        opacity=0.4,
+    ] {sin(x)};
+
+    % Gráfica de cosecante
+    \addplot[
+        domain=1:179,
+        samples=100,
+        smooth,
+        thick,
+        color=magenta,
+    ] {1/sin(x)};
+
+    \addplot[
+        domain=181:359,
+        samples=100,
+        smooth,
+        thick,
+        color=magenta,
+    ] {1/sin(x)};
+
+    \legend{$y = \sin(x)$, $y = \csc(x)$}
+
+    % Puntos importantes
+    \addplot[only marks, mark=*, mark size=2pt, color=red] coordinates {
+        (90,1) (270,-1)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 5:} Identificar características.
+
+\begin{itemize}
+    \item \textbf{Dominio:} Todos los reales excepto $x = 180°k$ (donde $k$ es un entero)
+    \item \textbf{Rango:} $(-\infty, -1] \cup [1, \infty)$
+    \item \textbf{Período:} $360°$
+    \item \textbf{Asíntotas verticales:} En $x = 0°, 180°, 360°,\ldots$
+    \item \textbf{Valores extremos:} Mínimo de 1 en $x = 90°$; máximo de $-1$ en $x = 270°$
+    \item \textbf{Simetría:} Impar (simétrica respecto al origen)
+\end{itemize}
+
+\textbf{Paso 6:} Comparación con la secante.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-4, ymax=4,
+    xtick={0,90,180,270,360},
+    ytick={-3,-2,-1,0,1,2,3},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+    restrict y to domain=-5:5,
+]
+    % Asíntotas de secante
+    \addplot[dashed, gray!50, samples=2] coordinates {(90,-4) (90,4)};
+    \addplot[dashed, gray!50, samples=2] coordinates {(270,-4) (270,4)};
+
+    % Asíntotas de cosecante
+    \addplot[dashed, gray, thick, samples=2] coordinates {(0,-4) (0,4)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(180,-4) (180,4)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(360,-4) (360,4)};
+
+    % Secante
+    \addplot[
+        domain=1:88,
+        samples=100,
+        smooth,
+        thick,
+        color=red,
+        opacity=0.5,
+    ] {1/cos(x)};
+
+    \addplot[
+        domain=92:268,
+        samples=100,
+        smooth,
+        thick,
+        color=red,
+        opacity=0.5,
+    ] {1/cos(x)};
+
+    \addplot[
+        domain=272:359,
+        samples=100,
+        smooth,
+        thick,
+        color=red,
+        opacity=0.5,
+    ] {1/cos(x)};
+
+    % Cosecante
+    \addplot[
+        domain=1:179,
+        samples=100,
+        smooth,
+        thick,
+        color=magenta,
+    ] {1/sin(x)};
+
+    \addplot[
+        domain=181:359,
+        samples=100,
+        smooth,
+        thick,
+        color=magenta,
+    ] {1/sin(x)};
+
+    \legend{$y = \sec(x)$, $y = \csc(x)$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación:} La cosecante está desplazada $90°$ respecto a la secante, de la misma manera que el seno está desplazado respecto al coseno.
+
+\textbf{Verificación:}
+\begin{align*}
+\csc(30°) &= \frac{1}{\sin(30°)} = \frac{1}{1/2} = 2 \quad \checkmark \\
+\csc(90°) &= \frac{1}{\sin(90°)} = \frac{1}{1} = 1 \quad \checkmark \\
+\csc(270°) &= \frac{1}{\sin(270°)} = \frac{1}{-1} = -1 \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} La función cosecante forma ramas parabólicas alternadas, con asíntotas verticales donde el seno se anula, comportándose como la función recíproca del seno.
+\end{ejemplo}
+
+\newpage
+
+
+ewpage
+
+\section{Ejercicios Propuestos}
+
+Ahora es tu turno. Resuelve los siguientes ejercicios aplicando lo que has aprendido sobre gráficas de funciones trigonométricas. Las soluciones detalladas están en la siguiente sección, pero intenta resolverlos primero por tu cuenta.
+
+\begin{ejercicio}[title=Ejercicio 1]
+Grafica la función $f(x) = 2\sin(x)$ en el intervalo $[0, 2\pi]$ e identifica:
+\begin{itemize}
+    \item[a)] La amplitud
+    \item[b)] El período
+    \item[c)] Los puntos máximos y mínimos
+    \item[d)] Las intersecciones con el eje $x$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 2]
+Determina la amplitud, el período y el desplazamiento de fase de la función:
+\[
+g(x) = 3\cos\left(2x - \frac{\pi}{3}\right)
+\]
+Luego, bosqueja su gráfica en el intervalo $[0, 2\pi]$.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 3]
+Considera la función $h(x) = -\sin\left(\frac{x}{2}\right) + 1$.
+\begin{itemize}
+    \item[a)] Identifica todas las transformaciones aplicadas a $\sin(x)$
+    \item[b)] Determina la amplitud, el período y el desplazamiento vertical
+    \item[c)] Encuentra el valor máximo y mínimo de la función
+    \item[d)] Grafica la función en el intervalo $[0, 4\pi]$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 4]
+Grafica la función tangente $f(x) = \tan(x)$ en el intervalo $\left[-\frac{3\pi}{2}, \frac{3\pi}{2}\right]$ e identifica:
+\begin{itemize}
+    \item[a)] Las asíntotas verticales
+    \item[b)] El período
+    \item[c)] Los ceros de la función
+    \item[d)] Los intervalos donde la función es creciente
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 5]
+Dada la gráfica de una función sinusoidal que pasa por los puntos $(0, 2)$, $\left(\frac{\pi}{2}, 5\right)$, $(\pi, 2)$, $\left(\frac{3\pi}{2}, -1\right)$ y $(2\pi, 2)$, determina:
+\begin{itemize}
+    \item[a)] La amplitud
+    \item[b)] El desplazamiento vertical
+    \item[c)] El período
+    \item[d)] Una ecuación de la forma $f(x) = A\sin(Bx) + D$ o $f(x) = A\cos(Bx) + D$ que representa esta función
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 6]
+Compara las gráficas de $f(x) = \sin(x)$ y $g(x) = \cos(x)$ en el intervalo $[0, 2\pi]$.
+\begin{itemize}
+    \item[a)] Encuentra el desplazamiento horizontal que transforma una función en la otra
+    \item[b)] Identifica los puntos donde ambas funciones se intersectan
+    \item[c)] Determina los intervalos donde $\sin(x) > \cos(x)$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 7: Problema aplicado]
+La altura (en metros) de la marea en un puerto está modelada por la función:
+\[
+h(t) = 2.5\sin\left(\frac{\pi}{6}t - \frac{\pi}{2}\right) + 3.5
+\]
+donde $t$ es el tiempo en horas después de la medianoche.
+\begin{itemize}
+    \item[a)] ¿Cuál es la altura máxima y mínima de la marea?
+    \item[b)] ¿Cuál es el período de la marea (tiempo entre dos mareas altas consecutivas)?
+    \item[c)] ¿A qué hora ocurre la primera marea alta después de la medianoche?
+    \item[d)] Grafica la función en el intervalo $[0, 24]$
+\end{itemize}
+\end{ejercicio}
+
+
+
+ewpage
+
+\section{Soluciones Detalladas}
+
+\begin{solucion}[title=Solución Ejercicio 1]
+\textbf{Graficar:} $f(x) = 2\sin(x)$ en $[0, 2\pi]$
+
+\textbf{Paso 1:} Identificar los parámetros.
+
+La función tiene la forma $f(x) = A\sin(Bx)$ donde:
+\begin{itemize}
+    \item $A = 2$ (amplitud)
+    \item $B = 1$ (frecuencia)
+\end{itemize}
+
+\textbf{Parte a):} Amplitud
+\[
+\boxed{\text{Amplitud} = |A| = |2| = 2}
+\]
+
+\textbf{Parte b):} Período
+\[
+\boxed{\text{Período} = \frac{2\pi}{B} = \frac{2\pi}{1} = 2\pi}
+\]
+
+\textbf{Parte c):} Puntos máximos y mínimos.
+
+Para $f(x) = 2\sin(x)$:
+\begin{itemize}
+    \item Máximo cuando $\sin(x) = 1$: $x = \frac{\pi}{2}$, $f\left(\frac{\pi}{2}\right) = 2$
+    \item Mínimo cuando $\sin(x) = -1$: $x = \frac{3\pi}{2}$, $f\left(\frac{3\pi}{2}\right) = -2$
+\end{itemize}
+
+\[
+\boxed{\text{Máximo: } \left(\frac{\pi}{2}, 2\right), \quad \text{Mínimo: } \left(\frac{3\pi}{2}, -2\right)}
+\]
+
+\textbf{Parte d):} Intersecciones con el eje $x$.
+
+$f(x) = 0$ cuando $2\sin(x) = 0$, es decir, cuando $\sin(x) = 0$
+
+En $[0, 2\pi]$: $x = 0, \pi, 2\pi$
+
+\[
+\boxed{\text{Intersecciones: } x = 0, \pi, 2\pi}
+\]
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=6.5,
+    ymin=-2.5, ymax=2.5,
+    xtick={0, 1.5708, 3.14159, 4.71239, 6.28318},
+    xticklabels={$0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-2,-1,0,1,2},
+    grid=major,
+    samples=200,
+    domain=0:2*pi,
+    thick,
+]
+    \addplot[maincolor, very thick] {2*sin(deg(x))};
+
+    % Puntos destacados
+    \addplot[mark=*, only marks, mark size=3pt, accentcolor] coordinates {
+        (1.5708, 2)
+        (4.71239, -2)
+        (0, 0)
+        (3.14159, 0)
+        (6.28318, 0)
+    };
+
+    \node[accentcolor, above right] at (axis cs:1.5708, 2) {Máximo};
+    \node[accentcolor, below right] at (axis cs:4.71239, -2) {Mínimo};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación:} La función $f(x) = 2\sin(x)$ es la función seno estándar estirada verticalmente por un factor de 2, lo que duplica su amplitud pero mantiene el mismo período.
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 2]
+\textbf{Analizar:} $g(x) = 3\cos\left(2x - \frac{\pi}{3}\right)$
+
+\textbf{Paso 1:} Reescribir en la forma estándar.
+
+Factorizando el 2:
+\[
+g(x) = 3\cos\left(2\left(x - \frac{\pi}{6}\right)\right)
+\]
+
+Esta es la forma $A\cos(B(x - C))$ donde:
+\begin{itemize}
+    \item $A = 3$
+    \item $B = 2$
+    \item $C = \frac{\pi}{6}$
+\end{itemize}
+
+\textbf{Paso 2:} Identificar parámetros.
+
+\textbf{Amplitud:}
+\[
+\boxed{|A| = |3| = 3}
+\]
+
+\textbf{Período:}
+\[
+\boxed{\text{Período} = \frac{2\pi}{B} = \frac{2\pi}{2} = \pi}
+\]
+
+\textbf{Desplazamiento de fase:}
+\[
+\boxed{C = \frac{\pi}{6} \text{ (hacia la derecha)}}
+\]
+
+\textbf{Paso 3:} Puntos clave para graficar.
+
+Para $\cos(u)$, un ciclo completo va de $u = 0$ a $u = 2\pi$.
+
+En nuestro caso, $u = 2\left(x - \frac{\pi}{6}\right)$
+
+\begin{itemize}
+    \item Inicio del ciclo: $2\left(x - \frac{\pi}{6}\right) = 0 \Rightarrow x = \frac{\pi}{6}$
+    \item Fin del ciclo: $2\left(x - \frac{\pi}{6}\right) = 2\pi \Rightarrow x = \frac{\pi}{6} + \pi = \frac{7\pi}{6}$
+\end{itemize}
+
+Puntos importantes:
+\begin{align*}
+x = \frac{\pi}{6}: &\quad g\left(\frac{\pi}{6}\right) = 3\cos(0) = 3 \quad \text{(máximo)} \\
+x = \frac{\pi}{6} + \frac{\pi}{4} = \frac{5\pi}{12}: &\quad g\left(\frac{5\pi}{12}\right) = 3\cos\left(\frac{\pi}{2}\right) = 0 \\
+x = \frac{\pi}{6} + \frac{\pi}{2} = \frac{2\pi}{3}: &\quad g\left(\frac{2\pi}{3}\right) = 3\cos(\pi) = -3 \quad \text{(mínimo)} \\
+x = \frac{\pi}{6} + \frac{3\pi}{4} = \frac{11\pi}{12}: &\quad g\left(\frac{11\pi}{12}\right) = 3\cos\left(\frac{3\pi}{2}\right) = 0 \\
+x = \frac{\pi}{6} + \pi = \frac{7\pi}{6}: &\quad g\left(\frac{7\pi}{6}\right) = 3\cos(2\pi) = 3 \quad \text{(máximo)}
+\end{align*}
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=6.5,
+    ymin=-3.5, ymax=3.5,
+    xtick={0, 0.5236, 1.5708, 2.0944, 3.14159, 4.71239, 6.28318},
+    xticklabels={$0$, $\frac{\pi}{6}$, $\frac{\pi}{2}$, $\frac{2\pi}{3}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-3,-2,-1,0,1,2,3},
+    grid=major,
+    samples=300,
+    domain=0:2*pi,
+    thick,
+]
+    \addplot[maincolor, very thick] {3*cos(deg(2*x - 60))};
+
+    % Puntos destacados
+    \addplot[mark=*, only marks, mark size=3pt, accentcolor] coordinates {
+        (0.5236, 3)
+        (2.0944, -3)
+        (3.665, 3)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} La función tiene una amplitud de 3, completa dos ciclos en el intervalo $[0, 2\pi]$ (período de $\pi$), y está desplazada $\frac{\pi}{6}$ unidades a la derecha.
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 3]
+\textbf{Analizar:} $h(x) = -\sin\left(\frac{x}{2}\right) + 1$
+
+\textbf{Parte a):} Transformaciones aplicadas.
+
+Partiendo de $\sin(x)$, se aplican las siguientes transformaciones:
+
+\begin{enumerate}
+    \item Compresión horizontal por factor de $\frac{1}{2}$ (o estiramiento por factor 2): $\sin\left(\frac{x}{2}\right)$
+    \item Reflexión sobre el eje $x$: $-\sin\left(\frac{x}{2}\right)$
+    \item Desplazamiento vertical hacia arriba 1 unidad: $-\sin\left(\frac{x}{2}\right) + 1$
+\end{enumerate}
+
+\[
+\boxed{\text{Transformaciones: estiramiento horizontal, reflexión vertical, traslación vertical}}
+\]
+
+\textbf{Parte b):} Parámetros.
+
+En la forma $A\sin(Bx) + D$:
+\begin{itemize}
+    \item $A = -1$ (negativo indica reflexión)
+    \item $B = \frac{1}{2}$
+    \item $D = 1$
+\end{itemize}
+
+\textbf{Amplitud:}
+\[
+\boxed{|A| = |-1| = 1}
+\]
+
+\textbf{Período:}
+\[
+\boxed{\text{Período} = \frac{2\pi}{B} = \frac{2\pi}{1/2} = 4\pi}
+\]
+
+\textbf{Desplazamiento vertical:}
+\[
+\boxed{D = 1}
+\]
+
+\textbf{Parte c):} Valores máximo y mínimo.
+
+El rango de $\sin(u)$ es $[-1, 1]$.
+
+El rango de $-\sin(u)$ es $[-1, 1]$ (invertido: cuando seno es máximo, esto es mínimo).
+
+El rango de $-\sin(u) + 1$ es:
+\begin{itemize}
+    \item Cuando $-\sin(u) = 1$ (mínimo de seno): $h(x) = 1 + 1 = 2$ \textbf{(máximo)}
+    \item Cuando $-\sin(u) = -1$ (máximo de seno): $h(x) = -1 + 1 = 0$ \textbf{(mínimo)}
+\end{itemize}
+
+\[
+\boxed{\text{Máximo} = 2, \quad \text{Mínimo} = 0}
+\]
+
+Alternativamente: El rango es $[D - |A|, D + |A|] = [1 - 1, 1 + 1] = [0, 2]$
+
+\textbf{Parte d):} Gráfica en $[0, 4\pi]$.
+
+Puntos clave (un ciclo completo):
+\begin{align*}
+x = 0: &\quad h(0) = -\sin(0) + 1 = 1 \\
+x = \pi: &\quad h(\pi) = -\sin\left(\frac{\pi}{2}\right) + 1 = -1 + 1 = 0 \quad \text{(mínimo)} \\
+x = 2\pi: &\quad h(2\pi) = -\sin(\pi) + 1 = 0 + 1 = 1 \\
+x = 3\pi: &\quad h(3\pi) = -\sin\left(\frac{3\pi}{2}\right) + 1 = -(-1) + 1 = 2 \quad \text{(máximo)} \\
+x = 4\pi: &\quad h(4\pi) = -\sin(2\pi) + 1 = 0 + 1 = 1
+\end{align*}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=13,
+    ymin=-0.5, ymax=2.5,
+    xtick={0, 3.14159, 6.28318, 9.42478, 12.56637},
+    xticklabels={$0$, $\pi$, $2\pi$, $3\pi$, $4\pi$},
+    ytick={0,1,2},
+    grid=major,
+    samples=300,
+    domain=0:4*pi,
+    thick,
+]
+    \addplot[maincolor, very thick] {-sin(deg(x/2)) + 1};
+
+    % Puntos destacados
+    \addplot[mark=*, only marks, mark size=3pt, accentcolor] coordinates {
+        (3.14159, 0)
+        (9.42478, 2)
+    };
+
+    \node[accentcolor, below] at (axis cs:3.14159, 0) {Mínimo};
+    \node[accentcolor, above] at (axis cs:9.42478, 2) {Máximo};
+
+    % Línea del eje central
+    \addplot[dashed, gray] {1};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación:} La función oscila entre 0 y 2, con línea central en $y = 1$. La reflexión hace que la función empiece en el valor medio, decrezca primero (en lugar de crecer como el seno normal), y complete un ciclo en $4\pi$.
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 4]
+\textbf{Graficar:} $f(x) = \tan(x)$ en $\left[-\frac{3\pi}{2}, \frac{3\pi}{2}\right]$
+
+\textbf{Parte a):} Asíntotas verticales.
+
+La función tangente $\tan(x) = \frac{\sin(x)}{\cos(x)}$ tiene asíntotas verticales donde $\cos(x) = 0$.
+
+$\cos(x) = 0$ cuando $x = \frac{\pi}{2} + n\pi$ para $n \in \mathbb{Z}$
+
+En el intervalo $\left[-\frac{3\pi}{2}, \frac{3\pi}{2}\right]$:
+
+\[
+\boxed{x = -\frac{3\pi}{2}, \quad x = -\frac{\pi}{2}, \quad x = \frac{\pi}{2}, \quad x = \frac{3\pi}{2}}
+\]
+
+\textbf{Nota:} Los extremos del intervalo son asíntotas.
+
+\textbf{Parte b):} Período.
+
+La función tangente tiene período $\pi$ (no $2\pi$ como seno y coseno).
+
+\[
+\boxed{\text{Período} = \pi}
+\]
+
+\textbf{Parte c):} Ceros de la función.
+
+$\tan(x) = 0$ cuando $\sin(x) = 0$
+
+$\sin(x) = 0$ cuando $x = n\pi$ para $n \in \mathbb{Z}$
+
+En el intervalo $\left[-\frac{3\pi}{2}, \frac{3\pi}{2}\right]$:
+
+\[
+\boxed{x = -\pi, \quad x = 0, \quad x = \pi}
+\]
+
+\textbf{Parte d):} Intervalos donde es creciente.
+
+La función tangente es creciente en cada uno de sus intervalos de definición (entre asíntotas consecutivas).
+
+\[
+\boxed{\left(-\frac{3\pi}{2}, -\frac{\pi}{2}\right), \quad \left(-\frac{\pi}{2}, \frac{\pi}{2}\right), \quad \left(\frac{\pi}{2}, \frac{3\pi}{2}\right)}
+\]
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-5, xmax=5,
+    ymin=-5, ymax=5,
+    xtick={-4.71239, -3.14159, -1.5708, 0, 1.5708, 3.14159, 4.71239},
+    xticklabels={$-\frac{3\pi}{2}$, $-\pi$, $-\frac{\pi}{2}$, $0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$},
+    ytick={-4,-2,0,2,4},
+    grid=major,
+    samples=200,
+    domain=-1.4:1.4,
+    thick,
+    restrict y to domain=-8:8,
+]
+    % Tangente en tres períodos
+    \addplot[maincolor, very thick, domain=-4.5:-1.67] {tan(deg(x))};
+    \addplot[maincolor, very thick, domain=-1.47:1.47] {tan(deg(x))};
+    \addplot[maincolor, very thick, domain=1.67:4.5] {tan(deg(x))};
+
+    % Asíntotas verticales
+    \addplot[dashed, red, samples=2] coordinates {(-4.71239,-8) (-4.71239,8)};
+    \addplot[dashed, red, samples=2] coordinates {(-1.5708,-8) (-1.5708,8)};
+    \addplot[dashed, red, samples=2] coordinates {(1.5708,-8) (1.5708,8)};
+    \addplot[dashed, red, samples=2] coordinates {(4.71239,-8) (4.71239,8)};
+
+    % Ceros
+    \addplot[mark=*, only marks, mark size=3pt, accentcolor] coordinates {
+        (-3.14159, 0)
+        (0, 0)
+        (3.14159, 0)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Características importantes:}
+\begin{itemize}
+    \item La tangente no está acotada (no tiene valores máximos ni mínimos)
+    \item Crece desde $-\infty$ hasta $+\infty$ en cada intervalo entre asíntotas
+    \item Es una función impar: $\tan(-x) = -\tan(x)$, simétrica respecto al origen
+    \item Cruza el eje $x$ en múltiplos enteros de $\pi$
+\end{itemize}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 5]
+\textbf{Dado:} Puntos $(0, 2)$, $\left(\frac{\pi}{2}, 5\right)$, $(\pi, 2)$, $\left(\frac{3\pi}{2}, -1\right)$, $(2\pi, 2)$
+
+\textbf{Paso 1:} Analizar los datos.
+
+Observemos que:
+\begin{itemize}
+    \item La función vuelve al mismo valor en $x = 0, \pi, 2\pi$: $f(x) = 2$
+    \item El máximo es 5 en $x = \frac{\pi}{2}$
+    \item El mínimo es $-1$ en $x = \frac{3\pi}{2}$
+\end{itemize}
+
+\textbf{Parte a):} Amplitud.
+
+\[
+\text{Amplitud} = \frac{\text{Máximo} - \text{Mínimo}}{2} = \frac{5 - (-1)}{2} = \frac{6}{2} = 3
+\]
+
+\[
+\boxed{\text{Amplitud} = 3}
+\]
+
+\textbf{Parte b):} Desplazamiento vertical.
+
+\[
+D = \frac{\text{Máximo} + \text{Mínimo}}{2} = \frac{5 + (-1)}{2} = \frac{4}{2} = 2
+\]
+
+\[
+\boxed{D = 2}
+\]
+
+\textbf{Verificación:} El valor medio de la función es 2, que coincide con $f(0) = f(\pi) = f(2\pi) = 2$. $\checkmark$
+
+\textbf{Parte c):} Período.
+
+La función alcanza su máximo en $x = \frac{\pi}{2}$ y vuelve al mismo valor máximo después de un período completo.
+
+De $x = 0$ a $x = 2\pi$ vemos un ciclo completo (empieza en 2, sube a 5, baja a 2, sigue bajando a $-1$, y regresa a 2).
+
+\[
+\boxed{\text{Período} = 2\pi}
+\]
+
+Por lo tanto: $B = \frac{2\pi}{\text{Período}} = \frac{2\pi}{2\pi} = 1$
+
+\textbf{Parte d):} Ecuación de la función.
+
+Tenemos:
+\begin{itemize}
+    \item $A = 3$
+    \item $B = 1$
+    \item $D = 2$
+\end{itemize}
+
+Necesitamos decidir entre seno o coseno.
+
+\textbf{Opción 1: Usando coseno}
+
+$f(x) = A\cos(Bx) + D = 3\cos(x) + 2$
+
+Verificamos:
+\begin{align*}
+f(0) &= 3\cos(0) + 2 = 3(1) + 2 = 5 \quad \text{(¡Error! Debería ser 2)}
+\end{align*}
+
+No funciona directamente. Necesitamos un coseno que valga 0 en $x = 0$.
+
+\textbf{Opción 2: Usando seno}
+
+$f(x) = A\sin(Bx) + D = 3\sin(x) + 2$
+
+Verificamos:
+\begin{align*}
+f(0) &= 3\sin(0) + 2 = 3(0) + 2 = 2 \quad \checkmark \\
+f\left(\frac{\pi}{2}\right) &= 3\sin\left(\frac{\pi}{2}\right) + 2 = 3(1) + 2 = 5 \quad \checkmark \\
+f(\pi) &= 3\sin(\pi) + 2 = 3(0) + 2 = 2 \quad \checkmark \\
+f\left(\frac{3\pi}{2}\right) &= 3\sin\left(\frac{3\pi}{2}\right) + 2 = 3(-1) + 2 = -1 \quad \checkmark \\
+f(2\pi) &= 3\sin(2\pi) + 2 = 3(0) + 2 = 2 \quad \checkmark
+\end{align*}
+
+¡Perfecto! Todos los puntos coinciden.
+
+\[
+\boxed{f(x) = 3\sin(x) + 2}
+\]
+
+\textbf{Alternativa con coseno:}
+
+También podríamos usar $f(x) = 3\cos\left(x - \frac{\pi}{2}\right) + 2$, ya que $\cos\left(x - \frac{\pi}{2}\right) = \sin(x)$.
+
+\textbf{Gráfica de verificación:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=6.5,
+    ymin=-2, ymax=6,
+    xtick={0, 1.5708, 3.14159, 4.71239, 6.28318},
+    xticklabels={$0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-1,0,1,2,3,4,5},
+    grid=major,
+    samples=200,
+    domain=0:2*pi,
+    thick,
+]
+    \addplot[maincolor, very thick] {3*sin(deg(x)) + 2};
+
+    % Puntos dados
+    \addplot[mark=*, only marks, mark size=4pt, accentcolor] coordinates {
+        (0, 2)
+        (1.5708, 5)
+        (3.14159, 2)
+        (4.71239, -1)
+        (6.28318, 2)
+    };
+
+    % Línea del eje central
+    \addplot[dashed, gray] {2};
+
+    \node[gray, right] at (axis cs:5.5, 2) {Eje central: $y=2$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 6]
+\textbf{Comparar:} $f(x) = \sin(x)$ y $g(x) = \cos(x)$ en $[0, 2\pi]$
+
+\textbf{Parte a):} Desplazamiento horizontal entre las funciones.
+
+Recordemos la identidad fundamental:
+\[
+\cos(x) = \sin\left(x + \frac{\pi}{2}\right)
+\]
+
+Alternativamente:
+\[
+\sin(x) = \cos\left(x - \frac{\pi}{2}\right)
+\]
+
+\[
+\boxed{\text{El coseno es el seno desplazado } \frac{\pi}{2} \text{ unidades a la izquierda}}
+\]
+
+O equivalentemente:
+\[
+\boxed{\text{El seno es el coseno desplazado } \frac{\pi}{2} \text{ unidades a la derecha}}
+\]
+
+\textbf{Parte b):} Puntos de intersección.
+
+Necesitamos resolver $\sin(x) = \cos(x)$ en $[0, 2\pi]$.
+
+Dividiendo ambos lados por $\cos(x)$ (cuando $\cos(x) \neq 0$):
+\[
+\frac{\sin(x)}{\cos(x)} = 1 \quad \Rightarrow \quad \tan(x) = 1
+\]
+
+$\tan(x) = 1$ cuando $x = \frac{\pi}{4} + n\pi$ para $n \in \mathbb{Z}$
+
+En $[0, 2\pi]$:
+\[
+x = \frac{\pi}{4}, \quad x = \frac{\pi}{4} + \pi = \frac{5\pi}{4}
+\]
+
+Verificación:
+\begin{align*}
+x = \frac{\pi}{4}: &\quad \sin\left(\frac{\pi}{4}\right) = \frac{\sqrt{2}}{2}, \quad \cos\left(\frac{\pi}{4}\right) = \frac{\sqrt{2}}{2} \quad \checkmark \\
+x = \frac{5\pi}{4}: &\quad \sin\left(\frac{5\pi}{4}\right) = -\frac{\sqrt{2}}{2}, \quad \cos\left(\frac{5\pi}{4}\right) = -\frac{\sqrt{2}}{2} \quad \checkmark
+\end{align*}
+
+Los puntos de intersección son:
+\[
+\boxed{\left(\frac{\pi}{4}, \frac{\sqrt{2}}{2}\right) \text{ y } \left(\frac{5\pi}{4}, -\frac{\sqrt{2}}{2}\right)}
+\]
+
+\textbf{Parte c):} Intervalos donde $\sin(x) > \cos(x)$.
+
+De la gráfica y el análisis anterior, sabemos que las funciones se intersectan en $x = \frac{\pi}{4}$ y $x = \frac{5\pi}{4}$.
+
+Evaluemos en puntos de prueba:
+
+\begin{itemize}
+    \item $x = 0$: $\sin(0) = 0$, $\cos(0) = 1$ $\Rightarrow$ $\sin(0) < \cos(0)$
+    \item $x = \frac{\pi}{2}$: $\sin\left(\frac{\pi}{2}\right) = 1$, $\cos\left(\frac{\pi}{2}\right) = 0$ $\Rightarrow$ $\sin\left(\frac{\pi}{2}\right) > \cos\left(\frac{\pi}{2}\right)$
+    \item $x = \pi$: $\sin(\pi) = 0$, $\cos(\pi) = -1$ $\Rightarrow$ $\sin(\pi) > \cos(\pi)$
+    \item $x = \frac{3\pi}{2}$: $\sin\left(\frac{3\pi}{2}\right) = -1$, $\cos\left(\frac{3\pi}{2}\right) = 0$ $\Rightarrow$ $\sin\left(\frac{3\pi}{2}\right) < \cos\left(\frac{3\pi}{2}\right)$
+\end{itemize}
+
+\[
+\boxed{\sin(x) > \cos(x) \text{ en } \left(\frac{\pi}{4}, \frac{5\pi}{4}\right)}
+\]
+
+\textbf{Gráfica comparativa:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=6.5,
+    ymin=-1.5, ymax=1.5,
+    xtick={0, 0.7854, 1.5708, 3.14159, 3.927, 4.71239, 6.28318},
+    xticklabels={$0$, $\frac{\pi}{4}$, $\frac{\pi}{2}$, $\pi$, $\frac{5\pi}{4}$, $\frac{3\pi}{2}$, $2\pi$},
+    ytick={-1,-0.5,0,0.5,1},
+    grid=major,
+    samples=200,
+    domain=0:2*pi,
+    thick,
+    legend pos=north east,
+]
+    \addplot[blue, very thick] {sin(deg(x))};
+    \addplot[red, very thick] {cos(deg(x))};
+
+    % Puntos de intersección
+    \addplot[mark=*, only marks, mark size=4pt, maincolor] coordinates {
+        (0.7854, 0.7071)
+        (3.927, -0.7071)
+    };
+
+    \legend{$\sin(x)$, $\cos(x)$}
+
+    \node[maincolor] at (axis cs:0.7854, 0.9) {Intersección};
+    \node[maincolor] at (axis cs:3.927, -0.9) {Intersección};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación importante:} En el intervalo $\left(\frac{\pi}{4}, \frac{5\pi}{4}\right)$, la curva del seno (azul) está por encima de la curva del coseno (roja).
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 7]
+\textbf{Modelo de marea:} $h(t) = 2.5\sin\left(\frac{\pi}{6}t - \frac{\pi}{2}\right) + 3.5$
+
+\textbf{Paso 1:} Reescribir en forma estándar.
+
+Factorizando $\frac{\pi}{6}$:
+\[
+h(t) = 2.5\sin\left(\frac{\pi}{6}\left(t - 3\right)\right) + 3.5
+\]
+
+Parámetros:
+\begin{itemize}
+    \item $A = 2.5$ (amplitud)
+    \item $B = \frac{\pi}{6}$ (frecuencia)
+    \item $C = 3$ (desplazamiento de fase)
+    \item $D = 3.5$ (desplazamiento vertical, altura promedio)
+\end{itemize}
+
+\textbf{Parte a):} Altura máxima y mínima.
+
+La altura oscila alrededor de $D = 3.5$ metros con amplitud $A = 2.5$ metros.
+
+\begin{align*}
+h_{\text{máx}} &= D + A = 3.5 + 2.5 = 6 \text{ metros} \\
+h_{\text{mín}} &= D - A = 3.5 - 2.5 = 1 \text{ metro}
+\end{align*}
+
+\[
+\boxed{\text{Altura máxima} = 6 \text{ m}, \quad \text{Altura mínima} = 1 \text{ m}}
+\]
+
+\textbf{Parte b):} Período de la marea.
+
+\[
+\text{Período} = \frac{2\pi}{B} = \frac{2\pi}{\pi/6} = 2\pi \cdot \frac{6}{\pi} = 12 \text{ horas}
+\]
+
+\[
+\boxed{\text{Período} = 12 \text{ horas}}
+\]
+
+Esto significa que hay dos mareas altas y dos mareas bajas cada día (cada 24 horas).
+
+\textbf{Parte c):} Primera marea alta después de medianoche.
+
+La marea es alta cuando $\sin\left(\frac{\pi}{6}t - \frac{\pi}{2}\right) = 1$
+
+Esto ocurre cuando:
+\[
+\frac{\pi}{6}t - \frac{\pi}{2} = \frac{\pi}{2}
+\]
+
+Resolviendo para $t$:
+\begin{align*}
+\frac{\pi}{6}t &= \frac{\pi}{2} + \frac{\pi}{2} \\
+\frac{\pi}{6}t &= \pi \\
+t &= \pi \cdot \frac{6}{\pi} \\
+t &= 6 \text{ horas}
+\end{align*}
+
+\[
+\boxed{\text{Primera marea alta a las } 6:00 \text{ a.m.}}
+\]
+
+\textbf{Verificación:}
+\[
+h(6) = 2.5\sin\left(\frac{\pi}{6}(6) - \frac{\pi}{2}\right) + 3.5 = 2.5\sin\left(\pi - \frac{\pi}{2}\right) + 3.5 = 2.5\sin\left(\frac{\pi}{2}\right) + 3.5 = 2.5(1) + 3.5 = 6 \text{ m} \quad \checkmark
+\]
+
+\textbf{Parte d):} Gráfica en $[0, 24]$.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=middle,
+    xlabel={$t$ (horas)},
+    ylabel={$h$ (metros)},
+    xmin=0, xmax=25,
+    ymin=0, ymax=7,
+    xtick={0, 3, 6, 9, 12, 15, 18, 21, 24},
+    ytick={0,1,2,3,4,5,6},
+    grid=major,
+    samples=300,
+    domain=0:24,
+    thick,
+]
+    \addplot[maincolor, very thick] {2.5*sin(deg(pi*x/6 - pi/2)) + 3.5};
+
+    % Puntos importantes: mareas altas y bajas
+    \addplot[mark=*, only marks, mark size=3pt, red] coordinates {
+        (6, 6)
+        (18, 6)
+    };
+
+    \addplot[mark=*, only marks, mark size=3pt, blue] coordinates {
+        (0, 1)
+        (12, 1)
+        (24, 1)
+    };
+
+    % Línea del nivel promedio
+    \addplot[dashed, gray] {3.5};
+
+    \node[red, above] at (axis cs:6, 6) {Marea alta};
+    \node[red, above] at (axis cs:18, 6) {Marea alta};
+    \node[blue, below] at (axis cs:12, 1) {Marea baja};
+    \node[gray, right] at (axis cs:20, 3.5) {Nivel promedio};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Análisis del modelo:}
+
+\begin{itemize}
+    \item A medianoche ($t = 0$): $h(0) = 2.5\sin\left(-\frac{\pi}{2}\right) + 3.5 = 2.5(-1) + 3.5 = 1$ m (marea baja)
+    \item A las 6:00 a.m. ($t = 6$): marea alta de 6 m
+    \item A las 12:00 p.m. ($t = 12$): marea baja de 1 m
+    \item A las 6:00 p.m. ($t = 18$): marea alta de 6 m
+    \item A medianoche siguiente ($t = 24$): marea baja de 1 m
+\end{itemize}
+
+Este patrón se repite cada 24 horas, con dos ciclos completos de marea (dos altas y dos bajas) por día, lo cual es característico de mareas semidiurnas.
+\end{solucion}
+
+
+ewpage
+
+\section{Ejercicios Inversos}
+
+Los ejercicios inversos te desafían a usar tu creatividad y comprensión profunda de las funciones trigonométricas. En lugar de simplemente graficar funciones dadas, deberás diseñar funciones que cumplan ciertas características.
+
+\begin{ejercicio}[title=Ejercicio Inverso 1: Disenar una funcion con amplitud y periodo especificos]
+Diseña una función trigonométrica basada en el seno que tenga las siguientes características:
+\begin{itemize}
+    \item Amplitud de 3
+    \item Período de $180°$
+    \item Que pase por el origen
+\end{itemize}
+
+Escribe la ecuación de la función y grafícala en el intervalo $[0°, 360°]$.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 2: Identificar la funcion a partir de su grafica]
+Se te proporciona la siguiente información sobre una función trigonométrica:
+\begin{itemize}
+    \item Tiene asíntotas verticales en $x = 0°, 180°, 360°$
+    \item Es positiva en el intervalo $(0°, 90°)$
+    \item Decrece en cada intervalo entre asíntotas
+    \item Pasa por el punto $(45°, 1)$
+\end{itemize}
+
+Identifica qué función trigonométrica cumple estas características y justifica tu respuesta con una gráfica.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 3: Crear una funcion compuesta]
+Un ingeniero necesita modelar una señal que oscila entre $-2$ y $2$, con un período de $120°$, y que comienza en su valor máximo cuando $x = 0°$.
+
+\begin{itemize}
+    \item[a)] Determina qué función trigonométrica (seno o coseno) es más apropiada
+    \item[b)] Encuentra la ecuación que modela esta señal
+    \item[c)] Grafica la función en el intervalo $[0°, 360°]$
+    \item[d)] Determina en qué valores de $x$ la señal es igual a 1
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 4: Analizar el comportamiento de funciones reciprocas]
+Considera las funciones $y = \tan(x)$ y $y = \cot(x)$ en el intervalo $[0°, 180°]$.
+
+\begin{itemize}
+    \item[a)] Encuentra todos los valores de $x$ donde $\tan(x) = \cot(x)$
+    \item[b)] Grafica ambas funciones en el mismo sistema de coordenadas
+    \item[c)] Determina en qué intervalo $\tan(x) > \cot(x)$
+    \item[d)] Explica geométricamente por qué se intersectan en esos puntos
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 5: Disenar una funcion con restricciones de rango]
+Diseña una función trigonométrica que cumpla simultáneamente:
+\begin{itemize}
+    \item Su rango es $[-5, 1]$
+    \item Tiene período de $360°$
+    \item Alcanza su valor máximo cuando $x = 270°$
+    \item Es una transformación de la función seno
+\end{itemize}
+
+Determina la ecuación, grafícala y verifica que cumple todas las condiciones.
+\end{ejercicio}
+
+
+
+ewpage
+
+\section{Soluciones de Ejercicios Inversos}
+
+\begin{solucion}[title=Solucion Ejercicio Inverso 1]
+\textbf{Diseñar:} Función seno con amplitud 3, período $180°$, que pase por el origen.
+
+\textbf{Paso 1:} Recordar la forma general de una función seno.
+
+La forma general es:
+\[
+y = A\sin(B(x - C)) + D
+\]
+
+donde:
+\begin{itemize}
+    \item $A$ = amplitud
+    \item Período $= \frac{360°}{B}$
+    \item $C$ = desplazamiento horizontal
+    \item $D$ = desplazamiento vertical
+\end{itemize}
+
+\textbf{Paso 2:} Aplicar las condiciones dadas.
+
+\textbf{Condición 1:} Amplitud de 3 $\Rightarrow$ $A = 3$
+
+\textbf{Condición 2:} Período de $180°$
+\[
+\frac{360°}{B} = 180° \quad \Rightarrow \quad B = \frac{360°}{180°} = 2
+\]
+
+\textbf{Condición 3:} Pasa por el origen
+
+La función $y = \sin(x)$ ya pasa por el origen, así que no necesitamos desplazamientos: $C = 0$, $D = 0$
+
+\textbf{Paso 3:} Escribir la ecuación.
+
+\[
+\boxed{y = 3\sin(2x)}
+\]
+
+\textbf{Paso 4:} Verificar las condiciones.
+
+\begin{itemize}
+    \item Amplitud: $|A| = |3| = 3$ \quad $\checkmark$
+    \item Período: $\frac{360°}{2} = 180°$ \quad $\checkmark$
+    \item Pasa por origen: $y(0°) = 3\sin(0°) = 0$ \quad $\checkmark$
+\end{itemize}
+
+\textbf{Paso 5:} Graficar la función.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-4, ymax=4,
+    xtick={0,45,90,135,180,225,270,315,360},
+    xticklabels={$0°$,$45°$,$90°$,$135°$,$180°$,$225°$,$270°$,$315°$,$360°$},
+    xticklabel style={font=\tiny},
+    ytick={-3,-2,-1,0,1,2,3},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+]
+    % Función original para comparación
+    \addplot[
+        domain=0:360,
+        samples=200,
+        smooth,
+        thin,
+        color=blue,
+        opacity=0.3,
+        dashed,
+    ] {sin(x)};
+
+    % Función diseñada
+    \addplot[
+        domain=0:360,
+        samples=200,
+        smooth,
+        thick,
+        color=red,
+    ] {3*sin(2*x)};
+
+    \legend{$y = \sin(x)$, $y = 3\sin(2x)$}
+
+    % Puntos importantes
+    \addplot[only marks, mark=*, mark size=2pt, color=red] coordinates {
+        (0,0) (45,3) (90,0) (135,-3) (180,0) (225,3) (270,0) (315,-3) (360,0)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 6:} Análisis de la gráfica.
+
+Observa que:
+\begin{itemize}
+    \item La amplitud es 3 (oscila entre $-3$ y $3$)
+    \item Completa un ciclo completo cada $180°$ (tiene dos ciclos en $[0°, 360°]$)
+    \item Pasa por el origen $(0, 0)$
+    \item Los máximos ocurren en $x = 45°, 225°$ (valor $y = 3$)
+    \item Los mínimos ocurren en $x = 135°, 315°$ (valor $y = -3$)
+\end{itemize}
+
+\textbf{Respuesta:} La función $y = 3\sin(2x)$ cumple todas las condiciones requeridas.
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio Inverso 2]
+\textbf{Identificar:} Función con asíntotas en $0°, 180°, 360°$, positiva en $(0°, 90°)$, decreciente, pasa por $(45°, 1)$.
+
+\textbf{Paso 1:} Analizar las asíntotas.
+
+Las asíntotas en $x = 0°, 180°, 360°,\ldots$ ocurren cuando el seno es cero. Esto sugiere que la función involucra $\frac{1}{\sin(x)}$, es decir, la \textbf{cosecante}.
+
+\textbf{Paso 2:} Verificar si es positiva en $(0°, 90°)$.
+
+En el intervalo $(0°, 90°)$:
+\begin{itemize}
+    \item $\sin(x) > 0$
+    \item Por lo tanto, $\csc(x) = \frac{1}{\sin(x)} > 0$ \quad $\checkmark$
+\end{itemize}
+
+\textbf{Paso 3:} Verificar si decrece.
+
+Para $x \in (0°, 90°)$, el seno crece desde 0 hasta 1. Por lo tanto:
+\[
+\csc(x) = \frac{1}{\sin(x)} \text{ decrece desde } +\infty \text{ hasta } 1 \quad \checkmark
+\]
+
+\textbf{Paso 4:} Verificar el punto $(45°, 1)$.
+
+\[
+\csc(45°) = \frac{1}{\sin(45°)} = \frac{1}{\sqrt{2}/2} = \frac{2}{\sqrt{2}} = \sqrt{2} \approx 1.414
+\]
+
+Esto no es exactamente 1. Necesitamos una transformación de la cosecante.
+
+\textbf{Paso 5:} Encontrar la transformación correcta.
+
+Si la función pasa por $(45°, 1)$ y queremos que sea una transformación de $\csc(x)$, podemos usar:
+\[
+y = A \cdot \csc(x)
+\]
+
+Para que pase por $(45°, 1)$:
+\[
+1 = A \cdot \csc(45°) = A \cdot \sqrt{2}
+\]
+\[
+A = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}
+\]
+
+Por lo tanto, la función es:
+\[
+\boxed{y = \frac{\sqrt{2}}{2} \csc(x) = \frac{1}{\sqrt{2}\sin(x)}}
+\]
+
+Alternativamente, podríamos decir que es simplemente $y = \cot(x)$ evaluada en un punto ligeramente diferente, pero la descripción más precisa basada en todas las condiciones es la cosecante con un factor de escala.
+
+\textbf{Paso 6:} Graficar para verificar.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-3, ymax=5,
+    xtick={0,45,90,135,180,225,270,315,360},
+    xticklabels={$0°$,$45°$,$90°$,$135°$,$180°$,$225°$,$270°$,$315°$,$360°$},
+    xticklabel style={font=\tiny},
+    ytick={-2,-1,0,1,2,3,4},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+    restrict y to domain=-4:6,
+]
+    % Asíntotas
+    \addplot[dashed, gray, thick, samples=2] coordinates {(0,-3) (0,5)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(180,-3) (180,5)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(360,-3) (360,5)};
+
+    % Función
+    \addplot[
+        domain=1:179,
+        samples=100,
+        smooth,
+        thick,
+        color=magenta,
+    ] {(sqrt(2)/2)/sin(x)};
+
+    \addplot[
+        domain=181:359,
+        samples=100,
+        smooth,
+        thick,
+        color=magenta,
+    ] {(sqrt(2)/2)/sin(x)};
+
+    \legend{$y = \frac{\sqrt{2}}{2}\csc(x)$}
+
+    % Punto dado
+    \addplot[only marks, mark=*, mark size=3pt, color=red] coordinates {(45,1)};
+    \node[above right] at (axis cs:45,1) {$(45°, 1)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Verificación de todas las condiciones:}
+\begin{itemize}
+    \item Asíntotas en $0°, 180°, 360°$ \quad $\checkmark$
+    \item Positiva en $(0°, 90°)$ \quad $\checkmark$
+    \item Decreciente en cada intervalo entre asíntotas \quad $\checkmark$
+    \item Pasa por $(45°, 1)$: $y = \frac{\sqrt{2}}{2} \cdot \sqrt{2} = 1$ \quad $\checkmark$
+\end{itemize}
+
+\textbf{Respuesta:} La función es $y = \frac{\sqrt{2}}{2}\csc(x)$, una versión escalada de la cosecante que cumple todas las condiciones especificadas.
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio Inverso 3]
+\textbf{Modelar:} Señal que oscila entre $-2$ y $2$, período $120°$, comienza en máximo.
+
+\textbf{Parte a):} Determinar la función apropiada.
+
+Como la señal \textbf{comienza en su valor máximo} cuando $x = 0°$, la función más apropiada es el \textbf{coseno}, porque $\cos(0°) = 1$ (su valor máximo).
+
+El seno comienza en 0, así que necesitaríamos un desplazamiento de fase.
+
+\textbf{Respuesta a):} $\boxed{\text{Coseno}}$
+
+\textbf{Parte b):} Encontrar la ecuación.
+
+Forma general:
+\[
+y = A\cos(B(x - C)) + D
+\]
+
+\textbf{Condición 1:} Oscila entre $-2$ y $2$
+
+El rango es $[-2, 2]$, lo que significa:
+\begin{itemize}
+    \item Amplitud: $A = 2$
+    \item Desplazamiento vertical: $D = 0$ (oscila simétricamente alrededor de 0)
+\end{itemize}
+
+\textbf{Condición 2:} Período de $120°$
+\[
+\frac{360°}{B} = 120° \quad \Rightarrow \quad B = \frac{360°}{120°} = 3
+\]
+
+\textbf{Condición 3:} Comienza en máximo
+
+Como el coseno ya comienza en su máximo, no necesitamos desplazamiento horizontal: $C = 0$
+
+\textbf{Ecuación:}
+\[
+\boxed{y = 2\cos(3x)}
+\]
+
+\textbf{Verificación:}
+\begin{itemize}
+    \item $y(0°) = 2\cos(0°) = 2 \cdot 1 = 2$ (máximo) \quad $\checkmark$
+    \item Amplitud: 2 \quad $\checkmark$
+    \item Período: $\frac{360°}{3} = 120°$ \quad $\checkmark$
+    \item Rango: $[-2, 2]$ \quad $\checkmark$
+\end{itemize}
+
+\textbf{Respuesta b):} $\boxed{y = 2\cos(3x)}$
+
+\textbf{Parte c):} Graficar la función.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-3, ymax=3,
+    xtick={0,40,60,80,120,160,180,200,240,280,300,320,360},
+    xticklabel style={font=\tiny},
+    ytick={-2,-1,0,1,2},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+]
+    % Función
+    \addplot[
+        domain=0:360,
+        samples=300,
+        smooth,
+        thick,
+        color=blue,
+    ] {2*cos(3*x)};
+
+    \legend{$y = 2\cos(3x)$}
+
+    % Líneas horizontales de referencia
+    \addplot[dashed, thin, gray] coordinates {(0,2) (360,2)};
+    \addplot[dashed, thin, gray] coordinates {(0,-2) (360,-2)};
+
+    % Puntos importantes (máximos y mínimos)
+    \addplot[only marks, mark=*, mark size=2pt, color=red] coordinates {
+        (0,2) (40,-2) (60,2) (120,2) (160,-2) (180,2) (240,2) (280,-2) (300,2) (360,2)
+    };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación:} La función completa 3 ciclos completos en el intervalo $[0°, 360°]$, como era de esperarse (ya que el período es $120°$).
+
+\textbf{Parte d):} Determinar cuándo la señal es igual a 1.
+
+Necesitamos resolver:
+\[
+2\cos(3x) = 1
+\]
+\[
+\cos(3x) = \frac{1}{2}
+\]
+
+Sabemos que $\cos(\theta) = \frac{1}{2}$ cuando $\theta = 60°$ o $\theta = 300°$ (en el primer ciclo $[0°, 360°]$).
+
+Por lo tanto:
+\[
+3x = 60° + 360°k \quad \text{o} \quad 3x = 300° + 360°k
+\]
+
+Para el primer caso:
+\[
+x = 20° + 120°k
+\]
+
+Para el segundo caso:
+\[
+x = 100° + 120°k
+\]
+
+En el intervalo $[0°, 360°]$:
+
+\textbf{Primer caso} ($k = 0, 1, 2$):
+\[
+x = 20°, \quad x = 140°, \quad x = 260°
+\]
+
+\textbf{Segundo caso} ($k = 0, 1, 2$):
+\[
+x = 100°, \quad x = 220°, \quad x = 340°
+\]
+
+\textbf{Respuesta d):} $\boxed{x = 20°, 100°, 140°, 220°, 260°, 340°}$
+
+\textbf{Verificación} (probemos uno):
+\[
+y(20°) = 2\cos(3 \cdot 20°) = 2\cos(60°) = 2 \cdot \frac{1}{2} = 1 \quad \checkmark
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio Inverso 4]
+\textbf{Analizar:} $\tan(x)$ y $\cot(x)$ en $[0°, 180°]$.
+
+\textbf{Parte a):} Encontrar donde $\tan(x) = \cot(x)$.
+
+Recordemos que:
+\[
+\tan(x) = \frac{\sin(x)}{\cos(x)}, \quad \cot(x) = \frac{\cos(x)}{\sin(x)}
+\]
+
+Igualando:
+\[
+\frac{\sin(x)}{\cos(x)} = \frac{\cos(x)}{\sin(x)}
+\]
+
+Multiplicando ambos lados por $\sin(x)\cos(x)$ (asumiendo que ninguno es cero):
+\[
+\sin^2(x) = \cos^2(x)
+\]
+
+Esto ocurre cuando:
+\[
+\sin(x) = \pm\cos(x)
+\]
+
+\textbf{Caso 1:} $\sin(x) = \cos(x)$
+
+Dividiendo por $\cos(x)$ (cuando $\cos(x) \neq 0$):
+\[
+\tan(x) = 1 \quad \Rightarrow \quad x = 45°
+\]
+
+\textbf{Caso 2:} $\sin(x) = -\cos(x)$
+
+\[
+\tan(x) = -1 \quad \Rightarrow \quad x = 135°
+\]
+
+En el intervalo $[0°, 180°]$:
+
+\textbf{Respuesta a):} $\boxed{x = 45° \text{ y } x = 135°}$
+
+\textbf{Verificación:}
+\begin{align*}
+\tan(45°) &= 1, \quad \cot(45°) = 1 \quad \checkmark \\
+\tan(135°) &= -1, \quad \cot(135°) = -1 \quad \checkmark
+\end{align*}
+
+\textbf{Parte b):} Graficar ambas funciones.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=8cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=180,
+    ymin=-4, ymax=4,
+    xtick={0,45,90,135,180},
+    xticklabels={$0°$,$45°$,$90°$,$135°$,$180°$},
+    ytick={-3,-2,-1,0,1,2,3},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north west,
+    restrict y to domain=-5:5,
+]
+    % Asíntotas
+    \addplot[dashed, gray, thick, samples=2] coordinates {(0,-4) (0,4)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(90,-4) (90,4)};
+    \addplot[dashed, gray, thick, samples=2] coordinates {(180,-4) (180,4)};
+
+    % Tangente
+    \addplot[
+        domain=1:89,
+        samples=100,
+        smooth,
+        thick,
+        color=orange,
+    ] {tan(x)};
+
+    \addplot[
+        domain=91:179,
+        samples=100,
+        smooth,
+        thick,
+        color=orange,
+    ] {tan(x)};
+
+    % Cotangente
+    \addplot[
+        domain=1:179,
+        samples=100,
+        smooth,
+        thick,
+        color=purple,
+    ] {cot(x)};
+
+    \legend{$y = \tan(x)$, $y = \cot(x)$}
+
+    % Puntos de intersección
+    \addplot[only marks, mark=*, mark size=3pt, color=red] coordinates {
+        (45,1) (135,-1)
+    };
+
+    % Etiquetas
+    \node[above right] at (axis cs:45,1) {$(45°, 1)$};
+    \node[below right] at (axis cs:135,-1) {$(135°, -1)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Parte c):} Determinar dónde $\tan(x) > \cot(x)$.
+
+Observando la gráfica, vemos que $\tan(x) > \cot(x)$ cuando la curva naranja está por encima de la curva morada.
+
+Esto ocurre en los intervalos:
+\[
+\boxed{(45°, 90°) \cup (135°, 180°)}
+\]
+
+\textbf{Verificación algebraica:}
+
+$\tan(x) > \cot(x)$
+\[
+\frac{\sin(x)}{\cos(x)} > \frac{\cos(x)}{\sin(x)}
+\]
+
+Si $\sin(x)\cos(x) > 0$ (ambos con el mismo signo):
+\[
+\sin^2(x) > \cos^2(x)
+\]
+\[
+|\sin(x)| > |\cos(x)|
+\]
+
+En $[0°, 180°]$, esto ocurre en $(45°, 135°)$. Pero debemos excluir $(90°, 135°)$ donde $\tan(x) < 0$ y $\cot(x) > 0$, lo que hace $\tan(x) < \cot(x)$.
+
+Por lo tanto: $(45°, 90°) \cup (135°, 180°)$ \quad $\checkmark$
+
+\textbf{Parte d):} Explicación geométrica.
+
+En la circunferencia unitaria:
+\begin{itemize}
+    \item $\tan(x) = \frac{\sin(x)}{\cos(x)} = \frac{y}{x}$ (pendiente del radio)
+    \item $\cot(x) = \frac{\cos(x)}{\sin(x)} = \frac{x}{y}$ (pendiente inversa)
+\end{itemize}
+
+Las funciones son iguales cuando la pendiente y su recíproca son iguales, lo que ocurre cuando la pendiente es $\pm 1$.
+
+Esto corresponde a ángulos de $45°$ (pendiente = 1) y $135°$ (pendiente = -1), que son exactamente donde las diagonales del círculo unitario tienen ángulos de $45°$ con los ejes.
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    \draw[thick,maincolor] (0,0) circle (1);
+    \draw[-{Latex},thick] (-1.2,0) -- (1.2,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.2) -- (0,1.2) node[above] {$y$};
+
+    % Radio a 45 grados
+    \draw[blue,thick,-{Latex}] (0,0) -- (45:1);
+    \filldraw[blue] (45:1) circle (0.02) node[above right] {$45°$};
+    \draw[blue,-{Latex}] (0.3,0) arc (0:45:0.3) node[midway,right] {\tiny $45°$};
+
+    % Radio a 135 grados
+    \draw[red,thick,-{Latex}] (0,0) -- (135:1);
+    \filldraw[red] (135:1) circle (0.02) node[above left] {$135°$};
+    \draw[red,-{Latex}] (0.3,0) arc (0:135:0.3);
+
+    % Líneas de pendiente ±1
+    \draw[dashed, green!60!black] (-0.7,-0.7) -- (0.7,0.7) node[right] {$y = x$};
+    \draw[dashed, purple] (-0.7,0.7) -- (0.7,-0.7) node[right] {$y = -x$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta d):} Las funciones se intersectan donde el radio forma ángulos de $45°$ con los ejes, porque en esos puntos las coordenadas $x$ e $y$ tienen el mismo valor absoluto, haciendo que $\frac{y}{x}$ y $\frac{x}{y}$ sean iguales.
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio Inverso 5]
+\textbf{Diseñar:} Función seno con rango $[-5, 1]$, período $360°$, máximo en $270°$.
+
+\textbf{Paso 1:} Analizar el rango $[-5, 1]$.
+
+El rango tiene:
+\begin{itemize}
+    \item Valor máximo: 1
+    \item Valor mínimo: $-5$
+    \item Centro: $\frac{1 + (-5)}{2} = \frac{-4}{2} = -2$
+    \item Amplitud: $\frac{1 - (-5)}{2} = \frac{6}{2} = 3$
+\end{itemize}
+
+Por lo tanto:
+\begin{itemize}
+    \item $A = 3$ (pero con signo negativo porque el máximo está desplazado)
+    \item $D = -2$ (desplazamiento vertical)
+\end{itemize}
+
+\textbf{Paso 2:} Analizar el período.
+
+Período = $360°$ es el período natural del seno, entonces $B = 1$.
+
+\textbf{Paso 3:} Determinar el desplazamiento de fase.
+
+La función seno estándar $y = \sin(x)$ tiene su máximo en $x = 90°$.
+
+Queremos que el máximo esté en $x = 270°$, lo que significa un desplazamiento de:
+\[
+270° - 90° = 180°
+\]
+
+Pero también debemos considerar que necesitamos una reflexión (amplitud negativa) porque el rango está desplazado hacia abajo.
+
+Intentemos la forma:
+\[
+y = -3\sin(x - C) - 2
+\]
+
+Con $A = -3$ (negativo), el seno alcanza su "máximo" (que es el mínimo del seno estándar) cuando $\sin(x - C) = -1$.
+
+$\sin(x - C) = -1$ cuando $x - C = 270°$
+
+Queremos que esto ocurra en $x = 270°$:
+\[
+270° - C = 270° \quad \Rightarrow \quad C = 0°
+\]
+
+Pero verificamos: si $y = -3\sin(x) - 2$:
+\begin{itemize}
+    \item Cuando $\sin(x) = -1$ (en $x = 270°$): $y = -3(-1) - 2 = 3 - 2 = 1$ \quad $\checkmark$ (máximo)
+    \item Cuando $\sin(x) = 1$ (en $x = 90°$): $y = -3(1) - 2 = -3 - 2 = -5$ \quad $\checkmark$ (mínimo)
+\end{itemize}
+
+\textbf{Ecuación:}
+\[
+\boxed{y = -3\sin(x) - 2}
+\]
+
+\textbf{Paso 4:} Verificar todas las condiciones.
+
+\begin{itemize}
+    \item Rango: $[-5, 1]$ \quad $\checkmark$
+    \item Período: $\frac{360°}{1} = 360°$ \quad $\checkmark$
+    \item Máximo en $270°$: $y(270°) = -3(-1) - 2 = 1$ \quad $\checkmark$
+    \item Transformación del seno: Sí \quad $\checkmark$
+\end{itemize}
+
+\textbf{Paso 5:} Graficar.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=7cm,
+    axis lines=center,
+    xlabel={$x$ (grados)},
+    ylabel={$y$},
+    xmin=0, xmax=360,
+    ymin=-6, ymax=2,
+    xtick={0,90,180,270,360},
+    xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$},
+    ytick={-5,-4,-3,-2,-1,0,1},
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    major grid style={line width=.2pt,draw=gray!50},
+    legend pos=north east,
+]
+    % Función seno original (para referencia)
+    \addplot[
+        domain=0:360,
+        samples=200,
+        smooth,
+        thin,
+        color=blue,
+        opacity=0.3,
+        dashed,
+    ] {sin(x)};
+
+    % Función diseñada
+    \addplot[
+        domain=0:360,
+        samples=200,
+        smooth,
+        thick,
+        color=red,
+    ] {-3*sin(x) - 2};
+
+    \legend{$y = \sin(x)$, $y = -3\sin(x) - 2$}
+
+    % Líneas de referencia para el rango
+    \addplot[dashed, thin, green!60!black] coordinates {(0,1) (360,1)};
+    \addplot[dashed, thin, green!60!black] coordinates {(0,-5) (360,-5)};
+
+    % Puntos importantes
+    \addplot[only marks, mark=*, mark size=2pt, color=red] coordinates {
+        (0,-2) (90,-5) (180,-2) (270,1) (360,-2)
+    };
+
+    % Etiqueta del máximo
+    \node[above] at (axis cs:270,1) {Máximo: $(270°, 1)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 6:} Análisis final.
+
+La función $y = -3\sin(x) - 2$ es:
+\begin{itemize}
+    \item Una reflexión vertical del seno ($-3$ en lugar de $3$)
+    \item Con amplitud 3
+    \item Desplazada 2 unidades hacia abajo
+    \item Esto hace que oscile entre $-5$ y $1$ (en lugar de $-1$ y $1$)
+    \item El máximo que normalmente estaría en $90°$ se convierte en mínimo
+    \item El mínimo que normalmente estaría en $270°$ se convierte en máximo
+\end{itemize}
+
+\textbf{Respuesta:} La función $y = -3\sin(x) - 2$ cumple todas las condiciones especificadas.
+\end{solucion}
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado esta primera parte de la guía sobre gráficas de funciones trigonométricas. Ahora tienes las herramientas fundamentales para:
+
+\begin{itemize}
+    \item Visualizar y entender las seis funciones trigonométricas como gráficas en el plano cartesiano
+    \item Identificar características clave: período, amplitud, dominio, rango, asíntotas
+    \item Reconocer patrones periódicos y ondulatorios
+    \item Relacionar las definiciones del círculo unitario con las representaciones gráficas
+    \item Distinguir entre las funciones básicas (seno, coseno) y sus recíprocas (secante, cosecante)
+    \item Comprender el comportamiento de tangente y cotangente con sus asíntotas
+\end{itemize}
+
+\subsection*{Resumen de Conceptos Clave}
+
+\begin{tcolorbox}[enhanced,colback=maincolor!10,colframe=maincolor,title=Características de las Funciones Trigonométricas]
+
+\textbf{Seno y Coseno:}
+\begin{itemize}
+    \item Rango: $[-1, 1]$
+    \item Período: $2\pi$
+    \item Sin asíntotas
+    \item Formas de onda suaves
+\end{itemize}
+
+\textbf{Tangente y Cotangente:}
+\begin{itemize}
+    \item Rango: $\mathbb{R}$ (todos los reales)
+    \item Período: $\pi$
+    \item Con asíntotas verticales
+    \item Crecen/decrecen sin límite
+\end{itemize}
+
+\textbf{Secante y Cosecante:}
+\begin{itemize}
+    \item Rango: $(-\infty, -1] \cup [1, \infty)$
+    \item Período: $2\pi$
+    \item Con asíntotas verticales
+    \item Formas de ``U'' invertidas
+\end{itemize}
+
+\textbf{Periodicidad:}
+\[
+\sin(x + 2\pi) = \sin(x), \quad \cos(x + 2\pi) = \cos(x), \quad \tan(x + \pi) = \tan(x)
+\]
+
+\textbf{Simetría:}
+\[
+\text{Pares: } \cos(-x) = \cos(x), \, \sec(-x) = \sec(x)
+\]
+\[
+\text{Impares: } \sin(-x) = -\sin(x), \, \tan(-x) = -\tan(x), \, \csc(-x) = -\csc(x), \, \cot(-x) = -\cot(x)
+\]
+\end{tcolorbox}
+
+\subsection*{Fórmulas Clave}
+
+\begin{tcolorbox}[enhanced,colback=accentcolor!10,colframe=accentcolor,title=Relaciones Entre Funciones]
+\textbf{Definiciones recíprocas:}
+\[
+\csc(x) = \frac{1}{\sin(x)}, \quad \sec(x) = \frac{1}{\cos(x)}, \quad \cot(x) = \frac{1}{\tan(x)}
+\]
+
+\textbf{Definiciones cociente:}
+\[
+\tan(x) = \frac{\sin(x)}{\cos(x)}, \quad \cot(x) = \frac{\cos(x)}{\sin(x)}
+\]
+
+\textbf{Identidad pitagórica:}
+\[
+\sin^2(x) + \cos^2(x) = 1
+\]
+
+\textbf{Conversión radianes-grados:}
+\[
+180° = \pi \text{ rad}, \quad 1° = \frac{\pi}{180} \text{ rad}, \quad 1 \text{ rad} = \frac{180°}{\pi}
+\]
+\end{tcolorbox}
+
+\subsection*{Aplicaciones Prácticas Recordatorio}
+
+Las gráficas que has estudiado son fundamentales para:
+
+\begin{itemize}
+    \item \textbf{Ondas sonoras:} La voz humana, instrumentos musicales, y audio digital se modelan con funciones seno
+    \item \textbf{Señales eléctricas:} La corriente AC en tu casa sigue un patrón senoidal
+    \item \textbf{Movimiento armónico simple:} Péndulos, resortes, y vibraciones mecánicas
+    \item \textbf{Mareas:} El nivel del mar varía siguiendo funciones coseno
+    \item \textbf{Análisis de fenómenos periódicos:} Ciclos naturales, patrones climáticos
+    \item \textbf{Ingeniería de señales:} Telecomunicaciones, WiFi, radio, procesamiento de señales
+\end{itemize}
+
+\subsection*{Próximos Pasos}
+
+En las siguientes partes de esta guía estudiaremos:
+
+\begin{enumerate}
+    \item \textbf{Transformaciones de funciones trigonométricas:} Desplazamientos horizontales y verticales, cambios de amplitud y período
+    \item \textbf{Ejemplos resueltos:} Problemas paso a paso que integran todos los conceptos
+    \item \textbf{Ejercicios propuestos:} Práctica guiada con soluciones detalladas
+    \item \textbf{Aplicaciones avanzadas:} Modelado de fenómenos reales usando funciones trigonométricas
+\end{enumerate}
+
+\subsection*{Consejos para el Éxito}
+
+\begin{enumerate}
+    \item \textbf{Practica dibujar las gráficas:} La mejor manera de entender las funciones trigonométricas es dibujarlas a mano varias veces
+    \item \textbf{Memoriza los valores clave:} Conocer $\sin(\frac{\pi}{6})$, $\cos(\frac{\pi}{4})$, etc., te ahorrará mucho tiempo
+    \item \textbf{Identifica patrones:} Las funciones trigonométricas tienen simetrías y periodicidades que puedes aprovechar
+    \item \textbf{Relaciona con el círculo unitario:} Siempre que tengas dudas, vuelve a la definición en el círculo unitario
+    \item \textbf{Usa la tecnología:} Graficadores como Desmos o GeoGebra te ayudarán a visualizar conceptos difíciles
+    \item \textbf{Conecta con el mundo real:} Busca ejemplos de ondas y oscilaciones a tu alrededor
+\end{enumerate}
+
+\vspace{1cm}
+
+\begin{center}
+\textit{``Las ondas son el lenguaje del universo.''} \\
+\textit{``Aprender a leerlas es aprender a entender la naturaleza.''}
+\end{center}
+
+\vspace{0.5cm}
+
+¡Sigue adelante con las siguientes partes de esta guía. El viaje apenas comienza!
+
+\end{document}
