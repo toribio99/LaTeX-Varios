@@ -20,6 +20,16 @@
 \usepackage{tcolorbox}
 \tcbuselibrary{most}
 
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{maincolor}{Ángulos}}
+\fancyhead[R]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
 \newtcolorbox{conceptbox}[1]{
     colback=maincolor!5,
     colframe=maincolor,

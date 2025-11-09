@@ -16,6 +16,16 @@
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
 
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{maincolor}{Triángulos}}
+\fancyhead[R]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
 % Definir estilos de cajas
 \newtcolorbox{conceptbox}[1][]{
   colback=maincolor!5,

@@ -159,24 +159,70 @@ Observar:
 
 #### PREÁMBULO ESTÁNDAR
 ```latex
+% !TEX program = lualatex
 \documentclass[12pt,a4paper]{article}
 \usepackage{fontspec}
 \usepackage[spanish,es-nodecimaldot]{babel}
 \usepackage{amsmath,amssymb}
 \usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
 \usepackage{tikz,pgfplots}
 \usetikzlibrary{calc,arrows.meta,babel}
 \usepackage{multicol}
-\usepackage{xcolor}
 \usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{fancyhdr}
 
 \pgfplotsset{compat=1.18}
 
-% Colores según disciplina
-\definecolor{medicina}{RGB}{220,20,60}
-\definecolor{economia}{RGB}{0,128,0}
-\definecolor{fisica}{RGB}{0,0,255}
-\definecolor{social}{RGB}{255,140,0}
+% Colores institucionales
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de encabezados y pies de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{maincolor}{[TÍTULO CORTO]}}
+\fancyhead[R]{\small\textcolor{maincolor}{Grado [X] - [ASIGNATURA]}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\setlength{\headheight}{14pt}
+
+% Definición de cajas de colores
+\newtcolorbox{definicion}{
+    colback=maincolor!5,
+    colframe=maincolor,
+    fonttitle=\bfseries,
+    title=Definición,
+    breakable
+}
+
+\newtcolorbox{teorema}{
+    colback=accentcolor!5,
+    colframe=accentcolor,
+    fonttitle=\bfseries,
+    title=Propiedad/Teorema,
+    breakable
+}
+
+\newtcolorbox{ejemplo}{
+    colback=green!5,
+    colframe=green!70!black,
+    fonttitle=\bfseries,
+    title=Ejemplo,
+    breakable
+}
+
+\newtcolorbox{nota}{
+    colback=yellow!10,
+    colframe=yellow!80!black,
+    fonttitle=\bfseries,
+    title=Nota Importante,
+    breakable
+}
 
 \title{[TÍTULO]}
 \author{[AUTOR]}
