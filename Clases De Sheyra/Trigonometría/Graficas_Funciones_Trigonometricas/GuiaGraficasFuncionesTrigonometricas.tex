@@ -1,0 +1,1395 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad Líneas trigonométricas}}
+\fancyhead[RO]{\small\textcolor{maincolor}{Líneas trigonométricas \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+% Título
+\title{\textbf{\Huge Gráficas de las funciones trigonométricas}\\[0.5cm]
+\Large Guía de Trigonometría}
+\author{Prof. Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+Bienvenidos a esta guía sobre líneas trigonométricas. En matemáticas, las funciones trigonométricas no solo son números abstractos; también se pueden representar como segmentos de recta dentro del círculo unitario. Estas representaciones geométricas se conocen como \textbf{líneas trigonométricas}.
+
+Las líneas trigonométricas nos permiten visualizar de manera directa las funciones seno, coseno y tangente como segmentos que podemos dibujar y medir. Esta perspectiva geométrica es fundamental para entender profundamente la trigonometría y sus aplicaciones.
+
+\subsection*{¿Qué son las líneas trigonométricas?}
+
+Las líneas trigonométricas son segmentos de recta que representan los valores de las funciones trigonométricas en el círculo unitario. Específicamente:
+
+\begin{itemize}
+    \item \textbf{Línea seno:} Es el segmento perpendicular al eje $x$ que va desde un punto en el círculo hasta el eje $x$.
+    \item \textbf{Línea coseno:} Es el segmento sobre el eje $x$ que va desde el origen hasta la proyección del punto.
+    \item \textbf{Línea tangente:} Es el segmento sobre la tangente geométrica al círculo que va desde el punto $(1,0)$ hasta donde esta tangente intercepta el radio prolongado.
+\end{itemize}
+
+\subsection*{¿Por qué son importantes?}
+
+Las líneas trigonométricas nos ayudan a:
+\begin{itemize}
+    \item Visualizar geométricamente las funciones trigonométricas
+    \item Entender los signos de las funciones en cada cuadrante
+    \item Comprender las relaciones entre las diferentes funciones
+    \item Resolver problemas de manera gráfica
+    \item Desarrollar intuición geométrica sobre la trigonometría
+\end{itemize}
+
+\subsection*{¿Qué vamos a aprender?}
+
+En esta guía exploraremos:
+\begin{enumerate}
+    \item Cómo identificar y dibujar las líneas seno, coseno y tangente
+    \item Las propiedades de estas líneas en diferentes cuadrantes
+    \item Cómo los signos de las funciones se relacionan con las direcciones de los segmentos
+    \item Aplicaciones prácticas de esta representación geométrica
+\end{enumerate}
+
+Prepárate para ver la trigonometría desde una nueva perspectiva visual.
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{El Círculo Unitario}
+
+El círculo unitario es la base de las líneas trigonométricas. Es un círculo con radio igual a 1, centrado en el origen del plano cartesiano.
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+    % Ejes
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    % Circunferencia unitaria
+    \draw[maincolor,very thick] (0,0) circle (1);
+
+    % Radio = 1
+    \draw[accentcolor,thick,-{Latex}] (0,0) -- (1,0) node[midway,below] {$r=1$};
+
+    % Cuadrantes
+    \node[maincolor] at (0.5,0.5) {\small I};
+    \node[maincolor] at (-0.5,0.5) {\small II};
+    \node[maincolor] at (-0.5,-0.5) {\small III};
+    \node[maincolor] at (0.5,-0.5) {\small IV};
+
+    % Marcas en los ejes
+    \foreach \x in {-1,1}
+        \draw (\x,0.05) -- (\x,-0.05) node[below] {$\x$};
+    \foreach \y in {-1,1}
+        \draw (0.05,\y) -- (-0.05,\y) node[left] {$\y$};
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+La ecuación del círculo unitario es: $x^2 + y^2 = 1$
+\end{nota}
+
+\subsection{Las Tres Líneas Trigonométricas Principales}
+
+Para un ángulo $\theta$ en posición estándar (con vértice en el origen y lado inicial en el eje $x$ positivo), definimos:
+
+\subsubsection{Línea Seno}
+
+La línea seno es el segmento perpendicular al eje $x$ que va desde el punto $P$ en el círculo hasta su proyección en el eje $x$. Su longitud es $|\sin\theta|$ y su signo depende de si está arriba (positivo) o abajo (negativo) del eje $x$.
+
+\subsubsection{Línea Coseno}
+
+La línea coseno es el segmento sobre el eje $x$ desde el origen hasta la proyección del punto $P$. Su longitud es $|\cos\theta|$ y su signo depende de si está a la derecha (positivo) o izquierda (negativo) del origen.
+
+\subsubsection{Línea Tangente}
+
+La línea tangente es el segmento sobre la recta tangente al círculo en el punto $(1,0)$, desde este punto hasta donde la tangente intercepta la prolongación del radio que forma el ángulo $\theta$. Su longitud es $|\tan\theta|$.
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{50}
+    \coordinate (P) at ({\angulo}:1);
+
+    % Radio
+    \draw[gray,dashed] (0,0) -- (1.5,{1.5*tan(\angulo)});
+    \draw[maincolor,very thick,-{Latex}] (0,0) -- (P);
+
+    % Punto P
+    \filldraw[maincolor] (P) circle (0.03) node[above right] {$P$};
+
+    % Ángulo
+    \draw[accentcolor,-{Latex}] (0.3,0) arc (0:\angulo:0.3) node[midway,right] {$\theta$};
+
+    % Línea COSENO (horizontal)
+    \draw[blue,very thick,-{Latex}] (0,0) -- ({\angulo}:1 |- 0,0) node[midway,below] {\small coseno};
+
+    % Línea SENO (vertical)
+    \draw[red,very thick,-{Latex}] ({\angulo}:1 |- 0,0) -- (P) node[midway,right] {\small seno};
+
+    % Línea TANGENTE
+    \coordinate (T) at (1,{tan(\angulo)});
+    \draw[green!60!black,very thick] (1,0) -- (T) node[midway,right] {\small tangente};
+    \filldraw[green!60!black] (T) circle (0.02);
+
+    % Recta tangente al círculo en (1,0)
+    \draw[green!60!black,dashed] (1,-0.5) -- (1,1.5);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Signos de las Líneas en Cada Cuadrante}
+
+Los signos de las líneas trigonométricas varían según el cuadrante:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Cuadrante} & \textbf{Seno} & \textbf{Coseno} & \textbf{Tangente} \\
+\hline
+I & $+$ & $+$ & $+$ \\
+\hline
+II & $+$ & $-$ & $-$ \\
+\hline
+III & $-$ & $-$ & $+$ \\
+\hline
+IV & $-$ & $+$ & $-$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{nota}
+Recuerda: \textbf{T}odo \textbf{S}tudent \textbf{T}akes \textbf{C}alculus
+\begin{itemize}
+    \item Cuadrante I: \textbf{T}odo es positivo
+    \item Cuadrante II: Solo \textbf{S}eno es positivo
+    \item Cuadrante III: Solo \textbf{T}angente es positivo
+    \item Cuadrante IV: Solo \textbf{C}oseno es positivo
+\end{itemize}
+\end{nota}
+
+\newpage
+
+\section{Ejemplos Resueltos}
+
+A continuación se presentan ejemplos detallados sobre cómo identificar y dibujar líneas trigonométricas.
+
+\begin{ejemplo}[title=Ejemplo 1: Lineas para 30 grados]
+Dibuja las líneas seno, coseno y tangente para el ángulo de $30^\circ$ en el círculo unitario.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Ubicar el ángulo.
+
+El ángulo $30^\circ$ está en el primer cuadrante. El punto $P$ en el círculo unitario tiene coordenadas:
+\[
+P = (\cos 30^\circ, \sin 30^\circ) = \left(\frac{\sqrt{3}}{2}, \frac{1}{2}\right)
+\]
+
+\textbf{Paso 2:} Identificar cada línea.
+
+\begin{itemize}
+    \item \textbf{Línea coseno:} Segmento horizontal desde el origen hasta $\left(\frac{\sqrt{3}}{2}, 0\right)$
+    \item Longitud: $\frac{\sqrt{3}}{2} \approx 0.866$
+    \item \textbf{Línea seno:} Segmento vertical desde $\left(\frac{\sqrt{3}}{2}, 0\right)$ hasta $P$
+    \item Longitud: $\frac{1}{2} = 0.5$
+    \item \textbf{Línea tangente:} Segmento desde $(1,0)$ hasta la intersección con el radio prolongado
+    \item Longitud: $\tan 30^\circ = \frac{1}{\sqrt{3}} = \frac{\sqrt{3}}{3} \approx 0.577$
+\end{itemize}
+
+\textbf{Paso 3:} Dibujo.
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-0.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-0.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{30}
+    \coordinate (P) at ({\angulo}:1);
+
+    % Radio
+    \draw[gray,dashed] (0,0) -- (1.2,{1.2*tan(\angulo)});
+    \draw[maincolor,very thick,-{Latex}] (0,0) -- (P);
+
+    % Punto P
+    \filldraw[maincolor] (P) circle (0.02) node[above right,scale=0.8] {$P\left(\frac{\sqrt{3}}{2}, \frac{1}{2}\right)$};
+
+    % Ángulo
+    \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25) node[midway,right,scale=0.7] {$30^\circ$};
+
+    % Línea COSENO
+    \draw[blue,very thick,-{Latex}] (0,0) -- ({\angulo}:1 |- 0,0);
+    \node[blue,below,scale=0.7] at (0.433,0) {$\cos 30^\circ = \frac{\sqrt{3}}{2}$};
+
+    % Línea SENO
+    \draw[red,very thick,-{Latex}] ({\angulo}:1 |- 0,0) -- (P);
+    \node[red,right,scale=0.7] at (0.866,0.25) {$\sin 30^\circ = \frac{1}{2}$};
+
+    % Línea TANGENTE
+    \coordinate (T) at (1,{tan(\angulo)});
+    \draw[green!60!black,very thick,-{Latex}] (1,0) -- (T);
+    \node[green!60!black,right,scale=0.7] at (1,0.289) {$\tan 30^\circ = \frac{\sqrt{3}}{3}$};
+    \filldraw[green!60!black] (T) circle (0.015);
+
+    % Recta tangente
+    \draw[green!60!black,dashed,thin] (1,-0.2) -- (1,0.7);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} En el primer cuadrante, todas las líneas son positivas y se dirigen hacia arriba (seno) y hacia la derecha (coseno y tangente).
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 2: Lineas para 120 grados]
+Dibuja las líneas seno, coseno y tangente para el ángulo de $120^\circ$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Ubicar el ángulo.
+
+El ángulo $120^\circ$ está en el segundo cuadrante. Usando $120^\circ = 180^\circ - 60^\circ$:
+\[
+P = (\cos 120^\circ, \sin 120^\circ) = \left(-\frac{1}{2}, \frac{\sqrt{3}}{2}\right)
+\]
+
+\textbf{Paso 2:} Identificar signos.
+
+En el segundo cuadrante:
+\begin{itemize}
+    \item $\sin 120^\circ = \frac{\sqrt{3}}{2} > 0$ (positivo)
+    \item $\cos 120^\circ = -\frac{1}{2} < 0$ (negativo)
+    \item $\tan 120^\circ = \frac{\sqrt{3}/2}{-1/2} = -\sqrt{3} < 0$ (negativo)
+\end{itemize}
+
+\textbf{Paso 3:} Dibujo.
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-0.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{120}
+    \coordinate (P) at ({\angulo}:1);
+
+    % Radio
+    \draw[gray,dashed] (0,0) -- (1.5,{1.5*tan(\angulo)});
+    \draw[maincolor,very thick,-{Latex}] (0,0) -- (P);
+
+    % Punto P
+    \filldraw[maincolor] (P) circle (0.02) node[above left,scale=0.8] {$P$};
+
+    % Ángulo
+    \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25) node[midway,above,scale=0.7] {$120^\circ$};
+
+    % Línea COSENO (negativo)
+    \draw[blue,very thick,{Latex}-] (0,0) -- ({\angulo}:1 |- 0,0);
+    \node[blue,below,scale=0.7] at (-0.25,0) {$\cos 120^\circ = -\frac{1}{2}$};
+
+    % Línea SENO (positivo)
+    \draw[red,very thick,-{Latex}] ({\angulo}:1 |- 0,0) -- (P);
+    \node[red,left,scale=0.7] at (-0.5,0.433) {$\sin 120^\circ = \frac{\sqrt{3}}{2}$};
+
+    % Línea TANGENTE (negativo)
+    \coordinate (T) at (1,{tan(\angulo)});
+    \draw[green!60!black,very thick,{Latex}-] (1,0) -- (T);
+    \node[green!60!black,right,scale=0.6] at (1,-0.866) {$\tan 120^\circ = -\sqrt{3}$};
+    \filldraw[green!60!black] (T) circle (0.015);
+
+    % Recta tangente
+    \draw[green!60!black,dashed,thin] (1,-2) -- (1,0.3);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} En el segundo cuadrante, el seno es positivo (hacia arriba) mientras que el coseno y la tangente son negativos.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 3: Lineas para 225 grados]
+Dibuja las líneas trigonométricas para el ángulo de $225^\circ$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Ubicar el ángulo.
+
+El ángulo $225^\circ$ está en el tercer cuadrante. Usando $225^\circ = 180^\circ + 45^\circ$:
+\[
+P = (\cos 225^\circ, \sin 225^\circ) = \left(-\frac{\sqrt{2}}{2}, -\frac{\sqrt{2}}{2}\right)
+\]
+
+\textbf{Paso 2:} Identificar signos.
+
+En el tercer cuadrante:
+\begin{itemize}
+    \item $\sin 225^\circ = -\frac{\sqrt{2}}{2} < 0$ (negativo)
+    \item $\cos 225^\circ = -\frac{\sqrt{2}}{2} < 0$ (negativo)
+    \item $\tan 225^\circ = \frac{-\sqrt{2}/2}{-\sqrt{2}/2} = 1 > 0$ (positivo)
+\end{itemize}
+
+\textbf{Paso 3:} Dibujo.
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{225}
+    \coordinate (P) at ({\angulo}:1);
+
+    % Radio
+    \draw[gray,dashed] (0,0) -- (1.5,{1.5*tan(\angulo)});
+    \draw[maincolor,very thick,-{Latex}] (0,0) -- (P);
+
+    % Punto P
+    \filldraw[maincolor] (P) circle (0.02) node[below left,scale=0.8] {$P$};
+
+    % Ángulo
+    \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25);
+    \node[accentcolor,scale=0.7] at (0.15,0.15) {$225^\circ$};
+
+    % Línea COSENO (negativo)
+    \draw[blue,very thick,{Latex}-] (0,0) -- ({\angulo}:1 |- 0,0);
+    \node[blue,above,scale=0.7] at (-0.35,0) {$\cos 225^\circ = -\frac{\sqrt{2}}{2}$};
+
+    % Línea SENO (negativo)
+    \draw[red,very thick,{Latex}-] ({\angulo}:1 |- 0,0) -- (P);
+    \node[red,right,scale=0.7] at (-0.707,-0.35) {$\sin 225^\circ = -\frac{\sqrt{2}}{2}$};
+
+    % Línea TANGENTE (positivo)
+    \coordinate (T) at (1,{tan(\angulo)});
+    \draw[green!60!black,very thick,-{Latex}] (1,0) -- (T);
+    \node[green!60!black,right,scale=0.7] at (1,-0.5) {$\tan 225^\circ = 1$};
+    \filldraw[green!60!black] (T) circle (0.015);
+
+    % Recta tangente
+    \draw[green!60!black,dashed,thin] (1,-1.3) -- (1,0.3);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} En el tercer cuadrante, seno y coseno son negativos, pero la tangente es positiva.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 4: Lineas para 300 grados]
+Dibuja las líneas trigonométricas para el ángulo de $300^\circ$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Ubicar el ángulo.
+
+El ángulo $300^\circ$ está en el cuarto cuadrante. Usando $300^\circ = 360^\circ - 60^\circ$:
+\[
+P = (\cos 300^\circ, \sin 300^\circ) = \left(\frac{1}{2}, -\frac{\sqrt{3}}{2}\right)
+\]
+
+\textbf{Paso 2:} Identificar signos.
+
+En el cuarto cuadrante:
+\begin{itemize}
+    \item $\sin 300^\circ = -\frac{\sqrt{3}}{2} < 0$ (negativo)
+    \item $\cos 300^\circ = \frac{1}{2} > 0$ (positivo)
+    \item $\tan 300^\circ = \frac{-\sqrt{3}/2}{1/2} = -\sqrt{3} < 0$ (negativo)
+\end{itemize}
+
+\textbf{Paso 3:} Dibujo.
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-0.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{300}
+    \coordinate (P) at ({\angulo}:1);
+
+    % Radio
+    \draw[gray,dashed] (0,0) -- (1.5,{1.5*tan(\angulo)});
+    \draw[maincolor,very thick,-{Latex}] (0,0) -- (P);
+
+    % Punto P
+    \filldraw[maincolor] (P) circle (0.02) node[below right,scale=0.8] {$P$};
+
+    % Ángulo
+    \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25);
+    \node[accentcolor,scale=0.7] at (0.3,-0.15) {$300^\circ$};
+
+    % Línea COSENO (positivo)
+    \draw[blue,very thick,-{Latex}] (0,0) -- ({\angulo}:1 |- 0,0);
+    \node[blue,above,scale=0.7] at (0.25,0) {$\cos 300^\circ = \frac{1}{2}$};
+
+    % Línea SENO (negativo)
+    \draw[red,very thick,{Latex}-] ({\angulo}:1 |- 0,0) -- (P);
+    \node[red,left,scale=0.7] at (0.5,-0.433) {$\sin 300^\circ = -\frac{\sqrt{3}}{2}$};
+
+    % Línea TANGENTE (negativo)
+    \coordinate (T) at (1,{tan(\angulo)});
+    \draw[green!60!black,very thick,{Latex}-] (1,0) -- (T);
+    \node[green!60!black,right,scale=0.6] at (1,-0.866) {$\tan 300^\circ = -\sqrt{3}$};
+    \filldraw[green!60!black] (T) circle (0.015);
+
+    % Recta tangente
+    \draw[green!60!black,dashed,thin] (1,-2) -- (1,0.3);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} En el cuarto cuadrante, solo el coseno es positivo, mientras que seno y tangente son negativos.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 5: Comparacion entre angulos]
+Compara las líneas trigonométricas de $45^\circ$ y $135^\circ$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Para $45^\circ$ (Primer cuadrante):}
+\[
+\sin 45^\circ = \frac{\sqrt{2}}{2}, \quad \cos 45^\circ = \frac{\sqrt{2}}{2}, \quad \tan 45^\circ = 1
+\]
+
+\textbf{Para $135^\circ$ (Segundo cuadrante):}
+
+Usando $135^\circ = 180^\circ - 45^\circ$:
+\[
+\sin 135^\circ = \frac{\sqrt{2}}{2}, \quad \cos 135^\circ = -\frac{\sqrt{2}}{2}, \quad \tan 135^\circ = -1
+\]
+
+\textbf{Observaciones:}
+
+\begin{itemize}
+    \item Ambos ángulos tienen la misma línea seno (misma longitud positiva)
+    \item Las líneas coseno tienen la misma longitud, pero signos opuestos
+    \item Las líneas tangente tienen la misma longitud, pero signos opuestos
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-0.3) -- (0,1.3) node[above] {$y$};
+
+    % Ángulo 45 grados
+    \coordinate (P1) at (45:1);
+    \draw[blue,very thick,-{Latex}] (0,0) -- (P1);
+    \filldraw[blue] (P1) circle (0.02) node[above right,scale=0.7] {$45^\circ$};
+
+    % Ángulo 135 grados
+    \coordinate (P2) at (135:1);
+    \draw[red,very thick,-{Latex}] (0,0) -- (P2);
+    \filldraw[red] (P2) circle (0.02) node[above left,scale=0.7] {$135^\circ$};
+
+    % Líneas seno (misma altura)
+    \draw[green!60!black,dashed] (-1,0.707) -- (1,0.707);
+    \node[green!60!black,right,scale=0.6] at (1,0.707) {Mismo seno};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} Los ángulos suplementarios (que suman $180^\circ$) tienen senos iguales y cosenos opuestos.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 6: Angulos cuadrantales]
+Dibuja las líneas trigonométricas para el ángulo de $90^\circ$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Valores para $90^\circ$.
+
+El punto en el círculo es $P = (0, 1)$, por lo tanto:
+\[
+\sin 90^\circ = 1, \quad \cos 90^\circ = 0, \quad \tan 90^\circ = \text{indefinido}
+\]
+
+\textbf{Paso 2:} Interpretación geométrica.
+
+\begin{itemize}
+    \item La línea seno tiene longitud máxima: 1
+    \item La línea coseno tiene longitud cero (no existe como segmento)
+    \item La línea tangente no está definida (el radio es paralelo a la recta tangente en $(1,0)$)
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-0.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-0.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{90}
+    \coordinate (P) at ({\angulo}:1);
+
+    % Radio
+    \draw[maincolor,very thick,-{Latex}] (0,0) -- (P);
+
+    % Punto P
+    \filldraw[maincolor] (P) circle (0.02) node[above right,scale=0.8] {$P(0,1)$};
+
+    % Ángulo
+    \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25);
+    \node[accentcolor,scale=0.7] at (0.35,0.35) {$90^\circ$};
+
+    % Línea COSENO (cero)
+    \filldraw[blue] (0,0) circle (0.02);
+    \node[blue,below,scale=0.7] at (0,-0.1) {$\cos 90^\circ = 0$};
+
+    % Línea SENO (máximo)
+    \draw[red,very thick,-{Latex}] (0,0) -- (P);
+    \node[red,left,scale=0.7] at (0,0.5) {$\sin 90^\circ = 1$};
+
+    % Recta tangente (paralela al radio)
+    \draw[green!60!black,dashed,thin] (1,-0.3) -- (1,1.3);
+    \node[green!60!black,right,scale=0.6] at (1,0.65) {$\tan 90^\circ$ indefinido};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} Para ángulos cuadrantales, algunas líneas pueden tener longitud cero o no estar definidas.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 7: Relacion entre lineas]
+Demuestra geométricamente que $\tan\theta = \frac{\sin\theta}{\cos\theta}$ usando las líneas trigonométricas.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Análisis geométrico:}
+
+Consideremos un ángulo $\theta$ en el primer cuadrante. En el círculo unitario:
+
+\begin{itemize}
+    \item El punto $P$ tiene coordenadas $(\cos\theta, \sin\theta)$
+    \item La línea seno tiene longitud $\sin\theta$
+    \item La línea coseno tiene longitud $\cos\theta$
+\end{itemize}
+
+\textbf{Triángulos semejantes:}
+
+El triángulo formado por el origen, la proyección de $P$ en el eje $x$, y el punto $P$ es semejante al triángulo formado por el origen, el punto $(1,0)$, y el punto donde la tangente intercepta el radio prolongado.
+
+Por semejanza:
+\[
+\frac{\text{línea tangente}}{1} = \frac{\sin\theta}{\cos\theta}
+\]
+
+Por lo tanto:
+\[
+\tan\theta = \frac{\sin\theta}{\cos\theta}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-0.3,0) -- (1.5,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-0.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{40}
+    \coordinate (P) at ({\angulo}:1);
+    \coordinate (T) at (1,{tan(\angulo)});
+
+    % Radios
+    \draw[gray,dashed] (0,0) -- (1.3,{1.3*tan(\angulo)});
+    \draw[maincolor,very thick] (0,0) -- (P);
+
+    % Triángulo principal
+    \draw[blue,thick] (0,0) -- ({\angulo}:1 |- 0,0) -- (P) -- cycle;
+
+    % Triángulo semejante
+    \draw[red,thick] (0,0) -- (1,0) -- (T) -- cycle;
+
+    % Puntos
+    \filldraw[maincolor] (P) circle (0.02) node[above right,scale=0.7] {$P$};
+    \filldraw[green!60!black] (T) circle (0.02);
+
+    % Etiquetas
+    \node[blue,below,scale=0.7] at (0.4,0) {$\cos\theta$};
+    \node[blue,right,scale=0.7] at (0.766,0.32) {$\sin\theta$};
+    \node[red,below,scale=0.7] at (0.5,0) {$1$};
+    \node[red,right,scale=0.7] at (1,0.42) {$\tan\theta$};
+
+    % Recta tangente
+    \draw[green!60!black,dashed,thin] (1,-0.2) -- (1,1);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} La relación $\tan\theta = \frac{\sin\theta}{\cos\theta}$ se puede demostrar usando la semejanza de triángulos en el círculo unitario.
+\end{ejemplo}
+
+\newpage
+
+\section{Ejercicios Propuestos}
+
+Resuelve los siguientes ejercicios aplicando los conceptos de líneas trigonométricas.
+
+\begin{ejercicio}[title=Ejercicio 1]
+Dibuja las líneas seno, coseno y tangente para el ángulo de $60^\circ$ e indica sus valores numéricos.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 2]
+Para el ángulo de $150^\circ$, determina:
+\begin{itemize}
+    \item[a)] En qué cuadrante se encuentra
+    \item[b)] El signo de cada línea trigonométrica
+    \item[c)] Los valores de $\sin 150^\circ$, $\cos 150^\circ$ y $\tan 150^\circ$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 3]
+Dibuja las líneas trigonométricas para $210^\circ$ y explica por qué el seno y el coseno son ambos negativos en este cuadrante.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 4]
+Compara las líneas trigonométricas de $45^\circ$ y $315^\circ$. ¿Qué relación existe entre ellas?
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 5]
+Para el ángulo de $270^\circ$:
+\begin{itemize}
+    \item[a)] Indica el valor de cada función trigonométrica
+    \item[b)] Explica qué sucede con la línea tangente
+    \item[c)] Dibuja el diagrama completo
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 6]
+Demuestra geométricamente usando las líneas trigonométricas que $\sin^2\theta + \cos^2\theta = 1$ para cualquier ángulo $\theta$.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 7]
+Dibuja en un mismo círculo unitario las líneas para $30^\circ$, $150^\circ$, $210^\circ$ y $330^\circ$. ¿Qué patrón observas en las líneas seno?
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 8]
+Si la línea seno de un ángulo $\theta$ en el segundo cuadrante tiene longitud $\frac{3}{5}$, determina:
+\begin{itemize}
+    \item[a)] El valor de $\sin\theta$
+    \item[b)] El valor de $\cos\theta$ usando la identidad pitagórica
+    \item[c)] El valor de $\tan\theta$
+\end{itemize}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones Detalladas}
+
+\begin{solucion}[title=Solucion Ejercicio 1]
+\textbf{Líneas para $60^\circ$}
+
+\textbf{Paso 1:} El ángulo $60^\circ$ está en el primer cuadrante.
+
+El punto $P$ tiene coordenadas:
+\[
+P = \left(\cos 60^\circ, \sin 60^\circ\right) = \left(\frac{1}{2}, \frac{\sqrt{3}}{2}\right)
+\]
+
+\textbf{Paso 2:} Valores de las líneas:
+
+\begin{itemize}
+    \item Línea coseno: longitud $= \frac{1}{2} = 0.5$
+    \item Línea seno: longitud $= \frac{\sqrt{3}}{2} \approx 0.866$
+    \item Línea tangente: longitud $= \tan 60^\circ = \sqrt{3} \approx 1.732$
+\end{itemize}
+
+\textbf{Paso 3:} Dibujo:
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-0.3,0) -- (1.5,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-0.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{60}
+    \coordinate (P) at ({\angulo}:1);
+    \coordinate (T) at (1,{tan(\angulo)});
+
+    \draw[gray,dashed] (0,0) -- (1.3,{1.3*tan(\angulo)});
+    \draw[maincolor,very thick,-{Latex}] (0,0) -- (P);
+    \filldraw[maincolor] (P) circle (0.02) node[above right,scale=0.8] {$P$};
+
+    \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25) node[midway,right,scale=0.7] {$60^\circ$};
+
+    \draw[blue,very thick,-{Latex}] (0,0) -- ({\angulo}:1 |- 0,0);
+    \node[blue,below,scale=0.7] at (0.25,-0.05) {$\frac{1}{2}$};
+
+    \draw[red,very thick,-{Latex}] ({\angulo}:1 |- 0,0) -- (P);
+    \node[red,left,scale=0.7] at (0.5,0.433) {$\frac{\sqrt{3}}{2}$};
+
+    \draw[green!60!black,very thick,-{Latex}] (1,0) -- (T);
+    \node[green!60!black,right,scale=0.7] at (1,0.866) {$\sqrt{3}$};
+    \filldraw[green!60!black] (T) circle (0.015);
+
+    \draw[green!60!black,dashed,thin] (1,-0.2) -- (1,2);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{\sin 60^\circ = \frac{\sqrt{3}}{2}, \quad \cos 60^\circ = \frac{1}{2}, \quad \tan 60^\circ = \sqrt{3}}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio 2]
+\textbf{Ángulo $150^\circ$}
+
+\textbf{Parte a):} Cuadrante.
+
+Como $90^\circ < 150^\circ < 180^\circ$, el ángulo está en el \textbf{segundo cuadrante}.
+
+\textbf{Parte b):} Signos.
+
+En el segundo cuadrante:
+\begin{itemize}
+    \item $\sin 150^\circ > 0$ (positivo)
+    \item $\cos 150^\circ < 0$ (negativo)
+    \item $\tan 150^\circ < 0$ (negativo)
+\end{itemize}
+
+\textbf{Parte c):} Valores.
+
+Usando $150^\circ = 180^\circ - 30^\circ$:
+\begin{align*}
+\sin 150^\circ &= \sin 30^\circ = \frac{1}{2} \\
+\cos 150^\circ &= -\cos 30^\circ = -\frac{\sqrt{3}}{2} \\
+\tan 150^\circ &= \frac{\sin 150^\circ}{\cos 150^\circ} = \frac{1/2}{-\sqrt{3}/2} = -\frac{1}{\sqrt{3}} = -\frac{\sqrt{3}}{3}
+\end{align*}
+
+\textbf{Respuesta:}
+\[
+\boxed{\sin 150^\circ = \frac{1}{2}, \quad \cos 150^\circ = -\frac{\sqrt{3}}{2}, \quad \tan 150^\circ = -\frac{\sqrt{3}}{3}}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio 3]
+\textbf{Ángulo $210^\circ$}
+
+El ángulo $210^\circ = 180^\circ + 30^\circ$ está en el tercer cuadrante.
+
+\textbf{Coordenadas del punto:}
+\[
+P = \left(\cos 210^\circ, \sin 210^\circ\right) = \left(-\frac{\sqrt{3}}{2}, -\frac{1}{2}\right)
+\]
+
+\textbf{Explicación de signos:}
+
+En el tercer cuadrante:
+\begin{itemize}
+    \item La coordenada $x$ es negativa (punto a la izquierda del eje $y$), por tanto $\cos 210^\circ < 0$
+    \item La coordenada $y$ es negativa (punto debajo del eje $x$), por tanto $\sin 210^\circ < 0$
+    \item Como ambos son negativos, $\tan 210^\circ = \frac{\text{negativo}}{\text{negativo}} > 0$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{210}
+    \coordinate (P) at ({\angulo}:1);
+
+    \draw[gray,dashed] (0,0) -- (1.5,{1.5*tan(\angulo)});
+    \draw[maincolor,very thick,-{Latex}] (0,0) -- (P);
+    \filldraw[maincolor] (P) circle (0.02) node[below left,scale=0.8] {$P$};
+
+    \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25);
+    \node[accentcolor,scale=0.7] at (0.15,0.15) {$210^\circ$};
+
+    \draw[blue,very thick,{Latex}-] (0,0) -- ({\angulo}:1 |- 0,0);
+    \node[blue,above,scale=0.7] at (-0.433,0) {$-\frac{\sqrt{3}}{2}$};
+
+    \draw[red,very thick,{Latex}-] ({\angulo}:1 |- 0,0) -- (P);
+    \node[red,left,scale=0.7] at (-0.866,-0.25) {$-\frac{1}{2}$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} Ambas líneas apuntan en direcciones negativas (izquierda y abajo) porque el punto está en el tercer cuadrante.
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio 4]
+\textbf{Comparación: $45^\circ$ y $315^\circ$}
+
+\textbf{Para $45^\circ$ (primer cuadrante):}
+\[
+\sin 45^\circ = \frac{\sqrt{2}}{2}, \quad \cos 45^\circ = \frac{\sqrt{2}}{2}, \quad \tan 45^\circ = 1
+\]
+
+\textbf{Para $315^\circ$ (cuarto cuadrante):}
+
+Usando $315^\circ = 360^\circ - 45^\circ$:
+\[
+\sin 315^\circ = -\frac{\sqrt{2}}{2}, \quad \cos 315^\circ = \frac{\sqrt{2}}{2}, \quad \tan 315^\circ = -1
+\]
+
+\textbf{Relación:}
+
+\begin{itemize}
+    \item Ambos ángulos tienen la misma línea coseno (positiva, misma longitud)
+    \item Las líneas seno tienen la misma longitud pero signos opuestos
+    \item Las líneas tangente tienen la misma longitud pero signos opuestos
+\end{itemize}
+
+Los ángulos $45^\circ$ y $315^\circ$ son \textbf{simétricos respecto al eje $x$}.
+
+\textbf{Respuesta:}
+\[
+\boxed{\sin 315^\circ = -\sin 45^\circ, \quad \cos 315^\circ = \cos 45^\circ, \quad \tan 315^\circ = -\tan 45^\circ}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio 5]
+\textbf{Ángulo $270^\circ$}
+
+\textbf{Parte a):} Valores.
+
+El punto en el círculo es $P = (0, -1)$:
+\begin{align*}
+\sin 270^\circ &= -1 \\
+\cos 270^\circ &= 0 \\
+\tan 270^\circ &= \text{indefinido}
+\end{align*}
+
+\textbf{Parte b):} Línea tangente.
+
+La línea tangente no está definida porque el radio que forma el ángulo de $270^\circ$ es vertical (paralelo al eje $y$), y nunca intercepta la recta tangente vertical en $(1,0)$. Matemáticamente, esto se refleja en que $\tan 270^\circ = \frac{-1}{0}$ es indefinido.
+
+\textbf{Parte c):} Diagrama.
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-0.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{270}
+    \coordinate (P) at ({\angulo}:1);
+
+    \draw[maincolor,very thick,-{Latex}] (0,0) -- (P);
+    \filldraw[maincolor] (P) circle (0.02) node[below right,scale=0.8] {$P(0,-1)$};
+
+    \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25);
+    \node[accentcolor,scale=0.7] at (0.35,-0.25) {$270^\circ$};
+
+    \filldraw[blue] (0,0) circle (0.02);
+    \node[blue,right,scale=0.7] at (0.1,0) {$\cos 270^\circ = 0$};
+
+    \draw[red,very thick,{Latex}-] (0,0) -- (P);
+    \node[red,right,scale=0.7] at (0,-0.5) {$\sin 270^\circ = -1$};
+
+    \draw[green!60!black,dashed,thin] (1,-1.3) -- (1,1.3);
+    \node[green!60!black,right,scale=0.6] at (1,-0.65) {$\tan 270^\circ$ indefinido};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} Para ángulos cuadrantales como $270^\circ$, algunas líneas pueden no estar definidas.
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio 6]
+\textbf{Demostración geométrica de $\sin^2\theta + \cos^2\theta = 1$}
+
+\textbf{Usando el círculo unitario:}
+
+Sea $P = (\cos\theta, \sin\theta)$ un punto en el círculo unitario.
+
+\textbf{Observación geométrica:}
+
+\begin{itemize}
+    \item La línea coseno tiene longitud $|\cos\theta|$ y está sobre el eje $x$
+    \item La línea seno tiene longitud $|\sin\theta|$ y es perpendicular al eje $x$
+    \item Estas dos líneas forman los catetos de un triángulo rectángulo
+    \item La hipotenusa de este triángulo es el radio del círculo, que vale 1
+\end{itemize}
+
+\textbf{Por el Teorema de Pitágoras:}
+\[
+(\text{cateto horizontal})^2 + (\text{cateto vertical})^2 = (\text{hipotenusa})^2
+\]
+
+\[
+\cos^2\theta + \sin^2\theta = 1^2 = 1
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-0.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-0.3) -- (0,1.3) node[above] {$y$};
+
+    \def\angulo{35}
+    \coordinate (P) at ({\angulo}:1);
+
+    \draw[thick,blue] (0,0) -- ({\angulo}:1 |- 0,0) node[midway,below,scale=0.7] {$\cos\theta$};
+    \draw[thick,red] ({\angulo}:1 |- 0,0) -- (P) node[midway,right,scale=0.7] {$\sin\theta$};
+    \draw[very thick,maincolor,-{Latex}] (0,0) -- (P) node[midway,above left,scale=0.7] {$r = 1$};
+
+    \filldraw[maincolor] (P) circle (0.02) node[above right,scale=0.8] {$P$};
+
+    \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25) node[midway,right,scale=0.7] {$\theta$};
+
+    % Ángulo recto
+    \draw[thick] ({\angulo}:1 |- 0,0) ++(-0.05,0) -- ++(-0.05,0.05) -- ++(0.05,0.05);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} La identidad pitagórica es una consecuencia directa del Teorema de Pitágoras aplicado al triángulo formado por las líneas seno, coseno y el radio unitario.
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio 7]
+\textbf{Ángulos: $30^\circ$, $150^\circ$, $210^\circ$ y $330^\circ$}
+
+\textbf{Valores de seno:}
+
+\begin{align*}
+\sin 30^\circ &= \frac{1}{2} \\
+\sin 150^\circ &= \sin(180^\circ - 30^\circ) = \frac{1}{2} \\
+\sin 210^\circ &= \sin(180^\circ + 30^\circ) = -\frac{1}{2} \\
+\sin 330^\circ &= \sin(360^\circ - 30^\circ) = -\frac{1}{2}
+\end{align*}
+
+\textbf{Patrón observado:}
+
+\begin{itemize}
+    \item Los ángulos en cuadrantes superiores ($30^\circ$ y $150^\circ$) tienen seno $= +\frac{1}{2}$
+    \item Los ángulos en cuadrantes inferiores ($210^\circ$ y $330^\circ$) tienen seno $= -\frac{1}{2}$
+    \item Todos tienen la misma magnitud: $|\sin\theta| = \frac{1}{2}$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    % Línea horizontal en y = 0.5
+    \draw[green!60!black,dashed] (-1,0.5) -- (1,0.5);
+    \node[green!60!black,right,scale=0.6] at (1,0.5) {$y = \frac{1}{2}$};
+
+    % Línea horizontal en y = -0.5
+    \draw[orange,dashed] (-1,-0.5) -- (1,-0.5);
+    \node[orange,right,scale=0.6] at (1,-0.5) {$y = -\frac{1}{2}$};
+
+    % Ángulos
+    \foreach \ang/\col in {30/blue, 150/red, 210/purple, 330/brown} {
+        \draw[\col,thick,-{Latex}] (0,0) -- (\ang:1);
+        \filldraw[\col] (\ang:1) circle (0.02);
+    }
+
+    \node[blue,above right,scale=0.6] at (30:1.1) {$30^\circ$};
+    \node[red,above left,scale=0.6] at (150:1.1) {$150^\circ$};
+    \node[purple,below left,scale=0.6] at (210:1.1) {$210^\circ$};
+    \node[brown,below right,scale=0.6] at (330:1.1) {$330^\circ$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} Los cuatro ángulos tienen líneas seno con la misma magnitud, pero los signos dependen de si están en la mitad superior o inferior del círculo.
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio 8]
+\textbf{Dado:} $\theta$ en el segundo cuadrante, línea seno con longitud $\frac{3}{5}$.
+
+\textbf{Parte a):} Valor de $\sin\theta$.
+
+Como el ángulo está en el segundo cuadrante, el seno es positivo:
+\[
+\boxed{\sin\theta = \frac{3}{5}}
+\]
+
+\textbf{Parte b):} Valor de $\cos\theta$.
+
+Usando la identidad pitagórica: $\sin^2\theta + \cos^2\theta = 1$
+
+\begin{align*}
+\left(\frac{3}{5}\right)^2 + \cos^2\theta &= 1 \\
+\frac{9}{25} + \cos^2\theta &= 1 \\
+\cos^2\theta &= 1 - \frac{9}{25} = \frac{16}{25} \\
+\cos\theta &= \pm\frac{4}{5}
+\end{align*}
+
+Como estamos en el segundo cuadrante, el coseno es negativo:
+\[
+\boxed{\cos\theta = -\frac{4}{5}}
+\]
+
+\textbf{Parte c):} Valor de $\tan\theta$.
+
+\[
+\tan\theta = \frac{\sin\theta}{\cos\theta} = \frac{3/5}{-4/5} = \frac{3}{5} \cdot \frac{5}{-4} = \boxed{-\frac{3}{4}}
+\]
+
+\textbf{Verificación:} En el segundo cuadrante, la tangente debe ser negativa. ✓
+\end{solucion}
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+Los ejercicios inversos te desafían a pensar de manera diferente sobre las líneas trigonométricas.
+
+\begin{ejercicio}[title=Ejercicio Inverso 1]
+Si la línea tangente para un ángulo $\theta$ en el tercer cuadrante tiene longitud $2$, encuentra:
+\begin{itemize}
+    \item[a)] El valor de $\tan\theta$
+    \item[b)] Los valores de $\sin\theta$ y $\cos\theta$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 2]
+Encuentra todos los ángulos entre $0^\circ$ y $360^\circ$ cuya línea seno tenga longitud $\frac{\sqrt{2}}{2}$.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 3]
+Si un ángulo $\theta$ en el cuarto cuadrante tiene línea coseno de longitud $0.6$, determina:
+\begin{itemize}
+    \item[a)] El valor de $\cos\theta$
+    \item[b)] El valor de $\sin\theta$
+    \item[c)] Dibuja las líneas trigonométricas aproximadas
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 4]
+Demuestra que para cualquier ángulo $\theta$, las líneas seno y coseno nunca pueden tener ambas longitud mayor que $1$.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 5]
+Si las líneas seno y coseno de un ángulo tienen la misma longitud, ¿cuáles son los posibles valores del ángulo entre $0^\circ$ y $360^\circ$?
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones de Ejercicios Inversos}
+
+\begin{solucion}[title=Solucion Ejercicio Inverso 1]
+\textbf{Dado:} $\theta$ en el tercer cuadrante, línea tangente con longitud $2$.
+
+\textbf{Parte a):} Valor de $\tan\theta$.
+
+En el tercer cuadrante, la tangente es positiva:
+\[
+\boxed{\tan\theta = 2}
+\]
+
+\textbf{Parte b):} Valores de $\sin\theta$ y $\cos\theta$.
+
+Sabemos que $\tan\theta = \frac{\sin\theta}{\cos\theta} = 2$, entonces:
+\[
+\sin\theta = 2\cos\theta
+\]
+
+Usando la identidad pitagórica:
+\begin{align*}
+\sin^2\theta + \cos^2\theta &= 1 \\
+(2\cos\theta)^2 + \cos^2\theta &= 1 \\
+4\cos^2\theta + \cos^2\theta &= 1 \\
+5\cos^2\theta &= 1 \\
+\cos^2\theta &= \frac{1}{5} \\
+\cos\theta &= \pm\frac{1}{\sqrt{5}} = \pm\frac{\sqrt{5}}{5}
+\end{align*}
+
+Como estamos en el tercer cuadrante, $\cos\theta < 0$:
+\[
+\cos\theta = -\frac{\sqrt{5}}{5}
+\]
+
+Por lo tanto:
+\[
+\sin\theta = 2\cos\theta = 2 \cdot \left(-\frac{\sqrt{5}}{5}\right) = -\frac{2\sqrt{5}}{5}
+\]
+
+\textbf{Respuesta:}
+\[
+\boxed{\sin\theta = -\frac{2\sqrt{5}}{5}, \quad \cos\theta = -\frac{\sqrt{5}}{5}}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio Inverso 2]
+\textbf{Encontrar ángulos con $|\sin\theta| = \frac{\sqrt{2}}{2}$}
+
+\textbf{Ángulos de referencia:}
+
+Sabemos que $\sin 45^\circ = \frac{\sqrt{2}}{2}$
+
+\textbf{Casos:}
+
+\textbf{Caso 1:} $\sin\theta = +\frac{\sqrt{2}}{2}$ (cuadrantes I y II)
+
+\begin{itemize}
+    \item Cuadrante I: $\theta = 45^\circ$
+    \item Cuadrante II: $\theta = 180^\circ - 45^\circ = 135^\circ$
+\end{itemize}
+
+\textbf{Caso 2:} $\sin\theta = -\frac{\sqrt{2}}{2}$ (cuadrantes III y IV)
+
+\begin{itemize}
+    \item Cuadrante III: $\theta = 180^\circ + 45^\circ = 225^\circ$
+    \item Cuadrante IV: $\theta = 360^\circ - 45^\circ = 315^\circ$
+\end{itemize}
+
+\textbf{Respuesta:}
+\[
+\boxed{\theta = 45^\circ, \quad 135^\circ, \quad 225^\circ, \quad 315^\circ}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio Inverso 3]
+\textbf{Dado:} $\theta$ en el cuarto cuadrante, línea coseno con longitud $0.6$.
+
+\textbf{Parte a):} Valor de $\cos\theta$.
+
+En el cuarto cuadrante, el coseno es positivo:
+\[
+\boxed{\cos\theta = 0.6 = \frac{3}{5}}
+\]
+
+\textbf{Parte b):} Valor de $\sin\theta$.
+
+Usando la identidad pitagórica:
+\begin{align*}
+\sin^2\theta + \cos^2\theta &= 1 \\
+\sin^2\theta + \left(\frac{3}{5}\right)^2 &= 1 \\
+\sin^2\theta + \frac{9}{25} &= 1 \\
+\sin^2\theta &= \frac{16}{25} \\
+\sin\theta &= \pm\frac{4}{5}
+\end{align*}
+
+Como estamos en el cuarto cuadrante, $\sin\theta < 0$:
+\[
+\boxed{\sin\theta = -\frac{4}{5} = -0.8}
+\]
+
+\textbf{Parte c):} Diagrama aproximado.
+
+\begin{center}
+\begin{tikzpicture}[scale=3.5]
+    \draw[maincolor,very thick] (0,0) circle (1);
+    \draw[-{Latex},thick] (-0.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    % Calcular ángulo: arcsin(-0.8)
+    \def\angulo{323.13}
+    \coordinate (P) at ({\angulo}:1);
+
+    \draw[maincolor,very thick,-{Latex}] (0,0) -- (P);
+    \filldraw[maincolor] (P) circle (0.02) node[below right,scale=0.8] {$P$};
+
+    \draw[blue,very thick,-{Latex}] (0,0) -- ({\angulo}:1 |- 0,0);
+    \node[blue,above,scale=0.7] at (0.3,0) {$0.6$};
+
+    \draw[red,very thick,{Latex}-] ({\angulo}:1 |- 0,0) -- (P);
+    \node[red,right,scale=0.7] at (0.6,-0.4) {$-0.8$};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio Inverso 4]
+\textbf{Demostración:} Las líneas seno y coseno no pueden tener ambas longitud mayor que $1$.
+
+\textbf{Por contradicción:}
+
+Supongamos que existe un ángulo $\theta$ tal que:
+\[
+|\sin\theta| > 1 \quad \text{y} \quad |\cos\theta| > 1
+\]
+
+Entonces:
+\begin{align*}
+\sin^2\theta &> 1 \\
+\cos^2\theta &> 1
+\end{align*}
+
+Sumando:
+\[
+\sin^2\theta + \cos^2\theta > 1 + 1 = 2
+\]
+
+Pero por la identidad pitagórica:
+\[
+\sin^2\theta + \cos^2\theta = 1
+\]
+
+Tenemos una contradicción: $1 > 2$ (falso).
+
+\textbf{Interpretación geométrica:}
+
+Las líneas seno y coseno son las proyecciones de un punto en el círculo unitario (radio $= 1$). Una proyección nunca puede ser más larga que el segmento original, por lo tanto:
+\[
+|\sin\theta| \leq 1 \quad \text{y} \quad |\cos\theta| \leq 1
+\]
+
+\textbf{Conclusión:} Es imposible que ambas líneas tengan longitud mayor que $1$ simultáneamente.
+\end{solucion}
+
+\begin{solucion}[title=Solucion Ejercicio Inverso 5]
+\textbf{Encontrar ángulos con $|\sin\theta| = |\cos\theta|$}
+
+\textbf{Condición:}
+\[
+|\sin\theta| = |\cos\theta|
+\]
+
+Esto implica:
+\[
+\sin^2\theta = \cos^2\theta
+\]
+
+Usando la identidad pitagórica:
+\[
+\sin^2\theta + \cos^2\theta = 1
+\]
+
+Sustituyendo $\sin^2\theta = \cos^2\theta$:
+\begin{align*}
+\cos^2\theta + \cos^2\theta &= 1 \\
+2\cos^2\theta &= 1 \\
+\cos^2\theta &= \frac{1}{2} \\
+|\cos\theta| &= \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}
+\end{align*}
+
+Por lo tanto: $|\sin\theta| = \frac{\sqrt{2}}{2}$
+
+\textbf{Ángulos que satisfacen esta condición:}
+
+En cada cuadrante hay un ángulo donde $|\sin\theta| = |\cos\theta|$:
+
+\begin{itemize}
+    \item Cuadrante I: $45^\circ$ (ambos positivos)
+    \item Cuadrante II: $135^\circ$ (seno positivo, coseno negativo)
+    \item Cuadrante III: $225^\circ$ (ambos negativos)
+    \item Cuadrante IV: $315^\circ$ (seno negativo, coseno positivo)
+\end{itemize}
+
+\textbf{Respuesta:}
+\[
+\boxed{\theta = 45^\circ, \quad 135^\circ, \quad 225^\circ, \quad 315^\circ}
+\]
+
+\textbf{Observación:} Estos ángulos forman las diagonales del cuadrado inscrito en el círculo unitario.
+\end{solucion}
+
+\newpage
+
+\section{Conclusión}
+
+Has completado esta guía sobre líneas trigonométricas. Ahora tienes las herramientas para:
+
+\begin{itemize}
+    \item Visualizar geométricamente las funciones seno, coseno y tangente
+    \item Entender cómo los signos de las funciones se relacionan con las posiciones en el círculo
+    \item Identificar y dibujar líneas trigonométricas para cualquier ángulo
+    \item Usar esta representación geométrica para resolver problemas
+\end{itemize}
+
+\subsection*{Conceptos Clave}
+
+\begin{nota}[title=Resumen de Lineas Trigonometricas]
+\textbf{Línea Seno:} Segmento vertical desde la proyección en el eje $x$ hasta el punto en el círculo.
+
+\textbf{Línea Coseno:} Segmento horizontal desde el origen hasta la proyección en el eje $x$.
+
+\textbf{Línea Tangente:} Segmento sobre la tangente geométrica en $(1,0)$ hasta el radio prolongado.
+
+\textbf{Signos por cuadrante:}
+\begin{itemize}
+    \item I: Todas positivas
+    \item II: Solo seno positivo
+    \item III: Solo tangente positiva
+    \item IV: Solo coseno positivo
+\end{itemize}
+\end{nota}
+
+\subsection*{Próximos Pasos}
+
+Para continuar tu aprendizaje en trigonometría:
+
+\begin{enumerate}
+    \item Estudiar las gráficas de funciones trigonométricas (curvas sinusoidales)
+    \item Aprender sobre identidades trigonométricas
+    \item Explorar funciones trigonométricas inversas
+    \item Aplicar la trigonometría a problemas de física y geometría
+\end{enumerate}
+
+\vspace{1cm}
+
+\begin{center}
+\textit{``La geometría es el arte de razonar bien sobre figuras mal trazadas.''} \\
+--- Henri Poincaré
+\end{center}
+
+\end{document}

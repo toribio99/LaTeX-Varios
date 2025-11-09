@@ -179,30 +179,30 @@ Aquí viene la parte genial: cualquier punto $(x,y)$ que esté sobre la circunfe
 ¡Sí, leíste bien! La coordenada $x$ del punto ES el coseno del ángulo, y la coordenada $y$ ES el seno del ángulo. Esta es la definición más fundamental de las funciones trigonométricas.
 
 \begin{center}
-\begin{tikzpicture}[scale=3.5]
-    % Circunferencia
-    \draw[maincolor,very thick] (0,0) circle (1);
-    \draw[-{Latex},thick] (-1.2,0) -- (1.2,0) node[right] {$x$};
-    \draw[-{Latex},thick] (0,-1.2) -- (0,1.2) node[above] {$y$};
-
-    % Varios puntos importantes
-    \foreach \ang/\etiqueta/\pos in {0/{(1,0)}/below, 30/{$(\cos 30°, \sin 30°)$}/right,
-    60/{$(\cos 60°, \sin 60°)$}/right,
-    90/{$(0,1)$}/left, 120/{$(\cos 120°, \sin 120°)$}/left,
-    150/{$(\cos 150°, \sin 150°)$}/left} {
-        \filldraw[accentcolor] (\ang:1) circle (0.02);
-        \node[\pos] at (\ang:1.15) {\tiny \etiqueta};
-    }
-
-    % Ángulo de 30 grados destacado
-    \draw[accentcolor,thick,-{Latex}] (0,0) -- (30:1);
-    \draw[accentcolor,-{Latex}] (0.3,0) arc (0:30:0.3) node[midway,right] {\tiny $30°$};
-
-    % Proyecciones
-    \draw[dashed,gray] (30:1) -- (30:1 |- 0,0) node[below left] at(0.7,-0.025){\tiny $\cos 30°$};
-    \draw[dashed,gray] (30:1) -- (0,0 -| 30:1) node[right] at(0.6,0.2){\tiny $\sin 30°$};
-\end{tikzpicture}
+	\begin{tikzpicture}[scale=1.5]
+		% Círculo unitario
+		\draw[thick,maincolor] (0,0) circle (2);
+		
+		% Ejes
+		\draw[-{Latex},thick] (-2.3,0)--(2.3,0) node[right] {$x$};
+		\draw[-{Latex},thick] (0,-2.3)--(0,2.3) node[above] {$y$};
+		
+		% Ángulos especiales con etiquetas
+		\foreach \angle/\label in {
+			30/30°, 45/45°, 60/60°, 90/90°, 120/120°, 135/135°, 150/150°, 
+			180/180°, 210/210°, 225/225°, 240/240°, 270/270°, 300/300°, 315/315°, 330/330°} {
+			% Radio y punto
+			\draw[red!70!black] (0,0)--(\angle:2);
+			\fill[blue] (\angle:2) circle (0.05);
+			
+			\node[font=\small, rotate=\angle, anchor=south] at (\angle:2.3) {\label};;
+		}
+		
+		% Título inferior
+		\node[maincolor] at (0,-2.8) {\large Círculo Unitario - Tu mejor amigo en trigonometría};
+	\end{tikzpicture}
 \end{center}
+
 
 \subsection{Definición de las Funciones Trigonométricas}
 
