@@ -1,0 +1,879 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+
+% PREÁMBULO COMPLETO
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{fancyhdr}
+
+\pgfplotsset{compat=1.18}
+
+% COLORES
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% ENTORNOS TCOLORBOX
+\newtcolorbox{definicion}{
+  colback=blue!5!white,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  breakable
+}
+
+\newtcolorbox{ejemplo}{
+  colback=maincolor!5!white,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo,
+  breakable
+}
+
+\newtcolorbox{ejercicio}{
+  colback=orange!5!white,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  breakable
+}
+
+\newtcolorbox{solucion}{
+  colback=green!5!white,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  breakable
+}
+
+\newtcolorbox{nota}{
+  colback=yellow!10!white,
+  colframe=yellow!75!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  breakable
+}
+
+% FANCYHDR (twoside)
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\textcolor{maincolor}{\leftmark}}
+\fancyhead[RO]{\textcolor{maincolor}{Funciones Trigonometricas Inversas}}
+\fancyhead[RE,LO]{\textcolor{maincolor}{\thepage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{maincolor}\leaders\hrule height \headrulewidth\hfill}}
+
+% TÍTULOS DE SECCIÓN
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{maincolor}}{\thesubsection}{1em}{}
+
+\begin{document}
+
+% PORTADA
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\Huge\bfseries\color{maincolor} Graficas de funciones trigonometricas\par}
+\vspace{1.5cm}
+{\Large Funciones Trigonometricas Inversas\par}
+\vspace{2cm}
+{\Large\itshape Prof: Toribio De J Arrieta F\par}
+\vfill
+{\large La Pruebita\par}
+\vspace{0.5cm}
+{\large Grado 10 -- Trigonometría\par}
+\vspace{0.5cm}
+{\large \today\par}
+\end{titlepage}
+
+% TABLA DE CONTENIDOS
+\tableofcontents
+\newpage
+
+% INTRODUCCIÓN (2 páginas)
+\section{Introducción}
+
+¡Bienvenidos a una de las secciones más fascinantes de la trigonometría! Hasta ahora hemos trabajado con las funciones trigonométricas clásicas: seno, coseno, tangente y sus compañeras. Conocemos bien que si tengo un ángulo, puedo calcular el valor de su seno, coseno o tangente. Pero ¿qué pasa si tengo la situación al revés? Es decir, ¿qué pasa si conozco el valor del seno de un ángulo y quiero encontrar cuál es ese ángulo?
+
+Imagina que estás usando el GPS de tu celular. El satélite ha calculado que el seno del ángulo de elevación desde tu posición hasta él es 0.6. Para determinar tu ubicación exacta, el sistema necesita saber cuál es ese ángulo. Aquí es donde entran en juego las \textbf{funciones trigonométricas inversas}, también conocidas como funciones arco.
+
+Las funciones trigonométricas inversas son herramientas matemáticas que nos permiten "devolver el camino": partir de un valor trigonométrico y encontrar el ángulo correspondiente. En esta guía exploraremos el arcoseno, arcocoseno, arcotangente y sus compañeras menos conocidas pero igualmente importantes: arcocotangente, arcosecante y arcocosecante.
+
+\subsection{¿Por qué son importantes estas funciones?}
+
+Las aplicaciones de las funciones trigonométricas inversas son increíblemente variadas y están presentes en nuestra vida cotidiana más de lo que imaginamos:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Navegación GPS}: Los sistemas de posicionamiento global utilizan constantemente funciones inversas para calcular ángulos de elevación y determinar tu ubicación precisa con base en las señales de múltiples satélites.
+
+    \item \textbf{Topografía}: Los agrimensores y topógrafos usan estas funciones para medir distancias y alturas de terrenos inaccesibles. Si conocen la distancia horizontal y la vertical, pueden calcular el ángulo de inclinación de una montaña.
+
+    \item \textbf{Ingeniería de antenas}: Para orientar antenas parabólicas hacia satélites específicos, se calculan ángulos de elevación y azimut usando funciones trigonométricas inversas, considerando tu latitud y la posición del satélite.
+
+    \item \textbf{Robótica}: Los brazos robóticos industriales usan estas funciones en sus sistemas de control para calcular los ángulos exactos que deben tener cada una de sus articulaciones para alcanzar un punto específico en el espacio.
+
+    \item \textbf{Física de ondas}: En el estudio de la interferencia de ondas (luz, sonido, ondas electromagnéticas), las funciones inversas permiten determinar ángulos de incidencia y reflexión.
+
+    \item \textbf{Astronomía}: Para calcular la posición de estrellas y planetas en el cielo, los astrónomos utilizan funciones trigonométricas inversas que relacionan las coordenadas cartesianas con coordenadas esféricas.
+\end{itemize}
+
+\subsection{¿Qué aprenderemos?}
+
+A lo largo de esta guía, desarrollaremos una comprensión profunda de:
+
+\begin{enumerate}[leftmargin=*]
+    \item Cómo y por qué existen las funciones trigonométricas inversas
+    \item Las características específicas de cada función: arcoseno, arcocoseno, arcotangente, arcocotangente, arcosecante y arcocosecante
+    \item Sus dominios y rangos (¿qué valores pueden recibir y devolver?)
+    \item Sus gráficas y propiedades visuales
+    \item Cómo operar con ellas y combinarlas
+    \item Trucos y técnicas para resolver problemas que involucran estas funciones
+\end{enumerate}
+
+No te preocupes si al principio te parece un poco abstracto. Vamos a ir paso a paso, con muchos ejemplos visuales y ejercicios prácticos. Al final de esta guía, no solo entenderás estas funciones, sino que sabrás aplicarlas con confianza en situaciones reales.
+
+Recuerda: la matemática no es solo memorizar fórmulas, es desarrollar intuición y razonamiento. Así que prepárate para pensar, visualizar y, sobre todo, para entender el "por qué" detrás de cada concepto.
+
+¡Comencemos este viaje matemático!
+
+\newpage
+
+% CONCEPTOS FUNDAMENTALES (3-5 páginas)
+\section{Conceptos Fundamentales}
+
+\subsection{Repaso: Funciones y Funciones Inversas}
+
+Antes de adentrarnos en las funciones trigonométricas inversas, refresquemos qué es una función inversa en general.
+
+\begin{definicion}
+Una \textbf{función} $f: A \to B$ es una regla que asigna a cada elemento $x$ del conjunto $A$ (dominio) exactamente un elemento $y = f(x)$ del conjunto $B$ (codominio).
+
+Una \textbf{función inversa} $f^{-1}: B \to A$ "deshace" lo que hace $f$. Es decir, si $y = f(x)$, entonces $x = f^{-1}(y)$.
+\end{definicion}
+
+\textbf{Ejemplo conceptual}: Piensa en $f(x) = 2x$ como "duplicar un número". Su función inversa sería $f^{-1}(x) = \frac{x}{2}$, que "divide por 2", deshaciendo la duplicación.
+
+\begin{nota}
+\textbf{Condición crucial}: No todas las funciones tienen inversa. Para que una función tenga inversa, debe ser \textbf{inyectiva} (uno a uno), es decir, a diferentes valores de $x$ les corresponden diferentes valores de $y$.
+
+Si una función no es inyectiva, podemos \textbf{restringir su dominio} para convertirla en inyectiva y así poder definir su inversa.
+\end{nota}
+
+Esto es exactamente lo que haremos con las funciones trigonométricas. Por ejemplo, $\sin(x)$ no es inyectiva en todo $\mathbb{R}$ (hay infinitos valores de $x$ que dan el mismo seno), pero si restringimos su dominio a $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$, entonces sí es inyectiva y podemos definir su inversa: el arcoseno.
+
+\textbf{Propiedades importantes de las funciones inversas}:
+\begin{itemize}
+    \item $f(f^{-1}(x)) = x$ para todo $x$ en el dominio de $f^{-1}$
+    \item $f^{-1}(f(x)) = x$ para todo $x$ en el dominio de $f$
+    \item La gráfica de $f^{-1}$ es la reflexión de la gráfica de $f$ sobre la recta $y = x$
+\end{itemize}
+
+\newpage
+
+\subsection{La Función Arcoseno ($\sin^{-1}$ o $\arcsin$)}
+
+La función arcoseno es la inversa de la función seno, pero con una restricción cuidadosa del dominio.
+
+\begin{definicion}
+La función \textbf{arcoseno}, denotada $\arcsin(x)$ o $\sin^{-1}(x)$, se define como:
+
+$$y = \arcsin(x) \quad \Leftrightarrow \quad \sin(y) = x \text{ con } y \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$$
+
+\textbf{Dominio}: $[-1, 1]$ (todos los posibles valores del seno)
+
+\textbf{Rango}: $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$ o $[-90°, 90°]$
+\end{definicion}
+
+\textbf{¿Qué significa esto en palabras simples?}
+
+Si te digo "el seno de un ángulo es 0.5", y te pregunto "¿cuál es ese ángulo?", la función arcoseno te da la respuesta: $\arcsin(0.5) = \frac{\pi}{6}$ (o 30°).
+
+Pero hay un detalle importante: infinitos ángulos tienen seno igual a 0.5 (por ejemplo, 30°, 150°, 390°, etc.). Para evitar ambigüedad, el arcoseno siempre devuelve el ángulo que está en el rango $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$, que corresponde al primer y cuarto cuadrante.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xlabel style={below right},
+        ylabel style={above left},
+        xmin=-1.2, xmax=1.2,
+        ymin=-2, ymax=2,
+        xtick={-1,-0.5,0,0.5,1},
+        ytick={-1.5708,-0.7854,0,0.7854,1.5708},
+        yticklabels={$-\frac{\pi}{2}$,$-\frac{\pi}{4}$,$0$,$\frac{\pi}{4}$,$\frac{\pi}{2}$},
+        grid=major,
+        grid style={dashed,gray!30},
+        domain=-1:1,
+        samples=100,
+        thick,
+    ]
+    \addplot[maincolor, ultra thick] {asin(x)*pi/180};
+    \addplot[accentcolor, dashed, thick] coordinates {(-1.2,-1.5708) (1.2,-1.5708)};
+    \addplot[accentcolor, dashed, thick] coordinates {(-1.2,1.5708) (1.2,1.5708)};
+    \node[maincolor] at (axis cs: 0.5,1.2) {$y = \arcsin(x)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observaciones importantes de la gráfica}:
+\begin{itemize}
+    \item La función es \textbf{creciente} en todo su dominio
+    \item Es una función \textbf{impar}: $\arcsin(-x) = -\arcsin(x)$
+    \item Pasa por el origen: $\arcsin(0) = 0$
+    \item Los valores límite son: $\arcsin(-1) = -\frac{\pi}{2}$ y $\arcsin(1) = \frac{\pi}{2}$
+\end{itemize}
+
+\begin{nota}
+\textbf{¿Por qué se restringe el dominio de $\sin(x)$ a $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$?}
+
+Porque en este intervalo:
+\begin{enumerate}
+    \item La función seno es \textbf{inyectiva} (cada valor de salida corresponde a un único valor de entrada)
+    \item La función seno alcanza \textbf{todos} los valores posibles de su rango: de $-1$ a $1$
+    \item Este intervalo incluye el \textbf{origen} y es \textbf{simétrico} respecto a él, lo cual es matemáticamente elegante
+\end{enumerate}
+
+Si eligiéramos otro intervalo (digamos, $[0, \pi]$), también funcionaría, pero perderíamos la propiedad de que la función sea impar, lo cual es útil para muchos cálculos.
+\end{nota}
+
+\newpage
+
+\subsection{La Función Arcocoseno ($\cos^{-1}$ o $\arccos$)}
+
+La función arcocoseno es la inversa de la función coseno, con su propia restricción de dominio.
+
+\begin{definicion}
+La función \textbf{arcocoseno}, denotada $\arccos(x)$ o $\cos^{-1}(x)$, se define como:
+
+$$y = \arccos(x) \quad \Leftrightarrow \quad \cos(y) = x \text{ con } y \in [0, \pi]$$
+
+\textbf{Dominio}: $[-1, 1]$ (todos los posibles valores del coseno)
+
+\textbf{Rango}: $[0, \pi]$ o $[0°, 180°]$
+\end{definicion}
+
+\textbf{Interpretación}: Si el coseno de un ángulo es $x$, entonces $\arccos(x)$ te dice cuál es ese ángulo, pero siempre te dará un ángulo entre 0 y $\pi$ (entre 0° y 180°), es decir, en el primer o segundo cuadrante.
+
+Por ejemplo, $\arccos\left(\frac{1}{2}\right) = \frac{\pi}{3}$ (60°), aunque también $\cos(300°) = \frac{1}{2}$. El arcocoseno elige el ángulo del intervalo $[0, \pi]$.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xlabel style={below right},
+        ylabel style={above left},
+        xmin=-1.2, xmax=1.2,
+        ymin=-0.5, ymax=3.5,
+        xtick={-1,-0.5,0,0.5,1},
+        ytick={0,0.7854,1.5708,2.3562,3.1416},
+        yticklabels={$0$,$\frac{\pi}{4}$,$\frac{\pi}{2}$,$\frac{3\pi}{4}$,$\pi$},
+        grid=major,
+        grid style={dashed,gray!30},
+        domain=-1:1,
+        samples=100,
+        thick,
+    ]
+    \addplot[maincolor, ultra thick] {acos(x)*pi/180};
+    \addplot[accentcolor, dashed, thick] coordinates {(-1.2,0) (1.2,0)};
+    \addplot[accentcolor, dashed, thick] coordinates {(-1.2,3.1416) (1.2,3.1416)};
+    \node[maincolor] at (axis cs: -0.5,2.5) {$y = \arccos(x)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Características clave de la gráfica}:
+\begin{itemize}
+    \item La función es \textbf{decreciente} en todo su dominio
+    \item \textbf{No} es una función impar ni par
+    \item $\arccos(1) = 0$ (el coseno de 0° es 1)
+    \item $\arccos(0) = \frac{\pi}{2}$ (el coseno de 90° es 0)
+    \item $\arccos(-1) = \pi$ (el coseno de 180° es -1)
+\end{itemize}
+
+\textbf{Relación entre arcoseno y arcocoseno}:
+
+Existe una bella identidad que relaciona estas dos funciones:
+$$\arcsin(x) + \arccos(x) = \frac{\pi}{2} \quad \text{para todo } x \in [-1, 1]$$
+
+Esto tiene sentido geométricamente: si un ángulo agudo tiene seno $x$, su complemento tiene coseno $x$, y la suma de ángulos complementarios es $\frac{\pi}{2}$.
+
+\newpage
+
+\subsection{La Función Arcotangente ($\tan^{-1}$ o $\arctan$)}
+
+La función arcotangente es la inversa de la tangente, y tiene una característica especial: su dominio es todo $\mathbb{R}$.
+
+\begin{definicion}
+La función \textbf{arcotangente}, denotada $\arctan(x)$ o $\tan^{-1}(x)$, se define como:
+
+$$y = \arctan(x) \quad \Leftrightarrow \quad \tan(y) = x \text{ con } y \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$$
+
+\textbf{Dominio}: $\mathbb{R}$ (todos los números reales)
+
+\textbf{Rango}: $\left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$ o $(-90°, 90°)$
+\end{definicion}
+
+\textbf{¿Qué la hace especial?}
+
+A diferencia del seno y el coseno, cuyo rango está limitado a $[-1, 1]$, la tangente puede tomar \textbf{cualquier} valor real. Por eso, el dominio del arcotangente es todo $\mathbb{R}$: puedes preguntarle "¿cuál es el ángulo cuya tangente es 1000?" y te dará una respuesta (muy cercana a $\frac{\pi}{2}$, pero menor).
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xlabel style={below right},
+        ylabel style={above left},
+        xmin=-8, xmax=8,
+        ymin=-2, ymax=2,
+        xtick={-6,-3,0,3,6},
+        ytick={-1.5708,-0.7854,0,0.7854,1.5708},
+        yticklabels={$-\frac{\pi}{2}$,$-\frac{\pi}{4}$,$0$,$\frac{\pi}{4}$,$\frac{\pi}{2}$},
+        grid=major,
+        grid style={dashed,gray!30},
+        domain=-8:8,
+        samples=200,
+        thick,
+    ]
+    \addplot[maincolor, ultra thick] {atan(x)*pi/180};
+    \addplot[accentcolor, dashed, thick] coordinates {(-8,-1.5708) (8,-1.5708)};
+    \addplot[accentcolor, dashed, thick] coordinates {(-8,1.5708) (8,1.5708)};
+    \node[accentcolor] at (axis cs: 5,1.8) {$y = \frac{\pi}{2}$};
+    \node[accentcolor] at (axis cs: 5,-1.8) {$y = -\frac{\pi}{2}$};
+    \node[maincolor] at (axis cs: -4,1) {$y = \arctan(x)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observaciones importantes}:
+\begin{itemize}
+    \item La función es \textbf{creciente} en todo su dominio
+    \item Es una función \textbf{impar}: $\arctan(-x) = -\arctan(x)$
+    \item Tiene \textbf{asíntotas horizontales}:
+    \begin{itemize}
+        \item $\lim_{x \to \infty} \arctan(x) = \frac{\pi}{2}$
+        \item $\lim_{x \to -\infty} \arctan(x) = -\frac{\pi}{2}$
+    \end{itemize}
+    \item Pasa por el origen: $\arctan(0) = 0$
+    \item $\arctan(1) = \frac{\pi}{4}$ (45°) y $\arctan(-1) = -\frac{\pi}{4}$ (-45°)
+\end{itemize}
+
+Las asíntotas horizontales significan que no importa qué tan grande sea el valor de $x$, el arcotangente nunca alcanzará exactamente $\frac{\pi}{2}$ o $-\frac{\pi}{2}$, solo se aproximará indefinidamente a estos valores.
+
+\begin{nota}
+\textbf{Aplicación práctica}: La función arcotangente es fundamental en la conversión entre coordenadas cartesianas $(x, y)$ y coordenadas polares $(r, \theta)$. El ángulo $\theta$ se calcula como $\arctan\left(\frac{y}{x}\right)$ (con algunas consideraciones según el cuadrante).
+\end{nota}
+
+\newpage
+
+\subsection{Las Funciones Arcocotangente, Arcosecante y Arcocosecante}
+
+Además de las tres funciones inversas principales, existen tres más que corresponden a las funciones trigonométricas recíprocas. Aunque son menos utilizadas, tienen sus propias aplicaciones específicas.
+
+\subsubsection{Función Arcocotangente ($\text{arccot}$ o $\cot^{-1}$)}
+
+\begin{definicion}
+La función \textbf{arcocotangente} se define como:
+
+$$y = \text{arccot}(x) \quad \Leftrightarrow \quad \cot(y) = x \text{ con } y \in (0, \pi)$$
+
+\textbf{Dominio}: $\mathbb{R}$ (todos los números reales)
+
+\textbf{Rango}: $(0, \pi)$ o $(0°, 180°)$
+\end{definicion}
+
+\textbf{Características}:
+\begin{itemize}
+    \item Es una función \textbf{decreciente}
+    \item $\text{arccot}(0) = \frac{\pi}{2}$
+    \item $\lim_{x \to \infty} \text{arccot}(x) = 0$
+    \item $\lim_{x \to -\infty} \text{arccot}(x) = \pi$
+    \item Relación con arcotangente: $\text{arccot}(x) = \frac{\pi}{2} - \arctan(x)$ para $x > 0$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=7cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-6, xmax=6,
+        ymin=-0.5, ymax=3.5,
+        ytick={0,0.7854,1.5708,2.3562,3.1416},
+        yticklabels={$0$,$\frac{\pi}{4}$,$\frac{\pi}{2}$,$\frac{3\pi}{4}$,$\pi$},
+        grid=major,
+        grid style={dashed,gray!30},
+        domain=-6:6,
+        samples=200,
+        thick,
+    ]
+    \addplot[maincolor, ultra thick] {(pi/2 - atan(x)*pi/180)};
+    \addplot[accentcolor, dashed] coordinates {(-6,0) (6,0)};
+    \addplot[accentcolor, dashed] coordinates {(-6,3.1416) (6,3.1416)};
+    \node[maincolor] at (axis cs: 3,2.5) {$y = \text{arccot}(x)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Función Arcosecante ($\text{arcsec}$ o $\sec^{-1}$)}
+
+\begin{definicion}
+La función \textbf{arcosecante} se define como:
+
+$$y = \text{arcsec}(x) \quad \Leftrightarrow \quad \sec(y) = x \text{ con } y \in \left[0, \frac{\pi}{2}\right) \cup \left(\frac{\pi}{2}, \pi\right]$$
+
+\textbf{Dominio}: $(-\infty, -1] \cup [1, \infty)$ (valores donde la secante existe)
+
+\textbf{Rango}: $\left[0, \frac{\pi}{2}\right) \cup \left(\frac{\pi}{2}, \pi\right]$
+\end{definicion}
+
+\textbf{Nota importante}: El dominio excluye el intervalo $(-1, 1)$ porque la secante (que es $\frac{1}{\cos(x)}$) nunca toma valores entre $-1$ y $1$.
+
+\textbf{Relación con arcocoseno}:
+$$\text{arcsec}(x) = \arccos\left(\frac{1}{x}\right) \quad \text{para } |x| \geq 1$$
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=7cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-4, xmax=4,
+        ymin=-0.5, ymax=3.5,
+        ytick={0,0.7854,1.5708,2.3562,3.1416},
+        yticklabels={$0$,$\frac{\pi}{4}$,$\frac{\pi}{2}$,$\frac{3\pi}{4}$,$\pi$},
+        grid=major,
+        grid style={dashed,gray!30},
+        samples=100,
+        thick,
+    ]
+    \addplot[maincolor, ultra thick, domain=1:4] {acos(1/x)*pi/180};
+    \addplot[maincolor, ultra thick, domain=-4:-1] {acos(1/x)*pi/180};
+    \node[maincolor] at (axis cs: 2.5,2.5) {$y = \text{arcsec}(x)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Función Arcocosecante ($\text{arccsc}$ o $\csc^{-1}$)}
+
+\begin{definicion}
+La función \textbf{arcocosecante} se define como:
+
+$$y = \text{arccsc}(x) \quad \Leftrightarrow \quad \csc(y) = x \text{ con } y \in \left[-\frac{\pi}{2}, 0\right) \cup \left(0, \frac{\pi}{2}\right]$$
+
+\textbf{Dominio}: $(-\infty, -1] \cup [1, \infty)$
+
+\textbf{Rango}: $\left[-\frac{\pi}{2}, 0\right) \cup \left(0, \frac{\pi}{2}\right]$
+\end{definicion}
+
+\textbf{Relación con arcoseno}:
+$$\text{arccsc}(x) = \arcsin\left(\frac{1}{x}\right) \quad \text{para } |x| \geq 1$$
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=7cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-4, xmax=4,
+        ymin=-2, ymax=2,
+        ytick={-1.5708,-0.7854,0,0.7854,1.5708},
+        yticklabels={$-\frac{\pi}{2}$,$-\frac{\pi}{4}$,$0$,$\frac{\pi}{4}$,$\frac{\pi}{2}$},
+        grid=major,
+        grid style={dashed,gray!30},
+        samples=100,
+        thick,
+    ]
+    \addplot[maincolor, ultra thick, domain=1:4] {asin(1/x)*pi/180};
+    \addplot[maincolor, ultra thick, domain=-4:-1] {asin(1/x)*pi/180};
+    \node[maincolor] at (axis cs: 2.5,1.2) {$y = \text{arccsc}(x)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Resumen de dominios y rangos}:
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Función} & \textbf{Dominio} & \textbf{Rango} \\
+\hline
+$\arcsin(x)$ & $[-1, 1]$ & $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$ \\
+\hline
+$\arccos(x)$ & $[-1, 1]$ & $[0, \pi]$ \\
+\hline
+$\arctan(x)$ & $\mathbb{R}$ & $\left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$ \\
+\hline
+$\text{arccot}(x)$ & $\mathbb{R}$ & $(0, \pi)$ \\
+\hline
+$\text{arcsec}(x)$ & $(-\infty, -1] \cup [1, \infty)$ & $\left[0, \frac{\pi}{2}\right) \cup \left(\frac{\pi}{2}, \pi\right]$ \\
+\hline
+$\text{arccsc}(x)$ & $(-\infty, -1] \cup [1, \infty)$ & $\left[-\frac{\pi}{2}, 0\right) \cup \left(0, \frac{\pi}{2}\right]$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\subsection{Propiedades de las Funciones Trigonométricas Inversas}
+
+Las funciones trigonométricas inversas cumplen varias propiedades importantes que nos facilitan los cálculos y nos ayudan a entenderlas mejor.
+
+\subsubsection{Propiedades de Composición}
+
+Estas son las propiedades fundamentales que definen la relación entre una función y su inversa:
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=maincolor, title=Propiedades Básicas de Composición]
+\begin{align*}
+\sin(\arcsin(x)) &= x \quad \text{para } x \in [-1, 1] \\
+\cos(\arccos(x)) &= x \quad \text{para } x \in [-1, 1] \\
+\tan(\arctan(x)) &= x \quad \text{para } x \in \mathbb{R} \\
+\\
+\arcsin(\sin(x)) &= x \quad \text{para } x \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right] \\
+\arccos(\cos(x)) &= x \quad \text{para } x \in [0, \pi] \\
+\arctan(\tan(x)) &= x \quad \text{para } x \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)
+\end{align*}
+\end{tcolorbox}
+
+\textbf{¡Cuidado!} Estas propiedades solo funcionan cuando $x$ está en el rango correcto. Por ejemplo:
+$$\arcsin(\sin(2\pi)) = \arcsin(0) = 0 \neq 2\pi$$
+Esto ocurre porque $2\pi$ no está en el rango del arcoseno.
+
+\subsubsection{Propiedades de Simetría}
+
+Algunas funciones inversas son impares (simétricas respecto al origen):
+
+\begin{tcolorbox}[colback=yellow!10!white, colframe=yellow!75!black, title=Funciones Impares]
+\begin{align*}
+\arcsin(-x) &= -\arcsin(x) \\
+\arctan(-x) &= -\arctan(x) \\
+\text{arccsc}(-x) &= -\text{arccsc}(x)
+\end{align*}
+\end{tcolorbox}
+
+Otras tienen propiedades de simetría diferentes:
+
+\begin{align*}
+\arccos(-x) &= \pi - \arccos(x) \\
+\text{arcsec}(-x) &= \pi - \text{arcsec}(x)
+\end{align*}
+
+\subsubsection{Identidades Complementarias}
+
+Estas relacionan funciones cofunción (seno-coseno, tangente-cotangente, etc.):
+
+\begin{tcolorbox}[colback=green!5!white, colframe=green!60!black, title=Identidades Complementarias]
+\begin{align*}
+\arcsin(x) + \arccos(x) &= \frac{\pi}{2} \quad \text{para } x \in [-1, 1] \\
+\arctan(x) + \text{arccot}(x) &= \frac{\pi}{2} \quad \text{para } x > 0 \\
+\text{arcsec}(x) + \text{arccsc}(x) &= \frac{\pi}{2} \quad \text{para } x \geq 1
+\end{align*}
+\end{tcolorbox}
+
+\subsubsection{Identidades de Suma y Resta}
+
+Para la arcotangente, existen fórmulas útiles para sumar o restar:
+
+\begin{align*}
+\arctan(x) + \arctan(y) &= \arctan\left(\frac{x+y}{1-xy}\right) \quad \text{si } xy < 1 \\
+\arctan(x) - \arctan(y) &= \arctan\left(\frac{x-y}{1+xy}\right)
+\end{align*}
+
+\subsubsection{Relaciones entre Funciones Inversas}
+
+Podemos expresar unas funciones inversas en términos de otras:
+
+\begin{align*}
+\text{arcsec}(x) &= \arccos\left(\frac{1}{x}\right) \quad \text{para } |x| \geq 1 \\
+\text{arccsc}(x) &= \arcsin\left(\frac{1}{x}\right) \quad \text{para } |x| \geq 1 \\
+\text{arccot}(x) &= \frac{\pi}{2} - \arctan(x) \quad \text{para } x > 0 \\
+\text{arccot}(x) &= \pi + \arctan\left(\frac{1}{x}\right) \quad \text{para } x < 0
+\end{align*}
+
+\newpage
+
+\subsection{Operaciones con Funciones Trigonométricas Inversas}
+
+Una habilidad muy útil es poder calcular expresiones como $\sin(\arccos(x))$ o $\cos(\arctan(x))$ sin usar calculadora. La clave está en usar \textbf{triángulos rectángulos}.
+
+\subsubsection{Método del Triángulo Rectángulo}
+
+La idea es simple pero poderosa: interpretar las funciones trigonométricas inversas como ángulos en un triángulo rectángulo.
+
+\textbf{Ejemplo conceptual}: Calcular $\sin(\arccos(x))$
+
+\textbf{Paso 1}: Sea $\theta = \arccos(x)$. Esto significa que $\cos(\theta) = x$.
+
+\textbf{Paso 2}: Dibuja un triángulo rectángulo donde $\cos(\theta) = \frac{\text{adyacente}}{\text{hipotenusa}} = \frac{x}{1}$.
+
+Entonces: adyacente = $x$, hipotenusa = 1
+
+\textbf{Paso 3}: Usa el teorema de Pitágoras para encontrar el cateto opuesto:
+$$\text{opuesto} = \sqrt{1^2 - x^2} = \sqrt{1-x^2}$$
+
+\textbf{Paso 4}: Ahora calcula el seno:
+$$\sin(\theta) = \sin(\arccos(x)) = \frac{\text{opuesto}}{\text{hipotenusa}} = \frac{\sqrt{1-x^2}}{1} = \sqrt{1-x^2}$$
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Triángulo
+    \draw[thick] (0,0) -- (2,0) -- (2,1.5) -- cycle;
+
+    % Ángulo
+    \draw[maincolor, thick] (0.4,0) arc (0:36.87:0.4);
+    \node[maincolor] at (0.6,0.15) {$\theta$};
+
+    % Etiquetas
+    \node at (1,-0.3) {$x$};
+    \node at (2.4,0.75) {$\sqrt{1-x^2}$};
+    \node at (0.8,1) {$1$};
+
+    % Ángulo recto
+    \draw (2,0.15) -- (1.85,0.15) -- (1.85,0);
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Identidades Útiles Derivadas}
+
+Usando este método, podemos derivar muchas identidades útiles:
+
+\begin{tcolorbox}[colback=maincolor!5!white, colframe=maincolor, title=Identidades con Composición de Funciones]
+\begin{align*}
+\sin(\arccos(x)) &= \sqrt{1-x^2} \quad \text{para } x \in [-1,1] \\
+\cos(\arcsin(x)) &= \sqrt{1-x^2} \quad \text{para } x \in [-1,1] \\
+\sin(\arctan(x)) &= \frac{x}{\sqrt{1+x^2}} \quad \text{para } x \in \mathbb{R} \\
+\cos(\arctan(x)) &= \frac{1}{\sqrt{1+x^2}} \quad \text{para } x \in \mathbb{R} \\
+\tan(\arcsin(x)) &= \frac{x}{\sqrt{1-x^2}} \quad \text{para } x \in (-1,1) \\
+\tan(\arccos(x)) &= \frac{\sqrt{1-x^2}}{x} \quad \text{para } x \in (-1,1], x \neq 0
+\end{align*}
+\end{tcolorbox}
+
+\textbf{Ejemplo práctico}: Calcular $\cos(\arctan(3))$
+
+Solución:
+\begin{itemize}
+    \item Sea $\theta = \arctan(3)$, entonces $\tan(\theta) = 3 = \frac{3}{1}$
+    \item En un triángulo: opuesto = 3, adyacente = 1
+    \item Hipotenusa: $h = \sqrt{3^2 + 1^2} = \sqrt{10}$
+    \item Coseno: $\cos(\theta) = \frac{1}{\sqrt{10}} = \frac{\sqrt{10}}{10}$
+\end{itemize}
+
+Por lo tanto: $\cos(\arctan(3)) = \frac{\sqrt{10}}{10}$
+
+\subsubsection{Simplificación de Expresiones Complejas}
+
+A veces nos encontramos con expresiones que combinan múltiples funciones inversas. La estrategia es:
+
+\begin{enumerate}
+    \item Asignar variables a las funciones inversas (sean ángulos)
+    \item Dibujar triángulos para cada ángulo
+    \item Usar identidades trigonométricas conocidas
+    \item Simplificar algebraicamente
+\end{enumerate}
+
+\textbf{Ejemplo}: Simplificar $\sin(\arcsin(x) + \arccos(y))$
+
+Usamos la identidad de suma de ángulos:
+$$\sin(A + B) = \sin(A)\cos(B) + \cos(A)\sin(B)$$
+
+Sean $A = \arcsin(x)$ y $B = \arccos(y)$:
+\begin{align*}
+\sin(\arcsin(x) + \arccos(y)) &= \sin(\arcsin(x))\cos(\arccos(y)) + \cos(\arcsin(x))\sin(\arccos(y)) \\
+&= x \cdot y + \sqrt{1-x^2} \cdot \sqrt{1-y^2} \\
+&= xy + \sqrt{(1-x^2)(1-y^2)}
+\end{align*}
+
+Estas técnicas son fundamentales para resolver problemas avanzados y simplificar expresiones complejas que aparecen en cálculo, física e ingeniería.
+
+\newpage
+
+%INSERTAR_EJEMPLOS_AQUI%
+
+%INSERTAR_EJERCICIOS_INVERSOS_AQUI%
+
+%INSERTAR_EJERCICIOS_PROPUESTOS_AQUI%
+
+%INSERTAR_SOLUCIONES_AQUI%
+
+%INSERTAR_SOLUCIONES_INVERSOS_AQUI%
+
+% CONCLUSIÓN (2 páginas)
+\section{Conclusión}
+
+¡Felicidades! Has completado el estudio de las funciones trigonométricas inversas, uno de los temas más fascinantes y útiles de la trigonometría. A lo largo de esta guía, hemos explorado cómo estas funciones nos permiten "revertir" el proceso trigonométrico: partir de un valor y encontrar el ángulo correspondiente.
+
+\subsection{Recapitulación de Conceptos Clave}
+
+Hemos aprendido que:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Las funciones trigonométricas no son inyectivas} en todo su dominio natural, por lo que fue necesario \textbf{restringir sus dominios} para poder definir funciones inversas únicas.
+
+    \item \textbf{El arcoseno} ($\arcsin$) toma valores en $[-1, 1]$ y devuelve ángulos en $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$, siendo una función creciente e impar.
+
+    \item \textbf{El arcocoseno} ($\arccos$) también toma valores en $[-1, 1]$ pero devuelve ángulos en $[0, \pi]$, siendo una función decreciente.
+
+    \item \textbf{La arcotangente} ($\arctan$) es especial porque acepta \textbf{cualquier número real} y devuelve ángulos en $\left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$, con asíntotas horizontales en $\pm\frac{\pi}{2}$.
+
+    \item Las funciones \textbf{arcocotangente, arcosecante y arcocosecante} completan el conjunto de inversas trigonométricas, cada una con sus propios dominios y rangos específicos.
+
+    \item Existen \textbf{múltiples propiedades e identidades} que relacionan estas funciones entre sí, incluyendo propiedades de simetría, complementariedad y composición.
+
+    \item El \textbf{método del triángulo rectángulo} es una herramienta poderosa para evaluar composiciones de funciones trigonométricas e inversas sin calculadora.
+\end{itemize}
+
+\subsection{Aplicaciones en el Mundo Real}
+
+Recuerda que estas funciones no son solo ejercicios abstractos. Se utilizan constantemente en:
+
+\begin{itemize}
+    \item \textbf{Tecnología GPS}: Para calcular tu posición exacta en el planeta
+    \item \textbf{Ingeniería}: Para diseñar estructuras, antenas y sistemas mecánicos
+    \item \textbf{Física}: Para analizar movimientos oscilatorios, ondas y fenómenos electromagnéticos
+    \item \textbf{Robótica}: Para programar el movimiento preciso de brazos robóticos
+    \item \textbf{Astronomía}: Para determinar posiciones de cuerpos celestes
+    \item \textbf{Gráficos por computadora}: Para renderizar imágenes 3D y animaciones
+\end{itemize}
+
+Cada vez que usas un mapa en tu celular, juegas un videojuego en 3D, o incluso cuando un avión aterriza usando piloto automático, las funciones trigonométricas inversas están trabajando detrás de escena.
+
+\subsection{Conexión con Temas Futuros}
+
+El dominio de las funciones trigonométricas inversas es fundamental para:
+
+\begin{itemize}
+    \item \textbf{Cálculo Diferencial}: Las derivadas de estas funciones son esenciales para resolver problemas de optimización y modelado.
+    \item \textbf{Cálculo Integral}: Muchas integrales complejas se resuelven usando sustituciones trigonométricas que involucran funciones inversas.
+    \item \textbf{Ecuaciones Diferenciales}: Aparecen naturalmente en las soluciones de ecuaciones que modelan fenómenos físicos.
+    \item \textbf{Análisis Complejo}: Se extienden al plano complejo con propiedades fascinantes.
+    \item \textbf{Procesamiento de Señales}: Son fundamentales en el análisis de Fourier y transformadas.
+\end{itemize}
+
+\newpage
+
+\subsection{Fórmulas Importantes para Recordar}
+
+Aquí tienes un resumen de las fórmulas más importantes que debes tener siempre a mano:
+
+\begin{tcolorbox}[colback=maincolor!5!white, colframe=maincolor, fonttitle=\bfseries, title=Dominios y Rangos]
+\begin{center}
+\begin{tabular}{lcc}
+\textbf{Función} & \textbf{Dominio} & \textbf{Rango} \\
+\hline
+$\arcsin(x)$ & $[-1, 1]$ & $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$ \\[0.3em]
+$\arccos(x)$ & $[-1, 1]$ & $[0, \pi]$ \\[0.3em]
+$\arctan(x)$ & $\mathbb{R}$ & $\left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$ \\[0.3em]
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=green!5!white, colframe=green!60!black, fonttitle=\bfseries, title=Propiedades de Composición]
+\begin{align*}
+\sin(\arcsin(x)) &= x \quad \text{para } x \in [-1, 1] \\
+\cos(\arccos(x)) &= x \quad \text{para } x \in [-1, 1] \\
+\tan(\arctan(x)) &= x \quad \text{para } x \in \mathbb{R} \\
+\arcsin(\sin(x)) &= x \quad \text{para } x \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right] \\
+\arccos(\cos(x)) &= x \quad \text{para } x \in [0, \pi] \\
+\arctan(\tan(x)) &= x \quad \text{para } x \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)
+\end{align*}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=yellow!10!white, colframe=yellow!75!black, fonttitle=\bfseries, title=Identidades Complementarias]
+\begin{align*}
+\arcsin(x) + \arccos(x) &= \frac{\pi}{2} \\
+\arctan(x) + \text{arccot}(x) &= \frac{\pi}{2} \\
+\end{align*}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=orange!5!white, colframe=accentcolor, fonttitle=\bfseries, title=Propiedades de Simetría]
+\begin{align*}
+\arcsin(-x) &= -\arcsin(x) \\
+\arctan(-x) &= -\arctan(x) \\
+\arccos(-x) &= \pi - \arccos(x)
+\end{align*}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=maincolor, fonttitle=\bfseries, title=Composiciones Útiles]
+\begin{align*}
+\sin(\arccos(x)) &= \sqrt{1-x^2} \\
+\cos(\arcsin(x)) &= \sqrt{1-x^2} \\
+\sin(\arctan(x)) &= \frac{x}{\sqrt{1+x^2}} \\
+\cos(\arctan(x)) &= \frac{1}{\sqrt{1+x^2}} \\
+\tan(\arcsin(x)) &= \frac{x}{\sqrt{1-x^2}}
+\end{align*}
+\end{tcolorbox}
+
+\subsection{Recomendaciones para el Éxito}
+
+Para dominar completamente este tema, te recomiendo:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Visualiza siempre}: Dibuja las gráficas mentalmente o en papel. La visualización es clave para la intuición.
+
+    \item \textbf{Usa el círculo unitario}: Relaciona cada valor con un punto en el círculo unitario. Esto te ayudará a entender por qué se restringen los dominios.
+
+    \item \textbf{Practica el método del triángulo}: Dibuja triángulos rectángulos para evaluar composiciones de funciones. Con práctica, podrás hacerlo mentalmente.
+
+    \item \textbf{Memoriza los valores especiales}: Conoce de memoria valores como $\arcsin\left(\frac{1}{2}\right) = \frac{\pi}{6}$, $\arccos(0) = \frac{\pi}{2}$, $\arctan(1) = \frac{\pi}{4}$, etc.
+
+    \item \textbf{Verifica con calculadora}: Después de resolver un problema a mano, verifica tu respuesta con una calculadora (en modo radianes). Esto te ayudará a detectar errores.
+
+    \item \textbf{Resuelve problemas variados}: No te limites a ejercicios rutinarios. Busca problemas de aplicación que te desafíen a pensar creativamente.
+
+    \item \textbf{Conecta con otros temas}: Relaciona lo aprendido con geometría, álgebra y física. Las matemáticas son un todo integrado.
+
+    \item \textbf{Enseña a otros}: Una de las mejores formas de consolidar tu comprensión es explicarle el tema a alguien más.
+
+    \item \textbf{No temas equivocarte}: Los errores son oportunidades de aprendizaje. Analiza dónde te equivocaste y por qué.
+
+    \item \textbf{Sé paciente contigo mismo}: Este tema puede ser desafiante al principio. Con práctica constante, todo se volverá más claro y natural.
+\end{enumerate}
+
+\subsection{Palabras Finales}
+
+Las matemáticas son un lenguaje universal que nos permite describir, predecir y comprender el mundo que nos rodea. Las funciones trigonométricas inversas son una pieza fundamental de ese lenguaje, y ahora forman parte de tu caja de herramientas matemáticas.
+
+Recuerda: no se trata solo de memorizar fórmulas, sino de \textbf{entender los conceptos}, desarrollar \textbf{intuición geométrica} y cultivar el \textbf{pensamiento lógico}. Estos son skills que te servirán no solo en matemáticas, sino en cualquier campo que decidas explorar en el futuro.
+
+Has trabajado duro para llegar hasta aquí, y espero que esta guía te haya resultado útil y clarificadora. Sigue practicando, sigue preguntando, sigue explorando. El mundo de las matemáticas es vasto y hermoso, y apenas estás comenzando a descubrirlo.
+
+\textit{¡Mucho éxito en tu viaje matemático!}
+
+\vspace{1cm}
+
+\begin{center}
+\textcolor{maincolor}{\rule{10cm}{0.5pt}}
+
+\textit{"Las matemáticas no son un deporte para espectadores"} \\
+— Anónimo
+
+\textcolor{maincolor}{\rule{10cm}{0.5pt}}
+\end{center}
+
+\end{document}
