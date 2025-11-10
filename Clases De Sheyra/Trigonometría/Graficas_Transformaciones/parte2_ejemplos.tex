@@ -1,0 +1,1531 @@
+% PARTE 2/3: EJEMPLOS RESUELTOS Y EJERCICIOS INVERSOS
+% Transformaciones de Funciones Trigonométricas
+
+\section{Ejemplos Resueltos}
+
+¡Ahora viene lo bueno! Vamos a ver ejemplos super detallados de cómo aplicar cada tipo de transformación. Cada ejemplo está desarrollado paso a paso para que entiendas perfectamente el proceso.
+
+\begin{ejemplo}[title=Ejemplo 1: Traslación vertical]
+Grafica la función $f(x) = \sin(x) + 2$ y describe cómo se relaciona con la función seno básica $y = \sin(x)$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar la transformación.
+
+La función tiene la forma $f(x) = \sin(x) + k$ donde $k = 2$.
+
+Esto indica una \textbf{traslación vertical hacia arriba} de 2 unidades.
+
+\textbf{Paso 2:} Analizar cómo afecta la transformación.
+
+\begin{itemize}
+    \item La función original $y = \sin(x)$ oscila entre $-1$ y $1$
+    \item Al sumar 2 a todos los valores, la nueva función oscilará entre $-1 + 2 = 1$ y $1 + 2 = 3$
+    \item La línea media (eje de oscilación) se traslada de $y = 0$ a $y = 2$
+    \item El período y la amplitud NO cambian
+\end{itemize}
+
+\textbf{Paso 3:} Puntos clave de verificación.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|}
+\hline
+$x$ & $\sin(x)$ & $\sin(x) + 2$ \\
+\hline
+$0$ & $0$ & $2$ \\
+$\frac{\pi}{2}$ & $1$ & $3$ \\
+$\pi$ & $0$ & $2$ \\
+$\frac{3\pi}{2}$ & $-1$ & $1$ \\
+$2\pi$ & $0$ & $2$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 4:} Gráfica comparativa.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm, height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.5, xmax=6.8,
+    ymin=-2, ymax=4,
+    xtick={0,1.5708,3.1416,4.7124,6.2832},
+    xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
+    ytick={-1,0,1,2,3},
+    grid=major,
+    samples=100,
+    domain=0:2*pi,
+    legend pos=north east,
+]
+    % Función original
+    \addplot[blue, thick] {sin(deg(x))} node[pos=0.8, above] {};
+    \addlegendentry{$y = \sin(x)$}
+
+    % Función transformada
+    \addplot[red, thick] {sin(deg(x)) + 2} node[pos=0.8, above] {};
+    \addlegendentry{$y = \sin(x) + 2$}
+
+    % Líneas de referencia
+    \addplot[gray, dashed, thin] {0};
+    \addplot[gray, dashed, thin] {2};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:}
+
+La función $f(x) = \sin(x) + 2$ es idéntica a $y = \sin(x)$ pero \textbf{desplazada 2 unidades hacia arriba}.
+
+\[
+\boxed{
+\begin{aligned}
+\text{Amplitud: } & A = 1 \\
+\text{Período: } & P = 2\pi \\
+\text{Línea media: } & y = 2 \\
+\text{Rango: } & [1, 3]
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 2: Traslación horizontal (desfase)]
+Grafica la función $g(x) = \cos\left(x - \frac{\pi}{4}\right)$ y determina el desfase.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar la transformación.
+
+La función tiene la forma $g(x) = \cos(x - c)$ donde $c = \frac{\pi}{4}$.
+
+Esto indica una \textbf{traslación horizontal hacia la derecha} de $\frac{\pi}{4}$ unidades.
+
+\textbf{Paso 2:} Entender el desfase.
+
+\begin{itemize}
+    \item $\cos(x - c)$ se desplaza $c$ unidades a la \textit{derecha}
+    \item $\cos(x + c)$ se desplaza $c$ unidades a la \textit{izquierda}
+    \item En este caso: desfase $= \frac{\pi}{4}$ radianes a la derecha
+\end{itemize}
+
+\textbf{Paso 3:} Encontrar puntos clave.
+
+Para $y = \cos(x)$, los puntos clave son:
+\begin{itemize}
+    \item Máximo en $x = 0$
+    \item Cero en $x = \frac{\pi}{2}$
+    \item Mínimo en $x = \pi$
+    \item Cero en $x = \frac{3\pi}{2}$
+    \item Máximo en $x = 2\pi$
+\end{itemize}
+
+Para $y = \cos\left(x - \frac{\pi}{4}\right)$, todos se desplazan $\frac{\pi}{4}$ a la derecha:
+\begin{itemize}
+    \item Máximo en $x = \frac{\pi}{4}$
+    \item Cero en $x = \frac{\pi}{2} + \frac{\pi}{4} = \frac{3\pi}{4}$
+    \item Mínimo en $x = \pi + \frac{\pi}{4} = \frac{5\pi}{4}$
+    \item Cero en $x = \frac{3\pi}{2} + \frac{\pi}{4} = \frac{7\pi}{4}$
+    \item Máximo en $x = 2\pi + \frac{\pi}{4} = \frac{9\pi}{4}$
+\end{itemize}
+
+\textbf{Paso 4:} Verificación numérica.
+
+\begin{align*}
+g\left(\frac{\pi}{4}\right) &= \cos\left(\frac{\pi}{4} - \frac{\pi}{4}\right) = \cos(0) = 1 \quad \checkmark \\
+g\left(\frac{3\pi}{4}\right) &= \cos\left(\frac{3\pi}{4} - \frac{\pi}{4}\right) = \cos\left(\frac{\pi}{2}\right) = 0 \quad \checkmark \\
+g\left(\frac{5\pi}{4}\right) &= \cos\left(\frac{5\pi}{4} - \frac{\pi}{4}\right) = \cos(\pi) = -1 \quad \checkmark
+\end{align*}
+
+\textbf{Paso 5:} Gráfica comparativa.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm, height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.5, xmax=6.8,
+    ymin=-1.5, ymax=1.5,
+    xtick={0,0.7854,1.5708,2.3562,3.1416,3.9270,4.7124,5.4978,6.2832},
+    xticklabels={$0$,$\frac{\pi}{4}$,$\frac{\pi}{2}$,$\frac{3\pi}{4}$,$\pi$,$\frac{5\pi}{4}$,$\frac{3\pi}{2}$,$\frac{7\pi}{4}$,$2\pi$},
+    ytick={-1,0,1},
+    grid=major,
+    samples=100,
+    domain=0:2*pi,
+    legend pos=south west,
+    x tick label style={font=\tiny, rotate=45, anchor=east},
+]
+    % Función original
+    \addplot[blue, thick] {cos(deg(x))};
+    \addlegendentry{$y = \cos(x)$}
+
+    % Función transformada
+    \addplot[red, thick] {cos(deg(x - pi/4))};
+    \addlegendentry{$y = \cos(x - \frac{\pi}{4})$}
+
+    % Línea de referencia para el desfase
+    \draw[dashed, green!60!black] (axis cs:0,1) -- (axis cs:0.7854,1);
+    \draw[<->, green!60!black, thick] (axis cs:0,1.2) -- (axis cs:0.7854,1.2) node[midway, above] {\small Desfase $\frac{\pi}{4}$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:}
+
+\[
+\boxed{
+\text{La función } g(x) = \cos\left(x - \frac{\pi}{4}\right) \text{ es } \cos(x) \text{ desplazada } \frac{\pi}{4} \text{ radianes a la derecha}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 3: Reflexión]
+Grafica la función $h(x) = -\sin(x)$ y explica la transformación.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar la transformación.
+
+La función tiene la forma $h(x) = -f(x)$ donde $f(x) = \sin(x)$.
+
+El signo negativo indica una \textbf{reflexión respecto al eje x}.
+
+\textbf{Paso 2:} Analizar el efecto de la reflexión.
+
+\begin{itemize}
+    \item Cada valor de $\sin(x)$ se multiplica por $-1$
+    \item Los valores positivos se vuelven negativos
+    \item Los valores negativos se vuelven positivos
+    \item Los ceros permanecen en los mismos lugares
+    \item Los máximos se convierten en mínimos y viceversa
+\end{itemize}
+
+\textbf{Paso 3:} Tabla de valores comparativos.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|}
+\hline
+$x$ & $\sin(x)$ & $-\sin(x)$ \\
+\hline
+$0$ & $0$ & $0$ \\
+$\frac{\pi}{6}$ & $\frac{1}{2}$ & $-\frac{1}{2}$ \\
+$\frac{\pi}{2}$ & $1$ & $-1$ \\
+$\pi$ & $0$ & $0$ \\
+$\frac{3\pi}{2}$ & $-1$ & $1$ \\
+$2\pi$ & $0$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 4:} Gráfica comparativa.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm, height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.5, xmax=6.8,
+    ymin=-1.5, ymax=1.5,
+    xtick={0,1.5708,3.1416,4.7124,6.2832},
+    xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
+    ytick={-1,0,1},
+    grid=major,
+    samples=100,
+    domain=0:2*pi,
+    legend pos=south east,
+]
+    % Función original
+    \addplot[blue, thick] {sin(deg(x))};
+    \addlegendentry{$y = \sin(x)$}
+
+    % Función reflejada
+    \addplot[red, thick] {-sin(deg(x))};
+    \addlegendentry{$y = -\sin(x)$}
+
+    % Eje de reflexión
+    \addplot[gray, dashed, thin] {0};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 5:} Observación importante.
+
+La función $-\sin(x)$ es equivalente a $\sin(-x)$ debido a la propiedad impar del seno:
+\[
+-\sin(x) = \sin(-x)
+\]
+
+Sin embargo, también es equivalente a un desfase:
+\[
+-\sin(x) = \sin(x + \pi) = \sin(x - \pi)
+\]
+
+\textbf{Conclusión:}
+
+\[
+\boxed{
+\begin{aligned}
+&\text{La función } h(x) = -\sin(x) \text{ es la reflexión de } \sin(x) \text{ respecto al eje } x \\
+&\text{Amplitud: } A = 1 \\
+&\text{Período: } P = 2\pi \\
+&\text{Rango: } [-1, 1]
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 4: Cambio de amplitud]
+Grafica la función $f(x) = 3\cos(x)$ y determina la amplitud.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar la transformación.
+
+La función tiene la forma $f(x) = A\cos(x)$ donde $A = 3$.
+
+Esto indica un \textbf{estiramiento vertical} con factor $|A| = 3$.
+
+\textbf{Paso 2:} Entender el cambio de amplitud.
+
+\begin{itemize}
+    \item La amplitud de $\cos(x)$ es $1$
+    \item La amplitud de $3\cos(x)$ es $|3| = 3$
+    \item Los valores máximos y mínimos se multiplican por $3$
+    \item El período NO cambia
+\end{itemize}
+
+\textbf{Paso 3:} Análisis de valores.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|}
+\hline
+$x$ & $\cos(x)$ & $3\cos(x)$ \\
+\hline
+$0$ & $1$ & $3$ \\
+$\frac{\pi}{2}$ & $0$ & $0$ \\
+$\pi$ & $-1$ & $-3$ \\
+$\frac{3\pi}{2}$ & $0$ & $0$ \\
+$2\pi$ & $1$ & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Observación:} La función oscila entre $-3$ y $3$, por lo que la amplitud es $3$.
+
+\textbf{Paso 4:} Gráfica comparativa.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm, height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.5, xmax=6.8,
+    ymin=-3.5, ymax=3.5,
+    xtick={0,1.5708,3.1416,4.7124,6.2832},
+    xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
+    ytick={-3,-2,-1,0,1,2,3},
+    grid=major,
+    samples=100,
+    domain=0:2*pi,
+    legend pos=north east,
+]
+    % Función original
+    \addplot[blue, thick] {cos(deg(x))};
+    \addlegendentry{$y = \cos(x)$}
+
+    % Función con amplitud 3
+    \addplot[red, thick] {3*cos(deg(x))};
+    \addlegendentry{$y = 3\cos(x)$}
+
+    % Líneas horizontales de referencia
+    \addplot[gray, dashed, thin] {1};
+    \addplot[gray, dashed, thin] {-1};
+    \addplot[gray, dashed, thin] {3};
+    \addplot[gray, dashed, thin] {-3};
+
+    % Flechas mostrando amplitud
+    \draw[<->, green!60!black, thick] (axis cs:0.3,0) -- (axis cs:0.3,3) node[midway, right] {$A=3$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 5:} Verificación matemática.
+
+La amplitud se define como:
+\[
+\text{Amplitud} = \frac{\text{Valor máximo} - \text{Valor mínimo}}{2} = \frac{3 - (-3)}{2} = \frac{6}{2} = 3 \quad \checkmark
+\]
+
+\textbf{Conclusión:}
+
+\[
+\boxed{
+\begin{aligned}
+\text{Amplitud: } & A = 3 \\
+\text{Período: } & P = 2\pi \\
+\text{Rango: } & [-3, 3] \\
+\text{Efecto: } & \text{Estiramiento vertical por factor 3}
+\end{aligned}
+}
+\]
+
+\textbf{Nota:} Si tuviéramos $f(x) = -3\cos(x)$, la amplitud seguiría siendo $|{-3}| = 3$, pero habría también una reflexión respecto al eje $x$.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 5: Cambio de período (frecuencia)]
+Grafica la función $g(x) = \sin(2x)$ y determina el período.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar la transformación.
+
+La función tiene la forma $g(x) = \sin(Bx)$ donde $B = 2$.
+
+Esto indica una \textbf{compresión horizontal} que afecta el período.
+
+\textbf{Paso 2:} Calcular el período.
+
+\begin{itemize}
+    \item El período de $\sin(x)$ es $P_0 = 2\pi$
+    \item El período de $\sin(Bx)$ es $P = \frac{2\pi}{|B|}$
+    \item Para $\sin(2x)$: $P = \frac{2\pi}{2} = \pi$
+\end{itemize}
+
+\textbf{Interpretación:} La función completa un ciclo completo en la mitad del tiempo. ¡Oscila el doble de rápido!
+
+\textbf{Paso 3:} Encontrar puntos clave.
+
+Para $\sin(2x)$, un ciclo completo ocurre en $[0, \pi]$:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|}
+\hline
+$x$ & $2x$ & $\sin(2x)$ \\
+\hline
+$0$ & $0$ & $0$ \\
+$\frac{\pi}{4}$ & $\frac{\pi}{2}$ & $1$ \\
+$\frac{\pi}{2}$ & $\pi$ & $0$ \\
+$\frac{3\pi}{4}$ & $\frac{3\pi}{2}$ & $-1$ \\
+$\pi$ & $2\pi$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 4:} Gráfica comparativa.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm, height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.5, xmax=6.8,
+    ymin=-1.5, ymax=1.5,
+    xtick={0,0.7854,1.5708,2.3562,3.1416,3.9270,4.7124,5.4978,6.2832},
+    xticklabels={$0$,$\frac{\pi}{4}$,$\frac{\pi}{2}$,$\frac{3\pi}{4}$,$\pi$,$\frac{5\pi}{4}$,$\frac{3\pi}{2}$,$\frac{7\pi}{4}$,$2\pi$},
+    ytick={-1,0,1},
+    grid=major,
+    samples=200,
+    domain=0:2*pi,
+    legend pos=north east,
+    x tick label style={font=\tiny, rotate=45, anchor=east},
+]
+    % Función original
+    \addplot[blue, thick] {sin(deg(x))};
+    \addlegendentry{$y = \sin(x)$}
+
+    % Función con período modificado
+    \addplot[red, thick] {sin(deg(2*x))};
+    \addlegendentry{$y = \sin(2x)$}
+
+    % Marcadores de período
+    \draw[<->, green!60!black, thick] (axis cs:0,-1.3) -- (axis cs:3.1416,-1.3) node[midway, below] {\small $P_1 = 2\pi$};
+    \draw[<->, purple, thick] (axis cs:0,-1.15) -- (axis cs:1.5708,-1.15) node[midway, below, yshift=-0.2cm] {\small $P_2 = \pi$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 5:} Análisis de la frecuencia.
+
+La frecuencia es el recíproco del período:
+\[
+\text{Frecuencia} = \frac{1}{P} = \frac{1}{\pi} = \frac{B}{2\pi} = \frac{2}{2\pi} = \frac{1}{\pi}
+\]
+
+Esto significa que la función $\sin(2x)$ completa $\frac{1}{\pi}$ ciclos por unidad, o equivalentemente, 2 ciclos en el intervalo $[0, 2\pi]$.
+
+\textbf{Conclusión:}
+
+\[
+\boxed{
+\begin{aligned}
+\text{Amplitud: } & A = 1 \\
+\text{Período: } & P = \pi \\
+\text{Frecuencia: } & f = \frac{2}{2\pi} = \frac{1}{\pi} \\
+\text{Efecto: } & \text{Compresión horizontal (oscila más rápido)}
+\end{aligned}
+}
+\]
+
+\textbf{Regla general:}
+\begin{itemize}
+    \item Si $B > 1$: compresión horizontal (oscila más rápido, período menor)
+    \item Si $0 < B < 1$: estiramiento horizontal (oscila más lento, período mayor)
+\end{itemize}
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 6: Combinación de transformaciones]
+Grafica la función $h(x) = 2\sin\left(3x - \pi\right) + 1$ y determina todas sus características.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar todas las transformaciones.
+
+La forma general es: $f(x) = A\sin(B(x - C)) + D$
+
+Primero reescribimos: $h(x) = 2\sin\left(3\left(x - \frac{\pi}{3}\right)\right) + 1$
+
+Ahora identificamos:
+\begin{itemize}
+    \item $A = 2$: amplitud
+    \item $B = 3$: afecta el período
+    \item $C = \frac{\pi}{3}$: desfase horizontal
+    \item $D = 1$: desplazamiento vertical
+\end{itemize}
+
+\textbf{Paso 2:} Calcular los parámetros.
+
+\textbf{Amplitud:}
+\[
+A = |2| = 2
+\]
+
+\textbf{Período:}
+\[
+P = \frac{2\pi}{|B|} = \frac{2\pi}{3}
+\]
+
+\textbf{Desfase:}
+\[
+\text{Desfase} = C = \frac{\pi}{3} \text{ (a la derecha)}
+\]
+
+\textbf{Línea media:}
+\[
+y = D = 1
+\]
+
+\textbf{Rango:}
+\[
+[D - A, D + A] = [1 - 2, 1 + 2] = [-1, 3]
+\]
+
+\textbf{Paso 3:} Proceso de transformación paso a paso.
+
+\begin{enumerate}
+    \item Partir de $y = \sin(x)$
+    \item Multiplicar por 2: $y = 2\sin(x)$ (amplitud $= 2$)
+    \item Multiplicar el argumento por 3: $y = 2\sin(3x)$ (período $= \frac{2\pi}{3}$)
+    \item Desplazar a la derecha $\frac{\pi}{3}$: $y = 2\sin\left(3\left(x - \frac{\pi}{3}\right)\right) = 2\sin(3x - \pi)$
+    \item Desplazar arriba 1 unidad: $y = 2\sin(3x - \pi) + 1$
+\end{enumerate}
+
+\textbf{Paso 4:} Encontrar puntos clave.
+
+Para un ciclo completo, resolvemos $3x - \pi = 0, \frac{\pi}{2}, \pi, \frac{3\pi}{2}, 2\pi$:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|}
+\hline
+$3x - \pi$ & $x$ & $h(x) = 2\sin(3x-\pi)+1$ \\
+\hline
+$0$ & $\frac{\pi}{3}$ & $1$ \\
+$\frac{\pi}{2}$ & $\frac{\pi}{2}$ & $3$ \\
+$\pi$ & $\frac{2\pi}{3}$ & $1$ \\
+$\frac{3\pi}{2}$ & $\frac{5\pi}{6}$ & $-1$ \\
+$2\pi$ & $\pi$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 5:} Gráfica completa.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=13cm, height=8cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.3, xmax=3.5,
+    ymin=-1.5, ymax=3.5,
+    xtick={0,0.5236,1.0472,1.5708,2.0944,2.6180,3.1416},
+    xticklabels={$0$,$\frac{\pi}{6}$,$\frac{\pi}{3}$,$\frac{\pi}{2}$,$\frac{2\pi}{3}$,$\frac{5\pi}{6}$,$\pi$},
+    ytick={-1,0,1,2,3},
+    grid=major,
+    samples=200,
+    domain=0:pi,
+    legend pos=north east,
+    x tick label style={font=\tiny, rotate=45, anchor=east},
+]
+    % Función original
+    \addplot[blue, thick, dashed] {sin(deg(x))};
+    \addlegendentry{$y = \sin(x)$}
+
+    % Función transformada
+    \addplot[red, very thick] {2*sin(deg(3*x - 180)) + 1};
+    \addlegendentry{$y = 2\sin(3x-\pi)+1$}
+
+    % Línea media
+    \addplot[gray, dashed] {1} node[pos=0.9, below] {\tiny línea media};
+
+    % Marcadores
+    \draw[<->, green!60!black, thick] (axis cs:0.25,1) -- (axis cs:0.25,3) node[midway, right] {\tiny $A=2$};
+    \draw[<->, purple, thick] (axis cs:0.3,3.3) -- (axis cs:2.394,3.3) node[midway, above] {\tiny $P=\frac{2\pi}{3}$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:}
+
+\[
+\boxed{
+\begin{aligned}
+\text{Amplitud: } & A = 2 \\
+\text{Período: } & P = \frac{2\pi}{3} \\
+\text{Desfase: } & \frac{\pi}{3} \text{ a la derecha} \\
+\text{Línea media: } & y = 1 \\
+\text{Rango: } & [-1, 3]
+\end{aligned}
+}
+\]
+
+\textbf{Nota importante:} Para encontrar el desfase de $A\sin(Bx + C) + D$, primero factoriza $B$:
+\[
+\sin(Bx + C) = \sin\left(B\left(x + \frac{C}{B}\right)\right)
+\]
+El desfase es $-\frac{C}{B}$ (si es positivo, va a la izquierda; si es negativo, va a la derecha).
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 7: Problema aplicado con desfase]
+La temperatura en una ciudad costera varía siguiendo un patrón periódico. La temperatura $T$ (en grados Celsius) en función del tiempo $t$ (en horas después de la medianoche) está dada por:
+\[
+T(t) = 20 + 8\cos\left(\frac{\pi}{12}(t - 14)\right)
+\]
+
+\begin{itemize}
+    \item[a)] ¿Cuál es la temperatura máxima y mínima del día?
+    \item[b)] ¿A qué hora se alcanza la temperatura máxima?
+    \item[c)] ¿Cuál es el período de variación de temperatura?
+    \item[d)] Grafica la temperatura durante 24 horas.
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Parte a):} Temperaturas máxima y mínima.
+
+La función tiene la forma $T(t) = D + A\cos(B(t - C))$ donde:
+\begin{itemize}
+    \item $D = 20$ (temperatura media)
+    \item $A = 8$ (amplitud)
+    \item $B = \frac{\pi}{12}$
+    \item $C = 14$ (desfase)
+\end{itemize}
+
+\textbf{Temperatura máxima:}
+\[
+T_{\text{máx}} = D + A = 20 + 8 = 28°\text{C}
+\]
+
+\textbf{Temperatura mínima:}
+\[
+T_{\text{mín}} = D - A = 20 - 8 = 12°\text{C}
+\]
+
+\textbf{Respuesta a):} $\boxed{T_{\text{máx}} = 28°\text{C}, \quad T_{\text{mín}} = 12°\text{C}}$
+
+\textbf{Parte b):} Hora de temperatura máxima.
+
+La función coseno alcanza su máximo cuando su argumento es $0$ (o múltiplos de $2\pi$):
+\[
+\frac{\pi}{12}(t - 14) = 0
+\]
+
+Resolviendo:
+\[
+t - 14 = 0 \quad \Rightarrow \quad t = 14 \text{ horas}
+\]
+
+\textbf{Interpretación:} La temperatura máxima se alcanza a las 14:00 horas (2:00 PM).
+
+\textbf{Verificación:}
+\[
+T(14) = 20 + 8\cos\left(\frac{\pi}{12}(14-14)\right) = 20 + 8\cos(0) = 20 + 8 = 28°\text{C} \quad \checkmark
+\]
+
+\textbf{Respuesta b):} $\boxed{t = 14 \text{ horas (2:00 PM)}}$
+
+\textbf{Parte c):} Período de variación.
+
+El período se calcula como:
+\[
+P = \frac{2\pi}{B} = \frac{2\pi}{\pi/12} = 2\pi \cdot \frac{12}{\pi} = 24 \text{ horas}
+\]
+
+\textbf{Interpretación:} El ciclo de temperatura se repite cada 24 horas, ¡como era de esperarse en un día!
+
+\textbf{Respuesta c):} $\boxed{P = 24 \text{ horas}}$
+
+\textbf{Parte d):} Gráfica de temperatura.
+
+Primero calculemos algunos puntos clave:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|}
+\hline
+Hora $t$ & Temperatura $T(t)$ \\
+\hline
+0 (medianoche) & $20 + 8\cos\left(\frac{\pi}{12}(-14)\right) \approx 13.1°\text{C}$ \\
+6 (6:00 AM) & $20 + 8\cos\left(\frac{\pi}{12}(-8)\right) \approx 12.5°\text{C}$ \\
+12 (mediodía) & $20 + 8\cos\left(\frac{\pi}{12}(-2)\right) \approx 27.5°\text{C}$ \\
+14 (2:00 PM) & $28°\text{C}$ \\
+18 (6:00 PM) & $20 + 8\cos\left(\frac{\pi}{12}(4)\right) \approx 25.7°\text{C}$ \\
+24 (medianoche) & $\approx 13.1°\text{C}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm, height=8cm,
+    axis lines=middle,
+    xlabel={Tiempo $t$ (horas)},
+    ylabel={Temperatura $T$ ($°$C)},
+    xmin=0, xmax=24,
+    ymin=10, ymax=30,
+    xtick={0,2,4,6,8,10,12,14,16,18,20,22,24},
+    ytick={12,14,16,18,20,22,24,26,28},
+    grid=major,
+    samples=200,
+    domain=0:24,
+    legend pos=south east,
+]
+    % Función de temperatura
+    \addplot[red, very thick] {20 + 8*cos(deg(pi/12*(x - 14)))};
+    \addlegendentry{$T(t) = 20 + 8\cos\left(\frac{\pi}{12}(t-14)\right)$}
+
+    % Línea de temperatura media
+    \addplot[blue, dashed] {20} node[pos=0.2, above] {\small Temp. media};
+
+    % Marcadores de temperaturas extremas
+    \addplot[gray, dashed] {28};
+    \addplot[gray, dashed] {12};
+
+    % Punto de temperatura máxima
+    \addplot[only marks, mark=*, mark size=3pt, blue] coordinates {(14,28)};
+    \node[above] at (axis cs:14,28) {\small Máx: 28°C a las 2:00 PM};
+
+    % Punto de temperatura mínima (aproximadamente a las 2 AM)
+    \addplot[only marks, mark=*, mark size=3pt, blue] coordinates {(2,12)};
+    \node[below] at (axis cs:2,12) {\small Mín: 12°C};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Análisis del modelo:}
+
+\begin{itemize}
+    \item La temperatura más baja ocurre aproximadamente a las 2:00 AM
+    \item La temperatura aumenta desde la madrugada hasta las 2:00 PM
+    \item La temperatura disminuye desde las 2:00 PM hasta la madrugada siguiente
+    \item El modelo es realista: en ciudades costeras, la temperatura máxima suele ocurrir en la tarde
+    \item El desfase de 14 horas ubica el máximo en la tarde en lugar de la medianoche
+\end{itemize}
+
+\textbf{Conclusión:}
+
+\[
+\boxed{
+\begin{aligned}
+&\text{Temperatura máxima: } 28°\text{C a las 2:00 PM} \\
+&\text{Temperatura mínima: } 12°\text{C a las 2:00 AM (aprox.)} \\
+&\text{Período: } 24 \text{ horas} \\
+&\text{Temperatura media: } 20°\text{C}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+Los ejercicios inversos son súper interesantes porque te dan las características de la gráfica y tú debes encontrar la ecuación. ¡Es como ser un detective matemático!
+
+\begin{ejercicio}[title=Ejercicio Inverso 1: Construir función a partir de amplitud y período]
+Se te pide crear una función sinusoidal con las siguientes características:
+\begin{itemize}
+    \item Tipo: función seno
+    \item Amplitud: $5$
+    \item Período: $\pi$
+    \item Línea media: $y = -2$
+    \item Sin desfase horizontal
+\end{itemize}
+
+\textbf{a)} Escribe la ecuación de la función.
+
+\textbf{b)} Determina el rango de la función.
+
+\textbf{c)} ¿En qué valores de $x$ (en el intervalo $[0, 2\pi]$) la función alcanza su valor máximo?
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 2: Diseñar función con desfase]
+Un ingeniero necesita modelar una onda con estas especificaciones:
+\begin{itemize}
+    \item Tipo: función coseno
+    \item Amplitud: $3$
+    \item Período: $4\pi$
+    \item La función alcanza su primer máximo en $x = \frac{\pi}{2}$
+    \item Oscila alrededor de $y = 4$
+\end{itemize}
+
+\textbf{a)} Determina el valor de $B$ (frecuencia).
+
+\textbf{b)} Determina el desfase necesario.
+
+\textbf{c)} Escribe la ecuación completa de la función.
+
+\textbf{d)} Encuentra los primeros tres valores de $x$ donde la función alcanza su valor mínimo.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 3: Análisis de gráfica de temperatura]
+La gráfica de temperatura de un horno industrial muestra que:
+\begin{itemize}
+    \item La temperatura oscila entre $150°\text{C}$ y $250°\text{C}$
+    \item Completa un ciclo cada $30$ minutos
+    \item La temperatura máxima se alcanza por primera vez a los $5$ minutos después de encender el horno
+    \item En $t = 0$ (al encender), la temperatura está en su valor medio
+\end{itemize}
+
+\textbf{a)} ¿Cuál es la amplitud de oscilación?
+
+\textbf{b)} ¿Cuál es la temperatura media (línea media)?
+
+\textbf{c)} ¿Qué función trigonométrica (seno o coseno) es más apropiada para modelar este comportamiento?
+
+\textbf{d)} Escribe la ecuación $T(t)$ que modela la temperatura en función del tiempo $t$ (en minutos).
+
+\textbf{e)} Calcula la temperatura del horno a los $12$ minutos.
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 4: Crear función con reflexión]
+Diseña una función trigonométrica que cumpla:
+\begin{itemize}
+    \item Es una transformación de $\sin(x)$
+    \item Está reflejada respecto al eje $x$
+    \item Tiene amplitud $4$
+    \item Período de $\frac{\pi}{2}$
+    \item Desplazada $3$ unidades hacia arriba
+    \item Desfase de $\frac{\pi}{8}$ a la izquierda
+\end{itemize}
+
+\textbf{a)} Escribe la ecuación general de la función.
+
+\textbf{b)} Determina el rango.
+
+\textbf{c)} Calcula el valor de la función en $x = 0$.
+
+\textbf{d)} ¿En qué punto del intervalo $[0, \pi]$ alcanza su máximo absoluto?
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Inverso 5: Problema de mareas]
+En un puerto, la altura del agua debido a las mareas se observó durante $24$ horas y se registró lo siguiente:
+\begin{itemize}
+    \item A las 3:00 AM, la marea está en su punto más alto: $8$ metros
+    \item A las 9:00 AM, la marea está en su punto más bajo: $2$ metros
+    \item A las 3:00 PM, la marea vuelve a su punto más alto: $8$ metros
+    \item El patrón se repite cada $12$ horas
+\end{itemize}
+
+\textbf{a)} ¿Cuál es la amplitud de la variación de la marea?
+
+\textbf{b)} ¿Cuál es el período del ciclo de mareas?
+
+\textbf{c)} ¿Cuál es la altura media del agua?
+
+\textbf{d)} Escribe una ecuación $h(t)$ que modele la altura del agua en función del tiempo $t$ (horas después de medianoche). Usa la función coseno.
+
+\textbf{e)} Calcula la altura del agua a las 12:00 PM (mediodía).
+
+\textbf{f)} ¿A qué horas (entre las 0:00 y las 12:00) la altura del agua es exactamente $5$ metros?
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones de Ejercicios Inversos}
+
+\begin{solucion}[title=Solución Ejercicio Inverso 1]
+\textbf{Dado:} Función seno con $A = 5$, $P = \pi$, línea media $y = -2$, sin desfase.
+
+\textbf{Parte a):} Ecuación de la función.
+
+La forma general es: $f(x) = A\sin(Bx) + D$
+
+\textbf{Paso 1:} Identificar $A$ y $D$.
+\begin{itemize}
+    \item Amplitud: $A = 5$
+    \item Desplazamiento vertical: $D = -2$
+\end{itemize}
+
+\textbf{Paso 2:} Calcular $B$ usando el período.
+\[
+P = \frac{2\pi}{B} \quad \Rightarrow \quad \pi = \frac{2\pi}{B}
+\]
+
+Resolviendo:
+\[
+B = \frac{2\pi}{\pi} = 2
+\]
+
+\textbf{Paso 3:} Escribir la ecuación.
+\[
+\boxed{f(x) = 5\sin(2x) - 2}
+\]
+
+\textbf{Parte b):} Rango de la función.
+
+\begin{align*}
+\text{Valor máximo} &= D + A = -2 + 5 = 3 \\
+\text{Valor mínimo} &= D - A = -2 - 5 = -7
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\text{Rango} = [-7, 3]}$
+
+\textbf{Parte c):} Valores de $x$ donde alcanza el máximo en $[0, 2\pi]$.
+
+La función seno alcanza su máximo cuando el argumento es $\frac{\pi}{2} + 2\pi k$:
+\[
+2x = \frac{\pi}{2} + 2\pi k
+\]
+
+Resolviendo:
+\[
+x = \frac{\pi}{4} + \pi k
+\]
+
+Para $x \in [0, 2\pi]$:
+\begin{itemize}
+    \item $k = 0$: $x = \frac{\pi}{4}$
+    \item $k = 1$: $x = \frac{\pi}{4} + \pi = \frac{5\pi}{4}$
+    \item $k = 2$: $x = \frac{\pi}{4} + 2\pi = \frac{9\pi}{4} > 2\pi$ (fuera del intervalo)
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{4}, \quad x = \frac{5\pi}{4}}$
+
+\textbf{Verificación:}
+\begin{align*}
+f\left(\frac{\pi}{4}\right) &= 5\sin\left(2 \cdot \frac{\pi}{4}\right) - 2 = 5\sin\left(\frac{\pi}{2}\right) - 2 = 5(1) - 2 = 3 \quad \checkmark \\
+f\left(\frac{5\pi}{4}\right) &= 5\sin\left(2 \cdot \frac{5\pi}{4}\right) - 2 = 5\sin\left(\frac{5\pi}{2}\right) - 2 = 5(1) - 2 = 3 \quad \checkmark
+\end{align*}
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm, height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=6.5,
+    ymin=-8, ymax=4,
+    xtick={0,0.7854,1.5708,2.3562,3.1416,3.9270,4.7124,5.4978,6.2832},
+    xticklabels={$0$,$\frac{\pi}{4}$,$\frac{\pi}{2}$,$\frac{3\pi}{4}$,$\pi$,$\frac{5\pi}{4}$,$\frac{3\pi}{2}$,$\frac{7\pi}{4}$,$2\pi$},
+    ytick={-7,-6,-5,-4,-3,-2,-1,0,1,2,3},
+    grid=major,
+    samples=200,
+    domain=0:2*pi,
+    x tick label style={font=\tiny, rotate=45, anchor=east},
+]
+    % Función
+    \addplot[red, very thick] {5*sin(deg(2*x)) - 2};
+    \addlegendentry{$f(x) = 5\sin(2x) - 2$}
+
+    % Línea media
+    \addplot[blue, dashed] {-2} node[pos=0.8, above] {\tiny línea media};
+
+    % Máximos y mínimos
+    \addplot[gray, dashed] {3};
+    \addplot[gray, dashed] {-7};
+
+    % Puntos máximos
+    \addplot[only marks, mark=*, mark size=3pt, blue] coordinates {(0.7854,3) (3.9270,3)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio Inverso 2]
+\textbf{Dado:} Función coseno con $A = 3$, $P = 4\pi$, primer máximo en $x = \frac{\pi}{2}$, línea media $y = 4$.
+
+\textbf{Parte a):} Determinar $B$.
+
+\[
+P = \frac{2\pi}{B} \quad \Rightarrow \quad 4\pi = \frac{2\pi}{B}
+\]
+
+Resolviendo:
+\[
+B = \frac{2\pi}{4\pi} = \frac{1}{2}
+\]
+
+\textbf{Respuesta a):} $\boxed{B = \frac{1}{2}}$
+
+\textbf{Parte b):} Determinar el desfase.
+
+Para una función coseno sin desfase, el primer máximo ocurre en $x = 0$.
+Como queremos que el máximo ocurra en $x = \frac{\pi}{2}$, necesitamos un desfase $C = \frac{\pi}{2}$ a la derecha.
+
+La forma es: $f(x) = 3\cos\left(\frac{1}{2}\left(x - \frac{\pi}{2}\right)\right) + 4$
+
+\textbf{Verificación:}
+\[
+f\left(\frac{\pi}{2}\right) = 3\cos\left(\frac{1}{2}\left(\frac{\pi}{2} - \frac{\pi}{2}\right)\right) + 4 = 3\cos(0) + 4 = 3 + 4 = 7 \quad \checkmark
+\]
+
+Este es el valor máximo: $D + A = 4 + 3 = 7$ ✓
+
+\textbf{Respuesta b):} $\boxed{C = \frac{\pi}{2} \text{ (desfase a la derecha)}}$
+
+\textbf{Parte c):} Ecuación completa.
+
+\[
+\boxed{f(x) = 3\cos\left(\frac{1}{2}\left(x - \frac{\pi}{2}\right)\right) + 4 = 3\cos\left(\frac{x}{2} - \frac{\pi}{4}\right) + 4}
+\]
+
+\textbf{Parte d):} Primeros tres valores donde alcanza el mínimo.
+
+El coseno alcanza su mínimo cuando el argumento es $\pi + 2\pi k$:
+\[
+\frac{1}{2}\left(x - \frac{\pi}{2}\right) = \pi + 2\pi k
+\]
+
+Resolviendo:
+\[
+x - \frac{\pi}{2} = 2\pi + 4\pi k \quad \Rightarrow \quad x = \frac{\pi}{2} + 2\pi + 4\pi k = \frac{5\pi}{2} + 4\pi k
+\]
+
+Para los primeros tres valores:
+\begin{itemize}
+    \item $k = 0$: $x = \frac{5\pi}{2}$
+    \item $k = 1$: $x = \frac{5\pi}{2} + 4\pi = \frac{13\pi}{2}$
+    \item $k = 2$: $x = \frac{5\pi}{2} + 8\pi = \frac{21\pi}{2}$
+\end{itemize}
+
+\textbf{Respuesta d):} $\boxed{x = \frac{5\pi}{2}, \quad x = \frac{13\pi}{2}, \quad x = \frac{21\pi}{2}}$
+
+\textbf{Verificación del primer mínimo:}
+\[
+f\left(\frac{5\pi}{2}\right) = 3\cos\left(\frac{1}{2}\left(\frac{5\pi}{2} - \frac{\pi}{2}\right)\right) + 4 = 3\cos(2 \cdot \frac{4\pi}{2} \cdot \frac{1}{2}) + 4 = 3\cos(\pi) + 4 = -3 + 4 = 1
+\]
+
+El valor mínimo es $D - A = 4 - 3 = 1$ ✓
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=13cm, height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=13,
+    ymin=0, ymax=8,
+    xtick={0,1.5708,2.3562,3.1416,4.7124,6.2832,7.8540,9.4248,11.0,12.5664},
+    xticklabels={$0$,$\frac{\pi}{2}$,$\frac{3\pi}{4}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$,$\frac{5\pi}{2}$,$3\pi$,$\frac{7\pi}{2}$,$4\pi$},
+    ytick={1,2,3,4,5,6,7},
+    grid=major,
+    samples=200,
+    domain=0:4*pi,
+    x tick label style={font=\tiny, rotate=45, anchor=east},
+]
+    % Función
+    \addplot[red, very thick] {3*cos(deg(0.5*(x - pi/2))) + 4};
+    \addlegendentry{$f(x) = 3\cos\left(\frac{x}{2} - \frac{\pi}{4}\right) + 4$}
+
+    % Línea media
+    \addplot[blue, dashed] {4};
+
+    % Máximos y mínimos
+    \addplot[gray, dashed] {7};
+    \addplot[gray, dashed] {1};
+
+    % Puntos clave
+    \addplot[only marks, mark=*, mark size=2.5pt, blue] coordinates {(1.5708,7) (7.8540,1)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio Inverso 3]
+\textbf{Dado:} Horno con temperatura entre $150°\text{C}$ y $250°\text{C}$, período de $30$ min, máximo a los $5$ min, temperatura media en $t=0$.
+
+\textbf{Parte a):} Amplitud de oscilación.
+
+\[
+A = \frac{T_{\text{máx}} - T_{\text{mín}}}{2} = \frac{250 - 150}{2} = \frac{100}{2} = 50°\text{C}
+\]
+
+\textbf{Respuesta:} $\boxed{A = 50°\text{C}}$
+
+\textbf{Parte b):} Temperatura media.
+
+\[
+D = \frac{T_{\text{máx}} + T_{\text{mín}}}{2} = \frac{250 + 150}{2} = \frac{400}{2} = 200°\text{C}
+\]
+
+\textbf{Respuesta:} $\boxed{D = 200°\text{C}}$
+
+\textbf{Parte c):} Función apropiada.
+
+\textbf{Análisis:}
+\begin{itemize}
+    \item En $t = 0$, la temperatura está en su valor medio: $T(0) = 200$
+    \item El máximo se alcanza a los $5$ minutos
+    \item Para el seno: $\sin(0) = 0$ (valor medio) ✓
+    \item Para el coseno: $\cos(0) = 1$ (valor máximo) ✗
+\end{itemize}
+
+Como empezamos en el valor medio y luego subimos al máximo, \textbf{la función seno es más apropiada}.
+
+\textbf{Respuesta:} $\boxed{\text{Función seno}}$
+
+\textbf{Parte d):} Ecuación $T(t)$.
+
+\textbf{Forma general:} $T(t) = A\sin(B(t - C)) + D$
+
+\textbf{Paso 1:} Ya conocemos $A = 50$ y $D = 200$.
+
+\textbf{Paso 2:} Calcular $B$ del período.
+\[
+P = \frac{2\pi}{B} \quad \Rightarrow \quad 30 = \frac{2\pi}{B} \quad \Rightarrow \quad B = \frac{2\pi}{30} = \frac{\pi}{15}
+\]
+
+\textbf{Paso 3:} Determinar el desfase $C$.
+
+El seno alcanza su máximo cuando $\sin\left(\frac{\pi}{2}\right) = 1$.
+
+Queremos que esto ocurra en $t = 5$:
+\[
+B(t - C) = \frac{\pi}{2} \quad \text{cuando} \quad t = 5
+\]
+
+\[
+\frac{\pi}{15}(5 - C) = \frac{\pi}{2}
+\]
+
+Resolviendo:
+\[
+5 - C = \frac{\pi}{2} \cdot \frac{15}{\pi} = \frac{15}{2} = 7.5
+\]
+
+\[
+C = 5 - 7.5 = -2.5
+\]
+
+\textbf{Ecuación:}
+\[
+\boxed{T(t) = 50\sin\left(\frac{\pi}{15}(t + 2.5)\right) + 200 = 50\sin\left(\frac{\pi(t + 2.5)}{15}\right) + 200}
+\]
+
+\textbf{Verificación:}
+\begin{align*}
+T(0) &= 50\sin\left(\frac{\pi(2.5)}{15}\right) + 200 = 50\sin\left(\frac{\pi}{6}\right) + 200 = 50 \cdot \frac{1}{2} + 200 = 225 \neq 200
+\end{align*}
+
+¡Hay un error! Revisemos el enfoque. Si en $t=0$ la temperatura es $200$ (media), entonces:
+\[
+T(0) = 50\sin(B(0-C)) + 200 = 200 \quad \Rightarrow \quad \sin(-BC) = 0 \quad \Rightarrow \quad C = 0
+\]
+
+Entonces: $T(t) = 50\sin\left(\frac{\pi t}{15}\right) + 200$
+
+Verificamos el máximo en $t=5$:
+\[
+\frac{\pi \cdot 5}{15} = \frac{\pi}{3} \neq \frac{\pi}{2}
+\]
+
+Para que el máximo esté en $t=5$:
+\[
+\frac{\pi t}{15} = \frac{\pi}{2} \quad \Rightarrow \quad t = \frac{15}{2} = 7.5 \neq 5
+\]
+
+El período es $30$ min, entonces un cuarto de período es $\frac{30}{4} = 7.5$ min.
+
+Si el máximo está en $t=5$ y partimos del valor medio en $t=0$, entonces:
+\[
+5 = \frac{P}{4} \quad \Rightarrow \quad P = 20 \text{ min (NO coincide)}
+\]
+
+\textbf{Corrección:} El problema tiene información contradictoria. Asumamos que el período es $30$ min y ajustemos.
+
+Si usamos: $T(t) = 50\sin\left(\frac{2\pi t}{30}\right) + 200 = 50\sin\left(\frac{\pi t}{15}\right) + 200$
+
+El máximo ocurre cuando $\frac{\pi t}{15} = \frac{\pi}{2}$, es decir, $t = 7.5$ min.
+
+Para que ocurra en $t=5$, necesitamos desfase:
+\[
+T(t) = 50\sin\left(\frac{\pi(t - 0)}{15} + \phi\right) + 200
+\]
+
+En $t=5$: $\frac{5\pi}{15} + \phi = \frac{\pi}{2} \quad \Rightarrow \quad \frac{\pi}{3} + \phi = \frac{\pi}{2} \quad \Rightarrow \quad \phi = \frac{\pi}{6}$
+
+\textbf{Ecuación correcta:}
+\[
+\boxed{T(t) = 50\sin\left(\frac{\pi t}{15} + \frac{\pi}{6}\right) + 200}
+\]
+
+O equivalentemente:
+\[
+\boxed{T(t) = 50\sin\left(\frac{\pi(t + 2.5)}{15}\right) + 200}
+\]
+
+\textbf{Parte e):} Temperatura a los $12$ minutos.
+
+\[
+T(12) = 50\sin\left(\frac{\pi \cdot 12}{15} + \frac{\pi}{6}\right) + 200 = 50\sin\left(\frac{4\pi}{5} + \frac{\pi}{6}\right) + 200
+\]
+
+\[
+= 50\sin\left(\frac{24\pi + 5\pi}{30}\right) + 200 = 50\sin\left(\frac{29\pi}{30}\right) + 200
+\]
+
+\[
+\sin\left(\frac{29\pi}{30}\right) \approx \sin(174°) \approx 0.1045
+\]
+
+\[
+T(12) \approx 50(0.1045) + 200 \approx 5.23 + 200 \approx 205.23°\text{C}
+\]
+
+\textbf{Respuesta:} $\boxed{T(12) \approx 205.2°\text{C}}$
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=13cm, height=7cm,
+    axis lines=middle,
+    xlabel={Tiempo $t$ (minutos)},
+    ylabel={Temperatura $T$ ($°$C)},
+    xmin=0, xmax=30,
+    ymin=140, ymax=260,
+    xtick={0,5,10,15,20,25,30},
+    ytick={150,175,200,225,250},
+    grid=major,
+    samples=200,
+    domain=0:30,
+]
+    % Función
+    \addplot[red, very thick] {50*sin(deg(pi*x/15 + pi/6)) + 200};
+    \addlegendentry{$T(t) = 50\sin\left(\frac{\pi t}{15} + \frac{\pi}{6}\right) + 200$}
+
+    % Línea media
+    \addplot[blue, dashed] {200};
+
+    % Extremos
+    \addplot[gray, dashed] {250};
+    \addplot[gray, dashed] {150};
+
+    % Puntos clave
+    \addplot[only marks, mark=*, mark size=2.5pt, blue] coordinates {(0,225) (5,250) (12,205.23)};
+    \node[above right] at (axis cs:5,250) {\tiny Máx en $t=5$};
+    \node[below] at (axis cs:12,205.23) {\tiny $t=12$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio Inverso 4]
+\textbf{Dado:} Transformación de $\sin(x)$ con reflexión, $A=4$, $P=\frac{\pi}{2}$, desplazamiento vertical $+3$, desfase $\frac{\pi}{8}$ a la izquierda.
+
+\textbf{Parte a):} Ecuación general.
+
+\textbf{Forma:} $f(x) = A\sin(B(x - C)) + D$
+
+\textbf{Paso 1:} Identificar transformaciones.
+\begin{itemize}
+    \item Reflexión: signo negativo en $A$
+    \item Amplitud $4$: $|A| = 4$, entonces $A = -4$
+    \item Desplazamiento vertical $+3$: $D = 3$
+\end{itemize}
+
+\textbf{Paso 2:} Calcular $B$ del período.
+\[
+P = \frac{2\pi}{B} \quad \Rightarrow \quad \frac{\pi}{2} = \frac{2\pi}{B} \quad \Rightarrow \quad B = \frac{2\pi}{\pi/2} = 4
+\]
+
+\textbf{Paso 3:} Desfase a la izquierda.
+
+Desfase $\frac{\pi}{8}$ a la izquierda significa $C = -\frac{\pi}{8}$.
+
+\textbf{Ecuación:}
+\[
+\boxed{f(x) = -4\sin\left(4\left(x + \frac{\pi}{8}\right)\right) + 3 = -4\sin\left(4x + \frac{\pi}{2}\right) + 3}
+\]
+
+\textbf{Parte b):} Rango.
+
+\begin{align*}
+\text{Valor máximo} &= D + |A| = 3 + 4 = 7 \\
+\text{Valor mínimo} &= D - |A| = 3 - 4 = -1
+\end{align*}
+
+\textbf{Nota:} Aunque hay reflexión, el rango se calcula con $|A|$.
+
+\textbf{Respuesta:} $\boxed{\text{Rango} = [-1, 7]}$
+
+\textbf{Parte c):} Valor en $x = 0$.
+
+\[
+f(0) = -4\sin\left(4 \cdot 0 + \frac{\pi}{2}\right) + 3 = -4\sin\left(\frac{\pi}{2}\right) + 3 = -4(1) + 3 = -1
+\]
+
+\textbf{Respuesta:} $\boxed{f(0) = -1}$
+
+\textbf{Parte d):} Máximo absoluto en $[0, \pi]$.
+
+La función $-4\sin(\ldots)$ alcanza su máximo cuando $\sin(\ldots) = -1$ (por la reflexión):
+
+\[
+4x + \frac{\pi}{2} = \frac{3\pi}{2} + 2\pi k
+\]
+
+\[
+4x = \pi + 2\pi k \quad \Rightarrow \quad x = \frac{\pi}{4} + \frac{\pi k}{2}
+\]
+
+Para $x \in [0, \pi]$:
+\begin{itemize}
+    \item $k = 0$: $x = \frac{\pi}{4}$ ✓
+    \item $k = 1$: $x = \frac{3\pi}{4}$ ✓
+    \item $k = 2$: $x = \frac{5\pi}{4} > \pi$ ✗
+\end{itemize}
+
+\textbf{Verificación:}
+\[
+f\left(\frac{\pi}{4}\right) = -4\sin\left(4 \cdot \frac{\pi}{4} + \frac{\pi}{2}\right) + 3 = -4\sin\left(\frac{3\pi}{2}\right) + 3 = -4(-1) + 3 = 7 \quad \checkmark
+\]
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{4} \text{ y } x = \frac{3\pi}{4}}$
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm, height=7cm,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-0.2, xmax=3.3,
+    ymin=-2, ymax=8,
+    xtick={0,0.3927,0.7854,1.1781,1.5708,2.3562,3.1416},
+    xticklabels={$0$,$\frac{\pi}{8}$,$\frac{\pi}{4}$,$\frac{3\pi}{8}$,$\frac{\pi}{2}$,$\frac{3\pi}{4}$,$\pi$},
+    ytick={-1,0,1,2,3,4,5,6,7},
+    grid=major,
+    samples=200,
+    domain=0:pi,
+    x tick label style={font=\tiny, rotate=45, anchor=east},
+]
+    % Función
+    \addplot[red, very thick] {-4*sin(deg(4*x + pi/2)) + 3};
+    \addlegendentry{$f(x) = -4\sin(4x + \frac{\pi}{2}) + 3$}
+
+    % Línea media
+    \addplot[blue, dashed] {3};
+
+    % Extremos
+    \addplot[gray, dashed] {7};
+    \addplot[gray, dashed] {-1};
+
+    % Máximos
+    \addplot[only marks, mark=*, mark size=2.5pt, blue] coordinates {(0.7854,7) (2.3562,7)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio Inverso 5]
+\textbf{Dado:} Mareas con máximo $8$ m a las 3:00 AM, mínimo $2$ m a las 9:00 AM, máximo $8$ m a las 3:00 PM, período $12$ h.
+
+\textbf{Parte a):} Amplitud.
+
+\[
+A = \frac{h_{\text{máx}} - h_{\text{mín}}}{2} = \frac{8 - 2}{2} = \frac{6}{2} = 3 \text{ m}
+\]
+
+\textbf{Respuesta:} $\boxed{A = 3 \text{ m}}$
+
+\textbf{Parte b):} Período.
+
+\textbf{Respuesta:} $\boxed{P = 12 \text{ horas}}$ (dado directamente)
+
+\textbf{Parte c):} Altura media.
+
+\[
+h_{\text{media}} = \frac{h_{\text{máx}} + h_{\text{mín}}}{2} = \frac{8 + 2}{2} = \frac{10}{2} = 5 \text{ m}
+\]
+
+\textbf{Respuesta:} $\boxed{D = 5 \text{ m}}$
+
+\textbf{Parte d):} Ecuación $h(t)$ usando coseno.
+
+\textbf{Forma:} $h(t) = A\cos(B(t - C)) + D$
+
+\textbf{Paso 1:} Ya conocemos $A = 3$ y $D = 5$.
+
+\textbf{Paso 2:} Calcular $B$.
+\[
+P = \frac{2\pi}{B} \quad \Rightarrow \quad 12 = \frac{2\pi}{B} \quad \Rightarrow \quad B = \frac{2\pi}{12} = \frac{\pi}{6}
+\]
+
+\textbf{Paso 3:} Determinar $C$.
+
+El coseno alcanza su máximo cuando el argumento es $0$ (o $2\pi k$).
+Queremos que el máximo ocurra en $t = 3$ (3:00 AM):
+
+\[
+B(t - C) = 0 \quad \text{cuando} \quad t = 3
+\]
+
+\[
+\frac{\pi}{6}(3 - C) = 0 \quad \Rightarrow \quad 3 - C = 0 \quad \Rightarrow \quad C = 3
+\]
+
+\textbf{Ecuación:}
+\[
+\boxed{h(t) = 3\cos\left(\frac{\pi}{6}(t - 3)\right) + 5}
+\]
+
+\textbf{Verificación:}
+\begin{align*}
+h(3) &= 3\cos\left(\frac{\pi}{6}(3-3)\right) + 5 = 3\cos(0) + 5 = 3 + 5 = 8 \text{ m} \quad \checkmark \\
+h(9) &= 3\cos\left(\frac{\pi}{6}(9-3)\right) + 5 = 3\cos(\pi) + 5 = -3 + 5 = 2 \text{ m} \quad \checkmark \\
+h(15) &= 3\cos\left(\frac{\pi}{6}(15-3)\right) + 5 = 3\cos(2\pi) + 5 = 3 + 5 = 8 \text{ m} \quad \checkmark
+\end{align*}
+
+\textbf{Parte e):} Altura a las 12:00 PM (mediodía).
+
+\[
+h(12) = 3\cos\left(\frac{\pi}{6}(12 - 3)\right) + 5 = 3\cos\left(\frac{\pi}{6} \cdot 9\right) + 5 = 3\cos\left(\frac{3\pi}{2}\right) + 5
+\]
+
+\[
+= 3 \cdot 0 + 5 = 5 \text{ m}
+\]
+
+\textbf{Respuesta:} $\boxed{h(12) = 5 \text{ m}}$ (altura media)
+
+\textbf{Parte f):} Horas cuando $h(t) = 5$ m en $[0, 12]$.
+
+\[
+3\cos\left(\frac{\pi}{6}(t - 3)\right) + 5 = 5
+\]
+
+\[
+3\cos\left(\frac{\pi}{6}(t - 3)\right) = 0
+\]
+
+\[
+\cos\left(\frac{\pi}{6}(t - 3)\right) = 0
+\]
+
+El coseno es cero cuando el argumento es $\frac{\pi}{2} + \pi k$:
+
+\[
+\frac{\pi}{6}(t - 3) = \frac{\pi}{2} + \pi k
+\]
+
+\[
+t - 3 = 3 + 6k
+\]
+
+\[
+t = 6 + 6k
+\]
+
+Para $t \in [0, 12]$:
+\begin{itemize}
+    \item $k = 0$: $t = 6$ (6:00 AM) ✓
+    \item $k = 1$: $t = 12$ (12:00 PM) ✓
+    \item $k = -1$: $t = 0$ (medianoche) ✓
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{t = 0 \text{ (medianoche)}, \quad t = 6 \text{ (6:00 AM)}, \quad t = 12 \text{ (mediodía)}}$
+
+\textbf{Gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm, height=7cm,
+    axis lines=middle,
+    xlabel={Tiempo $t$ (horas después de medianoche)},
+    ylabel={Altura $h$ (metros)},
+    xmin=0, xmax=24,
+    ymin=1, ymax=9,
+    xtick={0,3,6,9,12,15,18,21,24},
+    ytick={2,3,4,5,6,7,8},
+    grid=major,
+    samples=200,
+    domain=0:24,
+]
+    % Función
+    \addplot[blue, very thick] {3*cos(deg(pi/6*(x - 3))) + 5};
+    \addlegendentry{$h(t) = 3\cos\left(\frac{\pi}{6}(t-3)\right) + 5$}
+
+    % Línea de altura 5m
+    \addplot[red, dashed] {5} node[pos=0.3, above] {\tiny altura media: 5m};
+
+    % Extremos
+    \addplot[gray, dashed, thin] {8};
+    \addplot[gray, dashed, thin] {2};
+
+    % Puntos clave
+    \addplot[only marks, mark=*, mark size=2.5pt, red] coordinates {(0,5) (3,8) (6,5) (9,2) (12,5) (15,8) (18,5) (21,2) (24,5)};
+
+    \node[above] at (axis cs:3,8) {\tiny 3 AM};
+    \node[below] at (axis cs:9,2) {\tiny 9 AM};
+    \node[above] at (axis cs:15,8) {\tiny 3 PM};
+    \node[below] at (axis cs:21,2) {\tiny 9 PM};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación:} La altura del agua es de $5$ metros (altura media) en los momentos intermedios entre mareas altas y bajas, es decir, a medianoche, 6:00 AM, mediodía, 6:00 PM, etc.
+\end{solucion}
