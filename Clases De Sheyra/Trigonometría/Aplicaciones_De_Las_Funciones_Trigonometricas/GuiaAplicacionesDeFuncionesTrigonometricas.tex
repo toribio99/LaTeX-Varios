@@ -11,6 +11,7 @@
 \usepackage{tikz,pgfplots}
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{angles,calc,patterns,positioning,arrows.meta}
+\usepackage{colortbl}
 
 % Colores institucionales
 \definecolor{maincolor}{RGB}{26,35,126}      % Azul oscuro
@@ -2137,48 +2138,48 @@ Determina:
 - La distancia desde el punto $B$ hasta la base de la montaña
 
 \begin{center}
-\begin{tikzpicture}[scale=0.01]
+\begin{tikzpicture}[scale=0.1]
     % Montaña
-    \draw[thick, fill=brown!30] plot[smooth] coordinates {(-100,0) (0,0) (100,400) (200,420) (300,450) (400,420) (500,400) (600,0) (700,0)};
+    \draw[thick, fill=brown!30] plot[smooth] coordinates {(-10,0) (0,0) (10,40) (20,42) (30,45) (40,42) (50,40) (60,0) (70,0)};
 
     % Cima
-    \node[circle, fill=red, inner sep=3pt] at (300,450) {};
-    \node[above] at (300,450) {Cima};
+    \node[circle, fill=red, inner sep=2pt] at (30,45) {};
+    \node[above] at (30,45) {Cima};
 
     % Punto A
-    \node[circle, fill=blue, inner sep=3pt] at (-300,0) {};
-    \node[below] at (-300,0) {$A$};
+    \node[circle, fill=blue, inner sep=2pt] at (-30,0) {};
+    \node[below] at (-30,0) {$A$};
 
     % Punto B
-    \node[circle, fill=blue, inner sep=3pt] at (200,0) {};
-    \node[below] at (200,0) {$B$};
+    \node[circle, fill=blue, inner sep=2pt] at (20,0) {};
+    \node[below] at (20,0) {$B$};
 
     % Base de la montaña
-    \node[circle, fill=green, inner sep=3pt] at (300,0) {};
-    \node[below] at (300,0) {Base};
+    \node[circle, fill=green, inner sep=2pt] at (30,0) {};
+    \node[below] at (30,0) {Base};
 
     % Líneas de visión
-    \draw[dashed, red] (-300,0) -- (300,450);
-    \draw[dashed, blue] (200,0) -- (300,450);
+    \draw[dashed, red] (-30,0) -- (30,45);
+    \draw[dashed, blue] (20,0) -- (30,45);
 
     % Distancia A-B
-    \draw[<->] (-300,-50) -- (200,-50);
-    \node[below] at (-50,-50) {500 m};
+    \draw[<->] (-30,-5) -- (20,-5);
+    \node[below] at (-5,-5) {500 m};
 
     % Altura
-    \draw[<->] (350,0) -- (350,450);
-    \node[right] at (350,225) {$h$};
+    \draw[<->] (35,0) -- (35,45);
+    \node[right] at (35,22.5) {$h$};
 
     % Ángulos
-    \draw[thick] (-250,0) arc (0:38:50);
-    \node at (-220,30) {38°};
+    \draw[thick] (-25,0) arc (0:38:5);
+    \node at (-22,3) {38°};
 
-    \draw[thick] (240,0) arc (0:52:40);
-    \node at (265,35) {52°};
+    \draw[thick] (24,0) arc (0:52:4);
+    \node at (26.5,3.5) {52°};
 
     % Distancia B-Base
-    \draw[<->] (200,-100) -- (300,-100);
-    \node[below] at (250,-100) {$x$};
+    \draw[<->] (20,-10) -- (30,-10);
+    \node[below] at (25,-10) {$x$};
 \end{tikzpicture}
 \end{center}
 \end{ejercicio}
