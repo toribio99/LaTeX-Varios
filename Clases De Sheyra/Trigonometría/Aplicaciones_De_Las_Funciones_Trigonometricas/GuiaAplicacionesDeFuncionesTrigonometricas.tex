@@ -1,0 +1,3127 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+
+% Paquetes esenciales
+\usepackage{fontspec}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{angles,calc,patterns,positioning,arrows.meta}
+
+% Colores institucionales
+\definecolor{maincolor}{RGB}{26,35,126}      % Azul oscuro
+\definecolor{accentcolor}{RGB}{255,87,34}    % Naranja
+\definecolor{examplecolor}{RGB}{33,150,243}  % Azul claro
+\definecolor{solutioncolor}{RGB}{76,175,80}  % Verde
+\definecolor{notecolor}{RGB}{255,193,7}      % Amarillo
+
+% Encabezados y pies de página con fancyhdr
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textcolor{maincolor}{\small\textit{SOLUCION DE TRIANGULO RECTANGULO}}}
+\fancyhead[LO]{\textcolor{maincolor}{\small\textit{La Pruebita}}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Entornos personalizados con tcolorbox
+\usepackage[most]{tcolorbox}
+
+\newtcolorbox{definicion}{
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  sharp corners=downhill,
+  arc=8pt
+}
+
+\newtcolorbox{ejemplo}{
+  colback=examplecolor!5,
+  colframe=examplecolor,
+  fonttitle=\bfseries,
+  title=Ejemplo,
+  sharp corners=downhill,
+  arc=8pt
+}
+
+\newtcolorbox{ejercicio}{
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  sharp corners=downhill,
+  arc=8pt
+}
+
+\newtcolorbox{solucion}{
+  colback=solutioncolor!5,
+  colframe=solutioncolor,
+  fonttitle=\bfseries,
+  title=Solución,
+  sharp corners=downhill,
+  arc=8pt
+}
+
+\newtcolorbox{nota}{
+  colback=notecolor!5,
+  colframe=notecolor,
+  fonttitle=\bfseries,
+  title=Nota,
+  sharp corners=downhill,
+  arc=8pt
+}
+
+% Configuración de hyperref
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=maincolor,
+  urlcolor=accentcolor,
+  pdftitle={APLICACIONES DE LAS FUNCIONES TRIGONOMETRICAS},
+  pdfauthor={Prof: Toribio De J Arrieta F}
+}
+
+\begin{document}
+
+% ============================================
+% PORTADA
+% ============================================
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+
+  {\Huge\bfseries\textcolor{maincolor}{APLICACIONES DE LAS}\par}
+  \vspace{0.5cm}
+  {\Huge\bfseries\textcolor{maincolor}{FUNCIONES TRIGONOMÉTRICAS}\par}
+  \vspace{1cm}
+  {\Large\textcolor{accentcolor}{Solución de Triángulos Rectángulos}\par}
+
+  \vspace{3cm}
+
+  \begin{tikzpicture}
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (5,0);
+    \coordinate (C) at (5,3);
+
+    \draw[line width=1.5pt, maincolor] (A) -- (B) -- (C) -- cycle;
+    \draw[line width=1pt, accentcolor] (4.7,0) rectangle (5,0.3);
+
+    \node[below left] at (A) {\Large $A$};
+    \node[below right] at (B) {\Large $B$};
+    \node[above right] at (C) {\Large $C$};
+
+    \node[below, maincolor] at (2.5,0) {\Large Cateto adyacente};
+    \node[right, maincolor] at (5,1.5) {\Large Cateto opuesto};
+    \node[above left, maincolor] at (2.5,1.8) {\Large Hipotenusa};
+
+    \draw[maincolor] (0.8,0) arc (0:31:0.8);
+    \node[maincolor] at (1.2,0.3) {$\theta$};
+  \end{tikzpicture}
+
+  \vspace{3cm}
+
+  {\Large\textbf{Profesor:} Toribio De J Arrieta F\par}
+  \vspace{0.5cm}
+  {\Large\textbf{Institución:} La Pruebita\par}
+  \vspace{0.5cm}
+  {\Large\textbf{Grado:} 10\par}
+  \vspace{0.5cm}
+  {\Large\textbf{Asignatura:} Trigonometría\par}
+
+  \vfill
+
+  {\large\today\par}
+\end{titlepage}
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+% ============================================
+% TABLA DE CONTENIDOS
+% ============================================
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================
+% INTRODUCCIÓN
+% ============================================
+\section{Introducción}
+
+Bienvenidos a esta guía sobre una de las aplicaciones más útiles y fascinantes de la trigonometría: ¡la resolución de triángulos rectángulos! Seguro te estarás preguntando: "¿Y para qué me sirve esto en la vida real?" Pues déjame contarte que esta habilidad es súper importante en muchísimas profesiones y situaciones del día a día.
+
+Imagínate que estás en la playa y ves un barco en el horizonte. ¿Alguna vez te has preguntado cómo los capitanes de barco saben exactamente qué tan lejos están de la costa? O cuando miras un edificio altísimo, ¿cómo crees que los arquitectos calcularon su altura antes de construirlo? La respuesta está en lo que vamos a aprender hoy: resolver triángulos rectángulos.
+
+Un triángulo rectángulo es simplemente un triángulo que tiene un ángulo de 90 grados (un ángulo recto, como la esquina de tu cuaderno). Aunque parezca simple, este tipo de triángulo es la base de cálculos increíblemente importantes en el mundo real.
+
+\subsection{¿Por qué es tan importante resolver triángulos rectángulos?}
+
+Cuando hablamos de "resolver" un triángulo, nos referimos a encontrar todas sus medidas: los tres lados y los tres ángulos. Lo interesante es que no necesitamos saber todas estas medidas desde el principio. Con solo conocer algunas de ellas (y usando las razones trigonométricas que ya estudiaste), podemos calcular todas las demás. Es como resolver un rompecabezas matemático.
+
+Esta habilidad no es solo teórica, tiene aplicaciones súper prácticas:
+
+\begin{itemize}
+  \item \textbf{Navegación marítima y aérea:} Los navegantes usan estos cálculos para determinar distancias y rumbos. Cuando un capitán de barco mira hacia el faro con un cierto ángulo, puede calcular exactamente qué tan lejos está de la costa.
+
+  \item \textbf{Arquitectura y construcción:} Los arquitectos necesitan calcular alturas de edificios, longitudes de rampas, inclinaciones de techos y mucho más. Imagínate diseñar las escaleras de un edificio sin saber trigonometría, ¡sería imposible!
+
+  \item \textbf{Topografía:} Los topógrafos son las personas que miden terrenos y crean mapas. Ellos usan triángulos rectángulos constantemente para medir distancias que serían imposibles de medir directamente, como el ancho de un río o la altura de una montaña.
+
+  \item \textbf{Astronomía:} Los astrónomos calculan distancias a las estrellas y planetas usando principios similares. Aunque las distancias son enormes, el concepto es el mismo que usaremos aquí.
+
+  \item \textbf{Ingeniería civil:} Cuando se construyen puentes, carreteras o túneles, los ingenieros necesitan hacer cálculos precisos de ángulos y distancias. Un pequeño error podría ser desastroso.
+
+  \item \textbf{Deportes y videojuegos:} Desde calcular la trayectoria de una pelota de básquetbol hasta programar el movimiento de personajes en videojuegos, la trigonometría está por todas partes.
+\end{itemize}
+
+\subsection{¿Qué aprenderás en esta guía?}
+
+En esta guía vamos a enfocarnos en dos situaciones principales:
+
+\begin{enumerate}
+  \item \textbf{Cuando conoces un lado y un ángulo:} Aprenderás cómo encontrar los otros dos lados y el otro ángulo agudo del triángulo.
+
+  \item \textbf{Cuando conoces dos lados:} Aprenderás cómo encontrar el tercer lado y los dos ángulos agudos.
+\end{enumerate}
+
+También estudiaremos dos conceptos súper importantes y prácticos:
+
+\begin{itemize}
+  \item \textbf{Ángulos de elevación:} Cuando miras hacia arriba (como cuando ves un avión en el cielo o la cima de un edificio).
+
+  \item \textbf{Ángulos de depresión:} Cuando miras hacia abajo (como cuando estás en un mirador y observas algo en el suelo).
+\end{itemize}
+
+Lo mejor de todo es que vamos a trabajar con ejemplos prácticos y ejercicios que te ayudarán a entender no solo cómo hacer los cálculos, sino también cuándo y por qué usar cada técnica. No te preocupes si al principio parece complicado; con práctica verás que es como aprender a andar en bicicleta: al principio cuesta, pero una vez que le agarras el truco, ¡es facilísimo!
+
+Así que prepárate, toma tu calculadora científica (¡la vas a necesitar!), y vamos a descubrir juntos cómo resolver estos fascinantes problemas matemáticos que tienen aplicaciones tan importantes en el mundo real.
+
+\newpage
+
+% ============================================
+% CONCEPTOS FUNDAMENTALES
+% ============================================
+\section{Conceptos Fundamentales}
+
+Antes de lanzarnos a resolver triángulos rectángulos complejos, necesitamos asegurarnos de que tienes súper claros los conceptos básicos. Es como en el fútbol: antes de hacer jugadas complicadas, necesitas dominar cómo patear el balón correctamente. Vamos a repasar todo lo que necesitas saber.
+
+\subsection{Repaso de Triángulos Rectángulos}
+
+\begin{definicion}
+Un \textbf{triángulo rectángulo} es un triángulo que tiene un ángulo de exactamente 90 grados (un ángulo recto). Este ángulo especial es lo que hace que estos triángulos sean tan útiles en trigonometría.
+\end{definicion}
+
+Todo triángulo rectángulo tiene tres lados con nombres específicos:
+
+\begin{itemize}
+  \item \textbf{Hipotenusa:} Es el lado más largo del triángulo. Siempre está opuesto al ángulo recto (el de 90°). Es como el "jefe" de los lados.
+
+  \item \textbf{Catetos:} Son los dos lados que forman el ángulo recto. Hay dos catetos, y sus nombres pueden cambiar dependiendo del ángulo que estemos considerando:
+  \begin{itemize}
+    \item \textit{Cateto opuesto:} Es el lado que está enfrente del ángulo que nos interesa.
+    \item \textit{Cateto adyacente:} Es el lado que está junto al ángulo que nos interesa (además de la hipotenusa).
+  \end{itemize}
+\end{itemize}
+
+Veamos esto claramente en un diagrama:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  % Coordenadas del triángulo
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (5,0);
+  \coordinate (C) at (5,3);
+
+  % Dibujar el triángulo
+  \draw[line width=1.5pt, maincolor] (A) -- node[below] {Cateto adyacente a $\alpha$} (B)
+                                       -- node[right] {Cateto opuesto a $\alpha$} (C)
+                                       -- node[above left, sloped] {Hipotenusa} (A);
+
+  % Marcar el ángulo recto
+  \draw[line width=1pt, maincolor] (4.7,0) rectangle (5,0.3);
+
+  % Etiquetas de los vértices
+  \node[below left, maincolor] at (A) {\Large $A$};
+  \node[below right, maincolor] at (B) {\Large $B$};
+  \node[above right, maincolor] at (C) {\Large $C$};
+
+  % Marcar el ángulo de interés
+  \draw[accentcolor, line width=1pt] (1,0) arc (0:31:1);
+  \node[accentcolor] at (1.3,0.3) {$\alpha$};
+
+  % Marcar el otro ángulo agudo
+  \draw[examplecolor, line width=1pt] (4.3,3) arc (180:239:0.7);
+  \node[examplecolor] at (4.2,2.5) {$\beta$};
+
+  % Etiquetas de medidas
+  \node[below, maincolor] at (2.5,-0.5) {$b$};
+  \node[right, maincolor] at (5.3,1.5) {$a$};
+  \node[above left, maincolor] at (2.3,1.8) {$c$};
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+Fíjate que el cateto opuesto y el cateto adyacente dependen de cuál ángulo estás considerando. Si cambias el ángulo de referencia, estos nombres se intercambian. Sin embargo, la hipotenusa siempre es la hipotenusa, no importa qué ángulo estés mirando.
+\end{nota}
+
+\subsubsection{El Teorema de Pitágoras}
+
+Este es probablemente el teorema más famoso de toda la matemática. Ya lo has usado antes, pero vamos a repasarlo porque lo necesitaremos constantemente.
+
+\begin{definicion}
+\textbf{Teorema de Pitágoras:} En todo triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.
+
+Matemáticamente:
+\[
+c^2 = a^2 + b^2
+\]
+
+donde $c$ es la hipotenusa, y $a$ y $b$ son los catetos.
+\end{definicion}
+
+Este teorema nos permite encontrar la longitud de cualquier lado del triángulo si conocemos los otros dos. Las fórmulas derivadas son:
+
+\begin{align*}
+c &= \sqrt{a^2 + b^2} \quad \text{(si conocemos los dos catetos)} \\
+a &= \sqrt{c^2 - b^2} \quad \text{(si conocemos la hipotenusa y un cateto)} \\
+b &= \sqrt{c^2 - a^2} \quad \text{(si conocemos la hipotenusa y un cateto)}
+\end{align*}
+
+\subsection{Razones Trigonométricas Básicas}
+
+Las razones trigonométricas son relaciones entre los lados de un triángulo rectángulo. Son como recetas matemáticas que nos permiten relacionar los ángulos con las longitudes de los lados. Hay seis razones trigonométricas principales, pero vamos a enfocarnos primero en las tres más importantes.
+
+\begin{definicion}
+Para un ángulo agudo $\theta$ en un triángulo rectángulo, definimos:
+
+\begin{align*}
+\sin(\theta) &= \frac{\text{cateto opuesto}}{\text{hipotenusa}} = \frac{a}{c} \\[0.3cm]
+\cos(\theta) &= \frac{\text{cateto adyacente}}{\text{hipotenusa}} = \frac{b}{c} \\[0.3cm]
+\tan(\theta) &= \frac{\text{cateto opuesto}}{\text{cateto adyacente}} = \frac{a}{b}
+\end{align*}
+\end{definicion}
+
+Estas tres son las más importantes y las que usarás el 99\% del tiempo. Pero también existen tres más, que son las recíprocas de las anteriores:
+
+\begin{align*}
+\csc(\theta) &= \frac{1}{\sin(\theta)} = \frac{\text{hipotenusa}}{\text{cateto opuesto}} = \frac{c}{a} \\[0.3cm]
+\sec(\theta) &= \frac{1}{\cos(\theta)} = \frac{\text{hipotenusa}}{\text{cateto adyacente}} = \frac{c}{b} \\[0.3cm]
+\cot(\theta) &= \frac{1}{\tan(\theta)} = \frac{\text{cateto adyacente}}{\text{cateto opuesto}} = \frac{b}{a}
+\end{align*}
+
+\begin{nota}
+Una forma fácil de recordar las tres primeras es con la palabra "SOHCAHTOA":
+\begin{itemize}
+  \item \textbf{S}eno = \textbf{O}puesto / \textbf{H}ipotenusa
+  \item \textbf{C}oseno = \textbf{A}dyacente / \textbf{H}ipotenusa
+  \item \textbf{T}angente = \textbf{O}puesto / \textbf{A}dyacente
+\end{itemize}
+¡Repite "SOH-CAH-TOA" hasta que lo memorices!
+\end{nota}
+
+Aquí tienes una tabla de referencia rápida:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Razón} & \textbf{Fórmula} & \textbf{Descripción} \\
+\hline
+Seno & $\sin(\theta) = \dfrac{\text{opuesto}}{\text{hipotenusa}}$ & Relación vertical \\
+\hline
+Coseno & $\cos(\theta) = \dfrac{\text{adyacente}}{\text{hipotenusa}}$ & Relación horizontal \\
+\hline
+Tangente & $\tan(\theta) = \dfrac{\text{opuesto}}{\text{adyacente}}$ & Pendiente del ángulo \\
+\hline
+Cosecante & $\csc(\theta) = \dfrac{\text{hipotenusa}}{\text{opuesto}}$ & Recíproca del seno \\
+\hline
+Secante & $\sec(\theta) = \dfrac{\text{hipotenusa}}{\text{adyacente}}$ & Recíproca del coseno \\
+\hline
+Cotangente & $\cot(\theta) = \dfrac{\text{adyacente}}{\text{opuesto}}$ & Recíproca de la tangente \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Caso 1: Resolver un Triángulo Conociendo un Lado y un Ángulo}
+
+Este es uno de los casos más comunes que vas a encontrar. Imagínate que estás parado a cierta distancia de un edificio y mides el ángulo con el que ves la cima. Con solo esa información (la distancia y el ángulo), puedes calcular la altura del edificio. ¡Genial, verdad?
+
+\subsubsection{¿Qué datos necesitamos?}
+
+Para resolver este tipo de problema necesitamos conocer:
+\begin{enumerate}
+  \item \textbf{Un ángulo agudo} (diferente del ángulo recto de 90°)
+  \item \textbf{La longitud de un lado cualquiera} (puede ser la hipotenusa o cualquiera de los catetos)
+\end{enumerate}
+
+\subsubsection{Pasos para resolver el triángulo}
+
+\begin{enumerate}
+  \item \textbf{Identifica el ángulo recto:} Ya sabemos que es 90°.
+
+  \item \textbf{Encuentra el otro ángulo agudo:} Usa el hecho de que la suma de los ángulos internos de cualquier triángulo es 180°. Como ya tienes 90° del ángulo recto y uno de los ángulos agudos, el tercer ángulo es:
+  \[
+  \text{Ángulo faltante} = 180° - 90° - \text{ángulo conocido} = 90° - \text{ángulo conocido}
+  \]
+
+  \item \textbf{Identifica qué lado conoces:} ¿Es la hipotenusa, el cateto opuesto o el cateto adyacente respecto al ángulo conocido?
+
+  \item \textbf{Usa las razones trigonométricas:} Dependiendo de qué lado conoces y cuál quieres encontrar, usa la razón trigonométrica apropiada (seno, coseno o tangente).
+
+  \item \textbf{Verifica con Pitágoras:} Siempre es buena idea verificar tus resultados usando el teorema de Pitágoras.
+\end{enumerate}
+
+\subsubsection{Fórmulas clave}
+
+Si conoces el ángulo $\theta$ y un lado, puedes encontrar los demás usando:
+
+\begin{itemize}
+  \item Si conoces la \textbf{hipotenusa} $c$ y el ángulo $\theta$:
+  \begin{align*}
+    \text{Cateto opuesto: } a &= c \cdot \sin(\theta) \\
+    \text{Cateto adyacente: } b &= c \cdot \cos(\theta)
+  \end{align*}
+
+  \item Si conoces el \textbf{cateto opuesto} $a$ y el ángulo $\theta$:
+  \begin{align*}
+    \text{Hipotenusa: } c &= \frac{a}{\sin(\theta)} \\
+    \text{Cateto adyacente: } b &= a \cdot \frac{\cos(\theta)}{\sin(\theta)} = \frac{a}{\tan(\theta)}
+  \end{align*}
+
+  \item Si conoces el \textbf{cateto adyacente} $b$ y el ángulo $\theta$:
+  \begin{align*}
+    \text{Hipotenusa: } c &= \frac{b}{\cos(\theta)} \\
+    \text{Cateto opuesto: } a &= b \cdot \tan(\theta)
+  \end{align*}
+\end{itemize}
+
+\subsubsection{Ejemplo básico}
+
+\begin{ejemplo}
+Considera un triángulo rectángulo donde conocemos:
+\begin{itemize}
+  \item Uno de los ángulos agudos: $\alpha = 30°$
+  \item La hipotenusa: $c = 10$ cm
+\end{itemize}
+
+Encontremos todos los elementos faltantes del triángulo.
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (5,0);
+  \coordinate (C) at (5,2.5);
+
+  \draw[line width=1.5pt, maincolor] (A) -- (B) -- (C) -- cycle;
+  \draw[line width=1pt, maincolor] (4.7,0) rectangle (5,0.3);
+
+  \node[below left] at (A) {$A$};
+  \node[below right] at (B) {$B$};
+  \node[above right] at (C) {$C$};
+
+  \draw[accentcolor] (0.8,0) arc (0:27:0.8);
+  \node[accentcolor] at (1.1,0.25) {$30°$};
+
+  \node[above left] at (2.5,1.5) {$c = 10$ cm};
+  \node[below] at (2.5,-0.3) {$b = ?$};
+  \node[right] at (5.3,1.25) {$a = ?$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solución:}
+
+\textit{Paso 1:} Encontrar el otro ángulo agudo.
+\[
+\beta = 90° - 30° = 60°
+\]
+
+\textit{Paso 2:} Encontrar el cateto opuesto a 30° usando seno.
+\[
+\sin(30°) = \frac{a}{c} \quad \Rightarrow \quad a = c \cdot \sin(30°) = 10 \cdot 0.5 = 5 \text{ cm}
+\]
+
+\textit{Paso 3:} Encontrar el cateto adyacente a 30° usando coseno.
+\[
+\cos(30°) = \frac{b}{c} \quad \Rightarrow \quad b = c \cdot \cos(30°) = 10 \cdot 0.866 = 8.66 \text{ cm}
+\]
+
+\textit{Paso 4:} Verificar con Pitágoras.
+\[
+c^2 = a^2 + b^2 \quad \Rightarrow \quad 10^2 = 5^2 + 8.66^2 \quad \Rightarrow \quad 100 = 25 + 75 = 100 \quad \checkmark
+\]
+
+Por lo tanto, el triángulo completo tiene:
+\begin{itemize}
+  \item Ángulos: $30°$, $60°$ y $90°$
+  \item Lados: $a = 5$ cm, $b = 8.66$ cm, $c = 10$ cm
+\end{itemize}
+\end{ejemplo}
+
+\subsection{Caso 2: Resolver un Triángulo Conociendo Dos Lados}
+
+Este caso es igual de común que el anterior, pero requiere un paso adicional: necesitamos usar las funciones trigonométricas inversas para encontrar los ángulos. No te asustes con el nombre, las funciones inversas son simplemente una forma de "deshacer" las funciones trigonométricas.
+
+\subsubsection{¿Qué datos necesitamos?}
+
+Para resolver este tipo de problema necesitamos conocer las longitudes de dos lados cualesquiera del triángulo. Pueden ser:
+\begin{itemize}
+  \item Los dos catetos
+  \item La hipotenusa y un cateto
+\end{itemize}
+
+\subsubsection{Funciones trigonométricas inversas}
+
+Cuando conocemos la razón entre dos lados pero queremos encontrar el ángulo, usamos las funciones inversas:
+
+\begin{itemize}
+  \item $\arcsin(x)$ o $\sin^{-1}(x)$: Es el ángulo cuyo seno es $x$
+  \item $\arccos(x)$ o $\cos^{-1}(x)$: Es el ángulo cuyo coseno es $x$
+  \item $\arctan(x)$ o $\tan^{-1}(x)$: Es el ángulo cuya tangente es $x$
+\end{itemize}
+
+\begin{nota}
+En tu calculadora, estas funciones suelen aparecer como $\sin^{-1}$, $\cos^{-1}$ y $\tan^{-1}$. Para usarlas, primero calcula la razón entre los lados, y luego aplica la función inversa. ¡Asegúrate de que tu calculadora esté en modo GRADOS (DEG) y no en radianes (RAD)!
+\end{nota}
+
+\subsubsection{Pasos para resolver el triángulo}
+
+\begin{enumerate}
+  \item \textbf{Encuentra el tercer lado:} Si no conoces la hipotenusa, usa el teorema de Pitágoras:
+  \[
+  c = \sqrt{a^2 + b^2}
+  \]
+  Si ya conoces la hipotenusa y un cateto, encuentra el otro cateto:
+  \[
+  b = \sqrt{c^2 - a^2} \quad \text{o} \quad a = \sqrt{c^2 - b^2}
+  \]
+
+  \item \textbf{Encuentra uno de los ángulos agudos:} Usa la función trigonométrica inversa apropiada. Por ejemplo:
+  \begin{itemize}
+    \item Si conoces el cateto opuesto y la hipotenusa: $\theta = \arcsin\left(\frac{a}{c}\right)$
+    \item Si conoces el cateto adyacente y la hipotenusa: $\theta = \arccos\left(\frac{b}{c}\right)$
+    \item Si conoces ambos catetos: $\theta = \arctan\left(\frac{a}{b}\right)$
+  \end{itemize}
+
+  \item \textbf{Encuentra el otro ángulo agudo:} Simplemente resta de 90°:
+  \[
+  \text{Otro ángulo} = 90° - \theta
+  \]
+\end{enumerate}
+
+\subsubsection{Ejemplo básico}
+
+\begin{ejemplo}
+Considera un triángulo rectángulo donde conocemos:
+\begin{itemize}
+  \item Cateto opuesto: $a = 6$ cm
+  \item Cateto adyacente: $b = 8$ cm
+\end{itemize}
+
+Encontremos todos los elementos faltantes del triángulo.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (4,0);
+  \coordinate (C) at (4,3);
+
+  \draw[line width=1.5pt, maincolor] (A) -- (B) -- (C) -- cycle;
+  \draw[line width=1pt, maincolor] (3.7,0) rectangle (4,0.3);
+
+  \node[below left] at (A) {$A$};
+  \node[below right] at (B) {$B$};
+  \node[above right] at (C) {$C$};
+
+  \draw[accentcolor] (0.8,0) arc (0:37:0.8);
+  \node[accentcolor] at (1.1,0.3) {$\theta$};
+
+  \node[above left] at (2,1.8) {$c = ?$};
+  \node[below] at (2,-0.3) {$b = 8$ cm};
+  \node[right] at (4.4,1.5) {$a = 6$ cm};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solución:}
+
+\textit{Paso 1:} Encontrar la hipotenusa usando Pitágoras.
+\begin{align*}
+c &= \sqrt{a^2 + b^2} \\
+  &= \sqrt{6^2 + 8^2} \\
+  &= \sqrt{36 + 64} \\
+  &= \sqrt{100} \\
+  &= 10 \text{ cm}
+\end{align*}
+
+\textit{Paso 2:} Encontrar el ángulo $\theta$ usando la tangente inversa.
+\begin{align*}
+\tan(\theta) &= \frac{a}{b} = \frac{6}{8} = 0.75 \\
+\theta &= \arctan(0.75) \\
+\theta &\approx 36.87°
+\end{align*}
+
+\textit{Paso 3:} Encontrar el otro ángulo agudo.
+\[
+\beta = 90° - 36.87° = 53.13°
+\]
+
+Por lo tanto, el triángulo completo tiene:
+\begin{itemize}
+  \item Lados: $a = 6$ cm, $b = 8$ cm, $c = 10$ cm
+  \item Ángulos: $36.87°$, $53.13°$ y $90°$
+\end{itemize}
+\end{ejemplo}
+
+\subsection{Ángulos de Elevación}
+
+Ahora vamos a hablar de una aplicación súper práctica de todo lo que hemos visto: los ángulos de elevación. Este concepto se usa todo el tiempo en la vida real, especialmente cuando queremos medir alturas de objetos que no podemos alcanzar.
+
+\begin{definicion}
+Un \textbf{ángulo de elevación} es el ángulo formado entre la línea horizontal (a la altura de tus ojos) y la línea de visión cuando miras \textit{hacia arriba} para observar un objeto.
+\end{definicion}
+
+Imagínate que estás parado mirando un edificio alto. Si trazas una línea imaginaria desde tus ojos directamente al frente (paralela al suelo), y luego otra línea desde tus ojos hasta la cima del edificio, el ángulo entre esas dos líneas es el ángulo de elevación.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  % Suelo
+  \draw[line width=1pt, gray] (-1,0) -- (6,0);
+
+  % Edificio
+  \draw[line width=2pt, maincolor, fill=maincolor!20] (5,0) rectangle (5.5,4);
+  \node[maincolor] at (5.25,4.3) {Edificio};
+
+  % Observador
+  \fill[accentcolor] (0,0.2) circle (0.15);
+  \draw[line width=1.5pt, accentcolor] (0,0.2) -- (0,-0.5);
+  \draw[line width=1.5pt, accentcolor] (-0.2,-0.5) -- (0.2,-0.5);
+  \node[below, accentcolor] at (0,-0.7) {Observador};
+
+  % Línea horizontal
+  \draw[line width=1pt, dashed, examplecolor] (0,0.2) -- (3,0.2);
+  \node[above, examplecolor] at (1.5,0.2) {Línea horizontal};
+
+  % Línea de visión
+  \draw[line width=1.5pt, accentcolor, ->] (0,0.2) -- (5.25,4);
+  \node[above, accentcolor, sloped] at (2.6,2.2) {Línea de visión};
+
+  % Ángulo de elevación
+  \draw[accentcolor, line width=1pt] (1.2,0.2) arc (0:36:1.2);
+  \node[accentcolor] at (1.8,0.6) {Ángulo de elevación};
+
+  % Distancia horizontal
+  \draw[<->, line width=1pt, maincolor] (0,-1.2) -- (5,-1.2);
+  \node[below, maincolor] at (2.5,-1.2) {Distancia horizontal};
+
+  % Altura
+  \draw[<->, line width=1pt, maincolor] (6,0) -- (6,4);
+  \node[right, maincolor] at (6,2) {Altura};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Situaciones típicas con ángulos de elevación}
+
+Los ángulos de elevación aparecen en muchas situaciones del día a día:
+
+\begin{itemize}
+  \item \textbf{Medir la altura de un edificio:} Te paras a cierta distancia, mides el ángulo de elevación hasta la cima, y calculas la altura.
+
+  \item \textbf{Aviación:} Los pilotos usan ángulos de elevación cuando necesitan ascender hacia un punto específico.
+
+  \item \textbf{Observar un avión:} Si ves un avión en el cielo y quieres saber qué tan alto está volando, puedes usar el ángulo de elevación.
+
+  \item \textbf{Topografía:} Los topógrafos miden ángulos de elevación de montañas y colinas.
+
+  \item \textbf{Deportes:} En básquetbol, el ángulo de elevación óptimo para lanzar a la canasta se calcula con trigonometría.
+\end{itemize}
+
+\subsubsection{Cómo resolver problemas con ángulos de elevación}
+
+El truco está en visualizar el triángulo rectángulo:
+\begin{enumerate}
+  \item La distancia horizontal desde el observador hasta el objeto forma el cateto adyacente.
+  \item La altura del objeto (desde el nivel del observador) forma el cateto opuesto.
+  \item El ángulo de elevación es uno de los ángulos agudos del triángulo.
+\end{enumerate}
+
+Luego simplemente aplicas las razones trigonométricas. La más común es la tangente:
+\[
+\tan(\text{ángulo de elevación}) = \frac{\text{altura}}{\text{distancia horizontal}}
+\]
+
+\begin{ejemplo}
+Estás a 50 metros de un edificio y mides un ángulo de elevación de 35° hasta la cima. ¿Cuál es la altura del edificio?
+
+\textbf{Solución:}
+Usando la tangente:
+\begin{align*}
+\tan(35°) &= \frac{h}{50} \\
+h &= 50 \cdot \tan(35°) \\
+h &= 50 \cdot 0.7002 \\
+h &\approx 35.01 \text{ metros}
+\end{align*}
+
+El edificio mide aproximadamente 35 metros de altura.
+\end{ejemplo}
+
+\subsection{Ángulos de Depresión}
+
+Los ángulos de depresión son el complemento perfecto de los ángulos de elevación. Mientras que antes mirabas hacia arriba, ahora vas a mirar hacia abajo.
+
+\begin{definicion}
+Un \textbf{ángulo de depresión} es el ángulo formado entre la línea horizontal (a la altura de tus ojos) y la línea de visión cuando miras \textit{hacia abajo} para observar un objeto.
+\end{definicion}
+
+Imagínate que estás en el último piso de un edificio mirando hacia abajo a un auto en la calle. El ángulo entre la línea horizontal desde tus ojos y la línea que va hacia el auto es el ángulo de depresión.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+  % Suelo
+  \draw[line width=1pt, gray] (-1,0) -- (6,0);
+
+  % Edificio
+  \draw[line width=2pt, maincolor, fill=maincolor!20] (0,0) rectangle (0.5,4);
+
+  % Observador en lo alto
+  \fill[accentcolor] (0.5,4) circle (0.15);
+  \draw[line width=1.5pt, accentcolor] (0.5,4) -- (0.5,3.5);
+  \node[above, accentcolor] at (0.5,4.3) {Observador};
+
+  % Objeto en el suelo
+  \draw[line width=1.5pt, examplecolor, fill=examplecolor!20] (4.5,0) rectangle (5.5,0.3);
+  \node[below, examplecolor] at (5,-0.3) {Objeto};
+
+  % Línea horizontal
+  \draw[line width=1pt, dashed, examplecolor] (0.5,4) -- (3,4);
+  \node[above, examplecolor] at (1.7,4) {Línea horizontal};
+
+  % Línea de visión
+  \draw[line width=1.5pt, accentcolor, ->] (0.5,4) -- (5,0.15);
+  \node[below, accentcolor, sloped] at (2.8,1.9) {Línea de visión};
+
+  % Ángulo de depresión
+  \draw[accentcolor, line width=1pt] (1.5,4) arc (0:-40:1);
+  \node[accentcolor] at (1.5,3.4) {Ángulo de depresión};
+
+  % Distancia horizontal
+  \draw[<->, line width=1pt, maincolor] (0.5,-0.8) -- (5,-0.8);
+  \node[below, maincolor] at (2.75,-0.8) {Distancia horizontal};
+
+  % Altura del edificio
+  \draw[<->, line width=1pt, maincolor] (-0.8,0) -- (-0.8,4);
+  \node[left, maincolor] at (-0.8,2) {Altura};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Relación entre ángulos de elevación y depresión}
+
+Aquí viene algo muy interesante y súper útil: los ángulos de elevación y depresión entre dos puntos son iguales. ¿Por qué? Por una propiedad geométrica llamada "ángulos alternos internos".
+
+Si tú estás en un edificio mirando hacia abajo a una persona en el suelo con un ángulo de depresión de 40°, esa persona está mirando hacia ti con un ángulo de elevación de 40°. ¡Son iguales!
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  % Líneas horizontales paralelas
+  \draw[line width=1pt, dashed, gray] (0,0) -- (4,0);
+  \draw[line width=1pt, dashed, gray] (0,3) -- (4,3);
+
+  % Observador arriba
+  \fill[accentcolor] (0,3) circle (0.1);
+  \node[left] at (0,3) {A};
+
+  % Observador abajo
+  \fill[examplecolor] (3,0) circle (0.1);
+  \node[right] at (3,0) {B};
+
+  % Línea de visión
+  \draw[line width=1.5pt, maincolor] (0,3) -- (3,0);
+
+  % Ángulo de depresión
+  \draw[accentcolor, line width=1pt] (0.8,3) arc (0:-45:0.8);
+  \node[accentcolor] at (1.2,2.7) {Depresión};
+
+  % Ángulo de elevación
+  \draw[examplecolor, line width=1pt] (2.2,0) arc (180:135:0.8);
+  \node[examplecolor] at (2,0.5) {Elevación};
+
+  % Etiqueta
+  \node[maincolor, below] at (1.5,-0.5) {Los ángulos son iguales: ángulos alternos internos};
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+Esta propiedad es muy útil porque a veces es más fácil medir un ángulo de depresión desde arriba que un ángulo de elevación desde abajo, o viceversa. Pero como son iguales, puedes usar el que sea más conveniente para hacer tus cálculos.
+\end{nota}
+
+\subsubsection{Situaciones típicas con ángulos de depresión}
+
+\begin{itemize}
+  \item \textbf{Desde un avión:} Los pilotos usan ángulos de depresión para calcular cuándo empezar el descenso hacia el aeropuerto.
+
+  \item \textbf{Desde un faro:} Los fareros pueden calcular qué tan lejos está un barco usando el ángulo de depresión.
+
+  \item \textbf{Desde un mirador:} Si estás en un mirador de montaña y ves un lago abajo, puedes calcular la distancia hasta él.
+
+  \item \textbf{Topografía:} Cuando se hacen mapas de terrenos con colinas y valles, se usan ángulos de depresión constantemente.
+
+  \item \textbf{Búsqueda y rescate:} Los helicópteros de rescate usan ángulos de depresión para localizar personas perdidas.
+\end{itemize}
+
+\subsubsection{Cómo resolver problemas con ángulos de depresión}
+
+El proceso es idéntico al de los ángulos de elevación:
+
+\begin{enumerate}
+  \item Identifica el triángulo rectángulo en el problema.
+  \item Recuerda que el ángulo de depresión desde un punto es igual al ángulo de elevación desde el otro punto.
+  \item La distancia horizontal es el cateto adyacente.
+  \item La diferencia de alturas es el cateto opuesto.
+  \item Aplica las razones trigonométricas apropiadas.
+\end{enumerate}
+
+La fórmula más común sigue siendo la tangente:
+\[
+\tan(\text{ángulo de depresión}) = \frac{\text{diferencia de altura}}{\text{distancia horizontal}}
+\]
+
+\begin{ejemplo}
+Desde la cima de un acantilado de 80 metros de altura, observas un barco en el mar con un ángulo de depresión de 25°. ¿A qué distancia horizontal está el barco de la base del acantilado?
+
+\textbf{Solución:}
+Usando la tangente:
+\begin{align*}
+\tan(25°) &= \frac{80}{d} \\
+d &= \frac{80}{\tan(25°)} \\
+d &= \frac{80}{0.4663} \\
+d &\approx 171.54 \text{ metros}
+\end{align*}
+
+El barco está aproximadamente a 171.54 metros de la base del acantilado.
+\end{ejemplo}
+
+\newpage
+
+% ============================================
+% PLACEHOLDERS PARA SECCIONES POSTERIORES
+% ============================================
+
+\section{Ejemplos Resueltos}
+
+\section{Ejemplos Resueltos}
+
+¡Ahora sí viene lo bueno! Vamos a resolver problemas reales paso a paso. Presta mucha atención porque estos ejemplos te mostrarán exactamente cómo aplicar todo lo que has aprendido.
+
+\begin{ejemplo}
+\textbf{Ejemplo 1: El Edificio Misterioso}
+
+\textbf{Enunciado:}
+Un estudiante de arquitectura necesita calcular la altura de un edificio. Se para a 50 metros de la base y mide que el ángulo de elevación hacia la azotea es de 35°. ¿Cuál es la altura del edificio?
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar los datos}
+\begin{itemize}
+\item Distancia horizontal desde el observador al edificio: 50 m
+\item Ángulo de elevación: 35°
+\item Buscamos: altura del edificio
+\end{itemize}
+
+\textbf{Paso 2: Hacer un diagrama}
+\begin{center}
+\begin{tikzpicture}[scale=0.08]
+% Edificio
+\fill[gray!30] (0,0) rectangle (20,70);
+\draw[very thick] (0,0) -- (0,70) -- (20,70) -- (20,0) -- cycle;
+% Ventanas
+\foreach \x in {3,9,15} {
+    \foreach \y in {5,15,25,35,45,55,65} {
+        \fill[cyan!40] (\x,\y) rectangle (\x+3,\y+5);
+    }
+}
+% Triángulo
+\draw[thick, blue] (-50,0) -- (0,0) -- (0,70) -- cycle;
+\draw[thick, ->] (-50,0) -- (-25,35);
+\node at (-40,5) {35°};
+\draw[<->] (-50,-5) -- (0,-5);
+\node at (-25,-8) {50 m};
+\draw[<->] (25,0) -- (25,70);
+\node at (30,35) {$h = ?$};
+% Persona
+\draw[thick] (-50,0) circle (2);
+\draw[thick] (-50,-2) -- (-50,-8);
+\draw[thick] (-50,-8) -- (-52,-15);
+\draw[thick] (-50,-8) -- (-48,-15);
+\draw[thick] (-50,-4) -- (-54,-7);
+\draw[thick] (-50,-4) -- (-46,-7);
+\node at (-50,-20) {Estudiante};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 3: Identificar qué se busca}
+\begin{itemize}
+\item Altura del edificio ($h$)
+\item Es el cateto opuesto al ángulo de 35°
+\end{itemize}
+
+\textbf{Paso 4: Elegir la razón trigonométrica apropiada}
+
+Tenemos:
+\begin{itemize}
+\item Cateto adyacente = 50 m
+\item Ángulo = 35°
+\item Buscamos: Cateto opuesto
+\end{itemize}
+
+¿Qué razón relaciona cateto opuesto con cateto adyacente? ¡La tangente!
+
+$$\tan(35°) = \frac{\text{cateto opuesto}}{\text{cateto adyacente}} = \frac{h}{50}$$
+
+\textbf{Paso 5: Resolver}
+\begin{align}
+\tan(35°) &= \frac{h}{50}\\
+h &= 50 \cdot \tan(35°)\\
+h &= 50 \cdot 0.7002\\
+h &= 35.01 \text{ metros}
+\end{align}
+
+\textbf{Paso 6: Verificar}
+
+Vamos a comprobar usando el teorema de Pitágoras. Si $h = 35.01$ m y la base es 50 m, entonces:
+\begin{itemize}
+\item Hipotenusa = $\sqrt{50^2 + 35.01^2} = \sqrt{2500 + 1225.7} = \sqrt{3725.7} = 61.04$ m
+\end{itemize}
+
+Ahora verificamos con seno:
+$$\sin(35°) = \frac{35.01}{61.04} = 0.5736 \checkmark$$
+
+¡Correcto! $\sin(35°) = 0.5736$
+
+\begin{tcolorbox}[colback=solutioncolor!10, colframe=solutioncolor, title=Respuesta]
+La altura del edificio es de \textbf{35.01 metros}.
+\end{tcolorbox}
+\end{ejemplo}
+
+\begin{ejemplo}
+\textbf{Ejemplo 2: La Rampa de Acceso Perfecta}
+
+\textbf{Enunciado:}
+En un centro comercial necesitan construir una rampa de acceso para personas con movilidad reducida. La rampa debe tener una longitud de 8 metros y formar un ángulo de 7° con el suelo (cumpliendo con las normas de accesibilidad). ¿Qué altura alcanzará la rampa y cuál será su proyección horizontal?
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar los datos}
+\begin{itemize}
+\item Longitud de la rampa (hipotenusa): 8 m
+\item Ángulo con el suelo: 7°
+\item Buscamos: altura y proyección horizontal
+\end{itemize}
+
+\textbf{Paso 2: Hacer un diagrama}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+% Rampa
+\fill[gray!20] (0,0) -- (10,0) -- (10,1.22) -- (0,0);
+\draw[very thick, blue] (0,0) -- (10,1.22);
+\draw[thick] (0,0) -- (10,0) -- (10,1.22);
+% Ángulo
+\draw (2,0) arc (0:7:2);
+\node at (2.5,0.2) {7°};
+% Medidas
+\node[above,sloped] at (5,0.61) {8 m};
+\draw[<->] (0,-0.5) -- (10,-0.5);
+\node at (5,-0.8) {$d = ?$};
+\draw[<->] (10.5,0) -- (10.5,1.22);
+\node at (11,0.61) {$h = ?$};
+% Textura rampa
+\foreach \x in {1,2,3,4,5,6,7,8,9} {
+    \draw[gray] (\x,0.122*\x-0.05) -- (\x+0.3,0.122*\x+0.05);
+}
+% Persona en silla de ruedas
+\draw[thick] (0.5,0.3) circle (0.2);
+\draw[thick] (0.3,0.1) -- (0.7,0.1);
+\draw[thick] (0.2,0.4) -- (0.8,0.4);
+\draw[thick] (0.5,0.5) circle (0.15);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 3: Identificar qué se busca}
+\begin{itemize}
+\item Altura de la rampa ($h$) - cateto opuesto
+\item Proyección horizontal ($d$) - cateto adyacente
+\end{itemize}
+
+\textbf{Paso 4: Elegir las razones trigonométricas apropiadas}
+
+Para la altura ($h$):
+$$\sin(7°) = \frac{h}{8}$$
+
+Para la proyección horizontal ($d$):
+$$\cos(7°) = \frac{d}{8}$$
+
+\textbf{Paso 5: Resolver}
+
+\underline{Altura de la rampa:}
+\begin{align}
+\sin(7°) &= \frac{h}{8}\\
+h &= 8 \cdot \sin(7°)\\
+h &= 8 \cdot 0.1219\\
+h &= 0.98 \text{ metros}
+\end{align}
+
+\underline{Proyección horizontal:}
+\begin{align}
+\cos(7°) &= \frac{d}{8}\\
+d &= 8 \cdot \cos(7°)\\
+d &= 8 \cdot 0.9925\\
+d &= 7.94 \text{ metros}
+\end{align}
+
+\textbf{Paso 6: Verificar}
+
+Comprobemos con Pitágoras:
+$$\sqrt{h^2 + d^2} = \sqrt{0.98^2 + 7.94^2} = \sqrt{0.96 + 63.04} = \sqrt{64} = 8 \text{ m} \checkmark$$
+
+¡Perfecto! La hipotenusa es efectivamente 8 metros.
+
+\begin{tcolorbox}[colback=solutioncolor!10, colframe=solutioncolor, title=Respuesta]
+La rampa alcanzará una altura de \textbf{0.98 metros} (98 cm) y tendrá una proyección horizontal de \textbf{7.94 metros}.
+\end{tcolorbox}
+\end{ejemplo}
+
+\begin{ejemplo}
+\textbf{Ejemplo 3: El Terreno de Construcción}
+
+\textbf{Enunciado:}
+Un arquitecto está diseñando una casa en un terreno triangular. El terreno forma un triángulo rectángulo donde un cateto mide 15 metros y el otro cateto mide 20 metros. Necesita conocer todos los ángulos del terreno para el diseño. ¿Cuáles son las medidas de los ángulos agudos?
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar los datos}
+\begin{itemize}
+\item Cateto 1: 15 m
+\item Cateto 2: 20 m
+\item Ángulo recto: 90°
+\item Buscamos: los dos ángulos agudos
+\end{itemize}
+
+\textbf{Paso 2: Hacer un diagrama}
+\begin{center}
+\begin{tikzpicture}[scale=0.3]
+% Terreno
+\fill[green!10] (0,0) -- (20,0) -- (0,15) -- cycle;
+\draw[very thick] (0,0) -- (20,0) -- (0,15) -- cycle;
+% Ángulo recto
+\draw (0,0) rectangle (1.5,1.5);
+% Medidas
+\node[below] at (10,0) {20 m};
+\node[left] at (0,7.5) {15 m};
+\node[above right] at (10,7.5) {Hipotenusa};
+% Ángulos
+\node at (2,1) {90°};
+\node at (17,1) {$\alpha = ?$};
+\node at (1,12) {$\beta = ?$};
+% Casa esquemática
+\draw[dashed, gray] (5,3) rectangle (12,8);
+\draw[dashed, gray] (5,8) -- (8.5,11) -- (12,8);
+\node[gray] at (8.5,5.5) {Casa};
+% Árboles
+\foreach \x in {2,15,18} {
+    \draw[brown, thick] (\x,0) -- (\x,1);
+    \draw[green!60!black, thick] (\x,1) circle (0.5);
+}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 3: Identificar qué se busca}
+\begin{itemize}
+\item Ángulo $\alpha$ (en el vértice inferior derecho)
+\item Ángulo $\beta$ (en el vértice superior)
+\end{itemize}
+
+\textbf{Paso 4: Elegir la razón trigonométrica apropiada}
+
+Para encontrar $\alpha$, usamos la tangente:
+$$\tan(\alpha) = \frac{\text{cateto opuesto}}{\text{cateto adyacente}} = \frac{15}{20}$$
+
+\textbf{Paso 5: Resolver}
+
+\underline{Encontrar el ángulo $\alpha$:}
+\begin{align}
+\tan(\alpha) &= \frac{15}{20} = 0.75\\
+\alpha &= \arctan(0.75)\\
+\alpha &= 36.87°
+\end{align}
+
+\underline{Encontrar el ángulo $\beta$:}
+
+Como la suma de ángulos en un triángulo es 180°:
+\begin{align}
+\alpha + \beta + 90° &= 180°\\
+36.87° + \beta + 90° &= 180°\\
+\beta &= 180° - 90° - 36.87°\\
+\beta &= 53.13°
+\end{align}
+
+\textbf{Paso 6: Verificar}
+
+Verifiquemos usando otra razón trigonométrica:
+$$\tan(\beta) = \frac{20}{15} = 1.333...$$
+$$\beta = \arctan(1.333) = 53.13° \checkmark$$
+
+También podemos verificar que:
+$$\alpha + \beta + 90° = 36.87° + 53.13° + 90° = 180° \checkmark$$
+
+\begin{tcolorbox}[colback=solutioncolor!10, colframe=solutioncolor, title=Respuesta]
+Los ángulos agudos del terreno miden:
+\begin{itemize}
+\item Ángulo inferior derecho ($\alpha$): \textbf{36.87°}
+\item Ángulo superior ($\beta$): \textbf{53.13°}
+\end{itemize}
+\end{tcolorbox}
+\end{ejemplo}
+
+\begin{ejemplo}
+\textbf{Ejemplo 4: El Monte Chimborazo}
+
+\textbf{Enunciado:}
+Un grupo de montañistas quiere calcular la altura del Monte Chimborazo. Desde un punto en la base, miden un ángulo de elevación de 28° hacia la cima. Luego avanzan 2,500 metros en línea recta hacia la montaña y vuelven a medir, obteniendo un ángulo de elevación de 42°. ¿Cuál es la altura de la montaña desde el punto de observación?
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar los datos}
+\begin{itemize}
+\item Primera medición: ángulo de elevación = 28°
+\item Segunda medición: ángulo de elevación = 42°
+\item Distancia entre mediciones: 2,500 m
+\item Buscamos: altura de la montaña ($h$)
+\end{itemize}
+
+\textbf{Paso 2: Hacer un diagrama}
+\begin{center}
+\begin{tikzpicture}[scale=0.15]
+% Montaña
+\fill[brown!30] (0,0) -- (30,0) -- (15,40) -- cycle;
+\draw[very thick] (0,0) -- (15,40) -- (30,0);
+% Nieve en la cima
+\fill[white] (15,40) -- (13,36) -- (17,36) -- cycle;
+% Posiciones de observación
+\draw[thick, blue] (-25,0) -- (15,40);
+\draw[thick, red] (0,0) -- (15,40);
+% Ángulos
+\draw (-22,0) arc (0:28:3);
+\node at (-20,2) {28°};
+\draw (3,0) arc (0:42:3);
+\node at (5,2.5) {42°};
+% Distancias
+\draw[<->] (-25,-3) -- (0,-3);
+\node at (-12.5,-5) {2,500 m};
+\draw[<->] (0,-3) -- (15,-3);
+\node at (7.5,-5) {$x$};
+% Altura
+\draw[dashed] (15,0) -- (15,40);
+\draw[<->] (18,0) -- (18,40);
+\node at (21,20) {$h = ?$};
+% Personas
+\foreach \x in {-25, 0} {
+    \draw (\x,0) circle (0.4);
+    \draw (\x,-0.4) -- (\x,-1.2);
+    \draw (\x,-1.2) -- (\x-0.3,-2);
+    \draw (\x,-1.2) -- (\x+0.3,-2);
+}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 3: Identificar qué se busca}
+\begin{itemize}
+\item Altura de la montaña ($h$)
+\item Distancia horizontal desde la segunda posición hasta la base de la altura ($x$)
+\end{itemize}
+
+\textbf{Paso 4: Elegir las razones trigonométricas apropiadas}
+
+Desde la primera posición:
+$$\tan(28°) = \frac{h}{2500 + x}$$
+
+Desde la segunda posición:
+$$\tan(42°) = \frac{h}{x}$$
+
+\textbf{Paso 5: Resolver}
+
+De la segunda ecuación:
+$$x = \frac{h}{\tan(42°)}$$
+
+Sustituyendo en la primera ecuación:
+\begin{align}
+\tan(28°) &= \frac{h}{2500 + \frac{h}{\tan(42°)}}\\
+\tan(28°) &= \frac{h \cdot \tan(42°)}{2500 \cdot \tan(42°) + h}\\
+\tan(28°) \cdot (2500 \cdot \tan(42°) + h) &= h \cdot \tan(42°)\\
+2500 \cdot \tan(28°) \cdot \tan(42°) + h \cdot \tan(28°) &= h \cdot \tan(42°)\\
+2500 \cdot \tan(28°) \cdot \tan(42°) &= h \cdot \tan(42°) - h \cdot \tan(28°)\\
+2500 \cdot \tan(28°) \cdot \tan(42°) &= h(\tan(42°) - \tan(28°))\\
+h &= \frac{2500 \cdot \tan(28°) \cdot \tan(42°)}{\tan(42°) - \tan(28°)}\\
+h &= \frac{2500 \cdot 0.5317 \cdot 0.9004}{0.9004 - 0.5317}\\
+h &= \frac{1196.8}{0.3687}\\
+h &= 3,246.2 \text{ metros}
+\end{align}
+
+\textbf{Paso 6: Verificar}
+
+Calculemos $x$:
+$$x = \frac{3246.2}{0.9004} = 3,604.7 \text{ m}$$
+
+Verificación desde la primera posición:
+$$\tan(28°) = \frac{3246.2}{2500 + 3604.7} = \frac{3246.2}{6104.7} = 0.5317 \checkmark$$
+
+\begin{tcolorbox}[colback=solutioncolor!10, colframe=solutioncolor, title=Respuesta]
+La altura del Monte Chimborazo desde el punto de observación es de \textbf{3,246.2 metros}.
+\end{tcolorbox}
+\end{ejemplo}
+
+\begin{ejemplo}
+\textbf{Ejemplo 5: El Faro y el Barco}
+
+\textbf{Enunciado:}
+Desde lo alto de un faro de 85 metros de altura, el farero observa un barco en el mar con un ángulo de depresión de 15°. ¿A qué distancia horizontal se encuentra el barco de la base del faro? ¿Cuál es la distancia directa desde la cima del faro hasta el barco?
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar los datos}
+\begin{itemize}
+\item Altura del faro: 85 m
+\item Ángulo de depresión: 15°
+\item Buscamos: distancia horizontal y distancia directa
+\end{itemize}
+
+\textbf{Paso 2: Hacer un diagrama}
+\begin{center}
+\begin{tikzpicture}[scale=0.05]
+% Mar
+\fill[cyan!20] (-150,0) rectangle (150,-10);
+\draw[cyan!40, thick] (-150,0) -- (150,0);
+% Faro
+\fill[gray!40] (0,0) rectangle (15,85);
+\draw[very thick] (0,0) -- (0,85) -- (15,85) -- (15,0);
+% Franjas del faro
+\foreach \y in {0,17,34,51,68} {
+    \fill[red!60] (0,\y) rectangle (15,\y+8.5);
+}
+% Luz del faro
+\fill[yellow!50] (7.5,85) circle (5);
+% Línea horizontal de referencia
+\draw[dashed, gray] (15,85) -- (120,85);
+% Ángulo de depresión
+\draw (35,85) arc (0:-15:20);
+\node at (40,80) {15°};
+% Línea de visión
+\draw[thick, blue] (7.5,85) -- (100,0);
+% Barco
+\draw[thick, brown] (95,0) -- (105,0) -- (105,5) -- (95,5) -- cycle;
+\draw[thick] (100,5) -- (100,15);
+\draw[thick] (100,10) -- (90,10);
+\draw[thick] (100,15) -- (90,10);
+% Medidas
+\draw[<->] (-20,0) -- (-20,85);
+\node at (-30,42.5) {85 m};
+\draw[<->] (0,-15) -- (100,-15);
+\node at (50,-20) {$d = ?$};
+% Distancia directa
+\node[above right] at (50,42.5) {$L = ?$};
+% Olas
+\draw[cyan!60] (20,0) sin (30,-2) cos (40,0);
+\draw[cyan!60] (60,0) sin (70,-2) cos (80,0);
+\draw[cyan!60] (110,0) sin (120,-2) cos (130,0);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 3: Identificar qué se busca}
+\begin{itemize}
+\item Distancia horizontal ($d$) desde la base del faro hasta el barco
+\item Distancia directa ($L$) desde la cima del faro hasta el barco
+\end{itemize}
+
+\textbf{Paso 4: Elegir las razones trigonométricas apropiadas}
+
+Nota importante: El ángulo de depresión desde la horizontal es igual al ángulo de elevación desde el barco hacia el faro (ángulos alternos internos).
+
+Por lo tanto, trabajamos con un ángulo de 15° en el triángulo:
+$$\tan(15°) = \frac{85}{d}$$
+
+Para la distancia directa:
+$$\sin(15°) = \frac{85}{L}$$
+
+\textbf{Paso 5: Resolver}
+
+\underline{Distancia horizontal:}
+\begin{align}
+\tan(15°) &= \frac{85}{d}\\
+d &= \frac{85}{\tan(15°)}\\
+d &= \frac{85}{0.2679}\\
+d &= 317.3 \text{ metros}
+\end{align}
+
+\underline{Distancia directa:}
+\begin{align}
+\sin(15°) &= \frac{85}{L}\\
+L &= \frac{85}{\sin(15°)}\\
+L &= \frac{85}{0.2588}\\
+L &= 328.4 \text{ metros}
+\end{align}
+
+\textbf{Paso 6: Verificar}
+
+Usando el teorema de Pitágoras:
+$$L = \sqrt{85^2 + 317.3^2} = \sqrt{7225 + 100679.3} = \sqrt{107904.3} = 328.5 \text{ m} \checkmark$$
+
+La pequeña diferencia se debe al redondeo. ¡Está correcto!
+
+\begin{tcolorbox}[colback=solutioncolor!10, colframe=solutioncolor, title=Respuesta]
+\begin{itemize}
+\item El barco se encuentra a \textbf{317.3 metros} de la base del faro.
+\item La distancia directa desde la cima del faro hasta el barco es de \textbf{328.4 metros}.
+\end{itemize}
+\end{tcolorbox}
+\end{ejemplo}
+
+\begin{ejemplo}
+\textbf{Ejemplo 6: Navegación en el Caribe}
+
+\textbf{Enunciado:}
+Un barco turístico sale del puerto de Cartagena y navega 120 km con rumbo N30°E (30° al este del norte). Luego cambia su rumbo a S60°E (60° al este del sur) y navega 80 km más. ¿A qué distancia en línea recta se encuentra del puerto de origen? ¿En qué dirección debe navegar para regresar directamente al puerto?
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar los datos}
+\begin{itemize}
+\item Primera etapa: 120 km con rumbo N30°E
+\item Segunda etapa: 80 km con rumbo S60°E
+\item Buscamos: distancia directa al puerto y dirección de regreso
+\end{itemize}
+
+\textbf{Paso 2: Hacer un diagrama}
+
+[Diagrama de navegación: Ver figura en la versión original]
+
+\textbf{Paso 3: Descomponer los movimientos en componentes}
+
+\underline{Primera etapa (N30°E):}
+\begin{itemize}
+\item Componente Este: $x_1 = 120 \cdot \sin(30°) = 120 \cdot 0.5 = 60$ km
+\item Componente Norte: $y_1 = 120 \cdot \cos(30°) = 120 \cdot 0.866 = 103.92$ km
+\end{itemize}
+
+\underline{Segunda etapa (S60°E):}
+\begin{itemize}
+\item Componente Este: $x_2 = 80 \cdot \cos(60°) = 80 \cdot 0.866 = 69.28$ km
+\item Componente Sur: $y_2 = -80 \cdot \sin(60°) = -80 \cdot 0.5 = -69.28$ km
+\end{itemize}
+
+\textbf{Paso 4: Calcular la posición final}
+
+\underline{Posición total:}
+\begin{itemize}
+\item $x_{total} = x_1 + x_2 = 60 + 69.28 = 129.28$ km Este
+\item $y_{total} = y_1 + y_2 = 103.92 - 69.28 = 34.64$ km Norte
+\end{itemize}
+
+\textbf{Paso 5: Calcular la distancia directa al puerto}
+
+Usando el teorema de Pitágoras:
+\begin{align}
+d &= \sqrt{x_{total}^2 + y_{total}^2}\\
+d &= \sqrt{129.28^2 + 34.64^2}\\
+d &= \sqrt{16713.3 + 1199.9}\\
+d &= \sqrt{17913.2}\\
+d &= 133.8 \text{ km}
+\end{align}
+
+\textbf{Paso 6: Calcular la dirección de regreso}
+
+El ángulo respecto al norte:
+\begin{align}
+\tan(\theta) &= \frac{x_{total}}{y_{total}} = \frac{129.28}{34.64} = 3.733\\
+\theta &= \arctan(3.733) = 75.0°
+\end{align}
+
+Para regresar, el barco debe navegar en dirección opuesta:
+Rumbo de regreso = S75°O (75° al oeste del sur)
+
+\begin{tcolorbox}[colback=solutioncolor!10, colframe=solutioncolor, title=Respuesta]
+\begin{itemize}
+\item El barco se encuentra a \textbf{133.8 km} del puerto en línea recta.
+\item Para regresar directamente, debe navegar con rumbo \textbf{S75°O}.
+\end{itemize}
+\end{tcolorbox}
+\end{ejemplo}
+
+\begin{ejemplo}
+\textbf{Ejemplo 7: Midiendo el Ancho del Río Amazonas}
+
+\textbf{Enunciado:}
+Un equipo de topógrafos necesita medir el ancho de una sección del río Amazonas sin cruzarlo. Desde un punto A en una orilla, identifican un árbol notable (punto B) en la orilla opuesta. Luego caminan 150 metros paralelos a la orilla hasta un punto C. Desde C, miden que el ángulo ACB es de 52°. Desde A, el ángulo CAB es de 38°. ¿Cuál es el ancho del río?
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar los datos}
+\begin{itemize}
+\item Distancia AC (paralela a la orilla): 150 m
+\item Ángulo en C (ACB): 52°
+\item Ángulo en A (CAB): 38°
+\item Buscamos: ancho del río (distancia perpendicular de A a la orilla opuesta)
+\end{itemize}
+
+\textbf{Paso 2: Hacer un diagrama}
+\begin{center}
+\begin{tikzpicture}[scale=0.04]
+% Río
+\fill[cyan!30] (-50,-20) rectangle (200,120);
+% Orillas
+\draw[very thick, brown] (-50,-20) -- (200,-20);
+\draw[very thick, brown] (-50,120) -- (200,120);
+% Puntos
+\fill[red] (0,0) circle (2) node[below] {A};
+\fill[red] (150,0) circle (2) node[below] {C};
+\fill[green] (50,120) circle (2) node[above] {B (Árbol)};
+% Triángulo
+\draw[thick, blue] (0,0) -- (150,0) -- (50,120) -- cycle;
+% Ángulos
+\draw (20,0) arc (0:38:20);
+\node at (25,8) {38°};
+\draw (130,0) arc (180:128:20);
+\node at (125,8) {52°};
+% Distancia AC
+\draw[<->] (0,-10) -- (150,-10);
+\node at (75,-15) {150 m};
+% Ancho del río
+\draw[dashed, red] (0,0) -- (0,120);
+\draw[<->] (-10,0) -- (-10,120);
+\node at (-20,60) {$h = ?$};
+% Vegetación
+\foreach \x in {10,30,70,90,110,130,170,190} {
+    \draw[green!60!black] (\x,120) circle (3);
+}
+\foreach \x in {20,40,60,80,100,120,140,160,180} {
+    \draw[green!50!black] (\x,-20) circle (2);
+}
+% Árbol notable en B
+\draw[brown, very thick] (50,120) -- (50,125);
+\draw[green!70!black, very thick] (50,125) circle (5);
+% Topógrafos
+\draw (0,0) circle (1.5);
+\draw (0,-1.5) -- (0,-5);
+\draw (150,0) circle (1.5);
+\draw (150,-1.5) -- (150,-5);
+% Teodolito
+\draw[thick] (148,-2) -- (152,-2) -- (150,-0.5);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 3: Calcular el ángulo en B}
+
+La suma de ángulos en un triángulo es 180°:
+\begin{align}
+\angle ABC &= 180° - 38° - 52°\\
+\angle ABC &= 90°
+\end{align}
+
+¡Interesante! El triángulo ABC resulta ser rectángulo con el ángulo recto en B.
+
+\textbf{Paso 4: Aplicar la ley de senos}
+
+En cualquier triángulo:
+$$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$$
+
+Donde:
+\begin{itemize}
+\item $BC$ es opuesto al ángulo A (38°)
+\item $AB$ es opuesto al ángulo C (52°)
+\item $AC = 150$ m es opuesto al ángulo B (90°)
+\end{itemize}
+
+\textbf{Paso 5: Calcular AB (distancia de A al árbol)}
+
+$$\frac{AB}{\sin(52°)} = \frac{150}{\sin(90°)}$$
+
+$$AB = \frac{150 \cdot \sin(52°)}{\sin(90°)} = \frac{150 \cdot 0.788}{1} = 118.2 \text{ m}$$
+
+\textbf{Paso 6: Calcular el ancho del río}
+
+El ancho del río es la altura del triángulo desde A perpendicular a la orilla opuesta.
+
+Como el triángulo es rectángulo en B, y necesitamos la altura desde A:
+
+Usando trigonometría en el triángulo:
+$$h = AB \cdot \sin(38°) = 118.2 \cdot 0.616 = 72.8 \text{ m}$$
+
+Verificación alternativa:
+$$h = AC \cdot \sin(52°) \cdot \sin(38°) = 150 \cdot 0.788 \cdot 0.616 = 72.8 \text{ m} \checkmark$$
+
+\begin{tcolorbox}[colback=solutioncolor!10, colframe=solutioncolor, title=Respuesta]
+El ancho del río Amazonas en esta sección es de \textbf{72.8 metros}.
+\end{tcolorbox}
+\end{ejemplo}
+
+\section{Ejercicios Inversos: Creatividad y Diseño}
+
+¡Ahora es tu turno de ser el ingeniero! En estos ejercicios, TÚ crearás los problemas y los resolverás. Es como cuando un arquitecto primero imagina un edificio y luego hace los planos.
+
+\begin{ejercicio}
+\textbf{Ejercicio Inverso 1: El Arquitecto de Alturas}
+
+Diseña una situación real donde necesites usar un ángulo de elevación de exactamente 30° para calcular la altura de un objeto. Tu situación debe incluir:
+\begin{itemize}
+\item Un contexto realista (edificio, monumento, árbol, etc.)
+\item Una distancia horizontal específica
+\item El proceso de medición
+\end{itemize}
+
+Especifica todos los datos necesarios y resuelve tu propio problema.
+
+\textbf{Pistas:}
+\begin{itemize}
+\item Recuerda que $\tan(30°) = \frac{1}{\sqrt{3}} \approx 0.577$
+\item Elige una distancia que haga los cálculos interesantes
+\item Piensa en situaciones donde realmente se use este método
+\end{itemize}
+
+\textbf{Espacio para tu diseño:}
+\vspace{5cm}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Solución sugerida para Ejercicio Inverso 1:}
+
+\textbf{Situación diseñada:} La Torre del Reloj del Campus
+
+Un estudiante de ingeniería quiere medir la altura de la torre del reloj de su universidad. Se coloca a 50 metros de la base de la torre y mide un ángulo de elevación de 30° hacia la punta del reloj.
+
+\textbf{Datos del problema:}
+\begin{itemize}
+\item Distancia horizontal: 50 m
+\item Ángulo de elevación: 30°
+\item Altura del observador: 1.70 m (a nivel de los ojos)
+\end{itemize}
+
+\textbf{Solución:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.08]
+% Torre
+\fill[gray!30] (0,0) rectangle (10,30);
+\draw[very thick] (0,0) -- (0,30) -- (10,30) -- (10,0) -- cycle;
+% Reloj
+\draw[thick] (5,25) circle (3);
+\draw[thick] (5,25) -- (5,27);
+\draw[thick] (5,25) -- (6,24);
+% Triángulo
+\draw[thick, blue] (-50,1.7) -- (0,1.7) -- (5,30) -- cycle;
+% Ángulo
+\draw (-40,1.7) arc (0:30:10);
+\node at (-35,4) {30°};
+% Medidas
+\draw[<->] (-50,0) -- (0,0);
+\node at (-25,-2) {50 m};
+\draw[<->] (12,1.7) -- (12,30);
+\node at (16,15) {$h$};
+% Persona
+\draw (-50,0) -- (-50,1.7);
+\draw (-50,1.7) circle (0.5);
+\end{tikzpicture}
+\end{center}
+
+Cálculo de la altura sobre el nivel de los ojos:
+$$h = 50 \cdot \tan(30°) = 50 \cdot \frac{1}{\sqrt{3}} = \frac{50}{\sqrt{3}} = \frac{50\sqrt{3}}{3} = 28.87 \text{ m}$$
+
+Altura total de la torre:
+$$H_{total} = 28.87 + 1.70 = 30.57 \text{ m}$$
+
+\textbf{Respuesta:} La torre del reloj mide 30.57 metros de altura.
+\end{solucion}
+
+\begin{ejercicio}
+\textbf{Ejercicio Inverso 2: El Topógrafo Creativo}
+
+Crea un método para medir el ancho de un río usando DOS triángulos rectángulos. Tu método debe:
+\begin{itemize}
+\item Usar al menos dos posiciones de observación
+\item Incluir ángulos que puedas medir con un teodolito
+\item No requerir cruzar el río
+\end{itemize}
+
+Dibuja tu diseño y explica paso a paso cómo tomarías las medidas. Luego resuelve con datos específicos que tú elijas.
+
+\textbf{Pistas:}
+\begin{itemize}
+\item Piensa en formar triángulos que compartan algún lado
+\item Los ángulos de 45°, 30° y 60° son fáciles de trabajar
+\item Considera usar puntos de referencia en ambas orillas
+\end{itemize}
+
+\textbf{Espacio para tu diseño:}
+\vspace{5cm}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Solución sugerida para Ejercicio Inverso 2:}
+
+\textbf{Método de los dos triángulos perpendiculares:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.05]
+% Río
+\fill[cyan!20] (0,-20) rectangle (150,80);
+% Orillas
+\draw[very thick, brown] (0,-20) -- (150,-20);
+\draw[very thick, brown] (0,80) -- (150,80);
+% Puntos de observación
+\fill[red] (20,0) circle (1.5) node[below] {A};
+\fill[red] (70,0) circle (1.5) node[below] {B};
+\fill[green] (45,80) circle (1.5) node[above] {C (Referencia)};
+% Triángulos
+\draw[thick, blue] (20,0) -- (45,80) -- (45,0) -- cycle;
+\draw[thick, orange] (70,0) -- (45,80) -- (45,0) -- cycle;
+% Ángulos
+\draw (25,0) arc (0:60:5);
+\node at (28,3) {60°};
+\draw (65,0) arc (180:135:5);
+\node at (62,3) {45°};
+% Medidas
+\draw[<->] (20,-10) -- (70,-10);
+\node at (45,-13) {50 m};
+\draw[<->] (20,-5) -- (45,-5);
+\node at (32.5,-7) {25 m};
+\draw[<->] (45,-5) -- (70,-5);
+\node at (57.5,-7) {25 m};
+% Ancho del río
+\draw[dashed] (45,0) -- (45,80);
+\draw[<->] (50,0) -- (50,80);
+\node at (55,40) {Ancho = ?};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Procedimiento:}
+1. Marcar punto A en nuestra orilla
+2. Identificar punto de referencia C en la orilla opuesta
+3. Medir ángulo CAD = 60°
+4. Caminar 50 m paralelo a la orilla hasta punto B
+5. Medir ángulo CBD = 45°
+
+\textbf{Datos elegidos:}
+\begin{itemize}
+\item Distancia AB = 50 m
+\item Ángulo en A = 60°
+\item Ángulo en B = 45°
+\end{itemize}
+
+\textbf{Resolución:}
+
+Desde el triángulo rectángulo en A:
+$$\tan(60°) = \frac{h}{x}$$
+$$h = x \cdot \sqrt{3}$$
+
+Desde el triángulo rectángulo en B:
+$$\tan(45°) = \frac{h}{50-x}$$
+$$h = 50 - x$$
+
+Igualando:
+$$x\sqrt{3} = 50 - x$$
+$$x\sqrt{3} + x = 50$$
+$$x(\sqrt{3} + 1) = 50$$
+$$x = \frac{50}{\sqrt{3} + 1} = \frac{50(\sqrt{3} - 1)}{2} = 18.3 \text{ m}$$
+
+Por lo tanto:
+$$h = 50 - 18.3 = 31.7 \text{ m}$$
+
+\textbf{Respuesta:} El ancho del río es de 31.7 metros.
+\end{solucion}
+
+\begin{ejercicio}
+\textbf{Ejercicio Inverso 3: El Navegante Estratégico}
+
+Diseña una ruta de navegación para un barco turístico que debe:
+\begin{itemize}
+\item Salir del puerto
+\item Hacer DOS cambios de dirección (usa ángulos de 45° y 60°)
+\item Visitar una isla y luego regresar al puerto
+\end{itemize}
+
+Calcula:
+- Las distancias totales recorridas en cada tramo
+- La distancia directa desde la isla al puerto
+- El rumbo de regreso directo
+
+\textbf{Pistas:}
+\begin{itemize}
+\item Usa un sistema de coordenadas con el puerto en el origen
+\item Los rumbos se miden desde el norte en sentido horario
+\item Descompón cada movimiento en componentes N-S y E-O
+\end{itemize}
+
+\textbf{Espacio para tu diseño:}
+\vspace{5cm}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Solución sugerida para Ejercicio Inverso 3:}
+
+\textbf{Ruta diseñada:} Tour Isla del Tesoro
+
+\begin{center}
+\begin{tikzpicture}[scale=0.025]
+% Ejes
+\draw[gray, ->] (0,-20) -- (0,120) node[above] {N};
+\draw[gray, ->] (-20,0) -- (150,0) node[right] {E};
+% Puerto
+\fill[brown] (0,0) circle (3) node[below left] {Puerto};
+% Tramo 1: N45°E, 100 km
+\draw[thick, blue, ->] (0,0) -- (70.7,70.7);
+\node[above left] at (35,35) {100 km};
+\node at (15,10) {45°};
+% Tramo 2: E60°S, 80 km
+\draw[thick, red, ->] (70.7,70.7) -- (110.7,1.42);
+\node[right] at (90,35) {80 km};
+% Isla
+\fill[green] (110.7,1.42) circle (4) node[right] {Isla};
+% Regreso directo
+\draw[thick, green, dashed, ->] (110.7,1.42) -- (0,0);
+\node[below] at (55,0) {Regreso directo};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Análisis de la ruta:}
+
+\underline{Tramo 1: Puerto a punto intermedio}
+\begin{itemize}
+\item Rumbo: N45°E
+\item Distancia: 100 km
+\item Componente Este: $100 \sin(45°) = 70.7$ km
+\item Componente Norte: $100 \cos(45°) = 70.7$ km
+\item Posición: (70.7, 70.7)
+\end{itemize}
+
+\underline{Tramo 2: Punto intermedio a isla}
+\begin{itemize}
+\item Rumbo: S60°E (equivale a 150° desde el norte)
+\item Distancia: 80 km
+\item Componente Este: $80 \sin(60°) = 69.3$ km
+\item Componente Sur: $80 \cos(60°) = 40$ km
+\item Cambio de posición: (40, -69.3)
+\item Posición final de la isla: (110.7, 1.4)
+\end{itemize}
+
+\underline{Cálculo del regreso directo:}
+
+Distancia directa:
+$$d = \sqrt{110.7^2 + 1.4^2} = \sqrt{12254.5 + 2.0} = 110.7 \text{ km}$$
+
+Ángulo respecto al norte:
+$$\theta = \arctan\left(\frac{110.7}{1.4}\right) = 89.3°$$
+
+Rumbo de regreso: S89.3°O (casi directamente hacia el oeste)
+
+\textbf{Resumen:}
+\begin{itemize}
+\item Distancia total ida: 180 km
+\item Distancia regreso directo: 110.7 km
+\item Ahorro de distancia: 69.3 km
+\item Rumbo de regreso: S89.3°O
+\end{itemize}
+\end{solucion}
+
+\begin{ejercicio}
+\textbf{Ejercicio Inverso 4: El Detective de Ángulos}
+
+Te dan las tres medidas de los lados de un triángulo rectángulo: 5 cm, 12 cm y 13 cm.
+
+Tu misión:
+\begin{itemize}
+\item Verifica que es un triángulo rectángulo
+\item SIN USAR CALCULADORA, encuentra los valores exactos de seno, coseno y tangente de cada ángulo agudo
+\item Estima los ángulos usando los valores notables que conoces (30°, 45°, 60°)
+\item Crea una aplicación práctica donde usarías este triángulo
+\end{itemize}
+
+\textbf{Pistas:}
+\begin{itemize}
+\item Este es un triángulo pitagórico famoso
+\item Las razones trigonométricas serán fracciones simples
+\item Compara con los valores de ángulos notables para estimar
+\end{itemize}
+
+\textbf{Espacio para tu trabajo:}
+\vspace{5cm}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Solución sugerida para Ejercicio Inverso 4:}
+
+\textbf{Verificación del triángulo rectángulo:}
+$$5^2 + 12^2 = 25 + 144 = 169 = 13^2 \checkmark$$
+
+Sí es un triángulo rectángulo con catetos 5 y 12, e hipotenusa 13.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.4]
+\draw[very thick] (0,0) -- (12,0) -- (0,5) -- cycle;
+\draw (0,0) rectangle (0.5,0.5);
+\node[below] at (6,0) {12 cm};
+\node[left] at (0,2.5) {5 cm};
+\node[above right] at (6,2.5) {13 cm};
+\node at (10,0.5) {$\alpha$};
+\node at (0.5,3.8) {$\beta$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Cálculo de razones trigonométricas:}
+
+Para el ángulo $\alpha$ (opuesto al lado de 5 cm):
+\begin{itemize}
+\item $\sin(\alpha) = \frac{5}{13}$
+\item $\cos(\alpha) = \frac{12}{13}$
+\item $\tan(\alpha) = \frac{5}{12}$
+\end{itemize}
+
+Para el ángulo $\beta$ (opuesto al lado de 12 cm):
+\begin{itemize}
+\item $\sin(\beta) = \frac{12}{13}$
+\item $\cos(\beta) = \frac{5}{13}$
+\item $\tan(\beta) = \frac{12}{5} = 2.4$
+\end{itemize}
+
+\textbf{Estimación de ángulos:}
+
+Para $\alpha$:
+- $\tan(\alpha) = \frac{5}{12} \approx 0.417$
+- Sabemos que $\tan(30°) \approx 0.577$
+- Por lo tanto, $\alpha < 30°$
+- Estimación: $\alpha \approx 23°$
+
+Para $\beta$:
+- $\tan(\beta) = 2.4$
+- Sabemos que $\tan(60°) \approx 1.732$
+- Por lo tanto, $\beta > 60°$
+- Estimación: $\beta \approx 67°$
+
+Verificación: $23° + 67° + 90° = 180° \checkmark$
+
+\textbf{Aplicación práctica: Rampa de carga}
+
+Un camión necesita una rampa para cargar mercancía. Si la altura de la plataforma es 5 metros y disponemos de 12 metros horizontales, necesitaremos una rampa de 13 metros. El ángulo de inclinación será de aproximadamente 23°, que es seguro para el tránsito de montacargas.
+\end{solucion}
+
+\begin{ejercicio}
+\textbf{Ejercicio Inverso 5: El Ingeniero de Rampas}
+
+Las normas de accesibilidad establecen que una rampa para silla de ruedas no debe tener una pendiente mayor al 8.33\% (que significa subir 8.33 cm por cada 100 cm horizontales).
+
+Tu tarea:
+\begin{itemize}
+\item Convierte este porcentaje a un ángulo
+\item Si necesitas salvar una altura de 1.2 metros, calcula la longitud mínima de la rampa
+\item Diseña un sistema de rampa con descansos si la longitud es muy grande
+\item Verifica que tu diseño cumple con las normas
+\end{itemize}
+
+\textbf{Pistas:}
+\begin{itemize}
+\item Pendiente = $\tan(\theta) = \frac{\text{altura}}{\text{distancia horizontal}}$
+\item 8.33\% = 0.0833 = 8.33/100
+\item Las rampas muy largas necesitan descansos cada cierta distancia
+\end{itemize}
+
+\textbf{Espacio para tu diseño:}
+\vspace{5cm}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Solución sugerida para Ejercicio Inverso 5:}
+
+\textbf{Conversión de pendiente a ángulo:}
+
+Pendiente = 8.33\% = 0.0833
+$$\tan(\theta) = 0.0833$$
+$$\theta = \arctan(0.0833) = 4.76°$$
+
+\textbf{Cálculo de la rampa para 1.2 m de altura:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.3]
+% Rampa simple
+\draw[very thick] (0,0) -- (14.4,0) -- (14.4,1.2) -- (0,0);
+\draw (0,0) rectangle (0.3,0.3);
+\node at (1,0.2) {4.76°};
+\draw[<->] (0,-0.5) -- (14.4,-0.5);
+\node at (7.2,-0.8) {14.4 m};
+\draw[<->] (14.8,0) -- (14.8,1.2);
+\node at (15.5,0.6) {1.2 m};
+% Rampa con textura
+\foreach \x in {1,2,...,13} {
+    \draw[gray] (\x,0.0833*\x) -- (\x+0.5,0.0833*\x);
+}
+\end{tikzpicture}
+\end{center}
+
+Distancia horizontal mínima:
+$$d = \frac{h}{\tan(\theta)} = \frac{1.2}{0.0833} = 14.4 \text{ m}$$
+
+Longitud de la rampa:
+$$L = \frac{h}{\sin(\theta)} = \frac{1.2}{\sin(4.76°)} = \frac{1.2}{0.083} = 14.46 \text{ m}$$
+
+\textbf{Problema:} ¡14.4 metros es demasiado largo para una rampa continua!
+
+\textbf{Solución con descansos:}
+
+Dividir en 3 tramos de 0.4 m de altura cada uno:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.15]
+% Tramo 1
+\draw[thick] (0,0) -- (4.8,0) -- (4.8,0.4) -- (0,0);
+% Descanso 1
+\draw[thick, red] (4.8,0.4) -- (6.3,0.4);
+% Tramo 2
+\draw[thick] (6.3,0.4) -- (11.1,0.4) -- (11.1,0.8) -- (6.3,0.4);
+% Descanso 2
+\draw[thick, red] (11.1,0.8) -- (12.6,0.8);
+% Tramo 3
+\draw[thick] (12.6,0.8) -- (17.4,0.8) -- (17.4,1.2) -- (12.6,0.8);
+% Etiquetas
+\node at (2.4,-0.3) {4.8 m};
+\node at (5.5,0.2) {Des.};
+\node at (8.7,0.1) {4.8 m};
+\node at (11.8,0.6) {Des.};
+\node at (15,0.5) {4.8 m};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Diseño final:}
+\begin{itemize}
+\item 3 tramos de rampa de 4.8 m cada uno
+\item 2 descansos de 1.5 m
+\item Longitud total: $3 \times 4.8 + 2 \times 1.5 = 17.4$ m
+\item Cada tramo sube 0.4 m (40 cm)
+\item Pendiente verificada: $\frac{0.4}{4.8} = 0.0833 = 8.33\%$ ✓
+\end{itemize}
+
+\textbf{Ventajas del diseño:}
+- Cumple con las normas de accesibilidad
+- Proporciona áreas de descanso
+- Es más seguro y cómodo para los usuarios
+\end{solucion}
+
+\section*{¡Felicitaciones!}
+
+Has completado los ejemplos resueltos y los ejercicios inversos. Ahora tienes todas las herramientas para resolver problemas reales con triángulos rectángulos.
+
+Recuerda:
+\begin{itemize}
+\item Siempre hacer un diagrama claro
+\item Identificar qué datos tienes y qué buscas
+\item Elegir la razón trigonométrica correcta
+\item Verificar tus respuestas
+\item ¡La práctica hace al maestro!
+\end{itemize}
+
+Los ejercicios inversos te han enseñado algo muy importante: no solo puedes resolver problemas, ¡también puedes crearlos! Esto es lo que hacen los ingenieros, arquitectos y científicos todos los días: diseñan soluciones para problemas reales.\section{Ejercicios Propuestos}
+
+\begin{ejercicio}
+\textbf{Ejercicio 1:} Resolución de triángulos rectángulos (cateto y ángulo conocidos)
+
+En cada caso, encuentra todos los elementos del triángulo rectángulo $ABC$ donde $C = 90°$.
+
+\textbf{a)} Si $a = 12$ m (cateto opuesto) y $A = 30°$, encuentra $b$, $c$ y $B$.
+
+\textbf{b)} Si $b = 15$ m (cateto adyacente) y $B = 45°$, encuentra $a$, $c$ y $A$.
+
+\textbf{c)} Si $a = 8$ m (cateto opuesto) y $A = 60°$, encuentra $b$, $c$ y $B$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Triángulo
+    \draw[thick] (0,0) -- (4,0) -- (4,3) -- cycle;
+
+    % Ángulo recto
+    \draw[thick] (3.7,0) -- (3.7,0.3) -- (4,0.3);
+
+    % Etiquetas
+    \node[below] at (0,0) {$A$};
+    \node[below] at (4,0) {$C$};
+    \node[above] at (4,3) {$B$};
+    \node[below] at (2,0) {$b$};
+    \node[right] at (4,1.5) {$a$};
+    \node[above left] at (2,1.5) {$c$};
+
+    % Ángulos
+    \draw[thick] (0.8,0) arc (0:37:0.8);
+    \node at (1.2,0.3) {$A$};
+\end{tikzpicture}
+\end{center}
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 2:} Resolución de triángulos rectángulos (hipotenusa y ángulo conocidos)
+
+En cada caso, encuentra todos los elementos del triángulo rectángulo $ABC$ donde $C = 90°$.
+
+\textbf{a)} Si $c = 20$ m (hipotenusa) y $A = 30°$, encuentra $a$, $b$ y $B$.
+
+\textbf{b)} Si $c = 10$ m (hipotenusa) y $B = 60°$, encuentra $a$, $b$ y $A$.
+
+\textbf{c)} Si $c = 50$ m (hipotenusa) y $A = 45°$, encuentra $a$, $b$ y $B$.
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 3:} Ángulo de elevación simple
+
+María observa la parte superior de un edificio desde un punto en el suelo.
+
+\textbf{a)} Si María está a 30 metros del edificio y el ángulo de elevación es de 35°, ¿cuál es la altura del edificio?
+
+\textbf{b)} Si el edificio mide 45 metros de altura y María lo observa con un ángulo de elevación de 52°, ¿a qué distancia del edificio se encuentra María?
+
+\begin{center}
+\begin{tikzpicture}[scale=0.08]
+    % Edificio
+    \draw[thick, fill=gray!20] (0,0) rectangle (15,50);
+
+    % Ventanas
+    \foreach \x in {3,7,11}
+        \foreach \y in {5,10,15,20,25,30,35,40,45}
+            \draw[fill=white] (\x,\y) rectangle (\x+2,\y+3);
+
+    % Persona
+    \draw[thick] (-30,0) circle (1);
+    \draw[thick] (-30,-1) -- (-30,-5);
+    \draw[thick] (-30,-5) -- (-32,-8);
+    \draw[thick] (-30,-5) -- (-28,-8);
+    \draw[thick] (-30,-3) -- (-32,-4);
+    \draw[thick] (-30,-3) -- (-28,-4);
+
+    % Línea de visión
+    \draw[dashed] (-30,0) -- (7.5,50);
+
+    % Distancia horizontal
+    \draw[<->] (-30,-10) -- (0,-10);
+    \node[below] at (-15,-10) {distancia};
+
+    % Ángulo
+    \draw[thick] (-25,0) arc (0:35:5);
+    \node at (-22,3) {$\theta$};
+
+    % Altura
+    \draw[<->] (18,0) -- (18,50);
+    \node[right] at (18,25) {altura};
+\end{tikzpicture}
+\end{center}
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 4:} Ángulo de depresión simple
+
+Desde lo alto de un acantilado de 80 metros de altura, un observador ve un bote en el mar.
+
+\textbf{a)} Si el ángulo de depresión es de 25°, ¿a qué distancia horizontal del acantilado está el bote?
+
+\textbf{b)} Si el bote está a 120 metros de distancia horizontal del acantilado, ¿cuál es el ángulo de depresión?
+
+\begin{center}
+\begin{tikzpicture}[scale=0.05]
+    % Acantilado
+    \draw[thick, fill=brown!30] (0,0) -- (0,80) -- (-20,80) -- (-20,0);
+
+    % Mar
+    \draw[thick, blue] (-20,0) -- (150,0);
+    \draw[blue] (10,0) sin (30,2) cos (50,0) sin (70,2) cos (90,0) sin (110,2) cos (130,0);
+
+    % Observador
+    \draw[thick] (0,80) circle (1.5);
+    \draw[thick] (0,78.5) -- (0,75);
+
+    % Bote
+    \draw[thick, fill=red!30] (100,-2) -- (110,-2) -- (108,2) -- (102,2) -- cycle;
+    \draw[thick] (105,2) -- (105,8);
+    \draw[thick, fill=white] (105,8) -- (110,6) -- (110,4) -- (105,4) -- cycle;
+
+    % Línea de visión
+    \draw[dashed, red] (0,80) -- (105,0);
+
+    % Línea horizontal de referencia
+    \draw[dashed] (0,80) -- (120,80);
+
+    % Ángulo de depresión
+    \draw[thick] (20,80) arc (0:-25:20);
+    \node at (25,75) {$\alpha$};
+
+    % Distancia
+    \draw[<->] (0,-10) -- (105,-10);
+    \node[below] at (52.5,-10) {distancia};
+\end{tikzpicture}
+\end{center}
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 5:} Resolver triángulo conociendo dos lados
+
+En cada caso, encuentra todos los ángulos y el lado faltante del triángulo rectángulo $ABC$ donde $C = 90°$.
+
+\textbf{a)} Si $a = 5$ m y $b = 12$ m (catetos), encuentra $c$, $A$ y $B$.
+
+\textbf{b)} Si $a = 15$ m (cateto) y $c = 25$ m (hipotenusa), encuentra $b$, $A$ y $B$.
+
+\textbf{c)} Si $b = 8$ m (cateto) y $c = 10$ m (hipotenusa), encuentra $a$, $A$ y $B$.
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 6:} Problema aplicado de navegación marítima
+
+Un barco navega desde el puerto $P$ con rumbo N30°E durante 50 km hasta el punto $A$. Luego cambia su rumbo a N60°E y navega 40 km más hasta el punto $B$.
+
+Calcula:
+- La distancia en línea recta desde el puerto $P$ hasta el punto final $B$
+- El ángulo de dirección desde $P$ hasta $B$ respecto al norte
+
+\begin{center}
+\begin{tikzpicture}[scale=0.08]
+    % Sistema de coordenadas
+    \draw[->] (0,0) -- (0,80) node[above] {N};
+    \draw[->] (0,0) -- (80,0) node[right] {E};
+    \draw[->] (0,0) -- (0,-20) node[below] {S};
+    \draw[->] (0,0) -- (-20,0) node[left] {O};
+
+    % Puerto
+    \node[circle, fill=blue, inner sep=2pt] at (0,0) {};
+    \node[below left] at (0,0) {$P$};
+
+    % Primera etapa
+    \draw[thick, blue, ->] (0,0) -- (25,43.3);
+    \node[circle, fill=red, inner sep=2pt] at (25,43.3) {};
+    \node[above right] at (25,43.3) {$A$};
+    \node[midway, above left] at (12.5,21.65) {50 km};
+
+    % Segunda etapa
+    \draw[thick, blue, ->] (25,43.3) -- (59.64,63.3);
+    \node[circle, fill=green, inner sep=2pt] at (59.64,63.3) {};
+    \node[right] at (59.64,63.3) {$B$};
+    \node[midway, above] at (42.32,53.3) {40 km};
+
+    % Línea directa P-B
+    \draw[dashed, red, thick] (0,0) -- (59.64,63.3);
+    \node[midway, below right] at (29.82,31.65) {$d$};
+
+    % Ángulos
+    \draw[thick] (0,15) arc (90:60:15);
+    \node at (5,12) {30°};
+
+    \draw[thick] (25,53.3) arc (90:30:10);
+    \node at (30,50) {60°};
+
+    % Ángulo desde P a B
+    \draw[thick, red] (0,10) arc (90:43:10);
+    \node[red] at (5,7) {$\theta$};
+\end{tikzpicture}
+\end{center}
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 7:} Problema aplicado de topografía
+
+Un topógrafo necesita medir la altura de una montaña. Desde el punto $A$, a nivel del suelo, observa la cima con un ángulo de elevación de 38°. Avanza 500 metros en línea recta hacia la montaña hasta el punto $B$, y desde allí el ángulo de elevación es de 52°.
+
+Determina:
+- La altura de la montaña
+- La distancia desde el punto $B$ hasta la base de la montaña
+
+\begin{center}
+\begin{tikzpicture}[scale=0.01]
+    % Montaña
+    \draw[thick, fill=brown!30] plot[smooth] coordinates {(-100,0) (0,0) (100,400) (200,420) (300,450) (400,420) (500,400) (600,0) (700,0)};
+
+    % Cima
+    \node[circle, fill=red, inner sep=3pt] at (300,450) {};
+    \node[above] at (300,450) {Cima};
+
+    % Punto A
+    \node[circle, fill=blue, inner sep=3pt] at (-300,0) {};
+    \node[below] at (-300,0) {$A$};
+
+    % Punto B
+    \node[circle, fill=blue, inner sep=3pt] at (200,0) {};
+    \node[below] at (200,0) {$B$};
+
+    % Base de la montaña
+    \node[circle, fill=green, inner sep=3pt] at (300,0) {};
+    \node[below] at (300,0) {Base};
+
+    % Líneas de visión
+    \draw[dashed, red] (-300,0) -- (300,450);
+    \draw[dashed, blue] (200,0) -- (300,450);
+
+    % Distancia A-B
+    \draw[<->] (-300,-50) -- (200,-50);
+    \node[below] at (-50,-50) {500 m};
+
+    % Altura
+    \draw[<->] (350,0) -- (350,450);
+    \node[right] at (350,225) {$h$};
+
+    % Ángulos
+    \draw[thick] (-250,0) arc (0:38:50);
+    \node at (-220,30) {38°};
+
+    \draw[thick] (240,0) arc (0:52:40);
+    \node at (265,35) {52°};
+
+    % Distancia B-Base
+    \draw[<->] (200,-100) -- (300,-100);
+    \node[below] at (250,-100) {$x$};
+\end{tikzpicture}
+\end{center}
+\end{ejercicio}
+
+\begin{ejercicio}
+\textbf{Ejercicio 8:} Problema integrador de arquitectura
+
+Un arquitecto está diseñando una escalera de emergencia exterior para un edificio de 4 pisos. Cada piso tiene 3.5 metros de altura. Las normas de seguridad establecen que:
+- El ángulo de inclinación debe estar entre 30° y 45°
+- Cada tramo de escalera debe tener un descanso
+- La proyección horizontal de cada tramo no debe exceder 4 metros
+
+Si el arquitecto decide usar un ángulo de 35° para maximizar la comodidad:
+
+Calcula:
+- La longitud de cada tramo de escalera
+- La proyección horizontal de cada tramo
+- El espacio total horizontal necesario desde el edificio
+- El número total de escalones si cada uno tiene 18 cm de altura
+
+\begin{center}
+\begin{tikzpicture}[scale=0.15]
+    % Edificio
+    \draw[thick, fill=gray!20] (0,0) rectangle (20,14);
+
+    % Pisos
+    \foreach \y in {3.5,7,10.5}
+        \draw[thick] (0,\y) -- (20,\y);
+
+    % Ventanas
+    \foreach \x in {3,7,11,15}
+        \foreach \y in {1,4.5,8,11.5}
+            \draw[fill=white] (\x,\y) rectangle (\x+2,\y+2);
+
+    % Escalera - Tramo 1
+    \draw[thick, red] (20,0) -- (24.3,3.5);
+    \draw[thick, fill=yellow!30] (24.3,3) rectangle (26.3,3.5);
+
+    % Escalera - Tramo 2
+    \draw[thick, red] (26.3,3.5) -- (30.6,7);
+    \draw[thick, fill=yellow!30] (30.6,6.5) rectangle (32.6,7);
+
+    % Escalera - Tramo 3
+    \draw[thick, red] (32.6,7) -- (36.9,10.5);
+    \draw[thick, fill=yellow!30] (36.9,10) rectangle (38.9,10.5);
+
+    % Escalera - Tramo 4
+    \draw[thick, red] (38.9,10.5) -- (43.2,14);
+
+    % Proyección horizontal total
+    \draw[<->] (20,-2) -- (43.2,-2);
+    \node[below] at (31.6,-2) {Espacio horizontal total};
+
+    % Ángulo
+    \draw[thick] (20,0) -- (23,0);
+    \draw[thick] (20,2.1) arc (90:55:2.1);
+    \node at (21.5,1.5) {35°};
+
+    % Altura de piso
+    \draw[<->] (-2,0) -- (-2,3.5);
+    \node[left] at (-2,1.75) {3.5 m};
+
+    % Pasamanos
+    \foreach \i in {1,2,3,4} {
+        \draw[thick] (20+4.3*\i-4.3,3.5*\i-3.5+0.9) -- (20+4.3*\i,3.5*\i+0.9);
+    }
+
+    % Peldaños (representación simplificada)
+    \foreach \i in {0,1,2,3} {
+        \foreach \j in {0,0.35,...,3.15} {
+            \draw (20+4.3*\i+\j*1.23,3.5*\i+\j*0.87) -- (20+4.3*\i+\j*1.23+0.3,3.5*\i+\j*0.87);
+        }
+    }
+\end{tikzpicture}
+\end{center}
+\end{ejercicio}
+
+\section{Soluciones de Ejercicios Propuestos}
+
+\begin{solucion}
+\textbf{Solución Ejercicio 1:} Resolución de triángulos rectángulos (cateto y ángulo conocidos)
+
+\textbf{a)} Datos: $a = 12$ m, $A = 30°$, $C = 90°$
+
+\textbf{Paso 1: Identificar datos}
+\begin{itemize}
+    \item Cateto opuesto al ángulo $A$: $a = 12$ m
+    \item Ángulo $A = 30°$
+    \item Ángulo recto $C = 90°$
+\end{itemize}
+
+\textbf{Paso 2: Identificar incógnitas}
+\begin{itemize}
+    \item Cateto adyacente: $b = ?$
+    \item Hipotenusa: $c = ?$
+    \item Ángulo $B = ?$
+\end{itemize}
+
+\textbf{Paso 3: Encontrar el ángulo $B$}
+
+Como la suma de ángulos en un triángulo es $180°$:
+\begin{align*}
+A + B + C &= 180° \\
+30° + B + 90° &= 180° \\
+B &= 180° - 30° - 90° \\
+B &= 60°
+\end{align*}
+
+\textbf{Paso 4: Encontrar la hipotenusa $c$}
+
+Usando $\sin A = \frac{a}{c}$:
+\begin{align*}
+\sin 30° &= \frac{12}{c} \\
+\frac{1}{2} &= \frac{12}{c} \\
+c &= \frac{12}{\frac{1}{2}} \\
+c &= 24 \text{ m}
+\end{align*}
+
+\textbf{Paso 5: Encontrar el cateto $b$}
+
+Usando $\tan A = \frac{a}{b}$:
+\begin{align*}
+\tan 30° &= \frac{12}{b} \\
+\frac{1}{\sqrt{3}} &= \frac{12}{b} \\
+b &= 12\sqrt{3} \\
+b &= 12 \times 1.732 \\
+b &\approx 20.78 \text{ m}
+\end{align*}
+
+\textbf{Paso 6: Verificación}
+
+Teorema de Pitágoras: $a^2 + b^2 = c^2$
+\begin{align*}
+12^2 + (12\sqrt{3})^2 &= 24^2 \\
+144 + 432 &= 576 \\
+576 &= 576 \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} $b = 12\sqrt{3} \approx 20.78$ m, $c = 24$ m, $B = 60°$
+
+\textbf{b)} Datos: $b = 15$ m, $B = 45°$, $C = 90°$
+
+\textbf{Paso 1: Identificar datos}
+\begin{itemize}
+    \item Cateto adyacente al ángulo $A$: $b = 15$ m
+    \item Ángulo $B = 45°$
+    \item Ángulo recto $C = 90°$
+\end{itemize}
+
+\textbf{Paso 2: Encontrar el ángulo $A$}
+\begin{align*}
+A + B + C &= 180° \\
+A + 45° + 90° &= 180° \\
+A &= 45°
+\end{align*}
+
+¡Interesante! Es un triángulo isósceles rectángulo.
+
+\textbf{Paso 3: Encontrar el cateto $a$}
+
+Como $A = B = 45°$, entonces $a = b$:
+\begin{align*}
+a &= 15 \text{ m}
+\end{align*}
+
+\textbf{Paso 4: Encontrar la hipotenusa $c$}
+
+Usando $\sin B = \frac{b}{c}$:
+\begin{align*}
+\sin 45° &= \frac{15}{c} \\
+\frac{\sqrt{2}}{2} &= \frac{15}{c} \\
+c &= \frac{15 \times 2}{\sqrt{2}} \\
+c &= \frac{30}{\sqrt{2}} \times \frac{\sqrt{2}}{\sqrt{2}} \\
+c &= \frac{30\sqrt{2}}{2} \\
+c &= 15\sqrt{2} \\
+c &\approx 21.21 \text{ m}
+\end{align*}
+
+\textbf{Verificación:}
+\begin{align*}
+a^2 + b^2 &= c^2 \\
+15^2 + 15^2 &= (15\sqrt{2})^2 \\
+225 + 225 &= 450 \\
+450 &= 450 \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} $a = 15$ m, $c = 15\sqrt{2} \approx 21.21$ m, $A = 45°$
+
+\textbf{c)} Datos: $a = 8$ m, $A = 60°$, $C = 90°$
+
+\textbf{Paso 1: Encontrar el ángulo $B$}
+\begin{align*}
+B &= 180° - 60° - 90° = 30°
+\end{align*}
+
+\textbf{Paso 2: Encontrar la hipotenusa $c$}
+\begin{align*}
+\sin 60° &= \frac{8}{c} \\
+\frac{\sqrt{3}}{2} &= \frac{8}{c} \\
+c &= \frac{16}{\sqrt{3}} \\
+c &= \frac{16\sqrt{3}}{3} \\
+c &\approx 9.24 \text{ m}
+\end{align*}
+
+\textbf{Paso 3: Encontrar el cateto $b$}
+\begin{align*}
+\tan 60° &= \frac{8}{b} \\
+\sqrt{3} &= \frac{8}{b} \\
+b &= \frac{8}{\sqrt{3}} \\
+b &= \frac{8\sqrt{3}}{3} \\
+b &\approx 4.62 \text{ m}
+\end{align*}
+
+\textbf{Verificación:}
+\begin{align*}
+a^2 + b^2 &= c^2 \\
+8^2 + \left(\frac{8\sqrt{3}}{3}\right)^2 &= \left(\frac{16\sqrt{3}}{3}\right)^2 \\
+64 + \frac{192}{9} &= \frac{768}{9} \\
+\frac{576 + 192}{9} &= \frac{768}{9} \\
+\frac{768}{9} &= \frac{768}{9} \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} $b = \frac{8\sqrt{3}}{3} \approx 4.62$ m, $c = \frac{16\sqrt{3}}{3} \approx 9.24$ m, $B = 30°$
+\end{solucion}
+
+\begin{solucion}
+\textbf{Solución Ejercicio 2:} Resolución de triángulos rectángulos (hipotenusa y ángulo conocidos)
+
+\textbf{a)} Datos: $c = 20$ m, $A = 30°$, $C = 90°$
+
+\textbf{Paso 1: Encontrar el ángulo $B$}
+\begin{align*}
+B &= 180° - 30° - 90° = 60°
+\end{align*}
+
+\textbf{Paso 2: Encontrar el cateto $a$ (opuesto al ángulo $A$)}
+\begin{align*}
+\sin 30° &= \frac{a}{20} \\
+\frac{1}{2} &= \frac{a}{20} \\
+a &= 10 \text{ m}
+\end{align*}
+
+\textbf{Paso 3: Encontrar el cateto $b$ (adyacente al ángulo $A$)}
+\begin{align*}
+\cos 30° &= \frac{b}{20} \\
+\frac{\sqrt{3}}{2} &= \frac{b}{20} \\
+b &= 10\sqrt{3} \\
+b &\approx 17.32 \text{ m}
+\end{align*}
+
+\textbf{Verificación:}
+\begin{align*}
+a^2 + b^2 &= c^2 \\
+10^2 + (10\sqrt{3})^2 &= 20^2 \\
+100 + 300 &= 400 \\
+400 &= 400 \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} $a = 10$ m, $b = 10\sqrt{3} \approx 17.32$ m, $B = 60°$
+
+\textbf{b)} Datos: $c = 10$ m, $B = 60°$, $C = 90°$
+
+\textbf{Paso 1: Encontrar el ángulo $A$}
+\begin{align*}
+A &= 180° - 60° - 90° = 30°
+\end{align*}
+
+\textbf{Paso 2: Encontrar el cateto $b$ (opuesto al ángulo $B$)}
+\begin{align*}
+\sin 60° &= \frac{b}{10} \\
+\frac{\sqrt{3}}{2} &= \frac{b}{10} \\
+b &= 5\sqrt{3} \\
+b &\approx 8.66 \text{ m}
+\end{align*}
+
+\textbf{Paso 3: Encontrar el cateto $a$ (adyacente al ángulo $B$)}
+\begin{align*}
+\cos 60° &= \frac{a}{10} \\
+\frac{1}{2} &= \frac{a}{10} \\
+a &= 5 \text{ m}
+\end{align*}
+
+\textbf{Verificación:}
+\begin{align*}
+a^2 + b^2 &= c^2 \\
+5^2 + (5\sqrt{3})^2 &= 10^2 \\
+25 + 75 &= 100 \\
+100 &= 100 \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} $a = 5$ m, $b = 5\sqrt{3} \approx 8.66$ m, $A = 30°$
+
+\textbf{c)} Datos: $c = 50$ m, $A = 45°$, $C = 90°$
+
+\textbf{Paso 1: Encontrar el ángulo $B$}
+\begin{align*}
+B &= 180° - 45° - 90° = 45°
+\end{align*}
+
+¡Es un triángulo isósceles rectángulo!
+
+\textbf{Paso 2: Encontrar los catetos $a$ y $b$}
+
+Como $A = B = 45°$, los catetos son iguales:
+\begin{align*}
+\sin 45° &= \frac{a}{50} \\
+\frac{\sqrt{2}}{2} &= \frac{a}{50} \\
+a &= \frac{50\sqrt{2}}{2} \\
+a &= 25\sqrt{2} \\
+a &\approx 35.36 \text{ m}
+\end{align*}
+
+Y como es isósceles: $b = a = 25\sqrt{2} \approx 35.36$ m
+
+\textbf{Verificación:}
+\begin{align*}
+a^2 + b^2 &= c^2 \\
+(25\sqrt{2})^2 + (25\sqrt{2})^2 &= 50^2 \\
+1250 + 1250 &= 2500 \\
+2500 &= 2500 \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} $a = b = 25\sqrt{2} \approx 35.36$ m, $B = 45°$
+\end{solucion}
+
+\begin{solucion}
+\textbf{Solución Ejercicio 3:} Ángulo de elevación simple
+
+\textbf{a)} María está a 30 metros del edificio, ángulo de elevación = 35°
+
+\textbf{Paso 1: Identificar el triángulo}
+
+Se forma un triángulo rectángulo donde:
+\begin{itemize}
+    \item Cateto adyacente = distancia al edificio = 30 m
+    \item Cateto opuesto = altura del edificio = $h$ (incógnita)
+    \item Ángulo de elevación = 35°
+\end{itemize}
+
+\textbf{Paso 2: Elegir la razón trigonométrica}
+
+Como conocemos el cateto adyacente y buscamos el cateto opuesto, usamos la tangente:
+\begin{align*}
+\tan 35° &= \frac{\text{altura}}{\text{distancia}} \\
+\tan 35° &= \frac{h}{30}
+\end{align*}
+
+\textbf{Paso 3: Resolver para $h$}
+\begin{align*}
+h &= 30 \times \tan 35° \\
+h &= 30 \times 0.7002 \\
+h &= 21.01 \text{ metros}
+\end{align*}
+
+\textbf{Respuesta:} El edificio tiene una altura de aproximadamente 21.01 metros.
+
+\textbf{b)} Edificio de 45 metros, ángulo de elevación = 52°
+
+\textbf{Paso 1: Identificar el triángulo}
+\begin{itemize}
+    \item Cateto opuesto = altura del edificio = 45 m
+    \item Cateto adyacente = distancia al edificio = $d$ (incógnita)
+    \item Ángulo de elevación = 52°
+\end{itemize}
+
+\textbf{Paso 2: Elegir la razón trigonométrica}
+\begin{align*}
+\tan 52° &= \frac{45}{d}
+\end{align*}
+
+\textbf{Paso 3: Resolver para $d$}
+\begin{align*}
+d &= \frac{45}{\tan 52°} \\
+d &= \frac{45}{1.2799} \\
+d &= 35.16 \text{ metros}
+\end{align*}
+
+\textbf{Respuesta:} María se encuentra a aproximadamente 35.16 metros del edificio.
+\end{solucion}
+
+\begin{solucion}
+\textbf{Solución Ejercicio 4:} Ángulo de depresión simple
+
+\textbf{a)} Altura del acantilado = 80 m, ángulo de depresión = 25°
+
+\textbf{Paso 1: Comprender el ángulo de depresión}
+
+El ángulo de depresión se mide desde la horizontal hacia abajo. En el triángulo rectángulo formado, este ángulo es igual al ángulo de elevación desde el bote hacia el observador (ángulos alternos internos).
+
+\textbf{Paso 2: Identificar el triángulo}
+\begin{itemize}
+    \item Cateto opuesto = altura del acantilado = 80 m
+    \item Cateto adyacente = distancia horizontal = $d$ (incógnita)
+    \item Ángulo (en el triángulo) = 25°
+\end{itemize}
+
+\textbf{Paso 3: Aplicar la tangente}
+\begin{align*}
+\tan 25° &= \frac{80}{d} \\
+d &= \frac{80}{\tan 25°} \\
+d &= \frac{80}{0.4663} \\
+d &= 171.59 \text{ metros}
+\end{align*}
+
+\textbf{Respuesta:} El bote está a 171.59 metros de distancia horizontal del acantilado.
+
+\textbf{b)} Altura = 80 m, distancia horizontal = 120 m
+
+\textbf{Paso 1: Plantear la ecuación}
+\begin{align*}
+\tan \alpha &= \frac{80}{120} \\
+\tan \alpha &= \frac{2}{3} \\
+\tan \alpha &= 0.6667
+\end{align*}
+
+\textbf{Paso 2: Encontrar el ángulo}
+\begin{align*}
+\alpha &= \arctan(0.6667) \\
+\alpha &= 33.69°
+\end{align*}
+
+\textbf{Respuesta:} El ángulo de depresión es de aproximadamente 33.69°.
+\end{solucion}
+
+\begin{solucion}
+\textbf{Solución Ejercicio 5:} Resolver triángulo conociendo dos lados
+
+\textbf{a)} Datos: $a = 5$ m, $b = 12$ m (catetos)
+
+\textbf{Paso 1: Encontrar la hipotenusa $c$}
+
+Usando el Teorema de Pitágoras:
+\begin{align*}
+c^2 &= a^2 + b^2 \\
+c^2 &= 5^2 + 12^2 \\
+c^2 &= 25 + 144 \\
+c^2 &= 169 \\
+c &= 13 \text{ m}
+\end{align*}
+
+¡Es una terna pitagórica! (5, 12, 13)
+
+\textbf{Paso 2: Encontrar el ángulo $A$}
+\begin{align*}
+\tan A &= \frac{a}{b} = \frac{5}{12} \\
+A &= \arctan\left(\frac{5}{12}\right) \\
+A &= 22.62°
+\end{align*}
+
+\textbf{Paso 3: Encontrar el ángulo $B$}
+\begin{align*}
+B &= 90° - A \\
+B &= 90° - 22.62° \\
+B &= 67.38°
+\end{align*}
+
+\textbf{Verificación:}
+\begin{align*}
+\sin A &= \frac{5}{13} = 0.3846 \\
+\sin 22.62° &= 0.3846 \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} $c = 13$ m, $A = 22.62°$, $B = 67.38°$
+
+\textbf{b)} Datos: $a = 15$ m, $c = 25$ m
+
+\textbf{Paso 1: Encontrar el cateto $b$}
+\begin{align*}
+b^2 &= c^2 - a^2 \\
+b^2 &= 25^2 - 15^2 \\
+b^2 &= 625 - 225 \\
+b^2 &= 400 \\
+b &= 20 \text{ m}
+\end{align*}
+
+¡Otra terna pitagórica! (15, 20, 25) o (3, 4, 5) multiplicada por 5.
+
+\textbf{Paso 2: Encontrar el ángulo $A$}
+\begin{align*}
+\sin A &= \frac{a}{c} = \frac{15}{25} = \frac{3}{5} = 0.6 \\
+A &= \arcsin(0.6) \\
+A &= 36.87°
+\end{align*}
+
+\textbf{Paso 3: Encontrar el ángulo $B$}
+\begin{align*}
+B &= 90° - 36.87° = 53.13°
+\end{align*}
+
+\textbf{Respuesta:} $b = 20$ m, $A = 36.87°$, $B = 53.13°$
+
+\textbf{c)} Datos: $b = 8$ m, $c = 10$ m
+
+\textbf{Paso 1: Encontrar el cateto $a$}
+\begin{align*}
+a^2 &= c^2 - b^2 \\
+a^2 &= 10^2 - 8^2 \\
+a^2 &= 100 - 64 \\
+a^2 &= 36 \\
+a &= 6 \text{ m}
+\end{align*}
+
+¡Terna pitagórica (6, 8, 10) o (3, 4, 5) multiplicada por 2!
+
+\textbf{Paso 2: Encontrar el ángulo $A$}
+\begin{align*}
+\sin A &= \frac{a}{c} = \frac{6}{10} = 0.6 \\
+A &= \arcsin(0.6) \\
+A &= 36.87°
+\end{align*}
+
+\textbf{Paso 3: Encontrar el ángulo $B$}
+\begin{align*}
+\cos B &= \frac{b}{c} = \frac{8}{10} = 0.8 \\
+B &= \arccos(0.8) \\
+B &= 53.13°
+\end{align*}
+
+\textbf{Verificación:} $A + B = 36.87° + 53.13° = 90°$ ✓
+
+\textbf{Respuesta:} $a = 6$ m, $A = 36.87°$, $B = 53.13°$
+\end{solucion}
+
+\begin{solucion}
+\textbf{Solución Ejercicio 6:} Problema aplicado de navegación marítima
+
+\textbf{Paso 1: Establecer sistema de coordenadas}
+
+Colocamos el puerto $P$ en el origen $(0, 0)$, con el norte hacia arriba (eje $y$ positivo) y el este hacia la derecha (eje $x$ positivo).
+
+\textbf{Paso 2: Primera etapa - De $P$ a $A$}
+
+Rumbo N30°E significa 30° desde el norte hacia el este.
+\begin{itemize}
+    \item Distancia: 50 km
+    \item Componente este: $x_A = 50 \sin 30° = 50 \times 0.5 = 25$ km
+    \item Componente norte: $y_A = 50 \cos 30° = 50 \times \frac{\sqrt{3}}{2} = 25\sqrt{3} \approx 43.3$ km
+\end{itemize}
+
+Posición de $A$: $(25, 43.3)$ km
+
+\textbf{Paso 3: Segunda etapa - De $A$ a $B$}
+
+Rumbo N60°E significa 60° desde el norte hacia el este.
+\begin{itemize}
+    \item Distancia: 40 km
+    \item Componente este desde $A$: $\Delta x = 40 \sin 60° = 40 \times \frac{\sqrt{3}}{2} = 20\sqrt{3} \approx 34.64$ km
+    \item Componente norte desde $A$: $\Delta y = 40 \cos 60° = 40 \times 0.5 = 20$ km
+\end{itemize}
+
+Posición de $B$:
+\begin{align*}
+x_B &= x_A + \Delta x = 25 + 34.64 = 59.64 \text{ km} \\
+y_B &= y_A + \Delta y = 43.3 + 20 = 63.3 \text{ km}
+\end{align*}
+
+\textbf{Paso 4: Distancia directa de $P$ a $B$}
+\begin{align*}
+d_{PB} &= \sqrt{x_B^2 + y_B^2} \\
+d_{PB} &= \sqrt{59.64^2 + 63.3^2} \\
+d_{PB} &= \sqrt{3556.73 + 4006.89} \\
+d_{PB} &= \sqrt{7563.62} \\
+d_{PB} &= 86.97 \text{ km}
+\end{align*}
+
+\textbf{Paso 5: Ángulo de dirección desde $P$ hasta $B$}
+\begin{align*}
+\tan \theta &= \frac{x_B}{y_B} = \frac{59.64}{63.3} = 0.9422 \\
+\theta &= \arctan(0.9422) \\
+\theta &= 43.29°
+\end{align*}
+
+El rumbo desde $P$ hasta $B$ es N43.29°E.
+
+\textbf{Verificación alternativa:}
+
+Usando la ley del coseno en el triángulo $PAB$:
+\begin{itemize}
+    \item Lado $PA = 50$ km
+    \item Lado $AB = 40$ km
+    \item Ángulo en $A = 150°$ (ángulo exterior entre los dos rumbos: $180° - 30° = 150°$)
+\end{itemize}
+
+\begin{align*}
+PB^2 &= PA^2 + AB^2 - 2 \cdot PA \cdot AB \cdot \cos(150°) \\
+PB^2 &= 50^2 + 40^2 - 2(50)(40)\cos(150°) \\
+PB^2 &= 2500 + 1600 - 4000(-0.866) \\
+PB^2 &= 4100 + 3464 \\
+PB^2 &= 7564 \\
+PB &= 86.97 \text{ km} \quad \checkmark
+\end{align*}
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item Distancia directa $P$ a $B$: 86.97 km
+    \item Rumbo desde $P$ hasta $B$: N43.29°E
+\end{itemize}
+\end{solucion}
+
+\begin{solucion}
+\textbf{Solución Ejercicio 7:} Problema aplicado de topografía
+
+\textbf{Paso 1: Establecer las variables}
+
+Sea:
+\begin{itemize}
+    \item $h$ = altura de la montaña
+    \item $x$ = distancia desde el punto $B$ hasta la base
+    \item $x + 500$ = distancia desde el punto $A$ hasta la base
+\end{itemize}
+
+\textbf{Paso 2: Plantear las ecuaciones}
+
+Desde el punto $B$ (ángulo de 52°):
+\begin{align*}
+\tan 52° &= \frac{h}{x} \\
+h &= x \tan 52° \\
+h &= 1.2799x \quad \text{...(1)}
+\end{align*}
+
+Desde el punto $A$ (ángulo de 38°):
+\begin{align*}
+\tan 38° &= \frac{h}{x + 500} \\
+h &= (x + 500) \tan 38° \\
+h &= 0.7813(x + 500) \quad \text{...(2)}
+\end{align*}
+
+\textbf{Paso 3: Igualar las ecuaciones}
+
+Como ambas expresiones son igual a $h$:
+\begin{align*}
+1.2799x &= 0.7813(x + 500) \\
+1.2799x &= 0.7813x + 390.65 \\
+1.2799x - 0.7813x &= 390.65 \\
+0.4986x &= 390.65 \\
+x &= \frac{390.65}{0.4986} \\
+x &= 783.54 \text{ metros}
+\end{align*}
+
+\textbf{Paso 4: Calcular la altura}
+
+Sustituyendo en la ecuación (1):
+\begin{align*}
+h &= 1.2799 \times 783.54 \\
+h &= 1002.87 \text{ metros}
+\end{align*}
+
+\textbf{Paso 5: Verificación}
+
+Comprobemos con la ecuación (2):
+\begin{align*}
+h &= 0.7813 \times (783.54 + 500) \\
+h &= 0.7813 \times 1283.54 \\
+h &= 1002.91 \text{ metros} \quad \checkmark
+\end{align*}
+
+(La pequeña diferencia se debe al redondeo)
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item Altura de la montaña: 1002.87 metros
+    \item Distancia desde el punto $B$ hasta la base: 783.54 metros
+\end{itemize}
+\end{solucion}
+
+\begin{solucion}
+\textbf{Solución Ejercicio 8:} Problema integrador de arquitectura
+
+\textbf{Datos del problema:}
+\begin{itemize}
+    \item Altura total del edificio: $4 \times 3.5 = 14$ metros
+    \item Ángulo de inclinación elegido: $35°$
+    \item Altura de cada piso: 3.5 metros
+    \item Altura de cada escalón: 18 cm = 0.18 m
+    \item Restricción: proyección horizontal máxima por tramo = 4 metros
+\end{itemize}
+
+\textbf{Parte 1: Análisis de cada tramo}
+
+Como cada piso tiene 3.5 m de altura y usamos un ángulo de 35°:
+
+\textbf{Para un tramo típico (3.5 m de altura):}
+
+Proyección horizontal de un tramo:
+\begin{align*}
+\tan 35° &= \frac{3.5}{x} \\
+x &= \frac{3.5}{\tan 35°} \\
+x &= \frac{3.5}{0.7002} \\
+x &= 4.998 \text{ m}
+\end{align*}
+
+¡Problema! Esto excede los 4 metros permitidos. Necesitamos ajustar el diseño.
+
+\textbf{Solución: Dividir cada piso en dos tramos con descanso intermedio}
+
+Para medio piso (1.75 m de altura):
+\begin{align*}
+x_{medio} &= \frac{1.75}{\tan 35°} \\
+x_{medio} &= \frac{1.75}{0.7002} \\
+x_{medio} &= 2.499 \text{ m} < 4 \text{ m} \quad \checkmark
+\end{align*}
+
+\textbf{Parte 2: Longitud de cada medio tramo}
+
+Usando el teorema de Pitágoras o la función coseno:
+\begin{align*}
+\cos 35° &= \frac{x_{medio}}{L_{medio}} \\
+L_{medio} &= \frac{2.499}{\cos 35°} \\
+L_{medio} &= \frac{2.499}{0.8192} \\
+L_{medio} &= 3.051 \text{ m}
+\end{align*}
+
+O alternativamente:
+\begin{align*}
+L_{medio} &= \sqrt{1.75^2 + 2.499^2} \\
+L_{medio} &= \sqrt{3.0625 + 6.245} \\
+L_{medio} &= \sqrt{9.3075} \\
+L_{medio} &= 3.051 \text{ m}
+\end{align*}
+
+\textbf{Parte 3: Diseño completo de la escalera}
+
+Necesitamos 8 medios tramos (2 por piso × 4 pisos):
+
+\textbf{Longitud total de escalera:}
+\begin{align*}
+L_{total} &= 8 \times 3.051 = 24.408 \text{ m}
+\end{align*}
+
+\textbf{Proyección horizontal total:}
+
+Considerando los descansos (estimamos 2 m por descanso, 7 descansos):
+\begin{align*}
+\text{Proyección tramos} &= 8 \times 2.499 = 19.992 \text{ m} \\
+\text{Proyección descansos} &= 7 \times 2 = 14 \text{ m} \\
+\text{Espacio horizontal total} &= 19.992 + 14 = 33.992 \text{ m}
+\end{align*}
+
+\textbf{Parte 4: Número de escalones}
+
+\textbf{Para toda la escalera:}
+\begin{align*}
+\text{Número de escalones} &= \frac{\text{Altura total}}{\text{Altura por escalón}} \\
+&= \frac{14 \text{ m}}{0.18 \text{ m}} \\
+&= 77.78
+\end{align*}
+
+Redondeando: necesitamos 78 escalones.
+
+\textbf{Ajuste de la altura real por escalón:}
+\begin{align*}
+h_{escalón} &= \frac{14}{78} = 0.1795 \text{ m} \approx 17.95 \text{ cm}
+\end{align*}
+
+\textbf{Distribución por tramo:}
+\begin{itemize}
+    \item Por medio tramo: $\frac{78}{8} = 9.75 \approx 10$ escalones
+    \item Algunos tramos tendrán 10 escalones, otros 9
+    \item 6 tramos con 10 escalones = 60 escalones
+    \item 2 tramos con 9 escalones = 18 escalones
+    \item Total: 78 escalones ✓
+\end{itemize}
+
+\textbf{Respuestas finales:}
+\begin{itemize}
+    \item \textbf{Longitud de cada medio tramo:} 3.051 m
+    \item \textbf{Proyección horizontal por medio tramo:} 2.499 m
+    \item \textbf{Espacio horizontal total necesario:} aproximadamente 34 m
+    \item \textbf{Número total de escalones:} 78 escalones (17.95 cm cada uno)
+    \item \textbf{Configuración:} 8 tramos con descansos intermedios
+\end{itemize}
+
+\textbf{Nota de seguridad:} El diseño cumple con las normas:
+\begin{itemize}
+    \item Ángulo de 35° está entre 30° y 45° ✓
+    \item Cada tramo tiene descanso ✓
+    \item Proyección horizontal por tramo < 4 m ✓
+\end{itemize}
+\end{solucion}
+\newpage
+
+% ============================================
+% CONCLUSIÓN
+% ============================================
+
+\section{Conclusión}
+
+¡Felicidades! Has llegado al final de esta guía sobre la solución de triángulos rectángulos. Esperamos que ahora tengas una comprensión sólida de cómo aplicar las funciones trigonométricas para resolver problemas del mundo real.
+
+\subsection{Resumen de Conceptos Clave}
+
+Repasemos los puntos más importantes que hemos aprendido:
+
+\begin{enumerate}
+  \item \textbf{Triángulos rectángulos:} Tienen un ángulo de 90° y tres lados (dos catetos y la hipotenusa).
+
+  \item \textbf{Razones trigonométricas:} Son relaciones entre los lados del triángulo que nos permiten resolver problemas. Las tres principales son:
+  \begin{itemize}
+    \item Seno: $\sin(\theta) = \frac{\text{opuesto}}{\text{hipotenusa}}$
+    \item Coseno: $\cos(\theta) = \frac{\text{adyacente}}{\text{hipotenusa}}$
+    \item Tangente: $\tan(\theta) = \frac{\text{opuesto}}{\text{adyacente}}$
+  \end{itemize}
+
+  \item \textbf{Resolver conociendo un lado y un ángulo:} Usa las razones trigonométricas directamente para encontrar los otros lados, y la suma de ángulos para encontrar el ángulo faltante.
+
+  \item \textbf{Resolver conociendo dos lados:} Usa el teorema de Pitágoras para el tercer lado, y las funciones inversas ($\arcsin$, $\arccos$, $\arctan$) para encontrar los ángulos.
+
+  \item \textbf{Ángulos de elevación:} Se usan cuando miramos hacia arriba. Aparecen en problemas de medición de alturas de edificios, árboles, montañas, etc.
+
+  \item \textbf{Ángulos de depresión:} Se usan cuando miramos hacia abajo. Son iguales a los ángulos de elevación correspondientes por la propiedad de ángulos alternos internos.
+\end{enumerate}
+
+\subsection{Tabla de Fórmulas Importantes}
+
+Aquí tienes una tabla de referencia rápida con todas las fórmulas importantes:
+
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor{maincolor!30}
+\textbf{Concepto} & \textbf{Fórmula} \\
+\hline
+Teorema de Pitágoras & $c^2 = a^2 + b^2$ \\
+\hline
+Seno & $\sin(\theta) = \dfrac{\text{opuesto}}{\text{hipotenusa}}$ \\
+\hline
+Coseno & $\cos(\theta) = \dfrac{\text{adyacente}}{\text{hipotenusa}}$ \\
+\hline
+Tangente & $\tan(\theta) = \dfrac{\text{opuesto}}{\text{adyacente}}$ \\
+\hline
+Suma de ángulos & $\alpha + \beta + 90° = 180°$ \\
+\hline
+Ángulo agudo faltante & $\beta = 90° - \alpha$ \\
+\hline
+Arcoseno & $\theta = \arcsin\left(\dfrac{\text{opuesto}}{\text{hipotenusa}}\right)$ \\
+\hline
+Arcocoseno & $\theta = \arccos\left(\dfrac{\text{adyacente}}{\text{hipotenusa}}\right)$ \\
+\hline
+Arcotangente & $\theta = \arctan\left(\dfrac{\text{opuesto}}{\text{adyacente}}\right)$ \\
+\hline
+Altura con ángulo de elevación & $h = d \cdot \tan(\text{ángulo})$ \\
+\hline
+Distancia con ángulo de depresión & $d = \dfrac{h}{\tan(\text{ángulo})}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Consejos para Resolver Triángulos Rectángulos}
+
+Aquí te dejamos algunos consejos prácticos que te ayudarán a tener éxito resolviendo estos problemas:
+
+\begin{enumerate}
+  \item \textbf{Dibuja siempre un diagrama:} Antes de empezar a calcular, haz un dibujo del triángulo con todos los datos que conoces. Esto te ayudará a visualizar el problema y evitar errores.
+
+  \item \textbf{Identifica claramente cuál es el ángulo de referencia:} Los términos "opuesto" y "adyacente" dependen del ángulo que estás considerando. Márcalo claramente en tu diagrama.
+
+  \item \textbf{Revisa que tu calculadora esté en modo grados (DEG):} Este es uno de los errores más comunes. Si tu calculadora está en modo radianes (RAD), todos tus resultados estarán incorrectos.
+
+  \item \textbf{Verifica tus respuestas con Pitágoras:} Después de encontrar todos los lados, siempre verifica que $c^2 = a^2 + b^2$. Si no se cumple, revisa tus cálculos.
+
+  \item \textbf{Verifica que los ángulos sumen 180°:} La suma de los tres ángulos debe ser siempre 180°. Usa esto como una verificación adicional.
+
+  \item \textbf{Usa la función trigonométrica apropiada:}
+  \begin{itemize}
+    \item Si conoces/necesitas la hipotenusa, usa seno o coseno.
+    \item Si solo trabajas con catetos, usa tangente.
+  \end{itemize}
+
+  \item \textbf{Redondea al final, no en pasos intermedios:} Mantén todos los decimales durante los cálculos y redondea solo en la respuesta final para evitar errores de redondeo acumulados.
+
+  \item \textbf{Lee el problema con cuidado:} Identifica qué te están pidiendo encontrar. A veces el problema da más información de la necesaria, o te pide solo algunos datos específicos.
+
+  \item \textbf{Practica, practica, practica:} Como con cualquier habilidad matemática, la clave del éxito es la práctica constante. Mientras más problemas resuelvas, más fácil te resultará.
+\end{enumerate}
+
+\subsection{Recomendaciones para el Éxito}
+
+\begin{nota}
+La trigonometría puede parecer difícil al principio, pero recuerda que es como aprender un idioma nuevo: necesitas practicar regularmente para dominarlo. No te desanimes si algunos problemas te resultan difíciles al principio. ¡Sigue intentando!
+\end{nota}
+
+Para tener éxito con la trigonometría:
+
+\begin{itemize}
+  \item \textbf{Memoriza las razones trigonométricas básicas:} SOH-CAH-TOA debe convertirse en tu mejor amigo. Repítelo hasta que lo sepas de memoria.
+
+  \item \textbf{Entiende, no solo memorices:} No te limites a memorizar fórmulas. Trata de entender por qué funcionan y cuándo usarlas.
+
+  \item \textbf{Practica con problemas variados:} Resuelve problemas de diferentes contextos (navegación, arquitectura, deportes, etc.) para ver las múltiples aplicaciones.
+
+  \item \textbf{Trabaja en grupo:} Estudiar con compañeros puede ayudarte a ver diferentes enfoques para resolver los mismos problemas.
+
+  \item \textbf{Pide ayuda cuando la necesites:} Si algo no te queda claro, pregunta a tu profesor o busca recursos adicionales. Es mejor aclarar dudas temprano que arrastrarlas.
+
+  \item \textbf{Conecta con aplicaciones reales:} Cuando veas un edificio alto, una colina o cualquier situación que involucre ángulos y distancias, piensa en cómo resolverías ese problema con trigonometría.
+\end{itemize}
+
+\subsection{Aplicaciones Futuras}
+
+Lo que has aprendido en esta guía es solo el comienzo. La trigonometría es fundamental en muchas áreas avanzadas:
+
+\begin{itemize}
+  \item \textbf{Física:} Para analizar fuerzas, movimiento proyectil, ondas y muchos otros fenómenos.
+
+  \item \textbf{Cálculo:} Las funciones trigonométricas son fundamentales en el cálculo diferencial e integral.
+
+  \item \textbf{Ingeniería:} Todas las ramas de la ingeniería usan trigonometría extensivamente.
+
+  \item \textbf{Ciencias de la computación:} Desde gráficos por computadora hasta inteligencia artificial, la trigonometría está presente.
+
+  \item \textbf{Navegación GPS:} Tu celular usa trigonometría para determinar tu ubicación exacta.
+
+  \item \textbf{Astronomía:} Para calcular distancias a estrellas y planetas.
+\end{itemize}
+
+Dominar estos conceptos ahora te abrirá muchas puertas en el futuro. ¡Estás construyendo una base sólida para tu educación matemática!
+
+\subsection{Palabras Finales}
+
+Recuerda que las matemáticas son una herramienta poderosa para entender y transformar el mundo que nos rodea. La trigonometría, en particular, es un puente entre la geometría pura y las aplicaciones prácticas del mundo real.
+
+Cada problema que resuelves fortalece tu capacidad de pensamiento lógico y analítico, habilidades que te servirán no solo en matemáticas, sino en todas las áreas de tu vida.
+
+No importa si tu futuro está en las ciencias, las artes, los negocios o cualquier otro campo: las habilidades de resolución de problemas que desarrollas con la trigonometría son universalmente valiosas.
+
+\begin{center}
+\begin{tikzpicture}
+  \node[draw, line width=2pt, maincolor, rounded corners=10pt, fill=maincolor!10, text width=12cm, align=center, font=\Large] {
+    ¡Sigue practicando, nunca dejes de hacer preguntas, \\
+    y recuerda que cada problema resuelto te hace más fuerte!
+  };
+\end{tikzpicture}
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+{\Large\textbf{¡Mucho éxito en tu aprendizaje de la trigonometría!}}
+
+\vspace{0.5cm}
+
+{\large Prof. Toribio De J Arrieta F}
+\end{center}
+
+\end{document}
