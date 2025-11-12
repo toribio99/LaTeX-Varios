@@ -195,7 +195,7 @@ $$y = \arcsin(x) \quad \Leftrightarrow \quad \sin(y) = x \text{ con } y \in \lef
 
 \textbf{¿Qué significa esto en palabras simples?}
 
-Si te digo "el seno de un ángulo es 0.5", y te pregunto "¿cuál es ese ángulo?", la función arcoseno te da la respuesta: $\arcsin(0.5) = \frac{\pi}{6}$ (o 30°).
+Si te digo \textbf{el seno de un ángulo es 0.5}, y te pregunto \textbf{¿cuál es ese ángulo?}, la función arcoseno te da la respuesta: $\arcsin(0.5) = \frac{\pi}{6}$ (o 30°).
 
 Pero hay un detalle importante: infinitos ángulos tienen seno igual a 0.5 (por ejemplo, 30°, 150°, 390°, etc.). Para evitar ambigüedad, el arcoseno siempre devuelve el ángulo que está en el rango $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$, que corresponde al primer y cuarto cuadrante.
 
@@ -293,7 +293,7 @@ Por ejemplo, $\arccos\left(\frac{1}{2}\right) = \frac{\pi}{3}$ (60°), aunque ta
     \addplot[maincolor, ultra thick] {acos(x)*pi/180};
     \addplot[accentcolor, dashed, thick] coordinates {(-1.2,0) (1.2,0)};
     \addplot[accentcolor, dashed, thick] coordinates {(-1.2,3.1416) (1.2,3.1416)};
-    \node[maincolor] at (axis cs: -0.5,2.5) {$y = \arccos(x)$};
+    \node[maincolor] at (axis cs: -0.5,2.7) {$y = \arccos(x)$};
     \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -775,7 +775,7 @@ $$\theta = \pi - \frac{\pi}{6} = \frac{5\pi}{6}$$
     % Ángulo
     \draw[thick, blue] (0,0) -- (-0.866,0.5);
     \draw[blue, ->] (0.3,0) arc (0:150:0.3);
-    \node at (0.2,0.2) {$150°$};
+    \node at (0.2,0.4) {$150°$};
     % Punto
     \fill[red] (-0.866,0.5) circle (0.05);
     \node[above left] at (-0.866,0.5) {$\left(-\frac{\sqrt{3}}{2}, \frac{1}{2}\right)$};
@@ -1260,8 +1260,8 @@ Un topógrafo está midiendo la altura de un edificio. Desde un punto en el suel
     \draw[dashed,blue] (1,0) -- (7,4.5);
 
     % Ángulo
-    \draw[blue,thick] (1,0) -- (2,0) arc[start angle=0, end angle=56.3, radius=1];
-    \node[blue] at (1.8,0.4) {$\theta_1$};
+    \draw[blue,thick] (1,0) -- (2,0) arc[start angle=0, end angle=56.3, radius=0.7];
+    \node[blue] at (2.4,0.4) {$\theta_1$};
 
     % Posición alejada
     \draw[fill=black] (-1.5,0) circle (0.05) node[below] {80 m};
@@ -1271,7 +1271,7 @@ Un topógrafo está midiendo la altura de un edificio. Desde un punto en el suel
 
     % Ángulo alejado
     \draw[red,thick] (-1.5,0) -- (-0.5,0) arc[start angle=0, end angle=29.7, radius=1];
-    \node[red] at (-0.6,0.25) {$\theta_2$};
+    \node[red] at (-0.2,0.29) {$\theta_2$};
 
     % Altura
     \draw[<->,thick] (7.8,0) -- (7.8,4.5) node[midway,right] {$h = ?$};
@@ -1408,7 +1408,7 @@ Para estos ejercicios, usaremos el método del triángulo rectángulo. ¡Es súp
     \node[below] at (1.5,0) {3};
     \node[right] at (3,2) {?};
     \node[above left] at (1.5,2) {5};
-    \node[left] at (0.3,0.3) {$\theta$};
+    \node[left] at (0.9,0.3) {$\theta$};
 
     % Ángulo
     \draw (0.5,0) arc[start angle=0, end angle=53.13, radius=0.5];
@@ -1443,7 +1443,7 @@ $$\sen(\theta) = \frac{\text{opuesto}}{\text{hipotenusa}} = \frac{4}{5}$$
     \node[below] at (6,0) {?};
     \node[right] at (12,2.5) {5};
     \node[above left] at (6,2.5) {13};
-    \node[left] at (0.8,0.4) {$\alpha$};
+    \node[left] at (2.9,0.4) {$\alpha$};
 
     % Ángulo
     \draw (1.5,0) arc[start angle=0, end angle=22.62, radius=1.5];
@@ -1748,9 +1748,9 @@ $$d = 75 \text{ metros}$$
     }
 
     % Posiciones del topógrafo
-    \draw[fill=red] (40,0) circle (1) node[below] {\small 50 m};
-    \draw[fill=green] (10,0) circle (1) node[below] {\small 80 m};
-    \draw[fill=orange] (15,0) circle (1) node[below] {\small 75 m};
+    \draw[fill=red] (40,0) circle (1) node[below right] {\small 50 m};
+    \draw[fill=green] (10,0) circle (1) node[below right] {\small 80 m};
+    \draw[fill=orange] (15,0) circle (1) node[above left] {\small 75 m};
 
     % Líneas de visión
     \draw[dashed,red,thick] (40,0) -- (95,75);

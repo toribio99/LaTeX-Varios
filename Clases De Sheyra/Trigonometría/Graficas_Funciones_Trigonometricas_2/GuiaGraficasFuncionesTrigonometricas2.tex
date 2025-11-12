@@ -12,6 +12,7 @@
 \pgfplotsset{compat=1.18}
 \definecolor{maincolor}{RGB}{26,35,126}
 \definecolor{accentcolor}{RGB}{255,87,34}
+\usepackage{array}
 
 % Configuración de títulos y formato
 \usepackage{titlesec}
@@ -145,8 +146,12 @@ Antes de graficar las funciones trigonométricas, necesitamos recordar algunos c
 Recordemos las definiciones de las seis funciones trigonométricas en el círculo unitario. Para un ángulo $\theta$, si el punto correspondiente en el círculo unitario es $(x, y)$, entonces:
 
 \begin{center}
+{
 \renewcommand{\arraystretch}{2}
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|
+		>{\centering\arraybackslash}m{2cm}|
+		>{\centering\arraybackslash}m{5cm}|
+		>{\centering\arraybackslash}m{4cm}|}
 \hline
 \textbf{Función} & \textbf{Definición} & \textbf{Valor en círculo unitario} \\
 \hline
@@ -163,6 +168,7 @@ Secante & $\sec\theta = \dfrac{\text{hipotenusa}}{\text{cateto adyacente}}$ & $\
 Cotangente & $\cot\theta = \dfrac{\text{cateto adyacente}}{\text{cateto opuesto}}$ & $\cot\theta = \dfrac{x}{y} = \dfrac{\cos\theta}{\sin\theta}$ \\
 \hline
 \end{tabular}
+}
 \end{center}
 
 \begin{nota}
@@ -186,7 +192,12 @@ De aquí se obtiene:
 \textbf{Ángulos importantes en radianes:}
 
 \begin{center}
-\begin{tabular}{|c|c||c|c|}
+\renewcommand{\arraystretch}{2.5}
+\begin{tabular}{|
+		>{\centering\arraybackslash}m{2cm}|
+		>{\centering\arraybackslash}m{2cm}|
+		>{\centering\arraybackslash}m{2cm}|
+		>{\centering\arraybackslash}m{2cm}|}
 \hline
 \textbf{Grados} & \textbf{Radianes} & \textbf{Grados} & \textbf{Radianes} \\
 \hline
@@ -340,6 +351,7 @@ La función seno es la función trigonométrica más fundamental. Su gráfica ti
 \textbf{Valores importantes:}
 
 \begin{center}
+\renewcommand{\arraystretch}{2.8}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 \hline
 $x$ & $0$ & $\dfrac{\pi}{6}$ & $\dfrac{\pi}{4}$ & $\dfrac{\pi}{3}$ & $\dfrac{\pi}{2}$ & $\pi$ & $\dfrac{3\pi}{2}$ & $2\pi$ \\
@@ -408,6 +420,7 @@ La función coseno es muy similar al seno, pero está desplazada horizontalmente
 \textbf{Valores importantes:}
 
 \begin{center}
+	\renewcommand{\arraystretch}{2.8}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 \hline
 $x$ & $0$ & $\dfrac{\pi}{6}$ & $\dfrac{\pi}{4}$ & $\dfrac{\pi}{3}$ & $\dfrac{\pi}{2}$ & $\pi$ & $\dfrac{3\pi}{2}$ & $2\pi$ \\
@@ -475,6 +488,7 @@ La función tangente tiene un comportamiento muy diferente al seno y coseno. En 
 \textbf{Valores importantes:}
 
 \begin{center}
+\renewcommand{\arraystretch}{2.8}
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
 $x$ & $0$ & $\dfrac{\pi}{6}$ & $\dfrac{\pi}{4}$ & $\dfrac{\pi}{3}$ & $\pi$ & $-\dfrac{\pi}{4}$ & $-\dfrac{\pi}{3}$ \\
@@ -617,7 +631,13 @@ La secante es el recíproco del coseno: $\sec(x) = \dfrac{1}{\cos(x)}$.
     grid style={dashed, gray!30},
     samples=200,
     restrict y to domain=-10:10,
-    legend pos=north east,
+    legend style={
+	at={(0.85,0.8)}, % Coordenadas relativas dentro del área del gráfico
+	anchor=south east,% Qué parte de la leyenda se alinea con esas coordenadas
+	font=\small,
+	fill=white,
+	draw=black
+	},
 ]
 % Coseno (para referencia)
 \addplot[blue!50, dashed, thick] {cos(deg(x))};
@@ -871,7 +891,7 @@ $\cos(x)$ & $0$ & $0.5$ & $0.87$ & $1$ \\
     grid=both,
     grid style={line width=.1pt, draw=gray!10},
     major grid style={line width=.2pt,draw=gray!50},
-    legend pos=north east,
+    legend pos=south east,
 ]
     % Gráfica de coseno
     \addplot[
@@ -922,7 +942,7 @@ $\cos(x)$ & $0$ & $0.5$ & $0.87$ & $1$ \\
     grid=both,
     grid style={line width=.1pt, draw=gray!10},
     major grid style={line width=.2pt,draw=gray!50},
-    legend pos=north east,
+    legend pos=south west,
 ]
     % Seno
     \addplot[
@@ -1265,7 +1285,10 @@ $\sec(x)$ & $1$ & $1.15$ & $1.41$ & $2$ & $-2$ & $-1.41$ & $-1.15$ \\
     grid=both,
     grid style={line width=.1pt, draw=gray!10},
     major grid style={line width=.2pt,draw=gray!50},
-    legend pos=north east,
+    legend style={
+    	at={(0.5,0.8)},  % centrado horizontalmente arriba
+    	anchor=south,     % la parte inferior de la leyenda toca ese punto
+    },
     restrict y to domain=-5:5,
 ]
     % Asíntotas verticales
@@ -1492,7 +1515,7 @@ $\csc(x)$ & $-2$ & $-1.41$ & $-1.15$ & $-1$ & $-1.15$ \\
     grid=both,
     grid style={line width=.1pt, draw=gray!10},
     major grid style={line width=.2pt,draw=gray!50},
-    legend pos=north east,
+    legend pos=south west,
     restrict y to domain=-5:5,
 ]
     % Asíntotas de secante
@@ -2153,7 +2176,7 @@ También podríamos usar $f(x) = 3\cos\left(x - \frac{\pi}{2}\right) + 2$, ya qu
     % Línea del eje central
     \addplot[dashed, gray] {2};
 
-    \node[gray, right] at (axis cs:5.5, 2) {Eje central: $y=2$};
+    \node[gray, right] at (axis cs:4, 2.3) {Eje central: $y=2$};
 \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -2246,7 +2269,7 @@ Evaluemos en puntos de prueba:
     samples=200,
     domain=0:2*pi,
     thick,
-    legend pos=north east,
+    legend pos=south west,
 ]
     \addplot[blue, very thick] {sin(deg(x))};
     \addplot[red, very thick] {cos(deg(x))};
@@ -2259,8 +2282,8 @@ Evaluemos en puntos de prueba:
 
     \legend{$\sin(x)$, $\cos(x)$}
 
-    \node[maincolor] at (axis cs:0.7854, 0.9) {Intersección};
-    \node[maincolor] at (axis cs:3.927, -0.9) {Intersección};
+    \node[maincolor] at (axis cs:0.7854, 1.2) {Intersección};
+    \node[maincolor] at (axis cs:3.927, -1.2) {Intersección};
 \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -2376,7 +2399,7 @@ h(6) = 2.5\sin\left(\frac{\pi}{6}(6) - \frac{\pi}{2}\right) + 3.5 = 2.5\sin\left
     \node[red, above] at (axis cs:6, 6) {Marea alta};
     \node[red, above] at (axis cs:18, 6) {Marea alta};
     \node[blue, below] at (axis cs:12, 1) {Marea baja};
-    \node[gray, right] at (axis cs:20, 3.5) {Nivel promedio};
+    \node[gray, right] at (axis cs:15, 3.2) {Nivel promedio};
 \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -2898,7 +2921,7 @@ En el intervalo $[0°, 180°]$:
     grid=both,
     grid style={line width=.1pt, draw=gray!10},
     major grid style={line width=.2pt,draw=gray!50},
-    legend pos=north west,
+    legend pos=south west,
     restrict y to domain=-5:5,
 ]
     % Asíntotas
@@ -3097,7 +3120,7 @@ Pero verificamos: si $y = -3\sin(x) - 2$:
     grid=both,
     grid style={line width=.1pt, draw=gray!10},
     major grid style={line width=.2pt,draw=gray!50},
-    legend pos=north east,
+    legend pos=south east,
 ]
     % Función seno original (para referencia)
     \addplot[

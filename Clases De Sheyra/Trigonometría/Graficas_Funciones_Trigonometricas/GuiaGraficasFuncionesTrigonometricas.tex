@@ -305,7 +305,7 @@ P = (\cos 30^\circ, \sin 30^\circ) = \left(\frac{\sqrt{3}}{2}, \frac{1}{2}\right
 
     % Línea SENO
     \draw[red,very thick,-{Latex}] ({\angulo}:1 |- 0,0) -- (P);
-    \node[red,right,scale=0.7] at (0.866,0.25) {$\sin 30^\circ = \frac{1}{2}$};
+    \node[red,right,scale=0.7] at (0.43,0.2) {$\sin 30^\circ = \frac{1}{2}$};
 
     % Línea TANGENTE
     \coordinate (T) at (1,{tan(\angulo)});
@@ -370,7 +370,7 @@ En el segundo cuadrante:
 
     % Línea SENO (positivo)
     \draw[red,very thick,-{Latex}] ({\angulo}:1 |- 0,0) -- (P);
-    \node[red,left,scale=0.7] at (-0.5,0.433) {$\sin 120^\circ = \frac{\sqrt{3}}{2}$};
+    \node[red,left,scale=0.7, rotate=90] at (-0.6,0.6) {$\sin 120^\circ = \frac{\sqrt{3}}{2}$};
 
     % Línea TANGENTE (negativo)
     \coordinate (T) at (1,{tan(\angulo)});
@@ -428,15 +428,15 @@ En el tercer cuadrante:
 
     % Ángulo
     \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25);
-    \node[accentcolor,scale=0.7] at (0.15,0.15) {$225^\circ$};
+    \node[accentcolor,scale=0.7] at (0.15,0.3) {$225^\circ$};
 
     % Línea COSENO (negativo)
     \draw[blue,very thick,{Latex}-] (0,0) -- ({\angulo}:1 |- 0,0);
-    \node[blue,above,scale=0.7] at (-0.35,0) {$\cos 225^\circ = -\frac{\sqrt{2}}{2}$};
+    \node[blue,above,scale=0.7] at (-0.55,0) {$\cos 225^\circ = -\frac{\sqrt{2}}{2}$};
 
     % Línea SENO (negativo)
     \draw[red,very thick,{Latex}-] ({\angulo}:1 |- 0,0) -- (P);
-    \node[red,right,scale=0.7] at (-0.707,-0.35) {$\sin 225^\circ = -\frac{\sqrt{2}}{2}$};
+    \node[red,right,scale=0.7, rotate=90] at (-0.8,-0.6) {$\sin 225^\circ = -\frac{\sqrt{2}}{2}$};
 
     % Línea TANGENTE (positivo)
     \coordinate (T) at (1,{tan(\angulo)});
@@ -498,11 +498,11 @@ En el cuarto cuadrante:
 
     % Línea COSENO (positivo)
     \draw[blue,very thick,-{Latex}] (0,0) -- ({\angulo}:1 |- 0,0);
-    \node[blue,above,scale=0.7] at (0.25,0) {$\cos 300^\circ = \frac{1}{2}$};
+    \node[blue,above,scale=0.7] at (0.25,0.2) {$\cos 300^\circ = \frac{1}{2}$};
 
     % Línea SENO (negativo)
     \draw[red,very thick,{Latex}-] ({\angulo}:1 |- 0,0) -- (P);
-    \node[red,left,scale=0.7] at (0.5,-0.433) {$\sin 300^\circ = -\frac{\sqrt{3}}{2}$};
+    \node[red,left,scale=0.7, rotate=-90] at (0.6,-0.7) {$\sin 300^\circ = -\frac{\sqrt{3}}{2}$};
 
     % Línea TANGENTE (negativo)
     \coordinate (T) at (1,{tan(\angulo)});
@@ -682,7 +682,7 @@ Por lo tanto:
 
     % Etiquetas
     \node[blue,below,scale=0.7] at (0.4,0) {$\cos\theta$};
-    \node[blue,right,scale=0.7] at (0.766,0.32) {$\sin\theta$};
+    \node[blue,right,scale=0.7] at (0.55,0.32) {$\sin\theta$};
     \node[red,below,scale=0.7] at (0.5,0) {$1$};
     \node[red,right,scale=0.7] at (1,0.42) {$\tan\theta$};
 
@@ -871,13 +871,13 @@ En el tercer cuadrante:
     \filldraw[maincolor] (P) circle (0.02) node[below left,scale=0.8] {$P$};
 
     \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25);
-    \node[accentcolor,scale=0.7] at (0.15,0.15) {$210^\circ$};
+    \node[accentcolor,scale=0.7] at (0.15,0.3) {$210^\circ$};
 
     \draw[blue,very thick,{Latex}-] (0,0) -- ({\angulo}:1 |- 0,0);
-    \node[blue,above,scale=0.7] at (-0.433,0) {$-\frac{\sqrt{3}}{2}$};
+    \node[blue,above,scale=0.7] at (-0.47,0) {$-\frac{\sqrt{3}}{2}$};
 
     \draw[red,very thick,{Latex}-] ({\angulo}:1 |- 0,0) -- (P);
-    \node[red,left,scale=0.7] at (-0.866,-0.25) {$-\frac{1}{2}$};
+    \node[red,left,scale=0.7] at (-0.7,-0.25) {$-\frac{1}{2}$};
 \end{tikzpicture}
 \end{center}
 
@@ -946,10 +946,10 @@ La línea tangente no está definida porque el radio que forma el ángulo de $27
     \filldraw[maincolor] (P) circle (0.02) node[below right,scale=0.8] {$P(0,-1)$};
 
     \draw[accentcolor,-{Latex}] (0.25,0) arc (0:\angulo:0.25);
-    \node[accentcolor,scale=0.7] at (0.35,-0.25) {$270^\circ$};
+    \node[accentcolor,scale=0.7] at (0.25,0.25) {$270^\circ$};
 
     \filldraw[blue] (0,0) circle (0.02);
-    \node[blue,right,scale=0.7] at (0.1,0) {$\cos 270^\circ = 0$};
+    \node[blue,right,scale=0.7] at (0.05,-0.1) {$\cos 270^\circ = 0$};
 
     \draw[red,very thick,{Latex}-] (0,0) -- (P);
     \node[red,right,scale=0.7] at (0,-0.5) {$\sin 270^\circ = -1$};
@@ -997,7 +997,7 @@ Sea $P = (\cos\theta, \sin\theta)$ un punto en el círculo unitario.
     \coordinate (P) at ({\angulo}:1);
 
     \draw[thick,blue] (0,0) -- ({\angulo}:1 |- 0,0) node[midway,below,scale=0.7] {$\cos\theta$};
-    \draw[thick,red] ({\angulo}:1 |- 0,0) -- (P) node[midway,right,scale=0.7] {$\sin\theta$};
+    \draw[thick,red] ({\angulo}:1 |- 0,0) -- (P) node[midway,left,scale=0.7] {$\sin\theta$};
     \draw[very thick,maincolor,-{Latex}] (0,0) -- (P) node[midway,above left,scale=0.7] {$r = 1$};
 
     \filldraw[maincolor] (P) circle (0.02) node[above right,scale=0.8] {$P$};
@@ -1253,7 +1253,7 @@ Como estamos en el cuarto cuadrante, $\sin\theta < 0$:
     \node[blue,above,scale=0.7] at (0.3,0) {$0.6$};
 
     \draw[red,very thick,{Latex}-] ({\angulo}:1 |- 0,0) -- (P);
-    \node[red,right,scale=0.7] at (0.6,-0.4) {$-0.8$};
+    \node[red,right,scale=0.7] at (0.55,-0.3) {$-0.8$};
 \end{tikzpicture}
 \end{center}
 \end{solucion}

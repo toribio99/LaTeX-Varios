@@ -1,997 +1,900 @@
 % !TEX program = lualatex
 \documentclass[12pt,a4paper,twoside]{article}
-
-% Paquetes esenciales
 \usepackage{fontspec}
-\usepackage[spanish,es-nodecimaldot]{babel}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage{amsmath,amssymb}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{xcolor}
-\usepackage{graphicx}
 \usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel,patterns,angles,quotes}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{booktabs}
 \pgfplotsset{compat=1.18}
-\usetikzlibrary{angles,quotes,calc,patterns,positioning,arrows.meta}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
 
-% Colores institucionales
-\definecolor{maincolor}{RGB}{26,35,126}      % Azul oscuro
-\definecolor{accentcolor}{RGB}{255,87,34}    % Naranja
-\definecolor{examplecolor}{RGB}{33,150,243}  % Azul claro
-\definecolor{solutioncolor}{RGB}{76,175,80}  % Verde
-\definecolor{notecolor}{RGB}{255,193,7}      % Amarillo
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{maincolor}}{\thesubsubsection}{1em}{}
 
-% Encabezados y pies de página con fancyhdr
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Headers y footers
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\textcolor{maincolor}{\small\textit{SOLUCION DE TRIANGULO RECTANGULO}}}
-\fancyhead[LO]{\textcolor{maincolor}{\small\textit{La Pruebita}}}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad Aplicaciones de las Funciones Trigonométricas}}
+\fancyhead[RO]{\small\textcolor{maincolor}{Solución de Triángulos Oblicuángulos \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
 \renewcommand{\headrulewidth}{0.5pt}
 \renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
 
-% Entornos personalizados con tcolorbox
-\usepackage[most]{tcolorbox}
-
-\newtcolorbox{definicion}{
+% Entornos tcolorbox
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
   colback=maincolor!5,
   colframe=maincolor,
   fonttitle=\bfseries,
   title=Definición,
-  sharp corners=downhill,
-  arc=8pt
+  #1
 }
 
-\newtcolorbox{ejemplo}{
-  colback=examplecolor!5,
-  colframe=examplecolor,
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
   fonttitle=\bfseries,
-  title=Ejemplo,
-  sharp corners=downhill,
-  arc=8pt
+  title=Ejemplo Resuelto,
+  #1
 }
 
-\newtcolorbox{ejercicio}{
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
   colback=accentcolor!5,
   colframe=accentcolor,
   fonttitle=\bfseries,
   title=Ejercicio,
-  sharp corners=downhill,
-  arc=8pt
+  #1
 }
 
-\newtcolorbox{solucion}{
-  colback=solutioncolor!5,
-  colframe=solutioncolor,
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
   fonttitle=\bfseries,
   title=Solución,
-  sharp corners=downhill,
-  arc=8pt
+  #1
 }
 
-\newtcolorbox{nota}{
-  colback=notecolor!5,
-  colframe=notecolor,
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  breakable,
+  colback=yellow!10,
+  colframe=orange!80!black,
   fonttitle=\bfseries,
-  title=Nota,
-  sharp corners=downhill,
-  arc=8pt
+  title=Nota Importante,
+  #1
 }
 
-% Configuración de hyperref
-\usepackage{hyperref}
-\hypersetup{
-  colorlinks=true,
-  linkcolor=maincolor,
-  urlcolor=accentcolor,
-  pdftitle={APLICACIONES DE LAS FUNCIONES TRIGONOMETRICAS},
-  pdfauthor={Prof: Toribio De J Arrieta F}
-}
+% Título
+\title{\textbf{\Huge APLICACIONES DE LAS FUNCIONES TRIGONOMÉTRICAS}\\[0.5cm]
+\Large Solución de Triángulos Oblicuángulos\\[0.3cm]
+\normalsize Guía de Trigonometría}
+\author{Prof. Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10}
+\date{\today}
 
 \begin{document}
 
-% ============================================
-% PORTADA
-% ============================================
-\begin{titlepage}
-  \centering
-  \vspace*{2cm}
-
-  {\Huge\bfseries\textcolor{maincolor}{APLICACIONES DE LAS}\par}
-  \vspace{0.5cm}
-  {\Huge\bfseries\textcolor{maincolor}{FUNCIONES TRIGONOMÉTRICAS}\par}
-  \vspace{1cm}
-  {\Large\textcolor{accentcolor}{Solución de Triángulos Rectángulos}\par}
-
-  \vspace{3cm}
-
-  \begin{tikzpicture}
-    \coordinate (A) at (0,0);
-    \coordinate (B) at (5,0);
-    \coordinate (C) at (5,3);
-
-    \draw[line width=1.5pt, maincolor] (A) -- (B) -- (C) -- cycle;
-    \draw[line width=1pt, accentcolor] (4.7,0) rectangle (5,0.3);
-
-    \node[below left] at (A) {\Large $A$};
-    \node[below right] at (B) {\Large $B$};
-    \node[above right] at (C) {\Large $C$};
-
-    \node[below, maincolor] at (2.5,0) {\Large Cateto adyacente};
-    \node[right, maincolor] at (5,1.5) {\Large Cateto opuesto};
-    \node[above left, maincolor] at (2.5,1.8) {\Large Hipotenusa};
-
-    \pic[draw, maincolor, angle radius=0.8cm, "$\theta$"] {angle = B--A--C};
-  \end{tikzpicture}
-
-  \vspace{3cm}
-
-  {\Large\textbf{Profesor:} Toribio De J Arrieta F\par}
-  \vspace{0.5cm}
-  {\Large\textbf{Institución:} La Pruebita\par}
-  \vspace{0.5cm}
-  {\Large\textbf{Grado:} 10\par}
-  \vspace{0.5cm}
-  {\Large\textbf{Asignatura:} Trigonometría\par}
-
-  \vfill
-
-  {\large\today\par}
-\end{titlepage}
-
-\newpage
+\maketitle
 \thispagestyle{empty}
-\mbox{}
 
-% ============================================
-% TABLA DE CONTENIDOS
-% ============================================
-\newpage
-\tableofcontents
-\newpage
-
-% ============================================
-% INTRODUCCIÓN
-% ============================================
-\section{Introducción}
-
-Bienvenidos a esta guía sobre una de las aplicaciones más útiles y fascinantes de la trigonometría: ¡la resolución de triángulos rectángulos! Seguro te estarás preguntando: "¿Y para qué me sirve esto en la vida real?" Pues déjame contarte que esta habilidad es súper importante en muchísimas profesiones y situaciones del día a día.
-
-Imagínate que estás en la playa y ves un barco en el horizonte. ¿Alguna vez te has preguntado cómo los capitanes de barco saben exactamente qué tan lejos están de la costa? O cuando miras un edificio altísimo, ¿cómo crees que los arquitectos calcularon su altura antes de construirlo? La respuesta está en lo que vamos a aprender hoy: resolver triángulos rectángulos.
-
-Un triángulo rectángulo es simplemente un triángulo que tiene un ángulo de 90 grados (un ángulo recto, como la esquina de tu cuaderno). Aunque parezca simple, este tipo de triángulo es la base de cálculos increíblemente importantes en el mundo real.
-
-\subsection{¿Por qué es tan importante resolver triángulos rectángulos?}
-
-Cuando hablamos de "resolver" un triángulo, nos referimos a encontrar todas sus medidas: los tres lados y los tres ángulos. Lo interesante es que no necesitamos saber todas estas medidas desde el principio. Con solo conocer algunas de ellas (y usando las razones trigonométricas que ya estudiaste), podemos calcular todas las demás. Es como resolver un rompecabezas matemático.
-
-Esta habilidad no es solo teórica, tiene aplicaciones súper prácticas:
-
-\begin{itemize}
-  \item \textbf{Navegación marítima y aérea:} Los navegantes usan estos cálculos para determinar distancias y rumbos. Cuando un capitán de barco mira hacia el faro con un cierto ángulo, puede calcular exactamente qué tan lejos está de la costa.
-
-  \item \textbf{Arquitectura y construcción:} Los arquitectos necesitan calcular alturas de edificios, longitudes de rampas, inclinaciones de techos y mucho más. Imagínate diseñar las escaleras de un edificio sin saber trigonometría, ¡sería imposible!
-
-  \item \textbf{Topografía:} Los topógrafos son las personas que miden terrenos y crean mapas. Ellos usan triángulos rectángulos constantemente para medir distancias que serían imposibles de medir directamente, como el ancho de un río o la altura de una montaña.
-
-  \item \textbf{Astronomía:} Los astrónomos calculan distancias a las estrellas y planetas usando principios similares. Aunque las distancias son enormes, el concepto es el mismo que usaremos aquí.
-
-  \item \textbf{Ingeniería civil:} Cuando se construyen puentes, carreteras o túneles, los ingenieros necesitan hacer cálculos precisos de ángulos y distancias. Un pequeño error podría ser desastroso.
-
-  \item \textbf{Deportes y videojuegos:} Desde calcular la trayectoria de una pelota de básquetbol hasta programar el movimiento de personajes en videojuegos, la trigonometría está por todas partes.
-\end{itemize}
-
-\subsection{¿Qué aprenderás en esta guía?}
-
-En esta guía vamos a enfocarnos en dos situaciones principales:
-
-\begin{enumerate}
-  \item \textbf{Cuando conoces un lado y un ángulo:} Aprenderás cómo encontrar los otros dos lados y el otro ángulo agudo del triángulo.
-
-  \item \textbf{Cuando conoces dos lados:} Aprenderás cómo encontrar el tercer lado y los dos ángulos agudos.
-\end{enumerate}
-
-También estudiaremos dos conceptos súper importantes y prácticos:
-
-\begin{itemize}
-  \item \textbf{Ángulos de elevación:} Cuando miras hacia arriba (como cuando ves un avión en el cielo o la cima de un edificio).
-
-  \item \textbf{Ángulos de depresión:} Cuando miras hacia abajo (como cuando estás en un mirador y observas algo en el suelo).
-\end{itemize}
-
-Lo mejor de todo es que vamos a trabajar con ejemplos prácticos y ejercicios que te ayudarán a entender no solo cómo hacer los cálculos, sino también cuándo y por qué usar cada técnica. No te preocupes si al principio parece complicado; con práctica verás que es como aprender a andar en bicicleta: al principio cuesta, pero una vez que le agarras el truco, ¡es facilísimo!
-
-Así que prepárate, toma tu calculadora científica (¡la vas a necesitar!), y vamos a descubrir juntos cómo resolver estos fascinantes problemas matemáticos que tienen aplicaciones tan importantes en el mundo real.
-
-\newpage
-
-% ============================================
-% CONCEPTOS FUNDAMENTALES
-% ============================================
-\section{Conceptos Fundamentales}
-
-Antes de lanzarnos a resolver triángulos rectángulos complejos, necesitamos asegurarnos de que tienes súper claros los conceptos básicos. Es como en el fútbol: antes de hacer jugadas complicadas, necesitas dominar cómo patear el balón correctamente. Vamos a repasar todo lo que necesitas saber.
-
-\subsection{Repaso de Triángulos Rectángulos}
-
-\begin{definicion}
-Un \textbf{triángulo rectángulo} es un triángulo que tiene un ángulo de exactamente 90 grados (un ángulo recto). Este ángulo especial es lo que hace que estos triángulos sean tan útiles en trigonometría.
-\end{definicion}
-
-Todo triángulo rectángulo tiene tres lados con nombres específicos:
-
-\begin{itemize}
-  \item \textbf{Hipotenusa:} Es el lado más largo del triángulo. Siempre está opuesto al ángulo recto (el de 90°). Es como el "jefe" de los lados.
-
-  \item \textbf{Catetos:} Son los dos lados que forman el ángulo recto. Hay dos catetos, y sus nombres pueden cambiar dependiendo del ángulo que estemos considerando:
-  \begin{itemize}
-    \item \textit{Cateto opuesto:} Es el lado que está enfrente del ángulo que nos interesa.
-    \item \textit{Cateto adyacente:} Es el lado que está junto al ángulo que nos interesa (además de la hipotenusa).
-  \end{itemize}
-\end{itemize}
-
-Veamos esto claramente en un diagrama:
+\vfill
 
 \begin{center}
-\begin{tikzpicture}[scale=1.2]
-  % Coordenadas del triángulo
-  \coordinate (A) at (0,0);
-  \coordinate (B) at (5,0);
-  \coordinate (C) at (5,3);
+\textit{Esta guía está dedicada a todos los estudiantes que desean comprender\\
+cómo las matemáticas nos ayudan a resolver problemas del mundo real.}
+\end{center}
 
-  % Dibujar el triángulo
-  \draw[line width=1.5pt, maincolor] (A) -- node[below] {Cateto adyacente a $\alpha$} (B)
-                                       -- node[right] {Cateto opuesto a $\alpha$} (C)
-                                       -- node[above left, sloped] {Hipotenusa} (A);
+\newpage
 
-  % Marcar el ángulo recto
-  \draw[line width=1pt, maincolor] (4.7,0) rectangle (5,0.3);
+\tableofcontents
 
-  % Etiquetas de los vértices
-  \node[below left, maincolor] at (A) {\Large $A$};
-  \node[below right, maincolor] at (B) {\Large $B$};
-  \node[above right, maincolor] at (C) {\Large $C$};
+\newpage
 
-  % Marcar el ángulo de interés
-  \pic[draw, accentcolor, line width=1pt, angle radius=1cm, "$\alpha$"] {angle = B--A--C};
+\section{Introducción}
 
-  % Marcar el otro ángulo agudo
-  \pic[draw, examplecolor, line width=1pt, angle radius=0.7cm, "$\beta$"] {angle = A--C--B};
+¡Hola! ¿Alguna vez te has preguntado cómo los ingenieros calculan la altura de una montaña sin tener que escalarla? ¿O cómo los navegantes encuentran su camino en medio del océano? ¿Cómo los arquitectos diseñan esos puentes increíbles que parecen desafiar la gravedad? La respuesta está en lo que vamos a aprender hoy: los triángulos oblicuángulos.
 
-  % Etiquetas de medidas
-  \node[below, maincolor] at (2.5,-0.5) {$b$};
-  \node[right, maincolor] at (5.3,1.5) {$a$};
-  \node[above left, maincolor] at (2.3,1.8) {$c$};
+Hasta ahora, probablemente has trabajado mucho con triángulos rectángulos, esos triángulos que tienen un ángulo de $90^\circ$. Son geniales y súper útiles, pero ¿qué pasa cuando ninguno de los ángulos del triángulo es recto? Ahí es donde entran los triángulos oblicuángulos, y créeme, ¡son igual de poderosos!
+
+\subsection*{¿Qué son los triángulos oblicuángulos?}
+
+Un triángulo oblicuángulo es simplemente cualquier triángulo que NO tiene un ángulo recto. Puede ser:
+\begin{itemize}
+    \item \textbf{Acutángulo}: cuando todos sus ángulos son agudos (menores de $90^\circ$)
+    \item \textbf{Obtusángulo}: cuando uno de sus ángulos es obtuso (mayor de $90^\circ$)
+\end{itemize}
+
+Piénsalo así: la mayoría de los triángulos que encuentras en la vida real son oblicuángulos. La forma de un pedazo de pizza, el triángulo que forman tres ciudades en un mapa, la estructura triangular de un puente colgante... ¡todos son oblicuángulos!
+
+\subsection*{¿Por qué no podemos usar solo el teorema de Pitágoras?}
+
+Buena pregunta. El teorema de Pitágoras es como esa herramienta especial que solo funciona con triángulos rectángulos. Para los triángulos oblicuángulos, necesitamos herramientas nuevas y más versátiles: la Ley del Seno y la Ley del Coseno. Son como las navajas suizas de la trigonometría: funcionan con CUALQUIER triángulo.
+
+\subsection*{Aplicaciones prácticas que veremos}
+
+Te voy a mostrar cómo estos conceptos se usan en situaciones reales fascinantes:
+
+\begin{enumerate}
+    \item \textbf{Navegación marítima}: Los marineros usan triangulación para determinar su posición en el océano. Con la ley del seno, pueden calcular distancias a faros o puntos de referencia costeros.
+
+    \item \textbf{Topografía}: Los topógrafos miden terrenos irregulares dividiendo el área en triángulos oblicuángulos. Así determinan alturas de montañas, pendientes de terrenos y crean mapas precisos.
+
+    \item \textbf{Arquitectura}: Los arquitectos usan estas leyes para diseñar estructuras con formas triangulares no rectangulares, calculando fuerzas y tensiones en cada parte de la estructura.
+
+    \item \textbf{Ingeniería}: En el diseño de puentes innovadores, especialmente los puentes colgantes y atirantados, cada cable forma triángulos oblicuángulos con la estructura. Los ingenieros deben calcular las tensiones exactas en cada cable.
+
+    \item \textbf{Astronomía y GPS}: Para determinar la posición de satélites, calcular distancias entre estrellas, o hacer que tu GPS funcione correctamente, se utilizan constantemente estas leyes.
+\end{enumerate}
+
+\subsection*{¿Por qué deberías emocionarte con este tema?}
+
+Mira, entiendo que a veces las matemáticas pueden parecer abstractas, pero lo que vamos a aprender aquí es súper concreto y útil. Imagínate esto:
+
+\begin{itemize}
+    \item Podrás calcular la altura de cualquier objeto alto (un árbol, un edificio, una montaña) sin necesidad de medirlo directamente
+    \item Entenderás cómo funcionan los sistemas de GPS y navegación
+    \item Comprenderás los principios detrás del diseño de estructuras increíbles
+    \item Tendrás las herramientas matemáticas que usan ingenieros y científicos todos los días
+\end{itemize}
+
+Además, resolver triángulos oblicuángulos es como resolver puzzles. Tienes algunas piezas de información (algunos lados y ángulos) y debes descubrir las piezas faltantes. Es un desafío intelectual que, una vez que le agarras el truco, ¡es súper satisfactorio!
+
+\subsection*{Lo que necesitas recordar antes de empezar}
+
+Para sacarle el máximo provecho a esta guía, asegúrate de tener frescos estos conceptos:
+\begin{itemize}
+    \item Las funciones trigonométricas básicas: seno, coseno y tangente
+    \item Cómo trabajar con ángulos en grados
+    \item Álgebra básica (resolver ecuaciones)
+    \item El teorema de Pitágoras (sí, todavía lo usaremos como referencia)
+\end{itemize}
+
+No te preocupes si no eres un experto en todo esto. Iremos paso a paso, y cuando necesitemos usar algún concepto previo, lo repasaremos rápidamente.
+
+\subsection*{Nuestra meta}
+
+Al final de esta guía, serás capaz de resolver CUALQUIER triángulo oblicuángulo. No importa qué información te den (tres lados, dos lados y un ángulo, dos ángulos y un lado), tendrás las herramientas para encontrar toda la información faltante. ¡Es como tener superpoderes matemáticos!
+
+Así que respira profundo, prepara tu calculadora (la vas a necesitar), y vamos a sumergirnos en el fascinante mundo de los triángulos oblicuángulos. Te prometo que al final dirás: "¡Wow, no sabía que las matemáticas podían hacer todo esto!"
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Definición de triángulo oblicuángulo}
+
+\begin{definicion}
+Un \textbf{triángulo oblicuángulo} es cualquier triángulo que no contiene un ángulo recto ($90^\circ$). Todos sus ángulos son diferentes de $90^\circ$.
+\end{definicion}
+
+Los triángulos oblicuángulos se clasifican en dos tipos:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Triángulo acutángulo
+    \coordinate (A1) at (0,0);
+    \coordinate (B1) at (3,0);
+    \coordinate (C1) at (1.5,2);
+
+    \draw[thick, maincolor] (A1) -- (B1) -- (C1) -- cycle;
+    \node[below] at (A1) {$A$};
+    \node[below] at (B1) {$B$};
+    \node[above] at (C1) {$C$};
+
+    % Ángulos
+    \pic[draw, accentcolor, angle radius=0.3cm, angle eccentricity=1.5] {angle = B1--A1--C1};
+    \pic[draw, accentcolor, angle radius=0.3cm, angle eccentricity=1.5] {angle = C1--B1--A1};
+    \pic[draw, accentcolor, angle radius=0.3cm, angle eccentricity=1.5] {angle = A1--C1--B1};
+
+    \node[below] at (1.5,-0.5) {\textbf{Triángulo Acutángulo}};
+    \node[below] at (1.5,-0.8) {\small Todos los ángulos $< 90^\circ$};
+
+    % Triángulo obtusángulo
+    \begin{scope}[xshift=5cm]
+        \coordinate (A2) at (0,0);
+        \coordinate (B2) at (3,0);
+        \coordinate (C2) at (0.5,1.5);
+
+        \draw[thick, maincolor] (A2) -- (B2) -- (C2) -- cycle;
+        \node[below] at (A2) {$D$};
+        \node[below] at (B2) {$E$};
+        \node[above] at (C2) {$F$};
+
+        % Ángulos
+        \pic[draw, accentcolor, angle radius=0.3cm, angle eccentricity=1.5] {angle = B2--A2--C2};
+        \pic[draw, red, angle radius=0.3cm, angle eccentricity=1.5] {angle = C2--B2--A2};
+        \pic[draw, accentcolor, angle radius=0.3cm, angle eccentricity=1.5] {angle = A2--C2--B2};
+
+        \node[below] at (1.5,-0.5) {\textbf{Triángulo Obtusángulo}};
+        \node[below] at (1.5,-0.8) {\small Un ángulo $> 90^\circ$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 
-\begin{nota}
-Fíjate que el cateto opuesto y el cateto adyacente dependen de cuál ángulo estás considerando. Si cambias el ángulo de referencia, estos nombres se intercambian. Sin embargo, la hipotenusa siempre es la hipotenusa, no importa qué ángulo estés mirando.
-\end{nota}
-
-\subsubsection{El Teorema de Pitágoras}
-
-Este es probablemente el teorema más famoso de toda la matemática. Ya lo has usado antes, pero vamos a repasarlo porque lo necesitaremos constantemente.
-
-\begin{definicion}
-\textbf{Teorema de Pitágoras:} En todo triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos.
-
-Matemáticamente:
-\[
-c^2 = a^2 + b^2
-\]
-
-donde $c$ es la hipotenusa, y $a$ y $b$ son los catetos.
-\end{definicion}
-
-Este teorema nos permite encontrar la longitud de cualquier lado del triángulo si conocemos los otros dos. Las fórmulas derivadas son:
-
-\begin{align*}
-c &= \sqrt{a^2 + b^2} \quad \text{(si conocemos los dos catetos)} \\
-a &= \sqrt{c^2 - b^2} \quad \text{(si conocemos la hipotenusa y un cateto)} \\
-b &= \sqrt{c^2 - a^2} \quad \text{(si conocemos la hipotenusa y un cateto)}
-\end{align*}
-
-\subsection{Razones Trigonométricas Básicas}
-
-Las razones trigonométricas son relaciones entre los lados de un triángulo rectángulo. Son como recetas matemáticas que nos permiten relacionar los ángulos con las longitudes de los lados. Hay seis razones trigonométricas principales, pero vamos a enfocarnos primero en las tres más importantes.
-
-\begin{definicion}
-Para un ángulo agudo $\theta$ en un triángulo rectángulo, definimos:
-
-\begin{align*}
-\sin(\theta) &= \frac{\text{cateto opuesto}}{\text{hipotenusa}} = \frac{a}{c} \\[0.3cm]
-\cos(\theta) &= \frac{\text{cateto adyacente}}{\text{hipotenusa}} = \frac{b}{c} \\[0.3cm]
-\tan(\theta) &= \frac{\text{cateto opuesto}}{\text{cateto adyacente}} = \frac{a}{b}
-\end{align*}
-\end{definicion}
-
-Estas tres son las más importantes y las que usarás el 99\% del tiempo. Pero también existen tres más, que son las recíprocas de las anteriores:
-
-\begin{align*}
-\csc(\theta) &= \frac{1}{\sin(\theta)} = \frac{\text{hipotenusa}}{\text{cateto opuesto}} = \frac{c}{a} \\[0.3cm]
-\sec(\theta) &= \frac{1}{\cos(\theta)} = \frac{\text{hipotenusa}}{\text{cateto adyacente}} = \frac{c}{b} \\[0.3cm]
-\cot(\theta) &= \frac{1}{\tan(\theta)} = \frac{\text{cateto adyacente}}{\text{cateto opuesto}} = \frac{b}{a}
-\end{align*}
-
-\begin{nota}
-Una forma fácil de recordar las tres primeras es con la palabra "SOHCAHTOA":
+En cualquier triángulo oblicuángulo, usamos la siguiente notación estándar:
 \begin{itemize}
-  \item \textbf{S}eno = \textbf{O}puesto / \textbf{H}ipotenusa
-  \item \textbf{C}oseno = \textbf{A}dyacente / \textbf{H}ipotenusa
-  \item \textbf{T}angente = \textbf{O}puesto / \textbf{A}dyacente
+    \item Los vértices se nombran con letras mayúsculas: $A$, $B$, $C$
+    \item Los lados opuestos a cada vértice se nombran con letras minúsculas: $a$, $b$, $c$
+    \item Los ángulos en cada vértice se pueden denotar con la letra del vértice o con letras griegas
 \end{itemize}
-¡Repite "SOH-CAH-TOA" hasta que lo memorices!
-\end{nota}
 
-Aquí tienes una tabla de referencia rápida:
+\subsection{Ley del Seno}
+
+La Ley del Seno es nuestra primera herramienta poderosa para resolver triángulos oblicuángulos.
+
+\begin{definicion}[title=Ley del Seno]
+En cualquier triángulo, la razón entre la longitud de un lado y el seno del ángulo opuesto es constante:
+\[
+\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R
+\]
+donde $R$ es el radio del círculo circunscrito al triángulo.
+\end{definicion}
+
+\subsubsection{Demostración visual de la Ley del Seno}
+
+Vamos a ver por qué esta ley funciona. Imagina un triángulo inscrito en un círculo:
 
 \begin{center}
-\begin{tabular}{|c|c|c|}
+\begin{tikzpicture}[scale=2]
+    % Círculo
+    \draw[dashed, gray] (0,0) circle (2);
+    \coordinate (O) at (0,0);
+
+    % Triángulo
+    \coordinate (A) at (140:2);
+    \coordinate (B) at (20:2);
+    \coordinate (C) at (260:2);
+
+    \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+
+    % Etiquetas de vértices
+    \node[above left] at (A) {$A$};
+    \node[right] at (B) {$B$};
+    \node[below left] at (C) {$C$};
+
+    % Lados
+    \node[above right] at ($(A)!0.5!(B)$) {$c$};
+    \node[below] at ($(B)!0.5!(C)$) {$a$};
+    \node[left] at ($(C)!0.5!(A)$) {$b$};
+
+    % Radio y centro
+    \draw[accentcolor, dashed] (O) -- (A) node[midway, left] {$R$};
+    \draw[accentcolor, dashed] (O) -- (B) node[midway, right] {$R$};
+    \draw[accentcolor, dashed] (O) -- (C) node[midway, below] {$R$};
+    \filldraw (O) circle (0.03) node[below right] {$O$};
+
+    % Diámetro auxiliar
+    \coordinate (D) at (-140:2);
+    \draw[dotted, thick] (A) -- (D);
+    \node[below right] at (D) {$D$};
+
+    % Ángulo inscrito
+    \pic[draw, accentcolor, angle radius=0.4cm, angle eccentricity=1.3] {angle = C--A--B};
+
+    \node[below] at (0,-2.5) {El triángulo inscrito en un círculo de radio $R$};
+\end{tikzpicture}
+\end{center}
+
+La demostración se basa en que el ángulo inscrito en una semicircunferencia es recto, y usando propiedades del círculo, llegamos a que cada razón es igual a $2R$.
+
+\subsubsection{Casos de uso de la Ley del Seno}
+
+La Ley del Seno es especialmente útil cuando conocemos:
+\begin{enumerate}
+    \item \textbf{Caso ALA (Ángulo-Lado-Ángulo)}: Dos ángulos y el lado entre ellos
+    \item \textbf{Caso AAL (Ángulo-Ángulo-Lado)}: Dos ángulos y un lado cualquiera
+    \item \textbf{Caso LLA (Lado-Lado-Ángulo)}: Dos lados y un ángulo opuesto a uno de ellos (¡cuidado con el caso ambiguo!)
+\end{enumerate}
+
+\begin{nota}
+El caso LLA puede tener 0, 1 o 2 soluciones. Esto se conoce como el caso ambiguo de la ley del seno.
+\end{nota}
+
+\subsection{Ley del Coseno}
+
+La Ley del Coseno es como una versión generalizada del Teorema de Pitágoras que funciona para cualquier triángulo.
+
+\begin{definicion}[title=Ley del Coseno]
+En cualquier triángulo, el cuadrado de un lado es igual a la suma de los cuadrados de los otros dos lados menos el doble producto de estos lados por el coseno del ángulo comprendido entre ellos:
+\begin{align*}
+a^2 &= b^2 + c^2 - 2bc \cos A \\
+b^2 &= a^2 + c^2 - 2ac \cos B \\
+c^2 &= a^2 + b^2 - 2ab \cos C
+\end{align*}
+\end{definicion}
+
+\subsubsection{Demostración visual de la Ley del Coseno}
+
+Veamos geométricamente por qué funciona esta ley:
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    % Triángulo
+    \coordinate (B) at (0,0);
+    \coordinate (C) at (3,0);
+    \coordinate (A) at (2,1.5);
+
+    \draw[thick, maincolor] (B) -- (C) -- (A) -- cycle;
+
+    % Altura
+    \coordinate (H) at (2,0);
+    \draw[dashed, gray] (A) -- (H);
+    \draw (H) rectangle +(-0.1,0.1);
+
+    % Etiquetas
+    \node[below] at (B) {$B$};
+    \node[below] at (C) {$C$};
+    \node[above] at (A) {$A$};
+    \node[below] at (H) {$H$};
+
+    % Lados
+    \node[above left] at ($(B)!0.5!(A)$) {$c$};
+    \node[above right] at ($(A)!0.5!(C)$) {$b$};
+    \node[below] at ($(B)!0.5!(C)$) {$a$};
+
+    % Segmentos de la base
+    \draw[|-|, accentcolor] ($(B)+(0,-0.3)$) -- ($(H)+(0,-0.3)$) node[midway, below] {$c\cos B$};
+    \draw[|-|, accentcolor] ($(H)+(0,-0.4)$) -- ($(C)+(0,-0.4)$) node[midway, below] {$a - c\cos B$};
+
+    % Altura
+    \node[right] at ($(H)!0.5!(A)$) {$h = c\sin B$};
+
+    % Ángulo
+    \pic[draw, accentcolor, angle radius=0.4cm, angle eccentricity=1.3] {angle = C--B--A};
+\end{tikzpicture}
+\end{center}
+
+Aplicando el Teorema de Pitágoras al triángulo rectángulo $AHC$ y manipulando algebraicamente, obtenemos la Ley del Coseno.
+
+\subsubsection{Casos de uso de la Ley del Coseno}
+
+La Ley del Coseno es perfecta cuando conocemos:
+\begin{enumerate}
+    \item \textbf{Caso LAL (Lado-Ángulo-Lado)}: Dos lados y el ángulo comprendido entre ellos
+    \item \textbf{Caso LLL (Lado-Lado-Lado)}: Los tres lados del triángulo
+\end{enumerate}
+
+\begin{nota}
+Cuando todos los ángulos son agudos y uno de ellos es de $90^\circ$, la Ley del Coseno se reduce al Teorema de Pitágoras, ya que $\cos(90^\circ) = 0$.
+\end{nota}
+
+\subsection{Área de triángulos oblicuángulos}
+
+Para calcular el área de un triángulo oblicuángulo, tenemos varias fórmulas útiles:
+
+\subsubsection{Fórmula del área con seno}
+
+\begin{definicion}[title=Área con dos lados y el ángulo comprendido]
+El área de un triángulo con lados $a$ y $b$ y ángulo comprendido $C$ es:
+\[
+\text{Área} = \frac{1}{2}ab\sin C
+\]
+De manera general:
+\begin{align*}
+\text{Área} &= \frac{1}{2}ab\sin C \\
+&= \frac{1}{2}ac\sin B \\
+&= \frac{1}{2}bc\sin A
+\end{align*}
+\end{definicion}
+
+Esta fórmula es súper práctica porque solo necesitas conocer dos lados y el ángulo entre ellos.
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Triángulo
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3.5,0);
+    \coordinate (C) at (1.5,2);
+
+    \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+
+    % Altura
+    \coordinate (H) at (1.5,0);
+    \draw[dashed, gray] (C) -- (H);
+
+    % Etiquetas
+    \node[below] at (A) {$A$};
+    \node[below] at (B) {$B$};
+    \node[above] at (C) {$C$};
+
+    % Lados
+    \node[below] at ($(A)!0.5!(B)$) {$c$};
+    \node[above right] at ($(B)!0.5!(C)$) {$a$};
+    \node[above left] at ($(A)!0.5!(C)$) {$b$};
+
+    % Altura
+    \node[right] at ($(H)!0.5!(C)$) {$h = b\sin A$};
+
+    % Ángulo
+    \pic[draw, accentcolor, angle radius=0.5cm, angle eccentricity=1.3] {angle = B--A--C};
+
+    % Área sombreada
+    \fill[maincolor!20, opacity=0.5] (A) -- (B) -- (C) -- cycle;
+
+    \node[maincolor] at (1.75,0.8) {Área $= \frac{1}{2}ch$};
+    \node[maincolor] at (1.75,0.4) {$= \frac{1}{2}c(b\sin A)$};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Fórmula de Herón}
+
+Cuando conoces los tres lados del triángulo pero ningún ángulo, la Fórmula de Herón es tu mejor amiga.
+
+\begin{definicion}[title=Fórmula de Herón]
+Si conocemos los tres lados $a$, $b$ y $c$ de un triángulo, su área es:
+\[
+\text{Área} = \sqrt{s(s-a)(s-b)(s-c)}
+\]
+donde $s = \frac{a+b+c}{2}$ es el semiperímetro del triángulo.
+\end{definicion}
+
+Esta fórmula es elegante y poderosa. El semiperímetro $s$ es simplemente la mitad del perímetro total.
+
+\subsection{Casos de resolución de triángulos oblicuángulos}
+
+Ahora vamos a organizar todo lo que hemos aprendido. Dependiendo de qué información tengas sobre el triángulo, usarás diferentes estrategias:
+
+\subsubsection{Caso LAL (Lado-Ángulo-Lado)}
+
+\textbf{Conocemos}: Dos lados y el ángulo comprendido entre ellos.
+
+\textbf{Estrategia}:
+\begin{enumerate}
+    \item Usar la Ley del Coseno para encontrar el tercer lado
+    \item Usar la Ley del Seno para encontrar uno de los ángulos restantes
+    \item Calcular el tercer ángulo sabiendo que la suma de ángulos es $180^\circ$
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3,0);
+    \coordinate (C) at (1.2,1.8);
+
+    \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+
+    % Datos conocidos en rojo
+    \draw[ultra thick, red] (A) -- (B) node[midway, below] {conocido};
+    \draw[ultra thick, red] (A) -- (C) node[midway, left] {conocido};
+
+    % Ángulo conocido
+    \pic[draw, red, ultra thick, angle radius=0.5cm, angle eccentricity=1.5] {angle = B--A--C};
+
+    % Incógnita
+    \draw[dashed, thick, blue] (B) -- (C) node[midway, right] {?};
+
+    \node[below] at (1.5,-0.5) {\textbf{Caso LAL}};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Caso ALA (Ángulo-Lado-Ángulo)}
+
+\textbf{Conocemos}: Dos ángulos y el lado comprendido entre ellos.
+
+\textbf{Estrategia}:
+\begin{enumerate}
+    \item Calcular el tercer ángulo (suma = $180^\circ$)
+    \item Usar la Ley del Seno para encontrar los otros dos lados
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3,0);
+    \coordinate (C) at (1.8,1.5);
+
+    \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+
+    % Lado conocido
+    \draw[ultra thick, red] (A) -- (B) node[midway, below] {conocido};
+
+    % Ángulos conocidos
+    \pic[draw, red, ultra thick, angle radius=0.4cm, angle eccentricity=1.5] {angle = B--A--C};
+    \pic[draw, red, ultra thick, angle radius=0.4cm, angle eccentricity=1.5] {angle = A--B--C};
+
+    % Incógnitas
+    \draw[dashed, thick, blue] (A) -- (C) node[midway, left] {?};
+    \draw[dashed, thick, blue] (B) -- (C) node[midway, right] {?};
+
+    \node[below] at (1.5,-0.5) {\textbf{Caso ALA}};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Caso LLL (Lado-Lado-Lado)}
+
+\textbf{Conocemos}: Los tres lados del triángulo.
+
+\textbf{Estrategia}:
+\begin{enumerate}
+    \item Usar la Ley del Coseno para encontrar uno de los ángulos
+    \item Usar la Ley del Coseno o del Seno para encontrar otro ángulo
+    \item Calcular el tercer ángulo por diferencia
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3.2,0);
+    \coordinate (C) at (1.5,1.7);
+
+    \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+
+    % Todos los lados conocidos
+    \draw[ultra thick, red] (A) -- (B) node[midway, below] {conocido};
+    \draw[ultra thick, red] (B) -- (C) node[midway, right] {conocido};
+    \draw[ultra thick, red] (A) -- (C) node[midway, left] {conocido};
+
+    % Ángulos desconocidos
+    \pic[draw, blue, dashed, thick, angle radius=0.4cm, angle eccentricity=1.3] {angle = B--A--C};
+    \pic[draw, blue, dashed, thick, angle radius=0.4cm, angle eccentricity=1.3] {angle = A--B--C};
+    \pic[draw, blue, dashed, thick, angle radius=0.4cm, angle eccentricity=1.3] {angle = B--C--A};
+
+    \node[below] at (1.6,-0.5) {\textbf{Caso LLL}};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Caso LLA (Lado-Lado-Ángulo) - El caso ambiguo}
+
+\textbf{Conocemos}: Dos lados y un ángulo opuesto a uno de ellos.
+
+\textbf{¡Cuidado!} Este es el caso más complicado porque puede tener:
+\begin{itemize}
+    \item \textbf{Ninguna solución}: El triángulo no existe
+    \item \textbf{Una solución}: Un único triángulo posible
+    \item \textbf{Dos soluciones}: Dos triángulos diferentes posibles
+\end{itemize}
+
+\textbf{Estrategia}:
+\begin{enumerate}
+    \item Usar la Ley del Seno para encontrar otro ángulo
+    \item Verificar si la solución es válida (el seno debe estar entre -1 y 1)
+    \item Si hay solución, verificar si existe una segunda solución válida
+    \item Completar el triángulo con la información restante
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Primer caso - dos soluciones
+    \coordinate (A1) at (0,0);
+    \coordinate (B1) at (3,0);
+    \coordinate (C1) at (1.8,1.5);
+    \coordinate (C1p) at (1.8,-0.8);
+
+    % Triángulos
+    \draw[thick, maincolor] (A1) -- (B1);
+    \draw[thick, maincolor] (A1) -- (C1);
+    \draw[thick, maincolor] (B1) -- (C1);
+
+    \draw[thick, blue, dashed] (A1) -- (C1p);
+    \draw[thick, blue, dashed] (B1) -- (C1p);
+
+    % Arco mostrando las dos posibilidades
+    \draw[accentcolor, dashed] (B1) ++(150:2) arc (150:210:2);
+
+    % Etiquetas
+    \node[below] at (A1) {$A$};
+    \node[below] at (B1) {$B$};
+    \node[above] at (C1) {$C$};
+    \node[below] at (C1p) {$C'$};
+
+    % Datos conocidos
+    \draw[ultra thick, red] (A1) -- (B1) node[midway, below] {\small conocido};
+    \node[red, left] at ($(A1)!0.5!(C1)$) {\small conocido};
+
+    % Ángulo conocido
+    \pic[draw, red, ultra thick, angle radius=0.3cm, angle eccentricity=1.3] {angle = C1--B1--A1};
+
+    \node[below] at (1.5,-1.5) {\textbf{Caso ambiguo: 2 soluciones}};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Resumen de estrategias}
+
+Para que tengas todo claro, aquí está el resumen de qué herramienta usar en cada caso:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|l|l|c|}
 \hline
-\rowcolor{maincolor!20}
-\textbf{Razón} & \textbf{Fórmula} & \textbf{Descripción} \\
+\textbf{Caso} & \textbf{Información conocida} & \textbf{Herramienta principal} & \textbf{Soluciones} \\
 \hline
-Seno & $\sin(\theta) = \dfrac{\text{opuesto}}{\text{hipotenusa}}$ & Relación vertical \\
+LAL & 2 lados y ángulo entre ellos & Ley del Coseno & 1 \\
 \hline
-Coseno & $\cos(\theta) = \dfrac{\text{adyacente}}{\text{hipotenusa}}$ & Relación horizontal \\
+ALA & 2 ángulos y lado entre ellos & Ley del Seno & 1 \\
 \hline
-Tangente & $\tan(\theta) = \dfrac{\text{opuesto}}{\text{adyacente}}$ & Pendiente del ángulo \\
+AAL & 2 ángulos y 1 lado cualquiera & Ley del Seno & 1 \\
 \hline
-Cosecante & $\csc(\theta) = \dfrac{\text{hipotenusa}}{\text{opuesto}}$ & Recíproca del seno \\
+LLL & 3 lados & Ley del Coseno & 0 o 1 \\
 \hline
-Secante & $\sec(\theta) = \dfrac{\text{hipotenusa}}{\text{adyacente}}$ & Recíproca del coseno \\
-\hline
-Cotangente & $\cot(\theta) = \dfrac{\text{adyacente}}{\text{opuesto}}$ & Recíproca de la tangente \\
+LLA & 2 lados y ángulo opuesto a uno & Ley del Seno & 0, 1 o 2 \\
 \hline
 \end{tabular}
 \end{center}
 
-\subsection{Caso 1: Resolver un Triángulo Conociendo un Lado y un Ángulo}
+\subsection{Aplicación: Vectores en triángulos oblicuángulos}
 
-Este es uno de los casos más comunes que vas a encontrar. Imagínate que estás parado a cierta distancia de un edificio y mides el ángulo con el que ves la cima. Con solo esa información (la distancia y el ángulo), puedes calcular la altura del edificio. ¡Genial, verdad?
+Los vectores son súper importantes en física e ingeniería, y los triángulos oblicuángulos aparecen constantemente cuando trabajamos con ellos.
 
-\subsubsection{¿Qué datos necesitamos?}
+\subsubsection{Suma de vectores}
 
-Para resolver este tipo de problema necesitamos conocer:
-\begin{enumerate}
-  \item \textbf{Un ángulo agudo} (diferente del ángulo recto de 90°)
-  \item \textbf{La longitud de un lado cualquiera} (puede ser la hipotenusa o cualquiera de los catetos)
-\end{enumerate}
-
-\subsubsection{Pasos para resolver el triángulo}
-
-\begin{enumerate}
-  \item \textbf{Identifica el ángulo recto:} Ya sabemos que es 90°.
-
-  \item \textbf{Encuentra el otro ángulo agudo:} Usa el hecho de que la suma de los ángulos internos de cualquier triángulo es 180°. Como ya tienes 90° del ángulo recto y uno de los ángulos agudos, el tercer ángulo es:
-  \[
-  \text{Ángulo faltante} = 180° - 90° - \text{ángulo conocido} = 90° - \text{ángulo conocido}
-  \]
-
-  \item \textbf{Identifica qué lado conoces:} ¿Es la hipotenusa, el cateto opuesto o el cateto adyacente respecto al ángulo conocido?
-
-  \item \textbf{Usa las razones trigonométricas:} Dependiendo de qué lado conoces y cuál quieres encontrar, usa la razón trigonométrica apropiada (seno, coseno o tangente).
-
-  \item \textbf{Verifica con Pitágoras:} Siempre es buena idea verificar tus resultados usando el teorema de Pitágoras.
-\end{enumerate}
-
-\subsubsection{Fórmulas clave}
-
-Si conoces el ángulo $\theta$ y un lado, puedes encontrar los demás usando:
-
-\begin{itemize}
-  \item Si conoces la \textbf{hipotenusa} $c$ y el ángulo $\theta$:
-  \begin{align*}
-    \text{Cateto opuesto: } a &= c \cdot \sin(\theta) \\
-    \text{Cateto adyacente: } b &= c \cdot \cos(\theta)
-  \end{align*}
-
-  \item Si conoces el \textbf{cateto opuesto} $a$ y el ángulo $\theta$:
-  \begin{align*}
-    \text{Hipotenusa: } c &= \frac{a}{\sin(\theta)} \\
-    \text{Cateto adyacente: } b &= a \cdot \frac{\cos(\theta)}{\sin(\theta)} = \frac{a}{\tan(\theta)}
-  \end{align*}
-
-  \item Si conoces el \textbf{cateto adyacente} $b$ y el ángulo $\theta$:
-  \begin{align*}
-    \text{Hipotenusa: } c &= \frac{b}{\cos(\theta)} \\
-    \text{Cateto opuesto: } a &= b \cdot \tan(\theta)
-  \end{align*}
-\end{itemize}
-
-\subsubsection{Ejemplo básico}
-
-\begin{ejemplo}
-Considera un triángulo rectángulo donde conocemos:
-\begin{itemize}
-  \item Uno de los ángulos agudos: $\alpha = 30°$
-  \item La hipotenusa: $c = 10$ cm
-\end{itemize}
-
-Encontremos todos los elementos faltantes del triángulo.
+Cuando sumas dos vectores que no son perpendiculares, formas un triángulo oblicuángulo:
 
 \begin{center}
-\begin{tikzpicture}[scale=1]
-  \coordinate (A) at (0,0);
-  \coordinate (B) at (5,0);
-  \coordinate (C) at (5,2.5);
+\begin{tikzpicture}[scale=2]
+    % Vectores
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (3,0);
+    \coordinate (B) at (1.5,2);
 
-  \draw[line width=1.5pt, maincolor] (A) -- (B) -- (C) -- cycle;
-  \draw[line width=1pt, maincolor] (4.7,0) rectangle (5,0.3);
+    % Vector A
+    \draw[ultra thick, blue, -latex] (O) -- (A) node[midway, below] {$\vec{A}$};
 
-  \node[below left] at (A) {$A$};
-  \node[below right] at (B) {$B$};
-  \node[above right] at (C) {$C$};
+    % Vector B desde el final de A
+    \draw[ultra thick, red, -latex] (A) -- (B) node[midway, right] {$\vec{B}$};
 
-  \pic[draw, accentcolor, angle radius=0.8cm, "$30°$"] {angle = B--A--C};
+    % Resultante
+    \draw[ultra thick, maincolor, -latex] (O) -- (B) node[midway, left] {$\vec{R} = \vec{A} + \vec{B}$};
 
-  \node[above left] at (2.5,1.5) {$c = 10$ cm};
-  \node[below] at (2.5,-0.3) {$b = ?$};
-  \node[right] at (5.3,1.25) {$a = ?$};
+    % Vector B desde el origen (para mostrar el paralelogramo)
+    \draw[dashed, red, -latex] (O) -- +($(B)-(A)$) node[midway, above] {$\vec{B}$};
+
+    % Ángulo entre vectores
+    \pic[draw, accentcolor, angle radius=0.5cm, angle eccentricity=1.3] {angle = A--O--B};
+
+    \node[below] at (1.5,-0.5) {La suma de vectores forma un triángulo};
 \end{tikzpicture}
 \end{center}
 
-\textbf{Solución:}
-
-\textit{Paso 1:} Encontrar el otro ángulo agudo.
+Para encontrar la magnitud del vector resultante $\vec{R}$, usamos la Ley del Coseno:
 \[
-\beta = 90° - 30° = 60°
+|\vec{R}|^2 = |\vec{A}|^2 + |\vec{B}|^2 - 2|\vec{A}||\vec{B}|\cos(180^\circ - \theta)
 \]
 
-\textit{Paso 2:} Encontrar el cateto opuesto a 30° usando seno.
-\[
-\sin(30°) = \frac{a}{c} \quad \Rightarrow \quad a = c \cdot \sin(30°) = 10 \cdot 0.5 = 5 \text{ cm}
-\]
+\subsubsection{Descomposición de fuerzas}
 
-\textit{Paso 3:} Encontrar el cateto adyacente a 30° usando coseno.
-\[
-\cos(30°) = \frac{b}{c} \quad \Rightarrow \quad b = c \cdot \cos(30°) = 10 \cdot 0.866 = 8.66 \text{ cm}
-\]
+En ingeniería, frecuentemente necesitamos descomponer una fuerza en componentes que no son perpendiculares:
 
-\textit{Paso 4:} Verificar con Pitágoras.
-\[
-c^2 = a^2 + b^2 \quad \Rightarrow \quad 10^2 = 5^2 + 8.66^2 \quad \Rightarrow \quad 100 = 25 + 75 = 100 \quad \checkmark
-\]
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Sistema de coordenadas inclinado
+    \coordinate (O) at (0,0);
 
-Por lo tanto, el triángulo completo tiene:
-\begin{itemize}
-  \item Ángulos: $30°$, $60°$ y $90°$
-  \item Lados: $a = 5$ cm, $b = 8.66$ cm, $c = 10$ cm
-\end{itemize}
-\end{ejemplo}
+    % Ejes inclinados
+    \draw[thick, ->] (O) -- (30:3) node[right] {$x'$};
+    \draw[thick, ->] (O) -- (120:2.5) node[above] {$y'$};
 
-\subsection{Caso 2: Resolver un Triángulo Conociendo Dos Lados}
+    % Fuerza
+    \draw[ultra thick, maincolor, -latex] (O) -- (75:2.5) node[right] {$\vec{F}$};
 
-Este caso es igual de común que el anterior, pero requiere un paso adicional: necesitamos usar las funciones trigonométricas inversas para encontrar los ángulos. No te asustes con el nombre, las funciones inversas son simplemente una forma de "deshacer" las funciones trigonométricas.
+    % Componentes
+    \draw[dashed, blue] (75:2.5) -- ($(O)+(30:2.165)$);
+    \draw[dashed, red] (75:2.5) -- ($(O)+(120:1.25)$);
 
-\subsubsection{¿Qué datos necesitamos?}
+    \draw[thick, blue, -latex] (O) -- (30:2.165) node[below] {$F_{x'}$};
+    \draw[thick, red, -latex] (O) -- (120:1.25) node[left] {$F_{y'}$};
 
-Para resolver este tipo de problema necesitamos conocer las longitudes de dos lados cualesquiera del triángulo. Pueden ser:
-\begin{itemize}
-  \item Los dos catetos
-  \item La hipotenusa y un cateto
-\end{itemize}
+    % Ángulos
+    \pic[draw, angle radius=0.4cm, angle eccentricity=1.5] {angle = 30:3--O--0:3};
+    \pic[draw, angle radius=0.6cm, angle eccentricity=1.3] {angle = 75:2.5--O--30:3};
 
-\subsubsection{Funciones trigonométricas inversas}
+    \node[below] at (0,-0.5) {Descomposición en ejes no perpendiculares};
+\end{tikzpicture}
+\end{center}
 
-Cuando conocemos la razón entre dos lados pero queremos encontrar el ángulo, usamos las funciones inversas:
+\subsection{Aplicación: Diseño de puentes innovadores}
 
-\begin{itemize}
-  \item $\arcsin(x)$ o $\sin^{-1}(x)$: Es el ángulo cuyo seno es $x$
-  \item $\arccos(x)$ o $\cos^{-1}(x)$: Es el ángulo cuyo coseno es $x$
-  \item $\arctan(x)$ o $\tan^{-1}(x)$: Es el ángulo cuya tangente es $x$
-\end{itemize}
-
-\begin{nota}
-En tu calculadora, estas funciones suelen aparecer como $\sin^{-1}$, $\cos^{-1}$ y $\tan^{-1}$. Para usarlas, primero calcula la razón entre los lados, y luego aplica la función inversa. ¡Asegúrate de que tu calculadora esté en modo GRADOS (DEG) y no en radianes (RAD)!
-\end{nota}
-
-\subsubsection{Pasos para resolver el triángulo}
-
-\begin{enumerate}
-  \item \textbf{Encuentra el tercer lado:} Si no conoces la hipotenusa, usa el teorema de Pitágoras:
-  \[
-  c = \sqrt{a^2 + b^2}
-  \]
-  Si ya conoces la hipotenusa y un cateto, encuentra el otro cateto:
-  \[
-  b = \sqrt{c^2 - a^2} \quad \text{o} \quad a = \sqrt{c^2 - b^2}
-  \]
-
-  \item \textbf{Encuentra uno de los ángulos agudos:} Usa la función trigonométrica inversa apropiada. Por ejemplo:
-  \begin{itemize}
-    \item Si conoces el cateto opuesto y la hipotenusa: $\theta = \arcsin\left(\frac{a}{c}\right)$
-    \item Si conoces el cateto adyacente y la hipotenusa: $\theta = \arccos\left(\frac{b}{c}\right)$
-    \item Si conoces ambos catetos: $\theta = \arctan\left(\frac{a}{b}\right)$
-  \end{itemize}
-
-  \item \textbf{Encuentra el otro ángulo agudo:} Simplemente resta de 90°:
-  \[
-  \text{Otro ángulo} = 90° - \theta
-  \]
-\end{enumerate}
-
-\subsubsection{Ejemplo básico}
-
-\begin{ejemplo}
-Considera un triángulo rectángulo donde conocemos:
-\begin{itemize}
-  \item Cateto opuesto: $a = 6$ cm
-  \item Cateto adyacente: $b = 8$ cm
-\end{itemize}
-
-Encontremos todos los elementos faltantes del triángulo.
+Los puentes modernos, especialmente los atirantados y colgantes, son maravillas de la aplicación de triángulos oblicuángulos.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
-  \coordinate (A) at (0,0);
-  \coordinate (B) at (4,0);
-  \coordinate (C) at (4,3);
+    % Torre del puente
+    \draw[ultra thick] (0,-1) -- (0,4);
+    \node[left] at (0,4) {Torre};
 
-  \draw[line width=1.5pt, maincolor] (A) -- (B) -- (C) -- cycle;
-  \draw[line width=1pt, maincolor] (3.7,0) rectangle (4,0.3);
+    % Tablero del puente
+    \draw[ultra thick] (-4,0) -- (4,0);
+    \node[below] at (0,0) {Tablero};
 
-  \node[below left] at (A) {$A$};
-  \node[below right] at (B) {$B$};
-  \node[above right] at (C) {$C$};
+    % Cables (tirantes)
+    \foreach \x/\y in {-3/0.5, -2/1, -1/1.5, 1/1.5, 2/1, 3/0.5} {
+        \draw[thick, accentcolor] (0,3.5) -- (\x,0);
+    }
 
-  \pic[draw, accentcolor, angle radius=0.8cm, "$\theta$"] {angle = B--A--C};
+    % Triángulo ejemplo
+    \draw[ultra thick, blue] (0,3.5) -- (2,0) -- (0,0) -- cycle;
 
-  \node[above left] at (2,1.8) {$c = ?$};
-  \node[below] at (2,-0.3) {$b = 8$ cm};
-  \node[right] at (4.4,1.5) {$a = 6$ cm};
+    % Etiquetas del triángulo
+    \node[above] at (0,3.5) {$A$};
+    \node[below] at (2,0) {$B$};
+    \node[below] at (0,0) {$C$};
+
+    % Fuerzas
+    \draw[thick, red, -latex] (2,0) -- (2,-0.8) node[right] {Peso};
+    \draw[thick, red, -latex] (0,3.5) -- (-0.5,3.8) node[above] {Tensión};
+
+    \node[below] at (0,-1.5) {\textbf{Puente atirantado: cada cable forma un triángulo}};
+
+    % Anotación
+    \node[text width=6cm, right] at (5,2) {
+        Cada cable debe soportar una tensión específica.
+        Usando la ley del seno y coseno, los ingenieros calculan:
+        \begin{itemize}
+            \item Longitud exacta de cada cable
+            \item Ángulo óptimo de inclinación
+            \item Distribución de fuerzas
+            \item Tensión en cada punto
+        \end{itemize}
+    };
 \end{tikzpicture}
 \end{center}
 
-\textbf{Solución:}
-
-\textit{Paso 1:} Encontrar la hipotenusa usando Pitágoras.
-\begin{align*}
-c &= \sqrt{a^2 + b^2} \\
-  &= \sqrt{6^2 + 8^2} \\
-  &= \sqrt{36 + 64} \\
-  &= \sqrt{100} \\
-  &= 10 \text{ cm}
-\end{align*}
-
-\textit{Paso 2:} Encontrar el ángulo $\theta$ usando la tangente inversa.
-\begin{align*}
-\tan(\theta) &= \frac{a}{b} = \frac{6}{8} = 0.75 \\
-\theta &= \arctan(0.75) \\
-\theta &\approx 36.87°
-\end{align*}
-
-\textit{Paso 3:} Encontrar el otro ángulo agudo.
-\[
-\beta = 90° - 36.87° = 53.13°
-\]
-
-Por lo tanto, el triángulo completo tiene:
-\begin{itemize}
-  \item Lados: $a = 6$ cm, $b = 8$ cm, $c = 10$ cm
-  \item Ángulos: $36.87°$, $53.13°$ y $90°$
-\end{itemize}
-\end{ejemplo}
-
-\subsection{Ángulos de Elevación}
-
-Ahora vamos a hablar de una aplicación súper práctica de todo lo que hemos visto: los ángulos de elevación. Este concepto se usa todo el tiempo en la vida real, especialmente cuando queremos medir alturas de objetos que no podemos alcanzar.
-
-\begin{definicion}
-Un \textbf{ángulo de elevación} es el ángulo formado entre la línea horizontal (a la altura de tus ojos) y la línea de visión cuando miras \textit{hacia arriba} para observar un objeto.
-\end{definicion}
-
-Imagínate que estás parado mirando un edificio alto. Si trazas una línea imaginaria desde tus ojos directamente al frente (paralela al suelo), y luego otra línea desde tus ojos hasta la cima del edificio, el ángulo entre esas dos líneas es el ángulo de elevación.
-
-\begin{center}
-\begin{tikzpicture}[scale=1.2]
-  % Suelo
-  \draw[line width=1pt, gray] (-1,0) -- (6,0);
-
-  % Edificio
-  \draw[line width=2pt, maincolor, fill=maincolor!20] (5,0) rectangle (5.5,4);
-  \node[maincolor] at (5.25,4.3) {Edificio};
-
-  % Observador
-  \fill[accentcolor] (0,0.2) circle (0.15);
-  \draw[line width=1.5pt, accentcolor] (0,0.2) -- (0,-0.5);
-  \draw[line width=1.5pt, accentcolor] (-0.2,-0.5) -- (0.2,-0.5);
-  \node[below, accentcolor] at (0,-0.7) {Observador};
-
-  % Línea horizontal
-  \draw[line width=1pt, dashed, examplecolor] (0,0.2) -- (3,0.2);
-  \node[above, examplecolor] at (1.5,0.2) {Línea horizontal};
-
-  % Línea de visión
-  \draw[line width=1.5pt, accentcolor, ->] (0,0.2) -- (5.25,4);
-  \node[above, accentcolor, sloped] at (2.6,2.2) {Línea de visión};
-
-  % Ángulo de elevación
-  \pic[draw, accentcolor, line width=1pt, angle radius=1.2cm, "$\alpha$"] {angle = {(3,0.2)--(0,0.2)--(5.25,4)}};
-  \node[accentcolor] at (1.8,0.6) {Ángulo de elevación};
-
-  % Distancia horizontal
-  \draw[<->, line width=1pt, maincolor] (0,-1.2) -- (5,-1.2);
-  \node[below, maincolor] at (2.5,-1.2) {Distancia horizontal};
-
-  % Altura
-  \draw[<->, line width=1pt, maincolor] (6,0) -- (6,4);
-  \node[right, maincolor] at (6,2) {Altura};
-\end{tikzpicture}
-\end{center}
-
-\subsubsection{Situaciones típicas con ángulos de elevación}
-
-Los ángulos de elevación aparecen en muchas situaciones del día a día:
-
-\begin{itemize}
-  \item \textbf{Medir la altura de un edificio:} Te paras a cierta distancia, mides el ángulo de elevación hasta la cima, y calculas la altura.
-
-  \item \textbf{Aviación:} Los pilotos usan ángulos de elevación cuando necesitan ascender hacia un punto específico.
-
-  \item \textbf{Observar un avión:} Si ves un avión en el cielo y quieres saber qué tan alto está volando, puedes usar el ángulo de elevación.
-
-  \item \textbf{Topografía:} Los topógrafos miden ángulos de elevación de montañas y colinas.
-
-  \item \textbf{Deportes:} En básquetbol, el ángulo de elevación óptimo para lanzar a la canasta se calcula con trigonometría.
-\end{itemize}
-
-\subsubsection{Cómo resolver problemas con ángulos de elevación}
-
-El truco está en visualizar el triángulo rectángulo:
-\begin{enumerate}
-  \item La distancia horizontal desde el observador hasta el objeto forma el cateto adyacente.
-  \item La altura del objeto (desde el nivel del observador) forma el cateto opuesto.
-  \item El ángulo de elevación es uno de los ángulos agudos del triángulo.
-\end{enumerate}
-
-Luego simplemente aplicas las razones trigonométricas. La más común es la tangente:
-\[
-\tan(\text{ángulo de elevación}) = \frac{\text{altura}}{\text{distancia horizontal}}
-\]
-
-\begin{ejemplo}
-Estás a 50 metros de un edificio y mides un ángulo de elevación de 35° hasta la cima. ¿Cuál es la altura del edificio?
-
-\textbf{Solución:}
-Usando la tangente:
-\begin{align*}
-\tan(35°) &= \frac{h}{50} \\
-h &= 50 \cdot \tan(35°) \\
-h &= 50 \cdot 0.7002 \\
-h &\approx 35.01 \text{ metros}
-\end{align*}
-
-El edificio mide aproximadamente 35 metros de altura.
-\end{ejemplo}
-
-\subsection{Ángulos de Depresión}
-
-Los ángulos de depresión son el complemento perfecto de los ángulos de elevación. Mientras que antes mirabas hacia arriba, ahora vas a mirar hacia abajo.
-
-\begin{definicion}
-Un \textbf{ángulo de depresión} es el ángulo formado entre la línea horizontal (a la altura de tus ojos) y la línea de visión cuando miras \textit{hacia abajo} para observar un objeto.
-\end{definicion}
-
-Imagínate que estás en el último piso de un edificio mirando hacia abajo a un auto en la calle. El ángulo entre la línea horizontal desde tus ojos y la línea que va hacia el auto es el ángulo de depresión.
-
-\begin{center}
-\begin{tikzpicture}[scale=1.2]
-  % Suelo
-  \draw[line width=1pt, gray] (-1,0) -- (6,0);
-
-  % Edificio
-  \draw[line width=2pt, maincolor, fill=maincolor!20] (0,0) rectangle (0.5,4);
-
-  % Observador en lo alto
-  \fill[accentcolor] (0.5,4) circle (0.15);
-  \draw[line width=1.5pt, accentcolor] (0.5,4) -- (0.5,3.5);
-  \node[above, accentcolor] at (0.5,4.3) {Observador};
-
-  % Objeto en el suelo
-  \draw[line width=1.5pt, examplecolor, fill=examplecolor!20] (4.5,0) rectangle (5.5,0.3);
-  \node[below, examplecolor] at (5,-0.3) {Objeto};
-
-  % Línea horizontal
-  \draw[line width=1pt, dashed, examplecolor] (0.5,4) -- (3,4);
-  \node[above, examplecolor] at (1.7,4) {Línea horizontal};
-
-  % Línea de visión
-  \draw[line width=1.5pt, accentcolor, ->] (0.5,4) -- (5,0.15);
-  \node[below, accentcolor, sloped] at (2.8,1.9) {Línea de visión};
-
-  % Ángulo de depresión
-  \pic[draw, accentcolor, line width=1pt, angle radius=1cm, "$\beta$"] {angle = {(5,0.15)--(0.5,4)--(3,4)}};
-  \node[accentcolor] at (1.5,3.4) {Ángulo de depresión};
-
-  % Distancia horizontal
-  \draw[<->, line width=1pt, maincolor] (0.5,-0.8) -- (5,-0.8);
-  \node[below, maincolor] at (2.75,-0.8) {Distancia horizontal};
-
-  % Altura del edificio
-  \draw[<->, line width=1pt, maincolor] (-0.8,0) -- (-0.8,4);
-  \node[left, maincolor] at (-0.8,2) {Altura};
-\end{tikzpicture}
-\end{center}
-
-\subsubsection{Relación entre ángulos de elevación y depresión}
-
-Aquí viene algo muy interesante y súper útil: los ángulos de elevación y depresión entre dos puntos son iguales. ¿Por qué? Por una propiedad geométrica llamada "ángulos alternos internos".
-
-Si tú estás en un edificio mirando hacia abajo a una persona en el suelo con un ángulo de depresión de 40°, esa persona está mirando hacia ti con un ángulo de elevación de 40°. ¡Son iguales!
-
-\begin{center}
-\begin{tikzpicture}[scale=1]
-  % Líneas horizontales paralelas
-  \draw[line width=1pt, dashed, gray] (0,0) -- (4,0);
-  \draw[line width=1pt, dashed, gray] (0,3) -- (4,3);
-
-  % Observador arriba
-  \fill[accentcolor] (0,3) circle (0.1);
-  \node[left] at (0,3) {A};
-
-  % Observador abajo
-  \fill[examplecolor] (3,0) circle (0.1);
-  \node[right] at (3,0) {B};
-
-  % Línea de visión
-  \draw[line width=1.5pt, maincolor] (0,3) -- (3,0);
-
-  % Ángulo de depresión
-  \pic[draw, accentcolor, line width=1pt, angle radius=0.8cm, "$\alpha$"] {angle = {(3,0)--(0,3)--(2,3)}};
-  \node[accentcolor] at (1.2,2.7) {Depresión};
-
-  % Ángulo de elevación
-  \pic[draw, examplecolor, line width=1pt, angle radius=0.8cm, "$\alpha$"] {angle = {(1.5,0)--(3,0)--(0,3)}};
-  \node[examplecolor] at (2,0.5) {Elevación};
-
-  % Etiqueta
-  \node[maincolor, below] at (1.5,-0.5) {Los ángulos son iguales: ángulos alternos internos};
-\end{tikzpicture}
-\end{center}
-
-\begin{nota}
-Esta propiedad es muy útil porque a veces es más fácil medir un ángulo de depresión desde arriba que un ángulo de elevación desde abajo, o viceversa. Pero como son iguales, puedes usar el que sea más conveniente para hacer tus cálculos.
-\end{nota}
-
-\subsubsection{Situaciones típicas con ángulos de depresión}
-
-\begin{itemize}
-  \item \textbf{Desde un avión:} Los pilotos usan ángulos de depresión para calcular cuándo empezar el descenso hacia el aeropuerto.
-
-  \item \textbf{Desde un faro:} Los fareros pueden calcular qué tan lejos está un barco usando el ángulo de depresión.
-
-  \item \textbf{Desde un mirador:} Si estás en un mirador de montaña y ves un lago abajo, puedes calcular la distancia hasta él.
-
-  \item \textbf{Topografía:} Cuando se hacen mapas de terrenos con colinas y valles, se usan ángulos de depresión constantemente.
-
-  \item \textbf{Búsqueda y rescate:} Los helicópteros de rescate usan ángulos de depresión para localizar personas perdidas.
-\end{itemize}
-
-\subsubsection{Cómo resolver problemas con ángulos de depresión}
-
-El proceso es idéntico al de los ángulos de elevación:
-
-\begin{enumerate}
-  \item Identifica el triángulo rectángulo en el problema.
-  \item Recuerda que el ángulo de depresión desde un punto es igual al ángulo de elevación desde el otro punto.
-  \item La distancia horizontal es el cateto adyacente.
-  \item La diferencia de alturas es el cateto opuesto.
-  \item Aplica las razones trigonométricas apropiadas.
-\end{enumerate}
-
-La fórmula más común sigue siendo la tangente:
-\[
-\tan(\text{ángulo de depresión}) = \frac{\text{diferencia de altura}}{\text{distancia horizontal}}
-\]
-
-\begin{ejemplo}
-Desde la cima de un acantilado de 80 metros de altura, observas un barco en el mar con un ángulo de depresión de 25°. ¿A qué distancia horizontal está el barco de la base del acantilado?
-
-\textbf{Solución:}
-Usando la tangente:
-\begin{align*}
-\tan(25°) &= \frac{80}{d} \\
-d &= \frac{80}{\tan(25°)} \\
-d &= \frac{80}{0.4663} \\
-d &\approx 171.54 \text{ metros}
-\end{align*}
-
-El barco está aproximadamente a 171.54 metros de la base del acantilado.
-\end{ejemplo}
-
-\newpage
-
-% ============================================
-% PLACEHOLDERS PARA SECCIONES POSTERIORES
-% ============================================
-
-\section{Ejemplos Resueltos}
+Los ingenieros deben resolver cientos de triángulos oblicuángulos para diseñar un puente seguro y eficiente. Cada cable, cada viga, cada conexión forma triángulos que deben ser analizados cuidadosamente.
 
 %INSERTAR_EJEMPLOS_AQUI%
 
-\newpage
-
-\section{Ejercicios Inversos}
-
 %INSERTAR_EJERCICIOS_INVERSOS_AQUI%
-
-\newpage
-
-\section{Ejercicios Propuestos}
 
 %INSERTAR_EJERCICIOS_PROPUESTOS_AQUI%
 
-\newpage
-
-\section{Soluciones de los Ejercicios}
-
-%INSERTAR_SOLUCIONES_EJERCICIOS_AQUI%
+%INSERTAR_SOLUCIONES_AQUI%
 
 \newpage
-
-% ============================================
-% CONCLUSIÓN
-% ============================================
 
 \section{Conclusión}
 
-¡Felicidades! Has llegado al final de esta guía sobre la solución de triángulos rectángulos. Esperamos que ahora tengas una comprensión sólida de cómo aplicar las funciones trigonométricas para resolver problemas del mundo real.
+¡Felicitaciones! Has completado esta primera parte de la guía sobre triángulos oblicuángulos. Ahora tienes en tu caja de herramientas matemáticas dos leyes súper poderosas que te permiten resolver cualquier triángulo, no solo los rectángulos.
 
-\subsection{Resumen de Conceptos Clave}
+\subsection*{Lo que has aprendido}
 
-Repasemos los puntos más importantes que hemos aprendido:
+En esta guía hemos cubierto:
+\begin{itemize}
+    \item La diferencia entre triángulos rectángulos y oblicuángulos
+    \item La Ley del Seno y cuándo usarla
+    \item La Ley del Coseno y sus aplicaciones
+    \item Cómo calcular el área de cualquier triángulo
+    \item La famosa Fórmula de Herón
+    \item Los diferentes casos de resolución: LAL, ALA, LLL, LLA
+    \item El caso ambiguo y por qué es especial
+    \item Aplicaciones reales en navegación, topografía, arquitectura e ingeniería
+\end{itemize}
 
-\begin{enumerate}
-  \item \textbf{Triángulos rectángulos:} Tienen un ángulo de 90° y tres lados (dos catetos y la hipotenusa).
-
-  \item \textbf{Razones trigonométricas:} Son relaciones entre los lados del triángulo que nos permiten resolver problemas. Las tres principales son:
-  \begin{itemize}
-    \item Seno: $\sin(\theta) = \frac{\text{opuesto}}{\text{hipotenusa}}$
-    \item Coseno: $\cos(\theta) = \frac{\text{adyacente}}{\text{hipotenusa}}$
-    \item Tangente: $\tan(\theta) = \frac{\text{opuesto}}{\text{adyacente}}$
-  \end{itemize}
-
-  \item \textbf{Resolver conociendo un lado y un ángulo:} Usa las razones trigonométricas directamente para encontrar los otros lados, y la suma de ángulos para encontrar el ángulo faltante.
-
-  \item \textbf{Resolver conociendo dos lados:} Usa el teorema de Pitágoras para el tercer lado, y las funciones inversas ($\arcsin$, $\arccos$, $\arctan$) para encontrar los ángulos.
-
-  \item \textbf{Ángulos de elevación:} Se usan cuando miramos hacia arriba. Aparecen en problemas de medición de alturas de edificios, árboles, montañas, etc.
-
-  \item \textbf{Ángulos de depresión:} Se usan cuando miramos hacia abajo. Son iguales a los ángulos de elevación correspondientes por la propiedad de ángulos alternos internos.
-\end{enumerate}
-
-\subsection{Tabla de Fórmulas Importantes}
-
-Aquí tienes una tabla de referencia rápida con todas las fórmulas importantes:
+\subsection*{Tabla resumen de fórmulas importantes}
 
 \begin{center}
-\renewcommand{\arraystretch}{2}
-\begin{tabular}{|l|l|}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|l|c|}
 \hline
-\rowcolor{maincolor!30}
 \textbf{Concepto} & \textbf{Fórmula} \\
 \hline
-Teorema de Pitágoras & $c^2 = a^2 + b^2$ \\
+Ley del Seno & $\displaystyle\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R$ \\
 \hline
-Seno & $\sin(\theta) = \dfrac{\text{opuesto}}{\text{hipotenusa}}$ \\
+Ley del Coseno & $a^2 = b^2 + c^2 - 2bc\cos A$ \\
 \hline
-Coseno & $\cos(\theta) = \dfrac{\text{adyacente}}{\text{hipotenusa}}$ \\
+Área (con seno) & $\text{Área} = \frac{1}{2}ab\sin C$ \\
 \hline
-Tangente & $\tan(\theta) = \dfrac{\text{opuesto}}{\text{adyacente}}$ \\
+Fórmula de Herón & $\text{Área} = \sqrt{s(s-a)(s-b)(s-c)}$ \\
+& donde $s = \frac{a+b+c}{2}$ \\
 \hline
-Suma de ángulos & $\alpha + \beta + 90° = 180°$ \\
-\hline
-Ángulo agudo faltante & $\beta = 90° - \alpha$ \\
-\hline
-Arcoseno & $\theta = \arcsin\left(\dfrac{\text{opuesto}}{\text{hipotenusa}}\right)$ \\
-\hline
-Arcocoseno & $\theta = \arccos\left(\dfrac{\text{adyacente}}{\text{hipotenusa}}\right)$ \\
-\hline
-Arcotangente & $\theta = \arctan\left(\dfrac{\text{opuesto}}{\text{adyacente}}\right)$ \\
-\hline
-Altura con ángulo de elevación & $h = d \cdot \tan(\text{ángulo})$ \\
-\hline
-Distancia con ángulo de depresión & $d = \dfrac{h}{\tan(\text{ángulo})}$ \\
+Suma de ángulos & $A + B + C = 180^\circ$ \\
 \hline
 \end{tabular}
 \end{center}
 
-\subsection{Consejos para Resolver Triángulos Rectángulos}
-
-Aquí te dejamos algunos consejos prácticos que te ayudarán a tener éxito resolviendo estos problemas:
+\subsection*{Consejos para resolver triángulos oblicuángulos}
 
 \begin{enumerate}
-  \item \textbf{Dibuja siempre un diagrama:} Antes de empezar a calcular, haz un dibujo del triángulo con todos los datos que conoces. Esto te ayudará a visualizar el problema y evitar errores.
+    \item \textbf{Identifica qué información tienes}: Antes de empezar a calcular, lista claramente qué lados y ángulos conoces.
 
-  \item \textbf{Identifica claramente cuál es el ángulo de referencia:} Los términos "opuesto" y "adyacente" dependen del ángulo que estás considerando. Márcalo claramente en tu diagrama.
+    \item \textbf{Elige la herramienta correcta}:
+    \begin{itemize}
+        \item ¿Tienes un ángulo y su lado opuesto? → Ley del Seno
+        \item ¿Tienes dos lados y el ángulo entre ellos? → Ley del Coseno
+        \item ¿Tienes los tres lados? → Ley del Coseno (o Herón para el área)
+    \end{itemize}
 
-  \item \textbf{Revisa que tu calculadora esté en modo grados (DEG):} Este es uno de los errores más comunes. Si tu calculadora está en modo radianes (RAD), todos tus resultados estarán incorrectos.
+    \item \textbf{Dibuja siempre el triángulo}: Un dibujo te ayuda a visualizar el problema y evitar errores.
 
-  \item \textbf{Verifica tus respuestas con Pitágoras:} Después de encontrar todos los lados, siempre verifica que $c^2 = a^2 + b^2$. Si no se cumple, revisa tus cálculos.
+    \item \textbf{Verifica tus respuestas}:
+    \begin{itemize}
+        \item Los ángulos deben sumar $180^\circ$
+        \item Ningún ángulo puede ser negativo o mayor a $180^\circ$
+        \item El lado más largo está opuesto al ángulo más grande
+    \end{itemize}
 
-  \item \textbf{Verifica que los ángulos sumen 180°:} La suma de los tres ángulos debe ser siempre 180°. Usa esto como una verificación adicional.
+    \item \textbf{Ten cuidado con el caso ambiguo}: Cuando uses la ley del seno con dos lados y un ángulo opuesto, recuerda que puede haber dos soluciones.
 
-  \item \textbf{Usa la función trigonométrica apropiada:}
-  \begin{itemize}
-    \item Si conoces/necesitas la hipotenusa, usa seno o coseno.
-    \item Si solo trabajas con catetos, usa tangente.
-  \end{itemize}
-
-  \item \textbf{Redondea al final, no en pasos intermedios:} Mantén todos los decimales durante los cálculos y redondea solo en la respuesta final para evitar errores de redondeo acumulados.
-
-  \item \textbf{Lee el problema con cuidado:} Identifica qué te están pidiendo encontrar. A veces el problema da más información de la necesaria, o te pide solo algunos datos específicos.
-
-  \item \textbf{Practica, practica, practica:} Como con cualquier habilidad matemática, la clave del éxito es la práctica constante. Mientras más problemas resuelvas, más fácil te resultará.
+    \item \textbf{Usa la calculadora correctamente}:
+    \begin{itemize}
+        \item Asegúrate de que esté en modo grados (DEG)
+        \item Redondea solo al final
+        \item Guarda valores intermedios en la memoria
+    \end{itemize}
 \end{enumerate}
 
-\subsection{Recomendaciones para el Éxito}
+\subsection*{Aplicaciones en el mundo real}
 
-\begin{nota}
-La trigonometría puede parecer difícil al principio, pero recuerda que es como aprender un idioma nuevo: necesitas practicar regularmente para dominarlo. No te desanimes si algunos problemas te resultan difíciles al principio. ¡Sigue intentando!
-\end{nota}
-
-Para tener éxito con la trigonometría:
+Ahora que dominas estas herramientas, puedes entender y resolver problemas como:
 
 \begin{itemize}
-  \item \textbf{Memoriza las razones trigonométricas básicas:} SOH-CAH-TOA debe convertirse en tu mejor amigo. Repítelo hasta que lo sepas de memoria.
+    \item \textbf{GPS y navegación}: Tu teléfono usa triangulación (con triángulos oblicuángulos) para determinar tu posición exacta usando señales de al menos tres satélites.
 
-  \item \textbf{Entiende, no solo memorices:} No te limites a memorizar fórmulas. Trata de entender por qué funcionan y cuándo usarlas.
+    \item \textbf{Videojuegos y animación}: Los gráficos 3D se construyen con millones de triángulos. Las leyes que aprendiste se usan para calcular iluminación, sombras y perspectiva.
 
-  \item \textbf{Practica con problemas variados:} Resuelve problemas de diferentes contextos (navegación, arquitectura, deportes, etc.) para ver las múltiples aplicaciones.
+    \item \textbf{Astronomía}: Los astrónomos usan estas leyes para medir distancias a estrellas y planetas usando la técnica del paralaje.
 
-  \item \textbf{Trabaja en grupo:} Estudiar con compañeros puede ayudarte a ver diferentes enfoques para resolver los mismos problemas.
+    \item \textbf{Rescate y emergencias}: Los equipos de rescate usan triangulación para localizar señales de emergencia y planificar rutas de búsqueda.
 
-  \item \textbf{Pide ayuda cuando la necesites:} Si algo no te queda claro, pregunta a tu profesor o busca recursos adicionales. Es mejor aclarar dudas temprano que arrastrarlas.
-
-  \item \textbf{Conecta con aplicaciones reales:} Cuando veas un edificio alto, una colina o cualquier situación que involucre ángulos y distancias, piensa en cómo resolverías ese problema con trigonometría.
+    \item \textbf{Deportes}: En deportes como el golf o el billar, entender los ángulos y las distancias es crucial para la estrategia.
 \end{itemize}
 
-\subsection{Aplicaciones Futuras}
+\subsection*{Recomendaciones para el éxito}
 
-Lo que has aprendido en esta guía es solo el comienzo. La trigonometría es fundamental en muchas áreas avanzadas:
+Para dominar completamente los triángulos oblicuángulos:
 
+\begin{enumerate}
+    \item \textbf{Practica con problemas variados}: Cada tipo de problema (LAL, ALA, LLL, etc.) tiene sus trucos.
+
+    \item \textbf{Conecta con la física}: Muchos problemas de fuerzas, velocidades y aceleraciones involucran triángulos oblicuángulos.
+
+    \item \textbf{Explora aplicaciones}: Busca ejemplos en tu entorno. ¿Ves una grúa? Hay triángulos oblicuángulos. ¿Un techo inclinado? Más triángulos.
+
+    \item \textbf{Trabaja en equipo}: Resolver problemas con compañeros te ayuda a ver diferentes enfoques.
+
+    \item \textbf{No memorices, comprende}: Es mejor entender por qué funcionan las leyes que memorizar fórmulas sin sentido.
+\end{enumerate}
+
+\subsection*{Un último pensamiento}
+
+Los triángulos oblicuángulos pueden parecer más complicados que los rectángulos, pero en realidad son más representativos del mundo real. La naturaleza raramente nos da ángulos rectos perfectos. Las montañas, los árboles, las trayectorias de vuelo, las órbitas planetarias... todo involucra triángulos oblicuángulos.
+
+Al dominar estas herramientas matemáticas, no solo estás aprendiendo a resolver problemas en papel. Estás desarrollando una forma de pensar que te permite entender y modelar el mundo que te rodea. Desde el diseño de un simple techo hasta la navegación espacial, los conceptos que has aprendido hoy son fundamentales.
+
+\subsection*{¿Qué sigue?}
+
+En las siguientes partes de esta guía, pondremos en práctica todo lo aprendido con:
 \begin{itemize}
-  \item \textbf{Física:} Para analizar fuerzas, movimiento proyectil, ondas y muchos otros fenómenos.
-
-  \item \textbf{Cálculo:} Las funciones trigonométricas son fundamentales en el cálculo diferencial e integral.
-
-  \item \textbf{Ingeniería:} Todas las ramas de la ingeniería usan trigonometría extensivamente.
-
-  \item \textbf{Ciencias de la computación:} Desde gráficos por computadora hasta inteligencia artificial, la trigonometría está presente.
-
-  \item \textbf{Navegación GPS:} Tu celular usa trigonometría para determinar tu ubicación exacta.
-
-  \item \textbf{Astronomía:} Para calcular distancias a estrellas y planetas.
+    \item Ejemplos resueltos paso a paso de cada tipo de problema
+    \item Ejercicios progresivos para desarrollar tu habilidad
+    \item Problemas de aplicación del mundo real
+    \item Proyectos integradores que combinen todos los conceptos
 \end{itemize}
 
-Dominar estos conceptos ahora te abrirá muchas puertas en el futuro. ¡Estás construyendo una base sólida para tu educación matemática!
+Recuerda: las matemáticas son como un deporte mental. Mientras más practiques, más fuerte y ágil será tu mente matemática. ¡Sigue adelante y conquista esos triángulos!
 
-\subsection{Palabras Finales}
-
-Recuerda que las matemáticas son una herramienta poderosa para entender y transformar el mundo que nos rodea. La trigonometría, en particular, es un puente entre la geometría pura y las aplicaciones prácticas del mundo real.
-
-Cada problema que resuelves fortalece tu capacidad de pensamiento lógico y analítico, habilidades que te servirán no solo en matemáticas, sino en todas las áreas de tu vida.
-
-No importa si tu futuro está en las ciencias, las artes, los negocios o cualquier otro campo: las habilidades de resolución de problemas que desarrollas con la trigonometría son universalmente valiosas.
+\vspace{2cm}
 
 \begin{center}
-\begin{tikzpicture}
-  \node[draw, line width=2pt, maincolor, rounded corners=10pt, fill=maincolor!10, text width=12cm, align=center, font=\Large] {
-    ¡Sigue practicando, nunca dejes de hacer preguntas, \\
-    y recuerda que cada problema resuelto te hace más fuerte!
-  };
-\end{tikzpicture}
-\end{center}
-
-\vspace{1cm}
-
-\begin{center}
-{\Large\textbf{¡Mucho éxito en tu aprendizaje de la trigonometría!}}
-
+\Large\textit{``En cada triángulo hay una historia de ángulos y distancias\\
+esperando ser descubierta.''}\\
 \vspace{0.5cm}
-
-{\large Prof. Toribio De J Arrieta F}
+\normalsize
+--- Adaptado para estudiantes de Grado 10
 \end{center}
 
 \end{document}
