@@ -1,0 +1,2925 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel,patterns,angles,quotes}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{booktabs}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{maincolor}}{\thesubsubsection}{1em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Headers y footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad Aplicaciones de las Funciones Trigonométricas}}
+\fancyhead[RO]{\small\textcolor{maincolor}{Solución de Triángulos Oblicuángulos \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+% Entornos tcolorbox
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  breakable,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+% Título
+\title{\textbf{\Huge APLICACIONES DE LAS FUNCIONES TRIGONOMÉTRICAS}\\[0.5cm]
+\Large Solución de Triángulos Oblicuángulos\\[0.3cm]
+\normalsize Guía de Trigonometría}
+\author{Prof. Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vfill
+
+\begin{center}
+\textit{Esta guía está dedicada a todos los estudiantes que desean comprender\\
+cómo las matemáticas nos ayudan a resolver problemas del mundo real.}
+\end{center}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introducción}
+
+¡Hola! ¿Alguna vez te has preguntado cómo los ingenieros calculan la altura de una montaña sin tener que escalarla? ¿O cómo los navegantes encuentran su camino en medio del océano? ¿Cómo los arquitectos diseñan esos puentes increíbles que parecen desafiar la gravedad? La respuesta está en lo que vamos a aprender hoy: los triángulos oblicuángulos.
+
+Hasta ahora, probablemente has trabajado mucho con triángulos rectángulos, esos triángulos que tienen un ángulo de $90^\circ$. Son geniales y súper útiles, pero ¿qué pasa cuando ninguno de los ángulos del triángulo es recto? Ahí es donde entran los triángulos oblicuángulos, y créeme, ¡son igual de poderosos!
+
+\subsection*{¿Qué son los triángulos oblicuángulos?}
+
+Un triángulo oblicuángulo es simplemente cualquier triángulo que NO tiene un ángulo recto. Puede ser:
+\begin{itemize}
+    \item \textbf{Acutángulo}: cuando todos sus ángulos son agudos (menores de $90^\circ$)
+    \item \textbf{Obtusángulo}: cuando uno de sus ángulos es obtuso (mayor de $90^\circ$)
+\end{itemize}
+
+Piénsalo así: la mayoría de los triángulos que encuentras en la vida real son oblicuángulos. La forma de un pedazo de pizza, el triángulo que forman tres ciudades en un mapa, la estructura triangular de un puente colgante... ¡todos son oblicuángulos!
+
+\subsection*{¿Por qué no podemos usar solo el teorema de Pitágoras?}
+
+Buena pregunta. El teorema de Pitágoras es como esa herramienta especial que solo funciona con triángulos rectángulos. Para los triángulos oblicuángulos, necesitamos herramientas nuevas y más versátiles: la Ley del Seno y la Ley del Coseno. Son como las navajas suizas de la trigonometría: funcionan con CUALQUIER triángulo.
+
+\subsection*{Aplicaciones prácticas que veremos}
+
+Te voy a mostrar cómo estos conceptos se usan en situaciones reales fascinantes:
+
+\begin{enumerate}
+    \item \textbf{Navegación marítima}: Los marineros usan triangulación para determinar su posición en el océano. Con la ley del seno, pueden calcular distancias a faros o puntos de referencia costeros.
+
+    \item \textbf{Topografía}: Los topógrafos miden terrenos irregulares dividiendo el área en triángulos oblicuángulos. Así determinan alturas de montañas, pendientes de terrenos y crean mapas precisos.
+
+    \item \textbf{Arquitectura}: Los arquitectos usan estas leyes para diseñar estructuras con formas triangulares no rectangulares, calculando fuerzas y tensiones en cada parte de la estructura.
+
+    \item \textbf{Ingeniería}: En el diseño de puentes innovadores, especialmente los puentes colgantes y atirantados, cada cable forma triángulos oblicuángulos con la estructura. Los ingenieros deben calcular las tensiones exactas en cada cable.
+
+    \item \textbf{Astronomía y GPS}: Para determinar la posición de satélites, calcular distancias entre estrellas, o hacer que tu GPS funcione correctamente, se utilizan constantemente estas leyes.
+\end{enumerate}
+
+\subsection*{¿Por qué deberías emocionarte con este tema?}
+
+Mira, entiendo que a veces las matemáticas pueden parecer abstractas, pero lo que vamos a aprender aquí es súper concreto y útil. Imagínate esto:
+
+\begin{itemize}
+    \item Podrás calcular la altura de cualquier objeto alto (un árbol, un edificio, una montaña) sin necesidad de medirlo directamente
+    \item Entenderás cómo funcionan los sistemas de GPS y navegación
+    \item Comprenderás los principios detrás del diseño de estructuras increíbles
+    \item Tendrás las herramientas matemáticas que usan ingenieros y científicos todos los días
+\end{itemize}
+
+Además, resolver triángulos oblicuángulos es como resolver puzzles. Tienes algunas piezas de información (algunos lados y ángulos) y debes descubrir las piezas faltantes. Es un desafío intelectual que, una vez que le agarras el truco, ¡es súper satisfactorio!
+
+\subsection*{Lo que necesitas recordar antes de empezar}
+
+Para sacarle el máximo provecho a esta guía, asegúrate de tener frescos estos conceptos:
+\begin{itemize}
+    \item Las funciones trigonométricas básicas: seno, coseno y tangente
+    \item Cómo trabajar con ángulos en grados
+    \item Álgebra básica (resolver ecuaciones)
+    \item El teorema de Pitágoras (sí, todavía lo usaremos como referencia)
+\end{itemize}
+
+No te preocupes si no eres un experto en todo esto. Iremos paso a paso, y cuando necesitemos usar algún concepto previo, lo repasaremos rápidamente.
+
+\subsection*{Nuestra meta}
+
+Al final de esta guía, serás capaz de resolver CUALQUIER triángulo oblicuángulo. No importa qué información te den (tres lados, dos lados y un ángulo, dos ángulos y un lado), tendrás las herramientas para encontrar toda la información faltante. ¡Es como tener superpoderes matemáticos!
+
+Así que respira profundo, prepara tu calculadora (la vas a necesitar), y vamos a sumergirnos en el fascinante mundo de los triángulos oblicuángulos. Te prometo que al final dirás: "¡Wow, no sabía que las matemáticas podían hacer todo esto!"
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Definición de triángulo oblicuángulo}
+
+\begin{definicion}
+Un \textbf{triángulo oblicuángulo} es cualquier triángulo que no contiene un ángulo recto ($90^\circ$). Todos sus ángulos son diferentes de $90^\circ$.
+\end{definicion}
+
+Los triángulos oblicuángulos se clasifican en dos tipos:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Triángulo acutángulo
+    \coordinate (A1) at (0,0);
+    \coordinate (B1) at (3,0);
+    \coordinate (C1) at (1.5,2);
+
+    \draw[thick, maincolor] (A1) -- (B1) -- (C1) -- cycle;
+    \node[below] at (A1) {$A$};
+    \node[below] at (B1) {$B$};
+    \node[above] at (C1) {$C$};
+
+    % Ángulos
+    \pic[draw, accentcolor, angle radius=0.3cm, angle eccentricity=1.5] {angle = B1--A1--C1};
+    \pic[draw, accentcolor, angle radius=0.3cm, angle eccentricity=1.5] {angle = C1--B1--A1};
+    \pic[draw, accentcolor, angle radius=0.3cm, angle eccentricity=1.5] {angle = A1--C1--B1};
+
+    \node[below] at (1.5,-0.5) {\textbf{Triángulo Acutángulo}};
+    \node[below] at (1.5,-0.8) {\small Todos los ángulos $< 90^\circ$};
+
+    % Triángulo obtusángulo
+    \begin{scope}[xshift=5cm]
+        \coordinate (A2) at (0,0);
+        \coordinate (B2) at (3,0);
+        \coordinate (C2) at (0.5,1.5);
+
+        \draw[thick, maincolor] (A2) -- (B2) -- (C2) -- cycle;
+        \node[below] at (A2) {$D$};
+        \node[below] at (B2) {$E$};
+        \node[above] at (C2) {$F$};
+
+        % Ángulos
+        \pic[draw, accentcolor, angle radius=0.3cm, angle eccentricity=1.5] {angle = B2--A2--C2};
+        \pic[draw, red, angle radius=0.3cm, angle eccentricity=1.5] {angle = C2--B2--A2};
+        \pic[draw, accentcolor, angle radius=0.3cm, angle eccentricity=1.5] {angle = A2--C2--B2};
+
+        \node[below] at (1.5,-0.5) {\textbf{Triángulo Obtusángulo}};
+        \node[below] at (1.5,-0.8) {\small Un ángulo $> 90^\circ$};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+En cualquier triángulo oblicuángulo, usamos la siguiente notación estándar:
+\begin{itemize}
+    \item Los vértices se nombran con letras mayúsculas: $A$, $B$, $C$
+    \item Los lados opuestos a cada vértice se nombran con letras minúsculas: $a$, $b$, $c$
+    \item Los ángulos en cada vértice se pueden denotar con la letra del vértice o con letras griegas
+\end{itemize}
+
+\subsection{Ley del Seno}
+
+La Ley del Seno es nuestra primera herramienta poderosa para resolver triángulos oblicuángulos.
+
+\begin{definicion}[title=Ley del Seno]
+En cualquier triángulo, la razón entre la longitud de un lado y el seno del ángulo opuesto es constante:
+\[
+\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R
+\]
+donde $R$ es el radio del círculo circunscrito al triángulo.
+\end{definicion}
+
+\subsubsection{Demostración visual de la Ley del Seno}
+
+Vamos a ver por qué esta ley funciona. Imagina un triángulo inscrito en un círculo:
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Círculo
+    \draw[dashed, gray] (0,0) circle (2);
+    \coordinate (O) at (0,0);
+
+    % Triángulo
+    \coordinate (A) at (140:2);
+    \coordinate (B) at (20:2);
+    \coordinate (C) at (260:2);
+
+    \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+
+    % Etiquetas de vértices
+    \node[above left] at (A) {$A$};
+    \node[right] at (B) {$B$};
+    \node[below left] at (C) {$C$};
+
+    % Lados
+    \node[above right] at ($(A)!0.5!(B)$) {$c$};
+    \node[below] at ($(B)!0.5!(C)$) {$a$};
+    \node[left] at ($(C)!0.5!(A)$) {$b$};
+
+    % Radio y centro
+    \draw[accentcolor, dashed] (O) -- (A) node[midway, left] {$R$};
+    \draw[accentcolor, dashed] (O) -- (B) node[midway, right] {$R$};
+    \draw[accentcolor, dashed] (O) -- (C) node[midway, below] {$R$};
+    \filldraw (O) circle (0.03) node[below right] {$O$};
+
+    % Diámetro auxiliar
+    \coordinate (D) at (-140:2);
+    \draw[dotted, thick] (A) -- (D);
+    \node[below right] at (D) {$D$};
+
+    % Ángulo inscrito
+    \pic[draw, accentcolor, angle radius=0.4cm, angle eccentricity=1.3] {angle = C--A--B};
+
+    \node[below] at (0,-2.5) {El triángulo inscrito en un círculo de radio $R$};
+\end{tikzpicture}
+\end{center}
+
+La demostración se basa en que el ángulo inscrito en una semicircunferencia es recto, y usando propiedades del círculo, llegamos a que cada razón es igual a $2R$.
+
+\subsubsection{Casos de uso de la Ley del Seno}
+
+La Ley del Seno es especialmente útil cuando conocemos:
+\begin{enumerate}
+    \item \textbf{Caso ALA (Ángulo-Lado-Ángulo)}: Dos ángulos y el lado entre ellos
+    \item \textbf{Caso AAL (Ángulo-Ángulo-Lado)}: Dos ángulos y un lado cualquiera
+    \item \textbf{Caso LLA (Lado-Lado-Ángulo)}: Dos lados y un ángulo opuesto a uno de ellos (¡cuidado con el caso ambiguo!)
+\end{enumerate}
+
+\begin{nota}
+El caso LLA puede tener 0, 1 o 2 soluciones. Esto se conoce como el caso ambiguo de la ley del seno.
+\end{nota}
+
+\subsection{Ley del Coseno}
+
+La Ley del Coseno es como una versión generalizada del Teorema de Pitágoras que funciona para cualquier triángulo.
+
+\begin{definicion}[title=Ley del Coseno]
+En cualquier triángulo, el cuadrado de un lado es igual a la suma de los cuadrados de los otros dos lados menos el doble producto de estos lados por el coseno del ángulo comprendido entre ellos:
+\begin{align*}
+a^2 &= b^2 + c^2 - 2bc \cos A \\
+b^2 &= a^2 + c^2 - 2ac \cos B \\
+c^2 &= a^2 + b^2 - 2ab \cos C
+\end{align*}
+\end{definicion}
+
+\subsubsection{Demostración visual de la Ley del Coseno}
+
+Veamos geométricamente por qué funciona esta ley:
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    % Triángulo
+    \coordinate (B) at (0,0);
+    \coordinate (C) at (3,0);
+    \coordinate (A) at (2,1.5);
+
+    \draw[thick, maincolor] (B) -- (C) -- (A) -- cycle;
+
+    % Altura
+    \coordinate (H) at (2,0);
+    \draw[dashed, gray] (A) -- (H);
+    \draw (H) rectangle +(-0.1,0.1);
+
+    % Etiquetas
+    \node[below] at (B) {$B$};
+    \node[below] at (C) {$C$};
+    \node[above] at (A) {$A$};
+    \node[below] at (H) {$H$};
+
+    % Lados
+    \node[above left] at ($(B)!0.5!(A)$) {$c$};
+    \node[above right] at ($(A)!0.5!(C)$) {$b$};
+    \node[below] at ($(B)!0.5!(C)$) {$a$};
+
+    % Segmentos de la base
+    \draw[|-|, accentcolor] ($(B)+(0,-0.3)$) -- ($(H)+(0,-0.3)$) node[midway, below] {$c\cos B$};
+    \draw[|-|, accentcolor] ($(H)+(0,-0.4)$) -- ($(C)+(0,-0.4)$) node[midway, below] {$a - c\cos B$};
+
+    % Altura
+    \node[right] at ($(H)!0.5!(A)$) {$h = c\sin B$};
+
+    % Ángulo
+    \pic[draw, accentcolor, angle radius=0.4cm, angle eccentricity=1.3] {angle = C--B--A};
+\end{tikzpicture}
+\end{center}
+
+Aplicando el Teorema de Pitágoras al triángulo rectángulo $AHC$ y manipulando algebraicamente, obtenemos la Ley del Coseno.
+
+\subsubsection{Casos de uso de la Ley del Coseno}
+
+La Ley del Coseno es perfecta cuando conocemos:
+\begin{enumerate}
+    \item \textbf{Caso LAL (Lado-Ángulo-Lado)}: Dos lados y el ángulo comprendido entre ellos
+    \item \textbf{Caso LLL (Lado-Lado-Lado)}: Los tres lados del triángulo
+\end{enumerate}
+
+\begin{nota}
+Cuando todos los ángulos son agudos y uno de ellos es de $90^\circ$, la Ley del Coseno se reduce al Teorema de Pitágoras, ya que $\cos(90^\circ) = 0$.
+\end{nota}
+
+\subsection{Área de triángulos oblicuángulos}
+
+Para calcular el área de un triángulo oblicuángulo, tenemos varias fórmulas útiles:
+
+\subsubsection{Fórmula del área con seno}
+
+\begin{definicion}[title=Área con dos lados y el ángulo comprendido]
+El área de un triángulo con lados $a$ y $b$ y ángulo comprendido $C$ es:
+\[
+\text{Área} = \frac{1}{2}ab\sin C
+\]
+De manera general:
+\begin{align*}
+\text{Área} &= \frac{1}{2}ab\sin C \\
+&= \frac{1}{2}ac\sin B \\
+&= \frac{1}{2}bc\sin A
+\end{align*}
+\end{definicion}
+
+Esta fórmula es súper práctica porque solo necesitas conocer dos lados y el ángulo entre ellos.
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Triángulo
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3.5,0);
+    \coordinate (C) at (1.5,2);
+
+    \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+
+    % Altura
+    \coordinate (H) at (1.5,0);
+    \draw[dashed, gray] (C) -- (H);
+
+    % Etiquetas
+    \node[below] at (A) {$A$};
+    \node[below] at (B) {$B$};
+    \node[above] at (C) {$C$};
+
+    % Lados
+    \node[below] at ($(A)!0.5!(B)$) {$c$};
+    \node[above right] at ($(B)!0.5!(C)$) {$a$};
+    \node[above left] at ($(A)!0.5!(C)$) {$b$};
+
+    % Altura
+    \node[right] at ($(H)!0.5!(C)$) {$h = b\sin A$};
+
+    % Ángulo
+    \pic[draw, accentcolor, angle radius=0.5cm, angle eccentricity=1.3] {angle = B--A--C};
+
+    % Área sombreada
+    \fill[maincolor!20, opacity=0.5] (A) -- (B) -- (C) -- cycle;
+
+    \node[maincolor] at (1.75,0.8) {Área $= \frac{1}{2}ch$};
+    \node[maincolor] at (1.75,0.4) {$= \frac{1}{2}c(b\sin A)$};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Fórmula de Herón}
+
+Cuando conoces los tres lados del triángulo pero ningún ángulo, la Fórmula de Herón es tu mejor amiga.
+
+\begin{definicion}[title=Fórmula de Herón]
+Si conocemos los tres lados $a$, $b$ y $c$ de un triángulo, su área es:
+\[
+\text{Área} = \sqrt{s(s-a)(s-b)(s-c)}
+\]
+donde $s = \frac{a+b+c}{2}$ es el semiperímetro del triángulo.
+\end{definicion}
+
+Esta fórmula es elegante y poderosa. El semiperímetro $s$ es simplemente la mitad del perímetro total.
+
+\subsection{Casos de resolución de triángulos oblicuángulos}
+
+Ahora vamos a organizar todo lo que hemos aprendido. Dependiendo de qué información tengas sobre el triángulo, usarás diferentes estrategias:
+
+\subsubsection{Caso LAL (Lado-Ángulo-Lado)}
+
+\textbf{Conocemos}: Dos lados y el ángulo comprendido entre ellos.
+
+\textbf{Estrategia}:
+\begin{enumerate}
+    \item Usar la Ley del Coseno para encontrar el tercer lado
+    \item Usar la Ley del Seno para encontrar uno de los ángulos restantes
+    \item Calcular el tercer ángulo sabiendo que la suma de ángulos es $180^\circ$
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3,0);
+    \coordinate (C) at (1.2,1.8);
+
+    \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+
+    % Datos conocidos en rojo
+    \draw[ultra thick, red] (A) -- (B) node[midway, below] {conocido};
+    \draw[ultra thick, red] (A) -- (C) node[midway, left] {conocido};
+
+    % Ángulo conocido
+    \pic[draw, red, ultra thick, angle radius=0.5cm, angle eccentricity=1.5] {angle = B--A--C};
+
+    % Incógnita
+    \draw[dashed, thick, blue] (B) -- (C) node[midway, right] {?};
+
+    \node[below] at (1.5,-0.5) {\textbf{Caso LAL}};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Caso ALA (Ángulo-Lado-Ángulo)}
+
+\textbf{Conocemos}: Dos ángulos y el lado comprendido entre ellos.
+
+\textbf{Estrategia}:
+\begin{enumerate}
+    \item Calcular el tercer ángulo (suma = $180^\circ$)
+    \item Usar la Ley del Seno para encontrar los otros dos lados
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3,0);
+    \coordinate (C) at (1.8,1.5);
+
+    \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+
+    % Lado conocido
+    \draw[ultra thick, red] (A) -- (B) node[midway, below] {conocido};
+
+    % Ángulos conocidos
+    \pic[draw, red, ultra thick, angle radius=0.4cm, angle eccentricity=1.5] {angle = B--A--C};
+    \pic[draw, red, ultra thick, angle radius=0.4cm, angle eccentricity=1.5] {angle = A--B--C};
+
+    % Incógnitas
+    \draw[dashed, thick, blue] (A) -- (C) node[midway, left] {?};
+    \draw[dashed, thick, blue] (B) -- (C) node[midway, right] {?};
+
+    \node[below] at (1.5,-0.5) {\textbf{Caso ALA}};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Caso LLL (Lado-Lado-Lado)}
+
+\textbf{Conocemos}: Los tres lados del triángulo.
+
+\textbf{Estrategia}:
+\begin{enumerate}
+    \item Usar la Ley del Coseno para encontrar uno de los ángulos
+    \item Usar la Ley del Coseno o del Seno para encontrar otro ángulo
+    \item Calcular el tercer ángulo por diferencia
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3.2,0);
+    \coordinate (C) at (1.5,1.7);
+
+    \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+
+    % Todos los lados conocidos
+    \draw[ultra thick, red] (A) -- (B) node[midway, below] {conocido};
+    \draw[ultra thick, red] (B) -- (C) node[midway, right] {conocido};
+    \draw[ultra thick, red] (A) -- (C) node[midway, left] {conocido};
+
+    % Ángulos desconocidos
+    \pic[draw, blue, dashed, thick, angle radius=0.4cm, angle eccentricity=1.3] {angle = B--A--C};
+    \pic[draw, blue, dashed, thick, angle radius=0.4cm, angle eccentricity=1.3] {angle = A--B--C};
+    \pic[draw, blue, dashed, thick, angle radius=0.4cm, angle eccentricity=1.3] {angle = B--C--A};
+
+    \node[below] at (1.6,-0.5) {\textbf{Caso LLL}};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Caso LLA (Lado-Lado-Ángulo) - El caso ambiguo}
+
+\textbf{Conocemos}: Dos lados y un ángulo opuesto a uno de ellos.
+
+\textbf{¡Cuidado!} Este es el caso más complicado porque puede tener:
+\begin{itemize}
+    \item \textbf{Ninguna solución}: El triángulo no existe
+    \item \textbf{Una solución}: Un único triángulo posible
+    \item \textbf{Dos soluciones}: Dos triángulos diferentes posibles
+\end{itemize}
+
+\textbf{Estrategia}:
+\begin{enumerate}
+    \item Usar la Ley del Seno para encontrar otro ángulo
+    \item Verificar si la solución es válida (el seno debe estar entre -1 y 1)
+    \item Si hay solución, verificar si existe una segunda solución válida
+    \item Completar el triángulo con la información restante
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Primer caso - dos soluciones
+    \coordinate (A1) at (0,0);
+    \coordinate (B1) at (3,0);
+    \coordinate (C1) at (1.8,1.5);
+    \coordinate (C1p) at (1.8,-0.8);
+
+    % Triángulos
+    \draw[thick, maincolor] (A1) -- (B1);
+    \draw[thick, maincolor] (A1) -- (C1);
+    \draw[thick, maincolor] (B1) -- (C1);
+
+    \draw[thick, blue, dashed] (A1) -- (C1p);
+    \draw[thick, blue, dashed] (B1) -- (C1p);
+
+    % Arco mostrando las dos posibilidades
+    \draw[accentcolor, dashed] (B1) ++(150:2) arc (150:210:2);
+
+    % Etiquetas
+    \node[below] at (A1) {$A$};
+    \node[below] at (B1) {$B$};
+    \node[above] at (C1) {$C$};
+    \node[below] at (C1p) {$C'$};
+
+    % Datos conocidos
+    \draw[ultra thick, red] (A1) -- (B1) node[midway, below] {\small conocido};
+    \node[red, left] at ($(A1)!0.5!(C1)$) {\small conocido};
+
+    % Ángulo conocido
+    \pic[draw, red, ultra thick, angle radius=0.3cm, angle eccentricity=1.3] {angle = C1--B1--A1};
+
+    \node[below] at (1.5,-1.5) {\textbf{Caso ambiguo: 2 soluciones}};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Resumen de estrategias}
+
+Para que tengas todo claro, aquí está el resumen de qué herramienta usar en cada caso:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|l|l|c|}
+\hline
+\textbf{Caso} & \textbf{Información conocida} & \textbf{Herramienta principal} & \textbf{Soluciones} \\
+\hline
+LAL & 2 lados y ángulo entre ellos & Ley del Coseno & 1 \\
+\hline
+ALA & 2 ángulos y lado entre ellos & Ley del Seno & 1 \\
+\hline
+AAL & 2 ángulos y 1 lado cualquiera & Ley del Seno & 1 \\
+\hline
+LLL & 3 lados & Ley del Coseno & 0 o 1 \\
+\hline
+LLA & 2 lados y ángulo opuesto a uno & Ley del Seno & 0, 1 o 2 \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Aplicación: Vectores en triángulos oblicuángulos}
+
+Los vectores son súper importantes en física e ingeniería, y los triángulos oblicuángulos aparecen constantemente cuando trabajamos con ellos.
+
+\subsubsection{Suma de vectores}
+
+Cuando sumas dos vectores que no son perpendiculares, formas un triángulo oblicuángulo:
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Vectores
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (3,0);
+    \coordinate (B) at (1.5,2);
+
+    % Vector A
+    \draw[ultra thick, blue, -latex] (O) -- (A) node[midway, below] {$\vec{A}$};
+
+    % Vector B desde el final de A
+    \draw[ultra thick, red, -latex] (A) -- (B) node[midway, right] {$\vec{B}$};
+
+    % Resultante
+    \draw[ultra thick, maincolor, -latex] (O) -- (B) node[midway, left] {$\vec{R} = \vec{A} + \vec{B}$};
+
+    % Vector B desde el origen (para mostrar el paralelogramo)
+    \draw[dashed, red, -latex] (O) -- +($(B)-(A)$) node[midway, above] {$\vec{B}$};
+
+    % Ángulo entre vectores
+    \pic[draw, accentcolor, angle radius=0.5cm, angle eccentricity=1.3] {angle = A--O--B};
+
+    \node[below] at (1.5,-0.5) {La suma de vectores forma un triángulo};
+\end{tikzpicture}
+\end{center}
+
+Para encontrar la magnitud del vector resultante $\vec{R}$, usamos la Ley del Coseno:
+\[
+|\vec{R}|^2 = |\vec{A}|^2 + |\vec{B}|^2 - 2|\vec{A}||\vec{B}|\cos(180^\circ - \theta)
+\]
+
+\subsubsection{Descomposición de fuerzas}
+
+En ingeniería, frecuentemente necesitamos descomponer una fuerza en componentes que no son perpendiculares:
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Sistema de coordenadas inclinado
+    \coordinate (O) at (0,0);
+
+    % Ejes inclinados
+    \draw[thick, ->] (O) -- (30:3) node[right] {$x'$};
+    \draw[thick, ->] (O) -- (120:2.5) node[above] {$y'$};
+
+    % Fuerza
+    \draw[ultra thick, maincolor, -latex] (O) -- (75:2.5) node[right] {$\vec{F}$};
+
+    % Componentes
+    \draw[dashed, blue] (75:2.5) -- ($(O)+(30:2.165)$);
+    \draw[dashed, red] (75:2.5) -- ($(O)+(120:1.25)$);
+
+    \draw[thick, blue, -latex] (O) -- (30:2.165) node[below] {$F_{x'}$};
+    \draw[thick, red, -latex] (O) -- (120:1.25) node[left] {$F_{y'}$};
+
+    % Ángulos
+    \pic[draw, angle radius=0.4cm, angle eccentricity=1.5] {angle = 30:3--O--0:3};
+    \pic[draw, angle radius=0.6cm, angle eccentricity=1.3] {angle = 75:2.5--O--30:3};
+
+    \node[below] at (0,-0.5) {Descomposición en ejes no perpendiculares};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Aplicación: Diseño de puentes innovadores}
+
+Los puentes modernos, especialmente los atirantados y colgantes, son maravillas de la aplicación de triángulos oblicuángulos.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Torre del puente
+    \draw[ultra thick] (0,-1) -- (0,4);
+    \node[left] at (0,4) {Torre};
+
+    % Tablero del puente
+    \draw[ultra thick] (-4,0) -- (4,0);
+    \node[below] at (0,0) {Tablero};
+
+    % Cables (tirantes)
+    \foreach \x/\y in {-3/0.5, -2/1, -1/1.5, 1/1.5, 2/1, 3/0.5} {
+        \draw[thick, accentcolor] (0,3.5) -- (\x,0);
+    }
+
+    % Triángulo ejemplo
+    \draw[ultra thick, blue] (0,3.5) -- (2,0) -- (0,0) -- cycle;
+
+    % Etiquetas del triángulo
+    \node[above] at (0,3.5) {$A$};
+    \node[below] at (2,0) {$B$};
+    \node[below] at (0,0) {$C$};
+
+    % Fuerzas
+    \draw[thick, red, -latex] (2,0) -- (2,-0.8) node[right] {Peso};
+    \draw[thick, red, -latex] (0,3.5) -- (-0.5,3.8) node[above] {Tensión};
+
+    \node[below] at (0,-1.5) {\textbf{Puente atirantado: cada cable forma un triángulo}};
+
+    % Anotación
+    \node[text width=6cm, right] at (5,2) {
+        Cada cable debe soportar una tensión específica.
+        Usando la ley del seno y coseno, los ingenieros calculan:
+        \begin{itemize}
+            \item Longitud exacta de cada cable
+            \item Ángulo óptimo de inclinación
+            \item Distribución de fuerzas
+            \item Tensión en cada punto
+        \end{itemize}
+    };
+\end{tikzpicture}
+\end{center}
+
+Los ingenieros deben resolver cientos de triángulos oblicuángulos para diseñar un puente seguro y eficiente. Cada cable, cada viga, cada conexión forma triángulos que deben ser analizados cuidadosamente.
+
+% PARTE 2: EJEMPLOS RESUELTOS, EJERCICIOS INVERSOS Y SOLUCIONES
+% Tema: Triángulos Oblicuángulos (Ley del Seno, Ley del Coseno, Áreas)
+% Grado 10 - Trigonometría
+
+\section{Ejemplos Resueltos}
+
+Ahora sí, vamos a meternos de lleno con los triángulos oblicuángulos. Ya no más ángulos rectos, ¡ahora trabajamos con triángulos de cualquier forma! Y para eso tenemos dos herramientas súper poderosas: la ley del seno y la ley del coseno.
+
+\begin{ejemplo}[title=Ejemplo 1: Caso ALA - Dos ángulos y el lado entre ellos]
+Digamos que tenemos un triángulo ABC donde el ángulo $A = 45^\circ$, el ángulo $C = 60^\circ$, y el lado entre ellos $b = 10$ cm (el lado opuesto al ángulo B). Encuentra todos los elementos restantes del triángulo.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Primero, encontremos el ángulo que falta.
+Como la suma de los ángulos internos de un triángulo es $180^\circ$:
+\[
+B = 180^\circ - A - C = 180^\circ - 45^\circ - 60^\circ = 75^\circ
+\]
+
+\textbf{Paso 2:} Dibujemos el triángulo para visualizar mejor.
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Vértices
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (3.5,0);
+    \coordinate (C) at (1.8,2.2);
+
+    % Triángulo
+    \draw[thick] (A) -- (B) node[midway,below] {$c$} -- (C) node[midway,right] {$a$} -- cycle node[midway,above left] {$b = 10$};
+
+    % Ángulos
+    \draw[blue,-{Latex}] (0.5,0) arc (0:45:0.5) node[midway,right] {$45^\circ$};
+    \draw[blue,-{Latex}] (3,0) arc (180:105:0.5) node[midway,left] {$75^\circ$};
+    \draw[blue,-{Latex}] (C) ++(240:0.4) arc (240:300:0.4) node[midway,below] {$60^\circ$};
+
+    % Etiquetas de vértices
+    \node at (A) [below left] {$A$};
+    \node at (B) [below right] {$B$};
+    \node at (C) [above] {$C$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 3:} Ahora usamos la ley del seno, que dice:
+\[
+\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}
+\]
+
+\textbf{Paso 4:} Encontremos el lado $a$ (opuesto al ángulo A).
+\[
+\frac{a}{\sin 45^\circ} = \frac{10}{\sin 75^\circ}
+\]
+
+Entonces:
+\[
+a = \frac{10 \cdot \sin 45^\circ}{\sin 75^\circ} = \frac{10 \cdot 0.7071}{0.9659} = \frac{7.071}{0.9659} = 7.32 \text{ cm}
+\]
+
+\textbf{Paso 5:} Ahora encontremos el lado $c$ (opuesto al ángulo C).
+\[
+\frac{c}{\sin 60^\circ} = \frac{10}{\sin 75^\circ}
+\]
+
+Por lo tanto:
+\[
+c = \frac{10 \cdot \sin 60^\circ}{\sin 75^\circ} = \frac{10 \cdot 0.8660}{0.9659} = \frac{8.660}{0.9659} = 8.97 \text{ cm}
+\]
+
+\textbf{Paso 6:} Verificación usando la ley del seno con los valores encontrados.
+\[
+\frac{7.32}{\sin 45^\circ} = \frac{7.32}{0.7071} = 10.35
+\]
+\[
+\frac{10}{\sin 75^\circ} = \frac{10}{0.9659} = 10.35
+\]
+\[
+\frac{8.97}{\sin 60^\circ} = \frac{8.97}{0.8660} = 10.36
+\]
+
+¡Los valores son consistentes! (La pequeña diferencia es por redondeo)
+
+\textbf{Respuesta final:}
+\[
+\boxed{B = 75^\circ, \quad a = 7.32 \text{ cm}, \quad c = 8.97 \text{ cm}}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 2: Caso LAL - Dos lados y el ángulo entre ellos]
+En un triángulo PQR, conocemos los lados $p = 8$ m, $q = 12$ m, y el ángulo entre ellos $R = 50^\circ$. Encuentra el lado $r$ y los ángulos restantes.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Para este caso, la ley del coseno es nuestra mejor amiga. La ley del coseno dice:
+\[
+r^2 = p^2 + q^2 - 2pq\cos R
+\]
+
+\textbf{Paso 2:} Hagamos un diagrama del triángulo.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.4]
+    % Vértices
+    \coordinate (P) at (0,0);
+    \coordinate (Q) at (12,0);
+    \coordinate (R) at (5,6);
+
+    % Triángulo
+    \draw[thick] (P) -- (Q) node[midway,below] {$r$};
+    \draw[thick] (Q) -- (R) node[midway,right] {$p = 8$ m};
+    \draw[thick] (R) -- (P) node[midway,left] {$q = 12$ m};
+
+    % Ángulo R
+    \draw[red,-{Latex}] (R) ++(270:1) arc (270:330:1) node[midway,below] {$50^\circ$};
+
+    % Etiquetas
+    \node at (P) [below left] {$P$};
+    \node at (Q) [below right] {$Q$};
+    \node at (R) [above] {$R$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 3:} Sustituyamos los valores en la ley del coseno.
+\begin{align}
+r^2 &= 8^2 + 12^2 - 2(8)(12)\cos 50^\circ \\
+&= 64 + 144 - 192 \cdot 0.6428 \\
+&= 208 - 123.42 \\
+&= 84.58
+\end{align}
+
+Por lo tanto:
+\[
+r = \sqrt{84.58} = 9.20 \text{ m}
+\]
+
+\textbf{Paso 4:} Ahora encontremos el ángulo P usando la ley del seno.
+\[
+\frac{\sin P}{p} = \frac{\sin R}{r}
+\]
+
+Entonces:
+\[
+\sin P = \frac{p \cdot \sin R}{r} = \frac{8 \cdot \sin 50^\circ}{9.20} = \frac{8 \cdot 0.7660}{9.20} = \frac{6.128}{9.20} = 0.666
+\]
+
+Por lo tanto:
+\[
+P = \arcsin(0.666) = 41.76^\circ
+\]
+
+\textbf{Paso 5:} Encontremos el ángulo Q.
+\[
+Q = 180^\circ - P - R = 180^\circ - 41.76^\circ - 50^\circ = 88.24^\circ
+\]
+
+\textbf{Paso 6:} Verificación usando la ley del coseno para el lado $p$.
+\[
+p^2 = q^2 + r^2 - 2qr\cos P
+\]
+\[
+p^2 = 144 + 84.58 - 2(12)(9.20)(0.7468) = 228.58 - 164.86 = 63.72
+\]
+\[
+p = \sqrt{63.72} = 7.98 \approx 8 \text{ m} \quad \checkmark
+\]
+
+\textbf{Respuesta final:}
+\[
+\boxed{r = 9.20 \text{ m}, \quad P = 41.76^\circ, \quad Q = 88.24^\circ}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 3: Caso LLL - Los tres lados conocidos]
+Un triángulo tiene lados $a = 7$ cm, $b = 9$ cm y $c = 11$ cm. Encuentra todos los ángulos del triángulo.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Cuando conocemos los tres lados, usamos la ley del coseno para encontrar cada ángulo. Empecemos con el ángulo más grande (opuesto al lado más largo).
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+    % Vértices aproximados
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (11,0);
+    \coordinate (C) at (4.5,5.2);
+
+    % Triángulo
+    \draw[thick] (A) -- (B) node[midway,below] {$c = 11$ cm};
+    \draw[thick] (B) -- (C) node[midway,right] {$a = 7$ cm};
+    \draw[thick] (C) -- (A) node[midway,left] {$b = 9$ cm};
+
+    % Etiquetas
+    \node at (A) [below left] {$A$};
+    \node at (B) [below right] {$B$};
+    \node at (C) [above] {$C$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 2:} Encontremos el ángulo C (opuesto al lado más largo, $c = 11$).
+Usando la ley del coseno:
+\[
+c^2 = a^2 + b^2 - 2ab\cos C
+\]
+
+Despejando $\cos C$:
+\[
+\cos C = \frac{a^2 + b^2 - c^2}{2ab} = \frac{49 + 81 - 121}{2 \cdot 7 \cdot 9} = \frac{9}{126} = 0.0714
+\]
+
+Por lo tanto:
+\[
+C = \arccos(0.0714) = 85.90^\circ
+\]
+
+\textbf{Paso 3:} Ahora encontremos el ángulo B (opuesto al lado $b = 9$).
+\[
+\cos B = \frac{a^2 + c^2 - b^2}{2ac} = \frac{49 + 121 - 81}{2 \cdot 7 \cdot 11} = \frac{89}{154} = 0.5779
+\]
+
+Entonces:
+\[
+B = \arccos(0.5779) = 54.67^\circ
+\]
+
+\textbf{Paso 4:} Encontremos el ángulo A (opuesto al lado $a = 7$).
+\[
+\cos A = \frac{b^2 + c^2 - a^2}{2bc} = \frac{81 + 121 - 49}{2 \cdot 9 \cdot 11} = \frac{153}{198} = 0.7727
+\]
+
+Por lo tanto:
+\[
+A = \arccos(0.7727) = 39.43^\circ
+\]
+
+\textbf{Paso 5:} Verificación: La suma de los ángulos debe ser $180^\circ$.
+\[
+A + B + C = 39.43^\circ + 54.67^\circ + 85.90^\circ = 180.00^\circ \quad \checkmark
+\]
+
+\textbf{Paso 6:} Verificación adicional usando la ley del seno.
+\[
+\frac{a}{\sin A} = \frac{7}{\sin 39.43^\circ} = \frac{7}{0.6355} = 11.01
+\]
+\[
+\frac{b}{\sin B} = \frac{9}{\sin 54.67^\circ} = \frac{9}{0.8161} = 11.02
+\]
+\[
+\frac{c}{\sin C} = \frac{11}{\sin 85.90^\circ} = \frac{11}{0.9975} = 11.03
+\]
+
+¡Todos dan aproximadamente el mismo valor! ✓
+
+\textbf{Respuesta final:}
+\[
+\boxed{A = 39.43^\circ, \quad B = 54.67^\circ, \quad C = 85.90^\circ}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 4: Caso LLA - El caso ambiguo]
+En un triángulo XYZ, tenemos $x = 12$ cm, $y = 8$ cm, y el ángulo $Y = 30^\circ$ (opuesto al lado $y$). Encuentra todas las posibles soluciones para el triángulo.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Este es el famoso "caso ambiguo" porque puede tener 0, 1 o 2 soluciones. Usemos la ley del seno para encontrar el ángulo X.
+
+\[
+\frac{\sin X}{x} = \frac{\sin Y}{y}
+\]
+
+\textbf{Paso 2:} Despejando $\sin X$:
+\[
+\sin X = \frac{x \cdot \sin Y}{y} = \frac{12 \cdot \sin 30^\circ}{8} = \frac{12 \cdot 0.5}{8} = \frac{6}{8} = 0.75
+\]
+
+\textbf{Paso 3:} Como $\sin X = 0.75$, hay dos posibles valores para X:
+\begin{align}
+X_1 &= \arcsin(0.75) = 48.59^\circ \\
+X_2 &= 180^\circ - 48.59^\circ = 131.41^\circ
+\end{align}
+
+\textbf{Paso 4:} Veamos si ambas soluciones son válidas.
+
+\textbf{Primera solución:} $X_1 = 48.59^\circ$
+\[
+Z_1 = 180^\circ - X_1 - Y = 180^\circ - 48.59^\circ - 30^\circ = 101.41^\circ
+\]
+
+Como todos los ángulos son positivos y suman $180^\circ$, esta solución es válida.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.4]
+    % Primera solución
+    \coordinate (X1) at (0,0);
+    \coordinate (Y1) at (10,0);
+    \coordinate (Z1) at (3,5);
+
+    \draw[thick,blue] (X1) -- (Y1) node[midway,below] {$z_1$};
+    \draw[thick,blue] (Y1) -- (Z1) node[midway,right] {$x = 12$};
+    \draw[thick,blue] (Z1) -- (X1) node[midway,left] {$y = 8$};
+
+    \node at (X1) [below left] {$X$};
+    \node at (Y1) [below right] {$Y$};
+    \node at (Z1) [above] {$Z_1$};
+
+    \node[blue] at (5,-1.5) {Solución 1};
+\end{tikzpicture}
+\hspace{2cm}
+\begin{tikzpicture}[scale=0.4]
+    % Segunda solución
+    \coordinate (X2) at (0,0);
+    \coordinate (Y2) at (10,0);
+    \coordinate (Z2) at (7,-3);
+
+    \draw[thick,red] (X2) -- (Y2) node[midway,below] {$z_2$};
+    \draw[thick,red] (Y2) -- (Z2) node[midway,right] {$x = 12$};
+    \draw[thick,red] (Z2) -- (X2) node[midway,left] {$y = 8$};
+
+    \node at (X2) [below left] {$X$};
+    \node at (Y2) [below right] {$Y$};
+    \node at (Z2) [below] {$Z_2$};
+
+    \node[red] at (5,-4.5) {Solución 2};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Segunda solución:} $X_2 = 131.41^\circ$
+\[
+Z_2 = 180^\circ - X_2 - Y = 180^\circ - 131.41^\circ - 30^\circ = 18.59^\circ
+\]
+
+Esta solución también es válida porque todos los ángulos son positivos y suman $180^\circ$.
+
+\textbf{Paso 5:} Encontremos el lado $z$ para cada solución usando la ley del seno.
+
+Para la primera solución:
+\[
+z_1 = \frac{y \cdot \sin Z_1}{\sin Y} = \frac{8 \cdot \sin 101.41^\circ}{\sin 30^\circ} = \frac{8 \cdot 0.9799}{0.5} = 15.68 \text{ cm}
+\]
+
+Para la segunda solución:
+\[
+z_2 = \frac{y \cdot \sin Z_2}{\sin Y} = \frac{8 \cdot \sin 18.59^\circ}{\sin 30^\circ} = \frac{8 \cdot 0.3189}{0.5} = 5.10 \text{ cm}
+\]
+
+\textbf{Paso 6:} Verificación usando la ley del seno para ambas soluciones.
+
+Primera solución: $\frac{12}{\sin 48.59^\circ} = \frac{8}{\sin 30^\circ} = \frac{15.68}{\sin 101.41^\circ} = 16$ ✓
+
+Segunda solución: $\frac{12}{\sin 131.41^\circ} = \frac{8}{\sin 30^\circ} = \frac{5.10}{\sin 18.59^\circ} = 16$ ✓
+
+\textbf{Respuesta final:}
+\[
+\boxed{\begin{aligned}
+\text{Solución 1:} & \quad X_1 = 48.59^\circ, \quad Z_1 = 101.41^\circ, \quad z_1 = 15.68 \text{ cm} \\
+\text{Solución 2:} & \quad X_2 = 131.41^\circ, \quad Z_2 = 18.59^\circ, \quad z_2 = 5.10 \text{ cm}
+\end{aligned}}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 5: Área usando seno del ángulo]
+Un paralelogramo tiene lados adyacentes de 15 m y 20 m, con un ángulo de $65^\circ$ entre ellos. Calcula el área del paralelogramo y de uno de los triángulos que se forman al trazar una diagonal.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Primero visualicemos el problema con un diagrama.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.25]
+    % Paralelogramo
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (20,0);
+    \coordinate (D) at (5,12);
+    \coordinate (C) at (25,12);
+
+    \draw[thick] (A) -- (B) node[midway,below] {20 m};
+    \draw[thick] (B) -- (C) node[midway,right] {15 m};
+    \draw[thick] (C) -- (D);
+    \draw[thick] (D) -- (A) node[midway,left] {15 m};
+
+    % Diagonal
+    \draw[dashed,blue] (A) -- (C);
+
+    % Ángulo
+    \draw[red,-{Latex}] (2,0) arc (0:65:2) node[midway,right] {$65^\circ$};
+
+    % Etiquetas
+    \node at (A) [below left] {$A$};
+    \node at (B) [below right] {$B$};
+    \node at (C) [above right] {$C$};
+    \node at (D) [above left] {$D$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 2:} Para el área del paralelogramo, usamos la fórmula:
+\[
+\text{Área}_{\text{paralelogramo}} = ab\sin\theta
+\]
+
+donde $a$ y $b$ son los lados adyacentes y $\theta$ es el ángulo entre ellos.
+
+\textbf{Paso 3:} Sustituyendo los valores:
+\[
+\text{Área}_{\text{paralelogramo}} = 15 \times 20 \times \sin 65^\circ = 300 \times 0.9063 = 271.89 \text{ m}^2
+\]
+
+\textbf{Paso 4:} La diagonal divide el paralelogramo en dos triángulos congruentes. Por lo tanto, el área de cada triángulo es:
+\[
+\text{Área}_{\text{triángulo}} = \frac{\text{Área}_{\text{paralelogramo}}}{2} = \frac{271.89}{2} = 135.95 \text{ m}^2
+\]
+
+\textbf{Paso 5:} Verificación directa usando la fórmula del área para un triángulo:
+\[
+\text{Área}_{\text{triángulo}} = \frac{1}{2}ab\sin C = \frac{1}{2} \times 15 \times 20 \times \sin 65^\circ
+\]
+\[
+= \frac{1}{2} \times 300 \times 0.9063 = 135.95 \text{ m}^2 \quad \checkmark
+\]
+
+\textbf{Paso 6:} Extra: Calculemos la longitud de la diagonal usando la ley del coseno.
+\[
+d^2 = 15^2 + 20^2 - 2(15)(20)\cos 65^\circ
+\]
+\[
+d^2 = 225 + 400 - 600(0.4226) = 625 - 253.56 = 371.44
+\]
+\[
+d = \sqrt{371.44} = 19.27 \text{ m}
+\]
+
+\textbf{Respuesta final:}
+\[
+\boxed{\begin{aligned}
+\text{Área del paralelogramo} &= 271.89 \text{ m}^2 \\
+\text{Área de cada triángulo} &= 135.95 \text{ m}^2 \\
+\text{Longitud de la diagonal} &= 19.27 \text{ m}
+\end{aligned}}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 6: Área usando la fórmula de Herón]
+Un jardín triangular tiene lados de 25 m, 30 m y 35 m. Calcula su área usando la fórmula de Herón y verifica el resultado con otro método.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} La fórmula de Herón dice que si conocemos los tres lados $a$, $b$ y $c$ de un triángulo, el área es:
+\[
+A = \sqrt{s(s-a)(s-b)(s-c)}
+\]
+donde $s$ es el semiperímetro: $s = \frac{a+b+c}{2}$
+
+\textbf{Paso 2:} Calculemos el semiperímetro.
+\[
+s = \frac{25 + 30 + 35}{2} = \frac{90}{2} = 45 \text{ m}
+\]
+
+\textbf{Paso 3:} Ahora calculemos cada factor:
+\begin{align}
+s - a &= 45 - 25 = 20 \text{ m} \\
+s - b &= 45 - 30 = 15 \text{ m} \\
+s - c &= 45 - 35 = 10 \text{ m}
+\end{align}
+
+\textbf{Paso 4:} Aplicando la fórmula de Herón:
+\[
+A = \sqrt{45 \times 20 \times 15 \times 10} = \sqrt{45 \times 20 \times 15 \times 10}
+\]
+\[
+= \sqrt{135000} = \sqrt{135000}
+\]
+
+Vamos a simplificar $\sqrt{135000}$:
+\[
+135000 = 135 \times 1000 = 135 \times 1000 = 27 \times 5 \times 1000 = 27 \times 5000
+\]
+\[
+= 3^3 \times 5^4 \times 2^3 = 2^3 \times 3^3 \times 5^4
+\]
+\[
+\sqrt{135000} = 2 \times 3 \times 5^2 \sqrt{2 \times 3 \times 5} = 150\sqrt{30} = 150 \times 5.477 = 821.58 \text{ m}^2
+\]
+
+\textbf{Paso 5:} Verifiquemos usando el método del seno. Primero encontremos un ángulo usando la ley del coseno.
+
+Encontremos el ángulo C (opuesto al lado de 35 m):
+\[
+\cos C = \frac{25^2 + 30^2 - 35^2}{2 \times 25 \times 30} = \frac{625 + 900 - 1225}{1500} = \frac{300}{1500} = 0.2
+\]
+\[
+C = \arccos(0.2) = 78.46^\circ
+\]
+
+\textbf{Paso 6:} Verificación del área usando $A = \frac{1}{2}ab\sin C$:
+\[
+A = \frac{1}{2} \times 25 \times 30 \times \sin 78.46^\circ = 375 \times 0.9798 = 367.43 \text{ m}^2
+\]
+
+Hmm, parece que hay un error de cálculo. Recalculemos más cuidadosamente:
+\[
+A = \sqrt{45 \times 20 \times 15 \times 10} = \sqrt{135000}
+\]
+
+Calculemos paso a paso:
+\[
+\sqrt{135000} = \sqrt{900 \times 150} = 30\sqrt{150} = 30\sqrt{25 \times 6} = 30 \times 5\sqrt{6} = 150\sqrt{6}
+\]
+\[
+= 150 \times 2.449 = 367.35 \text{ m}^2
+\]
+
+¡Ahora sí coincide con la verificación!
+
+\textbf{Respuesta final:}
+\[
+\boxed{A = 150\sqrt{6} \approx 367.35 \text{ m}^2}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 7: Problema aplicado - Navegación marítima]
+Un barco sale del puerto A y navega 45 km en dirección N$30^\circ$E hasta el punto B. Luego gira y navega 60 km en dirección S$70^\circ$E hasta el punto C. ¿A qué distancia está el punto C del puerto A? ¿En qué dirección debe navegar para regresar directamente al puerto?
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Primero, entendamos las direcciones y dibujemos el problema.
+- N$30^\circ$E significa $30^\circ$ al este del norte, o sea, un rumbo de $60^\circ$ desde el este.
+- S$70^\circ$E significa $70^\circ$ al este del sur, o sea, un rumbo de $20^\circ$ bajo el este.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.08]
+    % Sistema de coordenadas
+    \draw[gray,->] (-10,0) -- (80,0) node[right] {E};
+    \draw[gray,->] (0,-10) -- (0,70) node[above] {N};
+
+    % Puntos
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (22.5,38.97);
+    \coordinate (C) at (78.9,18.42);
+
+    % Trayectoria
+    \draw[thick,blue,-{Latex}] (A) -- (B) node[midway,left] {45 km};
+    \draw[thick,blue,-{Latex}] (B) -- (C) node[midway,above] {60 km};
+    \draw[thick,red,dashed,-{Latex}] (C) -- (A) node[midway,below] {$d$};
+
+    % Ángulos de navegación
+    \draw[green] (10,0) arc (0:60:10) node[midway,right] {$60^\circ$};
+    \draw[green] (B) ++(10,0) arc (0:-20:10) node[midway,right] {$20^\circ$};
+
+    % Etiquetas
+    \node at (A) [below left] {Puerto A};
+    \node at (B) [above] {B};
+    \node at (C) [right] {C};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 2:} El ángulo en B del triángulo ABC.
+El cambio de dirección en B es desde N$30^\circ$E hasta S$70^\circ$E.
+Esto es un giro total de: $30^\circ + 90^\circ + 70^\circ = 190^\circ$
+
+Pero el ángulo interno del triángulo en B es:
+\[
+\angle ABC = 180^\circ - 190^\circ = -10^\circ
+\]
+
+No, mejor pensémoslo de otra forma. El ángulo entre las dos trayectorias es:
+\[
+\angle ABC = 180^\circ - (60^\circ - (-20^\circ)) = 180^\circ - 80^\circ = 100^\circ
+\]
+
+\textbf{Paso 3:} Usando la ley del coseno para encontrar la distancia AC.
+\[
+AC^2 = AB^2 + BC^2 - 2 \cdot AB \cdot BC \cdot \cos(\angle ABC)
+\]
+\[
+AC^2 = 45^2 + 60^2 - 2(45)(60)\cos(100^\circ)
+\]
+\[
+AC^2 = 2025 + 3600 - 5400(-0.1736) = 5625 + 937.44 = 6562.44
+\]
+\[
+AC = \sqrt{6562.44} = 81.01 \text{ km}
+\]
+
+\textbf{Paso 4:} Encontrar el rumbo de regreso usando la ley del seno.
+\[
+\frac{\sin(\angle BAC)}{BC} = \frac{\sin(\angle ABC)}{AC}
+\]
+\[
+\sin(\angle BAC) = \frac{60 \times \sin(100^\circ)}{81.01} = \frac{60 \times 0.9848}{81.01} = 0.7294
+\]
+\[
+\angle BAC = \arcsin(0.7294) = 46.84^\circ
+\]
+
+\textbf{Paso 5:} El rumbo de regreso desde C hacia A.
+Como el barco salió con rumbo N$30^\circ$E (o $60^\circ$ desde el este), y el ángulo BAC es $46.84^\circ$:
+
+El rumbo desde A hacia C es: $60^\circ - 46.84^\circ = 13.16^\circ$ desde el este.
+Por lo tanto, el rumbo de regreso desde C hacia A es: $180^\circ + 13.16^\circ = 193.16^\circ$
+
+Esto equivale a S$13.16^\circ$W (sur $13.16^\circ$ oeste).
+
+\textbf{Paso 6:} Verificación usando el tercer ángulo.
+\[
+\angle BCA = 180^\circ - 100^\circ - 46.84^\circ = 33.16^\circ
+\]
+
+Verificando con la ley del seno:
+\[
+\frac{45}{\sin 33.16^\circ} = \frac{81.01}{\sin 100^\circ} = \frac{45}{0.5462} = \frac{81.01}{0.9848} = 82.3 \approx 82.2 \quad \checkmark
+\]
+
+\textbf{Respuesta final:}
+\[
+\boxed{\begin{aligned}
+\text{Distancia de C al puerto A} &= 81.01 \text{ km} \\
+\text{Rumbo de regreso} &= \text{S}13.16^\circ\text{W}
+\end{aligned}}
+\]
+\end{ejemplo}
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+Ahora viene la parte divertida: ejercicios donde tú eres el que diseña, el que crea, el que investiga. Son problemas más abiertos donde tienes que pensar como un verdadero matemático o ingeniero.
+
+\begin{ejercicio}[title=El Arquitecto de Puentes]
+Imagina que eres un arquitecto y necesitas diseñar un puente triangular que conecte tres islas. Las restricciones son:
+- La distancia entre la Isla A y la Isla B debe ser exactamente 500 metros
+- El ángulo en la Isla A (mirando hacia B y C) debe ser de $75^\circ$ por cuestiones de navegación
+- El área total del triángulo formado por las tres islas debe ser de 60,000 metros cuadrados
+
+Tu tarea:
+\begin{enumerate}
+    \item Determina las posibles ubicaciones para la Isla C
+    \item Calcula todas las distancias entre las islas
+    \item Verifica que tu diseño cumple con todas las restricciones
+    \item Explica si hay una única solución o varias, y por qué
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title=El Topógrafo Creativo]
+Un topógrafo necesita medir la distancia entre dos puntos inaccesibles P y Q en lados opuestos de un cañón. Desde un punto A puede ver ambos puntos. Camina 200 metros en línea recta hasta un punto B desde donde también puede ver P y Q.
+
+Desde A mide:
+- Ángulo PAQ = $85^\circ$
+- Ángulo PAB = $40^\circ$
+
+Desde B mide:
+- Ángulo PBQ = $95^\circ$
+- Ángulo PBA = $55^\circ$
+
+Tu misión:
+\begin{enumerate}
+    \item Diseña un método sistemático para calcular la distancia PQ
+    \item Determina las distancias AP, AQ, BP y BQ
+    \item Calcula finalmente la distancia entre P y Q
+    \item Propón una forma de verificar tu resultado
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title=El Navegante Estratégico]
+Tres puertos forman un triángulo en el mar. Un capitán de barco tiene la siguiente información:
+- Puerto Alfa a Puerto Beta: 120 millas náuticas
+- Puerto Beta a Puerto Gamma: 150 millas náuticas
+- El ángulo en Beta es de $110^\circ$
+
+El capitán quiere establecer una ruta circular que visite los tres puertos, pero necesita saber:
+\begin{enumerate}
+    \item ¿Cuál es la distancia de Alfa a Gamma?
+    \item Si sale de Alfa hacia Beta, ¿qué rumbo debe tomar luego desde Beta hacia Gamma?
+    \item ¿Cuál es el perímetro total de la ruta?
+    \item Si su barco consume 2 galones por milla, ¿cuánto combustible necesita para el viaje completo más un 20\% de reserva?
+    \item ¿En qué punto dentro del triángulo debería ubicar una estación de rescate para que esté a la misma distancia de las tres rutas (los tres lados del triángulo)?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title=El Detective Geométrico]
+Te dan las siguientes pistas sobre un triángulo misterioso:
+- El área del triángulo es exactamente 100 cm²
+- Uno de sus lados mide 20 cm
+- El ángulo opuesto a ese lado es de $45^\circ$
+
+Tu investigación debe determinar:
+\begin{enumerate}
+    \item ¿Cuántos triángulos diferentes pueden cumplir estas condiciones?
+    \item Para cada triángulo posible, encuentra todos sus lados y ángulos
+    \item Clasifica cada triángulo (acutángulo, obtusángulo o rectángulo)
+    \item Determina cuál tiene el perímetro máximo y cuál el mínimo
+    \item Explica por qué existe esta variedad de soluciones
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title=El Ingeniero de Estructuras]
+Una torre de comunicaciones está sostenida por tres cables tensores que forman un triángulo en el suelo. Los puntos de anclaje A, B y C deben cumplir:
+- La distancia AB = 30 metros
+- La distancia BC = 40 metros
+- El cable desde A ejerce una fuerza de 1000 N
+- El cable desde B ejerce una fuerza de 1200 N
+- El cable desde C ejerce una fuerza de 800 N
+
+Para que la torre esté en equilibrio, las fuerzas deben formar un triángulo cerrado cuando se dibujan como vectores.
+
+Determina:
+\begin{enumerate}
+    \item El ángulo que debe haber entre los puntos de anclaje A y B vistos desde la torre
+    \item La distancia AC necesaria para el equilibrio
+    \item Los ángulos en B y C del triángulo en el suelo
+    \item La posición del centro de gravedad del sistema
+    \item Si es posible reconfigurar los anclajes manteniendo las mismas fuerzas pero cambiando las distancias
+\end{enumerate}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones de Ejercicios Inversos}
+
+\begin{solucion}[title=Solución: El Arquitecto de Puentes]
+\textbf{Análisis del problema:}
+
+Tenemos:
+- Lado AB = 500 m
+- Ángulo en A = $75^\circ$
+- Área = 60,000 m²
+
+\textbf{Paso 1:} Usar la fórmula del área con el seno.
+\[
+\text{Área} = \frac{1}{2} \cdot AB \cdot AC \cdot \sin A
+\]
+\[
+60000 = \frac{1}{2} \cdot 500 \cdot AC \cdot \sin 75^\circ
+\]
+\[
+60000 = 250 \cdot AC \cdot 0.9659
+\]
+\[
+AC = \frac{60000}{250 \cdot 0.9659} = \frac{60000}{241.475} = 248.47 \text{ m}
+\]
+
+\textbf{Paso 2:} Encontrar BC usando la ley del coseno.
+\[
+BC^2 = AB^2 + AC^2 - 2 \cdot AB \cdot AC \cdot \cos A
+\]
+\[
+BC^2 = 500^2 + 248.47^2 - 2(500)(248.47)\cos 75^\circ
+\]
+\[
+BC^2 = 250000 + 61737.34 - 248470(0.2588)
+\]
+\[
+BC^2 = 311737.34 - 64303.84 = 247433.5
+\]
+\[
+BC = 497.43 \text{ m}
+\]
+
+\textbf{Paso 3:} Encontrar los otros ángulos.
+Usando la ley del seno:
+\[
+\frac{\sin B}{AC} = \frac{\sin A}{BC}
+\]
+\[
+\sin B = \frac{248.47 \cdot \sin 75^\circ}{497.43} = \frac{248.47 \cdot 0.9659}{497.43} = 0.4826
+\]
+\[
+B = 28.86^\circ
+\]
+\[
+C = 180^\circ - 75^\circ - 28.86^\circ = 76.14^\circ
+\]
+
+\textbf{Paso 4:} Verificación del área con Herón.
+\[
+s = \frac{500 + 248.47 + 497.43}{2} = 622.95 \text{ m}
+\]
+\[
+\text{Área} = \sqrt{622.95 \times 122.95 \times 374.48 \times 125.52}
+\]
+\[
+= \sqrt{3,599,856,461} = 59,999 \text{ m}^2 \approx 60,000 \text{ m}^2 \quad \checkmark
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.01]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (500,0);
+    \coordinate (C) at (64,240);
+
+    \draw[thick,blue] (A) -- (B) node[midway,below] {500 m};
+    \draw[thick,blue] (B) -- (C) node[midway,right] {497.43 m};
+    \draw[thick,blue] (C) -- (A) node[midway,left] {248.47 m};
+
+    \draw[red,-{Latex}] (50,0) arc (0:75:50) node[midway,right] {$75^\circ$};
+
+    \node at (A) [below left] {Isla A};
+    \node at (B) [below right] {Isla B};
+    \node at (C) [above] {Isla C};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} Hay una única solución porque una vez fijados AB, el ángulo en A y el área, la posición de C queda determinada únicamente. La Isla C debe estar a 248.47 m de A y a 497.43 m de B.
+
+\[
+\boxed{\begin{aligned}
+AC &= 248.47 \text{ m} \\
+BC &= 497.43 \text{ m} \\
+\angle B &= 28.86^\circ \\
+\angle C &= 76.14^\circ
+\end{aligned}}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solución: El Topógrafo Creativo]
+\textbf{Análisis del problema:}
+
+Tenemos dos triángulos: APB y AQB que comparten el lado AB = 200 m.
+
+\textbf{Paso 1:} Analizar el triángulo APB.
+- AB = 200 m
+- Ángulo PAB = $40^\circ$
+- Ángulo PBA = $55^\circ$
+- Por lo tanto, ángulo APB = $180^\circ - 40^\circ - 55^\circ = 85^\circ$
+
+Usando la ley del seno:
+\[
+\frac{AP}{\sin 55^\circ} = \frac{200}{\sin 85^\circ}
+\]
+\[
+AP = \frac{200 \cdot \sin 55^\circ}{\sin 85^\circ} = \frac{200 \cdot 0.8192}{0.9962} = 164.52 \text{ m}
+\]
+
+\[
+\frac{BP}{\sin 40^\circ} = \frac{200}{\sin 85^\circ}
+\]
+\[
+BP = \frac{200 \cdot \sin 40^\circ}{\sin 85^\circ} = \frac{200 \cdot 0.6428}{0.9962} = 129.06 \text{ m}
+\]
+
+\textbf{Paso 2:} Analizar el triángulo AQB.
+- Ángulo QAB = PAQ - PAB = $85^\circ - 40^\circ = 45^\circ$
+- Ángulo QBA = $180^\circ - 95^\circ - 55^\circ = 30^\circ$
+- Ángulo AQB = $180^\circ - 45^\circ - 30^\circ = 105^\circ$
+
+\[
+\frac{AQ}{\sin 30^\circ} = \frac{200}{\sin 105^\circ}
+\]
+\[
+AQ = \frac{200 \cdot 0.5}{0.9659} = 103.55 \text{ m}
+\]
+
+\[
+\frac{BQ}{\sin 45^\circ} = \frac{200}{\sin 105^\circ}
+\]
+\[
+BQ = \frac{200 \cdot 0.7071}{0.9659} = 146.41 \text{ m}
+\]
+
+\textbf{Paso 3:} Calcular PQ usando el triángulo APQ.
+En el triángulo APQ:
+- AP = 164.52 m
+- AQ = 103.55 m
+- Ángulo PAQ = $85^\circ$
+
+Usando la ley del coseno:
+\[
+PQ^2 = AP^2 + AQ^2 - 2 \cdot AP \cdot AQ \cdot \cos(PAQ)
+\]
+\[
+PQ^2 = 164.52^2 + 103.55^2 - 2(164.52)(103.55)\cos 85^\circ
+\]
+\[
+PQ^2 = 27066.83 + 10722.60 - 34072.44(0.0872)
+\]
+\[
+PQ^2 = 37789.43 - 2971.12 = 34818.31
+\]
+\[
+PQ = 186.60 \text{ m}
+\]
+
+\textbf{Paso 4:} Verificación usando el triángulo BPQ.
+\[
+PQ^2 = BP^2 + BQ^2 - 2 \cdot BP \cdot BQ \cdot \cos(PBQ)
+\]
+\[
+PQ^2 = 129.06^2 + 146.41^2 - 2(129.06)(146.41)\cos 95^\circ
+\]
+\[
+PQ^2 = 16656.48 + 21435.89 - 37784.62(-0.0872)
+\]
+\[
+PQ^2 = 38092.37 - (-3294.82) = 34797.55
+\]
+\[
+PQ = 186.54 \text{ m} \approx 186.60 \text{ m} \quad \checkmark
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.02]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (200,0);
+    \coordinate (P) at (100,150);
+    \coordinate (Q) at (-50,80);
+
+    \draw[thick] (A) -- (B) node[midway,below] {200 m};
+    \draw[dashed,blue] (A) -- (P) node[midway,left] {164.52};
+    \draw[dashed,blue] (A) -- (Q) node[midway,left] {103.55};
+    \draw[dashed,blue] (B) -- (P) node[midway,right] {129.06};
+    \draw[dashed,blue] (B) -- (Q) node[midway,below] {146.41};
+    \draw[thick,red] (P) -- (Q) node[midway,above] {186.60 m};
+
+    \node at (A) [below] {A};
+    \node at (B) [below] {B};
+    \node at (P) [above] {P};
+    \node at (Q) [left] {Q};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{\begin{aligned}
+\text{Distancia PQ} &= 186.60 \text{ m} \\
+AP &= 164.52 \text{ m}, \quad AQ = 103.55 \text{ m} \\
+BP &= 129.06 \text{ m}, \quad BQ = 146.41 \text{ m}
+\end{aligned}}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solución: El Navegante Estratégico]
+\textbf{Datos:}
+- AB = 120 millas
+- BC = 150 millas
+- Ángulo en B = $110^\circ$
+
+\textbf{1. Distancia de Alfa a Gamma:}
+
+Usando la ley del coseno:
+\[
+AC^2 = AB^2 + BC^2 - 2 \cdot AB \cdot BC \cdot \cos B
+\]
+\[
+AC^2 = 120^2 + 150^2 - 2(120)(150)\cos 110^\circ
+\]
+\[
+AC^2 = 14400 + 22500 - 36000(-0.342)
+\]
+\[
+AC^2 = 36900 + 12312 = 49212
+\]
+\[
+AC = 221.79 \text{ millas}
+\]
+
+\textbf{2. Rumbo desde Beta hacia Gamma:}
+
+Primero encontremos el ángulo A usando la ley del seno:
+\[
+\frac{\sin A}{BC} = \frac{\sin B}{AC}
+\]
+\[
+\sin A = \frac{150 \cdot \sin 110^\circ}{221.79} = \frac{150 \cdot 0.9397}{221.79} = 0.6355
+\]
+\[
+A = 39.41^\circ
+\]
+
+El rumbo depende de la orientación inicial. Si AB está en dirección norte, entonces el giro en B es de $110^\circ$, lo que significa un cambio de rumbo de $70^\circ$ hacia el este.
+
+\textbf{3. Perímetro total:}
+\[
+\text{Perímetro} = AB + BC + CA = 120 + 150 + 221.79 = 491.79 \text{ millas}
+\]
+
+\textbf{4. Combustible necesario:}
+\[
+\text{Combustible base} = 491.79 \times 2 = 983.58 \text{ galones}
+\]
+\[
+\text{Con 20\% reserva} = 983.58 \times 1.20 = 1180.30 \text{ galones}
+\]
+
+\textbf{5. Centro del incírculo (punto equidistante de los tres lados):}
+
+El incentro se encuentra usando las coordenadas baricéntricas:
+\[
+I = \frac{a \cdot A + b \cdot B + c \cdot C}{a + b + c}
+\]
+
+donde $a = BC = 150$, $b = CA = 221.79$, $c = AB = 120$
+
+La distancia del incentro a cada lado (inradio) es:
+\[
+r = \frac{\text{Área}}{s}
+\]
+
+Primero calculemos el área con Herón:
+\[
+s = \frac{491.79}{2} = 245.895 \text{ millas}
+\]
+\[
+\text{Área} = \sqrt{245.895 \times 95.895 \times 24.105 \times 125.895}
+\]
+\[
+= \sqrt{71,582,738} = 8460.66 \text{ millas}^2
+\]
+\[
+r = \frac{8460.66}{245.895} = 34.41 \text{ millas}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.015]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (120,0);
+    \coordinate (C) at (180,200);
+
+    \draw[thick] (A) -- (B) node[midway,below] {120};
+    \draw[thick] (B) -- (C) node[midway,right] {150};
+    \draw[thick] (C) -- (A) node[midway,left] {221.79};
+
+    % Incentro
+    \coordinate (I) at (100,65);
+    \filldraw[red] (I) circle (2) node[below] {Estación};
+
+    % Círculo inscrito
+    \draw[dashed,red] (I) circle (34.41);
+
+    \node at (A) [below left] {Alfa};
+    \node at (B) [below right] {Beta};
+    \node at (C) [above] {Gamma};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{\begin{aligned}
+\text{1. Distancia Alfa-Gamma} &= 221.79 \text{ millas} \\
+\text{2. Cambio de rumbo en Beta} &= 70^\circ \text{ hacia estribor} \\
+\text{3. Perímetro total} &= 491.79 \text{ millas} \\
+\text{4. Combustible con reserva} &= 1180.30 \text{ galones} \\
+\text{5. Radio de la estación} &= 34.41 \text{ millas desde cada ruta}
+\end{aligned}}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solución: El Detective Geométrico]
+\textbf{Pistas:}
+- Área = 100 cm²
+- Un lado = 20 cm (llamémoslo $a$)
+- Ángulo opuesto = $45^\circ$ (llamémoslo $A$)
+
+\textbf{Paso 1:} Usar la fórmula del área.
+\[
+\text{Área} = \frac{1}{2}bc\sin A
+\]
+\[
+100 = \frac{1}{2}bc\sin 45^\circ = \frac{1}{2}bc \cdot \frac{\sqrt{2}}{2}
+\]
+\[
+bc = \frac{400}{\sqrt{2}} = 200\sqrt{2} = 282.84
+\]
+
+\textbf{Paso 2:} Usar la ley del coseno.
+\[
+a^2 = b^2 + c^2 - 2bc\cos A
+\]
+\[
+400 = b^2 + c^2 - 2bc \cdot \frac{\sqrt{2}}{2}
+\]
+\[
+400 = b^2 + c^2 - bc\sqrt{2}
+\]
+\[
+400 = b^2 + c^2 - 282.84\sqrt{2}
+\]
+\[
+b^2 + c^2 = 400 + 400 = 800
+\]
+
+\textbf{Paso 3:} Sistema de ecuaciones.
+\begin{align}
+bc &= 282.84 \\
+b^2 + c^2 &= 800
+\end{align}
+
+Sea $t = b + c$. Entonces:
+\[
+t^2 = b^2 + 2bc + c^2 = 800 + 2(282.84) = 1365.68
+\]
+\[
+t = b + c = 36.95
+\]
+
+Los valores de $b$ y $c$ son las raíces de:
+\[
+x^2 - 36.95x + 282.84 = 0
+\]
+
+Usando la fórmula cuadrática:
+\[
+x = \frac{36.95 \pm \sqrt{36.95^2 - 4(282.84)}}{2}
+\]
+\[
+x = \frac{36.95 \pm \sqrt{1365.3 - 1131.36}}{2} = \frac{36.95 \pm \sqrt{233.94}}{2}
+\]
+\[
+x = \frac{36.95 \pm 15.29}{2}
+\]
+
+Por lo tanto:
+\[
+b = 26.12 \text{ cm}, \quad c = 10.83 \text{ cm}
+\]
+o viceversa.
+
+\textbf{Paso 4:} Encontrar los otros ángulos.
+
+Para el triángulo con $b = 26.12$ y $c = 10.83$:
+
+Usando la ley del seno:
+\[
+\frac{\sin B}{26.12} = \frac{\sin 45^\circ}{20}
+\]
+\[
+\sin B = \frac{26.12 \cdot 0.7071}{20} = 0.9237
+\]
+\[
+B = 67.48^\circ
+\]
+\[
+C = 180^\circ - 45^\circ - 67.48^\circ = 67.52^\circ
+\]
+
+Este triángulo es acutángulo (todos los ángulos < $90^\circ$).
+
+\textbf{Paso 5:} Perímetros.
+
+Triángulo 1: $P_1 = 20 + 26.12 + 10.83 = 56.95$ cm
+Triángulo 2: $P_2 = 20 + 10.83 + 26.12 = 56.95$ cm
+
+¡Los perímetros son iguales! Esto tiene sentido porque solo intercambiamos $b$ y $c$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+    % Triángulo 1
+    \coordinate (A1) at (0,0);
+    \coordinate (B1) at (20,0);
+    \coordinate (C1) at (8,14);
+
+    \draw[thick,blue] (A1) -- (B1) node[midway,below] {20};
+    \draw[thick,blue] (B1) -- (C1) node[midway,right] {10.83};
+    \draw[thick,blue] (C1) -- (A1) node[midway,left] {26.12};
+
+    \node at (7,-2) {Solución 1};
+\end{tikzpicture}
+\hspace{2cm}
+\begin{tikzpicture}[scale=0.2]
+    % Triángulo 2
+    \coordinate (A2) at (0,0);
+    \coordinate (B2) at (20,0);
+    \coordinate (C2) at (12,14);
+
+    \draw[thick,red] (A2) -- (B2) node[midway,below] {20};
+    \draw[thick,red] (B2) -- (C2) node[midway,right] {26.12};
+    \draw[thick,red] (C2) -- (A2) node[midway,left] {10.83};
+
+    \node at (7,-2) {Solución 2};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{\begin{aligned}
+\text{Hay exactamente 2 triángulos posibles} \\
+\text{Ambos son acutángulos} \\
+\text{Ambos tienen el mismo perímetro: } 56.95 \text{ cm} \\
+\text{Lados: } (20, 26.12, 10.83) \text{ o } (20, 10.83, 26.12)
+\end{aligned}}
+\]
+
+La variedad existe porque el área y un ángulo no determinan únicamente un triángulo cuando conocemos solo un lado.
+\end{solucion}
+
+\begin{solucion}[title=Solución: El Ingeniero de Estructuras]
+\textbf{Análisis del equilibrio de fuerzas:}
+
+Para el equilibrio, la suma vectorial de las fuerzas debe ser cero. Esto significa que las fuerzas forman un triángulo cerrado cuando se dibujan como vectores.
+
+\textbf{Paso 1:} El triángulo de fuerzas.
+
+Las fuerzas de 1000 N, 1200 N y 800 N deben formar un triángulo. Usemos la ley del coseno para encontrar los ángulos entre las fuerzas.
+
+Para el ángulo entre las fuerzas de 1000 N y 1200 N:
+\[
+800^2 = 1000^2 + 1200^2 - 2(1000)(1200)\cos\alpha
+\]
+\[
+640000 = 1000000 + 1440000 - 2400000\cos\alpha
+\]
+\[
+\cos\alpha = \frac{2440000 - 640000}{2400000} = \frac{1800000}{2400000} = 0.75
+\]
+\[
+\alpha = 41.41^\circ
+\]
+
+\textbf{Paso 2:} Relación con el triángulo en el suelo.
+
+El ángulo entre las fuerzas corresponde al ángulo opuesto en el triángulo del suelo. Si el ángulo entre las fuerzas desde A y B es $41.41^\circ$, entonces el ángulo C en el triángulo ABC es $180^\circ - 41.41^\circ = 138.59^\circ$.
+
+\textbf{Paso 3:} Calcular AC.
+
+Usando la ley del coseno en el triángulo ABC:
+\[
+AC^2 = AB^2 + BC^2 - 2 \cdot AB \cdot BC \cdot \cos C
+\]
+\[
+AC^2 = 30^2 + 40^2 - 2(30)(40)\cos 138.59^\circ
+\]
+\[
+AC^2 = 900 + 1600 - 2400(-0.75) = 2500 + 1800 = 4300
+\]
+\[
+AC = 65.57 \text{ m}
+\]
+
+\textbf{Paso 4:} Los otros ángulos del triángulo.
+
+Usando la ley del seno:
+\[
+\frac{\sin A}{BC} = \frac{\sin C}{AC}
+\]
+\[
+\sin A = \frac{40 \cdot \sin 138.59^\circ}{65.57} = \frac{40 \cdot 0.661}{65.57} = 0.403
+\]
+\[
+A = 23.78^\circ
+\]
+\[
+B = 180^\circ - 138.59^\circ - 23.78^\circ = 17.63^\circ
+\]
+
+\textbf{Paso 5:} Centro de gravedad del sistema.
+
+El centro de gravedad está en el centroide del triángulo de fuerzas, ponderado por las magnitudes:
+\[
+\vec{G} = \frac{1000\vec{A} + 1200\vec{B} + 800\vec{C}}{1000 + 1200 + 800} = \frac{1000\vec{A} + 1200\vec{B} + 800\vec{C}}{3000}
+\]
+
+Si ubicamos el origen en A:
+- A está en (0, 0)
+- B está en (30, 0)
+- C está en aproximadamente (-32.8, 56.8)
+
+\[
+G_x = \frac{1000(0) + 1200(30) + 800(-32.8)}{3000} = \frac{36000 - 26240}{3000} = 3.25 \text{ m}
+\]
+\[
+G_y = \frac{1000(0) + 1200(0) + 800(56.8)}{3000} = \frac{45440}{3000} = 15.15 \text{ m}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.08]
+    % Triángulo en el suelo
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (30,0);
+    \coordinate (C) at (-32.8,56.8);
+
+    \draw[thick] (A) -- (B) node[midway,below] {30 m};
+    \draw[thick] (B) -- (C) node[midway,above right] {40 m};
+    \draw[thick] (C) -- (A) node[midway,left] {65.57 m};
+
+    % Centro de gravedad
+    \filldraw[red] (3.25,15.15) circle (1) node[right] {G};
+
+    % Fuerzas (vectores)
+    \draw[blue,-{Latex},very thick] (A) -- ++(10,0) node[below] {1000 N};
+    \draw[blue,-{Latex},very thick] (B) -- ++(12,0) node[below] {1200 N};
+    \draw[blue,-{Latex},very thick] (C) -- ++(8,0) node[below] {800 N};
+
+    \node at (A) [below left] {A};
+    \node at (B) [below right] {B};
+    \node at (C) [above left] {C};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Reconfiguración:}
+
+Sí es posible reconfigurar manteniendo las mismas fuerzas. Las fuerzas determinan los ángulos del triángulo pero no su tamaño. Podemos escalar el triángulo manteniendo los ángulos.
+
+\textbf{Respuesta:}
+\[
+\boxed{\begin{aligned}
+\text{1. Ángulo entre A y B desde la torre} &= 41.41^\circ \\
+\text{2. Distancia AC} &= 65.57 \text{ m} \\
+\text{3. Ángulos: } A &= 23.78^\circ, \, B = 17.63^\circ, \, C = 138.59^\circ \\
+\text{4. Centro de gravedad} &= (3.25, 15.15) \text{ m desde A} \\
+\text{5. Sí es posible reconfigurar} &\text{ (escalando el triángulo)}
+\end{aligned}}
+\]
+\end{solucion}%% PARTE 3: EJERCICIOS PROPUESTOS Y SOLUCIONES
+%% Tema: Triángulos Oblicuángulos
+%% Total: 8 ejercicios con soluciones completas
+
+\section{Ejercicios Propuestos}
+
+¡Es hora de poner a prueba todo lo que has aprendido! Aquí tienes 8 ejercicios que van desde lo básico hasta aplicaciones avanzadas. Intenta resolverlos todos antes de ver las soluciones.
+
+\begin{ejercicio}[title=Ejercicio 1: Caso ALA Básico]
+En el triángulo $ABC$, se conoce:
+\begin{itemize}
+    \item Lado $a = 12$ cm
+    \item Ángulo $B = 45^\circ$
+    \item Ángulo $C = 60^\circ$
+\end{itemize}
+
+Calcula:
+\begin{itemize}
+    \item[a)] El ángulo $A$ y los lados $b$ y $c$
+    \item[b)] El perímetro del triángulo
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 2: Caso LAL Básico]
+Un triángulo tiene los siguientes datos:
+\begin{itemize}
+    \item Lado $b = 15$ m
+    \item Lado $c = 20$ m
+    \item Ángulo $A = 50^\circ$
+\end{itemize}
+
+Determina:
+\begin{itemize}
+    \item[a)] El lado $a$ usando la ley del coseno
+    \item[b)] Los ángulos $B$ y $C$ usando la ley del seno
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 3: Caso LLL]
+Los tres lados de un triángulo miden:
+\begin{itemize}
+    \item $a = 7$ cm
+    \item $b = 9$ cm
+    \item $c = 11$ cm
+\end{itemize}
+
+Encuentra:
+\begin{itemize}
+    \item[a)] El ángulo mayor usando la ley del coseno
+    \item[b)] Los otros dos ángulos del triángulo
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 4: Caso LLA Ambiguo]
+En un triángulo se conoce:
+\begin{itemize}
+    \item Lado $a = 10$ unidades
+    \item Lado $b = 12$ unidades
+    \item Ángulo $A = 40^\circ$
+\end{itemize}
+
+\begin{itemize}
+    \item[a)] Determina si existe una o dos soluciones posibles
+    \item[b)] Encuentra todos los triángulos posibles (valores de $B$, $C$ y $c$)
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 5: Área con Seno]
+Un triángulo tiene:
+\begin{itemize}
+    \item Lado $a = 18$ cm
+    \item Lado $b = 24$ cm
+\end{itemize}
+
+Calcula el área del triángulo cuando:
+\begin{itemize}
+    \item[a)] El ángulo entre estos lados es $C = 30^\circ$
+    \item[b)] El ángulo entre estos lados es $C = 90^\circ$
+    \item[c)] El ángulo entre estos lados es $C = 120^\circ$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 6: Área con Fórmula de Herón]
+Un terreno triangular tiene lados de:
+\begin{itemize}
+    \item $a = 25$ metros
+    \item $b = 30$ metros
+    \item $c = 35$ metros
+\end{itemize}
+
+\begin{itemize}
+    \item[a)] Calcula el área usando la fórmula de Herón
+    \item[b)] Verifica el resultado calculando la altura desde el vértice $A$ al lado $a$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 7: Problema de Navegación]
+Un barco parte del puerto $A$ y navega 50 km en dirección $N30^\circ E$ hasta el punto $B$. Luego gira y navega 70 km en dirección $S60^\circ E$ hasta llegar al punto $C$.
+
+Determina:
+\begin{itemize}
+    \item[a)] El ángulo $ABC$ formado en el punto $B$
+    \item[b)] La distancia directa desde $A$ hasta $C$
+    \item[c)] El rumbo que debe tomar para regresar directamente de $C$ a $A$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 8: Ingeniería de Puentes]
+Un puente colgante forma un triángulo con el río. Los puntos de anclaje $A$ y $B$ están separados 120 metros. Desde $A$, el cable principal va hasta la torre $C$ con un ángulo de elevación de $35^\circ$. Desde $B$, el cable va hasta la misma torre con un ángulo de elevación de $42^\circ$.
+
+Calcula:
+\begin{itemize}
+    \item[a)] La longitud de cada cable (de $A$ a $C$ y de $B$ a $C$)
+    \item[b)] La altura de la torre sobre el nivel del río
+    \item[c)] El ángulo en la cima de la torre (ángulo $ACB$)
+    \item[d)] El área del triángulo formado
+\end{itemize}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones Detalladas}
+
+Aquí están las soluciones completas paso a paso. Recuerda que la clave está en identificar qué caso tienes y qué ley aplicar.
+
+\begin{solucion}[title=Solución Ejercicio 1: Caso ALA]
+\textbf{Datos:}
+\begin{itemize}
+    \item $a = 12$ cm
+    \item $B = 45^\circ$
+    \item $C = 60^\circ$
+\end{itemize}
+
+\textbf{Incógnitas:} $A$, $b$, $c$ y perímetro
+
+\textbf{Parte a) Encontrar $A$, $b$ y $c$:}
+
+\textbf{Paso 1:} Hallar el ángulo $A$
+
+Como la suma de ángulos internos es $180^\circ$:
+\[A = 180^\circ - B - C = 180^\circ - 45^\circ - 60^\circ = 75^\circ\]
+
+\textbf{Paso 2:} Aplicar la ley del seno
+
+\[\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}\]
+
+Sustituimos los valores conocidos:
+\[\frac{12}{\sin 75^\circ} = \frac{b}{\sin 45^\circ} = \frac{c}{\sin 60^\circ}\]
+
+Calculamos primero la razón común:
+\[\frac{12}{\sin 75^\circ} = \frac{12}{0.9659} \approx 12.42\]
+
+\textbf{Paso 3:} Calcular $b$
+
+\[b = 12.42 \times \sin 45^\circ = 12.42 \times 0.7071 \approx 8.78 \text{ cm}\]
+
+\textbf{Paso 4:} Calcular $c$
+
+\[c = 12.42 \times \sin 60^\circ = 12.42 \times 0.8660 \approx 10.76 \text{ cm}\]
+
+\textbf{Parte b) Calcular el perímetro:}
+
+\[P = a + b + c = 12 + 8.78 + 10.76 = 31.54 \text{ cm}\]
+
+\textbf{Verificación con valores exactos:}
+
+Usando valores exactos de las funciones trigonométricas:
+\begin{itemize}
+    \item $\sin 75^\circ = \frac{\sqrt{6} + \sqrt{2}}{4}$
+    \item $\sin 45^\circ = \frac{\sqrt{2}}{2}$
+    \item $\sin 60^\circ = \frac{\sqrt{3}}{2}$
+\end{itemize}
+
+\[b = \frac{12 \times \sin 45^\circ}{\sin 75^\circ} = \frac{12 \times \frac{\sqrt{2}}{2}}{\frac{\sqrt{6} + \sqrt{2}}{4}} = \frac{24\sqrt{2}}{\sqrt{6} + \sqrt{2}}\]
+
+Racionalizando:
+\[b = \frac{24\sqrt{2}(\sqrt{6} - \sqrt{2})}{(\sqrt{6} + \sqrt{2})(\sqrt{6} - \sqrt{2})} = \frac{24\sqrt{2}(\sqrt{6} - \sqrt{2})}{4} = 6\sqrt{2}(\sqrt{6} - \sqrt{2}) = 6(\sqrt{12} - 2) = 6(2\sqrt{3} - 2)\]
+
+\textbf{Respuesta final:}
+\[\boxed{\begin{aligned}
+A &= 75^\circ\\
+b &\approx 8.78 \text{ cm}\\
+c &\approx 10.76 \text{ cm}\\
+\text{Perímetro} &\approx 31.54 \text{ cm}
+\end{aligned}}\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.4]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (8.78,0);
+    \coordinate (C) at (3.5,10.1);
+
+    \draw[thick] (A) -- (B) node[midway,below] {$c = 10.76$};
+    \draw[thick] (B) -- (C) node[midway,right] {$a = 12$};
+    \draw[thick] (C) -- (A) node[midway,left] {$b = 8.78$};
+
+    \draw[blue] (1,0) arc (0:75:1) node[midway,right] {$75^\circ$};
+    \draw[blue] (B) ++ (-1,0) arc (180:135:1) node[midway,left] {$45^\circ$};
+    \draw[blue] (C) ++ (-0.5,-1.4) arc (-70:-130:1) node[midway,below] {$60^\circ$};
+
+    \node at (A) [below left] {$A$};
+    \node at (B) [below right] {$B$};
+    \node at (C) [above] {$C$};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 2: Caso LAL]
+\textbf{Datos:}
+\begin{itemize}
+    \item $b = 15$ m
+    \item $c = 20$ m
+    \item $A = 50^\circ$
+\end{itemize}
+
+\textbf{Incógnitas:} $a$, $B$, $C$
+
+\textbf{Parte a) Calcular el lado $a$ usando ley del coseno:}
+
+La ley del coseno establece:
+\[a^2 = b^2 + c^2 - 2bc\cos A\]
+
+Sustituyendo valores:
+\begin{align*}
+a^2 &= 15^2 + 20^2 - 2(15)(20)\cos 50^\circ\\
+a^2 &= 225 + 400 - 600 \times 0.6428\\
+a^2 &= 625 - 385.68\\
+a^2 &= 239.32\\
+a &= \sqrt{239.32} \approx 15.47 \text{ m}
+\end{align*}
+
+\textbf{Parte b) Calcular los ángulos $B$ y $C$ usando ley del seno:}
+
+\[\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}\]
+
+Calculamos $B$:
+\[\sin B = \frac{b \sin A}{a} = \frac{15 \times \sin 50^\circ}{15.47} = \frac{15 \times 0.7660}{15.47} = \frac{11.49}{15.47} \approx 0.7427\]
+
+\[B = \arcsin(0.7427) \approx 47.88^\circ\]
+
+Calculamos $C$:
+\[C = 180^\circ - A - B = 180^\circ - 50^\circ - 47.88^\circ = 82.12^\circ\]
+
+\textbf{Verificación con ley del seno para $C$:}
+\[\sin C = \frac{c \sin A}{a} = \frac{20 \times 0.7660}{15.47} = \frac{15.32}{15.47} \approx 0.9903\]
+\[C = \arcsin(0.9903) \approx 82.01^\circ \quad \checkmark\]
+
+\textbf{Respuesta final:}
+\[\boxed{\begin{aligned}
+a &\approx 15.47 \text{ m}\\
+B &\approx 47.88^\circ\\
+C &\approx 82.12^\circ
+\end{aligned}}\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.25]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (20,0);
+    \coordinate (C) at (9.2,12.1);
+
+    \draw[thick] (A) -- (B) node[midway,below] {$c = 20$};
+    \draw[thick] (B) -- (C) node[midway,right] {$a = 15.47$};
+    \draw[thick] (C) -- (A) node[midway,left] {$b = 15$};
+
+    \draw[blue] (2,0) arc (0:50:2) node[midway,right] {$50^\circ$};
+
+    \node at (A) [below left] {$A$};
+    \node at (B) [below right] {$B$};
+    \node at (C) [above] {$C$};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 3: Caso LLL]
+\textbf{Datos:}
+\begin{itemize}
+    \item $a = 7$ cm
+    \item $b = 9$ cm
+    \item $c = 11$ cm
+\end{itemize}
+
+\textbf{Incógnitas:} Ángulos $A$, $B$, $C$
+
+\textbf{Parte a) Encontrar el ángulo mayor:}
+
+El ángulo mayor está opuesto al lado mayor. Como $c = 11$ es el lado mayor, el ángulo $C$ es el mayor.
+
+Usando la ley del coseno:
+\[c^2 = a^2 + b^2 - 2ab\cos C\]
+
+Despejando $\cos C$:
+\[\cos C = \frac{a^2 + b^2 - c^2}{2ab}\]
+
+Sustituyendo:
+\begin{align*}
+\cos C &= \frac{7^2 + 9^2 - 11^2}{2(7)(9)}\\
+\cos C &= \frac{49 + 81 - 121}{126}\\
+\cos C &= \frac{9}{126} = \frac{1}{14} \approx 0.0714
+\end{align*}
+
+\[C = \arccos(0.0714) \approx 85.90^\circ\]
+
+\textbf{Parte b) Calcular los otros ángulos:}
+
+Para el ángulo $A$:
+\[\cos A = \frac{b^2 + c^2 - a^2}{2bc} = \frac{9^2 + 11^2 - 7^2}{2(9)(11)} = \frac{81 + 121 - 49}{198} = \frac{153}{198} \approx 0.7727\]
+
+\[A = \arccos(0.7727) \approx 39.23^\circ\]
+
+Para el ángulo $B$:
+\[\cos B = \frac{a^2 + c^2 - b^2}{2ac} = \frac{7^2 + 11^2 - 9^2}{2(7)(11)} = \frac{49 + 121 - 81}{154} = \frac{89}{154} \approx 0.5779\]
+
+\[B = \arccos(0.5779) \approx 54.67^\circ\]
+
+\textbf{Verificación:}
+\[A + B + C = 39.23^\circ + 54.67^\circ + 85.90^\circ = 179.80^\circ \approx 180^\circ \quad \checkmark\]
+
+\textbf{Respuesta final:}
+\[\boxed{\begin{aligned}
+C &\approx 85.90^\circ \text{ (ángulo mayor)}\\
+A &\approx 39.23^\circ\\
+B &\approx 54.67^\circ
+\end{aligned}}\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (11,0);
+    \coordinate (C) at (4.9,6.8);
+
+    \draw[thick] (A) -- (B) node[midway,below] {$c = 11$};
+    \draw[thick] (B) -- (C) node[midway,right] {$a = 7$};
+    \draw[thick] (C) -- (A) node[midway,left] {$b = 9$};
+
+    \node at (A) [below left] {$A$};
+    \node at (B) [below right] {$B$};
+    \node at (C) [above] {$C$};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 4: Caso LLA Ambiguo]
+\textbf{Datos:}
+\begin{itemize}
+    \item $a = 10$ unidades
+    \item $b = 12$ unidades
+    \item $A = 40^\circ$
+\end{itemize}
+
+\textbf{Parte a) Determinar número de soluciones:}
+
+En el caso LLA (SSA), aplicamos la ley del seno:
+\[\frac{a}{\sin A} = \frac{b}{\sin B}\]
+
+Despejando $\sin B$:
+\[\sin B = \frac{b \sin A}{a} = \frac{12 \times \sin 40^\circ}{10} = \frac{12 \times 0.6428}{10} = \frac{7.7136}{10} = 0.7714\]
+
+Como $0 < \sin B < 1$, existe al menos una solución.
+
+Para $\sin B = 0.7714$:
+\begin{itemize}
+    \item $B_1 = \arcsin(0.7714) \approx 50.48^\circ$
+    \item $B_2 = 180^\circ - 50.48^\circ = 129.52^\circ$
+\end{itemize}
+
+Verificamos si ambas soluciones son válidas:
+\begin{itemize}
+    \item Para $B_1 = 50.48^\circ$: $A + B_1 = 40^\circ + 50.48^\circ = 90.48^\circ < 180^\circ$ ✓ Válida
+    \item Para $B_2 = 129.52^\circ$: $A + B_2 = 40^\circ + 129.52^\circ = 169.52^\circ < 180^\circ$ ✓ Válida
+\end{itemize}
+
+\textbf{Existen DOS triángulos posibles.}
+
+\textbf{Parte b) Encontrar ambos triángulos:}
+
+\textbf{Triángulo 1:} $B_1 = 50.48^\circ$
+
+\[C_1 = 180^\circ - A - B_1 = 180^\circ - 40^\circ - 50.48^\circ = 89.52^\circ\]
+
+Usando ley del seno para encontrar $c_1$:
+\[c_1 = \frac{a \sin C_1}{\sin A} = \frac{10 \times \sin 89.52^\circ}{\sin 40^\circ} = \frac{10 \times 0.9999}{0.6428} \approx 15.56 \text{ unidades}\]
+
+\textbf{Triángulo 2:} $B_2 = 129.52^\circ$
+
+\[C_2 = 180^\circ - A - B_2 = 180^\circ - 40^\circ - 129.52^\circ = 10.48^\circ\]
+
+\[c_2 = \frac{a \sin C_2}{\sin A} = \frac{10 \times \sin 10.48^\circ}{\sin 40^\circ} = \frac{10 \times 0.1822}{0.6428} \approx 2.83 \text{ unidades}\]
+
+\textbf{Respuesta final:}
+\[\boxed{\begin{aligned}
+\text{Triángulo 1:} & \quad B = 50.48^\circ, \, C = 89.52^\circ, \, c = 15.56\\
+\text{Triángulo 2:} & \quad B = 129.52^\circ, \, C = 10.48^\circ, \, c = 2.83
+\end{aligned}}\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.35]
+    % Triángulo 1
+    \coordinate (A1) at (0,0);
+    \coordinate (C1) at (15.56,0);
+    \coordinate (B1) at (9.97,6.43);
+
+    \draw[thick,blue] (A1) -- (C1) -- (B1) -- cycle;
+    \node at (A1) [below left] {$A$};
+    \node at (C1) [below right] {$C_1$};
+    \node at (B1) [above] {$B_1$};
+
+    % Triángulo 2
+    \coordinate (C2) at (2.83,0);
+    \coordinate (B2) at (5.77,9.77);
+
+    \draw[thick,red,dashed] (A1) -- (C2) -- (B2) -- cycle;
+    \node at (C2) [below] {$C_2$};
+    \node at (B2) [above right] {$B_2$};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 5: Área con Seno]
+\textbf{Datos:}
+\begin{itemize}
+    \item $a = 18$ cm
+    \item $b = 24$ cm
+\end{itemize}
+
+La fórmula del área usando dos lados y el ángulo entre ellos es:
+\[\text{Área} = \frac{1}{2}ab\sin C\]
+
+\textbf{Parte a) Cuando $C = 30^\circ$:}
+\begin{align*}
+\text{Área} &= \frac{1}{2}(18)(24)\sin 30^\circ\\
+&= \frac{1}{2}(18)(24)\left(\frac{1}{2}\right)\\
+&= \frac{432}{4} = 108 \text{ cm}^2
+\end{align*}
+
+\textbf{Parte b) Cuando $C = 90^\circ$:}
+\begin{align*}
+\text{Área} &= \frac{1}{2}(18)(24)\sin 90^\circ\\
+&= \frac{1}{2}(18)(24)(1)\\
+&= \frac{432}{2} = 216 \text{ cm}^2
+\end{align*}
+
+Nota: Este es el área máxima posible, pues ocurre cuando el triángulo es rectángulo.
+
+\textbf{Parte c) Cuando $C = 120^\circ$:}
+\begin{align*}
+\text{Área} &= \frac{1}{2}(18)(24)\sin 120^\circ\\
+&= \frac{1}{2}(18)(24)\left(\frac{\sqrt{3}}{2}\right)\\
+&= \frac{432\sqrt{3}}{4} = 108\sqrt{3} \approx 187.06 \text{ cm}^2
+\end{align*}
+
+\textbf{Respuesta final:}
+\[\boxed{\begin{aligned}
+\text{a) } C = 30^\circ &: \text{ Área} = 108 \text{ cm}^2\\
+\text{b) } C = 90^\circ &: \text{ Área} = 216 \text{ cm}^2\\
+\text{c) } C = 120^\circ &: \text{ Área} = 108\sqrt{3} \approx 187.06 \text{ cm}^2
+\end{aligned}}\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.15]
+    % Triángulo con C=30°
+    \coordinate (A1) at (0,0);
+    \coordinate (B1) at (24,0);
+    \coordinate (C1) at (15.59,9);
+
+    \draw[thick,blue] (A1) -- (B1) node[midway,below] {\tiny $b=24$};
+    \draw[thick,blue] (B1) -- (C1);
+    \draw[thick,blue] (C1) -- (A1) node[midway,left] {\tiny $a=18$};
+    \node at (2,7) [blue] {\tiny $30^\circ$};
+
+    % Triángulo con C=90°
+    \begin{scope}[xshift=30cm]
+    \coordinate (A2) at (0,0);
+    \coordinate (B2) at (24,0);
+    \coordinate (C2) at (0,18);
+
+    \draw[thick,green!60!black] (A2) -- (B2);
+    \draw[thick,green!60!black] (B2) -- (C2);
+    \draw[thick,green!60!black] (C2) -- (A2);
+    \draw (0,1.5) -- (1.5,1.5) -- (1.5,0);
+    \node at (12,12) [green!60!black] {\tiny $90^\circ$};
+    \end{scope}
+
+    % Triángulo con C=120°
+    \begin{scope}[xshift=60cm]
+    \coordinate (A3) at (0,0);
+    \coordinate (B3) at (24,0);
+    \coordinate (C3) at (-9,15.59);
+
+    \draw[thick,red] (A3) -- (B3);
+    \draw[thick,red] (B3) -- (C3);
+    \draw[thick,red] (C3) -- (A3);
+    \node at (0,7) [red] {\tiny $120^\circ$};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 6: Fórmula de Herón]
+\textbf{Datos:}
+\begin{itemize}
+    \item $a = 25$ m
+    \item $b = 30$ m
+    \item $c = 35$ m
+\end{itemize}
+
+\textbf{Parte a) Calcular el área usando la fórmula de Herón:}
+
+La fórmula de Herón es:
+\[\text{Área} = \sqrt{s(s-a)(s-b)(s-c)}\]
+
+donde $s$ es el semiperímetro:
+\[s = \frac{a + b + c}{2} = \frac{25 + 30 + 35}{2} = \frac{90}{2} = 45 \text{ m}\]
+
+Calculamos cada factor:
+\begin{align*}
+s - a &= 45 - 25 = 20\\
+s - b &= 45 - 30 = 15\\
+s - c &= 45 - 35 = 10
+\end{align*}
+
+Aplicamos la fórmula:
+\begin{align*}
+\text{Área} &= \sqrt{45 \times 20 \times 15 \times 10}\\
+&= \sqrt{45 \times 20 \times 15 \times 10}\\
+&= \sqrt{135000}\\
+&= \sqrt{135000}\\
+&= 30\sqrt{150}\\
+&= 30 \times 5\sqrt{6}\\
+&= 150\sqrt{6} \approx 367.42 \text{ m}^2
+\end{align*}
+
+\textbf{Parte b) Verificación calculando la altura desde $A$:}
+
+Si el área es $367.42$ m² y la base es $a = 25$ m, entonces:
+\[h_a = \frac{2 \times \text{Área}}{a} = \frac{2 \times 367.42}{25} = \frac{734.84}{25} = 29.39 \text{ m}\]
+
+Para verificar, calculemos primero el ángulo $A$ usando ley del coseno:
+\[\cos A = \frac{b^2 + c^2 - a^2}{2bc} = \frac{900 + 1225 - 625}{2(30)(35)} = \frac{1500}{2100} = \frac{5}{7}\]
+
+\[A = \arccos\left(\frac{5}{7}\right) \approx 44.42^\circ\]
+
+La altura desde $C$ al lado $c$ es:
+\[h_a = b\sin A = 30 \times \sin(44.42^\circ) \approx 30 \times 0.700 = 21 \text{ m}\]
+
+Verificación alternativa con la altura desde $B$:
+\[\cos B = \frac{a^2 + c^2 - b^2}{2ac} = \frac{625 + 1225 - 900}{2(25)(35)} = \frac{950}{1750} = \frac{19}{35}\]
+
+La altura es:
+\[h_b = a\sin B = 25\sin(\arccos(19/35)) = 25\sqrt{1-(19/35)^2} = 25\sqrt{1-361/1225} = 25\sqrt{864/1225}\]
+
+\textbf{Respuesta final:}
+\[\boxed{\begin{aligned}
+\text{Área} &= 150\sqrt{6} \approx 367.42 \text{ m}^2\\
+\text{Altura desde } A &\approx 29.39 \text{ m}
+\end{aligned}}\]
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 7: Navegación]
+\textbf{Datos:}
+\begin{itemize}
+    \item De $A$ a $B$: 50 km, dirección $N30^\circ E$
+    \item De $B$ a $C$: 70 km, dirección $S60^\circ E$
+\end{itemize}
+
+\textbf{Parte a) Calcular el ángulo $ABC$:}
+
+Analizamos los rumbos:
+\begin{itemize}
+    \item $N30^\circ E$ significa $30^\circ$ al este del norte
+    \item $S60^\circ E$ significa $60^\circ$ al este del sur
+\end{itemize}
+
+El cambio de dirección en $B$:
+\begin{itemize}
+    \item Primera dirección: $30^\circ$ desde el norte hacia el este
+    \item Segunda dirección: $60^\circ$ desde el sur hacia el este
+\end{itemize}
+
+El ángulo entre las dos direcciones es:
+\[ABC = 180^\circ - (30^\circ + 60^\circ) = 180^\circ - 90^\circ = 90^\circ\]
+
+\textbf{Parte b) Distancia de $A$ a $C$:}
+
+Como el ángulo en $B$ es $90^\circ$, podemos usar el teorema de Pitágoras:
+\begin{align*}
+AC^2 &= AB^2 + BC^2\\
+AC^2 &= 50^2 + 70^2\\
+AC^2 &= 2500 + 4900\\
+AC^2 &= 7400\\
+AC &= \sqrt{7400} = 10\sqrt{74} \approx 86.02 \text{ km}
+\end{align*}
+
+\textbf{Parte c) Rumbo de regreso de $C$ a $A$:}
+
+Primero encontramos el ángulo $CAB$ usando ley del seno:
+\[\sin(CAB) = \frac{BC \times \sin(ABC)}{AC} = \frac{70 \times \sin 90^\circ}{86.02} = \frac{70}{86.02} \approx 0.8139\]
+
+\[CAB = \arcsin(0.8139) \approx 54.46^\circ\]
+
+El rumbo inicial desde $A$ era $N30^\circ E$, por lo que el ángulo de $AC$ respecto al norte es:
+\[30^\circ + 54.46^\circ = 84.46^\circ\]
+
+Para regresar de $C$ a $A$, el rumbo opuesto sería:
+\[S84.46^\circ W \approx S84^\circ W\]
+
+O alternativamente: $264.46^\circ$ en notación de 360°.
+
+\textbf{Respuesta final:}
+\[\boxed{\begin{aligned}
+\text{a) Ángulo } ABC &= 90^\circ\\
+\text{b) Distancia } AC &\approx 86.02 \text{ km}\\
+\text{c) Rumbo de } C \text{ a } A &: S84^\circ W
+\end{aligned}}\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.05]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (25,43.3);
+    \coordinate (C) at (85,8.3);
+
+    \draw[thick,-latex] (A) -- (B) node[midway,left] {50 km};
+    \draw[thick,-latex] (B) -- (C) node[midway,above] {70 km};
+    \draw[thick,dashed,red] (C) -- (A) node[midway,below] {86 km};
+
+    % Norte
+    \draw[-latex,blue] (A) -- ++(0,20) node[above] {N};
+    \draw[-latex,blue] (B) -- ++(0,20) node[above] {N};
+
+    % Ángulos
+    \draw[green] (A) ++(0,10) arc (90:60:10) node[midway,right] {\tiny $30^\circ$};
+    \draw[green] (B) ++(0,-10) arc (270:330:10) node[midway,right] {\tiny $60^\circ$};
+
+    \node at (A) [below] {$A$ (Puerto)};
+    \node at (B) [above left] {$B$};
+    \node at (C) [right] {$C$};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 8: Puente Colgante]
+\textbf{Datos:}
+\begin{itemize}
+    \item Distancia $AB = 120$ m
+    \item Ángulo de elevación desde $A$: $\alpha = 35^\circ$
+    \item Ángulo de elevación desde $B$: $\beta = 42^\circ$
+\end{itemize}
+
+\textbf{Parte a) Longitud de los cables:}
+
+En el triángulo, conocemos:
+\begin{itemize}
+    \item Lado $c = AB = 120$ m
+    \item Ángulo $CAB = 35^\circ$ (elevación desde $A$)
+    \item Ángulo $CBA = 42^\circ$ (elevación desde $B$)
+\end{itemize}
+
+El ángulo en la torre:
+\[ACB = 180^\circ - 35^\circ - 42^\circ = 103^\circ\]
+
+Usando ley del seno:
+\[\frac{AC}{\sin B} = \frac{BC}{\sin A} = \frac{AB}{\sin C}\]
+
+\[\frac{AC}{\sin 42^\circ} = \frac{BC}{\sin 35^\circ} = \frac{120}{\sin 103^\circ}\]
+
+Cable $AC$:
+\[AC = \frac{120 \times \sin 42^\circ}{\sin 103^\circ} = \frac{120 \times 0.6691}{0.9744} = \frac{80.29}{0.9744} \approx 82.41 \text{ m}\]
+
+Cable $BC$:
+\[BC = \frac{120 \times \sin 35^\circ}{\sin 103^\circ} = \frac{120 \times 0.5736}{0.9744} = \frac{68.83}{0.9744} \approx 70.64 \text{ m}\]
+
+\textbf{Parte b) Altura de la torre:}
+
+La altura de la torre desde el punto $A$ es:
+\[h = AC \times \sin 35^\circ = 82.41 \times 0.5736 \approx 47.27 \text{ m}\]
+
+Verificación desde $B$:
+\[h = BC \times \sin 42^\circ = 70.64 \times 0.6691 \approx 47.26 \text{ m} \quad \checkmark\]
+
+\textbf{Parte c) Ángulo en la cima:}
+
+Ya calculado: $ACB = 103^\circ$
+
+\textbf{Parte d) Área del triángulo:}
+
+Usando la fórmula con dos lados y el ángulo entre ellos:
+\[\text{Área} = \frac{1}{2} \times AC \times BC \times \sin(ACB)\]
+\[\text{Área} = \frac{1}{2} \times 82.41 \times 70.64 \times \sin 103^\circ\]
+\[\text{Área} = \frac{1}{2} \times 82.41 \times 70.64 \times 0.9744\]
+\[\text{Área} \approx 2835.73 \text{ m}^2\]
+
+Verificación alternativa usando base y altura:
+\[\text{Área} = \frac{1}{2} \times 120 \times 47.27 = 2836.2 \text{ m}^2 \quad \checkmark\]
+
+\textbf{Respuesta final:}
+\[\boxed{\begin{aligned}
+\text{a) Cable } AC &\approx 82.41 \text{ m}\\
+\text{   Cable } BC &\approx 70.64 \text{ m}\\
+\text{b) Altura torre} &\approx 47.27 \text{ m}\\
+\text{c) Ángulo } ACB &= 103^\circ\\
+\text{d) Área} &\approx 2836 \text{ m}^2
+\end{aligned}}\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.03]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (120,0);
+    \coordinate (C) at (51.8,47.3);
+
+    % Triángulo
+    \draw[thick] (A) -- (B) node[midway,below] {120 m};
+    \draw[thick,blue] (A) -- (C) node[midway,left] {82.4 m};
+    \draw[thick,blue] (B) -- (C) node[midway,right] {70.6 m};
+
+    % Torre vertical
+    \draw[dashed,gray] (C) -- (51.8,0) node[below] {base};
+
+    % Ángulos
+    \draw[red] (10,0) arc (0:35:10) node[midway,right] {$35^\circ$};
+    \draw[red] (B) ++(-10,0) arc (180:138:10) node[midway,left] {$42^\circ$};
+
+    % Altura
+    \draw[<->,green!60!black] (55,0) -- (55,47.3) node[midway,right] {$h=47.3$ m};
+
+    \node at (A) [below left] {$A$};
+    \node at (B) [below right] {$B$};
+    \node at (C) [above] {$C$ (Torre)};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+\newpage
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado esta primera parte de la guía sobre triángulos oblicuángulos. Ahora tienes en tu caja de herramientas matemáticas dos leyes súper poderosas que te permiten resolver cualquier triángulo, no solo los rectángulos.
+
+\subsection*{Lo que has aprendido}
+
+En esta guía hemos cubierto:
+\begin{itemize}
+    \item La diferencia entre triángulos rectángulos y oblicuángulos
+    \item La Ley del Seno y cuándo usarla
+    \item La Ley del Coseno y sus aplicaciones
+    \item Cómo calcular el área de cualquier triángulo
+    \item La famosa Fórmula de Herón
+    \item Los diferentes casos de resolución: LAL, ALA, LLL, LLA
+    \item El caso ambiguo y por qué es especial
+    \item Aplicaciones reales en navegación, topografía, arquitectura e ingeniería
+\end{itemize}
+
+\subsection*{Tabla resumen de fórmulas importantes}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Concepto} & \textbf{Fórmula} \\
+\hline
+Ley del Seno & $\displaystyle\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R$ \\
+\hline
+Ley del Coseno & $a^2 = b^2 + c^2 - 2bc\cos A$ \\
+\hline
+Área (con seno) & $\text{Área} = \frac{1}{2}ab\sin C$ \\
+\hline
+Fórmula de Herón & $\text{Área} = \sqrt{s(s-a)(s-b)(s-c)}$ \\
+& donde $s = \frac{a+b+c}{2}$ \\
+\hline
+Suma de ángulos & $A + B + C = 180^\circ$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Consejos para resolver triángulos oblicuángulos}
+
+\begin{enumerate}
+    \item \textbf{Identifica qué información tienes}: Antes de empezar a calcular, lista claramente qué lados y ángulos conoces.
+
+    \item \textbf{Elige la herramienta correcta}:
+    \begin{itemize}
+        \item ¿Tienes un ángulo y su lado opuesto? → Ley del Seno
+        \item ¿Tienes dos lados y el ángulo entre ellos? → Ley del Coseno
+        \item ¿Tienes los tres lados? → Ley del Coseno (o Herón para el área)
+    \end{itemize}
+
+    \item \textbf{Dibuja siempre el triángulo}: Un dibujo te ayuda a visualizar el problema y evitar errores.
+
+    \item \textbf{Verifica tus respuestas}:
+    \begin{itemize}
+        \item Los ángulos deben sumar $180^\circ$
+        \item Ningún ángulo puede ser negativo o mayor a $180^\circ$
+        \item El lado más largo está opuesto al ángulo más grande
+    \end{itemize}
+
+    \item \textbf{Ten cuidado con el caso ambiguo}: Cuando uses la ley del seno con dos lados y un ángulo opuesto, recuerda que puede haber dos soluciones.
+
+    \item \textbf{Usa la calculadora correctamente}:
+    \begin{itemize}
+        \item Asegúrate de que esté en modo grados (DEG)
+        \item Redondea solo al final
+        \item Guarda valores intermedios en la memoria
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Aplicaciones en el mundo real}
+
+Ahora que dominas estas herramientas, puedes entender y resolver problemas como:
+
+\begin{itemize}
+    \item \textbf{GPS y navegación}: Tu teléfono usa triangulación (con triángulos oblicuángulos) para determinar tu posición exacta usando señales de al menos tres satélites.
+
+    \item \textbf{Videojuegos y animación}: Los gráficos 3D se construyen con millones de triángulos. Las leyes que aprendiste se usan para calcular iluminación, sombras y perspectiva.
+
+    \item \textbf{Astronomía}: Los astrónomos usan estas leyes para medir distancias a estrellas y planetas usando la técnica del paralaje.
+
+    \item \textbf{Rescate y emergencias}: Los equipos de rescate usan triangulación para localizar señales de emergencia y planificar rutas de búsqueda.
+
+    \item \textbf{Deportes}: En deportes como el golf o el billar, entender los ángulos y las distancias es crucial para la estrategia.
+\end{itemize}
+
+\subsection*{Recomendaciones para el éxito}
+
+Para dominar completamente los triángulos oblicuángulos:
+
+\begin{enumerate}
+    \item \textbf{Practica con problemas variados}: Cada tipo de problema (LAL, ALA, LLL, etc.) tiene sus trucos.
+
+    \item \textbf{Conecta con la física}: Muchos problemas de fuerzas, velocidades y aceleraciones involucran triángulos oblicuángulos.
+
+    \item \textbf{Explora aplicaciones}: Busca ejemplos en tu entorno. ¿Ves una grúa? Hay triángulos oblicuángulos. ¿Un techo inclinado? Más triángulos.
+
+    \item \textbf{Trabaja en equipo}: Resolver problemas con compañeros te ayuda a ver diferentes enfoques.
+
+    \item \textbf{No memorices, comprende}: Es mejor entender por qué funcionan las leyes que memorizar fórmulas sin sentido.
+\end{enumerate}
+
+\subsection*{Un último pensamiento}
+
+Los triángulos oblicuángulos pueden parecer más complicados que los rectángulos, pero en realidad son más representativos del mundo real. La naturaleza raramente nos da ángulos rectos perfectos. Las montañas, los árboles, las trayectorias de vuelo, las órbitas planetarias... todo involucra triángulos oblicuángulos.
+
+Al dominar estas herramientas matemáticas, no solo estás aprendiendo a resolver problemas en papel. Estás desarrollando una forma de pensar que te permite entender y modelar el mundo que te rodea. Desde el diseño de un simple techo hasta la navegación espacial, los conceptos que has aprendido hoy son fundamentales.
+
+\subsection*{¿Qué sigue?}
+
+En las siguientes partes de esta guía, pondremos en práctica todo lo aprendido con:
+\begin{itemize}
+    \item Ejemplos resueltos paso a paso de cada tipo de problema
+    \item Ejercicios progresivos para desarrollar tu habilidad
+    \item Problemas de aplicación del mundo real
+    \item Proyectos integradores que combinen todos los conceptos
+\end{itemize}
+
+Recuerda: las matemáticas son como un deporte mental. Mientras más practiques, más fuerte y ágil será tu mente matemática. ¡Sigue adelante y conquista esos triángulos!
+
+\vspace{2cm}
+
+\begin{center}
+\Large\textit{``En cada triángulo hay una historia de ángulos y distancias\\
+esperando ser descubierta.''}\\
+\vspace{0.5cm}
+\normalsize
+--- Adaptado para estudiantes de Grado 10
+\end{center}
+
+\end{document}
