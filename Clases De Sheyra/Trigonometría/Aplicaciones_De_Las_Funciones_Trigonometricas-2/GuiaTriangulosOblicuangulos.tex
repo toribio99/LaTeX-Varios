@@ -363,7 +363,7 @@ Veamos geométricamente por qué funciona esta ley:
     \draw[|-|, accentcolor] ($(H)+(0,-0.4)$) -- ($(C)+(0,-0.4)$) node[midway, below] {$a - c\cos B$};
 
     % Altura
-    \node[right] at ($(H)!0.5!(A)$) {$h = c\sin B$};
+    \node[left] at ($(H)!0.5!(A)$) {$h = c\sin B$};
 
     % Ángulo
     \pic[draw, accentcolor, angle radius=0.4cm, angle eccentricity=1.3] {angle = C--B--A};
@@ -429,7 +429,7 @@ Esta fórmula es súper práctica porque solo necesitas conocer dos lados y el �
     \node[above left] at ($(A)!0.5!(C)$) {$b$};
 
     % Altura
-    \node[right] at ($(H)!0.5!(C)$) {$h = b\sin A$};
+    \node[centered] at ($(H)!0.5!(C)$) {$h = b\sin A$};
 
     % Ángulo
     \pic[draw, accentcolor, angle radius=0.5cm, angle eccentricity=1.3] {angle = B--A--C};
@@ -437,8 +437,8 @@ Esta fórmula es súper práctica porque solo necesitas conocer dos lados y el �
     % Área sombreada
     \fill[maincolor!20, opacity=0.5] (A) -- (B) -- (C) -- cycle;
 
-    \node[maincolor] at (1.75,0.8) {Área $= \frac{1}{2}ch$};
-    \node[maincolor] at (1.75,0.4) {$= \frac{1}{2}c(b\sin A)$};
+    %\node[maincolor] at (1.75,0.8) {Área $= \frac{1}{2}ch$};
+    \node[maincolor] at (1.75,0.4) {Área $= \frac{1}{2}ch= \frac{1}{2}c(b\sin A)$};
 \end{tikzpicture}
 \end{center}
 
@@ -482,6 +482,10 @@ Ahora vamos a organizar todo lo que hemos aprendido. Dependiendo de qué informa
     % Datos conocidos en rojo
     \draw[ultra thick, red] (A) -- (B) node[midway, below] {conocido};
     \draw[ultra thick, red] (A) -- (C) node[midway, left] {conocido};
+    \node[above] at (1.2,1.8) {C};
+    \node[right] at (3,0) {B};
+    \node[left] at (0,0) {A};
+    
 
     % Ángulo conocido
     \pic[draw, red, ultra thick, angle radius=0.5cm, angle eccentricity=1.5] {angle = B--A--C};
@@ -510,13 +514,16 @@ Ahora vamos a organizar todo lo que hemos aprendido. Dependiendo de qué informa
     \coordinate (C) at (1.8,1.5);
 
     \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+    \node[above] at (1.8,1.6) {C};
+    \node[right] at (3,0) {B};
+    \node[left] at (0,0) {A};
 
     % Lado conocido
     \draw[ultra thick, red] (A) -- (B) node[midway, below] {conocido};
 
     % Ángulos conocidos
-    \pic[draw, red, ultra thick, angle radius=0.4cm, angle eccentricity=1.5] {angle = B--A--C};
-    \pic[draw, red, ultra thick, angle radius=0.4cm, angle eccentricity=1.5] {angle = A--B--C};
+    \pic[draw, red, ultra thick, angle radius=0.4cm, angle eccentricity=2.5] {angle = B--A--C};
+    \pic[draw, red, ultra thick, angle radius=0.4cm, angle eccentricity=2.5] {angle = C--B--A};
 
     % Incógnitas
     \draw[dashed, thick, blue] (A) -- (C) node[midway, left] {?};
@@ -544,6 +551,9 @@ Ahora vamos a organizar todo lo que hemos aprendido. Dependiendo de qué informa
     \coordinate (C) at (1.5,1.7);
 
     \draw[thick, maincolor] (A) -- (B) -- (C) -- cycle;
+    \node[above] at (1.5,1.7) {C};
+    \node[right] at (3.15,0) {B};
+    \node[left] at (0,0) {A};
 
     % Todos los lados conocidos
     \draw[ultra thick, red] (A) -- (B) node[midway, below] {conocido};
@@ -552,8 +562,8 @@ Ahora vamos a organizar todo lo que hemos aprendido. Dependiendo de qué informa
 
     % Ángulos desconocidos
     \pic[draw, blue, dashed, thick, angle radius=0.4cm, angle eccentricity=1.3] {angle = B--A--C};
-    \pic[draw, blue, dashed, thick, angle radius=0.4cm, angle eccentricity=1.3] {angle = A--B--C};
-    \pic[draw, blue, dashed, thick, angle radius=0.4cm, angle eccentricity=1.3] {angle = B--C--A};
+    \pic[draw, blue, dashed, thick, angle radius=0.4cm, angle eccentricity=1.3] {angle = C--B--A};
+    \pic[draw, blue, dashed, thick, angle radius=0.4cm, angle eccentricity=1.3] {angle = A--C--B};
 
     \node[below] at (1.6,-0.5) {\textbf{Caso LLL}};
 \end{tikzpicture}
@@ -604,8 +614,9 @@ Ahora vamos a organizar todo lo que hemos aprendido. Dependiendo de qué informa
     \node[below] at (C1p) {$C'$};
 
     % Datos conocidos
-    \draw[ultra thick, red] (A1) -- (B1) node[midway, below] {\small conocido};
-    \node[red, left] at ($(A1)!0.5!(C1)$) {\small conocido};
+    \draw[ultra thick, red] (A1) -- (B1) node[below] at ($(A1)!0.5!(B1)$) {\small conocido};
+    \draw[ultra thick, red] (A1) -- (C1) node[left=2mm] at ($(A1)!0.5!(C1)$) {\small conocido};
+    %\node[red, left] at ($(A1)!0.5!(C1)$) {\small conocido};
 
     % Ángulo conocido
     \pic[draw, red, ultra thick, angle radius=0.3cm, angle eccentricity=1.3] {angle = C1--B1--A1};
@@ -715,11 +726,11 @@ Los puentes modernos, especialmente los atirantados y colgantes, son maravillas 
 \begin{tikzpicture}[scale=0.8]
     % Torre del puente
     \draw[ultra thick] (0,-1) -- (0,4);
-    \node[left] at (0,4) {Torre};
+    \node[left] at (1.5,3.5) {Torre};
 
     % Tablero del puente
     \draw[ultra thick] (-4,0) -- (4,0);
-    \node[below] at (0,0) {Tablero};
+    \node[below] at (-1.2,0) {Tablero};
 
     % Cables (tirantes)
     \foreach \x/\y in {-3/0.5, -2/1, -1/1.5, 1/1.5, 2/1, 3/0.5} {
@@ -730,13 +741,13 @@ Los puentes modernos, especialmente los atirantados y colgantes, son maravillas 
     \draw[ultra thick, blue] (0,3.5) -- (2,0) -- (0,0) -- cycle;
 
     % Etiquetas del triángulo
-    \node[above] at (0,3.5) {$A$};
-    \node[below] at (2,0) {$B$};
-    \node[below] at (0,0) {$C$};
+    \node[above] at (0,3.9) {$A$};
+    \node[below] at (1.7,0) {$B$};
+    \node[below] at (0.3,0) {$C$};
 
     % Fuerzas
     \draw[thick, red, -latex] (2,0) -- (2,-0.8) node[right] {Peso};
-    \draw[thick, red, -latex] (0,3.5) -- (-0.5,3.8) node[above] {Tensión};
+    \draw[thick, red, -latex] (0,3.5) -- (-0.5,3.8) node[above left] {Tensión};
 
     \node[below] at (0,-1.5) {\textbf{Puente atirantado: cada cable forma un triángulo}};
 
@@ -863,6 +874,7 @@ r^2 = p^2 + q^2 - 2pq\cos R
     \coordinate (P) at (0,0);
     \coordinate (Q) at (12,0);
     \coordinate (R) at (5,6);
+    \pic[draw, red, ultra thick, angle radius=0.4cm, angle eccentricity=2.5] {angle = P--R--Q};
 
     % Triángulo
     \draw[thick] (P) -- (Q) node[midway,below] {$r$};
@@ -946,8 +958,8 @@ Un triángulo tiene lados $a = 7$ cm, $b = 9$ cm y $c = 11$ cm. Encuentra todos 
 
     % Triángulo
     \draw[thick] (A) -- (B) node[midway,below] {$c = 11$ cm};
-    \draw[thick] (B) -- (C) node[midway,right] {$a = 7$ cm};
-    \draw[thick] (C) -- (A) node[midway,left] {$b = 9$ cm};
+    \draw[thick] (B) -- (C) node[midway,right=2mm] {$a = 7$ cm};
+    \draw[thick] (C) -- (A) node[midway,left=2mm] {$b = 9$ cm};
 
     % Etiquetas
     \node at (A) [below left] {$A$};
@@ -1056,14 +1068,14 @@ Como todos los ángulos son positivos y suman $180^\circ$, esta solución es vá
     \coordinate (Z1) at (3,5);
 
     \draw[thick,blue] (X1) -- (Y1) node[midway,below] {$z_1$};
-    \draw[thick,blue] (Y1) -- (Z1) node[midway,right] {$x = 12$};
-    \draw[thick,blue] (Z1) -- (X1) node[midway,left] {$y = 8$};
+    \draw[thick,blue] (Y1) -- (Z1) node[midway,right=2mm] {$x = 12$};
+    \draw[thick,blue] (Z1) -- (X1) node[midway,left=2mm] {$y = 8$};
 
     \node at (X1) [below left] {$X$};
     \node at (Y1) [below right] {$Y$};
     \node at (Z1) [above] {$Z_1$};
 
-    \node[blue] at (5,-1.5) {Solución 1};
+    \node[blue] at (5,-2) {Solución 1};
 \end{tikzpicture}
 \hspace{2cm}
 \begin{tikzpicture}[scale=0.4]
@@ -1072,15 +1084,15 @@ Como todos los ángulos son positivos y suman $180^\circ$, esta solución es vá
     \coordinate (Y2) at (10,0);
     \coordinate (Z2) at (7,-3);
 
-    \draw[thick,red] (X2) -- (Y2) node[midway,below] {$z_2$};
+    \draw[thick,red] (X2) -- (Y2) node[midway,above] {$z_2$};
     \draw[thick,red] (Y2) -- (Z2) node[midway,right] {$x = 12$};
-    \draw[thick,red] (Z2) -- (X2) node[midway,left] {$y = 8$};
+    \draw[thick,red] (Z2) -- (X2) node[midway,left=4mm] {$y = 8$};
 
     \node at (X2) [below left] {$X$};
     \node at (Y2) [below right] {$Y$};
     \node at (Z2) [below] {$Z_2$};
 
-    \node[red] at (5,-4.5) {Solución 2};
+    \node[red] at (5,-5) {Solución 2};
 \end{tikzpicture}
 \end{center}
 
@@ -1300,17 +1312,21 @@ Un barco sale del puerto A y navega 45 km en dirección N$30^\circ$E hasta el pu
     \coordinate (C) at (78.9,18.42);
 
     % Trayectoria
-    \draw[thick,blue,-{Latex}] (A) -- (B) node[midway,left] {45 km};
-    \draw[thick,blue,-{Latex}] (B) -- (C) node[midway,above] {60 km};
+    \draw[thick,blue,-{Latex}] (A) -- (B) node[midway,left=2mm] {45 km};
+    \draw[thick,blue,-{Latex}] (B) -- (C) node[midway,above right] {60 km};
     \draw[thick,red,dashed,-{Latex}] (C) -- (A) node[midway,below] {$d$};
+    \draw[thick,gray,dashed] (5,38.97) -- (35,38.97);
+    \draw[thick,gray,dashed] (22.5,20) -- (22.5,55);
 
     % Ángulos de navegación
     \draw[green] (10,0) arc (0:60:10) node[midway,right] {$60^\circ$};
     \draw[green] (B) ++(10,0) arc (0:-20:10) node[midway,right] {$20^\circ$};
+    \node[green] at(27,32.5) {$70^\circ$};
+    \node[green] at(18,23) {$30^\circ$};
 
     % Etiquetas
     \node at (A) [below left] {Puerto A};
-    \node at (B) [above] {B};
+    \node at (B) [above left] {B};
     \node at (C) [right] {C};
 \end{tikzpicture}
 \end{center}
@@ -1550,7 +1566,7 @@ s = \frac{500 + 248.47 + 497.43}{2} = 622.95 \text{ m}
     \coordinate (C) at (64,240);
 
     \draw[thick,blue] (A) -- (B) node[midway,below] {500 m};
-    \draw[thick,blue] (B) -- (C) node[midway,right] {497.43 m};
+    \draw[thick,blue] (B) -- (C) node[midway,right=2mm] {497.43 m};
     \draw[thick,blue] (C) -- (A) node[midway,left] {248.47 m};
 
     \draw[red,-{Latex}] (50,0) arc (0:75:50) node[midway,right] {$75^\circ$};
@@ -1666,11 +1682,11 @@ PQ = 186.54 \text{ m} \approx 186.60 \text{ m} \quad \checkmark
     \coordinate (Q) at (-50,80);
 
     \draw[thick] (A) -- (B) node[midway,below] {200 m};
-    \draw[dashed,blue] (A) -- (P) node[midway,left] {164.52};
+    \draw[dashed,blue] (A) -- (P) node[midway,right] {164.52};
     \draw[dashed,blue] (A) -- (Q) node[midway,left] {103.55};
     \draw[dashed,blue] (B) -- (P) node[midway,right] {129.06};
     \draw[dashed,blue] (B) -- (Q) node[midway,below] {146.41};
-    \draw[thick,red] (P) -- (Q) node[midway,above] {186.60 m};
+    \draw[thick,red] (P) -- (Q) node[midway,above left] {186.60 m};
 
     \node at (A) [below] {A};
     \node at (B) [below] {B};
@@ -1913,7 +1929,7 @@ Triángulo 2: $P_2 = 20 + 10.83 + 26.12 = 56.95$ cm
     \draw[thick,blue] (B1) -- (C1) node[midway,right] {10.83};
     \draw[thick,blue] (C1) -- (A1) node[midway,left] {26.12};
 
-    \node at (7,-2) {Solución 1};
+    \node at (7,-3.5) {Solución 1};
 \end{tikzpicture}
 \hspace{2cm}
 \begin{tikzpicture}[scale=0.2]
@@ -1926,7 +1942,7 @@ Triángulo 2: $P_2 = 20 + 10.83 + 26.12 = 56.95$ cm
     \draw[thick,red] (B2) -- (C2) node[midway,right] {26.12};
     \draw[thick,red] (C2) -- (A2) node[midway,left] {10.83};
 
-    \node at (7,-2) {Solución 2};
+    \node at (7,-3.5) {Solución 2};
 \end{tikzpicture}
 \end{center}
 
@@ -2036,9 +2052,9 @@ G_y = \frac{1000(0) + 1200(0) + 800(56.8)}{3000} = \frac{45440}{3000} = 15.15 \t
     \filldraw[red] (3.25,15.15) circle (1) node[right] {G};
 
     % Fuerzas (vectores)
-    \draw[blue,-{Latex},very thick] (A) -- ++(10,0) node[below] {1000 N};
-    \draw[blue,-{Latex},very thick] (B) -- ++(12,0) node[below] {1200 N};
-    \draw[blue,-{Latex},very thick] (C) -- ++(8,0) node[below] {800 N};
+    \draw[blue,-{Latex},very thick] (A) -- ++(10,0) node[above] {1000 N};
+    \draw[blue,-{Latex},very thick] (B) -- ++(12,0) node[above] {1200 N};
+    \draw[blue,-{Latex},very thick] (C) -- ++(8,0) node[above] {800 N};
 
     \node at (A) [below left] {A};
     \node at (B) [below right] {B};
@@ -2255,10 +2271,13 @@ c &\approx 10.76 \text{ cm}\\
     \draw[thick] (A) -- (B) node[midway,below] {$c = 10.76$};
     \draw[thick] (B) -- (C) node[midway,right] {$a = 12$};
     \draw[thick] (C) -- (A) node[midway,left] {$b = 8.78$};
+    
+    \pic[draw, blue, ultra thick, angle radius=0.4cm, angle eccentricity=2.5] {angle = A--C--B};
+        
 
     \draw[blue] (1,0) arc (0:75:1) node[midway,right] {$75^\circ$};
     \draw[blue] (B) ++ (-1,0) arc (180:135:1) node[midway,left] {$45^\circ$};
-    \draw[blue] (C) ++ (-0.5,-1.4) arc (-70:-130:1) node[midway,below] {$60^\circ$};
+    \draw[blue] (C) ++ (0.6,-1.4) arc (-70:-130:1) node[midway,below] {$60^\circ$};
 
     \node at (A) [below left] {$A$};
     \node at (B) [below right] {$B$};
@@ -2527,7 +2546,7 @@ Nota: Este es el área máxima posible, pues ocurre cuando el triángulo es rect
     \draw[thick,blue] (A1) -- (B1) node[midway,below] {\tiny $b=24$};
     \draw[thick,blue] (B1) -- (C1);
     \draw[thick,blue] (C1) -- (A1) node[midway,left] {\tiny $a=18$};
-    \node at (2,7) [blue] {\tiny $30^\circ$};
+    \node at (4,1) [blue] {\tiny $30^\circ$};
 
     % Triángulo con C=90°
     \begin{scope}[xshift=30cm]
@@ -2539,7 +2558,7 @@ Nota: Este es el área máxima posible, pues ocurre cuando el triángulo es rect
     \draw[thick,green!60!black] (B2) -- (C2);
     \draw[thick,green!60!black] (C2) -- (A2);
     \draw (0,1.5) -- (1.5,1.5) -- (1.5,0);
-    \node at (12,12) [green!60!black] {\tiny $90^\circ$};
+    \node at (3.5,2) [green!60!black] {\tiny $90^\circ$};
     \end{scope}
 
     % Triángulo con C=120°
@@ -2551,7 +2570,7 @@ Nota: Este es el área máxima posible, pues ocurre cuando el triángulo es rect
     \draw[thick,red] (A3) -- (B3);
     \draw[thick,red] (B3) -- (C3);
     \draw[thick,red] (C3) -- (A3);
-    \node at (0,7) [red] {\tiny $120^\circ$};
+    \node at (2,2) [red] {\tiny $120^\circ$};
     \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -2680,8 +2699,8 @@ O alternativamente: $264.46^\circ$ en notación de 360°.
     \coordinate (B) at (25,43.3);
     \coordinate (C) at (85,8.3);
 
-    \draw[thick,-latex] (A) -- (B) node[midway,left] {50 km};
-    \draw[thick,-latex] (B) -- (C) node[midway,above] {70 km};
+    \draw[thick,-latex] (A) -- (B) node[midway,right] {50 km};
+    \draw[thick,-latex] (B) -- (C) node[midway,above right] {70 km};
     \draw[thick,dashed,red] (C) -- (A) node[midway,below] {86 km};
 
     % Norte
@@ -2689,8 +2708,8 @@ O alternativamente: $264.46^\circ$ en notación de 360°.
     \draw[-latex,blue] (B) -- ++(0,20) node[above] {N};
 
     % Ángulos
-    \draw[green] (A) ++(0,10) arc (90:60:10) node[midway,right] {\tiny $30^\circ$};
-    \draw[green] (B) ++(0,-10) arc (270:330:10) node[midway,right] {\tiny $60^\circ$};
+    \draw[green!70!black] (A) ++(1.5,14) arc (90:60:10) node[midway,centered] {\tiny $30^\circ$};
+    \draw[green!70!black] (B) ++(-4.5,-10) arc (270:330:10) node[midway,right] {\tiny $60^\circ$};
 
     \node at (A) [below] {$A$ (Puerto)};
     \node at (B) [above left] {$B$};
@@ -2771,17 +2790,17 @@ Verificación alternativa usando base y altura:
     % Triángulo
     \draw[thick] (A) -- (B) node[midway,below] {120 m};
     \draw[thick,blue] (A) -- (C) node[midway,left] {82.4 m};
-    \draw[thick,blue] (B) -- (C) node[midway,right] {70.6 m};
+    \draw[thick,blue] (B) -- (C) node[midway,above right] {70.6 m};
 
     % Torre vertical
-    \draw[dashed,gray] (C) -- (51.8,0) node[below] {base};
+    \draw[dashed,gray] (C) -- (51.8,0) node[below left] {base};
 
     % Ángulos
     \draw[red] (10,0) arc (0:35:10) node[midway,right] {$35^\circ$};
     \draw[red] (B) ++(-10,0) arc (180:138:10) node[midway,left] {$42^\circ$};
 
     % Altura
-    \draw[<->,green!60!black] (55,0) -- (55,47.3) node[midway,right] {$h=47.3$ m};
+    \draw[<->,green!60!black] (55,0) -- (55,47.3) node[midway,centered] {$h=47.3$ m};
 
     \node at (A) [below left] {$A$};
     \node at (B) [below right] {$B$};
