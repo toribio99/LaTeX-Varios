@@ -700,8 +700,8 @@ En ingeniería, frecuentemente necesitamos descomponer una fuerza en componentes
     \draw[thick, red, -latex] (O) -- (120:1.25) node[left] {$F_{y'}$};
 
     % Ángulos
-    \pic[draw, angle radius=0.4cm, angle eccentricity=1.5] {angle = 30:3--O--0:3};
-    \pic[draw, angle radius=0.6cm, angle eccentricity=1.3] {angle = 75:2.5--O--30:3};
+    \draw (0.4,0) arc (0:30:0.4) node[midway, right] {\small $30^\circ$};
+    \draw (0.6,0) arc (0:75:0.6) node[midway, above right] {\small $75^\circ$};
 
     \node[below] at (0,-0.5) {Descomposición en ejes no perpendiculares};
 \end{tikzpicture}

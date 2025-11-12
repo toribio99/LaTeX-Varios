@@ -529,6 +529,45 @@ El asistente principal debe:
 - `gray!30`: Grid
 - `black`: Ejes, texto
 
+### ⚠️ ADVERTENCIA CRÍTICA: NO usar \pic con coordenadas directas
+
+**PROBLEMA RECURRENTE:** El comando `\pic` con babel-spanish causa errores cuando se usa con coordenadas polares o cartesianas directas.
+
+**❌ NUNCA HACER ESTO:**
+```latex
+% ESTO CAUSARÁ ERROR "No shape named '30:3' is known"
+\pic[draw, angle radius=0.4cm] {angle = 30:3--O--0:3};
+\pic[draw, angle radius=0.6cm] {angle = 75:2.5--O--30:3};
+```
+
+**✅ SOLUCIONES CORRECTAS:**
+
+**Opción 1: Definir nodos primero**
+```latex
+% Definir nodos con nombres
+\coordinate (A) at (30:3);
+\coordinate (B) at (0:3);
+\coordinate (C) at (75:2.5);
+
+% Usar nombres de nodos en \pic
+\pic[draw, angle radius=0.4cm] {angle = A--O--B};
+\pic[draw, angle radius=0.6cm] {angle = C--O--A};
+```
+
+**Opción 2: Dibujar arcos manualmente (MÁS SEGURO)**
+```latex
+% Dibujar ángulos con arcos simples
+\draw (0.4,0) arc (0:30:0.4) node[midway, right] {\small $30^\circ$};
+\draw (0.6,0) arc (0:75:0.6) node[midway, above right] {\small $75^\circ$};
+```
+
+**Por qué ocurre:**
+- TikZ interpreta `30:3` como el nombre de un nodo
+- babel-spanish interfiere con la sintaxis de `\pic`
+- La opción `es-noshorthands` no soluciona el problema con coordenadas directas
+
+**Recomendación:** SIEMPRE usar la Opción 2 (arcos manuales) para ángulos en diagramas geométricos. Es más confiable y compatible.
+
 ### 4. Tono de lenguaje según grado
 
 **Grados 9-10 (Coloquial):**
