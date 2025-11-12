@@ -39,7 +39,8 @@
   fonttitle=\bfseries,
   title=Definición,
   sharp corners=downhill,
-  arc=8pt
+  arc=8pt,
+  breakable
 }
 
 \newtcolorbox{ejemplo}{
@@ -48,7 +49,8 @@
   fonttitle=\bfseries,
   title=Ejemplo,
   sharp corners=downhill,
-  arc=8pt
+  arc=8pt,
+  breakable
 }
 
 \newtcolorbox{ejercicio}{
@@ -57,7 +59,8 @@
   fonttitle=\bfseries,
   title=Ejercicio,
   sharp corners=downhill,
-  arc=8pt
+  arc=8pt,
+  breakable
 }
 
 \newtcolorbox{solucion}{
@@ -66,7 +69,8 @@
   fonttitle=\bfseries,
   title=Solución,
   sharp corners=downhill,
-  arc=8pt
+  arc=8pt,
+  breakable
 }
 
 \newtcolorbox{nota}{
@@ -75,7 +79,8 @@
   fonttitle=\bfseries,
   title=Nota,
   sharp corners=downhill,
-  arc=8pt
+  arc=8pt,
+  breakable
 }
 
 % Configuración de hyperref
@@ -241,9 +246,7 @@ Veamos esto claramente en un diagrama:
   \coordinate (C) at (5,3);
 
   % Dibujar el triángulo
-  \draw[line width=1.5pt, maincolor] (A) -- node[below] {Cateto adyacente a $\alpha$} (B)
-                                       -- node[right] {Cateto opuesto a $\alpha$} (C)
-                                       -- node[above left, sloped] {Hipotenusa} (A);
+  \draw[line width=1.5pt, maincolor] (A) -- node[below] {Cateto adyacente a $\alpha$} (B)--node[right] {Cateto opuesto a $\alpha$} (C)--node[above left, sloped] {Hipotenusa} (A);
 
   % Marcar el ángulo recto
   \draw[line width=1pt, maincolor] (4.7,0) rectangle (5,0.3);
@@ -258,12 +261,12 @@ Veamos esto claramente en un diagrama:
   \node[accentcolor] at (1.3,0.3) {$\alpha$};
 
   % Marcar el otro ángulo agudo
-  \draw[examplecolor, line width=1pt] (4.3,3) arc (180:239:0.7);
-  \node[examplecolor] at (4.2,2.5) {$\beta$};
+  \draw[examplecolor, line width=1pt] (4.3,2.6) arc (170:265:.75);
+  \node[examplecolor] at (4.7,2.5) {$\beta$};
 
   % Etiquetas de medidas
   \node[below, maincolor] at (2.5,-0.5) {$b$};
-  \node[right, maincolor] at (5.3,1.5) {$a$};
+  \node[right, maincolor] at (5.3,1.1) {$a$};
   \node[above left, maincolor] at (2.3,1.8) {$c$};
 \end{tikzpicture}
 \end{center}
@@ -606,22 +609,22 @@ Imagínate que estás parado mirando un edificio alto. Si trazas una línea imag
 
   % Línea horizontal
   \draw[line width=1pt, dashed, examplecolor] (0,0.2) -- (3,0.2);
-  \node[above, examplecolor] at (1.5,0.2) {Línea horizontal};
+  \node[above, examplecolor] at (2.6,0.2) {Línea horizontal};
 
   % Línea de visión
-  \draw[line width=1.5pt, accentcolor, ->] (0,0.2) -- (5.25,4);
-  \node[above, accentcolor, sloped] at (2.6,2.2) {Línea de visión};
+  \draw[line width=1.5pt, accentcolor, -{Latex}] (0,0.2) -- (5.25,4);
+  \node[above, accentcolor, sloped, rotate=36] at (2.6,2.2) {Línea de visión};
 
   % Ángulo de elevación
   \draw[accentcolor, line width=1pt] (1.2,0.2) arc (0:36:1.2);
-  \node[accentcolor] at (1.8,0.6) {Ángulo de elevación};
+  \node[accentcolor] at (2.7,0.8) {Ángulo de elevación};
 
   % Distancia horizontal
-  \draw[<->, line width=1pt, maincolor] (0,-1.2) -- (5,-1.2);
-  \node[below, maincolor] at (2.5,-1.2) {Distancia horizontal};
+  \draw[{Latex}-{Latex}, line width=1pt, maincolor] (0,-.2) -- (5,-0.2);
+  \node[below, maincolor] at (2.5,-0.2) {Distancia horizontal};
 
   % Altura
-  \draw[<->, line width=1pt, maincolor] (6,0) -- (6,4);
+  \draw[{Latex}-{Latex}, line width=1pt, maincolor] (6,0) -- (6,4);
   \node[right, maincolor] at (6,2) {Altura};
 \end{tikzpicture}
 \end{center}
@@ -696,26 +699,26 @@ Imagínate que estás en el último piso de un edificio mirando hacia abajo a un
 
   % Objeto en el suelo
   \draw[line width=1.5pt, examplecolor, fill=examplecolor!20] (4.5,0) rectangle (5.5,0.3);
-  \node[below, examplecolor] at (5,-0.3) {Objeto};
+  \node[below, examplecolor] at (5.5,0.8) {Objeto};
 
   % Línea horizontal
   \draw[line width=1pt, dashed, examplecolor] (0.5,4) -- (3,4);
   \node[above, examplecolor] at (1.7,4) {Línea horizontal};
 
   % Línea de visión
-  \draw[line width=1.5pt, accentcolor, ->] (0.5,4) -- (5,0.15);
-  \node[below, accentcolor, sloped] at (2.8,1.9) {Línea de visión};
+  \draw[line width=1.5pt, accentcolor, -{Latex}] (0.5,4) -- (5,0.15);
+  \node[below, accentcolor, sloped, rotate=-41] at (2.8,2) {Línea de visión};
 
   % Ángulo de depresión
   \draw[accentcolor, line width=1pt] (1.5,4) arc (0:-40:1);
-  \node[accentcolor] at (1.5,3.4) {Ángulo de depresión};
+  \node[accentcolor, rotate=-41] at (2.7,2.8) {Ángulo de depresión};
 
   % Distancia horizontal
-  \draw[<->, line width=1pt, maincolor] (0.5,-0.8) -- (5,-0.8);
-  \node[below, maincolor] at (2.75,-0.8) {Distancia horizontal};
+  \draw[{Latex}-{Latex}, line width=1pt, maincolor] (0.5,-0.2) -- (5,-0.2);
+  \node[below, maincolor] at (2.75,-0.2) {Distancia horizontal};
 
   % Altura del edificio
-  \draw[<->, line width=1pt, maincolor] (-0.8,0) -- (-0.8,4);
+  \draw[{Latex}-{Latex}, line width=1pt, maincolor] (-0.8,0) -- (-0.8,4);
   \node[left, maincolor] at (-0.8,2) {Altura};
 \end{tikzpicture}
 \end{center}
@@ -745,11 +748,11 @@ Si tú estás en un edificio mirando hacia abajo a una persona en el suelo con u
 
   % Ángulo de depresión
   \draw[accentcolor, line width=1pt] (0.8,3) arc (0:-45:0.8);
-  \node[accentcolor] at (1.2,2.7) {Depresión};
+  \node[accentcolor] at (1.7,2.7) {Depresión};
 
   % Ángulo de elevación
   \draw[examplecolor, line width=1pt] (2.2,0) arc (180:135:0.8);
-  \node[examplecolor] at (2,0.5) {Elevación};
+  \node[examplecolor] at (1.3,0.5) {Elevación};
 
   % Etiqueta
   \node[maincolor, below] at (1.5,-0.5) {Los ángulos son iguales: ángulos alternos internos};
@@ -847,11 +850,11 @@ Un estudiante de arquitectura necesita calcular la altura de un edificio. Se par
 }
 % Triángulo
 \draw[thick, blue] (-50,0) -- (0,0) -- (0,70) -- cycle;
-\draw[thick, ->] (-50,0) -- (-25,35);
+\draw[thick, -{Latex}] (-50,0) -- (-25,35);
 \node at (-40,5) {35°};
-\draw[<->] (-50,-5) -- (0,-5);
+\draw[{Latex}-{Latex}] (-50,-5) -- (0,-5);
 \node at (-25,-8) {50 m};
-\draw[<->] (25,0) -- (25,70);
+\draw[{Latex}-{Latex}] (25,0) -- (25,70);
 \node at (30,35) {$h = ?$};
 % Persona
 \draw[thick] (-50,0) circle (2);
@@ -932,12 +935,12 @@ En un centro comercial necesitan construir una rampa de acceso para personas con
 \draw[thick] (0,0) -- (10,0) -- (10,1.22);
 % Ángulo
 \draw (2,0) arc (0:7:2);
-\node at (2.5,0.2) {7°};
+\node at (4.5,0.2) {7°};
 % Medidas
 \node[above,sloped] at (5,0.61) {8 m};
-\draw[<->] (0,-0.5) -- (10,-0.5);
+\draw[{Latex}-{Latex}] (0,-0.5) -- (10,-0.5);
 \node at (5,-0.8) {$d = ?$};
-\draw[<->] (10.5,0) -- (10.5,1.22);
+\draw[{Latex}-{Latex}] (10.5,0) -- (10.5,1.22);
 \node at (11,0.61) {$h = ?$};
 % Textura rampa
 \foreach \x in {1,2,3,4,5,6,7,8,9} {
@@ -1024,9 +1027,9 @@ Un arquitecto está diseñando una casa en un terreno triangular. El terreno for
 \node[left] at (0,7.5) {15 m};
 \node[above right] at (10,7.5) {Hipotenusa};
 % Ángulos
-\node at (2,1) {90°};
-\node at (17,1) {$\alpha = ?$};
-\node at (1,12) {$\beta = ?$};
+\node at (3,2) {90°};
+\node at (15.5,2) {$\alpha = ?$};
+\node at (1.5,12) {$\beta = ?$};
 % Casa esquemática
 \draw[dashed, gray] (5,3) rectangle (12,8);
 \draw[dashed, gray] (5,8) -- (8.5,11) -- (12,8);
@@ -1120,13 +1123,13 @@ Un grupo de montañistas quiere calcular la altura del Monte Chimborazo. Desde u
 \draw (3,0) arc (0:42:3);
 \node at (5,2.5) {42°};
 % Distancias
-\draw[<->] (-25,-3) -- (0,-3);
+\draw[{Latex}-{Latex}] (-25,-3) -- (0,-3);
 \node at (-12.5,-5) {2,500 m};
-\draw[<->] (0,-3) -- (15,-3);
+\draw[{Latex}-{Latex}] (0,-3) -- (15,-3);
 \node at (7.5,-5) {$x$};
 % Altura
 \draw[dashed] (15,0) -- (15,40);
-\draw[<->] (18,0) -- (18,40);
+\draw[{Latex}-{Latex}] (18,0) -- (18,40);
 \node at (21,20) {$h = ?$};
 % Personas
 \foreach \x in {-25, 0} {
@@ -1217,8 +1220,8 @@ Desde lo alto de un faro de 85 metros de altura, el farero observa un barco en e
 % Línea horizontal de referencia
 \draw[dashed, gray] (15,85) -- (120,85);
 % Ángulo de depresión
-\draw (35,85) arc (0:-15:20);
-\node at (40,80) {15°};
+\draw (35,85) arc (0:-15:85);
+\node at (43,75) {15°};
 % Línea de visión
 \draw[thick, blue] (7.5,85) -- (100,0);
 % Barco
@@ -1227,9 +1230,9 @@ Desde lo alto de un faro de 85 metros de altura, el farero observa un barco en e
 \draw[thick] (100,10) -- (90,10);
 \draw[thick] (100,15) -- (90,10);
 % Medidas
-\draw[<->] (-20,0) -- (-20,85);
+\draw[{Latex}-{Latex}] (-20,0) -- (-20,85);
 \node at (-30,42.5) {85 m};
-\draw[<->] (0,-15) -- (100,-15);
+\draw[{Latex}-{Latex}] (0,-15) -- (100,-15);
 \node at (50,-20) {$d = ?$};
 % Distancia directa
 \node[above right] at (50,42.5) {$L = ?$};
@@ -1391,16 +1394,16 @@ Un equipo de topógrafos necesita medir el ancho de una sección del río Amazon
 % Triángulo
 \draw[thick, blue] (0,0) -- (150,0) -- (50,120) -- cycle;
 % Ángulos
-\draw (20,0) arc (0:38:20);
+\draw (10,0) arc (0:38:20);
 \node at (25,8) {38°};
 \draw (130,0) arc (180:128:20);
 \node at (125,8) {52°};
 % Distancia AC
-\draw[<->] (0,-10) -- (150,-10);
+\draw[{Latex}-{Latex}] (0,-10) -- (150,-10);
 \node at (75,-15) {150 m};
 % Ancho del río
 \draw[dashed, red] (0,0) -- (0,120);
-\draw[<->] (-10,0) -- (-10,120);
+\draw[{Latex}-{Latex}] (-10,0) -- (-10,120);
 \node at (-20,60) {$h = ?$};
 % Vegetación
 \foreach \x in {10,30,70,90,110,130,170,190} {
@@ -1525,9 +1528,9 @@ Un estudiante de ingeniería quiere medir la altura de la torre del reloj de su 
 \draw (-40,1.7) arc (0:30:10);
 \node at (-35,4) {30°};
 % Medidas
-\draw[<->] (-50,0) -- (0,0);
+\draw[{Latex}-{Latex}] (-50,0) -- (0,0);
 \node at (-25,-2) {50 m};
-\draw[<->] (12,1.7) -- (12,30);
+\draw[{Latex}-{Latex}] (12,1.7) -- (12,30);
 \node at (16,15) {$h$};
 % Persona
 \draw (-50,0) -- (-50,1.7);
@@ -1575,9 +1578,9 @@ Dibuja tu diseño y explica paso a paso cómo tomarías las medidas. Luego resue
 \begin{center}
 \begin{tikzpicture}[scale=0.05]
 % Río
-\fill[cyan!20] (0,-20) rectangle (150,80);
+\fill[cyan!20] (0,-30) rectangle (150,80);
 % Orillas
-\draw[very thick, brown] (0,-20) -- (150,-20);
+\draw[very thick, brown] (0,-30) -- (150,-30);
 \draw[very thick, brown] (0,80) -- (150,80);
 % Puntos de observación
 \fill[red] (20,0) circle (1.5) node[below] {A};
@@ -1588,19 +1591,19 @@ Dibuja tu diseño y explica paso a paso cómo tomarías las medidas. Luego resue
 \draw[thick, orange] (70,0) -- (45,80) -- (45,0) -- cycle;
 % Ángulos
 \draw (25,0) arc (0:60:5);
-\node at (28,3) {60°};
+\node at (32,3) {60°};
 \draw (65,0) arc (180:135:5);
-\node at (62,3) {45°};
+\node at (60,3) {45°};
 % Medidas
-\draw[<->] (20,-10) -- (70,-10);
-\node at (45,-13) {50 m};
-\draw[<->] (20,-5) -- (45,-5);
-\node at (32.5,-7) {25 m};
-\draw[<->] (45,-5) -- (70,-5);
-\node at (57.5,-7) {25 m};
+\draw[{Latex}-{Latex}] (20,-15) -- (70,-15);
+\node at (45,-20) {50 m};
+\draw[{Latex}-{Latex}] (20,-5) -- (45,-5);
+\node at (32.5,-9) {25 m};
+\draw[{Latex}-{Latex}] (45,-5) -- (70,-5);
+\node at (57.5,-9) {25 m};
 % Ancho del río
 \draw[dashed] (45,0) -- (45,80);
-\draw[<->] (50,0) -- (50,80);
+\draw[{Latex}-{Latex}] (50,0) -- (50,80);
 \node at (55,40) {Ancho = ?};
 \end{tikzpicture}
 \end{center}
@@ -1675,21 +1678,21 @@ Calcula:
 \begin{center}
 \begin{tikzpicture}[scale=0.025]
 % Ejes
-\draw[gray, ->] (0,-20) -- (0,120) node[above] {N};
-\draw[gray, ->] (-20,0) -- (150,0) node[right] {E};
+\draw[gray, -{Latex}] (0,-20) -- (0,120) node[above] {N};
+\draw[gray, -{Latex}] (-20,0) -- (150,0) node[right] {E};
 % Puerto
 \fill[brown] (0,0) circle (3) node[below left] {Puerto};
 % Tramo 1: N45°E, 100 km
-\draw[thick, blue, ->] (0,0) -- (70.7,70.7);
+\draw[thick, blue, -{Latex}] (0,0) -- (70.7,70.7);
 \node[above left] at (35,35) {100 km};
-\node at (15,10) {45°};
+\node at (25,10) {45°};
 % Tramo 2: E60°S, 80 km
-\draw[thick, red, ->] (70.7,70.7) -- (110.7,1.42);
+\draw[thick, red, -{Latex}] (70.7,70.7) -- (110.7,1.42);
 \node[right] at (90,35) {80 km};
 % Isla
 \fill[green] (110.7,1.42) circle (4) node[right] {Isla};
 % Regreso directo
-\draw[thick, green, dashed, ->] (110.7,1.42) -- (0,0);
+\draw[thick, green, dashed, -{Latex}] (110.7,1.42) -- (0,0);
 \node[below] at (55,0) {Regreso directo};
 \end{tikzpicture}
 \end{center}
@@ -1773,7 +1776,7 @@ Sí es un triángulo rectángulo con catetos 5 y 12, e hipotenusa 13.
 \node[below] at (6,0) {12 cm};
 \node[left] at (0,2.5) {5 cm};
 \node[above right] at (6,2.5) {13 cm};
-\node at (10,0.5) {$\alpha$};
+\node at (8.9,0.5) {$\alpha$};
 \node at (0.5,3.8) {$\beta$};
 \end{tikzpicture}
 \end{center}
@@ -1851,14 +1854,14 @@ $$\theta = \arctan(0.0833) = 4.76°$$
 \textbf{Cálculo de la rampa para 1.2 m de altura:}
 
 \begin{center}
-\begin{tikzpicture}[scale=0.3]
+\begin{tikzpicture}[scale=0.7]
 % Rampa simple
 \draw[very thick] (0,0) -- (14.4,0) -- (14.4,1.2) -- (0,0);
 \draw (0,0) rectangle (0.3,0.3);
-\node at (1,0.2) {4.76°};
-\draw[<->] (0,-0.5) -- (14.4,-0.5);
+\node at (7,0.2) {4.76°};
+\draw[{Latex}-{Latex}] (0,-0.5) -- (14.4,-0.5);
 \node at (7.2,-0.8) {14.4 m};
-\draw[<->] (14.8,0) -- (14.8,1.2);
+\draw[{Latex}-{Latex}] (14.8,0) -- (14.8,1.2);
 \node at (15.5,0.6) {1.2 m};
 % Rampa con textura
 \foreach \x in {1,2,...,13} {
@@ -1880,7 +1883,7 @@ $$L = \frac{h}{\sin(\theta)} = \frac{1.2}{\sin(4.76°)} = \frac{1.2}{0.083} = 14
 Dividir en 3 tramos de 0.4 m de altura cada uno:
 
 \begin{center}
-\begin{tikzpicture}[scale=0.15]
+\begin{tikzpicture}[scale=0.75]
 % Tramo 1
 \draw[thick] (0,0) -- (4.8,0) -- (4.8,0.4) -- (0,0);
 % Descanso 1
@@ -2007,7 +2010,7 @@ María observa la parte superior de un edificio desde un punto en el suelo.
     \draw[dashed] (-30,0) -- (7.5,50);
 
     % Distancia horizontal
-    \draw[<->] (-30,-10) -- (0,-10);
+    \draw[{Latex}-{Latex}] (-30,-10) -- (0,-10);
     \node[below] at (-15,-10) {distancia};
 
     % Ángulo
@@ -2015,7 +2018,7 @@ María observa la parte superior de un edificio desde un punto en el suelo.
     \node at (-22,3) {$\theta$};
 
     % Altura
-    \draw[<->] (18,0) -- (18,50);
+    \draw[{Latex}-{Latex}] (18,0) -- (18,50);
     \node[right] at (18,25) {altura};
 \end{tikzpicture}
 \end{center}
@@ -2059,7 +2062,7 @@ Desde lo alto de un acantilado de 80 metros de altura, un observador ve un bote 
     \node at (25,75) {$\alpha$};
 
     % Distancia
-    \draw[<->] (0,-10) -- (105,-10);
+    \draw[{Latex}-{Latex}] (0,-10) -- (105,-10);
     \node[below] at (52.5,-10) {distancia};
 \end{tikzpicture}
 \end{center}
@@ -2089,26 +2092,26 @@ Calcula:
 \begin{center}
 \begin{tikzpicture}[scale=0.08]
     % Sistema de coordenadas
-    \draw[->] (0,0) -- (0,80) node[above] {N};
-    \draw[->] (0,0) -- (80,0) node[right] {E};
-    \draw[->] (0,0) -- (0,-20) node[below] {S};
-    \draw[->] (0,0) -- (-20,0) node[left] {O};
+    \draw[-{Latex}] (0,0) -- (0,80) node[above] {N};
+    \draw[-{Latex}] (0,0) -- (80,0) node[right] {E};
+    \draw[-{Latex}] (0,0) -- (0,-20) node[below] {S};
+    \draw[-{Latex}] (0,0) -- (-20,0) node[left] {O};
 
     % Puerto
     \node[circle, fill=blue, inner sep=2pt] at (0,0) {};
     \node[below left] at (0,0) {$P$};
 
     % Primera etapa
-    \draw[thick, blue, ->] (0,0) -- (25,43.3);
+    \draw[thick, blue, -{Latex}] (0,0) -- (25,43.3);
     \node[circle, fill=red, inner sep=2pt] at (25,43.3) {};
-    \node[above right] at (25,43.3) {$A$};
-    \node[midway, above left] at (12.5,21.65) {50 km};
+    \node[above left] at (25,43.3) {$A$};
+    \node[above left ] at(12.5,21.65){50 km};
 
     % Segunda etapa
-    \draw[thick, blue, ->] (25,43.3) -- (59.64,63.3);
+    \draw[thick, blue, -{Latex}] (25,43.3) -- (59.64,63.3);
     \node[circle, fill=green, inner sep=2pt] at (59.64,63.3) {};
     \node[right] at (59.64,63.3) {$B$};
-    \node[midway, above] at (42.32,53.3) {40 km};
+    \node[above left] at (42.32,53.3) {40 km};
 
     % Línea directa P-B
     \draw[dashed, red, thick] (0,0) -- (59.64,63.3);
@@ -2163,11 +2166,11 @@ Determina:
     \draw[dashed, blue] (20,0) -- (30,45);
 
     % Distancia A-B
-    \draw[<->] (-30,-5) -- (20,-5);
+    \draw[{Latex}-{Latex}] (-30,-5) -- (20,-5);
     \node[below] at (-5,-5) {500 m};
 
     % Altura
-    \draw[<->] (35,0) -- (35,45);
+    \draw[{Latex}-{Latex}] (35,0) -- (35,45);
     \node[right] at (35,22.5) {$h$};
 
     % Ángulos
@@ -2178,7 +2181,7 @@ Determina:
     \node at (26.5,3.5) {52°};
 
     % Distancia B-Base
-    \draw[<->] (20,-10) -- (30,-10);
+    \draw[{Latex}-{Latex}] (20,-10) -- (30,-10);
     \node[below] at (25,-10) {$x$};
 \end{tikzpicture}
 \end{center}
@@ -2230,7 +2233,7 @@ Calcula:
     \draw[thick, red] (38.9,10.5) -- (43.2,14);
 
     % Proyección horizontal total
-    \draw[<->] (20,-2) -- (43.2,-2);
+    \draw[{Latex}-{Latex}] (20,-2) -- (43.2,-2);
     \node[below] at (31.6,-2) {Espacio horizontal total};
 
     % Ángulo
@@ -2239,7 +2242,7 @@ Calcula:
     \node at (21.5,1.5) {35°};
 
     % Altura de piso
-    \draw[<->] (-2,0) -- (-2,3.5);
+    \draw[{Latex}-{Latex}] (-2,0) -- (-2,3.5);
     \node[left] at (-2,1.75) {3.5 m};
 
     % Pasamanos
