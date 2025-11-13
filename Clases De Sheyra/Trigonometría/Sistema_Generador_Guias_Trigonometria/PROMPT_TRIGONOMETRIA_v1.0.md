@@ -226,6 +226,7 @@ INSTRUCCIONES CRÍTICAS:
 - Lee el archivo de referencia para estructura
 - USA twoside, fancyhdr, tcolorbox
 - NO uses $ en parámetros title
+- DIMENSIONES DE GRÁFICAS: width=0.85-0.95\textwidth, height proporcional (0.5-0.7 del ancho)
 - Cierra todos los entornos
 - Deja comentarios %INSERTAR_EJEMPLOS_AQUI%, %INSERTAR_EJERCICIOS_AQUI%
 "
@@ -271,6 +272,7 @@ INSTRUCCIONES CRÍTICAS:
 - Lee el archivo de referencia para estilo
 - Títulos de ejemplos SIN símbolos $
 - Todas las gráficas con pgfplots + axis
+- DIMENSIONES: width=0.85-0.95\textwidth, height proporcional (0.5-0.7 del ancho)
 - ^\circ solo dentro de $...$
 - Cierra todos los entornos
 "
@@ -313,6 +315,7 @@ INSTRUCCIONES CRÍTICAS:
 - Lee el archivo de referencia para estilo
 - Títulos de ejercicios SIN símbolos $
 - Gráficas con pgfplots + axis
+- DIMENSIONES: width=0.85-0.95\textwidth, height proporcional (0.5-0.7 del ancho)
 - ^\circ solo dentro de $...$
 - Cierra todos los entornos
 "
@@ -474,7 +477,7 @@ El asistente principal debe:
 ```latex
 \begin{tikzpicture}
     \begin{axis}[
-        width=12cm, height=8cm,
+        width=0.9\textwidth, height=0.55\textwidth,
         axis lines=middle,
         xlabel={$x$}, ylabel={$y$},
         xmin=-5, xmax=5,
@@ -504,6 +507,73 @@ El asistente principal debe:
     \end{axis}
 \end{tikzpicture}
 ```
+
+### 📏 ESPECIFICACIÓN DE DIMENSIONES DE GRÁFICAS
+
+**⚠️ REGLA OBLIGATORIA: Todas las gráficas deben usar dimensiones basadas en `\textwidth`**
+
+**Objetivo:** Garantizar que todas las gráficas tengan un tamaño consistente y apropiado, ocupando entre 85% y 95% del ancho de texto disponible en la página.
+
+**Dimensiones OBLIGATORIAS:**
+
+```latex
+% OPCIÓN 1: Para gráficas pgfplots (PREFERIDA)
+\begin{axis}[
+    width=0.9\textwidth,      % 90% del ancho de texto (rango: 0.85 - 0.95)
+    height=0.6\textwidth,     % Altura proporcional (rango: 0.4 - 0.7 del ancho)
+    % ... resto de opciones
+]
+```
+
+```latex
+% OPCIÓN 2: Para gráficas TikZ puras (diagramas, círculos, triángulos)
+\begin{center}
+\resizebox{0.9\textwidth}{!}{%  % 90% del ancho, altura automática
+    \begin{tikzpicture}
+        % ... contenido TikZ
+    \end{tikzpicture}
+}
+\end{center}
+```
+
+```latex
+% OPCIÓN 3: Para TikZ con scale (MENOS PREFERIDA, usar solo si es necesario)
+\begin{tikzpicture}[scale=2]  % Ajustar scale para que el resultado final
+                               % quede en el rango 85%-95% de \textwidth
+```
+
+**Tabla de Referencia de Dimensiones:**
+
+| Tipo de Gráfica | Ancho (width) | Altura (height) | Ratio | Uso |
+|------------------|---------------|------------------|-------|-----|
+| Funciones estándar | `0.90\textwidth` | `0.55\textwidth` | 1.6:1 | Seno, coseno, tangente |
+| Funciones comparativas | `0.90\textwidth` | `0.60\textwidth` | 1.5:1 | Múltiples curvas |
+| Círculo unitario | `0.85\textwidth` | `0.85\textwidth` | 1:1 | Diagramas circulares |
+| Triángulos | `0.85\textwidth` | `!` (auto) | - | Usar resizebox |
+| Diagramas complejos | `0.95\textwidth` | `0.65\textwidth` | 1.46:1 | Múltiples elementos |
+
+**Rangos Permitidos:**
+- **Ancho mínimo:** `0.85\textwidth` (85%)
+- **Ancho máximo:** `0.95\textwidth` (95%)
+- **Altura:** Debe ser proporcional al ancho
+  - Mínimo: `0.4` veces el ancho (gráficas panorámicas)
+  - Máximo: `1.0` veces el ancho (gráficas cuadradas)
+  - Recomendado: `0.5 - 0.7` veces el ancho
+
+**EVITAR valores fijos como:**
+- ❌ `width=12cm` (no escala con el documento)
+- ❌ `width=8cm` (puede ser muy pequeño)
+- ❌ `scale=3` (puede exceder el ancho de página)
+
+**✅ SIEMPRE USAR:**
+- ✅ `width=0.90\textwidth, height=0.55\textwidth`
+- ✅ `\resizebox{0.90\textwidth}{!}{...}`
+
+**Justificación:**
+- Consistencia visual entre todas las gráficas
+- Adaptabilidad a diferentes configuraciones de márgenes
+- Prevención de gráficas que exceden el ancho de página
+- Mejor experiencia de lectura
 
 **❌ NO USAR (causa errores):**
 ```latex
