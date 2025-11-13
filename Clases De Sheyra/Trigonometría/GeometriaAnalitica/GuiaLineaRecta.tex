@@ -41,20 +41,20 @@
 {\thesubsubsection}{1em}{}
 
 % Entornos tcolorbox
-\newtcolorbox{ejemplo}[1][]{
+\newtcolorbox{ejemplo}[2][]{
   colback=blue!5!white,
   colframe=maincolor,
   fonttitle=\bfseries,
-  title=Ejemplo Resuelto,
+  title=Ejemplo Resuelto: #2,
   breakable,
   #1
 }
 
-\newtcolorbox{ejercicio}[1][]{
+\newtcolorbox{ejercicio}[2][]{
   colback=orange!5!white,
   colframe=accentcolor,
   fonttitle=\bfseries,
-  title=Ejercicio,
+  title=Ejercicio: #2,
   breakable,
   #1
 }
