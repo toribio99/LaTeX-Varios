@@ -229,6 +229,9 @@ INSTRUCCIONES CRÍTICAS:
 - DIMENSIONES DE GRÁFICAS: width=0.85-0.95\textwidth, height proporcional (0.5-0.7 del ancho)
 - Cierra todos los entornos
 - Deja comentarios %INSERTAR_EJEMPLOS_AQUI%, %INSERTAR_EJERCICIOS_AQUI%
+- USA sintaxis correcta: \begin{ejemplo}{Título} (con llaves, no corchetes)
+- enumitem: usa [label=\alph*)] NO [a)]
+- NO dejes placeholders como [Solución completa...] que causen errores
 "
 })
 
@@ -275,6 +278,9 @@ INSTRUCCIONES CRÍTICAS:
 - DIMENSIONES: width=0.85-0.95\textwidth, height proporcional (0.5-0.7 del ancho)
 - ^\circ solo dentro de $...$
 - Cierra todos los entornos
+- USA sintaxis correcta: \begin{ejemplo}{Título} (con llaves, no corchetes)
+- enumitem: usa [label=\alph*)] NO [a)]
+- NO dejes placeholders como [Solución completa...] que causen errores
 "
 })
 
@@ -318,6 +324,10 @@ INSTRUCCIONES CRÍTICAS:
 - DIMENSIONES: width=0.85-0.95\textwidth, height proporcional (0.5-0.7 del ancho)
 - ^\circ solo dentro de $...$
 - Cierra todos los entornos
+- USA sintaxis correcta: \begin{ejercicio}{Título} (con llaves, no corchetes)
+- enumitem: usa [label=\alph*)] NO [a)]
+- NO dejes placeholders como [Solución completa...] que causen errores
+- TODAS las soluciones deben estar completas (no usar placeholders)
 "
 })
 ```
@@ -345,7 +355,26 @@ El asistente principal debe:
    - Estilo uniforme
    - Todos los entornos cerrados
 
-3. **Compilar con lualatex** (2 pasadas)
+3. **Compilar con lualatex en MODO ESTRICTO** (OBLIGATORIO)
+   ```bash
+   # Primera pasada con verificación estricta
+   lualatex -halt-on-error [archivo].tex
+   if [ $? -ne 0 ]; then
+       echo "❌ Error en compilación - corregir antes de continuar"
+       exit 1
+   fi
+
+   # Segunda pasada para TOC
+   lualatex -halt-on-error [archivo].tex
+   if [ $? -ne 0 ]; then
+       echo "❌ Error en segunda compilación"
+       exit 1
+   fi
+
+   echo "✅ Compilación exitosa"
+   ```
+
+   **IMPORTANTE:** Solo continuar si código de salida = 0
 
 4. **Crear README.md** (FASE 3.5)
 
@@ -791,15 +820,70 @@ Esta guía está diseñada para:
 
 ## FASE 4: COMPILACIÓN Y VERIFICACIÓN
 
-### 1. Compilar el documento
+### 1. Compilar el documento con VERIFICACIÓN ESTRICTA
+
+**⚠️ IMPORTANTE - COMPILACIÓN ESTRICTA OBLIGATORIA:**
+
+El asistente DEBE usar el flag `-halt-on-error` para garantizar que la compilación se detenga al primer error. Esto asegura el mismo nivel de exigencia que TeXstudio y otros editores profesionales.
+
+**❌ NO USAR (modo permisivo):**
 ```bash
-cd [directorio]
-lualatex [archivo].tex
-lualatex [archivo].tex  # Segunda pasada para índices
+lualatex -interaction=nonstopmode [archivo].tex  # INCORRECTO
 ```
 
+**✅ USAR (modo estricto - OBLIGATORIO):**
+```bash
+cd [directorio]
+
+# Primera compilación con verificación estricta
+lualatex -halt-on-error [archivo].tex
+
+# Verificar código de salida
+if [ $? -ne 0 ]; then
+    echo "❌ Error en compilación - revisar log de errores"
+    echo "El documento tiene errores que deben corregirse antes de continuar"
+    exit 1
+fi
+
+# Segunda pasada (para TOC, referencias, etc.)
+lualatex -halt-on-error [archivo].tex
+
+# Verificar código de salida nuevamente
+if [ $? -ne 0 ]; then
+    echo "❌ Error en segunda compilación - revisar log"
+    exit 1
+fi
+
+echo "✅ Compilación exitosa - documento sin errores"
+```
+
+**Explicación de flags:**
+- `-halt-on-error`: Detiene la compilación al primer error encontrado
+- Código de salida `0` = éxito total (sin errores)
+- Código de salida `≠ 0` = hubo errores (aunque se haya generado PDF)
+
+**Por qué es crítico:**
+1. **Modo permisivo** (`-interaction=nonstopmode`):
+   - Continúa compilando a pesar de errores
+   - Puede generar PDF con contenido incorrecto
+   - Reporta "éxito" aunque haya errores
+   - ❌ NO ACEPTABLE
+
+2. **Modo estricto** (`-halt-on-error`):
+   - Se detiene al primer error
+   - No genera PDF si hay errores
+   - Código de salida refleja el estado real
+   - ✅ NIVEL PROFESIONAL (igual que TeXstudio)
+
+**REGLA OBLIGATORIA:**
+Solo se considera compilación exitosa si:
+- El comando retorna código de salida 0
+- No hay mensajes de error en el log
+- El PDF se genera completamente
+
 ### 2. Checklist de verificación
-- [ ] Compila sin errores
+- [ ] Compila sin errores con `-halt-on-error`
+- [ ] Código de salida = 0 en ambas pasadas
 - [ ] Todas las gráficas tienen grid, ejes y etiquetas
 - [ ] Colores consistentes
 - [ ] No hay superposiciones de texto
@@ -811,10 +895,11 @@ lualatex [archivo].tex  # Segunda pasada para índices
 
 ### 3. Correcciones
 Si hay errores:
-- Identificar el problema
+- Identificar el problema en el log de LaTeX
 - Corregir el código LaTeX
-- Recompilar
-- Verificar nuevamente
+- Recompilar con `-halt-on-error`
+- Verificar código de salida = 0
+- Solo continuar si no hay errores
 
 ---
 
@@ -872,9 +957,31 @@ git push origin main
 - Añadir `shift={(dx,dy)}`
 - Rotar: `rotate=ángulo`
 
-**Error: Compilación fallida**
+**Error: pgfkeys Error - "I do not know the key '/tcb/...'"**
+- Causa: Uso incorrecto de sintaxis en entornos tcolorbox
+- Solución: Usar `\begin{ejemplo}{Título}` NO `\begin{ejemplo}[Título]`
+- Verificar que títulos NO contengan símbolos $ matemáticos
+
+**Error: enumitem Error - "a) undefined"**
+- Causa: Sintaxis obsoleta de enumerate
+- Solución: Usar `\begin{enumerate}[label=\alph*)]` NO `\begin{enumerate}[a)]`
+
+**Error: Placeholders causando errores**
+- Causa: Líneas como `[Solución completa...]` interpretadas como parámetros
+- Solución: NO dejar placeholders en el código final
+- Completar TODAS las soluciones
+
+**Error: Compilación reporta éxito pero TeXstudio muestra errores**
+- Causa: Uso de `-interaction=nonstopmode` (modo permisivo)
+- Solución: SIEMPRE usar `-halt-on-error` (modo estricto)
+- Verificar código de salida = 0
 ```bash
-lualatex -interaction=nonstopmode [archivo].tex
+# CORRECTO (modo estricto):
+lualatex -halt-on-error [archivo].tex
+if [ $? -ne 0 ]; then
+    echo "❌ Compilación fallida - revisar errores"
+    exit 1
+fi
 ```
 
 ### Archivos auxiliares (NO versionar)
@@ -961,7 +1068,7 @@ Este es el template REAL usado en las 9 guías exitosas de Trigonometría.
 
 ---
 
-**Versión:** 1.0 - Trigonometría (Basada en v3.1 corregida)
+**Versión:** 1.1 - Trigonometría (Basada en v3.1 corregida)
 **Fecha:** Noviembre 2025
 **Optimizaciones principales:**
 - Archivo de referencia correcto y verificado
@@ -971,8 +1078,23 @@ Este es el template REAL usado en las 9 guías exitosas de Trigonometría.
 - Referencias a archivos en lugar de contenido duplicado
 - Workflow paso a paso claramente definido
 - Checklist de verificación integrado
-- **NUEVO:** Plantilla de gráficas corregida (pgfplots con axis)
-- **NUEVO:** Advertencias sobre errores "Dimension too large"
-- **NUEVO:** Ejemplos de código incorrecto vs correcto
+- **v1.0:** Plantilla de gráficas corregida (pgfplots con axis)
+- **v1.0:** Advertencias sobre errores "Dimension too large"
+- **v1.0:** Ejemplos de código incorrecto vs correcto
+- **v1.1 (NUEVO):** Compilación ESTRICTA obligatoria con `-halt-on-error`
+- **v1.1 (NUEVO):** Verificación de código de salida = 0
+- **v1.1 (NUEVO):** Nivel profesional igual a TeXstudio
+- **v1.1 (NUEVO):** Prevención de errores comunes (tcolorbox, enumitem, placeholders)
+- **v1.1 (NUEVO):** Instrucciones explícitas para subagentes sobre sintaxis correcta
+
+**Mejoras v1.1 (2025-11-13):**
+1. **Compilación estricta:** Reemplazo de `-interaction=nonstopmode` por `-halt-on-error`
+2. **Verificación de errores:** Código de salida debe ser 0 para considerarse exitoso
+3. **Documentación de errores:** Sección ampliada con soluciones a errores comunes
+4. **Prevención proactiva:** Instrucciones a subagentes para evitar errores típicos:
+   - Sintaxis correcta de tcolorbox: `\begin{ejemplo}{Título}` (llaves, no corchetes)
+   - enumitem moderno: `[label=\alph*)]` NO `[a)]`
+   - Prohibición de placeholders que causen errores
+5. **Alineación con editores profesionales:** Mismo nivel de exigencia que TeXstudio
 
 **Mantenedor:** Este prompt evoluciona con el uso. Documentar mejoras en CHANGELOG.md
