@@ -234,7 +234,7 @@ Las funciones tangente y cotangente pueden expresarse como razones de seno y cos
 Estas identidades son súper útiles porque te permiten convertir problemas con tangente o cotangente en problemas con seno y coseno, que suelen ser más fáciles de manejar.
 
 \begin{center}
-\begin{tikzpicture}[scale=1.8]
+\begin{tikzpicture}[scale=3]
     % Círculo unitario
     \draw[maincolor,very thick] (0,0) circle (1);
 
@@ -252,7 +252,7 @@ Estas identidades son súper útiles porque te permiten convertir problemas con 
 
     % Proyecciones
     \draw[blue,thick] (0,0) -- (P |- 0,0) node[midway,below] {$\cos\theta$};
-    \draw[red,thick] (P |- 0,0) -- (P) node[midway,right] {$\sin\theta$};
+    \draw[red,thick] (P |- 0,0) -- (P) node[midway,left] {$\sin\theta$};
 
     % Tangente
     \draw[green!60!black,thick] (1,0) -- (1,{tan(\angulo)}) node[midway,right] {$\tan\theta$};
@@ -378,7 +378,7 @@ Truco mnemotécnico para recordar las fórmulas:
 \end{nota}
 
 \begin{center}
-\begin{tikzpicture}[scale=1.5]
+\begin{tikzpicture}[scale=3]
     % Círculo unitario
     \draw[thick,gray!50] (0,0) circle (1);
 
@@ -390,13 +390,13 @@ Truco mnemotécnico para recordar las fórmulas:
     \def\alpha{25}
     \coordinate (A) at ({\alpha}:1);
     \draw[blue,thick] (0,0) -- (A);
-    \draw[blue] (0.3,0) arc (0:\alpha:0.3) node[midway,right] {$\alpha$};
+    \draw[blue] (0.4,0) arc (0:\alpha:0.4) node[midway,right] {$\alpha$};
 
     % Ángulo beta desde alpha
     \def\beta{30}
     \coordinate (B) at ({\alpha+\beta}:1);
-    \draw[red,thick] (0,0) -- (B);
-    \draw[red] (0.4,0) arc (0:{\alpha+\beta}:0.4);
+    \draw[green!70!black,thick] (0,0) -- (B);
+    \draw[green!70!black] (0.4,0) arc (0:{\alpha+\beta}:0.4);
     \draw[red] ({\alpha}:0.5) arc (\alpha:{\alpha+\beta}:0.5) node[midway,above] {$\beta$};
 
     % Punto suma
@@ -442,7 +442,13 @@ Observa que el coseno del ángulo doble tiene tres formas diferentes. Cada una e
         xticklabels={$0°$,$30°$,$60°$,$90°$,$120°$,$150°$,$180°$},
         grid=major,
         grid style={line width=.2pt, draw=gray!30},
-        legend pos=north east
+        legend style={
+		at={(1.2,0.2)},
+		anchor=south,
+		font=\small,
+		fill=gray!10,
+		draw=none
+		},
     ]
 
     % sin(theta)
@@ -569,7 +575,7 @@ Estas identidades son especialmente útiles para:
 Para comprender mejor las identidades, es fundamental visualizarlas en el círculo unitario.
 
 \begin{center}
-\begin{tikzpicture}[scale=2]
+\begin{tikzpicture}[scale=4.5]
     % Círculo unitario
     \draw[thick,maincolor] (0,0) circle (1);
 
@@ -616,11 +622,11 @@ Para comprender mejor las identidades, es fundamental visualizarlas en el círcu
     \def\demoangle{40}
     \coordinate (Demo) at ({\demoangle}:1);
     \draw[blue,very thick] (0,0) -- (Demo |- 0,0) node[midway,below] {$\cos\theta$};
-    \draw[red,very thick] (Demo |- 0,0) -- (Demo) node[midway,right] {$\sin\theta$};
+    \draw[red,very thick] (Demo |- 0,0) -- (Demo) node[midway,left] {$\sin\theta$};
     \draw[green!60!black,very thick] (0,0) -- (Demo) node[midway,above,sloped] {$r=1$};
 
     % Anotación
-    \node[align=center] at (0,-0.5) {$\sin^2\theta + \cos^2\theta = 1$};
+    \node[align=center] at (0,-1.3) {$\sin^2\theta + \cos^2\theta = 1$};
 \end{tikzpicture}
 \end{center}
 
@@ -744,7 +750,7 @@ Sabemos que $\sin^2\theta + \cos^2\theta = 1$, por lo tanto: $\cos^2\theta = 1 -
 \textbf{Paso 6:} Verificación gráfica usando el círculo unitario.
 
 \begin{center}
-\begin{tikzpicture}[scale=1.8]
+\begin{tikzpicture}[scale=1]
     \begin{axis}[
         axis lines = center,
         xlabel = {$x$},
@@ -753,7 +759,7 @@ Sabemos que $\sin^2\theta + \cos^2\theta = 1$, por lo tanto: $\cos^2\theta = 1 -
         ymin=-1.5, ymax=1.5,
         axis equal,
         grid=major,
-        width=8cm,
+        width=10cm,
         height=8cm,
     ]
     % Círculo unitario
@@ -775,9 +781,9 @@ Sabemos que $\sin^2\theta + \cos^2\theta = 1$, por lo tanto: $\cos^2\theta = 1 -
         coordinates {(0, {sin(45)}) ({cos(45)}, {sin(45)})};
 
     % Etiquetas
-    \node at (axis cs:0.9, 0.9) {$P(\cos\theta, \sin\theta)$};
-    \node at (axis cs:0.5, -0.15) {$\cos\theta$};
-    \node at (axis cs:-0.2, 0.5) {$\sin\theta$};
+    \node at (axis cs:1.2, 0.9) {$P(\cos\theta, \sin\theta)$};
+    \node at (axis cs:0.5, 0.15) {$\cos\theta$};
+    \node at (axis cs:0.2, 0.5) {$\sin\theta$};
     \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -869,7 +875,7 @@ En un triángulo rectángulo con hipotenusa 5, cateto adyacente 3 y cateto opues
 \textbf{Paso 6:} Representación en el círculo unitario.
 
 \begin{center}
-\begin{tikzpicture}[scale=1.5]
+\begin{tikzpicture}[scale=1]
     \begin{axis}[
         axis lines = center,
         xlabel = {$x$},
@@ -1127,7 +1133,7 @@ Comprobamos: $\sin^2 15° + \cos^2 15° = \frac{2 - \sqrt{3}}{4} + \frac{2 + \sq
 \textbf{Paso 7:} Representación gráfica del ángulo medio.
 
 \begin{center}
-\begin{tikzpicture}[scale=1.8]
+\begin{tikzpicture}[scale=1]
     \begin{axis}[
         axis lines = center,
         xlabel = {$x$},
@@ -1338,6 +1344,12 @@ Amplitud máxima cuando $\cos(2\pi t) = \pm 1$:
         grid=major,
         xmin=0, xmax=2,
         ymin=-4.5, ymax=4.5,
+        legend style={
+       	at={(0.5,1.05)},
+       	anchor=south,
+       	font=\small,
+       	fill=gray!10,
+        }
     ]
     % Onda resultante
     \addplot[blue, thick] {4*sin(deg(438*pi*x))*cos(deg(2*pi*x))};
@@ -1519,7 +1531,7 @@ La expresión no está definida cuando:
 \]
 
 \begin{center}
-\begin{tikzpicture}[scale=2]
+\begin{tikzpicture}[scale=1]
     \begin{axis}[
         axis lines = center,
         xlabel = {$\theta$},
@@ -1726,7 +1738,7 @@ $\boxed{\frac{\tan 3\theta - 3\tan\theta}{1 - 3\tan^2\theta} = \tan\theta \cdot 
 En el círculo unitario, los puntos excluidos son exactamente los cuatro puntos cardinales donde uno de los ejes coordenados es cero. La identidad representa una propiedad universal de las funciones trigonométricas relacionada con la simetría rotacional.
 
 \begin{center}
-\begin{tikzpicture}[scale=1.5]
+\begin{tikzpicture}[scale=1]
     \begin{axis}[
         axis lines = center,
         xlabel = {$x$},
@@ -1823,8 +1835,8 @@ $\boxed{A = -\sqrt{2}, \phi = -45°, B = 0}$
 
     % Etiquetas
     \node at (axis cs:0, 1.2) {$(0°, 1)$};
-    \node at (axis cs:45, 0.3) {$(45°, 0)$};
-    \node at (axis cs:90, -1.3) {$(90°, -1)$};
+    \node at (axis cs:63, 0.3) {$(45°, 0)$};
+    \node at (axis cs:48, -1) {$(90°, -1)$};
     \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -2245,7 +2257,7 @@ Ahora aplicamos la identidad:
 \textbf{Respuesta:} $\boxed{\sin(A + B) = \frac{56}{65}}$
 
 \begin{center}
-\begin{tikzpicture}[scale=1.5]
+\begin{tikzpicture}[scale=4.5]
     % Ejes
     \draw[-{Latex},thick] (-0.2,0) -- (1.3,0) node[right] {$x$};
     \draw[-{Latex},thick] (0,-0.2) -- (0,1.3) node[above] {$y$};
@@ -2254,7 +2266,7 @@ Ahora aplicamos la identidad:
     \draw[blue!70,thick] (0,0) circle (1);
 
     % Ángulo A
-    \draw[red,thick] (0,0) -- ({4/5},{3/5}) node[midway,below] {$A$};
+    \draw[red,thick] (0,0) -- ({4/5},{3/5}) node[midway,above] {$A$};
     \filldraw[red] ({4/5},{3/5}) circle (0.02);
     \draw[red] (0.2,0) arc (0:36.87:0.2);
 
@@ -2264,12 +2276,12 @@ Ahora aplicamos la identidad:
     \draw[green!60!black] (0.15,0) arc (0:22.62:0.15);
 
     % Ángulo A+B
-    \draw[purple,thick] (0,0) -- ({56/65},{33/65}) node[midway,above,sloped] {$A+B$};
+    \draw[purple,thick] (0,0) -- ({56/65},{33/65}) node[midway,below right,sloped] {$A+B$};
     \filldraw[purple] ({56/65},{33/65}) circle (0.02);
-    \draw[purple] (0.25,0) arc (0:59.49:0.25);
+    \draw[purple] (0.25,0) arc (0:59.49:0.13);
 
     % Etiquetas
-    \node at (0.5,-0.3) {Suma de ángulos};
+    \node at (0.5,-0.1) {Suma de ángulos};
 \end{tikzpicture}
 \end{center}
 \end{solucion}
@@ -2381,7 +2393,7 @@ Para $\cos\left(\frac{\theta}{2}\right)$:
 \textbf{Respuesta:} $\boxed{\sin\left(\frac{\theta}{2}\right) = \frac{3}{5}, \quad \cos\left(\frac{\theta}{2}\right) = \frac{4}{5}}$
 
 \begin{center}
-\begin{tikzpicture}[scale=1.8]
+\begin{tikzpicture}[scale=2.8]
     % Ejes
     \draw[-{Latex},thick] (-0.2,0) -- (1.2,0) node[right] {$x$};
     \draw[-{Latex},thick] (0,-0.2) -- (0,1.2) node[above] {$y$};
@@ -2394,14 +2406,14 @@ Para $\cos\left(\frac{\theta}{2}\right)$:
     \draw[red,thick] (0,0) -- (P);
     \filldraw[red] (P) circle (0.02);
     \draw[red] (0.3,0) arc (0:73.74:0.3);
-    \node[red] at (0.4,0.15) {$\theta$};
+    \node[red] at (0.4,0.4) {$\theta$};
 
     % Ángulo theta/2
     \coordinate (Q) at ({4/5},{3/5});
     \draw[green!60!black,thick] (0,0) -- (Q);
     \filldraw[green!60!black] (Q) circle (0.02);
     \draw[green!60!black] (0.2,0) arc (0:36.87:0.2);
-    \node[green!60!black] at (0.25,0.05) {$\frac{\theta}{2}$};
+    \node[green!60!black] at (0.35,0.12) {$\frac{\theta}{2}$};
 
     % Proyecciones
     \draw[dashed,thin] (P) -- ({7/25},0) node[below] {\tiny $\frac{7}{25}$};
@@ -2513,7 +2525,12 @@ Aplicando la segunda identidad con $A = 4\theta$ y $B = 2\theta$:
         domain=0:4*pi,
         samples=200,
         grid=major,
-        legend pos=north east,
+        legend style={
+       	at={(0.5,1.05)},
+       	anchor=south,
+       	font=\small,
+       	fill=gray!10,
+        },
         cycle list name=color list
     ]
 
@@ -2636,7 +2653,7 @@ Cada identidad cuenta una historia sobre la simetría y la armonía en las matem
 Al dominar estas identidades, no solo has aprendido matemáticas - has adquirido un lenguaje para describir fenómenos periódicos, oscilaciones y ondas en el universo. Este conocimiento te abre puertas a campos fascinantes como la física cuántica, la ingeniería de telecomunicaciones, la astronomía y muchos más.
 
 \begin{center}
-\begin{tikzpicture}[scale=2]
+\begin{tikzpicture}[scale=0.75]
     % Espiral logarítmica con funciones trigonométricas
     \draw[domain=0:720,variable=\t,smooth,samples=200,thick,maincolor]
         plot ({0.01*\t*cos(\t)},{0.01*\t*sin(\t)});
@@ -2645,8 +2662,8 @@ Al dominar estas identidades, no solo has aprendido matemáticas - has adquirido
     \filldraw[accentcolor] (0,0) circle (0.05);
 
     % Texto
-    \node[below] at (0,-2) {\textit{``Las matemáticas son el lenguaje con el que Dios escribió el universo''}};
-    \node[below] at (0,-2.3) {\small --- Galileo Galilei};
+    \node[below] at (0,-6.5) {\textit{``Las matemáticas son el lenguaje con el que Dios escribió el universo''}};
+    \node[below] at (0,-7.5) {\small --- Galileo Galilei};
 \end{tikzpicture}
 \end{center}
 

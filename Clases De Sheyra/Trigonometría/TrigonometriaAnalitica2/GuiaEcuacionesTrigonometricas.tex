@@ -208,13 +208,13 @@ Para que la ecuación $\sin x = k$ tenga solución, necesitamos que $-1 \leq k \
     \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(30,0.5) (150,0.5) (390,0.5) (510,0.5)};
 
     % Etiquetas
-    \node[above,accentcolor] at (axis cs:30,0.5) {$30°$};
-    \node[above,accentcolor] at (axis cs:150,0.5) {$150°$};
-    \node[above,accentcolor] at (axis cs:390,0.5) {$390°$};
-    \node[above,accentcolor] at (axis cs:510,0.5) {$510°$};
+    \node[above right,accentcolor] at (axis cs:30,0.5) {$30°$};
+    \node[above right,accentcolor] at (axis cs:150,0.5) {$150°$};
+    \node[above left,accentcolor] at (axis cs:390,0.5) {$390°$};
+    \node[above right,accentcolor] at (axis cs:510,0.5) {$510°$};
 
     \node[maincolor,above] at (axis cs:360,1) {$y = \sin x$};
-    \node[accentcolor] at (axis cs:650,0.5) {$y = 0.5$};
+    \node[accentcolor] at (axis cs:650,.7) {$y = 0.5$};
 
     \end{axis}
 \end{tikzpicture}
@@ -261,13 +261,13 @@ Similar al seno, para que $\cos x = k$ tenga solución, necesitamos $-1 \leq k \
     \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(120,-0.5) (240,-0.5) (480,-0.5) (600,-0.5)};
 
     % Etiquetas
-    \node[below,accentcolor] at (axis cs:120,-0.5) {$120°$};
-    \node[below,accentcolor] at (axis cs:240,-0.5) {$240°$};
-    \node[below,accentcolor] at (axis cs:480,-0.5) {$480°$};
-    \node[below,accentcolor] at (axis cs:600,-0.5) {$600°$};
+    \node[below left,accentcolor] at (axis cs:120,-0.5) {$120°$};
+    \node[below right,accentcolor] at (axis cs:240,-0.5) {$240°$};
+    \node[below left,accentcolor] at (axis cs:480,-0.5) {$480°$};
+    \node[below right,accentcolor] at (axis cs:600,-0.5) {$600°$};
 
-    \node[maincolor,above] at (axis cs:180,-1) {$y = \cos x$};
-    \node[accentcolor] at (axis cs:650,-0.5) {$y = -0.5$};
+    \node[maincolor,above] at (axis cs:80,1) {$y = \cos x$};
+    \node[accentcolor] at (axis cs:650,-0.7) {$y = -0.5$};
 
     \end{axis}
 \end{tikzpicture}
@@ -321,12 +321,12 @@ La tangente es especial porque puede tomar cualquier valor real, así que $\tan 
     \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(45,1) (225,1) (405,1)};
 
     % Etiquetas
-    \node[above,accentcolor] at (axis cs:45,1) {$45°$};
-    \node[above,accentcolor] at (axis cs:225,1) {$225°$};
-    \node[above,accentcolor] at (axis cs:405,1) {$405°$};
+    \node[above left,accentcolor] at (axis cs:45,1) {$45°$};
+    \node[above left,accentcolor] at (axis cs:225,1) {$225°$};
+    \node[above left,accentcolor] at (axis cs:405,1) {$405°$};
 
     \node[maincolor] at (axis cs:135,2.5) {$y = \tan x$};
-    \node[accentcolor] at (axis cs:500,1) {$y = 1$};
+    \node[accentcolor] at (axis cs:500,1.35) {$y = 1$};
 
     \end{axis}
 \end{tikzpicture}
@@ -393,10 +393,10 @@ Veamos un ejemplo concreto. Para resolver $\sin x + \cos x = 1$:
     \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(0,1) (90,1)};
 
     % Etiquetas
-    \node[above,accentcolor] at (axis cs:0,1) {$(0°, 1)$};
-    \node[above,accentcolor] at (axis cs:90,1) {$(90°, 1)$};
+    \node[below right=1mm,accentcolor] at (axis cs:0,1) {$(0°, 1)$};
+    \node[above left,accentcolor] at (axis cs:90,1) {$(90°, 1)$};
 
-    \node[maincolor] at (axis cs:270,0) {$y = \sin x + \cos x$};
+    \node[maincolor] at (axis cs:300,0.85) {$y = \sin x + \cos x$};
 
     \end{axis}
 \end{tikzpicture}
@@ -458,8 +458,8 @@ Ejemplo: Resolver $2\sin^2 x - \sin x - 1 = 0$
 
     % Etiquetas
     \node[above,accentcolor] at (axis cs:90,0) {$90°$};
-    \node[below,accentcolor] at (axis cs:210,0) {$210°$};
-    \node[below,accentcolor] at (axis cs:330,0) {$330°$};
+    \node[below right,accentcolor] at (axis cs:210,0) {$210°$};
+    \node[below left,accentcolor] at (axis cs:330,0) {$330°$};
 
     \node[maincolor] at (axis cs:180,1.5) {$y = 2\sin^2 x - \sin x - 1$};
 
@@ -567,12 +567,12 @@ Ejemplo: Resolver $\sin(2x) = \cos x$
 
     % Etiquetas
     \node[above,thirdcolor] at (axis cs:30,0.866) {$30°$};
-    \node[above,thirdcolor] at (axis cs:90,0) {$90°$};
+    \node[above right,thirdcolor] at (axis cs:90,0) {$90°$};
     \node[above,thirdcolor] at (axis cs:150,0.866) {$150°$};
-    \node[below,thirdcolor] at (axis cs:270,0) {$270°$};
+    \node[above right,thirdcolor] at (axis cs:277,0) {$270°$};
 
-    \node[maincolor] at (axis cs:200,0.8) {$y = \sin(2x)$};
-    \node[accentcolor] at (axis cs:45,0.5) {$y = \cos x$};
+    \node[maincolor] at (axis cs:170,0.65) {$y = \sin(2x)$};
+    \node[accentcolor] at (axis cs:45,0.25) {$y = \cos x$};
 
     \end{axis}
 \end{tikzpicture}
@@ -684,8 +684,8 @@ Pero aquí viene lo interesante: debido a obstáculos (edificios, calles cerrada
     \draw[gray!30,very thin] (-1,-1) grid (8,6);
 
     % Axes
-    \draw[->,thick] (-1,0) -- (8.5,0) node[right] {$x$};
-    \draw[->,thick] (0,-1) -- (0,6.5) node[above] {$y$};
+    \draw[-{Latex},thick] (-1,0) -- (8.5,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1) -- (0,6.5) node[above] {$y$};
 
     % Origin
     \node[below left] at (0,0) {$O$};
@@ -697,18 +697,18 @@ Pero aquí viene lo interesante: debido a obstáculos (edificios, calles cerrada
 
     % Direct path (blocked)
     \draw[red,dashed,thick] (0,0) -- (7,5);
-    \node[red,rotate=35] at (3.5,2.5) {$\times$ Bloqueado};
+    \node[red,rotate=35] at (2.5,2.25) {$\times$ Bloqueado};
 
     % Actual path
-    \draw[thirdcolor,very thick,->,>=stealth] (0,0) -- (4,0) node[midway,below] {Tramo 1};
-    \draw[thirdcolor,very thick,->,>=stealth] (4,0) -- (4,3) node[midway,right] {Tramo 2};
-    \draw[thirdcolor,very thick,->,>=stealth] (4,3) -- (7,3) node[midway,below] {Tramo 3};
-    \draw[thirdcolor,very thick,->,>=stealth] (4,3) -- (7,5) node[midway,above,sloped] {Tramo 4};
+    \draw[thirdcolor,very thick,-{Latex},>=stealth] (0,0) -- (4,0) node[midway,below] {Tramo 1};
+    \draw[thirdcolor,very thick,-{Latex},>=stealth] (4,0) -- (4,3) node[midway,right] {Tramo 2};
+    \draw[thirdcolor,very thick,-{Latex},>=stealth] (4,3) -- (7,3) node[midway,below] {Tramo 3};
+    \draw[thirdcolor,very thick,-{Latex},>=stealth] (4,3) -- (7,5) node[midway,above,sloped] {Tramo 4};
 
     % Angles
-    \draw[accentcolor,->] (1,0) arc (0:35:1) node[midway,right] {$\theta_1$};
-    \draw[accentcolor,->] (4,0.5) arc (90:35:0.5);
-    \draw[accentcolor,->] (4.5,3) arc (0:34:0.5);
+    \draw[accentcolor,-{Latex}] (1,0) arc (0:35:1) node[midway,right] {$\theta_1$};
+    \draw[accentcolor,-{Latex}] (4,0.5) arc (90:35:0.5);
+    \draw[accentcolor,-{Latex}] (4.5,3) arc (0:34:0.5);
 
     % Car and flag icons (using simple TikZ shapes)
     \fill[accentcolor] (0,0) circle (3pt);
@@ -751,24 +751,24 @@ donde $(x_c, y_c)$ es el centro de la curva, $\omega$ es la velocidad angular y 
     \filldraw (0,0) circle (1pt) node[below] {Centro $(x_c, y_c)$};
 
     % Radio
-    \draw[<->,thick] (0,0) -- (2,0) node[midway,above] {$r$};
+    \draw[{Latex}-{Latex},thick] (0,0) -- (2,0) node[midway,above] {$r$};
 
     % Trayectoria del carro
-    \draw[maincolor,very thick,->] (2,0) arc (0:120:2);
+    \draw[maincolor,very thick,-{Latex}] (2,0) arc (0:120:2);
 
     % Posiciones del carro
     \filldraw[accentcolor] (2,0) circle (2pt) node[right] {$t=0$};
     \filldraw[accentcolor] (60:2) circle (2pt) node[above right] {$t=t_1$};
-    \filldraw[accentcolor] (120:2) circle (2pt) node[above left] {$t=t_2$};
+    \filldraw[accentcolor] (120:2) circle (2pt) node[below right] {$t=t_2$};
 
     % Ángulos
-    \draw[thirdcolor,->] (0.5,0) arc (0:60:0.5) node[midway,right] {$\omega t_1$};
-    \draw[thirdcolor,->] (0.7,0) arc (0:120:0.7) node[near end,right] {$\omega t_2$};
+    \draw[thirdcolor,-{Latex}] (0.5,0) arc (0:60:0.5) node[midway,left=1mm] {$\omega t_1$};
+    \draw[thirdcolor,-{Latex}] (0.7,0) arc (0:120:0.7) node[near end,right=4mm] {$\omega t_2$};
 
     % Vectores de velocidad (tangentes)
-    \draw[red,thick,->] (2,0) -- (2,0.7) node[right] {$\vec{v}$};
-    \draw[red,thick,->] (60:2) -- +(-30:0.7) node[above] {$\vec{v}$};
-    \draw[red,thick,->] (120:2) -- +(-210:0.7) node[left] {$\vec{v}$};
+    \draw[red,thick,-{Latex}] (2,0) -- (2,0.7) node[right] {$\vec{v}$};
+    \draw[red,thick,-{Latex}] (60:2) -- +(-30:0.7) node[above] {$\vec{v}$};
+    \draw[red,thick,-{Latex}] (120:2) -- +(-210:0.7) node[left] {$\vec{v}$};
 \end{tikzpicture}
 \end{center}
 
@@ -1015,7 +1015,7 @@ $\sin\left(\frac{2\pi}{3}\right) = \sin\left(\pi - \frac{\pi}{3}\right) = \sin\l
     % Etiquetas
     \node[above] at (axis cs:1.047, 0.866) {$\left(\frac{\pi}{3}, \frac{\sqrt{3}}{2}\right)$};
     \node[above] at (axis cs:2.094, 0.866) {$\left(\frac{2\pi}{3}, \frac{\sqrt{3}}{2}\right)$};
-    \node[red] at (axis cs:5.5, 0.866) {$y = \frac{\sqrt{3}}{2}$};
+    \node[red] at (axis cs:5.5, 1.1) {$y = \frac{\sqrt{3}}{2}$};
 \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -1070,8 +1070,8 @@ Para $x = 150^\circ$: $2\sin(150^\circ) - 1 = 2 \cdot \frac{1}{2} - 1 = 1 - 1 = 
     \draw[thick] (0,0) circle (1);
 
     % Ejes
-    \draw[->] (-1.3,0) -- (1.3,0) node[right] {$x$};
-    \draw[->] (0,-1.3) -- (0,1.3) node[above] {$y$};
+    \draw[-{Latex}] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex}] (0,-1.3) -- (0,1.3) node[above] {$y$};
 
     % Línea horizontal y = 1/2
     \draw[red, thick, dashed] (-1,0.5) -- (1,0.5) node[right] {$y = \frac{1}{2}$};
@@ -1085,8 +1085,8 @@ Para $x = 150^\circ$: $2\sin(150^\circ) - 1 = 2 \cdot \frac{1}{2} - 1 = 1 - 1 = 
     \filldraw[red] (150:1) circle (0.03) node[above left] {$150^\circ$};
 
     % Ángulos
-    \draw[blue, ->] (0.3,0) arc (0:30:0.3) node[midway, right] {$30^\circ$};
-    \draw[blue, ->] (0.3,0) arc (0:150:0.3) node[midway, above] {$150^\circ$};
+    \draw[blue, -{Latex}] (0.3,0) arc (0:30:0.3) node[midway, right] {$30^\circ$};
+    \draw[blue, -{Latex}] (0.3,0) arc (0:150:0.3) node[midway, above] {$150^\circ$};
 \end{tikzpicture}
 \end{center}
 
@@ -1244,8 +1244,8 @@ $2 - 2\cos^2(2\pi) = 2 - 2(1) = 0$ ✓
     \draw[thick] (0,0) circle (1);
 
     % Ejes
-    \draw[->] (-1.3,0) -- (1.3,0) node[right] {$x$};
-    \draw[->] (0,-1.3) -- (0,1.3) node[above] {$y$};
+    \draw[-{Latex}] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex}] (0,-1.3) -- (0,1.3) node[above] {$y$};
 
     % Puntos solución
     \filldraw[red] (1,0) circle (0.03) node[below right] {$0, 2\pi$};
@@ -1327,7 +1327,7 @@ $\cos\left(\frac{3\pi}{2}\right) = 0$ ✓
     grid style={dashed, gray!50},
     samples=200,
     domain=0:6.283,
-    legend pos=north east
+    legend pos=south west
 ]
     % sin(2x)
     \addplot[blue, thick] {sin(2*deg(x))};
@@ -1520,7 +1520,7 @@ Para $x = \frac{\sqrt{5}}{5}$:
     \addplot[only marks, mark=*, mark size=3pt, green!60!black]
         coordinates {(0.447, 0.464)};
 
-    \node[right] at (axis cs:0.447, 0.464) {$\left(\frac{\sqrt{5}}{5}, \arcsin\left(\frac{\sqrt{5}}{5}\right)\right)$};
+    \node[left=1mm] at (axis cs:0.447, 0.464) {$\left(\frac{\sqrt{5}}{5}, \arcsin\left(\frac{\sqrt{5}}{5}\right)\right)$};
 \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -1606,21 +1606,21 @@ $t = 2$ segundos y $t = 10$ segundos
     % Posición en t=2 (ángulo π/3)
     \coordinate (P1) at (60:50);
     \filldraw[blue] (P1) circle (1.5);
-    \draw[blue, thick, ->] (P1) -- ++(150:20) node[above] {$t=2s$};
+    \draw[blue, thick, -{Latex}] (P1) -- ++(150:20) node[above] {$t=2s$};
     \draw[green, dashed] (P1) -- (100,0);
 
     % Posición en t=10 (ángulo 5π/3)
     \coordinate (P2) at (300:50);
     \filldraw[blue] (P2) circle (1.5);
-    \draw[blue, thick, ->] (P2) -- ++(30:20) node[right] {$t=10s$};
+    \draw[blue, thick, -{Latex}] (P2) -- ++(30:20) node[right] {$t=10s$};
     \draw[green, dashed] (P2) -- (100,0);
 
     % Centro
     \filldraw (0,0) circle (1) node[below] {Centro};
 
     % Ejes
-    \draw[->] (-60,0) -- (110,0) node[right] {$x$};
-    \draw[->] (0,-60) -- (0,60) node[above] {$y$};
+    \draw[-{Latex}] (-60,0) -- (110,0) node[right] {$x$};
+    \draw[-{Latex}] (0,-60) -- (0,60) node[above] {$y$};
 \end{tikzpicture}
 \end{center}
 
@@ -1791,8 +1791,8 @@ $t = \frac{6u}{\pi}$
     \addplot[only marks, mark=*, mark size=3pt, red]
         coordinates {(6.72, 0) (11.28, 0)};
 
-    \node[above] at (axis cs:6.72, 0) {$t \approx 6.72h$};
-    \node[below] at (axis cs:11.28, 0) {$t \approx 11.28h$};
+    \node[above right] at (axis cs:6.72, 0) {$t \approx 6.72h$};
+    \node[below, rotate=90] at (axis cs:10.75, 7.8) {$t \approx 11.28h$};
 \end{axis}
 \end{tikzpicture}
 \end{center}
@@ -3051,7 +3051,7 @@ $\theta = \frac{\pi}{6}$ (30°) o $\theta = \frac{5\pi}{6}$ (150°)
     \filldraw[red] (150:3) circle (0.1);
 
     % Radios
-    \draw[red,thick] (0,0) -- (30:3) node[midway,below right] {$r=10$};
+    \draw[red,thick] (0,0) -- (30:3) node[midway,above right, rotate=30] {$r=10$};
     \draw[red,thick] (0,0) -- (150:3);
 
     % Ángulos
@@ -3102,7 +3102,7 @@ Despejando $t$:
     ymin=8, ymax=32,
     xtick={0,2,4,6,8,10,12,14,16,18,20,22,24},
     ytick={10,15,20,25,30},
-    legend pos=north east,
+    legend pos=south west,
 ]
     % Función de temperatura
     \addplot[blue,thick] {20 + 10*sin(pi*x/12 * 180/pi)};
