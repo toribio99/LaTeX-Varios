@@ -227,6 +227,7 @@ INSTRUCCIONES CRÍTICAS:
 - USA twoside, fancyhdr, tcolorbox
 - NO uses $ en parámetros title
 - DIMENSIONES DE GRÁFICAS: width=0.85-0.95\textwidth, height proporcional (0.5-0.7 del ancho)
+- IMPORTANTE: Para circunferencias, elipses, hipérbolas, polígonos → AGREGAR axis equal image
 - Cierra todos los entornos
 - Deja comentarios %INSERTAR_EJEMPLOS_AQUI%, %INSERTAR_EJERCICIOS_AQUI%
 - USA sintaxis correcta: \begin{ejemplo}{Título} (con llaves, no corchetes)
@@ -276,6 +277,7 @@ INSTRUCCIONES CRÍTICAS:
 - Títulos de ejemplos SIN símbolos $
 - Todas las gráficas con pgfplots + axis
 - DIMENSIONES: width=0.85-0.95\textwidth, height proporcional (0.5-0.7 del ancho)
+- IMPORTANTE: Para circunferencias, elipses, hipérbolas, polígonos → AGREGAR axis equal image
 - ^\circ solo dentro de $...$
 - Cierra todos los entornos
 - USA sintaxis correcta: \begin{ejemplo}{Título} (con llaves, no corchetes)
@@ -322,6 +324,7 @@ INSTRUCCIONES CRÍTICAS:
 - Títulos de ejercicios SIN símbolos $
 - Gráficas con pgfplots + axis
 - DIMENSIONES: width=0.85-0.95\textwidth, height proporcional (0.5-0.7 del ancho)
+- IMPORTANTE: Para circunferencias, elipses, hipérbolas, polígonos → AGREGAR axis equal image
 - ^\circ solo dentro de $...$
 - Cierra todos los entornos
 - USA sintaxis correcta: \begin{ejercicio}{Título} (con llaves, no corchetes)
@@ -554,6 +557,41 @@ El asistente principal debe:
 ]
 ```
 
+**⚠️ REGLA ESPECIAL - FIGURAS GEOMÉTRICAS CON PROPORCIONES EXACTAS:**
+
+Para gráficas que contengan **circunferencias, elipses, hipérbolas, polígonos regulares, o cualquier figura geométrica que deba mantener proporciones exactas**, es **OBLIGATORIO** agregar `axis equal image`:
+
+```latex
+% Para circunferencias, elipses, hipérbolas, polígonos regulares, etc.
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.6\textwidth,
+    axis equal image,     % ← OBLIGATORIO para figuras geométricas
+    % ... resto de opciones
+]
+```
+
+**¿Por qué `axis equal image`?**
+- Sin este parámetro, una circunferencia se verá como una elipse
+- Fuerza que las escalas de x y y sean iguales físicamente
+- Mantiene las proporciones geométricas correctas
+- Funciona con dimensiones rectangulares (0.9×0.6)
+
+**Ejemplos que REQUIEREN `axis equal image`:**
+- ✅ Circunferencias: $x^2 + y^2 = r^2$
+- ✅ Elipses: $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$
+- ✅ Hipérbolas: $\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$
+- ✅ Cuadrados, pentágonos, hexágonos
+- ✅ Triángulos rectángulos con ángulos exactos
+- ✅ Lugar geométrico con distancias exactas
+
+**Ejemplos que NO requieren `axis equal image`:**
+- ❌ Funciones trigonométricas: $y = \sin(x)$, $y = \cos(x)$
+- ❌ Funciones polinomiales: $y = x^2$, $y = x^3$
+- ❌ Funciones exponenciales: $y = e^x$
+- ❌ Funciones logarítmicas: $y = \ln(x)$
+- ❌ Rectas en general (a menos que se analicen ángulos)
+
 ```latex
 % OPCIÓN 2: Para gráficas TikZ puras (diagramas, círculos, triángulos)
 \begin{center}
@@ -573,13 +611,16 @@ El asistente principal debe:
 
 **Tabla de Referencia de Dimensiones:**
 
-| Tipo de Gráfica | Ancho (width) | Altura (height) | Ratio | Uso |
-|------------------|---------------|------------------|-------|-----|
-| Funciones estándar | `0.90\textwidth` | `0.55\textwidth` | 1.6:1 | Seno, coseno, tangente |
-| Funciones comparativas | `0.90\textwidth` | `0.60\textwidth` | 1.5:1 | Múltiples curvas |
-| Círculo unitario | `0.85\textwidth` | `0.85\textwidth` | 1:1 | Diagramas circulares |
-| Triángulos | `0.85\textwidth` | `!` (auto) | - | Usar resizebox |
-| Diagramas complejos | `0.95\textwidth` | `0.65\textwidth` | 1.46:1 | Múltiples elementos |
+| Tipo de Gráfica | Ancho (width) | Altura (height) | `axis equal image` | Uso |
+|------------------|---------------|------------------|-------------------|-----|
+| Funciones estándar | `0.90\textwidth` | `0.55\textwidth` | ❌ NO | Seno, coseno, tangente, polinomios |
+| Funciones comparativas | `0.90\textwidth` | `0.60\textwidth` | ❌ NO | Múltiples curvas |
+| Circunferencias | `0.90\textwidth` | `0.60\textwidth` | ✅ **SÍ** | $x^2 + y^2 = r^2$ |
+| Elipses/Hipérbolas | `0.90\textwidth` | `0.60\textwidth` | ✅ **SÍ** | Cónicas en general |
+| Polígonos regulares | `0.90\textwidth` | `0.60\textwidth` | ✅ **SÍ** | Cuadrados, pentágonos, etc. |
+| Lugar geométrico | `0.90\textwidth` | `0.60\textwidth` | ✅ **SÍ** | Distancias exactas |
+| Triángulos (TikZ puro) | `0.85\textwidth` | `!` (auto) | N/A | Usar resizebox |
+| Diagramas complejos | `0.95\textwidth` | `0.65\textwidth` | ❌ NO | Múltiples elementos variados |
 
 **Rangos Permitidos:**
 - **Ancho mínimo:** `0.85\textwidth` (85%)
@@ -1068,7 +1109,7 @@ Este es el template REAL usado en las 9 guías exitosas de Trigonometría.
 
 ---
 
-**Versión:** 1.1 - Trigonometría (Basada en v3.1 corregida)
+**Versión:** 1.2 - Trigonometría (Basada en v3.1 corregida)
 **Fecha:** Noviembre 2025
 **Optimizaciones principales:**
 - Archivo de referencia correcto y verificado
@@ -1081,11 +1122,22 @@ Este es el template REAL usado en las 9 guías exitosas de Trigonometría.
 - **v1.0:** Plantilla de gráficas corregida (pgfplots con axis)
 - **v1.0:** Advertencias sobre errores "Dimension too large"
 - **v1.0:** Ejemplos de código incorrecto vs correcto
-- **v1.1 (NUEVO):** Compilación ESTRICTA obligatoria con `-halt-on-error`
-- **v1.1 (NUEVO):** Verificación de código de salida = 0
-- **v1.1 (NUEVO):** Nivel profesional igual a TeXstudio
-- **v1.1 (NUEVO):** Prevención de errores comunes (tcolorbox, enumitem, placeholders)
-- **v1.1 (NUEVO):** Instrucciones explícitas para subagentes sobre sintaxis correcta
+- **v1.1:** Compilación ESTRICTA obligatoria con `-halt-on-error`
+- **v1.1:** Verificación de código de salida = 0
+- **v1.1:** Nivel profesional igual a TeXstudio
+- **v1.1:** Prevención de errores comunes (tcolorbox, enumitem, placeholders)
+- **v1.1:** Instrucciones explícitas para subagentes sobre sintaxis correcta
+- **v1.2 (NUEVO):** `axis equal image` para figuras geométricas con proporciones exactas
+- **v1.2 (NUEVO):** Tabla de referencia con columna para `axis equal image`
+- **v1.2 (NUEVO):** Reglas claras: cuándo usar y cuándo NO usar `axis equal image`
+
+**Mejoras v1.2 (2025-11-13):**
+1. **Proporciones geométricas correctas:** Regla obligatoria `axis equal image`
+2. **Documentación completa:** Ejemplos que requieren vs no requieren escalas iguales
+3. **Tabla de referencia actualizada:** Incluye columna con `axis equal image` (✅/❌)
+4. **Instrucciones a subagentes:** Los 3 subagentes ahora saben cuándo aplicar `axis equal image`
+5. **Figuras afectadas:** Circunferencias, elipses, hipérbolas, polígonos, lugares geométricos
+6. **Explicación técnica:** Por qué sin `axis equal image` las circunferencias se ven como elipses
 
 **Mejoras v1.1 (2025-11-13):**
 1. **Compilación estricta:** Reemplazo de `-interaction=nonstopmode` por `-halt-on-error`
