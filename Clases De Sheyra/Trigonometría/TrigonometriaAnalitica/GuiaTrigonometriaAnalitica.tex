@@ -1,0 +1,2634 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\pgfplotsset{compat=1.18}
+
+% Definición de colores
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de tcolorbox
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+\newtcolorbox{teorema}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Teorema,
+  #1
+}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejemplo,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  breakable,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+% Configuración de encabezados y pies de página
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad Identidades Trigonometricas}}
+\fancyhead[RO]{\small\textcolor{maincolor}{Identidades Trigonometricas \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+% Información del documento
+\title{\textbf{\Huge TRIGONOMETRIA ANALITICA}\\[0.5cm]
+\Large Identidades Trigonométricas\\[0.3cm]
+\large Guía Completa para Grado 10}
+\author{Prof: Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10 - Trigonometría}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Hola! Bienvenido al fascinante mundo de las identidades trigonométricas. Si alguna vez has pensado que la trigonometría es como un rompecabezas matemático, estás en lo correcto. Las identidades trigonométricas son las piezas fundamentales que te permitirán resolver ese rompecabezas con elegancia y precisión.
+
+\subsection*{¿Qué son las identidades trigonométricas?}
+
+Imagina que tienes diferentes formas de decir la misma cosa. Por ejemplo, puedes decir ``media docena'' o ``seis unidades'' - ambas expresiones significan lo mismo. Las identidades trigonométricas funcionan de manera similar: son ecuaciones que expresan relaciones entre funciones trigonométricas que son verdaderas para todos los valores donde las funciones están definidas.
+
+Una identidad trigonométrica es como una ``ley universal'' del mundo trigonométrico. No importa qué ángulo elijas (siempre que las funciones estén definidas), la identidad siempre será verdadera. Por ejemplo, la famosa identidad $\sin^2\theta + \cos^2\theta = 1$ funciona para cualquier ángulo $\theta$, ya sea $30°$, $45°$, $137.8°$ o cualquier otro valor que se te ocurra.
+
+\subsection*{¿Por qué son importantes en matemáticas?}
+
+Las identidades trigonométricas son herramientas poderosas que nos permiten:
+
+\begin{itemize}
+    \item \textbf{Simplificar expresiones complejas:} Convertir expresiones trigonométricas complicadas en formas más simples y manejables.
+    \item \textbf{Resolver ecuaciones:} Muchas ecuaciones trigonométricas que parecen imposibles se vuelven sencillas cuando aplicas la identidad correcta.
+    \item \textbf{Demostrar teoremas:} Son fundamentales en demostraciones matemáticas avanzadas en cálculo y física.
+    \item \textbf{Calcular valores exactos:} Encontrar valores trigonométricos exactos para ángulos que no son los típicos $30°$, $45°$ o $60°$.
+    \item \textbf{Transformar funciones:} Cambiar entre diferentes formas de expresar la misma información trigonométrica.
+\end{itemize}
+
+\subsection*{Aplicaciones en el mundo real}
+
+Las identidades trigonométricas no son solo ejercicios abstractos - tienen aplicaciones increíbles en el mundo real:
+
+\subsubsection*{Física Ondulatoria}
+En el estudio de las ondas (sonido, luz, agua), las identidades trigonométricas nos permiten:
+\begin{itemize}
+    \item Analizar la interferencia de ondas cuando dos ondas se encuentran
+    \item Descomponer ondas complejas en componentes simples
+    \item Predecir patrones de resonancia en instrumentos musicales
+\end{itemize}
+
+\subsubsection*{Ingeniería de Señales}
+Los ingenieros utilizan identidades trigonométricas para:
+\begin{itemize}
+    \item Procesar señales de audio y video
+    \item Comprimir archivos multimedia (MP3, JPEG)
+    \item Diseñar filtros para eliminar ruido en comunicaciones
+    \item Modular y demodular señales en telecomunicaciones
+\end{itemize}
+
+\subsubsection*{Navegación GPS}
+Tu teléfono móvil usa identidades trigonométricas para:
+\begin{itemize}
+    \item Calcular tu posición exacta usando señales de satélites
+    \item Convertir entre diferentes sistemas de coordenadas
+    \item Corregir errores causados por la atmósfera terrestre
+\end{itemize}
+
+\subsubsection*{Análisis de Circuitos Eléctricos}
+En electricidad y electrónica:
+\begin{itemize}
+    \item Analizar corriente alterna (AC) en tu casa
+    \item Calcular la potencia en circuitos con inductores y capacitores
+    \item Diseñar fuentes de alimentación eficientes
+\end{itemize}
+
+\subsubsection*{Astronomía}
+Los astrónomos usan identidades para:
+\begin{itemize}
+    \item Calcular órbitas planetarias
+    \item Predecir eclipses solares y lunares
+    \item Determinar distancias a estrellas lejanas
+    \item Analizar el movimiento de galaxias
+\end{itemize}
+
+\subsection*{Lo que aprenderás en esta guía}
+
+En esta aventura matemática, dominarás:
+
+\begin{enumerate}
+    \item Las relaciones fundamentales entre las funciones trigonométricas
+    \item Cómo simplificar expresiones que parecen imposibles
+    \item Técnicas para demostrar identidades paso a paso
+    \item Fórmulas para sumar y restar ángulos
+    \item Los secretos de los ángulos dobles y medios
+    \item Transformaciones mágicas entre productos y sumas
+\end{enumerate}
+
+Prepárate para ver las matemáticas desde una nueva perspectiva. Las identidades trigonométricas son como superpoderes matemáticos - una vez que las domines, podrás resolver problemas que antes parecían imposibles. ¡Comencemos!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Relaciones Recíprocas}
+
+Las relaciones recíprocas son las identidades más básicas y fundamentales. Conectan cada función trigonométrica con su función recíproca.
+
+\begin{definicion}[title=Funciones Recíprocas]
+Las funciones trigonométricas recíprocas se definen como:
+\begin{align}
+\csc\theta &= \frac{1}{\sin\theta} \quad \text{(cosecante)} \\
+\sec\theta &= \frac{1}{\cos\theta} \quad \text{(secante)} \\
+\cot\theta &= \frac{1}{\tan\theta} \quad \text{(cotangente)}
+\end{align}
+\end{definicion}
+
+Estas relaciones implican que:
+\begin{itemize}
+    \item $\sin\theta \cdot \csc\theta = 1$
+    \item $\cos\theta \cdot \sec\theta = 1$
+    \item $\tan\theta \cdot \cot\theta = 1$
+\end{itemize}
+
+\begin{nota}
+Recuerda: una función y su recíproca SIEMPRE multiplican a 1, excepto cuando la función original es cero (donde la recíproca no está definida).
+\end{nota}
+
+\subsection{Relaciones de Razón}
+
+Las funciones tangente y cotangente pueden expresarse como razones de seno y coseno:
+
+\begin{teorema}[title=Identidades de Razón]
+\begin{align}
+\tan\theta &= \frac{\sin\theta}{\cos\theta} \\
+\cot\theta &= \frac{\cos\theta}{\sin\theta}
+\end{align}
+\end{teorema}
+
+Estas identidades son súper útiles porque te permiten convertir problemas con tangente o cotangente en problemas con seno y coseno, que suelen ser más fáciles de manejar.
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+    % Círculo unitario
+    \draw[maincolor,very thick] (0,0) circle (1);
+
+    % Ejes
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    % Ángulo y punto
+    \def\angulo{35}
+    \coordinate (P) at ({\angulo}:1);
+
+    % Radio
+    \draw[accentcolor,thick] (0,0) -- (P);
+    \filldraw[maincolor] (P) circle (0.03);
+
+    % Proyecciones
+    \draw[blue,thick] (0,0) -- (P |- 0,0) node[midway,below] {$\cos\theta$};
+    \draw[red,thick] (P |- 0,0) -- (P) node[midway,right] {$\sin\theta$};
+
+    % Tangente
+    \draw[green!60!black,thick] (1,0) -- (1,{tan(\angulo)}) node[midway,right] {$\tan\theta$};
+
+    % Ángulo
+    \draw[accentcolor] (0.3,0) arc (0:\angulo:0.3) node[midway,right] {$\theta$};
+
+    % Etiquetas
+    \node[above right] at (P) {$(\cos\theta, \sin\theta)$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Identidades Pitagóricas}
+
+Las identidades pitagóricas son las más importantes y útiles de todas. Se derivan directamente del teorema de Pitágoras aplicado al círculo unitario.
+
+\begin{teorema}[title=Identidades Pitagóricas Fundamentales]
+Existen tres formas de la identidad pitagórica:
+\begin{align}
+\sin^2\theta + \cos^2\theta &= 1 \quad \text{(Identidad fundamental)} \\
+1 + \tan^2\theta &= \sec^2\theta \quad \text{(Dividiendo por } \cos^2\theta \text{)} \\
+1 + \cot^2\theta &= \csc^2\theta \quad \text{(Dividiendo por } \sin^2\theta \text{)}
+\end{align}
+\end{teorema}
+
+\textbf{Demostración de la segunda identidad:}
+Partimos de $\sin^2\theta + \cos^2\theta = 1$ y dividimos todo por $\cos^2\theta$:
+\[
+\frac{\sin^2\theta}{\cos^2\theta} + \frac{\cos^2\theta}{\cos^2\theta} = \frac{1}{\cos^2\theta}
+\]
+\[
+\tan^2\theta + 1 = \sec^2\theta
+\]
+
+\subsection{Expresión de una Función en Términos de las Otras}
+
+Una habilidad crucial es expresar cualquier función trigonométrica en términos de cualquier otra. Esto es especialmente útil cuando necesitas trabajar con una sola función.
+
+\begin{ejemplo}
+Expresar todas las funciones trigonométricas en términos del seno:
+
+Dado que $\sin^2\theta + \cos^2\theta = 1$, tenemos:
+\begin{align}
+\cos\theta &= \pm\sqrt{1 - \sin^2\theta} \\
+\tan\theta &= \frac{\sin\theta}{\pm\sqrt{1 - \sin^2\theta}} \\
+\csc\theta &= \frac{1}{\sin\theta} \\
+\sec\theta &= \frac{1}{\pm\sqrt{1 - \sin^2\theta}} \\
+\cot\theta &= \frac{\pm\sqrt{1 - \sin^2\theta}}{\sin\theta}
+\end{align}
+
+El signo $\pm$ depende del cuadrante donde se encuentra $\theta$.
+\end{ejemplo}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=8cm,
+        axis lines=middle,
+        xlabel={$\theta$},
+        ylabel={},
+        xmin=0, xmax=360,
+        ymin=-2, ymax=2,
+        xtick={0,90,180,270,360},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$},
+        ytick={-2,-1,0,1,2},
+        grid=major,
+        grid style={line width=.2pt, draw=gray!30},
+        legend pos=north east,
+        cycle list name=color list
+    ]
+
+    % Seno
+    \addplot[domain=0:360,samples=100,smooth,thick,blue]
+        {sin(x)};
+    \addlegendentry{$\sin\theta$}
+
+    % Coseno
+    \addplot[domain=0:360,samples=100,smooth,thick,red]
+        {cos(x)};
+    \addlegendentry{$\cos\theta$}
+
+    % Relación visible
+    \node at (axis cs:45,1.2) [anchor=west] {$\sin^2\theta + \cos^2\theta = 1$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Identidades de Suma y Diferencia de Ángulos}
+
+Estas identidades nos permiten calcular funciones trigonométricas de sumas o diferencias de ángulos.
+
+\begin{teorema}[title=Fórmulas de Suma y Diferencia]
+Para cualesquiera ángulos $\alpha$ y $\beta$:
+
+\textbf{Seno:}
+\begin{align}
+\sin(\alpha + \beta) &= \sin\alpha\cos\beta + \cos\alpha\sin\beta \\
+\sin(\alpha - \beta) &= \sin\alpha\cos\beta - \cos\alpha\sin\beta
+\end{align}
+
+\textbf{Coseno:}
+\begin{align}
+\cos(\alpha + \beta) &= \cos\alpha\cos\beta - \sin\alpha\sin\beta \\
+\cos(\alpha - \beta) &= \cos\alpha\cos\beta + \sin\alpha\sin\beta
+\end{align}
+
+\textbf{Tangente:}
+\begin{align}
+\tan(\alpha + \beta) &= \frac{\tan\alpha + \tan\beta}{1 - \tan\alpha\tan\beta} \\
+\tan(\alpha - \beta) &= \frac{\tan\alpha - \tan\beta}{1 + \tan\alpha\tan\beta}
+\end{align}
+\end{teorema}
+
+\begin{nota}
+Truco mnemotécnico para recordar las fórmulas:
+\begin{itemize}
+    \item Seno: ``Seno-Coseno más/menos Coseno-Seno'' (productos cruzados)
+    \item Coseno: ``Coseno-Coseno menos/más Seno-Seno'' (productos iguales)
+    \item Los signos en coseno son opuestos a los de la operación
+\end{itemize}
+\end{nota}
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    % Círculo unitario
+    \draw[thick,gray!50] (0,0) circle (1);
+
+    % Ejes
+    \draw[-{Latex}] (-1.2,0) -- (1.2,0) node[right] {$x$};
+    \draw[-{Latex}] (0,-1.2) -- (0,1.2) node[above] {$y$};
+
+    % Ángulo alpha
+    \def\alpha{25}
+    \coordinate (A) at ({\alpha}:1);
+    \draw[blue,thick] (0,0) -- (A);
+    \draw[blue] (0.3,0) arc (0:\alpha:0.3) node[midway,right] {$\alpha$};
+
+    % Ángulo beta desde alpha
+    \def\beta{30}
+    \coordinate (B) at ({\alpha+\beta}:1);
+    \draw[red,thick] (0,0) -- (B);
+    \draw[red] (0.4,0) arc (0:{\alpha+\beta}:0.4);
+    \draw[red] ({\alpha}:0.5) arc (\alpha:{\alpha+\beta}:0.5) node[midway,above] {$\beta$};
+
+    % Punto suma
+    \filldraw[green!60!black] (B) circle (0.03) node[above right] {$\alpha + \beta$};
+
+    % Etiquetas
+    \node[blue] at (A) [right] {$\alpha$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Identidades de Ángulo Doble}
+
+Las identidades de ángulo doble son casos especiales de las fórmulas de suma cuando $\alpha = \beta = \theta$.
+
+\begin{teorema}[title=Fórmulas de Ángulo Doble]
+\begin{align}
+\sin(2\theta) &= 2\sin\theta\cos\theta \\
+\cos(2\theta) &= \cos^2\theta - \sin^2\theta \\
+&= 2\cos^2\theta - 1 \\
+&= 1 - 2\sin^2\theta \\
+\tan(2\theta) &= \frac{2\tan\theta}{1 - \tan^2\theta}
+\end{align}
+\end{teorema}
+
+Observa que el coseno del ángulo doble tiene tres formas diferentes. Cada una es útil en diferentes situaciones:
+\begin{itemize}
+    \item Usa $\cos^2\theta - \sin^2\theta$ cuando tengas ambas funciones
+    \item Usa $2\cos^2\theta - 1$ cuando solo tengas coseno
+    \item Usa $1 - 2\sin^2\theta$ cuando solo tengas seno
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=7cm,
+        axis lines=middle,
+        xlabel={$\theta$},
+        ylabel={},
+        xmin=0, xmax=180,
+        ymin=-1.5, ymax=1.5,
+        xtick={0,30,60,90,120,150,180},
+        xticklabels={$0°$,$30°$,$60°$,$90°$,$120°$,$150°$,$180°$},
+        grid=major,
+        grid style={line width=.2pt, draw=gray!30},
+        legend pos=north east
+    ]
+
+    % sin(theta)
+    \addplot[domain=0:180,samples=100,smooth,thick,blue,dashed]
+        {sin(x)};
+    \addlegendentry{$\sin\theta$}
+
+    % sin(2*theta)
+    \addplot[domain=0:180,samples=100,smooth,thick,blue]
+        {sin(2*x)};
+    \addlegendentry{$\sin(2\theta)$}
+
+    % cos(theta)
+    \addplot[domain=0:180,samples=100,smooth,thick,red,dashed]
+        {cos(x)};
+    \addlegendentry{$\cos\theta$}
+
+    % cos(2*theta)
+    \addplot[domain=0:180,samples=100,smooth,thick,red]
+        {cos(2*x)};
+    \addlegendentry{$\cos(2\theta)$}
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Identidades de Ángulo Medio}
+
+Las identidades de ángulo medio nos permiten expresar funciones de $\theta/2$ en términos de funciones de $\theta$.
+
+\begin{teorema}[title=Fórmulas de Ángulo Medio]
+\begin{align}
+\sin\left(\frac{\theta}{2}\right) &= \pm\sqrt{\frac{1 - \cos\theta}{2}} \\
+\cos\left(\frac{\theta}{2}\right) &= \pm\sqrt{\frac{1 + \cos\theta}{2}} \\
+\tan\left(\frac{\theta}{2}\right) &= \pm\sqrt{\frac{1 - \cos\theta}{1 + \cos\theta}} = \frac{\sin\theta}{1 + \cos\theta} = \frac{1 - \cos\theta}{\sin\theta}
+\end{align}
+\end{teorema}
+
+El signo $\pm$ depende del cuadrante donde se encuentra $\theta/2$:
+\begin{itemize}
+    \item Si $0° < \theta/2 < 90°$ (Cuadrante I): todas positivas
+    \item Si $90° < \theta/2 < 180°$ (Cuadrante II): seno positivo, coseno negativo
+    \item Si $180° < \theta/2 < 270°$ (Cuadrante III): ambas negativas
+    \item Si $270° < \theta/2 < 360°$ (Cuadrante IV): seno negativo, coseno positivo
+\end{itemize}
+
+\subsection{Transformación de Productos en Sumas o Diferencias}
+
+Estas identidades convierten productos de funciones trigonométricas en sumas o diferencias, lo cual es muy útil en física e ingeniería.
+
+\begin{teorema}[title=Producto a Suma]
+\begin{align}
+\sin\alpha\cos\beta &= \frac{1}{2}[\sin(\alpha + \beta) + \sin(\alpha - \beta)] \\
+\cos\alpha\sin\beta &= \frac{1}{2}[\sin(\alpha + \beta) - \sin(\alpha - \beta)] \\
+\cos\alpha\cos\beta &= \frac{1}{2}[\cos(\alpha + \beta) + \cos(\alpha - \beta)] \\
+\sin\alpha\sin\beta &= \frac{1}{2}[\cos(\alpha - \beta) - \cos(\alpha + \beta)]
+\end{align}
+\end{teorema}
+
+\begin{ejemplo}
+Aplicación en física ondulatoria:
+Cuando dos ondas de frecuencias diferentes se superponen, el producto $\sin(f_1 t)\sin(f_2 t)$ representa la modulación. Usando la identidad:
+\[
+\sin(f_1 t)\sin(f_2 t) = \frac{1}{2}[\cos((f_1-f_2)t) - \cos((f_1+f_2)t)]
+\]
+Esto muestra que obtenemos dos nuevas frecuencias: la diferencia y la suma de las originales.
+\end{ejemplo}
+
+\subsection{Transformación de Sumas o Diferencias en Productos}
+
+Estas son las identidades inversas, que convierten sumas en productos.
+
+\begin{teorema}[title=Suma a Producto]
+\begin{align}
+\sin\alpha + \sin\beta &= 2\sin\left(\frac{\alpha + \beta}{2}\right)\cos\left(\frac{\alpha - \beta}{2}\right) \\
+\sin\alpha - \sin\beta &= 2\cos\left(\frac{\alpha + \beta}{2}\right)\sin\left(\frac{\alpha - \beta}{2}\right) \\
+\cos\alpha + \cos\beta &= 2\cos\left(\frac{\alpha + \beta}{2}\right)\cos\left(\frac{\alpha - \beta}{2}\right) \\
+\cos\alpha - \cos\beta &= -2\sin\left(\frac{\alpha + \beta}{2}\right)\sin\left(\frac{\alpha - \beta}{2}\right)
+\end{align}
+\end{teorema}
+
+\begin{nota}
+Estas identidades son especialmente útiles para:
+\begin{itemize}
+    \item Simplificar expresiones trigonométricas complejas
+    \item Resolver ecuaciones trigonométricas
+    \item Analizar fenómenos de interferencia en física
+    \item Procesar señales en ingeniería
+\end{itemize}
+\end{nota}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=6cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={},
+        xmin=0, xmax=360,
+        ymin=-2.5, ymax=2.5,
+        xtick={0,90,180,270,360},
+        grid=major,
+        grid style={line width=.2pt, draw=gray!30},
+        legend pos=north east
+    ]
+
+    % Suma de senos
+    \addplot[domain=0:360,samples=200,smooth,thick,blue]
+        {sin(x) + sin(3*x)};
+    \addlegendentry{$\sin x + \sin 3x$}
+
+    % Producto equivalente
+    \addplot[domain=0:360,samples=200,smooth,thick,red,dashed]
+        {2*sin(2*x)*cos(x)};
+    \addlegendentry{$2\sin 2x \cos x$}
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Visualización del Círculo Unitario y las Identidades}
+
+Para comprender mejor las identidades, es fundamental visualizarlas en el círculo unitario.
+
+\begin{center}
+\begin{tikzpicture}[scale=4]
+    % Círculo unitario
+    \draw[thick,maincolor] (0,0) circle (1);
+
+    % Ejes
+    \draw[-{Latex},thick] (-1.2,0) -- (1.2,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.2) -- (0,1.2) node[above] {$y$};
+
+    % Puntos importantes
+    \foreach \angle/\x/\y/\xtext/\ytext/\pos in {
+        0/1/0/1/0/right,
+        30/{sqrt(3)/2}/{1/2}/{\frac{\sqrt{3}}{2}}/{\frac{1}{2}}/{above right},
+        45/{sqrt(2)/2}/{sqrt(2)/2}/{\frac{\sqrt{2}}{2}}/{\frac{\sqrt{2}}{2}}/{above right},
+        60/{1/2}/{sqrt(3)/2}/{\frac{1}{2}}/{\frac{\sqrt{3}}{2}}/{above right},
+        90/0/1/0/1/above,
+        120/{-1/2}/{sqrt(3)/2}/{-\frac{1}{2}}/{\frac{\sqrt{3}}{2}}/{above left},
+        135/{-sqrt(2)/2}/{sqrt(2)/2}/{-\frac{\sqrt{2}}{2}}/{\frac{\sqrt{2}}{2}}/{above left},
+        150/{-sqrt(3)/2}/{1/2}/{-\frac{\sqrt{3}}{2}}/{\frac{1}{2}}/{above left},
+        180/-1/0/{-1}/0/left,
+        210/{-sqrt(3)/2}/{-1/2}/{-\frac{\sqrt{3}}{2}}/{-\frac{1}{2}}/{below left},
+        225/{-sqrt(2)/2}/{-sqrt(2)/2}/{-\frac{\sqrt{2}}{2}}/{-\frac{\sqrt{2}}{2}}/{below left},
+        240/{-1/2}/{-sqrt(3)/2}/{-\frac{1}{2}}/{-\frac{\sqrt{3}}{2}}/{below left},
+        270/0/-1/0/{-1}/below,
+        300/{1/2}/{-sqrt(3)/2}/{\frac{1}{2}}/{-\frac{\sqrt{3}}{2}}/{below right},
+        315/{sqrt(2)/2}/{-sqrt(2)/2}/{\frac{\sqrt{2}}{2}}/{-\frac{\sqrt{2}}{2}}/{below right},
+        330/{sqrt(3)/2}/{-1/2}/{\frac{\sqrt{3}}{2}}/{-\frac{1}{2}}/{below right}
+    } {
+        \coordinate (P\angle) at (\x,\y);
+        \filldraw[accentcolor] (P\angle) circle (0.015);
+        \draw[gray,thin] (0,0) -- (P\angle);
+        \node[\pos,font=\tiny] at (P\angle) {$(\xtext,\ytext)$};
+    }
+
+    % Ángulos especiales marcados
+    \foreach \angle/\label in {
+        30/30°, 45/45°, 60/60°, 90/90°,
+        120/120°, 135/135°, 150/150°, 180/180°,
+        210/210°, 225/225°, 240/240°, 270/270°,
+        300/300°, 315/315°, 330/330°
+    } {
+        \node[font=\scriptsize] at ({\angle}:0.85) {$\label$};
+    }
+
+    % Identidad fundamental ilustrada
+    \def\demoangle{40}
+    \coordinate (Demo) at ({\demoangle}:1);
+    \draw[blue,very thick] (0,0) -- (Demo |- 0,0) node[midway,below] {$\cos\theta$};
+    \draw[red,very thick] (Demo |- 0,0) -- (Demo) node[midway,right] {$\sin\theta$};
+    \draw[green!60!black,very thick] (0,0) -- (Demo) node[midway,above,sloped] {$r=1$};
+
+    % Anotación
+    \node[align=center] at (0,-0.5) {$\sin^2\theta + \cos^2\theta = 1$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Técnicas para Simplificar Expresiones Trigonométricas}
+
+Simplificar expresiones trigonométricas es como resolver un puzzle. Aquí te doy las estrategias más efectivas:
+
+\begin{enumerate}
+    \item \textbf{Convertir todo a senos y cosenos:} Cuando la expresión tiene muchas funciones diferentes, convierte todo a $\sin\theta$ y $\cos\theta$.
+
+    \item \textbf{Usar identidades pitagóricas:} Si ves $\sin^2\theta$ o $\cos^2\theta$, piensa en usar $\sin^2\theta + \cos^2\theta = 1$.
+
+    \item \textbf{Factorizar:} Busca factores comunes, diferencias de cuadrados, y otras técnicas algebraicas.
+
+    \item \textbf{Denominadores comunes:} Cuando sumes fracciones, encuentra el mínimo común denominador.
+
+    \item \textbf{Conjugados:} Para racionalizar expresiones con radicales o eliminar fracciones complejas.
+\end{enumerate}
+
+\begin{ejemplo}
+Simplificar: $\frac{1 - \cos^2\theta}{\sin\theta}$
+
+Solución:
+\begin{align}
+\frac{1 - \cos^2\theta}{\sin\theta} &= \frac{\sin^2\theta}{\sin\theta} \quad \text{(usando } \sin^2\theta + \cos^2\theta = 1\text{)} \\
+&= \sin\theta \quad \text{(simplificando)}
+\end{align}
+\end{ejemplo}
+
+\subsection{Demostración de Identidades Trigonométricas}
+
+Demostrar una identidad trigonométrica significa mostrar que dos expresiones son equivalentes para todos los valores donde están definidas. Las estrategias principales son:
+
+\begin{enumerate}
+    \item \textbf{Trabajar con un lado:} Transforma el lado más complejo hasta obtener el más simple.
+
+    \item \textbf{Trabajar con ambos lados:} Transforma ambos lados hasta llegar a la misma expresión.
+
+    \item \textbf{Método de la conjugada:} Multiplica numerador y denominador por el conjugado.
+
+    \item \textbf{Sustitución:} Reemplaza una función por su equivalente en términos de otras.
+\end{enumerate}
+
+\begin{teorema}[title=Estrategia General para Demostraciones]
+\begin{enumerate}
+    \item Examina ambos lados de la identidad
+    \item Identifica qué identidades conocidas podrían ser útiles
+    \item Comienza con el lado más complejo
+    \item Simplifica paso a paso, justificando cada transformación
+    \item Continúa hasta obtener el otro lado
+\end{enumerate}
+\end{teorema}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Diagrama de flujo para demostrar identidades
+    \node[draw,rectangle,rounded corners,fill=maincolor!20] (start) at (0,0) {Identidad a demostrar};
+
+    \node[draw,rectangle,rounded corners,fill=accentcolor!20] (step1) at (0,-1.5) {Elegir lado complejo};
+
+    \node[draw,rectangle,rounded corners,fill=accentcolor!20] (step2) at (-3,-3) {Convertir a sen/cos};
+
+    \node[draw,rectangle,rounded corners,fill=accentcolor!20] (step3) at (0,-3) {Usar pitagóricas};
+
+    \node[draw,rectangle,rounded corners,fill=accentcolor!20] (step4) at (3,-3) {Factorizar};
+
+    \node[draw,rectangle,rounded corners,fill=green!20] (end) at (0,-4.5) {Lado simple obtenido};
+
+    % Flechas
+    \draw[-{Latex}] (start) -- (step1);
+    \draw[-{Latex}] (step1) -- (step2);
+    \draw[-{Latex}] (step1) -- (step3);
+    \draw[-{Latex}] (step1) -- (step4);
+    \draw[-{Latex}] (step2) -- (end);
+    \draw[-{Latex}] (step3) -- (end);
+    \draw[-{Latex}] (step4) -- (end);
+\end{tikzpicture}
+\end{center}
+
+% PARTE 2 DE 3: EJEMPLOS RESUELTOS, EJERCICIOS INVERSOS Y SOLUCIONES
+% Guía de Identidades Trigonométricas - Grado 10
+
+\section{Ejemplos Resueltos}
+
+Ahora vamos a poner en práctica todas las identidades trigonométricas que hemos aprendido. Cada ejemplo está completamente desarrollado paso a paso para que entiendas perfectamente el proceso. ¡Vamos a dominar estas identidades!
+
+\begin{ejemplo}[title=Ejemplo 1: Verificar una identidad pitagórica básica]
+Verifica que la siguiente expresión es una identidad verdadera para todo valor de $\theta$ donde las funciones están definidas:
+\[
+\sec^2\theta - \tan^2\theta = 1
+\]
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Expresar las funciones en términos de seno y coseno.
+
+Recordemos que $\sec\theta = \frac{1}{\cos\theta}$ y $\tan\theta = \frac{\sin\theta}{\cos\theta}$
+
+\textbf{Paso 2:} Sustituir en el lado izquierdo de la identidad.
+\begin{align*}
+\sec^2\theta - \tan^2\theta &= \left(\frac{1}{\cos\theta}\right)^2 - \left(\frac{\sin\theta}{\cos\theta}\right)^2 \\[0.3cm]
+&= \frac{1}{\cos^2\theta} - \frac{\sin^2\theta}{\cos^2\theta}
+\end{align*}
+
+\textbf{Paso 3:} Encontrar un denominador común y simplificar.
+\begin{align*}
+\frac{1}{\cos^2\theta} - \frac{\sin^2\theta}{\cos^2\theta} &= \frac{1 - \sin^2\theta}{\cos^2\theta}
+\end{align*}
+
+\textbf{Paso 4:} Aplicar la identidad pitagórica fundamental.
+
+Sabemos que $\sin^2\theta + \cos^2\theta = 1$, por lo tanto: $\cos^2\theta = 1 - \sin^2\theta$
+
+\textbf{Paso 5:} Sustituir y simplificar.
+\begin{align*}
+\frac{1 - \sin^2\theta}{\cos^2\theta} &= \frac{\cos^2\theta}{\cos^2\theta} \\[0.2cm]
+&= 1 \quad \checkmark
+\end{align*}
+
+\textbf{Paso 6:} Verificación gráfica usando el círculo unitario.
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin=-1.5, xmax=1.5,
+        ymin=-1.5, ymax=1.5,
+        axis equal,
+        grid=major,
+        width=10cm,
+        height=10cm,
+    ]
+    % Círculo unitario
+    \addplot[domain=0:360, samples=100, maincolor, very thick]
+        ({cos(x)}, {sin(x)});
+
+    % Punto en el círculo para ángulo de 45 grados
+    \addplot[only marks, mark=*, mark size=3pt, maincolor]
+        coordinates {({cos(45)}, {sin(45)})};
+
+    % Radio
+    \addplot[accentcolor, thick, -{Latex}]
+        coordinates {(0,0) ({cos(45)}, {sin(45)})};
+
+    % Proyecciones
+    \addplot[dashed, gray]
+        coordinates {({cos(45)}, 0) ({cos(45)}, {sin(45)})};
+    \addplot[dashed, gray]
+        coordinates {(0, {sin(45)}) ({cos(45)}, {sin(45)})};
+
+    % Etiquetas
+    \node at (axis cs:0.9, 0.9) {$P(\cos\theta, \sin\theta)$};
+    \node at (axis cs:0.5, -0.15) {$\cos\theta$};
+    \node at (axis cs:-0.2, 0.5) {$\sin\theta$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:} $\boxed{\text{Identidad verificada: } \sec^2\theta - \tan^2\theta = 1}$
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 2: Simplificar expresión con identidades recíprocas]
+Simplifica la siguiente expresión trigonométrica usando identidades recíprocas:
+\[
+\frac{\sin\theta \cdot \csc\theta + \cos\theta \cdot \sec\theta}{\tan\theta \cdot \cot\theta}
+\]
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Aplicar las identidades recíprocas fundamentales.
+
+Recordemos que:
+\begin{itemize}
+    \item $\sin\theta \cdot \csc\theta = 1$
+    \item $\cos\theta \cdot \sec\theta = 1$
+    \item $\tan\theta \cdot \cot\theta = 1$
+\end{itemize}
+
+\textbf{Paso 2:} Sustituir estas identidades en la expresión.
+\begin{align*}
+\frac{\sin\theta \cdot \csc\theta + \cos\theta \cdot \sec\theta}{\tan\theta \cdot \cot\theta} &= \frac{1 + 1}{1} \\[0.3cm]
+&= \frac{2}{1} \\[0.3cm]
+&= 2
+\end{align*}
+
+\textbf{Paso 3:} Verificación desarrollando las funciones recíprocas.
+
+Vamos a verificar expandiendo cada función:
+\begin{align*}
+\frac{\sin\theta \cdot \frac{1}{\sin\theta} + \cos\theta \cdot \frac{1}{\cos\theta}}{\frac{\sin\theta}{\cos\theta} \cdot \frac{\cos\theta}{\sin\theta}} &= \frac{\frac{\sin\theta}{\sin\theta} + \frac{\cos\theta}{\cos\theta}}{\frac{\sin\theta \cdot \cos\theta}{\cos\theta \cdot \sin\theta}} \\[0.3cm]
+&= \frac{1 + 1}{1} = 2 \quad \checkmark
+\end{align*}
+
+\textbf{Paso 4:} Interpretación geométrica.
+
+Esta simplificación nos dice que no importa el valor del ángulo $\theta$ (siempre que las funciones estén definidas), la expresión siempre vale 2. ¡Es una constante!
+
+\textbf{Respuesta final:} $\boxed{2}$
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 3: Expresar seno en términos de coseno]
+Si $\cos\theta = \frac{3}{5}$ y $\theta$ está en el cuarto cuadrante, expresa todas las demás funciones trigonométricas en términos del coseno dado.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Encontrar $\sin\theta$ usando la identidad pitagórica.
+
+De $\sin^2\theta + \cos^2\theta = 1$:
+\begin{align*}
+\sin^2\theta &= 1 - \cos^2\theta \\
+&= 1 - \left(\frac{3}{5}\right)^2 \\
+&= 1 - \frac{9}{25} \\
+&= \frac{25 - 9}{25} = \frac{16}{25}
+\end{align*}
+
+\textbf{Paso 2:} Determinar el signo de $\sin\theta$.
+
+Como $\theta$ está en el cuarto cuadrante, sabemos que $\sin\theta < 0$.
+
+Por lo tanto: $\sin\theta = -\sqrt{\frac{16}{25}} = -\frac{4}{5}$
+
+\textbf{Paso 3:} Calcular la tangente.
+\[
+\tan\theta = \frac{\sin\theta}{\cos\theta} = \frac{-4/5}{3/5} = -\frac{4}{5} \cdot \frac{5}{3} = -\frac{4}{3}
+\]
+
+\textbf{Paso 4:} Calcular las funciones recíprocas.
+\begin{align*}
+\csc\theta &= \frac{1}{\sin\theta} = \frac{1}{-4/5} = -\frac{5}{4} \\[0.3cm]
+\sec\theta &= \frac{1}{\cos\theta} = \frac{1}{3/5} = \frac{5}{3} \\[0.3cm]
+\cot\theta &= \frac{1}{\tan\theta} = \frac{1}{-4/3} = -\frac{3}{4}
+\end{align*}
+
+\textbf{Paso 5:} Verificación usando el teorema de Pitágoras.
+
+En un triángulo rectángulo con hipotenusa 5, cateto adyacente 3 y cateto opuesto 4:
+\[
+3^2 + 4^2 = 9 + 16 = 25 = 5^2 \quad \checkmark
+\]
+
+\textbf{Paso 6:} Representación en el círculo unitario.
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin=-1.2, xmax=1.2,
+        ymin=-1.2, ymax=1.2,
+        axis equal,
+        grid=major,
+        width=8cm,
+        height=8cm,
+    ]
+    % Círculo unitario
+    \addplot[domain=0:360, samples=100, maincolor, thick]
+        ({cos(x)}, {sin(x)});
+
+    % Punto en el cuarto cuadrante
+    \addplot[only marks, mark=*, mark size=3pt, red]
+        coordinates {(0.6, -0.8)};
+
+    % Radio
+    \addplot[red, thick, -{Latex}]
+        coordinates {(0,0) (0.6, -0.8)};
+
+    % Proyecciones
+    \addplot[dashed, gray]
+        coordinates {(0.6, 0) (0.6, -0.8)};
+    \addplot[dashed, gray]
+        coordinates {(0, -0.8) (0.6, -0.8)};
+
+    % Etiquetas
+    \node at (axis cs:0.85, -0.85) {$(\frac{3}{5}, -\frac{4}{5})$};
+    \node at (axis cs:0.3, -0.15) {$\theta$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:}
+\[
+\boxed{
+\begin{aligned}
+\sin\theta &= -\frac{4}{5}, \quad \tan\theta = -\frac{4}{3}, \quad \csc\theta = -\frac{5}{4} \\
+\sec\theta &= \frac{5}{3}, \quad \cot\theta = -\frac{3}{4}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 4: Demostrar una identidad trigonométrica]
+Demuestra la siguiente identidad trigonométrica:
+\[
+\frac{1 + \tan^2\theta}{\sec\theta} = \sec\theta
+\]
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Trabajar con el lado izquierdo de la identidad.
+
+Vamos a transformar el lado izquierdo hasta llegar al lado derecho.
+
+\textbf{Paso 2:} Aplicar la identidad pitagórica $1 + \tan^2\theta = \sec^2\theta$.
+
+\begin{align*}
+\frac{1 + \tan^2\theta}{\sec\theta} &= \frac{\sec^2\theta}{\sec\theta}
+\end{align*}
+
+\textbf{Paso 3:} Simplificar la fracción.
+\begin{align*}
+\frac{\sec^2\theta}{\sec\theta} &= \sec\theta \cdot \frac{\sec\theta}{\sec\theta} \\
+&= \sec\theta \cdot 1 \\
+&= \sec\theta \quad \checkmark
+\end{align*}
+
+\textbf{Paso 4:} Verificación alternativa usando definiciones básicas.
+
+Expresemos todo en términos de seno y coseno:
+\begin{align*}
+\text{Lado izquierdo} &= \frac{1 + \tan^2\theta}{\sec\theta} \\
+&= \frac{1 + \frac{\sin^2\theta}{\cos^2\theta}}{\frac{1}{\cos\theta}} \\
+&= \frac{\frac{\cos^2\theta + \sin^2\theta}{\cos^2\theta}}{\frac{1}{\cos\theta}}
+\end{align*}
+
+\textbf{Paso 5:} Aplicar la identidad fundamental $\sin^2\theta + \cos^2\theta = 1$.
+\begin{align*}
+&= \frac{\frac{1}{\cos^2\theta}}{\frac{1}{\cos\theta}} \\
+&= \frac{1}{\cos^2\theta} \cdot \frac{\cos\theta}{1} \\
+&= \frac{1}{\cos\theta} = \sec\theta \quad \checkmark
+\end{align*}
+
+\textbf{Paso 6:} Verificación numérica con $\theta = 60°$.
+
+Para $\theta = 60°$: $\cos 60° = \frac{1}{2}$, $\sin 60° = \frac{\sqrt{3}}{2}$
+
+$\tan 60° = \sqrt{3}$, $\sec 60° = 2$
+
+Lado izquierdo: $\frac{1 + (\sqrt{3})^2}{2} = \frac{1 + 3}{2} = \frac{4}{2} = 2 = \sec 60°$ ✓
+
+\textbf{Respuesta final:} $\boxed{\text{Identidad demostrada: } \frac{1 + \tan^2\theta}{\sec\theta} = \sec\theta}$
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 5: Aplicar identidad de suma de ángulos]
+Encuentra el valor exacto de $\sin 75°$ usando la identidad de suma de ángulos.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Expresar $75°$ como suma de ángulos conocidos.
+
+$75° = 45° + 30°$
+
+\textbf{Paso 2:} Aplicar la identidad de suma para el seno.
+
+La identidad de suma es: $\sin(\alpha + \beta) = \sin\alpha \cos\beta + \cos\alpha \sin\beta$
+
+\textbf{Paso 3:} Sustituir $\alpha = 45°$ y $\beta = 30°$.
+\begin{align*}
+\sin 75° &= \sin(45° + 30°) \\
+&= \sin 45° \cos 30° + \cos 45° \sin 30°
+\end{align*}
+
+\textbf{Paso 4:} Recordar los valores exactos de las funciones.
+\begin{itemize}
+    \item $\sin 45° = \frac{\sqrt{2}}{2}$, $\cos 45° = \frac{\sqrt{2}}{2}$
+    \item $\sin 30° = \frac{1}{2}$, $\cos 30° = \frac{\sqrt{3}}{2}$
+\end{itemize}
+
+\textbf{Paso 5:} Sustituir y calcular.
+\begin{align*}
+\sin 75° &= \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{3}}{2} + \frac{\sqrt{2}}{2} \cdot \frac{1}{2} \\[0.3cm]
+&= \frac{\sqrt{6}}{4} + \frac{\sqrt{2}}{4} \\[0.3cm]
+&= \frac{\sqrt{6} + \sqrt{2}}{4}
+\end{align*}
+
+\textbf{Paso 6:} Verificación usando la identidad de suma para el coseno.
+
+$\cos 75° = \cos(45° + 30°) = \cos 45° \cos 30° - \sin 45° \sin 30°$
+
+$= \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{3}}{2} - \frac{\sqrt{2}}{2} \cdot \frac{1}{2} = \frac{\sqrt{6} - \sqrt{2}}{4}$
+
+Verificamos que $\sin^2 75° + \cos^2 75° = 1$:
+\[
+\left(\frac{\sqrt{6} + \sqrt{2}}{4}\right)^2 + \left(\frac{\sqrt{6} - \sqrt{2}}{4}\right)^2 = \frac{6 + 2\sqrt{12} + 2 + 6 - 2\sqrt{12} + 2}{16} = \frac{16}{16} = 1 \quad \checkmark
+\]
+
+\textbf{Respuesta final:} $\boxed{\sin 75° = \frac{\sqrt{6} + \sqrt{2}}{4}}$
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 6: Usar identidad de ángulo doble]
+Si $\sin\theta = \frac{3}{5}$ y $\theta$ está en el segundo cuadrante, encuentra:
+\begin{itemize}
+    \item[a)] $\sin 2\theta$
+    \item[b)] $\cos 2\theta$
+    \item[c)] $\tan 2\theta$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Encontrar $\cos\theta$ usando la identidad pitagórica.
+
+$\cos^2\theta = 1 - \sin^2\theta = 1 - \left(\frac{3}{5}\right)^2 = 1 - \frac{9}{25} = \frac{16}{25}$
+
+Como $\theta$ está en el segundo cuadrante, $\cos\theta < 0$:
+$\cos\theta = -\frac{4}{5}$
+
+\textbf{Paso 2:} Calcular $\sin 2\theta$ usando la identidad del ángulo doble.
+
+$\sin 2\theta = 2\sin\theta \cos\theta$
+
+\begin{align*}
+\sin 2\theta &= 2 \cdot \frac{3}{5} \cdot \left(-\frac{4}{5}\right) \\
+&= -\frac{24}{25}
+\end{align*}
+
+\textbf{Paso 3:} Calcular $\cos 2\theta$ usando cualquiera de las tres formas.
+
+Método 1: $\cos 2\theta = \cos^2\theta - \sin^2\theta$
+\begin{align*}
+\cos 2\theta &= \left(-\frac{4}{5}\right)^2 - \left(\frac{3}{5}\right)^2 \\
+&= \frac{16}{25} - \frac{9}{25} = \frac{7}{25}
+\end{align*}
+
+\textbf{Paso 4:} Verificar con otro método.
+
+Método 2: $\cos 2\theta = 1 - 2\sin^2\theta$
+\begin{align*}
+\cos 2\theta &= 1 - 2\left(\frac{3}{5}\right)^2 = 1 - 2 \cdot \frac{9}{25} \\
+&= 1 - \frac{18}{25} = \frac{7}{25} \quad \checkmark
+\end{align*}
+
+\textbf{Paso 5:} Calcular $\tan 2\theta$.
+
+$\tan 2\theta = \frac{\sin 2\theta}{\cos 2\theta} = \frac{-24/25}{7/25} = -\frac{24}{25} \cdot \frac{25}{7} = -\frac{24}{7}$
+
+\textbf{Paso 6:} Verificar usando la fórmula directa de tangente doble.
+
+$\tan\theta = \frac{\sin\theta}{\cos\theta} = \frac{3/5}{-4/5} = -\frac{3}{4}$
+
+$\tan 2\theta = \frac{2\tan\theta}{1 - \tan^2\theta} = \frac{2(-3/4)}{1 - 9/16} = \frac{-3/2}{7/16} = -\frac{3}{2} \cdot \frac{16}{7} = -\frac{24}{7}$ ✓
+
+\textbf{Respuesta final:}
+\[
+\boxed{
+\begin{aligned}
+\text{a) } \sin 2\theta &= -\frac{24}{25} \\
+\text{b) } \cos 2\theta &= \frac{7}{25} \\
+\text{c) } \tan 2\theta &= -\frac{24}{7}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 7: Aplicar identidad de ángulo medio]
+Encuentra el valor exacto de $\cos 15°$ usando la identidad de ángulo medio.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Reconocer que $15° = \frac{30°}{2}$.
+
+Usaremos la identidad: $\cos\frac{\theta}{2} = \pm\sqrt{\frac{1 + \cos\theta}{2}}$
+
+\textbf{Paso 2:} Determinar el signo.
+
+Como $15°$ está en el primer cuadrante, $\cos 15° > 0$, así que usamos el signo positivo.
+
+\textbf{Paso 3:} Aplicar la fórmula con $\theta = 30°$.
+
+\begin{align*}
+\cos 15° &= \cos\frac{30°}{2} \\
+&= \sqrt{\frac{1 + \cos 30°}{2}}
+\end{align*}
+
+\textbf{Paso 4:} Sustituir el valor conocido $\cos 30° = \frac{\sqrt{3}}{2}$.
+
+\begin{align*}
+\cos 15° &= \sqrt{\frac{1 + \frac{\sqrt{3}}{2}}{2}} \\
+&= \sqrt{\frac{\frac{2 + \sqrt{3}}{2}}{2}} \\
+&= \sqrt{\frac{2 + \sqrt{3}}{4}}
+\end{align*}
+
+\textbf{Paso 5:} Simplificar la expresión.
+
+\begin{align*}
+\cos 15° &= \frac{\sqrt{2 + \sqrt{3}}}{2}
+\end{align*}
+
+\textbf{Paso 6:} Verificación adicional.
+
+Podemos verificar calculando $\sin 15°$ usando la identidad correspondiente:
+$\sin 15° = \sin\frac{30°}{2} = \sqrt{\frac{1 - \cos 30°}{2}} = \sqrt{\frac{1 - \frac{\sqrt{3}}{2}}{2}} = \frac{\sqrt{2 - \sqrt{3}}}{2}$
+
+Comprobamos: $\sin^2 15° + \cos^2 15° = \frac{2 - \sqrt{3}}{4} + \frac{2 + \sqrt{3}}{4} = \frac{4}{4} = 1$ ✓
+
+\textbf{Paso 7:} Representación gráfica del ángulo medio.
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin=-0.2, xmax=1.2,
+        ymin=-0.2, ymax=0.8,
+        axis equal,
+        grid=none,
+        width=10cm,
+        height=7cm,
+    ]
+    % Arco para 30 grados
+    \addplot[domain=0:30, samples=50, red, thick]
+        ({cos(x)}, {sin(x)});
+
+    % Arco para 15 grados
+    \addplot[domain=0:15, samples=50, blue, very thick]
+        ({cos(x)}, {sin(x)});
+
+    % Radios
+    \addplot[black, thick] coordinates {(0,0) (1,0)};
+    \addplot[red, thick] coordinates {(0,0) ({cos(30)}, {sin(30)})};
+    \addplot[blue, very thick] coordinates {(0,0) ({cos(15)}, {sin(15)})};
+
+    % Etiquetas
+    \node at (axis cs:0.5, 0.05) {$30°$};
+    \node at (axis cs:0.3, 0.03) {$15°$};
+    \node at (axis cs:1, -0.05) {$x$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:} $\boxed{\cos 15° = \frac{\sqrt{2 + \sqrt{3}}}{2}}$
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 8: Transformar producto en suma]
+Transforma el producto $\sin 5x \cos 3x$ en una suma o diferencia de funciones trigonométricas.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Recordar la identidad de producto a suma.
+
+La identidad que necesitamos es:
+\[
+\sin A \cos B = \frac{1}{2}[\sin(A + B) + \sin(A - B)]
+\]
+
+\textbf{Paso 2:} Identificar $A = 5x$ y $B = 3x$.
+
+\textbf{Paso 3:} Calcular $A + B$ y $A - B$.
+\begin{align*}
+A + B &= 5x + 3x = 8x \\
+A - B &= 5x - 3x = 2x
+\end{align*}
+
+\textbf{Paso 4:} Aplicar la identidad.
+\begin{align*}
+\sin 5x \cos 3x &= \frac{1}{2}[\sin(8x) + \sin(2x)] \\
+&= \frac{1}{2}\sin 8x + \frac{1}{2}\sin 2x
+\end{align*}
+
+\textbf{Paso 5:} Verificación mediante expansión inversa.
+
+Podemos verificar aplicando la identidad de suma a diferencia:
+$\sin 8x = \sin(5x + 3x) = \sin 5x \cos 3x + \cos 5x \sin 3x$
+$\sin 2x = \sin(5x - 3x) = \sin 5x \cos 3x - \cos 5x \sin 3x$
+
+Sumando: $\sin 8x + \sin 2x = 2\sin 5x \cos 3x$
+
+Por lo tanto: $\sin 5x \cos 3x = \frac{1}{2}(\sin 8x + \sin 2x)$ ✓
+
+\textbf{Paso 6:} Aplicación práctica.
+
+Esta transformación es muy útil en física para analizar ondas moduladas o interferencia de ondas. Por ejemplo, cuando dos ondas de frecuencias diferentes se superponen.
+
+\textbf{Respuesta final:} $\boxed{\sin 5x \cos 3x = \frac{1}{2}\sin 8x + \frac{1}{2}\sin 2x}$
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 9: Transformar suma en producto]
+Expresa $\cos 7\theta + \cos 3\theta$ como un producto de funciones trigonométricas.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Aplicar la identidad de suma a producto para cosenos.
+
+La identidad es:
+\[
+\cos A + \cos B = 2\cos\left(\frac{A + B}{2}\right)\cos\left(\frac{A - B}{2}\right)
+\]
+
+\textbf{Paso 2:} Identificar $A = 7\theta$ y $B = 3\theta$.
+
+\textbf{Paso 3:} Calcular los argumentos de las funciones.
+\begin{align*}
+\frac{A + B}{2} &= \frac{7\theta + 3\theta}{2} = \frac{10\theta}{2} = 5\theta \\[0.3cm]
+\frac{A - B}{2} &= \frac{7\theta - 3\theta}{2} = \frac{4\theta}{2} = 2\theta
+\end{align*}
+
+\textbf{Paso 4:} Sustituir en la identidad.
+\begin{align*}
+\cos 7\theta + \cos 3\theta &= 2\cos(5\theta)\cos(2\theta)
+\end{align*}
+
+\textbf{Paso 5:} Verificación expandiendo el producto.
+
+Usando la identidad de producto a suma:
+\begin{align*}
+2\cos 5\theta \cos 2\theta &= 2 \cdot \frac{1}{2}[\cos(5\theta + 2\theta) + \cos(5\theta - 2\theta)] \\
+&= \cos 7\theta + \cos 3\theta \quad \checkmark
+\end{align*}
+
+\textbf{Paso 6:} Interpretación geométrica.
+
+Esta transformación es útil para simplificar expresiones en análisis de vibraciones y ondas estacionarias, donde la suma de dos cosenos de diferentes frecuencias produce un patrón de interferencia.
+
+\textbf{Paso 7:} Caso especial interesante.
+
+Si $\theta = 36°$, entonces:
+$\cos 252° + \cos 108° = 2\cos 180° \cos 72° = 2(-1)\cos 72° = -2\cos 72°$
+
+\textbf{Respuesta final:} $\boxed{\cos 7\theta + \cos 3\theta = 2\cos 5\theta \cos 2\theta}$
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 10: Problema aplicado - Física ondulatoria]
+En un experimento de física, dos ondas sonoras de la misma amplitud $A = 2$ unidades se superponen. Las ondas están descritas por:
+\begin{align*}
+y_1(t) &= 2\sin(440\pi t) \\
+y_2(t) &= 2\sin(436\pi t)
+\end{align*}
+donde $t$ está en segundos.
+
+Encuentra:
+\begin{itemize}
+    \item[a)] La expresión de la onda resultante $y(t) = y_1(t) + y_2(t)$
+    \item[b)] La frecuencia de batido (pulsación)
+    \item[c)] La amplitud máxima de la onda resultante
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Sumar las dos ondas.
+\[
+y(t) = 2\sin(440\pi t) + 2\sin(436\pi t)
+\]
+
+\textbf{Paso 2:} Aplicar la identidad de suma a producto.
+
+Para $\sin A + \sin B = 2\sin\left(\frac{A+B}{2}\right)\cos\left(\frac{A-B}{2}\right)$
+
+Con $A = 440\pi t$ y $B = 436\pi t$:
+
+\textbf{Paso 3:} Calcular los argumentos.
+\begin{align*}
+\frac{A + B}{2} &= \frac{440\pi t + 436\pi t}{2} = \frac{876\pi t}{2} = 438\pi t \\[0.3cm]
+\frac{A - B}{2} &= \frac{440\pi t - 436\pi t}{2} = \frac{4\pi t}{2} = 2\pi t
+\end{align*}
+
+\textbf{Paso 4:} Escribir la onda resultante.
+\begin{align*}
+y(t) &= 2 \cdot 2\sin(438\pi t)\cos(2\pi t) \\
+&= 4\sin(438\pi t)\cos(2\pi t)
+\end{align*}
+
+\textbf{Paso 5:} Interpretar el resultado.
+
+La onda resultante es una onda de alta frecuencia (438π rad/s) modulada por una envolvente de baja frecuencia (2π rad/s).
+
+\textbf{Parte a)} Expresión de la onda resultante:
+\[
+\boxed{y(t) = 4\sin(438\pi t)\cos(2\pi t)}
+\]
+
+\textbf{Parte b)} Frecuencia de batido:
+
+La frecuencia de la envolvente es $f_{env} = \frac{2\pi}{2\pi} = 1$ Hz
+
+Pero la frecuencia de batido percibida es el doble:
+\[
+\boxed{f_{batido} = 2 \text{ Hz}}
+\]
+
+Esto corresponde a la diferencia de las frecuencias originales:
+$f_1 = 220$ Hz, $f_2 = 218$ Hz, $|f_1 - f_2| = 2$ Hz ✓
+
+\textbf{Parte c)} Amplitud máxima:
+
+La amplitud varía según $|4\cos(2\pi t)|$
+
+Amplitud máxima cuando $\cos(2\pi t) = \pm 1$:
+\[
+\boxed{A_{max} = 4 \text{ unidades}}
+\]
+
+\textbf{Paso 6:} Gráfica de la onda resultante (batidos).
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+    \begin{axis}[
+        domain=0:2,
+        samples=500,
+        xlabel={$t$ (segundos)},
+        ylabel={$y(t)$},
+        width=14cm,
+        height=6cm,
+        grid=major,
+        xmin=0, xmax=2,
+        ymin=-4.5, ymax=4.5,
+    ]
+    % Onda resultante
+    \addplot[blue, thick] {4*sin(deg(438*pi*x))*cos(deg(2*pi*x))};
+
+    % Envolvente superior
+    \addplot[red, dashed, thick] {4*cos(deg(2*pi*x))};
+
+    % Envolvente inferior
+    \addplot[red, dashed, thick] {-4*cos(deg(2*pi*x))};
+
+    \legend{Onda resultante, Envolvente}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conclusión:} Este fenómeno de batidos se usa para afinar instrumentos musicales. Cuando dos notas están casi afinadas, se escuchan pulsaciones lentas. Cuando están perfectamente afinadas, las pulsaciones desaparecen.
+\end{ejemplo}
+
+\newpage
+
+\section{Ejercicios Inversos Creativos}
+
+Los ejercicios inversos te desafían a pensar de manera creativa y aplicar las identidades trigonométricas en contextos novedosos. ¡Prepárate para convertirte en un detective matemático!
+
+\begin{ejercicio}[title=El Detective de Identidades]
+Un estudiante afirma haber descubierto una nueva identidad trigonométrica:
+\[
+\frac{\sin\theta + \cos\theta}{\sin\theta - \cos\theta} + \frac{\sin\theta - \cos\theta}{\sin\theta + \cos\theta} = \frac{2}{\cos 2\theta}
+\]
+
+Tu misión es:
+\begin{itemize}
+    \item[a)] Determinar si esta identidad es verdadera o falsa
+    \item[b)] Si es falsa, encontrar la expresión correcta del lado derecho
+    \item[c)] Encontrar todos los valores de $\theta$ donde la expresión no está definida
+    \item[d)] Crear una identidad similar pero con tangentes
+\end{itemize}
+
+\textit{Pista: Recuerda que en matemáticas, como en la vida, las apariencias engañan. ¡Simplifica con cuidado!}
+\end{ejercicio}
+
+\begin{ejercicio}[title=El Ingeniero de Ondas]
+Un ingeniero de telecomunicaciones necesita diseñar un filtro para una señal que tiene la forma:
+\[
+S(t) = 3\cos(100\pi t)\cos(20\pi t) - 2\sin(100\pi t)\sin(20\pi t)
+\]
+
+Para optimizar el procesamiento, necesita:
+\begin{itemize}
+    \item[a)] Expresar $S(t)$ como una única función trigonométrica de la forma $A\cos(\omega t + \phi)$
+    \item[b)] Determinar la frecuencia principal de la señal (en Hz)
+    \item[c)] Calcular la potencia máxima de la señal (proporcional a $A^2$)
+    \item[d)] Encontrar el primer instante $t > 0$ donde la señal alcanza su valor máximo
+    \item[e)] Diseñar una segunda señal $S_2(t)$ que, al sumarse con $S(t)$, produzca una señal de amplitud constante igual a 5
+\end{itemize}
+
+\textit{Dato curioso: Este tipo de manipulación se usa en modulación AM/FM de señales de radio.}
+\end{ejercicio}
+
+\begin{ejercicio}[title=El Físico Cuántico]
+En mecánica cuántica, la función de onda de una partícula en una caja unidimensional involucra expresiones de la forma:
+\[
+\psi_n(x) = A_n\sin\left(\frac{n\pi x}{L}\right)
+\]
+
+donde $n$ es un número cuántico y $L$ es la longitud de la caja. La superposición de dos estados está dada por:
+\[
+\Psi(x,t) = \sin\left(\frac{2\pi x}{L}\right)\cos(\omega_2 t) + \sin\left(\frac{4\pi x}{L}\right)\cos(\omega_4 t)
+\]
+
+Tu tarea cuántica es:
+\begin{itemize}
+    \item[a)] Expresar $\Psi(x,0)$ (en $t = 0$) como producto de funciones usando identidades trigonométricas
+    \item[b)] Encontrar los puntos $x$ donde $\Psi(x,0) = 0$ (nodos de la función de onda)
+    \item[c)] Determinar los puntos donde $|\Psi(x,0)|$ es máximo
+    \item[d)] Si $\omega_4 = 4\omega_2$, simplificar $\Psi(x,t)$ cuando $\omega_2 t = \frac{\pi}{4}$
+    \item[e)] Proponer una tercera componente $\psi_3$ tal que la superposición de las tres funciones tenga exactamente 5 nodos en el intervalo $[0, L]$
+\end{itemize}
+
+\textit{Nota: Los nodos de una función de onda determinan las regiones donde es imposible encontrar la partícula.}
+\end{ejercicio}
+
+\begin{ejercicio}[title=El Explorador Matemático]
+Eres un explorador matemático que ha descubierto una antigua tablilla con la siguiente ecuación misteriosa:
+\[
+\frac{\sin 3\theta}{\sin\theta} - \frac{\cos 3\theta}{\cos\theta} = 2
+\]
+
+Tu aventura consiste en:
+\begin{itemize}
+    \item[a)] Encontrar todos los ángulos $\theta$ en $[0°, 360°)$ que satisfacen esta ecuación
+    \item[b)] Demostrar que estos ángulos forman un patrón geométrico regular
+    \item[c)] Generalizar: Si la ecuación fuera $\frac{\sin n\theta}{\sin\theta} - \frac{\cos n\theta}{\cos\theta} = 2$, ¿cuántas soluciones habría en $[0°, 360°)$ para $n = 5$?
+    \item[d)] Crear una identidad relacionada que involucre tangentes
+    \item[e)] Encontrar una interpretación geométrica de las soluciones en el círculo unitario
+\end{itemize}
+
+\textit{Pista arqueológica: Las identidades de ángulos triples guardan secretos milenarios. ¡Úsalas sabiamente!}
+\end{ejercicio}
+
+\begin{ejercicio}[title=El Arquitecto de Ecuaciones]
+Como arquitecto de ecuaciones trigonométricas, tu cliente te ha pedido diseñar una expresión $E(\theta)$ que cumpla estas especificaciones:
+
+\begin{itemize}
+    \item Debe ser igual a 1 cuando $\theta = 0°$
+    \item Debe ser igual a 0 cuando $\theta = 45°$
+    \item Debe ser igual a -1 cuando $\theta = 90°$
+    \item Debe tener período $360°$
+    \item Debe poder expresarse usando solo senos y cosenos
+\end{itemize}
+
+Tu proyecto arquitectónico requiere:
+\begin{itemize}
+    \item[a)] Construir una expresión $E(\theta)$ que cumpla todas las especificaciones
+    \item[b)] Verificar algebraicamente que tu diseño cumple cada condición
+    \item[c)] Expresar $E(\theta)$ en la forma $A\sin(\theta + \phi) + B$ encontrando $A$, $\phi$ y $B$
+    \item[d)] Graficar tu función mostrando los puntos clave
+    \item[e)] Diseñar una segunda expresión $F(\theta)$ tal que $E(\theta) \cdot F(\theta) = \cos 2\theta$
+\end{itemize}
+
+\textit{Consejo del maestro constructor: A veces, la combinación lineal de funciones básicas es la clave para construir algo complejo.}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones de Ejercicios Inversos}
+
+\begin{solucion}[title=Solución: El Detective de Identidades]
+\textbf{Parte a)} Verificar si la identidad es verdadera.
+
+Simplifiquemos el lado izquierdo:
+\[
+\frac{\sin\theta + \cos\theta}{\sin\theta - \cos\theta} + \frac{\sin\theta - \cos\theta}{\sin\theta + \cos\theta}
+\]
+
+\textbf{Paso 1:} Encontrar denominador común.
+\begin{align*}
+&= \frac{(\sin\theta + \cos\theta)^2 + (\sin\theta - \cos\theta)^2}{(\sin\theta - \cos\theta)(\sin\theta + \cos\theta)}
+\end{align*}
+
+\textbf{Paso 2:} Expandir los cuadrados del numerador.
+\begin{align*}
+(\sin\theta + \cos\theta)^2 &= \sin^2\theta + 2\sin\theta\cos\theta + \cos^2\theta \\
+(\sin\theta - \cos\theta)^2 &= \sin^2\theta - 2\sin\theta\cos\theta + \cos^2\theta
+\end{align*}
+
+Suma: $2\sin^2\theta + 2\cos^2\theta = 2(\sin^2\theta + \cos^2\theta) = 2$
+
+\textbf{Paso 3:} Expandir el denominador.
+\begin{align*}
+(\sin\theta - \cos\theta)(\sin\theta + \cos\theta) &= \sin^2\theta - \cos^2\theta \\
+&= -\cos 2\theta
+\end{align*}
+
+\textbf{Paso 4:} Resultado final.
+\[
+\frac{2}{-\cos 2\theta} = -\frac{2}{\cos 2\theta}
+\]
+
+¡La identidad es FALSA! El signo está incorrecto.
+
+\textbf{Parte b)} La expresión correcta es:
+\[
+\boxed{\frac{\sin\theta + \cos\theta}{\sin\theta - \cos\theta} + \frac{\sin\theta - \cos\theta}{\sin\theta + \cos\theta} = -\frac{2}{\cos 2\theta}}
+\]
+
+\textbf{Parte c)} Valores donde no está definida.
+
+La expresión no está definida cuando:
+1. $\sin\theta - \cos\theta = 0 \Rightarrow \tan\theta = 1 \Rightarrow \theta = 45°, 225°$
+2. $\sin\theta + \cos\theta = 0 \Rightarrow \tan\theta = -1 \Rightarrow \theta = 135°, 315°$
+3. $\cos 2\theta = 0 \Rightarrow 2\theta = 90°, 270° \Rightarrow \theta = 45°, 135°, 225°, 315°$
+
+\textbf{Respuesta:} $\boxed{\theta = 45°, 135°, 225°, 315°}$
+
+\textbf{Parte d)} Identidad similar con tangentes:
+\[
+\boxed{\frac{\tan\theta + 1}{\tan\theta - 1} + \frac{\tan\theta - 1}{\tan\theta + 1} = -\frac{2\tan^2\theta}{\tan^2\theta - 1} = -\frac{2}{\cot^2\theta - 1}}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$\theta$},
+        ylabel = {$y$},
+        xmin=0, xmax=360,
+        ymin=-10, ymax=10,
+        xtick={0,45,90,135,180,225,270,315,360},
+        grid=major,
+        width=12cm,
+        height=8cm,
+        restrict y to domain=-10:10,
+    ]
+    % Función
+    \addplot[domain=0:44, samples=100, blue, thick]
+        {-2/cos(2*x)};
+    \addplot[domain=46:134, samples=100, blue, thick]
+        {-2/cos(2*x)};
+    \addplot[domain=136:224, samples=100, blue, thick]
+        {-2/cos(2*x)};
+    \addplot[domain=226:314, samples=100, blue, thick]
+        {-2/cos(2*x)};
+    \addplot[domain=316:360, samples=100, blue, thick]
+        {-2/cos(2*x)};
+
+    % Asíntotas verticales
+    \foreach \x in {45,135,225,315} {
+        \addplot[red, dashed, thick] coordinates {(\x,-10) (\x,10)};
+    }
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución: El Ingeniero de Ondas]
+\textbf{Parte a)} Simplificar la señal.
+
+Dado: $S(t) = 3\cos(100\pi t)\cos(20\pi t) - 2\sin(100\pi t)\sin(20\pi t)$
+
+Reconocemos la identidad: $\cos A \cos B - \sin A \sin B = \cos(A + B)$
+
+Pero tenemos coeficientes diferentes. Reescribimos:
+\[
+S(t) = 3\cos(100\pi t)\cos(20\pi t) - 2\sin(100\pi t)\sin(20\pi t)
+\]
+
+Usando identidad de producto a suma:
+$\cos A \cos B = \frac{1}{2}[\cos(A-B) + \cos(A+B)]$
+$\sin A \sin B = \frac{1}{2}[\cos(A-B) - \cos(A+B)]$
+
+\begin{align*}
+S(t) &= 3 \cdot \frac{1}{2}[\cos(80\pi t) + \cos(120\pi t)] - 2 \cdot \frac{1}{2}[\cos(80\pi t) - \cos(120\pi t)] \\
+&= \frac{3}{2}\cos(80\pi t) + \frac{3}{2}\cos(120\pi t) - \cos(80\pi t) + \cos(120\pi t) \\
+&= \frac{1}{2}\cos(80\pi t) + \frac{5}{2}\cos(120\pi t)
+\end{align*}
+
+Para forma $A\cos(\omega t + \phi)$, necesitamos combinar. Como tienen frecuencias diferentes, la señal no se puede expresar como una única función coseno simple.
+
+Pero si interpretamos de otra manera:
+$S(t) = \cos(120\pi t)\cos(20\pi t) + 2[\cos(120\pi t)\cos(20\pi t) - \sin(120\pi t)\sin(20\pi t)]$
+$= \cos(120\pi t)\cos(20\pi t) + 2\cos(120\pi t + 20\pi t)$
+$= \cos(120\pi t)\cos(20\pi t) + 2\cos(140\pi t)$
+
+En realidad, volviendo al principio con coeficientes correctos:
+Si factorizamos de manera especial, notamos que no es exactamente la identidad del coseno de la suma.
+
+La respuesta correcta requiere usar que:
+$3\cos A \cos B - 2\sin A \sin B$ no es una identidad estándar directa.
+
+\textbf{Simplificación alternativa:}
+$S(t) = \boxed{\frac{1}{2}\cos(80\pi t) + \frac{5}{2}\cos(120\pi t)}$
+
+\textbf{Parte b)} Frecuencia principal.
+
+Las componentes tienen frecuencias:
+- $f_1 = \frac{80\pi}{2\pi} = 40$ Hz
+- $f_2 = \frac{120\pi}{2\pi} = 60$ Hz
+
+La frecuencia principal (dominante) es: $\boxed{60 \text{ Hz}}$ (mayor amplitud)
+
+\textbf{Parte c)} Potencia máxima.
+
+La señal tiene dos componentes con amplitudes $\frac{1}{2}$ y $\frac{5}{2}$.
+Cuando ambas están en fase (máximo constructivo):
+$A_{max} = \frac{1}{2} + \frac{5}{2} = 3$
+
+Potencia máxima $\propto A^2_{max} = \boxed{9 \text{ unidades}^2}$
+
+\textbf{Parte d)} Primer máximo.
+
+El máximo ocurre cuando ambos cosenos valen 1:
+$\cos(80\pi t) = 1$ y $\cos(120\pi t) = 1$
+
+Esto requiere: $80\pi t = 2\pi k_1$ y $120\pi t = 2\pi k_2$
+
+Simplificando: $t = \frac{k_1}{40}$ y $t = \frac{k_2}{60}$
+
+El mínimo común múltiplo nos da: $\boxed{t = \frac{1}{20} \text{ segundos}}$
+
+\textbf{Parte e)} Señal complementaria.
+
+Para que $S(t) + S_2(t) = 5$ (constante):
+$S_2(t) = 5 - S(t) = 5 - \frac{1}{2}\cos(80\pi t) - \frac{5}{2}\cos(120\pi t)$
+
+$\boxed{S_2(t) = 5 - \frac{1}{2}\cos(80\pi t) - \frac{5}{2}\cos(120\pi t)}$
+\end{solucion}
+
+\begin{solucion}[title=Solución: El Físico Cuántico]
+\textbf{Parte a)} Expresar $\Psi(x,0)$ como producto.
+
+En $t = 0$: $\Psi(x,0) = \sin\left(\frac{2\pi x}{L}\right) + \sin\left(\frac{4\pi x}{L}\right)$
+
+Usando la identidad suma a producto:
+$\sin A + \sin B = 2\sin\left(\frac{A+B}{2}\right)\cos\left(\frac{A-B}{2}\right)$
+
+Con $A = \frac{4\pi x}{L}$ y $B = \frac{2\pi x}{L}$:
+
+\begin{align*}
+\Psi(x,0) &= 2\sin\left(\frac{6\pi x}{2L}\right)\cos\left(\frac{2\pi x}{2L}\right) \\
+&= \boxed{2\sin\left(\frac{3\pi x}{L}\right)\cos\left(\frac{\pi x}{L}\right)}
+\end{align*}
+
+\textbf{Parte b)} Nodos de la función.
+
+$\Psi(x,0) = 0$ cuando:
+1. $\sin\left(\frac{3\pi x}{L}\right) = 0 \Rightarrow x = \frac{kL}{3}$, $k = 0, 1, 2, 3$
+2. $\cos\left(\frac{\pi x}{L}\right) = 0 \Rightarrow x = \frac{(2m+1)L}{2}$, $m = 0$
+
+En el intervalo $[0, L]$:
+$\boxed{x = 0, \frac{L}{3}, \frac{L}{2}, \frac{2L}{3}, L}$
+
+\textbf{Parte c)} Máximos de $|\Psi(x,0)|$.
+
+El máximo ocurre cuando ambos factores son máximos en valor absoluto.
+Analizando las derivadas y puntos críticos:
+
+$\boxed{x = \frac{L}{6}, \frac{5L}{6}}$ (máximos absolutos)
+
+\textbf{Parte d)} Simplificar cuando $\omega_2 t = \frac{\pi}{4}$.
+
+Si $\omega_4 = 4\omega_2$, entonces $\omega_4 t = \pi$.
+
+\begin{align*}
+\Psi(x,t) &= \sin\left(\frac{2\pi x}{L}\right)\cos\left(\frac{\pi}{4}\right) + \sin\left(\frac{4\pi x}{L}\right)\cos(\pi) \\
+&= \frac{\sqrt{2}}{2}\sin\left(\frac{2\pi x}{L}\right) - \sin\left(\frac{4\pi x}{L}\right)
+\end{align*}
+
+$\boxed{\Psi(x,t) = \frac{\sqrt{2}}{2}\sin\left(\frac{2\pi x}{L}\right) - \sin\left(\frac{4\pi x}{L}\right)}$
+
+\textbf{Parte e)} Tercera componente con 5 nodos totales.
+
+Para tener exactamente 5 nodos en $[0, L]$, necesitamos $\psi_3 = \sin\left(\frac{5\pi x}{L}\right)$
+
+La superposición sería:
+$\boxed{\Psi_{total} = \sin\left(\frac{2\pi x}{L}\right) + \sin\left(\frac{4\pi x}{L}\right) + A\sin\left(\frac{5\pi x}{L}\right)}$
+
+donde $A$ es un coeficiente a determinar según las condiciones de normalización.
+\end{solucion}
+
+\begin{solucion}[title=Solución: El Explorador Matemático]
+\textbf{Parte a)} Resolver la ecuación misteriosa.
+
+$\frac{\sin 3\theta}{\sin\theta} - \frac{\cos 3\theta}{\cos\theta} = 2$
+
+Usando las identidades de ángulo triple:
+- $\sin 3\theta = 3\sin\theta - 4\sin^3\theta = \sin\theta(3 - 4\sin^2\theta)$
+- $\cos 3\theta = 4\cos^3\theta - 3\cos\theta = \cos\theta(4\cos^2\theta - 3)$
+
+Sustituyendo:
+\begin{align*}
+\frac{\sin\theta(3 - 4\sin^2\theta)}{\sin\theta} - \frac{\cos\theta(4\cos^2\theta - 3)}{\cos\theta} &= 2 \\
+3 - 4\sin^2\theta - (4\cos^2\theta - 3) &= 2 \\
+3 - 4\sin^2\theta - 4\cos^2\theta + 3 &= 2 \\
+6 - 4(\sin^2\theta + \cos^2\theta) &= 2 \\
+6 - 4 &= 2 \\
+2 &= 2 \quad \checkmark
+\end{align*}
+
+¡La ecuación es una identidad! Es verdadera para todo $\theta$ donde las funciones estén definidas.
+
+Restricciones: $\sin\theta \neq 0$ y $\cos\theta \neq 0$
+
+Por lo tanto, excluimos $\theta = 0°, 90°, 180°, 270°, 360°$
+
+$\boxed{\text{Todos los } \theta \in [0°, 360°) \text{ excepto } 0°, 90°, 180°, 270°}$
+
+\textbf{Parte b)} Patrón geométrico.
+
+Como la ecuación es válida para casi todos los ángulos, no forman un patrón regular discreto, sino que cubren densamente el círculo unitario excepto los puntos sobre los ejes.
+
+\textbf{Parte c)} Generalización para $n = 5$.
+
+$\frac{\sin 5\theta}{\sin\theta} - \frac{\cos 5\theta}{\cos\theta} = 2$
+
+Usando el mismo análisis con identidades de ángulo múltiple, encontramos que también es una identidad para todo $\theta$ válido.
+
+$\boxed{\text{Infinitas soluciones (todos los ángulos excepto múltiplos de } 90°)}$
+
+\textbf{Parte d)} Identidad con tangentes.
+
+$\boxed{\frac{\tan 3\theta - 3\tan\theta}{1 - 3\tan^2\theta} = \tan\theta \cdot \text{expresión}}$
+
+\textbf{Parte e)} Interpretación geométrica.
+
+En el círculo unitario, los puntos excluidos son exactamente los cuatro puntos cardinales donde uno de los ejes coordenados es cero. La identidad representa una propiedad universal de las funciones trigonométricas relacionada con la simetría rotacional.
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin=-1.2, xmax=1.2,
+        ymin=-1.2, ymax=1.2,
+        axis equal,
+        grid=none,
+        width=8cm,
+        height=8cm,
+    ]
+    % Círculo unitario
+    \addplot[domain=0:360, samples=100, blue, very thick]
+        ({cos(x)}, {sin(x)});
+
+    % Puntos excluidos
+    \addplot[only marks, mark=x, mark size=4pt, red, thick]
+        coordinates {(1,0) (0,1) (-1,0) (0,-1)};
+
+    % Etiquetas
+    \node at (axis cs:1.1, 0.1) {$0°$};
+    \node at (axis cs:0.1, 1.1) {$90°$};
+    \node at (axis cs:-1.1, 0.1) {$180°$};
+    \node at (axis cs:0.1, -1.1) {$270°$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución: El Arquitecto de Ecuaciones]
+\textbf{Parte a)} Construir $E(\theta)$.
+
+Necesitamos cumplir:
+- $E(0°) = 1$
+- $E(45°) = 0$
+- $E(90°) = -1$
+
+Probemos con una combinación lineal: $E(\theta) = A\sin\theta + B\cos\theta$
+
+Sistema de ecuaciones:
+\begin{align*}
+E(0°) &= A(0) + B(1) = B = 1 \\
+E(45°) &= A\left(\frac{\sqrt{2}}{2}\right) + B\left(\frac{\sqrt{2}}{2}\right) = \frac{\sqrt{2}}{2}(A + 1) = 0 \\
+E(90°) &= A(1) + B(0) = A = -1
+\end{align*}
+
+De la segunda ecuación: $A = -1$ ✓
+
+Por lo tanto: $\boxed{E(\theta) = \cos\theta - \sin\theta}$
+
+\textbf{Parte b)} Verificación.
+
+- $E(0°) = \cos 0° - \sin 0° = 1 - 0 = 1$ ✓
+- $E(45°) = \frac{\sqrt{2}}{2} - \frac{\sqrt{2}}{2} = 0$ ✓
+- $E(90°) = 0 - 1 = -1$ ✓
+- Período: Las funciones seno y coseno tienen período $360°$, por lo tanto $E(\theta)$ también ✓
+
+\textbf{Parte c)} Forma $A\sin(\theta + \phi) + B$.
+
+$E(\theta) = \cos\theta - \sin\theta$
+
+Usando la identidad: $a\cos\theta + b\sin\theta = \sqrt{a^2 + b^2}\sin(\theta + \arctan(a/b))$
+
+Con $a = 1$ y $b = -1$:
+$E(\theta) = \sqrt{2}\sin(\theta + 135°)$
+
+Pero queremos la forma pedida exactamente:
+$E(\theta) = -\sqrt{2}\sin(\theta - 45°)$
+
+$\boxed{A = -\sqrt{2}, \phi = -45°, B = 0}$
+
+\textbf{Parte d)} Gráfica de la función.
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+    \begin{axis}[
+        domain=0:360,
+        samples=100,
+        xlabel={$\theta$ (grados)},
+        ylabel={$E(\theta)$},
+        width=12cm,
+        height=6cm,
+        grid=major,
+        xmin=0, xmax=360,
+        ymin=-1.5, ymax=1.5,
+        xtick={0,45,90,135,180,225,270,315,360},
+    ]
+    % Función
+    \addplot[blue, very thick] {cos(x) - sin(x)};
+
+    % Puntos clave
+    \addplot[only marks, mark=*, mark size=3pt, red]
+        coordinates {(0,1) (45,0) (90,-1)};
+
+    % Etiquetas
+    \node at (axis cs:0, 1.2) {$(0°, 1)$};
+    \node at (axis cs:45, 0.3) {$(45°, 0)$};
+    \node at (axis cs:90, -1.3) {$(90°, -1)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Parte e)} Diseñar $F(\theta)$ tal que $E(\theta) \cdot F(\theta) = \cos 2\theta$.
+
+Tenemos: $(\cos\theta - \sin\theta) \cdot F(\theta) = \cos 2\theta$
+
+Sabemos que $\cos 2\theta = \cos^2\theta - \sin^2\theta = (\cos\theta - \sin\theta)(\cos\theta + \sin\theta)$
+
+Por lo tanto: $\boxed{F(\theta) = \cos\theta + \sin\theta}$
+
+Verificación:
+$E(\theta) \cdot F(\theta) = (\cos\theta - \sin\theta)(\cos\theta + \sin\theta) = \cos^2\theta - \sin^2\theta = \cos 2\theta$ ✓
+\end{solucion}% PARTE 3: EJERCICIOS PROPUESTOS Y SOLUCIONES
+% Guía de Identidades Trigonométricas - Grado 10
+
+\section{Ejercicios Propuestos}
+
+Ahora es tu turno de poner en práctica todo lo que has aprendido sobre identidades trigonométricas. ¡Recuerda que las identidades son como herramientas en una caja de herramientas: cada una tiene su momento perfecto para ser usada!
+
+\begin{ejercicio}[title=Ejercicio 1: Identidades Recíprocas]
+Usando las identidades recíprocas, simplifica las siguientes expresiones:
+\begin{itemize}
+    \item[a)] $\sin\theta \cdot \csc\theta + \cos\theta \cdot \sec\theta$
+    \item[b)] $\frac{\csc\alpha}{\sec\alpha} \cdot \tan\alpha$
+    \item[c)] Si $\sin x = \frac{3}{5}$ y $x$ está en el primer cuadrante, encuentra $\csc x$ y $\cot x$.
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 2: Identidades Pitagóricas]
+Aplica las identidades pitagóricas para resolver:
+\begin{itemize}
+    \item[a)] Si $\cos\theta = \frac{4}{5}$ y $\theta$ está en el cuarto cuadrante, encuentra $\sin\theta$ y $\tan\theta$.
+    \item[b)] Simplifica: $1 - \sin^2x + \cos^2x$
+    \item[c)] Verifica que $\sec^2\beta - \tan^2\beta = 1$ para $\beta = 30°$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 3: Simplificación de Expresiones]
+Simplifica las siguientes expresiones trigonométricas:
+\begin{itemize}
+    \item[a)] $\frac{\sin\theta \cos\theta}{\tan\theta}$
+    \item[b)] $\frac{1 + \tan^2x}{\sec^2x}$
+    \item[c)] $\frac{\sin^2\alpha - \cos^2\alpha}{\sin\alpha - \cos\alpha}$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 4: Expresar Funciones en Términos de Otras]
+\begin{itemize}
+    \item[a)] Si $\tan\theta = t$, expresa $\sin\theta$ y $\cos\theta$ en términos de $t$ (considera $\theta$ en el primer cuadrante).
+    \item[b)] Si $\sin x = s$, expresa todas las demás funciones trigonométricas en términos de $s$ (considera $x$ en el segundo cuadrante).
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 5: Demostración de Identidades]
+Demuestra las siguientes identidades:
+\begin{itemize}
+    \item[a)] $\frac{1 - \cos\theta}{\sin\theta} = \frac{\sin\theta}{1 + \cos\theta}$
+    \item[b)] $\frac{\tan x + \cot x}{\sec x \cdot \csc x} = 1$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 6: Identidades de Suma y Diferencia]
+Usando las identidades de suma y diferencia de ángulos:
+\begin{itemize}
+    \item[a)] Calcula el valor exacto de $\sin(75°)$ usando $\sin(45° + 30°)$
+    \item[b)] Encuentra $\cos(15°)$ usando $\cos(45° - 30°)$
+    \item[c)] Si $\sin A = \frac{3}{5}$ y $\cos B = \frac{12}{13}$, donde $A$ y $B$ están en el primer cuadrante, encuentra $\sin(A + B)$.
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 7: Identidades de Ángulo Doble]
+Aplica las identidades de ángulo doble:
+\begin{itemize}
+    \item[a)] Si $\sin\theta = \frac{1}{3}$ y $\theta$ está en el primer cuadrante, encuentra $\sin(2\theta)$ y $\cos(2\theta)$.
+    \item[b)] Simplifica: $\frac{\sin(2x)}{2\cos x}$
+    \item[c)] Demuestra que $\cos(2\alpha) = 2\cos^2\alpha - 1$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 8: Identidades de Ángulo Medio]
+Resuelve usando identidades de ángulo medio:
+\begin{itemize}
+    \item[a)] Encuentra el valor exacto de $\sin(22.5°)$ usando la identidad de ángulo medio.
+    \item[b)] Si $\cos\theta = \frac{7}{25}$ y $0° < \theta < 90°$, encuentra $\sin\left(\frac{\theta}{2}\right)$ y $\cos\left(\frac{\theta}{2}\right)$.
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 9: Transformaciones Producto-Suma]
+Transforma los siguientes productos en sumas o diferencias:
+\begin{itemize}
+    \item[a)] $2\sin(3x)\cos(2x)$
+    \item[b)] $\cos(4\theta)\cos(2\theta)$
+    \item[c)] $\sin(5\alpha)\sin(3\alpha)$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 10: Transformaciones Suma-Producto]
+Convierte las siguientes sumas o diferencias en productos:
+\begin{itemize}
+    \item[a)] $\sin(7x) + \sin(3x)$
+    \item[b)] $\cos(5\beta) - \cos(3\beta)$
+    \item[c)] $\sin(4\theta) - \sin(2\theta)$
+\end{itemize}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones Detalladas}
+
+¡Vamos a resolver cada ejercicio paso a paso! Recuerda que en trigonometría, hay muchos caminos para llegar a la misma respuesta. Lo importante es que cada paso esté bien justificado.
+
+\begin{solucion}[title=Solución Ejercicio 1: Identidades Recíprocas]
+
+\textbf{Parte a):} Simplificar $\sin\theta \cdot \csc\theta + \cos\theta \cdot \sec\theta$
+
+Recordemos las identidades recíprocas:
+- $\csc\theta = \frac{1}{\sin\theta}$, entonces $\sin\theta \cdot \csc\theta = 1$
+- $\sec\theta = \frac{1}{\cos\theta}$, entonces $\cos\theta \cdot \sec\theta = 1$
+
+Por lo tanto:
+\begin{align*}
+\sin\theta \cdot \csc\theta + \cos\theta \cdot \sec\theta &= \sin\theta \cdot \frac{1}{\sin\theta} + \cos\theta \cdot \frac{1}{\cos\theta} \\
+&= 1 + 1 \\
+&= 2
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{2}$
+
+\textbf{Parte b):} Simplificar $\frac{\csc\alpha}{\sec\alpha} \cdot \tan\alpha$
+
+Primero expresamos todo en términos de seno y coseno:
+\begin{align*}
+\frac{\csc\alpha}{\sec\alpha} \cdot \tan\alpha &= \frac{1/\sin\alpha}{1/\cos\alpha} \cdot \frac{\sin\alpha}{\cos\alpha} \\
+&= \frac{1}{\sin\alpha} \cdot \frac{\cos\alpha}{1} \cdot \frac{\sin\alpha}{\cos\alpha} \\
+&= \frac{\cos\alpha}{\sin\alpha} \cdot \frac{\sin\alpha}{\cos\alpha} \\
+&= 1
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{1}$
+
+\textbf{Parte c):} Si $\sin x = \frac{3}{5}$ y $x$ está en el primer cuadrante, encontrar $\csc x$ y $\cot x$.
+
+Paso 1: Encontrar $\csc x$ (es la recíproca del seno)
+\[
+\csc x = \frac{1}{\sin x} = \frac{1}{3/5} = \frac{5}{3}
+\]
+
+Paso 2: Para encontrar $\cot x$, primero necesitamos $\cos x$.
+Usando la identidad pitagórica $\sin^2x + \cos^2x = 1$:
+\begin{align*}
+\left(\frac{3}{5}\right)^2 + \cos^2x &= 1 \\
+\frac{9}{25} + \cos^2x &= 1 \\
+\cos^2x &= 1 - \frac{9}{25} = \frac{16}{25} \\
+\cos x &= \frac{4}{5} \quad \text{(positivo porque estamos en el primer cuadrante)}
+\end{align*}
+
+Paso 3: Calcular $\cot x$
+\[
+\cot x = \frac{\cos x}{\sin x} = \frac{4/5}{3/5} = \frac{4}{3}
+\]
+
+\textbf{Respuesta:} $\boxed{\csc x = \frac{5}{3}, \quad \cot x = \frac{4}{3}}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 2: Identidades Pitagóricas]
+
+\textbf{Parte a):} Si $\cos\theta = \frac{4}{5}$ y $\theta$ está en el cuarto cuadrante, encontrar $\sin\theta$ y $\tan\theta$.
+
+Paso 1: Usar la identidad pitagórica fundamental $\sin^2\theta + \cos^2\theta = 1$
+\begin{align*}
+\sin^2\theta + \left(\frac{4}{5}\right)^2 &= 1 \\
+\sin^2\theta + \frac{16}{25} &= 1 \\
+\sin^2\theta &= 1 - \frac{16}{25} = \frac{9}{25} \\
+\sin\theta &= \pm\frac{3}{5}
+\end{align*}
+
+Como $\theta$ está en el cuarto cuadrante, $\sin\theta < 0$, entonces:
+\[
+\sin\theta = -\frac{3}{5}
+\]
+
+Paso 2: Calcular $\tan\theta$
+\[
+\tan\theta = \frac{\sin\theta}{\cos\theta} = \frac{-3/5}{4/5} = -\frac{3}{4}
+\]
+
+\textbf{Respuesta:} $\boxed{\sin\theta = -\frac{3}{5}, \quad \tan\theta = -\frac{3}{4}}$
+
+\textbf{Parte b):} Simplificar $1 - \sin^2x + \cos^2x$
+
+Sabemos que $\sin^2x + \cos^2x = 1$, entonces $\cos^2x = 1 - \sin^2x$
+
+Sustituyendo:
+\begin{align*}
+1 - \sin^2x + \cos^2x &= 1 - \sin^2x + (1 - \sin^2x) \\
+&= 1 - \sin^2x + 1 - \sin^2x \\
+&= 2 - 2\sin^2x \\
+&= 2(1 - \sin^2x) \\
+&= 2\cos^2x
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{2\cos^2x}$
+
+\textbf{Parte c):} Verificar que $\sec^2\beta - \tan^2\beta = 1$ para $\beta = 30°$
+
+Calculemos los valores para $\beta = 30°$:
+- $\cos(30°) = \frac{\sqrt{3}}{2}$, entonces $\sec(30°) = \frac{2}{\sqrt{3}} = \frac{2\sqrt{3}}{3}$
+- $\sin(30°) = \frac{1}{2}$
+- $\tan(30°) = \frac{\sin(30°)}{\cos(30°)} = \frac{1/2}{\sqrt{3}/2} = \frac{1}{\sqrt{3}} = \frac{\sqrt{3}}{3}$
+
+Verificando:
+\begin{align*}
+\sec^2(30°) - \tan^2(30°) &= \left(\frac{2\sqrt{3}}{3}\right)^2 - \left(\frac{\sqrt{3}}{3}\right)^2 \\
+&= \frac{4 \cdot 3}{9} - \frac{3}{9} \\
+&= \frac{12}{9} - \frac{3}{9} \\
+&= \frac{9}{9} \\
+&= 1 \quad \checkmark
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\text{Verificado: } \sec^2(30°) - \tan^2(30°) = 1}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 3: Simplificación de Expresiones]
+
+\textbf{Parte a):} Simplificar $\frac{\sin\theta \cos\theta}{\tan\theta}$
+
+Recordemos que $\tan\theta = \frac{\sin\theta}{\cos\theta}$
+
+\begin{align*}
+\frac{\sin\theta \cos\theta}{\tan\theta} &= \frac{\sin\theta \cos\theta}{\sin\theta/\cos\theta} \\
+&= \sin\theta \cos\theta \cdot \frac{\cos\theta}{\sin\theta} \\
+&= \cos\theta \cdot \cos\theta \\
+&= \cos^2\theta
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\cos^2\theta}$
+
+\textbf{Parte b):} Simplificar $\frac{1 + \tan^2x}{\sec^2x}$
+
+Usamos la identidad pitagórica: $1 + \tan^2x = \sec^2x$
+
+\begin{align*}
+\frac{1 + \tan^2x}{\sec^2x} &= \frac{\sec^2x}{\sec^2x} \\
+&= 1
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{1}$
+
+\textbf{Parte c):} Simplificar $\frac{\sin^2\alpha - \cos^2\alpha}{\sin\alpha - \cos\alpha}$
+
+Factorizamos el numerador como diferencia de cuadrados:
+\begin{align*}
+\sin^2\alpha - \cos^2\alpha &= (\sin\alpha + \cos\alpha)(\sin\alpha - \cos\alpha)
+\end{align*}
+
+Por lo tanto:
+\begin{align*}
+\frac{\sin^2\alpha - \cos^2\alpha}{\sin\alpha - \cos\alpha} &= \frac{(\sin\alpha + \cos\alpha)(\sin\alpha - \cos\alpha)}{\sin\alpha - \cos\alpha} \\
+&= \sin\alpha + \cos\alpha
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\sin\alpha + \cos\alpha}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 4: Expresar Funciones en Términos de Otras]
+
+\textbf{Parte a):} Si $\tan\theta = t$ y $\theta$ está en el primer cuadrante, expresar $\sin\theta$ y $\cos\theta$ en términos de $t$.
+
+Sabemos que $\tan\theta = \frac{\sin\theta}{\cos\theta} = t$, entonces $\sin\theta = t\cos\theta$
+
+Usando la identidad fundamental $\sin^2\theta + \cos^2\theta = 1$:
+\begin{align*}
+(t\cos\theta)^2 + \cos^2\theta &= 1 \\
+t^2\cos^2\theta + \cos^2\theta &= 1 \\
+\cos^2\theta(t^2 + 1) &= 1 \\
+\cos^2\theta &= \frac{1}{t^2 + 1} \\
+\cos\theta &= \frac{1}{\sqrt{t^2 + 1}} \quad \text{(positivo en el primer cuadrante)}
+\end{align*}
+
+Y entonces:
+\[
+\sin\theta = t\cos\theta = \frac{t}{\sqrt{t^2 + 1}}
+\]
+
+\textbf{Respuesta:} $\boxed{\sin\theta = \frac{t}{\sqrt{t^2 + 1}}, \quad \cos\theta = \frac{1}{\sqrt{t^2 + 1}}}$
+
+\textbf{Parte b):} Si $\sin x = s$ y $x$ está en el segundo cuadrante, expresar todas las demás funciones en términos de $s$.
+
+Paso 1: Encontrar $\cos x$
+\begin{align*}
+\sin^2x + \cos^2x &= 1 \\
+s^2 + \cos^2x &= 1 \\
+\cos^2x &= 1 - s^2 \\
+\cos x &= -\sqrt{1 - s^2} \quad \text{(negativo en el segundo cuadrante)}
+\end{align*}
+
+Paso 2: Calcular las demás funciones
+\begin{align*}
+\cos x &= -\sqrt{1 - s^2} \\
+\tan x &= \frac{\sin x}{\cos x} = \frac{s}{-\sqrt{1 - s^2}} = -\frac{s}{\sqrt{1 - s^2}} \\
+\csc x &= \frac{1}{\sin x} = \frac{1}{s} \\
+\sec x &= \frac{1}{\cos x} = \frac{1}{-\sqrt{1 - s^2}} = -\frac{1}{\sqrt{1 - s^2}} \\
+\cot x &= \frac{\cos x}{\sin x} = \frac{-\sqrt{1 - s^2}}{s}
+\end{align*}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+\cos x &= -\sqrt{1 - s^2} \\
+\tan x &= -\frac{s}{\sqrt{1 - s^2}} \\
+\csc x &= \frac{1}{s} \\
+\sec x &= -\frac{1}{\sqrt{1 - s^2}} \\
+\cot x &= -\frac{\sqrt{1 - s^2}}{s}
+\end{aligned}
+}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 5: Demostración de Identidades]
+
+\textbf{Parte a):} Demostrar que $\frac{1 - \cos\theta}{\sin\theta} = \frac{\sin\theta}{1 + \cos\theta}$
+
+\textbf{Método 1: Multiplicación cruzada}
+
+Multiplicamos el lado izquierdo por $\frac{1 + \cos\theta}{1 + \cos\theta}$:
+\begin{align*}
+\frac{1 - \cos\theta}{\sin\theta} &= \frac{1 - \cos\theta}{\sin\theta} \cdot \frac{1 + \cos\theta}{1 + \cos\theta} \\
+&= \frac{(1 - \cos\theta)(1 + \cos\theta)}{\sin\theta(1 + \cos\theta)} \\
+&= \frac{1 - \cos^2\theta}{\sin\theta(1 + \cos\theta)}
+\end{align*}
+
+Usando la identidad $\sin^2\theta = 1 - \cos^2\theta$:
+\begin{align*}
+&= \frac{\sin^2\theta}{\sin\theta(1 + \cos\theta)} \\
+&= \frac{\sin\theta}{1 + \cos\theta} \quad \checkmark
+\end{align*}
+
+\textbf{Parte b):} Demostrar que $\frac{\tan x + \cot x}{\sec x \cdot \csc x} = 1$
+
+Expresamos todo en términos de seno y coseno:
+\begin{align*}
+\frac{\tan x + \cot x}{\sec x \cdot \csc x} &= \frac{\frac{\sin x}{\cos x} + \frac{\cos x}{\sin x}}{\frac{1}{\cos x} \cdot \frac{1}{\sin x}} \\
+&= \frac{\frac{\sin^2x + \cos^2x}{\sin x \cos x}}{\frac{1}{\sin x \cos x}}
+\end{align*}
+
+Como $\sin^2x + \cos^2x = 1$:
+\begin{align*}
+&= \frac{\frac{1}{\sin x \cos x}}{\frac{1}{\sin x \cos x}} \\
+&= 1 \quad \checkmark
+\end{align*}
+
+\textbf{Conclusión:} Ambas identidades han sido demostradas.
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 6: Identidades de Suma y Diferencia]
+
+\textbf{Parte a):} Calcular $\sin(75°)$ usando $\sin(45° + 30°)$
+
+Usamos la identidad: $\sin(A + B) = \sin A \cos B + \cos A \sin B$
+
+\begin{align*}
+\sin(75°) &= \sin(45° + 30°) \\
+&= \sin(45°)\cos(30°) + \cos(45°)\sin(30°) \\
+&= \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{3}}{2} + \frac{\sqrt{2}}{2} \cdot \frac{1}{2} \\
+&= \frac{\sqrt{6}}{4} + \frac{\sqrt{2}}{4} \\
+&= \frac{\sqrt{6} + \sqrt{2}}{4}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\sin(75°) = \frac{\sqrt{6} + \sqrt{2}}{4}}$
+
+\textbf{Parte b):} Encontrar $\cos(15°)$ usando $\cos(45° - 30°)$
+
+Usamos la identidad: $\cos(A - B) = \cos A \cos B + \sin A \sin B$
+
+\begin{align*}
+\cos(15°) &= \cos(45° - 30°) \\
+&= \cos(45°)\cos(30°) + \sin(45°)\sin(30°) \\
+&= \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{3}}{2} + \frac{\sqrt{2}}{2} \cdot \frac{1}{2} \\
+&= \frac{\sqrt{6}}{4} + \frac{\sqrt{2}}{4} \\
+&= \frac{\sqrt{6} + \sqrt{2}}{4}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\cos(15°) = \frac{\sqrt{6} + \sqrt{2}}{4}}$
+
+\textbf{Parte c):} Si $\sin A = \frac{3}{5}$ y $\cos B = \frac{12}{13}$, con $A$ y $B$ en el primer cuadrante, encontrar $\sin(A + B)$.
+
+Primero encontramos los valores faltantes:
+
+Para el ángulo $A$:
+\begin{align*}
+\sin^2A + \cos^2A &= 1 \\
+\left(\frac{3}{5}\right)^2 + \cos^2A &= 1 \\
+\frac{9}{25} + \cos^2A &= 1 \\
+\cos^2A &= \frac{16}{25} \\
+\cos A &= \frac{4}{5} \quad \text{(positivo en el primer cuadrante)}
+\end{align*}
+
+Para el ángulo $B$:
+\begin{align*}
+\sin^2B + \cos^2B &= 1 \\
+\sin^2B + \left(\frac{12}{13}\right)^2 &= 1 \\
+\sin^2B + \frac{144}{169} &= 1 \\
+\sin^2B &= \frac{25}{169} \\
+\sin B &= \frac{5}{13} \quad \text{(positivo en el primer cuadrante)}
+\end{align*}
+
+Ahora aplicamos la identidad:
+\begin{align*}
+\sin(A + B) &= \sin A \cos B + \cos A \sin B \\
+&= \frac{3}{5} \cdot \frac{12}{13} + \frac{4}{5} \cdot \frac{5}{13} \\
+&= \frac{36}{65} + \frac{20}{65} \\
+&= \frac{56}{65}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\sin(A + B) = \frac{56}{65}}$
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    % Ejes
+    \draw[-{Latex},thick] (-0.2,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-0.2) -- (0,1.3) node[above] {$y$};
+
+    % Círculo unitario
+    \draw[blue!70,thick] (0,0) circle (1);
+
+    % Ángulo A
+    \draw[red,thick] (0,0) -- ({4/5},{3/5}) node[midway,below] {$A$};
+    \filldraw[red] ({4/5},{3/5}) circle (0.02);
+    \draw[red] (0.2,0) arc (0:36.87:0.2);
+
+    % Ángulo B
+    \draw[green!60!black,thick] (0,0) -- ({12/13},{5/13}) node[midway,below] {$B$};
+    \filldraw[green!60!black] ({12/13},{5/13}) circle (0.02);
+    \draw[green!60!black] (0.15,0) arc (0:22.62:0.15);
+
+    % Ángulo A+B
+    \draw[purple,thick] (0,0) -- ({56/65},{33/65}) node[midway,above,sloped] {$A+B$};
+    \filldraw[purple] ({56/65},{33/65}) circle (0.02);
+    \draw[purple] (0.25,0) arc (0:59.49:0.25);
+
+    % Etiquetas
+    \node at (0.5,-0.3) {Suma de ángulos};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 7: Identidades de Ángulo Doble]
+
+\textbf{Parte a):} Si $\sin\theta = \frac{1}{3}$ y $\theta$ está en el primer cuadrante, encontrar $\sin(2\theta)$ y $\cos(2\theta)$.
+
+Primero encontramos $\cos\theta$:
+\begin{align*}
+\sin^2\theta + \cos^2\theta &= 1 \\
+\left(\frac{1}{3}\right)^2 + \cos^2\theta &= 1 \\
+\frac{1}{9} + \cos^2\theta &= 1 \\
+\cos^2\theta &= \frac{8}{9} \\
+\cos\theta &= \frac{2\sqrt{2}}{3} \quad \text{(positivo en el primer cuadrante)}
+\end{align*}
+
+Ahora usamos las identidades de ángulo doble:
+\begin{align*}
+\sin(2\theta) &= 2\sin\theta\cos\theta \\
+&= 2 \cdot \frac{1}{3} \cdot \frac{2\sqrt{2}}{3} \\
+&= \frac{4\sqrt{2}}{9}
+\end{align*}
+
+Para $\cos(2\theta)$ podemos usar cualquiera de estas formas:
+\begin{align*}
+\cos(2\theta) &= \cos^2\theta - \sin^2\theta \\
+&= \left(\frac{2\sqrt{2}}{3}\right)^2 - \left(\frac{1}{3}\right)^2 \\
+&= \frac{8}{9} - \frac{1}{9} \\
+&= \frac{7}{9}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\sin(2\theta) = \frac{4\sqrt{2}}{9}, \quad \cos(2\theta) = \frac{7}{9}}$
+
+\textbf{Parte b):} Simplificar $\frac{\sin(2x)}{2\cos x}$
+
+Usando la identidad $\sin(2x) = 2\sin x\cos x$:
+\begin{align*}
+\frac{\sin(2x)}{2\cos x} &= \frac{2\sin x\cos x}{2\cos x} \\
+&= \sin x
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\sin x}$
+
+\textbf{Parte c):} Demostrar que $\cos(2\alpha) = 2\cos^2\alpha - 1$
+
+Partimos de la identidad fundamental de ángulo doble:
+\[
+\cos(2\alpha) = \cos^2\alpha - \sin^2\alpha
+\]
+
+Usando $\sin^2\alpha = 1 - \cos^2\alpha$:
+\begin{align*}
+\cos(2\alpha) &= \cos^2\alpha - (1 - \cos^2\alpha) \\
+&= \cos^2\alpha - 1 + \cos^2\alpha \\
+&= 2\cos^2\alpha - 1 \quad \checkmark
+\end{align*}
+
+\textbf{Conclusión:} La identidad ha sido demostrada.
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 8: Identidades de Ángulo Medio]
+
+\textbf{Parte a):} Encontrar el valor exacto de $\sin(22.5°)$
+
+Notemos que $22.5° = \frac{45°}{2}$. Usamos la identidad de ángulo medio:
+\[
+\sin\left(\frac{\alpha}{2}\right) = \pm\sqrt{\frac{1 - \cos\alpha}{2}}
+\]
+
+Para $\alpha = 45°$:
+\begin{align*}
+\sin(22.5°) &= \sin\left(\frac{45°}{2}\right) \\
+&= \sqrt{\frac{1 - \cos(45°)}{2}} \quad \text{(positivo porque } 22.5° \text{ está en el primer cuadrante)} \\
+&= \sqrt{\frac{1 - \frac{\sqrt{2}}{2}}{2}} \\
+&= \sqrt{\frac{\frac{2 - \sqrt{2}}{2}}{2}} \\
+&= \sqrt{\frac{2 - \sqrt{2}}{4}} \\
+&= \frac{\sqrt{2 - \sqrt{2}}}{2}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\sin(22.5°) = \frac{\sqrt{2 - \sqrt{2}}}{2}}$
+
+\textbf{Parte b):} Si $\cos\theta = \frac{7}{25}$ y $0° < \theta < 90°$, encontrar $\sin\left(\frac{\theta}{2}\right)$ y $\cos\left(\frac{\theta}{2}\right)$.
+
+Como $0° < \theta < 90°$, entonces $0° < \frac{\theta}{2} < 45°$, por lo que ambas funciones serán positivas.
+
+Para $\sin\left(\frac{\theta}{2}\right)$:
+\begin{align*}
+\sin\left(\frac{\theta}{2}\right) &= \sqrt{\frac{1 - \cos\theta}{2}} \\
+&= \sqrt{\frac{1 - \frac{7}{25}}{2}} \\
+&= \sqrt{\frac{\frac{18}{25}}{2}} \\
+&= \sqrt{\frac{18}{50}} \\
+&= \sqrt{\frac{9}{25}} \\
+&= \frac{3}{5}
+\end{align*}
+
+Para $\cos\left(\frac{\theta}{2}\right)$:
+\begin{align*}
+\cos\left(\frac{\theta}{2}\right) &= \sqrt{\frac{1 + \cos\theta}{2}} \\
+&= \sqrt{\frac{1 + \frac{7}{25}}{2}} \\
+&= \sqrt{\frac{\frac{32}{25}}{2}} \\
+&= \sqrt{\frac{32}{50}} \\
+&= \sqrt{\frac{16}{25}} \\
+&= \frac{4}{5}
+\end{align*}
+
+\textbf{Verificación:} $\sin^2\left(\frac{\theta}{2}\right) + \cos^2\left(\frac{\theta}{2}\right) = \left(\frac{3}{5}\right)^2 + \left(\frac{4}{5}\right)^2 = \frac{9}{25} + \frac{16}{25} = 1$ ✓
+
+\textbf{Respuesta:} $\boxed{\sin\left(\frac{\theta}{2}\right) = \frac{3}{5}, \quad \cos\left(\frac{\theta}{2}\right) = \frac{4}{5}}$
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+    % Ejes
+    \draw[-{Latex},thick] (-0.2,0) -- (1.2,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-0.2) -- (0,1.2) node[above] {$y$};
+
+    % Círculo unitario
+    \draw[blue!70,thick] (0,0) circle (1);
+
+    % Ángulo theta
+    \coordinate (P) at ({7/25},{24/25});
+    \draw[red,thick] (0,0) -- (P);
+    \filldraw[red] (P) circle (0.02);
+    \draw[red] (0.3,0) arc (0:73.74:0.3);
+    \node[red] at (0.4,0.15) {$\theta$};
+
+    % Ángulo theta/2
+    \coordinate (Q) at ({4/5},{3/5});
+    \draw[green!60!black,thick] (0,0) -- (Q);
+    \filldraw[green!60!black] (Q) circle (0.02);
+    \draw[green!60!black] (0.2,0) arc (0:36.87:0.2);
+    \node[green!60!black] at (0.25,0.05) {$\frac{\theta}{2}$};
+
+    % Proyecciones
+    \draw[dashed,thin] (P) -- ({7/25},0) node[below] {\tiny $\frac{7}{25}$};
+    \draw[dashed,thin] (Q) -- ({4/5},0) node[below] {\tiny $\frac{4}{5}$};
+    \draw[dashed,thin] (Q) -- (0,{3/5}) node[left] {\tiny $\frac{3}{5}$};
+
+    \node at (0.6,-0.3) {Ángulo medio};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 9: Transformaciones Producto-Suma]
+
+Para transformar productos en sumas, usamos las identidades:
+- $2\sin A\cos B = \sin(A+B) + \sin(A-B)$
+- $2\cos A\cos B = \cos(A+B) + \cos(A-B)$
+- $2\sin A\sin B = \cos(A-B) - \cos(A+B)$
+
+\textbf{Parte a):} Transformar $2\sin(3x)\cos(2x)$
+
+Aplicando directamente la primera identidad con $A = 3x$ y $B = 2x$:
+\begin{align*}
+2\sin(3x)\cos(2x) &= \sin(3x + 2x) + \sin(3x - 2x) \\
+&= \sin(5x) + \sin(x)
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\sin(5x) + \sin(x)}$
+
+\textbf{Parte b):} Transformar $\cos(4\theta)\cos(2\theta)$
+
+Primero multiplicamos por 2 y dividimos por 2:
+\[
+\cos(4\theta)\cos(2\theta) = \frac{1}{2} \cdot 2\cos(4\theta)\cos(2\theta)
+\]
+
+Aplicando la segunda identidad con $A = 4\theta$ y $B = 2\theta$:
+\begin{align*}
+\cos(4\theta)\cos(2\theta) &= \frac{1}{2}[\cos(4\theta + 2\theta) + \cos(4\theta - 2\theta)] \\
+&= \frac{1}{2}[\cos(6\theta) + \cos(2\theta)]
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\frac{1}{2}[\cos(6\theta) + \cos(2\theta)]}$
+
+\textbf{Parte c):} Transformar $\sin(5\alpha)\sin(3\alpha)$
+
+Multiplicamos y dividimos por 2:
+\[
+\sin(5\alpha)\sin(3\alpha) = \frac{1}{2} \cdot 2\sin(5\alpha)\sin(3\alpha)
+\]
+
+Aplicando la tercera identidad con $A = 5\alpha$ y $B = 3\alpha$:
+\begin{align*}
+\sin(5\alpha)\sin(3\alpha) &= \frac{1}{2}[\cos(5\alpha - 3\alpha) - \cos(5\alpha + 3\alpha)] \\
+&= \frac{1}{2}[\cos(2\alpha) - \cos(8\alpha)]
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\frac{1}{2}[\cos(2\alpha) - \cos(8\alpha)]}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 10: Transformaciones Suma-Producto]
+
+Para transformar sumas en productos, usamos las identidades:
+- $\sin A + \sin B = 2\sin\left(\frac{A+B}{2}\right)\cos\left(\frac{A-B}{2}\right)$
+- $\sin A - \sin B = 2\cos\left(\frac{A+B}{2}\right)\sin\left(\frac{A-B}{2}\right)$
+- $\cos A + \cos B = 2\cos\left(\frac{A+B}{2}\right)\cos\left(\frac{A-B}{2}\right)$
+- $\cos A - \cos B = -2\sin\left(\frac{A+B}{2}\right)\sin\left(\frac{A-B}{2}\right)$
+
+\textbf{Parte a):} Convertir $\sin(7x) + \sin(3x)$
+
+Aplicando la primera identidad con $A = 7x$ y $B = 3x$:
+\begin{align*}
+\sin(7x) + \sin(3x) &= 2\sin\left(\frac{7x + 3x}{2}\right)\cos\left(\frac{7x - 3x}{2}\right) \\
+&= 2\sin\left(\frac{10x}{2}\right)\cos\left(\frac{4x}{2}\right) \\
+&= 2\sin(5x)\cos(2x)
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{2\sin(5x)\cos(2x)}$
+
+\textbf{Parte b):} Convertir $\cos(5\beta) - \cos(3\beta)$
+
+Aplicando la cuarta identidad con $A = 5\beta$ y $B = 3\beta$:
+\begin{align*}
+\cos(5\beta) - \cos(3\beta) &= -2\sin\left(\frac{5\beta + 3\beta}{2}\right)\sin\left(\frac{5\beta - 3\beta}{2}\right) \\
+&= -2\sin\left(\frac{8\beta}{2}\right)\sin\left(\frac{2\beta}{2}\right) \\
+&= -2\sin(4\beta)\sin(\beta)
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{-2\sin(4\beta)\sin(\beta)}$
+
+\textbf{Parte c):} Convertir $\sin(4\theta) - \sin(2\theta)$
+
+Aplicando la segunda identidad con $A = 4\theta$ y $B = 2\theta$:
+\begin{align*}
+\sin(4\theta) - \sin(2\theta) &= 2\cos\left(\frac{4\theta + 2\theta}{2}\right)\sin\left(\frac{4\theta - 2\theta}{2}\right) \\
+&= 2\cos\left(\frac{6\theta}{2}\right)\sin\left(\frac{2\theta}{2}\right) \\
+&= 2\cos(3\theta)\sin(\theta)
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{2\cos(3\theta)\sin(\theta)}$
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+    % Gráfica ilustrativa de transformación suma-producto
+    \begin{axis}[
+        width=12cm,
+        height=6cm,
+        xlabel={$x$},
+        ylabel={$y$},
+        domain=0:4*pi,
+        samples=200,
+        grid=major,
+        legend pos=north east,
+        cycle list name=color list
+    ]
+
+    % Suma original
+    \addplot[blue,thick] {sin(deg(2*x)) + sin(deg(x))};
+    \addlegendentry{$\sin(2x) + \sin(x)$}
+
+    % Producto equivalente
+    \addplot[red,dashed,thick] {2*sin(deg(1.5*x))*cos(deg(0.5*x))};
+    \addlegendentry{$2\sin(\frac{3x}{2})\cos(\frac{x}{2})$}
+
+    \end{axis}
+
+    \node at (6,-1) {Transformación suma-producto: las gráficas coinciden};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Observación importante:}
+Las transformaciones suma-producto y producto-suma son muy útiles en:
+\begin{itemize}
+    \item Integración de funciones trigonométricas
+    \item Análisis de ondas y señales
+    \item Resolución de ecuaciones trigonométricas
+    \item Simplificación de expresiones complejas
+\end{itemize}
+
+¡Fíjate cómo en la gráfica anterior, la suma de senos (línea azul) es idéntica al producto (línea roja punteada)! Esto demuestra que nuestras transformaciones son correctas.
+\end{solucion}
+\newpage
+
+\section{Conclusión}
+
+¡Felicidades! Has completado el estudio de las identidades trigonométricas fundamentales. Este conocimiento es una herramienta poderosa que te acompañará en tu viaje matemático y científico.
+
+\subsection{Resumen de Conceptos Clave}
+
+\begin{center}
+\begin{tcolorbox}[enhanced,colback=maincolor!10,colframe=maincolor,title=Tabla de Identidades Fundamentales]
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{ll}
+\hline
+\textbf{Tipo de Identidad} & \textbf{Fórmulas} \\
+\hline
+\multirow{3}{*}{Recíprocas} & $\csc\theta = \frac{1}{\sin\theta}$ \\
+& $\sec\theta = \frac{1}{\cos\theta}$ \\
+& $\cot\theta = \frac{1}{\tan\theta}$ \\
+\hline
+\multirow{2}{*}{Razón} & $\tan\theta = \frac{\sin\theta}{\cos\theta}$ \\
+& $\cot\theta = \frac{\cos\theta}{\sin\theta}$ \\
+\hline
+\multirow{3}{*}{Pitagóricas} & $\sin^2\theta + \cos^2\theta = 1$ \\
+& $1 + \tan^2\theta = \sec^2\theta$ \\
+& $1 + \cot^2\theta = \csc^2\theta$ \\
+\hline
+\multirow{2}{*}{Suma de Ángulos} & $\sin(\alpha + \beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta$ \\
+& $\cos(\alpha + \beta) = \cos\alpha\cos\beta - \sin\alpha\sin\beta$ \\
+\hline
+\multirow{3}{*}{Ángulo Doble} & $\sin(2\theta) = 2\sin\theta\cos\theta$ \\
+& $\cos(2\theta) = \cos^2\theta - \sin^2\theta$ \\
+& $\tan(2\theta) = \frac{2\tan\theta}{1 - \tan^2\theta}$ \\
+\hline
+\multirow{2}{*}{Ángulo Medio} & $\sin\left(\frac{\theta}{2}\right) = \pm\sqrt{\frac{1 - \cos\theta}{2}}$ \\
+& $\cos\left(\frac{\theta}{2}\right) = \pm\sqrt{\frac{1 + \cos\theta}{2}}$ \\
+\hline
+\end{tabular}
+\end{tcolorbox}
+\end{center}
+
+\subsection{Consejos para Trabajar con Identidades}
+
+\begin{enumerate}
+    \item \textbf{Practica regularmente:} Las identidades se vuelven naturales con la práctica constante.
+
+    \item \textbf{Memoriza las fundamentales:} No necesitas memorizar todas, pero las pitagóricas y recíprocas son esenciales.
+
+    \item \textbf{Entiende las derivaciones:} Si entiendes cómo se derivan las identidades, podrás reconstruirlas cuando las olvides.
+
+    \item \textbf{Visualiza en el círculo unitario:} Muchas identidades tienen interpretaciones geométricas claras.
+
+    \item \textbf{Verifica tus respuestas:} Sustituye valores específicos de ángulos para comprobar si tu simplificación es correcta.
+
+    \item \textbf{Desarrolla intuición:} Con el tiempo, desarrollarás un ``sexto sentido'' para saber qué identidad usar.
+\end{enumerate}
+
+\subsection{Aplicaciones Avanzadas}
+
+Las identidades trigonométricas que has aprendido son la base para:
+
+\begin{itemize}
+    \item \textbf{Cálculo diferencial e integral:} Las derivadas e integrales de funciones trigonométricas
+    \item \textbf{Series de Fourier:} Descomposición de señales complejas
+    \item \textbf{Números complejos:} La fórmula de Euler conecta trigonometría con exponenciales complejas
+    \item \textbf{Mecánica cuántica:} Funciones de onda y probabilidades
+    \item \textbf{Procesamiento de imágenes:} Transformadas utilizadas en compresión JPEG
+    \item \textbf{Música digital:} Síntesis y análisis de sonidos
+\end{itemize}
+
+\subsection{Recomendaciones para Continuar}
+
+Para profundizar tu comprensión:
+
+\begin{enumerate}
+    \item \textbf{Practica con problemas variados:} Busca problemas de olimpiadas matemáticas que involucren identidades.
+
+    \item \textbf{Explora aplicaciones:} Investiga cómo se usan las identidades en tu área de interés (física, ingeniería, música, etc.).
+
+    \item \textbf{Usa software matemático:} Programas como GeoGebra te permiten visualizar las identidades dinámicamente.
+
+    \item \textbf{Conecta con otros temas:} Ve cómo las identidades se relacionan con vectores, matrices y números complejos.
+
+    \item \textbf{Enseña a otros:} Explicar identidades a compañeros solidifica tu comprensión.
+\end{enumerate}
+
+\subsection{Reflexión Final}
+
+Las identidades trigonométricas son mucho más que fórmulas para memorizar. Son patrones fundamentales que aparecen en toda la naturaleza: desde las ondas del mar hasta las señales de tu teléfono móvil, desde la música que escuchas hasta la luz que ves.
+
+Cada identidad cuenta una historia sobre la simetría y la armonía en las matemáticas. La identidad pitagórica fundamental $\sin^2\theta + \cos^2\theta = 1$ no es solo una ecuación; es una expresión de la perfecta relación entre las coordenadas de un punto en el círculo unitario.
+
+Al dominar estas identidades, no solo has aprendido matemáticas - has adquirido un lenguaje para describir fenómenos periódicos, oscilaciones y ondas en el universo. Este conocimiento te abre puertas a campos fascinantes como la física cuántica, la ingeniería de telecomunicaciones, la astronomía y muchos más.
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Espiral logarítmica con funciones trigonométricas
+    \draw[domain=0:720,variable=\t,smooth,samples=200,thick,maincolor]
+        plot ({0.01*\t*cos(\t)},{0.01*\t*sin(\t)});
+
+    % Centro
+    \filldraw[accentcolor] (0,0) circle (0.05);
+
+    % Texto
+    \node[below] at (0,-2) {\textit{``Las matemáticas son el lenguaje con el que Dios escribió el universo''}};
+    \node[below] at (0,-2.3) {\small --- Galileo Galilei};
+\end{tikzpicture}
+\end{center}
+
+Continúa explorando, preguntando y descubriendo. Las identidades trigonométricas son solo el comienzo de un viaje matemático fascinante. ¡El mundo de las matemáticas te espera!
+
+\end{document}

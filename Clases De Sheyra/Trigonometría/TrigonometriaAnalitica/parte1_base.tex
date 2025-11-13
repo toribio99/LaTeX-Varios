@@ -1,0 +1,806 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\pgfplotsset{compat=1.18}
+
+% Definición de colores
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de tcolorbox
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+\newtcolorbox{teorema}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Teorema,
+  #1
+}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejemplo,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  breakable,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+% Configuración de encabezados y pies de página
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad Identidades Trigonometricas}}
+\fancyhead[RO]{\small\textcolor{maincolor}{Identidades Trigonometricas \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+% Información del documento
+\title{\textbf{\Huge TRIGONOMETRIA ANALITICA}\\[0.5cm]
+\Large Identidades Trigonométricas\\[0.3cm]
+\large Guía Completa para Grado 10}
+\author{Prof: Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10 - Trigonometría}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Hola! Bienvenido al fascinante mundo de las identidades trigonométricas. Si alguna vez has pensado que la trigonometría es como un rompecabezas matemático, estás en lo correcto. Las identidades trigonométricas son las piezas fundamentales que te permitirán resolver ese rompecabezas con elegancia y precisión.
+
+\subsection*{¿Qué son las identidades trigonométricas?}
+
+Imagina que tienes diferentes formas de decir la misma cosa. Por ejemplo, puedes decir ``media docena'' o ``seis unidades'' - ambas expresiones significan lo mismo. Las identidades trigonométricas funcionan de manera similar: son ecuaciones que expresan relaciones entre funciones trigonométricas que son verdaderas para todos los valores donde las funciones están definidas.
+
+Una identidad trigonométrica es como una ``ley universal'' del mundo trigonométrico. No importa qué ángulo elijas (siempre que las funciones estén definidas), la identidad siempre será verdadera. Por ejemplo, la famosa identidad $\sin^2\theta + \cos^2\theta = 1$ funciona para cualquier ángulo $\theta$, ya sea $30°$, $45°$, $137.8°$ o cualquier otro valor que se te ocurra.
+
+\subsection*{¿Por qué son importantes en matemáticas?}
+
+Las identidades trigonométricas son herramientas poderosas que nos permiten:
+
+\begin{itemize}
+    \item \textbf{Simplificar expresiones complejas:} Convertir expresiones trigonométricas complicadas en formas más simples y manejables.
+    \item \textbf{Resolver ecuaciones:} Muchas ecuaciones trigonométricas que parecen imposibles se vuelven sencillas cuando aplicas la identidad correcta.
+    \item \textbf{Demostrar teoremas:} Son fundamentales en demostraciones matemáticas avanzadas en cálculo y física.
+    \item \textbf{Calcular valores exactos:} Encontrar valores trigonométricos exactos para ángulos que no son los típicos $30°$, $45°$ o $60°$.
+    \item \textbf{Transformar funciones:} Cambiar entre diferentes formas de expresar la misma información trigonométrica.
+\end{itemize}
+
+\subsection*{Aplicaciones en el mundo real}
+
+Las identidades trigonométricas no son solo ejercicios abstractos - tienen aplicaciones increíbles en el mundo real:
+
+\subsubsection*{Física Ondulatoria}
+En el estudio de las ondas (sonido, luz, agua), las identidades trigonométricas nos permiten:
+\begin{itemize}
+    \item Analizar la interferencia de ondas cuando dos ondas se encuentran
+    \item Descomponer ondas complejas en componentes simples
+    \item Predecir patrones de resonancia en instrumentos musicales
+\end{itemize}
+
+\subsubsection*{Ingeniería de Señales}
+Los ingenieros utilizan identidades trigonométricas para:
+\begin{itemize}
+    \item Procesar señales de audio y video
+    \item Comprimir archivos multimedia (MP3, JPEG)
+    \item Diseñar filtros para eliminar ruido en comunicaciones
+    \item Modular y demodular señales en telecomunicaciones
+\end{itemize}
+
+\subsubsection*{Navegación GPS}
+Tu teléfono móvil usa identidades trigonométricas para:
+\begin{itemize}
+    \item Calcular tu posición exacta usando señales de satélites
+    \item Convertir entre diferentes sistemas de coordenadas
+    \item Corregir errores causados por la atmósfera terrestre
+\end{itemize}
+
+\subsubsection*{Análisis de Circuitos Eléctricos}
+En electricidad y electrónica:
+\begin{itemize}
+    \item Analizar corriente alterna (AC) en tu casa
+    \item Calcular la potencia en circuitos con inductores y capacitores
+    \item Diseñar fuentes de alimentación eficientes
+\end{itemize}
+
+\subsubsection*{Astronomía}
+Los astrónomos usan identidades para:
+\begin{itemize}
+    \item Calcular órbitas planetarias
+    \item Predecir eclipses solares y lunares
+    \item Determinar distancias a estrellas lejanas
+    \item Analizar el movimiento de galaxias
+\end{itemize}
+
+\subsection*{Lo que aprenderás en esta guía}
+
+En esta aventura matemática, dominarás:
+
+\begin{enumerate}
+    \item Las relaciones fundamentales entre las funciones trigonométricas
+    \item Cómo simplificar expresiones que parecen imposibles
+    \item Técnicas para demostrar identidades paso a paso
+    \item Fórmulas para sumar y restar ángulos
+    \item Los secretos de los ángulos dobles y medios
+    \item Transformaciones mágicas entre productos y sumas
+\end{enumerate}
+
+Prepárate para ver las matemáticas desde una nueva perspectiva. Las identidades trigonométricas son como superpoderes matemáticos - una vez que las domines, podrás resolver problemas que antes parecían imposibles. ¡Comencemos!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Relaciones Recíprocas}
+
+Las relaciones recíprocas son las identidades más básicas y fundamentales. Conectan cada función trigonométrica con su función recíproca.
+
+\begin{definicion}[title=Funciones Recíprocas]
+Las funciones trigonométricas recíprocas se definen como:
+\begin{align}
+\csc\theta &= \frac{1}{\sin\theta} \quad \text{(cosecante)} \\
+\sec\theta &= \frac{1}{\cos\theta} \quad \text{(secante)} \\
+\cot\theta &= \frac{1}{\tan\theta} \quad \text{(cotangente)}
+\end{align}
+\end{definicion}
+
+Estas relaciones implican que:
+\begin{itemize}
+    \item $\sin\theta \cdot \csc\theta = 1$
+    \item $\cos\theta \cdot \sec\theta = 1$
+    \item $\tan\theta \cdot \cot\theta = 1$
+\end{itemize}
+
+\begin{nota}
+Recuerda: una función y su recíproca SIEMPRE multiplican a 1, excepto cuando la función original es cero (donde la recíproca no está definida).
+\end{nota}
+
+\subsection{Relaciones de Razón}
+
+Las funciones tangente y cotangente pueden expresarse como razones de seno y coseno:
+
+\begin{teorema}[title=Identidades de Razón]
+\begin{align}
+\tan\theta &= \frac{\sin\theta}{\cos\theta} \\
+\cot\theta &= \frac{\cos\theta}{\sin\theta}
+\end{align}
+\end{teorema}
+
+Estas identidades son súper útiles porque te permiten convertir problemas con tangente o cotangente en problemas con seno y coseno, que suelen ser más fáciles de manejar.
+
+\begin{center}
+\begin{tikzpicture}[scale=3]
+    % Círculo unitario
+    \draw[maincolor,very thick] (0,0) circle (1);
+
+    % Ejes
+    \draw[-{Latex},thick] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    % Ángulo y punto
+    \def\angulo{35}
+    \coordinate (P) at ({\angulo}:1);
+
+    % Radio
+    \draw[accentcolor,thick] (0,0) -- (P);
+    \filldraw[maincolor] (P) circle (0.03);
+
+    % Proyecciones
+    \draw[blue,thick] (0,0) -- (P |- 0,0) node[midway,below] {$\cos\theta$};
+    \draw[red,thick] (P |- 0,0) -- (P) node[midway,right] {$\sin\theta$};
+
+    % Tangente
+    \draw[green!60!black,thick] (1,0) -- (1,{tan(\angulo)}) node[midway,right] {$\tan\theta$};
+
+    % Ángulo
+    \draw[accentcolor] (0.3,0) arc (0:\angulo:0.3) node[midway,right] {$\theta$};
+
+    % Etiquetas
+    \node[above right] at (P) {$(\cos\theta, \sin\theta)$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Identidades Pitagóricas}
+
+Las identidades pitagóricas son las más importantes y útiles de todas. Se derivan directamente del teorema de Pitágoras aplicado al círculo unitario.
+
+\begin{teorema}[title=Identidades Pitagóricas Fundamentales]
+Existen tres formas de la identidad pitagórica:
+\begin{align}
+\sin^2\theta + \cos^2\theta &= 1 \quad \text{(Identidad fundamental)} \\
+1 + \tan^2\theta &= \sec^2\theta \quad \text{(Dividiendo por } \cos^2\theta \text{)} \\
+1 + \cot^2\theta &= \csc^2\theta \quad \text{(Dividiendo por } \sin^2\theta \text{)}
+\end{align}
+\end{teorema}
+
+\textbf{Demostración de la segunda identidad:}
+Partimos de $\sin^2\theta + \cos^2\theta = 1$ y dividimos todo por $\cos^2\theta$:
+\[
+\frac{\sin^2\theta}{\cos^2\theta} + \frac{\cos^2\theta}{\cos^2\theta} = \frac{1}{\cos^2\theta}
+\]
+\[
+\tan^2\theta + 1 = \sec^2\theta
+\]
+
+\subsection{Expresión de una Función en Términos de las Otras}
+
+Una habilidad crucial es expresar cualquier función trigonométrica en términos de cualquier otra. Esto es especialmente útil cuando necesitas trabajar con una sola función.
+
+\begin{ejemplo}
+Expresar todas las funciones trigonométricas en términos del seno:
+
+Dado que $\sin^2\theta + \cos^2\theta = 1$, tenemos:
+\begin{align}
+\cos\theta &= \pm\sqrt{1 - \sin^2\theta} \\
+\tan\theta &= \frac{\sin\theta}{\pm\sqrt{1 - \sin^2\theta}} \\
+\csc\theta &= \frac{1}{\sin\theta} \\
+\sec\theta &= \frac{1}{\pm\sqrt{1 - \sin^2\theta}} \\
+\cot\theta &= \frac{\pm\sqrt{1 - \sin^2\theta}}{\sin\theta}
+\end{align}
+
+El signo $\pm$ depende del cuadrante donde se encuentra $\theta$.
+\end{ejemplo}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=8cm,
+        axis lines=middle,
+        xlabel={$\theta$},
+        ylabel={},
+        xmin=0, xmax=360,
+        ymin=-2, ymax=2,
+        xtick={0,90,180,270,360},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$},
+        ytick={-2,-1,0,1,2},
+        grid=major,
+        grid style={line width=.2pt, draw=gray!30},
+        legend pos=north east,
+        cycle list name=color list
+    ]
+
+    % Seno
+    \addplot[domain=0:360,samples=100,smooth,thick,blue]
+        {sin(x)};
+    \addlegendentry{$\sin\theta$}
+
+    % Coseno
+    \addplot[domain=0:360,samples=100,smooth,thick,red]
+        {cos(x)};
+    \addlegendentry{$\cos\theta$}
+
+    % Relación visible
+    \node at (axis cs:45,1.2) [anchor=west] {$\sin^2\theta + \cos^2\theta = 1$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Identidades de Suma y Diferencia de Ángulos}
+
+Estas identidades nos permiten calcular funciones trigonométricas de sumas o diferencias de ángulos.
+
+\begin{teorema}[title=Fórmulas de Suma y Diferencia]
+Para cualesquiera ángulos $\alpha$ y $\beta$:
+
+\textbf{Seno:}
+\begin{align}
+\sin(\alpha + \beta) &= \sin\alpha\cos\beta + \cos\alpha\sin\beta \\
+\sin(\alpha - \beta) &= \sin\alpha\cos\beta - \cos\alpha\sin\beta
+\end{align}
+
+\textbf{Coseno:}
+\begin{align}
+\cos(\alpha + \beta) &= \cos\alpha\cos\beta - \sin\alpha\sin\beta \\
+\cos(\alpha - \beta) &= \cos\alpha\cos\beta + \sin\alpha\sin\beta
+\end{align}
+
+\textbf{Tangente:}
+\begin{align}
+\tan(\alpha + \beta) &= \frac{\tan\alpha + \tan\beta}{1 - \tan\alpha\tan\beta} \\
+\tan(\alpha - \beta) &= \frac{\tan\alpha - \tan\beta}{1 + \tan\alpha\tan\beta}
+\end{align}
+\end{teorema}
+
+\begin{nota}
+Truco mnemotécnico para recordar las fórmulas:
+\begin{itemize}
+    \item Seno: ``Seno-Coseno más/menos Coseno-Seno'' (productos cruzados)
+    \item Coseno: ``Coseno-Coseno menos/más Seno-Seno'' (productos iguales)
+    \item Los signos en coseno son opuestos a los de la operación
+\end{itemize}
+\end{nota}
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    % Círculo unitario
+    \draw[thick,gray!50] (0,0) circle (1);
+
+    % Ejes
+    \draw[-{Latex}] (-1.2,0) -- (1.2,0) node[right] {$x$};
+    \draw[-{Latex}] (0,-1.2) -- (0,1.2) node[above] {$y$};
+
+    % Ángulo alpha
+    \def\alpha{25}
+    \coordinate (A) at ({\alpha}:1);
+    \draw[blue,thick] (0,0) -- (A);
+    \draw[blue] (0.3,0) arc (0:\alpha:0.3) node[midway,right] {$\alpha$};
+
+    % Ángulo beta desde alpha
+    \def\beta{30}
+    \coordinate (B) at ({\alpha+\beta}:1);
+    \draw[red,thick] (0,0) -- (B);
+    \draw[red] (0.4,0) arc (0:{\alpha+\beta}:0.4);
+    \draw[red] ({\alpha}:0.5) arc (\alpha:{\alpha+\beta}:0.5) node[midway,above] {$\beta$};
+
+    % Punto suma
+    \filldraw[green!60!black] (B) circle (0.03) node[above right] {$\alpha + \beta$};
+
+    % Etiquetas
+    \node[blue] at (A) [right] {$\alpha$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Identidades de Ángulo Doble}
+
+Las identidades de ángulo doble son casos especiales de las fórmulas de suma cuando $\alpha = \beta = \theta$.
+
+\begin{teorema}[title=Fórmulas de Ángulo Doble]
+\begin{align}
+\sin(2\theta) &= 2\sin\theta\cos\theta \\
+\cos(2\theta) &= \cos^2\theta - \sin^2\theta \\
+&= 2\cos^2\theta - 1 \\
+&= 1 - 2\sin^2\theta \\
+\tan(2\theta) &= \frac{2\tan\theta}{1 - \tan^2\theta}
+\end{align}
+\end{teorema}
+
+Observa que el coseno del ángulo doble tiene tres formas diferentes. Cada una es útil en diferentes situaciones:
+\begin{itemize}
+    \item Usa $\cos^2\theta - \sin^2\theta$ cuando tengas ambas funciones
+    \item Usa $2\cos^2\theta - 1$ cuando solo tengas coseno
+    \item Usa $1 - 2\sin^2\theta$ cuando solo tengas seno
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=7cm,
+        axis lines=middle,
+        xlabel={$\theta$},
+        ylabel={},
+        xmin=0, xmax=180,
+        ymin=-1.5, ymax=1.5,
+        xtick={0,30,60,90,120,150,180},
+        xticklabels={$0°$,$30°$,$60°$,$90°$,$120°$,$150°$,$180°$},
+        grid=major,
+        grid style={line width=.2pt, draw=gray!30},
+        legend pos=north east
+    ]
+
+    % sin(theta)
+    \addplot[domain=0:180,samples=100,smooth,thick,blue,dashed]
+        {sin(x)};
+    \addlegendentry{$\sin\theta$}
+
+    % sin(2*theta)
+    \addplot[domain=0:180,samples=100,smooth,thick,blue]
+        {sin(2*x)};
+    \addlegendentry{$\sin(2\theta)$}
+
+    % cos(theta)
+    \addplot[domain=0:180,samples=100,smooth,thick,red,dashed]
+        {cos(x)};
+    \addlegendentry{$\cos\theta$}
+
+    % cos(2*theta)
+    \addplot[domain=0:180,samples=100,smooth,thick,red]
+        {cos(2*x)};
+    \addlegendentry{$\cos(2\theta)$}
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Identidades de Ángulo Medio}
+
+Las identidades de ángulo medio nos permiten expresar funciones de $\theta/2$ en términos de funciones de $\theta$.
+
+\begin{teorema}[title=Fórmulas de Ángulo Medio]
+\begin{align}
+\sin\left(\frac{\theta}{2}\right) &= \pm\sqrt{\frac{1 - \cos\theta}{2}} \\
+\cos\left(\frac{\theta}{2}\right) &= \pm\sqrt{\frac{1 + \cos\theta}{2}} \\
+\tan\left(\frac{\theta}{2}\right) &= \pm\sqrt{\frac{1 - \cos\theta}{1 + \cos\theta}} = \frac{\sin\theta}{1 + \cos\theta} = \frac{1 - \cos\theta}{\sin\theta}
+\end{align}
+\end{teorema}
+
+El signo $\pm$ depende del cuadrante donde se encuentra $\theta/2$:
+\begin{itemize}
+    \item Si $0° < \theta/2 < 90°$ (Cuadrante I): todas positivas
+    \item Si $90° < \theta/2 < 180°$ (Cuadrante II): seno positivo, coseno negativo
+    \item Si $180° < \theta/2 < 270°$ (Cuadrante III): ambas negativas
+    \item Si $270° < \theta/2 < 360°$ (Cuadrante IV): seno negativo, coseno positivo
+\end{itemize}
+
+\subsection{Transformación de Productos en Sumas o Diferencias}
+
+Estas identidades convierten productos de funciones trigonométricas en sumas o diferencias, lo cual es muy útil en física e ingeniería.
+
+\begin{teorema}[title=Producto a Suma]
+\begin{align}
+\sin\alpha\cos\beta &= \frac{1}{2}[\sin(\alpha + \beta) + \sin(\alpha - \beta)] \\
+\cos\alpha\sin\beta &= \frac{1}{2}[\sin(\alpha + \beta) - \sin(\alpha - \beta)] \\
+\cos\alpha\cos\beta &= \frac{1}{2}[\cos(\alpha + \beta) + \cos(\alpha - \beta)] \\
+\sin\alpha\sin\beta &= \frac{1}{2}[\cos(\alpha - \beta) - \cos(\alpha + \beta)]
+\end{align}
+\end{teorema}
+
+\begin{ejemplo}
+Aplicación en física ondulatoria:
+Cuando dos ondas de frecuencias diferentes se superponen, el producto $\sin(f_1 t)\sin(f_2 t)$ representa la modulación. Usando la identidad:
+\[
+\sin(f_1 t)\sin(f_2 t) = \frac{1}{2}[\cos((f_1-f_2)t) - \cos((f_1+f_2)t)]
+\]
+Esto muestra que obtenemos dos nuevas frecuencias: la diferencia y la suma de las originales.
+\end{ejemplo}
+
+\subsection{Transformación de Sumas o Diferencias en Productos}
+
+Estas son las identidades inversas, que convierten sumas en productos.
+
+\begin{teorema}[title=Suma a Producto]
+\begin{align}
+\sin\alpha + \sin\beta &= 2\sin\left(\frac{\alpha + \beta}{2}\right)\cos\left(\frac{\alpha - \beta}{2}\right) \\
+\sin\alpha - \sin\beta &= 2\cos\left(\frac{\alpha + \beta}{2}\right)\sin\left(\frac{\alpha - \beta}{2}\right) \\
+\cos\alpha + \cos\beta &= 2\cos\left(\frac{\alpha + \beta}{2}\right)\cos\left(\frac{\alpha - \beta}{2}\right) \\
+\cos\alpha - \cos\beta &= -2\sin\left(\frac{\alpha + \beta}{2}\right)\sin\left(\frac{\alpha - \beta}{2}\right)
+\end{align}
+\end{teorema}
+
+\begin{nota}
+Estas identidades son especialmente útiles para:
+\begin{itemize}
+    \item Simplificar expresiones trigonométricas complejas
+    \item Resolver ecuaciones trigonométricas
+    \item Analizar fenómenos de interferencia en física
+    \item Procesar señales en ingeniería
+\end{itemize}
+\end{nota}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=6cm,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={},
+        xmin=0, xmax=360,
+        ymin=-2.5, ymax=2.5,
+        xtick={0,90,180,270,360},
+        grid=major,
+        grid style={line width=.2pt, draw=gray!30},
+        legend pos=north east
+    ]
+
+    % Suma de senos
+    \addplot[domain=0:360,samples=200,smooth,thick,blue]
+        {sin(x) + sin(3*x)};
+    \addlegendentry{$\sin x + \sin 3x$}
+
+    % Producto equivalente
+    \addplot[domain=0:360,samples=200,smooth,thick,red,dashed]
+        {2*sin(2*x)*cos(x)};
+    \addlegendentry{$2\sin 2x \cos x$}
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Visualización del Círculo Unitario y las Identidades}
+
+Para comprender mejor las identidades, es fundamental visualizarlas en el círculo unitario.
+
+\begin{center}
+\begin{tikzpicture}[scale=4]
+    % Círculo unitario
+    \draw[thick,maincolor] (0,0) circle (1);
+
+    % Ejes
+    \draw[-{Latex},thick] (-1.2,0) -- (1.2,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-1.2) -- (0,1.2) node[above] {$y$};
+
+    % Puntos importantes
+    \foreach \angle/\x/\y/\xtext/\ytext/\pos in {
+        0/1/0/1/0/right,
+        30/{sqrt(3)/2}/{1/2}/{\frac{\sqrt{3}}{2}}/{\frac{1}{2}}/{above right},
+        45/{sqrt(2)/2}/{sqrt(2)/2}/{\frac{\sqrt{2}}{2}}/{\frac{\sqrt{2}}{2}}/{above right},
+        60/{1/2}/{sqrt(3)/2}/{\frac{1}{2}}/{\frac{\sqrt{3}}{2}}/{above right},
+        90/0/1/0/1/above,
+        120/{-1/2}/{sqrt(3)/2}/{-\frac{1}{2}}/{\frac{\sqrt{3}}{2}}/{above left},
+        135/{-sqrt(2)/2}/{sqrt(2)/2}/{-\frac{\sqrt{2}}{2}}/{\frac{\sqrt{2}}{2}}/{above left},
+        150/{-sqrt(3)/2}/{1/2}/{-\frac{\sqrt{3}}{2}}/{\frac{1}{2}}/{above left},
+        180/-1/0/{-1}/0/left,
+        210/{-sqrt(3)/2}/{-1/2}/{-\frac{\sqrt{3}}{2}}/{-\frac{1}{2}}/{below left},
+        225/{-sqrt(2)/2}/{-sqrt(2)/2}/{-\frac{\sqrt{2}}{2}}/{-\frac{\sqrt{2}}{2}}/{below left},
+        240/{-1/2}/{-sqrt(3)/2}/{-\frac{1}{2}}/{-\frac{\sqrt{3}}{2}}/{below left},
+        270/0/-1/0/{-1}/below,
+        300/{1/2}/{-sqrt(3)/2}/{\frac{1}{2}}/{-\frac{\sqrt{3}}{2}}/{below right},
+        315/{sqrt(2)/2}/{-sqrt(2)/2}/{\frac{\sqrt{2}}{2}}/{-\frac{\sqrt{2}}{2}}/{below right},
+        330/{sqrt(3)/2}/{-1/2}/{\frac{\sqrt{3}}{2}}/{-\frac{1}{2}}/{below right}
+    } {
+        \coordinate (P\angle) at (\x,\y);
+        \filldraw[accentcolor] (P\angle) circle (0.015);
+        \draw[gray,thin] (0,0) -- (P\angle);
+        \node[\pos,font=\tiny] at (P\angle) {$(\xtext,\ytext)$};
+    }
+
+    % Ángulos especiales marcados
+    \foreach \angle/\label in {
+        30/30°, 45/45°, 60/60°, 90/90°,
+        120/120°, 135/135°, 150/150°, 180/180°,
+        210/210°, 225/225°, 240/240°, 270/270°,
+        300/300°, 315/315°, 330/330°
+    } {
+        \node[font=\scriptsize] at ({\angle}:0.85) {$\label$};
+    }
+
+    % Identidad fundamental ilustrada
+    \def\demoangle{40}
+    \coordinate (Demo) at ({\demoangle}:1);
+    \draw[blue,very thick] (0,0) -- (Demo |- 0,0) node[midway,below] {$\cos\theta$};
+    \draw[red,very thick] (Demo |- 0,0) -- (Demo) node[midway,right] {$\sin\theta$};
+    \draw[green!60!black,very thick] (0,0) -- (Demo) node[midway,above,sloped] {$r=1$};
+
+    % Anotación
+    \node[align=center] at (0,-0.5) {$\sin^2\theta + \cos^2\theta = 1$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Técnicas para Simplificar Expresiones Trigonométricas}
+
+Simplificar expresiones trigonométricas es como resolver un puzzle. Aquí te doy las estrategias más efectivas:
+
+\begin{enumerate}
+    \item \textbf{Convertir todo a senos y cosenos:} Cuando la expresión tiene muchas funciones diferentes, convierte todo a $\sin\theta$ y $\cos\theta$.
+
+    \item \textbf{Usar identidades pitagóricas:} Si ves $\sin^2\theta$ o $\cos^2\theta$, piensa en usar $\sin^2\theta + \cos^2\theta = 1$.
+
+    \item \textbf{Factorizar:} Busca factores comunes, diferencias de cuadrados, y otras técnicas algebraicas.
+
+    \item \textbf{Denominadores comunes:} Cuando sumes fracciones, encuentra el mínimo común denominador.
+
+    \item \textbf{Conjugados:} Para racionalizar expresiones con radicales o eliminar fracciones complejas.
+\end{enumerate}
+
+\begin{ejemplo}
+Simplificar: $\frac{1 - \cos^2\theta}{\sin\theta}$
+
+Solución:
+\begin{align}
+\frac{1 - \cos^2\theta}{\sin\theta} &= \frac{\sin^2\theta}{\sin\theta} \quad \text{(usando } \sin^2\theta + \cos^2\theta = 1\text{)} \\
+&= \sin\theta \quad \text{(simplificando)}
+\end{align}
+\end{ejemplo}
+
+\subsection{Demostración de Identidades Trigonométricas}
+
+Demostrar una identidad trigonométrica significa mostrar que dos expresiones son equivalentes para todos los valores donde están definidas. Las estrategias principales son:
+
+\begin{enumerate}
+    \item \textbf{Trabajar con un lado:} Transforma el lado más complejo hasta obtener el más simple.
+
+    \item \textbf{Trabajar con ambos lados:} Transforma ambos lados hasta llegar a la misma expresión.
+
+    \item \textbf{Método de la conjugada:} Multiplica numerador y denominador por el conjugado.
+
+    \item \textbf{Sustitución:} Reemplaza una función por su equivalente en términos de otras.
+\end{enumerate}
+
+\begin{teorema}[title=Estrategia General para Demostraciones]
+\begin{enumerate}
+    \item Examina ambos lados de la identidad
+    \item Identifica qué identidades conocidas podrían ser útiles
+    \item Comienza con el lado más complejo
+    \item Simplifica paso a paso, justificando cada transformación
+    \item Continúa hasta obtener el otro lado
+\end{enumerate}
+\end{teorema}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Diagrama de flujo para demostrar identidades
+    \node[draw,rectangle,rounded corners,fill=maincolor!20] (start) at (0,0) {Identidad a demostrar};
+
+    \node[draw,rectangle,rounded corners,fill=accentcolor!20] (step1) at (0,-1.5) {Elegir lado complejo};
+
+    \node[draw,rectangle,rounded corners,fill=accentcolor!20] (step2) at (-3,-3) {Convertir a sen/cos};
+
+    \node[draw,rectangle,rounded corners,fill=accentcolor!20] (step3) at (0,-3) {Usar pitagóricas};
+
+    \node[draw,rectangle,rounded corners,fill=accentcolor!20] (step4) at (3,-3) {Factorizar};
+
+    \node[draw,rectangle,rounded corners,fill=green!20] (end) at (0,-4.5) {Lado simple obtenido};
+
+    % Flechas
+    \draw[-{Latex}] (start) -- (step1);
+    \draw[-{Latex}] (step1) -- (step2);
+    \draw[-{Latex}] (step1) -- (step3);
+    \draw[-{Latex}] (step1) -- (step4);
+    \draw[-{Latex}] (step2) -- (end);
+    \draw[-{Latex}] (step3) -- (end);
+    \draw[-{Latex}] (step4) -- (end);
+\end{tikzpicture}
+\end{center}
+
+%INSERTAR_EJEMPLOS_AQUI%
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+%INSERTAR_EJERCICIOS_INVERSOS_AQUI%
+
+\newpage
+
+\section{Ejercicios Propuestos}
+
+%INSERTAR_EJERCICIOS_AQUI%
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicidades! Has completado el estudio de las identidades trigonométricas fundamentales. Este conocimiento es una herramienta poderosa que te acompañará en tu viaje matemático y científico.
+
+\subsection{Resumen de Conceptos Clave}
+
+\begin{center}
+\begin{tcolorbox}[enhanced,colback=maincolor!10,colframe=maincolor,title=Tabla de Identidades Fundamentales]
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{ll}
+\hline
+\textbf{Tipo de Identidad} & \textbf{Fórmulas} \\
+\hline
+\multirow{3}{*}{Recíprocas} & $\csc\theta = \frac{1}{\sin\theta}$ \\
+& $\sec\theta = \frac{1}{\cos\theta}$ \\
+& $\cot\theta = \frac{1}{\tan\theta}$ \\
+\hline
+\multirow{2}{*}{Razón} & $\tan\theta = \frac{\sin\theta}{\cos\theta}$ \\
+& $\cot\theta = \frac{\cos\theta}{\sin\theta}$ \\
+\hline
+\multirow{3}{*}{Pitagóricas} & $\sin^2\theta + \cos^2\theta = 1$ \\
+& $1 + \tan^2\theta = \sec^2\theta$ \\
+& $1 + \cot^2\theta = \csc^2\theta$ \\
+\hline
+\multirow{2}{*}{Suma de Ángulos} & $\sin(\alpha + \beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta$ \\
+& $\cos(\alpha + \beta) = \cos\alpha\cos\beta - \sin\alpha\sin\beta$ \\
+\hline
+\multirow{3}{*}{Ángulo Doble} & $\sin(2\theta) = 2\sin\theta\cos\theta$ \\
+& $\cos(2\theta) = \cos^2\theta - \sin^2\theta$ \\
+& $\tan(2\theta) = \frac{2\tan\theta}{1 - \tan^2\theta}$ \\
+\hline
+\multirow{2}{*}{Ángulo Medio} & $\sin\left(\frac{\theta}{2}\right) = \pm\sqrt{\frac{1 - \cos\theta}{2}}$ \\
+& $\cos\left(\frac{\theta}{2}\right) = \pm\sqrt{\frac{1 + \cos\theta}{2}}$ \\
+\hline
+\end{tabular}
+\end{tcolorbox}
+\end{center}
+
+\subsection{Consejos para Trabajar con Identidades}
+
+\begin{enumerate}
+    \item \textbf{Practica regularmente:} Las identidades se vuelven naturales con la práctica constante.
+
+    \item \textbf{Memoriza las fundamentales:} No necesitas memorizar todas, pero las pitagóricas y recíprocas son esenciales.
+
+    \item \textbf{Entiende las derivaciones:} Si entiendes cómo se derivan las identidades, podrás reconstruirlas cuando las olvides.
+
+    \item \textbf{Visualiza en el círculo unitario:} Muchas identidades tienen interpretaciones geométricas claras.
+
+    \item \textbf{Verifica tus respuestas:} Sustituye valores específicos de ángulos para comprobar si tu simplificación es correcta.
+
+    \item \textbf{Desarrolla intuición:} Con el tiempo, desarrollarás un ``sexto sentido'' para saber qué identidad usar.
+\end{enumerate}
+
+\subsection{Aplicaciones Avanzadas}
+
+Las identidades trigonométricas que has aprendido son la base para:
+
+\begin{itemize}
+    \item \textbf{Cálculo diferencial e integral:} Las derivadas e integrales de funciones trigonométricas
+    \item \textbf{Series de Fourier:} Descomposición de señales complejas
+    \item \textbf{Números complejos:} La fórmula de Euler conecta trigonometría con exponenciales complejas
+    \item \textbf{Mecánica cuántica:} Funciones de onda y probabilidades
+    \item \textbf{Procesamiento de imágenes:} Transformadas utilizadas en compresión JPEG
+    \item \textbf{Música digital:} Síntesis y análisis de sonidos
+\end{itemize}
+
+\subsection{Recomendaciones para Continuar}
+
+Para profundizar tu comprensión:
+
+\begin{enumerate}
+    \item \textbf{Practica con problemas variados:} Busca problemas de olimpiadas matemáticas que involucren identidades.
+
+    \item \textbf{Explora aplicaciones:} Investiga cómo se usan las identidades en tu área de interés (física, ingeniería, música, etc.).
+
+    \item \textbf{Usa software matemático:} Programas como GeoGebra te permiten visualizar las identidades dinámicamente.
+
+    \item \textbf{Conecta con otros temas:} Ve cómo las identidades se relacionan con vectores, matrices y números complejos.
+
+    \item \textbf{Enseña a otros:} Explicar identidades a compañeros solidifica tu comprensión.
+\end{enumerate}
+
+\subsection{Reflexión Final}
+
+Las identidades trigonométricas son mucho más que fórmulas para memorizar. Son patrones fundamentales que aparecen en toda la naturaleza: desde las ondas del mar hasta las señales de tu teléfono móvil, desde la música que escuchas hasta la luz que ves.
+
+Cada identidad cuenta una historia sobre la simetría y la armonía en las matemáticas. La identidad pitagórica fundamental $\sin^2\theta + \cos^2\theta = 1$ no es solo una ecuación; es una expresión de la perfecta relación entre las coordenadas de un punto en el círculo unitario.
+
+Al dominar estas identidades, no solo has aprendido matemáticas - has adquirido un lenguaje para describir fenómenos periódicos, oscilaciones y ondas en el universo. Este conocimiento te abre puertas a campos fascinantes como la física cuántica, la ingeniería de telecomunicaciones, la astronomía y muchos más.
+
+\begin{center}
+\begin{tikzpicture}[scale=2]
+    % Espiral logarítmica con funciones trigonométricas
+    \draw[domain=0:720,variable=\t,smooth,samples=200,thick,maincolor]
+        plot ({0.01*\t*cos(\t)},{0.01*\t*sin(\t)});
+
+    % Centro
+    \filldraw[accentcolor] (0,0) circle (0.05);
+
+    % Texto
+    \node[below] at (0,-2) {\textit{``Las matemáticas son el lenguaje con el que Dios escribió el universo''}};
+    \node[below] at (0,-2.3) {\small --- Galileo Galilei};
+\end{tikzpicture}
+\end{center}
+
+Continúa explorando, preguntando y descubriendo. Las identidades trigonométricas son solo el comienzo de un viaje matemático fascinante. ¡El mundo de las matemáticas te espera!
+
+\end{document}
