@@ -244,7 +244,6 @@ Veamos algunos ejemplos visuales de lugares geométricos:
 \begin{axis}[
     width=0.90\textwidth,
     height=0.60\textwidth,
-    axis equal image,
     axis lines=middle,
     xlabel={$x$},
     ylabel={$y$},
@@ -464,7 +463,7 @@ Veamos diferentes tipos de pendientes:
     grid=major,
     grid style={dashed, gray!30},
     title={Diferentes tipos de pendientes},
-    legend pos=outer north east
+    legend pos= south west
 ]
 
 % Pendiente positiva grande
@@ -589,11 +588,11 @@ Veamos una recta con todos sus elementos identificados:
 % Triángulo para mostrar la pendiente
 \draw[thick, dashed, orange] (axis cs:2,3) -- (axis cs:5,3) node[midway, below] {$\Delta x = 3$};
 \draw[thick, dashed, orange] (axis cs:5,3) -- (axis cs:5,5.25) node[midway, right] {$\Delta y = 2.25$};
-\node[orange, below right] at (axis cs:2.5,4) {$m = \frac{2.25}{3} = 0.75$};
+\node[orange, below right] at (axis cs:3.4,3.85) {$m = \frac{2.25}{3} = 0.75$};
 
 % Ángulo de inclinación
-\draw[thick, red] (axis cs:0.5,0) arc (0:37:0.5);
-\node[red] at (axis cs:1,0.3) {$\theta \approx 37°$};
+\draw[thick, red] (axis cs:-1.5,0) arc (0:37:0.5);
+\node[red] at (axis cs:-0.65,0.3) {$\theta \approx 37°$};
 
 \end{axis}
 \end{tikzpicture}
@@ -659,7 +658,12 @@ Veamos una aplicación práctica visualizada:
     grid=major,
     grid style={dashed, gray!30},
     title={Aplicación: Trayectoria de dos vehículos},
-    legend pos=north west
+    legend style={
+   	at={(0.25,.6)},
+   	anchor=south,
+   	font=\small,
+   	fill=white!10
+    }
 ]
 
 % Vehículo 1: sale del origen con velocidad 60 km/h
@@ -759,7 +763,7 @@ Veamos gráficamente estos cuatro casos:
 \addplot[thirdcolor, thick, domain=-5:-1] {0.8*x - 1.2};
 
 % Punto de intersección secantes
-\addplot[mark=*, mark size=3pt, thirdcolor] coordinates {(-3.5,-1.9)};
+\addplot[mark=*, mark size=3pt, thirdcolor] coordinates {(-2,-2.8)};
 
 % Rectas coincidentes (se ve como una sola)
 \addplot[purple, ultra thick, domain=1:5] {-x + 3} node[pos=0.5, above, sloped] {Coincidentes};
@@ -910,7 +914,7 @@ d = 10 \text{ unidades}
 
 % Puntos A y B
 \addplot[only marks, mark=*, mark size=4pt, color=blue] coordinates {(2,3) (8,11)};
-\node[above right, blue] at (axis cs:2,3) {$A(2,3)$};
+\node[above left, blue] at (axis cs:2,3) {$A(2,3)$};
 \node[above right, blue] at (axis cs:8,11) {$B(8,11)$};
 
 % Línea entre A y B
@@ -1005,7 +1009,7 @@ Como $d(M,P) = d(M,Q)$, confirmamos que $M$ es el punto medio. ✓
 
 \node[below left, blue] at (axis cs:-4,2) {$P(-4,2)$};
 \node[above right, blue] at (axis cs:6,10) {$Q(6,10)$};
-\node[above right, red] at (axis cs:1,6) {$M(1,6)$};
+\node[below right, red] at (axis cs:1,6) {$M(1,6)$};
 
 % Segmento PQ
 \addplot[thick, color=blue!50] coordinates {(-4,2) (6,10)};
@@ -1225,7 +1229,7 @@ La pendiente es el coeficiente de $x$, que es $2$. ✓
 
 % Punto P(3,5)
 \addplot[only marks, mark=*, mark size=5pt, color=red] coordinates {(3,5)};
-\node[above right, red] at (axis cs:3,5) {Almacén $P(3,5)$};
+\node[above left, red] at (axis cs:3,5) {Almacén $P(3,5)$};
 
 % Triángulo de pendiente
 \addplot[dashed, color=green!70!black, thick] coordinates {(3,5) (4,5)};
@@ -1334,7 +1338,11 @@ Para $B(5, 12)$: $y = 2(5) + 2 = 12$ ✓
     grid style={dashed, gray!30},
     xtick={-2,-1,0,1,2,3,4,5,6,7},
     ytick={-1,0,2,4,6,8,10,12,14},
-    legend pos=north west,
+    legend style={
+   	at={(0.5,.75)},
+   	anchor=south,
+   	font=\small
+    }
 ]
 
 % Recta y = 2x + 2
@@ -1344,12 +1352,12 @@ Para $B(5, 12)$: $y = 2(5) + 2 = 12$ ✓
 % Puntos A y B
 \addplot[only marks, mark=*, mark size=4pt, color=red] coordinates {(1,4) (5,12)};
 \node[above left, red] at (axis cs:1,4) {$A(1,4)$};
-\node[above right, red] at (axis cs:5,12) {$B(5,12)$};
+\node[below right, red] at (axis cs:5,12) {$B(5,12)$};
 
 % Intersecciones con los ejes
 \addplot[only marks, mark=*, mark size=4pt, color=green!70!black] coordinates {(-1,0) (0,2)};
-\node[below, green!70!black] at (axis cs:-1,0) {$(-1,0)$};
-\node[left, green!70!black] at (axis cs:0,2) {$(0,2)$};
+\node[above left, green!70!black] at (axis cs:-1,0) {$(-1,0)$};
+\node[below right, green!70!black] at (axis cs:0,2) {$(0,2)$};
 
 % Triángulo de pendiente
 \addplot[dashed, color=orange, thick] coordinates {(1,4) (5,4)};
@@ -1595,7 +1603,7 @@ Punto de intersección: $I\left(\frac{125}{29}, \frac{37}{29}\right) \approx (4.
     grid style={dashed, gray!30},
     xtick={0,2,4,6,8},
     ytick={-2,0,2,4,6,8},
-    legend pos=north west,
+    legend pos=north east,
 ]
 
 % Primera pared: y = -(2/5)x + 3
@@ -1608,7 +1616,7 @@ Punto de intersección: $I\left(\frac{125}{29}, \frac{37}{29}\right) \approx (4.
 
 % Punto C(5,3)
 \addplot[only marks, mark=*, mark size=4pt, color=red] coordinates {(5,3)};
-\node[above right, red] at (axis cs:5,3) {$C(5,3)$};
+\node[above left, red] at (axis cs:5,3) {$C(5,3)$};
 
 % Punto de intersección I
 \addplot[only marks, mark=*, mark size=5pt, color=green!70!black] coordinates {(4.31,1.28)};
@@ -1741,16 +1749,16 @@ t = \frac{60\sqrt{2} \text{ km}}{\sqrt{2} \text{ km/min}} = 60 \text{ minutos}
 
 % Puntos A, B, P60
 \addplot[only marks, mark=*, mark size=4pt, color=red] coordinates {(10,20) (40,50) (70,80)};
-\node[below left, red] at (axis cs:10,20) {$A(10,20)$ $t=0$ min};
+\node[above right, red] at (axis cs:10,20) {$A(10,20)$ $t=0$ min};
 \node[above left, red] at (axis cs:40,50) {$B(40,50)$ $t=30$ min};
-\node[above right, red] at (axis cs:70,80) {$(70,80)$ $t=60$ min};
+\node[above left, red] at (axis cs:70,80) {$(70,80)$ $t=60$ min};
 
 % Vectores de desplazamiento
 \addplot[->, ultra thick, color=green!70!black] coordinates {(10,20) (40,50)};
 \addplot[->, ultra thick, color=orange] coordinates {(40,50) (70,80)};
 
-\node[above, green!70!black] at (axis cs:25,35) {$30\sqrt{2}$ km};
-\node[above, orange] at (axis cs:55,65) {$30\sqrt{2}$ km};
+\node[below right, green!70!black] at (axis cs:25,35) {$30\sqrt{2}$ km};
+\node[below right, orange] at (axis cs:55,65) {$30\sqrt{2}$ km};
 
 \end{axis}
 \end{tikzpicture}
@@ -1911,7 +1919,7 @@ Usando la fórmula del área con base y altura:
     ymin=-1, ymax=13,
     grid=major,
     grid style={dashed, gray!30},
-    legend pos=north west,
+    legend pos=outer north east,
 ]
 
 % Arista tipo 1
@@ -1927,9 +1935,9 @@ Usando la fórmula del área con base y altura:
 
 % Puntos
 \addplot[only marks, mark=*, mark size=4pt, color=black] coordinates {(0,0) (6.44,11.16) (12.89,0)};
-\node[below left] at (axis cs:0,0) {$(0,0)$};
-\node[above] at (axis cs:6.44,11.16) {$I(6.44, 11.16)$};
-\node[below] at (axis cs:12.89,0) {$(12.89, 0)$};
+\node[above right] at (axis cs:0,0) {$(0,0)$};
+\node[above left] at (axis cs:6.44,11.16) {$I(6.44, 11.16)$};
+\node[above left] at (axis cs:12.89,0) {$(12.89, 0)$};
 
 \end{axis}
 \end{tikzpicture}
@@ -2071,10 +2079,10 @@ Como el vehículo va de $A$ a $C$ en dirección creciente, el punto $D$ más ló
 
 % Puntos A, B, C, D
 \addplot[only marks, mark=*, mark size=4pt, color=red] coordinates {(2,3) (8,7) (14,11) (22.32,16.55)};
-\node[below left, red] at (axis cs:2,3) {$A(2,3)$};
+\node[right, red] at (axis cs:2,3) {$A(2,3)$};
 \node[above left, red] at (axis cs:8,7) {$B(8,7)$};
 \node[above left, red] at (axis cs:14,11) {$C(14,11)$};
-\node[above right, red] at (axis cs:22.32,16.55) {$D(22.32,16.55)$};
+\node[above left, red] at (axis cs:22.32,16.55) {$D(22.32,16.55)$};
 
 % Segmentos
 \addplot[<->, thick, color=green!70!black] coordinates {(2,3) (8,7)};
@@ -2354,12 +2362,12 @@ Cuando dos puntos tienen la misma coordenada $x$ (como en el inciso c), la recta
 % Inciso a) m=2
 \addplot[thick, color=blue, domain=0:6] {2*x + 1};
 \addplot[only marks, mark=*, mark size=3pt, color=blue] coordinates {(1,3) (5,11)};
-\node[above right, blue] at (axis cs:3,7) {$m=2$};
+\node[below right, blue] at (axis cs:3,7) {$m=2$};
 
 % Inciso b) m=-2
 \addplot[thick, color=red, domain=-3:4] {-2*x};
 \addplot[only marks, mark=*, mark size=3pt, color=red] coordinates {(-2,4) (3,-6)};
-\node[below, red] at (axis cs:0.5,0) {$m=-2$};
+\node[above right, red] at (axis cs:0.5,0) {$m=-2$};
 
 % Inciso c) vertical
 \addplot[thick, color=green!70!black] coordinates {(7,2) (7,9)};
@@ -2515,7 +2523,7 @@ x + y - 5 = 0
     ymin=-3, ymax=14,
     grid=major,
     grid style={dashed, gray!30},
-    legend pos=north west,
+    legend pos=outer north east,
 ]
 
 % Inciso a)
@@ -2717,7 +2725,7 @@ y &= 6x - 19
 \addplot[thick, color=blue, domain=-1:10] {0.75*x + 3};
 \addplot[thick, color=blue, dashed, domain=3:9] {-4/3*x + 10};
 \addplot[only marks, mark=*, mark size=3pt, color=blue] coordinates {(6,2)};
-\node[above, blue] at (axis cs:6,2) {$P(6,2)$};
+\node[below left, blue] at (axis cs:6,2) {$P(6,2)$};
 
 % Ángulo recto en P
 \draw[thick, blue] (axis cs:6,2) -- ++(0.5,0.375) -- ++(0.667,-0.5);
@@ -2835,14 +2843,14 @@ y = -(3) + 6 = 3 \quad \checkmark
     ymin=-1, ymax=12,
     grid=major,
     grid style={dashed, gray!30},
-    legend pos=north west,
+    legend pos=north east,
 ]
 
 % Inciso a)
 \addplot[thick, color=blue, domain=0:6] {10 - 2*x};
 \addplot[thick, color=red, domain=0:7] {x - 2};
 \addplot[only marks, mark=*, mark size=4pt, color=black] coordinates {(4,2)};
-\node[above right] at (axis cs:4,2) {$I_a(4,2)$};
+\node[right=2mm] at (axis cs:4,2) {$I_a(4,2)$};
 \addlegendentry{$2x + y = 10$}
 \addlegendentry{$x - y = 2$}
 
@@ -2850,7 +2858,7 @@ y = -(3) + 6 = 3 \quad \checkmark
 \addplot[thick, color=green!70!black, domain=0:5] {2*x - 3};
 \addplot[thick, color=orange, domain=0:7] {-x + 6};
 \addplot[only marks, mark=*, mark size=4pt, color=black] coordinates {(3,3)};
-\node[below right] at (axis cs:3,3) {$I_c(3,3)$};
+\node[left=2mm] at (axis cs:3,3) {$I_c(3,3)$};
 \addlegendentry{$y = 2x - 3$}
 \addlegendentry{$y = -x + 6$}
 
@@ -2975,7 +2983,7 @@ x &= \frac{134}{14} = \frac{67}{7} \approx 9.57
 
 % Intersección
 \addplot[only marks, mark=*, mark size=5pt, color=orange] coordinates {(6.86,5.43)};
-\node[above right, orange] at (axis cs:6.86,5.43) {Rotonda $I(6.86, 5.43)$};
+\node[right=3mm, orange] at (axis cs:6.86,5.43) {Rotonda $I(6.86, 5.43)$};
 
 % Punto en eje x
 \addplot[only marks, mark=*, mark size=4pt, color=green!70!black] coordinates {(9.57,0)};
@@ -3206,7 +3214,7 @@ Durante este recorrido, has dominado conceptos fundamentales que son la base de 
 
 \begin{center}
 \renewcommand{\arraystretch}{1.5}
-\begin{tabular}{|p{5cm}|p{7cm}|p{3cm}|}
+\begin{tabular}{|p{5cm}|p{5cm}|p{3cm}|}
 \hline
 \textbf{Concepto} & \textbf{Fórmula} & \textbf{Uso Principal} \\
 \hline
@@ -3317,7 +3325,6 @@ Has demostrado perseverancia y dedicación al completar este estudio. Los concep
 \begin{axis}[
     width=0.85\textwidth,
     height=0.55\textwidth,
-    axis equal image,
     axis lines=none,
     xmin=-10, xmax=10,
     ymin=-10, ymax=10,
