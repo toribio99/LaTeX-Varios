@@ -471,7 +471,7 @@ Ejemplo: Resolver $2\sin^2 x - \sin x - 1 = 0$
 
 Las identidades trigonométricas son herramientas poderosas para simplificar y resolver ecuaciones complejas.
 
-\begin{teorema}[Identidades Pitagóricas]
+\begin{teorema}[title={Identidades Pitagóricas}]
 \begin{align}
 \sin^2 x + \cos^2 x &= 1 \\
 1 + \tan^2 x &= \sec^2 x \\
@@ -506,7 +506,7 @@ Ejemplo: Resolver $\sin^2 x + \sin x \cos x - 2\cos^2 x = 0$
 
 Las identidades de ángulo doble y ángulo medio nos permiten resolver ecuaciones más complejas.
 
-\begin{teorema}[Identidades de Ángulo Doble]
+\begin{teorema}[title={Identidades de Ángulo Doble}]
 \begin{align}
 \sin(2x) &= 2\sin x \cos x \\
 \cos(2x) &= \cos^2 x - \sin^2 x = 2\cos^2 x - 1 = 1 - 2\sin^2 x \\
@@ -514,7 +514,7 @@ Las identidades de ángulo doble y ángulo medio nos permiten resolver ecuacione
 \end{align}
 \end{teorema}
 
-\begin{teorema}[Identidades de Ángulo Medio]
+\begin{teorema}[title={Identidades de Ángulo Medio}]
 \begin{align}
 \sin\left(\frac{x}{2}\right) &= \pm\sqrt{\frac{1 - \cos x}{2}} \\
 \cos\left(\frac{x}{2}\right) &= \pm\sqrt{\frac{1 + \cos x}{2}} \\
@@ -710,9 +710,12 @@ Pero aquí viene lo interesante: debido a obstáculos (edificios, calles cerrada
     \draw[accentcolor,->] (4,0.5) arc (90:35:0.5);
     \draw[accentcolor,->] (4.5,3) arc (0:34:0.5);
 
-    % Car icons
-    \node at (0,0) {\includegraphics[width=0.5cm]{car.png}};
-    \node at (7,5) {\includegraphics[width=0.5cm]{flag.png}};
+    % Car and flag icons (using simple TikZ shapes)
+    \fill[accentcolor] (0,0) circle (3pt);
+    \node[below,font=\tiny] at (0,-0.1) {Inicio};
+    \fill[thirdcolor] (7,5) -- (7.3,5.15) -- (7,5.3) -- cycle;
+    \draw[thirdcolor,very thick] (7,5) -- (7,4.7);
+    \node[above,font=\tiny] at (7,5.4) {Meta};
 \end{tikzpicture}
 \end{center}
 
