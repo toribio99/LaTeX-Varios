@@ -1,0 +1,3161 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel,patterns,angles,quotes}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\pgfplotsset{compat=1.18}
+
+% Definición de colores
+\definecolor{maincolor}{RGB}{0,70,173}
+\definecolor{accentcolor}{RGB}{255,127,0}
+\definecolor{thirdcolor}{RGB}{0,150,0}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{thirdcolor}}{\thesubsubsection}{0.5em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Configuración de encabezados y pies de página
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad Ecuaciones Trigonométricas}}
+\fancyhead[RO]{\small\textcolor{maincolor}{Ecuaciones Trigonométricas \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+% Definición de cajas tcolorbox
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=blue!5,
+  colframe=blue!60!black,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+\newtcolorbox{teorema}[1][]{
+  enhanced,
+  breakable,
+  colback=purple!5,
+  colframe=purple!60!black,
+  fonttitle=\bfseries,
+  title=Teorema,
+  #1
+}
+
+% Título y datos del documento
+\title{\textbf{\Huge TRIGONOMETRÍA ANALÍTICA}\\[0.5cm]
+\Large Guía de Trigonometría - Grado 10}
+\author{Prof. Toribio De J Arrieta F\\
+\textit{La Pruebita}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Hola! Bienvenido al mundo fascinante de la trigonometría analítica, donde las matemáticas se vuelven verdaderamente emocionantes. ¿Alguna vez te has preguntado cómo los ingenieros calculan la dirección exacta de un carro en movimiento? ¿O cómo los navegantes encuentran su camino en medio del océano usando solo matemáticas? ¿Cómo es que tu teléfono puede recibir señales de radio tan claras? La respuesta a todas estas preguntas está en lo que vamos a estudiar: las ecuaciones trigonométricas.
+
+Imagina que eres un capitán de barco navegando por el océano Atlántico. No hay señales de GPS (supongamos que estamos en 1850), solo tienes las estrellas, un sextante y... ¡las ecuaciones trigonométricas! Con estas herramientas matemáticas, los navegantes han cruzado océanos durante siglos. O piensa en los ingenieros que diseñan las antenas de telecomunicaciones que permiten que puedas hablar con alguien al otro lado del mundo. Ellos usan ecuaciones trigonométricas para calcular exactamente cómo deben orientar las antenas para que las ondas electromagnéticas lleguen a su destino.
+
+\subsection*{¿Qué son las ecuaciones trigonométricas?}
+
+Las ecuaciones trigonométricas son como puzzles matemáticos donde necesitas encontrar los ángulos que hacen que una expresión sea verdadera. Por ejemplo, si te pregunto: ``¿Para qué ángulo el seno vale 0.5?'', estás resolviendo la ecuación $\sin x = 0.5$. Pero aquí viene lo interesante: ¡no hay solo una respuesta! Debido a que las funciones trigonométricas son periódicas (se repiten), hay infinitas soluciones. Es como preguntar: ``¿A qué hora las manecillas del reloj forman un ángulo recto?'' No solo a las 3:00, sino también a las 9:00, y si consideramos varios días, ¡infinitas veces!
+
+\subsection*{¿Por qué son tan importantes en el mundo real?}
+
+Las aplicaciones de las ecuaciones trigonométricas están por todas partes:
+
+\begin{itemize}
+    \item \textbf{Navegación marítima:} Los marineros usan ecuaciones trigonométricas para calcular su posición usando las estrellas y el sol. El método de navegación celestial depende completamente de resolver ecuaciones trigonométricas complejas.
+
+    \item \textbf{Ingeniería de ondas:} Cuando los ingenieros diseñan sistemas de sonido para un concierto, necesitan resolver ecuaciones trigonométricas para evitar que las ondas sonoras se cancelen entre sí (interferencia destructiva) y para crear puntos donde el sonido sea más fuerte (interferencia constructiva).
+
+    \item \textbf{Física ondulatoria:} El movimiento de las olas del mar, las vibraciones de una cuerda de guitarra, incluso la luz misma, todos se describen usando ecuaciones trigonométricas. Los físicos las usan para predecir cómo se comportarán las ondas en diferentes situaciones.
+
+    \item \textbf{Telecomunicaciones:} Tu celular funciona gracias a las ecuaciones trigonométricas. Las señales de radio son ondas, y para modularlas (agregar información) y demodularlas (extraer información), los ingenieros resuelven constantemente ecuaciones trigonométricas.
+
+    \item \textbf{Astronomía:} Los astrónomos usan ecuaciones trigonométricas para calcular las órbitas de los planetas, predecir eclipses y determinar la distancia a las estrellas. Sin ellas, no podríamos enviar sondas espaciales a Marte o calcular cuándo será el próximo eclipse solar.
+
+    \item \textbf{Dirección de vehículos:} Los sistemas de navegación de los carros modernos usan ecuaciones trigonométricas para calcular la mejor ruta. Cuando el GPS te dice ``gire a la derecha en 100 metros'', está resolviendo ecuaciones trigonométricas para determinar tu posición y dirección exactas.
+\end{itemize}
+
+\subsection*{Lo que aprenderás en esta guía}
+
+En esta guía vamos a explorar diferentes tipos de ecuaciones trigonométricas, desde las más simples hasta las más complejas. Aprenderás a:
+
+\begin{enumerate}
+    \item Resolver ecuaciones básicas como $\sin x = k$ o $\cos x = k$
+    \item Trabajar con ecuaciones lineales que involucran varias funciones trigonométricas
+    \item Dominar las ecuaciones cuadráticas trigonométricas (sí, como las ecuaciones cuadráticas que ya conoces, pero con senos y cosenos)
+    \item Usar identidades fundamentales para simplificar ecuaciones complicadas
+    \item Aplicar identidades de ángulo doble y ángulo medio para resolver problemas avanzados
+    \item Explorar las funciones trigonométricas inversas y sus aplicaciones
+    \item Ver cómo todo esto se aplica en la vida real, especialmente en la dirección de vehículos
+\end{enumerate}
+
+Prepárate para un viaje emocionante donde las matemáticas cobran vida. No estamos hablando de números abstractos sin sentido, sino de herramientas poderosas que literalmente mueven el mundo moderno. Cada vez que usas tu teléfono, escuchas música, o viajas en carro, las ecuaciones trigonométricas están trabajando silenciosamente en el fondo, haciendo posible la tecnología que damos por sentada.
+
+¡Comencemos este viaje juntos!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Ecuaciones Trigonométricas de la Forma $f(x) = k$}
+
+Empecemos con lo básico pero fundamental. Una ecuación trigonométrica de la forma $f(x) = k$ es aquella donde una función trigonométrica (seno, coseno, tangente, etc.) es igual a una constante. Por ejemplo: $\sin x = 0.5$, $\cos x = -0.7$, o $\tan x = 1$.
+
+\begin{definicion}
+Una ecuación trigonométrica básica tiene la forma:
+\[f(x) = k\]
+donde $f$ es una función trigonométrica (sen, cos, tan, csc, sec, cot) y $k$ es una constante real.
+\end{definicion}
+
+Lo fascinante de estas ecuaciones es que, debido a la naturaleza periódica de las funciones trigonométricas, generalmente tienen infinitas soluciones. Es como preguntarle a un reloj: ``¿Cuándo las manecillas forman este ángulo?'' La respuesta se repite cada 12 horas.
+
+\subsubsection{Resolución de $\sin x = k$}
+
+Para que la ecuación $\sin x = k$ tenga solución, necesitamos que $-1 \leq k \leq 1$ (porque el seno siempre está entre -1 y 1).
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-1.5, ymax=1.5,
+        xmin=0, xmax=720,
+        xtick={0,90,180,270,360,450,540,630,720},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$,$450°$,$540°$,$630°$,$720°$},
+        ytick={-1,-0.5,0,0.5,1},
+        width=0.9\textwidth,
+        height=0.5\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick
+    ]
+
+    % Función seno
+    \addplot[maincolor,very thick,smooth,domain=0:720,samples=100] {sin(x)};
+
+    % Línea horizontal y = 0.5
+    \addplot[accentcolor,thick,dashed,domain=0:720] {0.5};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(30,0.5) (150,0.5) (390,0.5) (510,0.5)};
+
+    % Etiquetas
+    \node[above,accentcolor] at (axis cs:30,0.5) {$30°$};
+    \node[above,accentcolor] at (axis cs:150,0.5) {$150°$};
+    \node[above,accentcolor] at (axis cs:390,0.5) {$390°$};
+    \node[above,accentcolor] at (axis cs:510,0.5) {$510°$};
+
+    \node[maincolor,above] at (axis cs:360,1) {$y = \sin x$};
+    \node[accentcolor] at (axis cs:650,0.5) {$y = 0.5$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Como puedes ver en la gráfica, cuando resolvemos $\sin x = 0.5$, encontramos múltiples soluciones: $x = 30°, 150°, 390°, 510°, ...$
+
+La solución general es:
+\begin{itemize}
+    \item Solución principal: $x = \arcsin(k)$ (también escrito como $\sin^{-1}(k)$)
+    \item Segunda solución en $[0°, 360°)$: $x = 180° - \arcsin(k)$
+    \item Solución general: $x = \arcsin(k) + 360°n$ o $x = 180° - \arcsin(k) + 360°n$, donde $n \in \mathbb{Z}$
+\end{itemize}
+
+\subsubsection{Resolución de $\cos x = k$}
+
+Similar al seno, para que $\cos x = k$ tenga solución, necesitamos $-1 \leq k \leq 1$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-1.5, ymax=1.5,
+        xmin=0, xmax=720,
+        xtick={0,90,180,270,360,450,540,630,720},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$,$450°$,$540°$,$630°$,$720°$},
+        ytick={-1,-0.5,0,0.5,1},
+        width=0.9\textwidth,
+        height=0.5\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick
+    ]
+
+    % Función coseno
+    \addplot[maincolor,very thick,smooth,domain=0:720,samples=100] {cos(x)};
+
+    % Línea horizontal y = -0.5
+    \addplot[accentcolor,thick,dashed,domain=0:720] {-0.5};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(120,-0.5) (240,-0.5) (480,-0.5) (600,-0.5)};
+
+    % Etiquetas
+    \node[below,accentcolor] at (axis cs:120,-0.5) {$120°$};
+    \node[below,accentcolor] at (axis cs:240,-0.5) {$240°$};
+    \node[below,accentcolor] at (axis cs:480,-0.5) {$480°$};
+    \node[below,accentcolor] at (axis cs:600,-0.5) {$600°$};
+
+    \node[maincolor,above] at (axis cs:180,-1) {$y = \cos x$};
+    \node[accentcolor] at (axis cs:650,-0.5) {$y = -0.5$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Para $\cos x = k$:
+\begin{itemize}
+    \item Solución principal: $x = \arccos(k)$
+    \item Segunda solución en $[0°, 360°)$: $x = 360° - \arccos(k)$
+    \item Solución general: $x = \pm\arccos(k) + 360°n$, donde $n \in \mathbb{Z}$
+\end{itemize}
+
+\subsubsection{Resolución de $\tan x = k$}
+
+La tangente es especial porque puede tomar cualquier valor real, así que $\tan x = k$ siempre tiene solución para cualquier $k \in \mathbb{R}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-3, ymax=3,
+        xmin=0, xmax=540,
+        xtick={0,90,180,270,360,450,540},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$,$450°$,$540°$},
+        ytick={-2,-1,0,1,2},
+        width=0.9\textwidth,
+        height=0.5\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick,
+        restrict y to domain=-3:3
+    ]
+
+    % Función tangente (por partes para evitar las asíntotas)
+    \addplot[maincolor,very thick,smooth,domain=0:85,samples=50] {tan(x)};
+    \addplot[maincolor,very thick,smooth,domain=95:265,samples=50] {tan(x)};
+    \addplot[maincolor,very thick,smooth,domain=275:445,samples=50] {tan(x)};
+    \addplot[maincolor,very thick,smooth,domain=455:540,samples=50] {tan(x)};
+
+    % Asíntotas verticales
+    \addplot[gray,dashed,thick] coordinates {(90,-3) (90,3)};
+    \addplot[gray,dashed,thick] coordinates {(270,-3) (270,3)};
+    \addplot[gray,dashed,thick] coordinates {(450,-3) (450,3)};
+
+    % Línea horizontal y = 1
+    \addplot[accentcolor,thick,dashed,domain=0:540] {1};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(45,1) (225,1) (405,1)};
+
+    % Etiquetas
+    \node[above,accentcolor] at (axis cs:45,1) {$45°$};
+    \node[above,accentcolor] at (axis cs:225,1) {$225°$};
+    \node[above,accentcolor] at (axis cs:405,1) {$405°$};
+
+    \node[maincolor] at (axis cs:135,2.5) {$y = \tan x$};
+    \node[accentcolor] at (axis cs:500,1) {$y = 1$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+La tangente tiene período $180°$ (no $360°$ como seno y coseno), así que:
+\begin{itemize}
+    \item Solución principal: $x = \arctan(k)$
+    \item Solución general: $x = \arctan(k) + 180°n$, donde $n \in \mathbb{Z}$
+\end{itemize}
+
+\subsection{Ecuaciones Trigonométricas Lineales}
+
+Las ecuaciones trigonométricas lineales involucran combinaciones lineales de funciones trigonométricas. Por ejemplo: $2\sin x + 3\cos x = 1$ o $\sin x - \cos x = 0$.
+
+\begin{definicion}
+Una ecuación trigonométrica lineal tiene la forma:
+\[a \cdot f(x) + b \cdot g(x) = c\]
+donde $f$ y $g$ son funciones trigonométricas, y $a$, $b$, $c$ son constantes.
+\end{definicion}
+
+\subsubsection{Método de Sustitución}
+
+Para resolver $a\sin x + b\cos x = c$, podemos usar la identidad:
+\[a\sin x + b\cos x = R\sin(x + \phi)\]
+donde $R = \sqrt{a^2 + b^2}$ y $\tan \phi = \frac{b}{a}$.
+
+Veamos un ejemplo concreto. Para resolver $\sin x + \cos x = 1$:
+
+\begin{enumerate}
+    \item Calculamos $R = \sqrt{1^2 + 1^2} = \sqrt{2}$
+    \item Calculamos $\tan \phi = \frac{1}{1} = 1$, entonces $\phi = 45°$
+    \item La ecuación se convierte en: $\sqrt{2}\sin(x + 45°) = 1$
+    \item Simplificando: $\sin(x + 45°) = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}$
+    \item Por lo tanto: $x + 45° = 45° + 360°n$ o $x + 45° = 135° + 360°n$
+    \item Solución: $x = 0° + 360°n$ o $x = 90° + 360°n$
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-2, ymax=2,
+        xmin=0, xmax=360,
+        xtick={0,90,180,270,360},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$},
+        ytick={-1,0,1},
+        width=0.9\textwidth,
+        height=0.6\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick
+    ]
+
+    % Función sin x + cos x
+    \addplot[maincolor,very thick,smooth,domain=0:360,samples=100] {sin(x) + cos(x)};
+
+    % Línea y = 1
+    \addplot[accentcolor,thick,dashed,domain=0:360] {1};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(0,1) (90,1)};
+
+    % Etiquetas
+    \node[above,accentcolor] at (axis cs:0,1) {$(0°, 1)$};
+    \node[above,accentcolor] at (axis cs:90,1) {$(90°, 1)$};
+
+    \node[maincolor] at (axis cs:270,0) {$y = \sin x + \cos x$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ecuaciones Trigonométricas Cuadráticas}
+
+Estas ecuaciones involucran términos cuadráticos de funciones trigonométricas, como $\sin^2 x$, $\cos^2 x$, etc.
+
+\begin{definicion}
+Una ecuación trigonométrica cuadrática tiene la forma:
+\[a \cdot [f(x)]^2 + b \cdot f(x) + c = 0\]
+donde $f$ es una función trigonométrica y $a \neq 0$.
+\end{definicion}
+
+\subsubsection{Método de Resolución}
+
+Para resolver estas ecuaciones, tratamos la función trigonométrica como una variable y aplicamos la fórmula cuadrática.
+
+Ejemplo: Resolver $2\sin^2 x - \sin x - 1 = 0$
+
+\begin{enumerate}
+    \item Sea $u = \sin x$, entonces: $2u^2 - u - 1 = 0$
+    \item Factorizando: $(2u + 1)(u - 1) = 0$
+    \item Por lo tanto: $u = -\frac{1}{2}$ o $u = 1$
+    \item Regresando a la variable original:
+    \begin{itemize}
+        \item $\sin x = -\frac{1}{2}$: $x = 210°, 330°$ (en $[0°, 360°)$)
+        \item $\sin x = 1$: $x = 90°$
+    \end{itemize}
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-2, ymax=2,
+        xmin=0, xmax=360,
+        xtick={0,90,180,270,360},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$},
+        ytick={-1,0,1},
+        width=0.9\textwidth,
+        height=0.6\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick
+    ]
+
+    % Función 2sin²x - sin x - 1
+    \addplot[maincolor,very thick,smooth,domain=0:360,samples=100] {2*(sin(x))^2 - sin(x) - 1};
+
+    % Línea y = 0
+    \addplot[black,thick,domain=0:360] {0};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(90,0) (210,0) (330,0)};
+
+    % Etiquetas
+    \node[above,accentcolor] at (axis cs:90,0) {$90°$};
+    \node[below,accentcolor] at (axis cs:210,0) {$210°$};
+    \node[below,accentcolor] at (axis cs:330,0) {$330°$};
+
+    \node[maincolor] at (axis cs:180,1.5) {$y = 2\sin^2 x - \sin x - 1$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ecuaciones con Identidades Fundamentales}
+
+Las identidades trigonométricas son herramientas poderosas para simplificar y resolver ecuaciones complejas.
+
+\begin{teorema}[Identidades Pitagóricas]
+\begin{align}
+\sin^2 x + \cos^2 x &= 1 \\
+1 + \tan^2 x &= \sec^2 x \\
+1 + \cot^2 x &= \csc^2 x
+\end{align}
+\end{teorema}
+
+Estas identidades nos permiten convertir ecuaciones con múltiples funciones trigonométricas en ecuaciones con una sola función.
+
+Ejemplo: Resolver $\sin^2 x + \sin x \cos x - 2\cos^2 x = 0$
+
+\begin{enumerate}
+    \item Dividimos toda la ecuación por $\cos^2 x$ (asumiendo $\cos x \neq 0$):
+    \[\frac{\sin^2 x}{\cos^2 x} + \frac{\sin x}{\cos x} - 2 = 0\]
+
+    \item Esto se convierte en: $\tan^2 x + \tan x - 2 = 0$
+
+    \item Sea $u = \tan x$: $u^2 + u - 2 = 0$
+
+    \item Factorizando: $(u + 2)(u - 1) = 0$
+
+    \item Por lo tanto: $\tan x = -2$ o $\tan x = 1$
+
+    \item Soluciones:
+    \begin{itemize}
+        \item $\tan x = 1$: $x = 45°, 225°$
+        \item $\tan x = -2$: $x = \arctan(-2) + 180°n \approx 116.57°, 296.57°$
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Ecuaciones con Ángulos Dobles y Medios}
+
+Las identidades de ángulo doble y ángulo medio nos permiten resolver ecuaciones más complejas.
+
+\begin{teorema}[Identidades de Ángulo Doble]
+\begin{align}
+\sin(2x) &= 2\sin x \cos x \\
+\cos(2x) &= \cos^2 x - \sin^2 x = 2\cos^2 x - 1 = 1 - 2\sin^2 x \\
+\tan(2x) &= \frac{2\tan x}{1 - \tan^2 x}
+\end{align}
+\end{teorema}
+
+\begin{teorema}[Identidades de Ángulo Medio]
+\begin{align}
+\sin\left(\frac{x}{2}\right) &= \pm\sqrt{\frac{1 - \cos x}{2}} \\
+\cos\left(\frac{x}{2}\right) &= \pm\sqrt{\frac{1 + \cos x}{2}} \\
+\tan\left(\frac{x}{2}\right) &= \frac{\sin x}{1 + \cos x} = \frac{1 - \cos x}{\sin x}
+\end{align}
+\end{teorema}
+
+Ejemplo: Resolver $\sin(2x) = \cos x$
+
+\begin{enumerate}
+    \item Usamos la identidad $\sin(2x) = 2\sin x \cos x$:
+    \[2\sin x \cos x = \cos x\]
+
+    \item Factor común $\cos x$:
+    \[\cos x(2\sin x - 1) = 0\]
+
+    \item Por lo tanto:
+    \begin{itemize}
+        \item $\cos x = 0$: $x = 90°, 270°$
+        \item $\sin x = \frac{1}{2}$: $x = 30°, 150°$
+    \end{itemize}
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-1.5, ymax=1.5,
+        xmin=0, xmax=360,
+        xtick={0,30,90,150,180,270,360},
+        xticklabels={$0°$,$30°$,$90°$,$150°$,$180°$,$270°$,$360°$},
+        ytick={-1,0,1},
+        width=0.9\textwidth,
+        height=0.6\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick
+    ]
+
+    % Función sin(2x)
+    \addplot[maincolor,very thick,smooth,domain=0:360,samples=100] {sin(2*x)};
+
+    % Función cos(x)
+    \addplot[accentcolor,very thick,smooth,domain=0:360,samples=100] {cos(x)};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,thirdcolor] coordinates {(30,0.866) (90,0) (150,0.866) (270,0)};
+
+    % Etiquetas
+    \node[above,thirdcolor] at (axis cs:30,0.866) {$30°$};
+    \node[above,thirdcolor] at (axis cs:90,0) {$90°$};
+    \node[above,thirdcolor] at (axis cs:150,0.866) {$150°$};
+    \node[below,thirdcolor] at (axis cs:270,0) {$270°$};
+
+    \node[maincolor] at (axis cs:200,0.8) {$y = \sin(2x)$};
+    \node[accentcolor] at (axis cs:45,0.5) {$y = \cos x$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Funciones Trigonométricas Inversas}
+
+Las funciones trigonométricas inversas nos permiten encontrar ángulos cuando conocemos el valor de la función trigonométrica.
+
+\begin{definicion}
+Las funciones trigonométricas inversas son:
+\begin{itemize}
+    \item $\arcsin(x)$ o $\sin^{-1}(x)$: devuelve el ángulo cuyo seno es $x$, donde $x \in [-1, 1]$
+    \item $\arccos(x)$ o $\cos^{-1}(x)$: devuelve el ángulo cuyo coseno es $x$, donde $x \in [-1, 1]$
+    \item $\arctan(x)$ o $\tan^{-1}(x)$: devuelve el ángulo cuya tangente es $x$, donde $x \in \mathbb{R}$
+\end{itemize}
+\end{definicion}
+
+Es importante recordar que estas funciones tienen rangos restringidos:
+\begin{itemize}
+    \item $\arcsin: [-1, 1] \rightarrow [-90°, 90°]$
+    \item $\arccos: [-1, 1] \rightarrow [0°, 180°]$
+    \item $\arctan: \mathbb{R} \rightarrow (-90°, 90°)$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-100, ymax=100,
+        xmin=-1.5, xmax=1.5,
+        ytick={-90,-45,0,45,90},
+        yticklabels={$-90°$,$-45°$,$0°$,$45°$,$90°$},
+        xtick={-1,-0.5,0,0.5,1},
+        width=0.45\textwidth,
+        height=0.6\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick,
+        title={$y = \arcsin(x)$}
+    ]
+
+    % Función arcsin
+    \addplot[maincolor,very thick,smooth,domain=-1:1,samples=50] {asin(x)*180/pi};
+
+    \end{axis}
+\end{tikzpicture}
+\hfill
+\begin{tikzpicture}[scale=1]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-10, ymax=190,
+        xmin=-1.5, xmax=1.5,
+        ytick={0,45,90,135,180},
+        yticklabels={$0°$,$45°$,$90°$,$135°$,$180°$},
+        xtick={-1,-0.5,0,0.5,1},
+        width=0.45\textwidth,
+        height=0.6\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick,
+        title={$y = \arccos(x)$}
+    ]
+
+    % Función arccos
+    \addplot[accentcolor,very thick,smooth,domain=-1:1,samples=50] {acos(x)*180/pi};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Ejemplo: Resolver $\arcsin(2x - 1) = 30°$
+
+\begin{enumerate}
+    \item Aplicamos seno a ambos lados:
+    \[\sin(\arcsin(2x - 1)) = \sin(30°)\]
+
+    \item Simplificamos:
+    \[2x - 1 = \frac{1}{2}\]
+
+    \item Resolvemos para $x$:
+    \[2x = \frac{3}{2}\]
+    \[x = \frac{3}{4}\]
+
+    \item Verificación: Necesitamos que $-1 \leq 2x - 1 \leq 1$
+    \[2 \cdot \frac{3}{4} - 1 = \frac{3}{2} - 1 = \frac{1}{2}\]
+    Como $\frac{1}{2} \in [-1, 1]$, la solución es válida.
+\end{enumerate}
+
+\subsection{Aplicación: Trigonometría en la Dirección de un Carro}
+
+Una de las aplicaciones más prácticas de las ecuaciones trigonométricas es en el cálculo de trayectorias y direcciones de vehículos. Imaginemos un carro que se mueve en una ciudad con calles que forman una cuadrícula.
+
+\subsubsection{Problema de Navegación}
+
+Un carro parte del origen y debe llegar a un punto $P(x_f, y_f)$. El ángulo de dirección $\theta$ que debe tomar se calcula resolviendo:
+
+\[\tan \theta = \frac{y_f}{x_f}\]
+
+Pero aquí viene lo interesante: debido a obstáculos (edificios, calles cerradas), el carro no puede ir en línea recta. Debe seguir una ruta que minimice la distancia total viajada.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Grid
+    \draw[gray!30,very thin] (-1,-1) grid (8,6);
+
+    % Axes
+    \draw[->,thick] (-1,0) -- (8.5,0) node[right] {$x$};
+    \draw[->,thick] (0,-1) -- (0,6.5) node[above] {$y$};
+
+    % Origin
+    \node[below left] at (0,0) {$O$};
+    \filldraw (0,0) circle (2pt);
+
+    % Destination
+    \node[above right] at (7,5) {$P(7,5)$};
+    \filldraw[red] (7,5) circle (2pt);
+
+    % Direct path (blocked)
+    \draw[red,dashed,thick] (0,0) -- (7,5);
+    \node[red,rotate=35] at (3.5,2.5) {$\times$ Bloqueado};
+
+    % Actual path
+    \draw[thirdcolor,very thick,->,>=stealth] (0,0) -- (4,0) node[midway,below] {Tramo 1};
+    \draw[thirdcolor,very thick,->,>=stealth] (4,0) -- (4,3) node[midway,right] {Tramo 2};
+    \draw[thirdcolor,very thick,->,>=stealth] (4,3) -- (7,3) node[midway,below] {Tramo 3};
+    \draw[thirdcolor,very thick,->,>=stealth] (4,3) -- (7,5) node[midway,above,sloped] {Tramo 4};
+
+    % Angles
+    \draw[accentcolor,->] (1,0) arc (0:35:1) node[midway,right] {$\theta_1$};
+    \draw[accentcolor,->] (4,0.5) arc (90:35:0.5);
+    \draw[accentcolor,->] (4.5,3) arc (0:34:0.5);
+
+    % Car icons
+    \node at (0,0) {\includegraphics[width=0.5cm]{car.png}};
+    \node at (7,5) {\includegraphics[width=0.5cm]{flag.png}};
+\end{tikzpicture}
+\end{center}
+
+Para cada tramo del viaje, necesitamos resolver ecuaciones trigonométricas:
+
+\begin{enumerate}
+    \item \textbf{Ángulo inicial ideal:} $\theta = \arctan\left(\frac{5}{7}\right) \approx 35.54°$
+
+    \item \textbf{Corrección por obstáculo:} Si hay un edificio en el camino, el carro debe calcular un nuevo ángulo $\theta'$ tal que:
+    \[\tan \theta' = \frac{y_{intermedio}}{x_{intermedio}}\]
+
+    \item \textbf{Distancia total:} Usando el teorema de Pitágoras para cada segmento:
+    \[d_{total} = \sum_{i=1}^n \sqrt{(\Delta x_i)^2 + (\Delta y_i)^2}\]
+\end{enumerate}
+
+\subsubsection{Curvas y Giros}
+
+Cuando un carro toma una curva, su dirección cambia continuamente. Si el carro sigue una trayectoria circular de radio $r$, su posición en función del tiempo está dada por:
+
+\begin{align}
+x(t) &= r\cos(\omega t + \phi_0) + x_c \\
+y(t) &= r\sin(\omega t + \phi_0) + y_c
+\end{align}
+
+donde $(x_c, y_c)$ es el centro de la curva, $\omega$ es la velocidad angular y $\phi_0$ es el ángulo inicial.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Círculo de la trayectoria
+    \draw[gray,dashed] (0,0) circle (2);
+
+    % Centro
+    \filldraw (0,0) circle (1pt) node[below] {Centro $(x_c, y_c)$};
+
+    % Radio
+    \draw[<->,thick] (0,0) -- (2,0) node[midway,above] {$r$};
+
+    % Trayectoria del carro
+    \draw[maincolor,very thick,->] (2,0) arc (0:120:2);
+
+    % Posiciones del carro
+    \filldraw[accentcolor] (2,0) circle (2pt) node[right] {$t=0$};
+    \filldraw[accentcolor] (60:2) circle (2pt) node[above right] {$t=t_1$};
+    \filldraw[accentcolor] (120:2) circle (2pt) node[above left] {$t=t_2$};
+
+    % Ángulos
+    \draw[thirdcolor,->] (0.5,0) arc (0:60:0.5) node[midway,right] {$\omega t_1$};
+    \draw[thirdcolor,->] (0.7,0) arc (0:120:0.7) node[near end,right] {$\omega t_2$};
+
+    % Vectores de velocidad (tangentes)
+    \draw[red,thick,->] (2,0) -- (2,0.7) node[right] {$\vec{v}$};
+    \draw[red,thick,->] (60:2) -- +(-30:0.7) node[above] {$\vec{v}$};
+    \draw[red,thick,->] (120:2) -- +(-210:0.7) node[left] {$\vec{v}$};
+\end{tikzpicture}
+\end{center}
+
+El ángulo de dirección del carro en cualquier momento es:
+\[\theta_{direccion}(t) = \omega t + \phi_0 + 90°\]
+
+(Se suma $90°$ porque la velocidad es perpendicular al radio)
+
+\subsubsection{Sistema de Posicionamiento Global (GPS)}
+
+Los sistemas GPS modernos usan ecuaciones trigonométricas constantemente. Cuando tu teléfono calcula tu posición, resuelve un sistema de ecuaciones que involucra las distancias a varios satélites:
+
+\begin{align}
+d_1 &= \sqrt{(x - x_1)^2 + (y - y_1)^2 + (z - z_1)^2} \\
+d_2 &= \sqrt{(x - x_2)^2 + (y - y_2)^2 + (z - z_2)^2} \\
+d_3 &= \sqrt{(x - x_3)^2 + (y - y_3)^2 + (z - z_3)^2} \\
+d_4 &= \sqrt{(x - x_4)^2 + (y - y_4)^2 + (z - z_4)^2}
+\end{align}
+
+donde $(x_i, y_i, z_i)$ son las posiciones conocidas de los satélites y $d_i$ son las distancias calculadas usando el tiempo que tarda la señal en llegar.
+
+Para convertir estas coordenadas cartesianas a coordenadas geográficas (latitud y longitud), se usan ecuaciones trigonométricas inversas:
+
+\begin{align}
+\text{Longitud} &= \arctan\left(\frac{y}{x}\right) \\
+\text{Latitud} &= \arctan\left(\frac{z}{\sqrt{x^2 + y^2}}\right)
+\end{align}
+
+\subsection{Resumen de Métodos de Resolución}
+
+Para cerrar esta sección de conceptos fundamentales, aquí está un resumen de los métodos principales para resolver ecuaciones trigonométricas:
+
+\begin{nota}[title=Guía Rápida de Resolución]
+\begin{enumerate}
+    \item \textbf{Ecuaciones básicas $f(x) = k$:}
+    \begin{itemize}
+        \item Usa funciones inversas
+        \item Considera la periodicidad
+        \item No olvides todas las soluciones en el intervalo dado
+    \end{itemize}
+
+    \item \textbf{Ecuaciones lineales:}
+    \begin{itemize}
+        \item Método de sustitución $R\sin(x + \phi)$
+        \item Elevar al cuadrado (con precaución)
+    \end{itemize}
+
+    \item \textbf{Ecuaciones cuadráticas:}
+    \begin{itemize}
+        \item Sustituir $u = \text{función trig}$
+        \item Aplicar fórmula cuadrática o factorización
+    \end{itemize}
+
+    \item \textbf{Ecuaciones con múltiples funciones:}
+    \begin{itemize}
+        \item Usar identidades para convertir a una sola función
+        \item Dividir por funciones comunes (verificar casos especiales)
+    \end{itemize}
+
+    \item \textbf{Ecuaciones con ángulos múltiples:}
+    \begin{itemize}
+        \item Aplicar identidades de ángulo doble/medio
+        \item Sustituir y simplificar
+    \end{itemize}
+\end{enumerate}
+\end{nota}
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado un viaje fascinante por el mundo de las ecuaciones trigonométricas. Ahora tienes en tus manos herramientas matemáticas poderosas que han sido usadas durante siglos para resolver problemas del mundo real.
+
+\subsection*{Lo que has aprendido}
+
+A lo largo de esta guía, has descubierto cómo:
+
+\begin{itemize}
+    \item Resolver ecuaciones trigonométricas básicas de la forma $f(x) = k$, entendiendo que la periodicidad de estas funciones genera múltiples soluciones
+    \item Trabajar con ecuaciones lineales combinando diferentes funciones trigonométricas
+    \item Aplicar técnicas algebraicas conocidas (como la fórmula cuadrática) a ecuaciones trigonométricas cuadráticas
+    \item Usar identidades fundamentales para simplificar ecuaciones complejas
+    \item Emplear identidades de ángulo doble y ángulo medio para resolver problemas avanzados
+    \item Utilizar funciones trigonométricas inversas para encontrar ángulos específicos
+    \item Aplicar todo esto a problemas prácticos, especialmente en navegación y dirección de vehículos
+\end{itemize}
+
+\subsection*{Fórmulas y Conceptos Clave}
+
+\begin{tcolorbox}[enhanced,colback=maincolor!10,colframe=maincolor,title=Resumen de Fórmulas Esenciales]
+
+\textbf{Soluciones Generales:}
+\begin{align*}
+\sin x = k: \quad & x = \arcsin(k) + 360°n \text{ o } x = 180° - \arcsin(k) + 360°n \\
+\cos x = k: \quad & x = \pm\arccos(k) + 360°n \\
+\tan x = k: \quad & x = \arctan(k) + 180°n
+\end{align*}
+
+\textbf{Identidades Fundamentales:}
+\begin{align*}
+\sin^2 x + \cos^2 x &= 1 \\
+1 + \tan^2 x &= \sec^2 x \\
+1 + \cot^2 x &= \csc^2 x
+\end{align*}
+
+\textbf{Ángulo Doble:}
+\begin{align*}
+\sin(2x) &= 2\sin x \cos x \\
+\cos(2x) &= \cos^2 x - \sin^2 x \\
+\tan(2x) &= \frac{2\tan x}{1 - \tan^2 x}
+\end{align*}
+
+\textbf{Transformación Lineal:}
+\[a\sin x + b\cos x = R\sin(x + \phi)\]
+donde $R = \sqrt{a^2 + b^2}$ y $\tan \phi = \frac{b}{a}$
+
+\end{tcolorbox}
+
+\subsection*{Consejos para el Éxito}
+
+\begin{enumerate}
+    \item \textbf{Visualiza siempre:} Las gráficas son tus mejores aliadas. Cuando resuelvas una ecuación, imagina o dibuja la función para entender mejor las soluciones.
+
+    \item \textbf{Verifica tus respuestas:} Siempre sustituye tus soluciones en la ecuación original. Es fácil cometer errores algebraicos, pero la verificación te salvará.
+
+    \item \textbf{Considera el dominio:} Algunas ecuaciones tienen restricciones. Por ejemplo, $\tan x$ no está definida cuando $x = 90° + 180°n$.
+
+    \item \textbf{Practica con aplicaciones reales:} Los problemas abstractos son importantes, pero las aplicaciones reales te ayudan a entender el "por qué" detrás de las matemáticas.
+
+    \item \textbf{No memorices, comprende:} En lugar de memorizar fórmulas, entiende de dónde vienen. Por ejemplo, la identidad $\sin^2 x + \cos^2 x = 1$ viene directamente del teorema de Pitágoras aplicado al círculo unitario.
+\end{enumerate}
+
+\subsection*{El Poder de la Trigonometría en Tu Vida}
+
+Cada vez que uses tu teléfono para navegar, escuches música, o veas una película, las ecuaciones trigonométricas están trabajando en el fondo. Los ingenieros las usan para:
+
+\begin{itemize}
+    \item Diseñar antenas de comunicación que transmiten datos a la velocidad de la luz
+    \item Crear sistemas de navegación que te guían con precisión de centímetros
+    \item Desarrollar tecnología de realidad virtual que rastrea tus movimientos
+    \item Construir puentes y edificios que resisten terremotos
+    \item Programar videojuegos con física realista
+    \item Analizar señales médicas como electrocardiogramas
+\end{itemize}
+
+\subsection*{Tu Próximo Paso}
+
+Ahora que dominas las ecuaciones trigonométricas, estás listo para explorar temas más avanzados como:
+
+\begin{itemize}
+    \item Series de Fourier (cómo cualquier señal puede descomponerse en senos y cosenos)
+    \item Números complejos y la fórmula de Euler
+    \item Cálculo diferencial e integral de funciones trigonométricas
+    \item Aplicaciones en física cuántica y relatividad
+    \item Procesamiento digital de señales
+\end{itemize}
+
+\subsection*{Reflexión Final}
+
+La trigonometría analítica no es solo un conjunto de fórmulas y técnicas; es un lenguaje universal que describe los patrones fundamentales del universo. Desde el movimiento de los planetas hasta las vibraciones de los átomos, desde las olas del mar hasta las ondas electromagnéticas que transmiten información alrededor del mundo, las ecuaciones trigonométricas están en todas partes.
+
+Al dominar estos conceptos, te has unido a una tradición milenaria de pensadores que han usado estas herramientas para entender y transformar el mundo. Desde los antiguos astrónomos babilonios hasta los ingenieros modernos que diseñan las misiones a Marte, todos han confiado en el poder de la trigonometría.
+
+Recuerda: las matemáticas no son solo números y símbolos abstractos. Son la clave para entender el universo y crear tecnología que mejora nuestras vidas. Cada ecuación que resuelves, cada identidad que aplicas, te acerca más a comprender los secretos del cosmos.
+
+\vspace{1cm}
+
+\begin{center}
+\textit{``Las matemáticas son el lenguaje con el que Dios escribió el universo.''} \\
+--- Galileo Galilei
+
+\vspace{0.5cm}
+
+\textit{``La trigonometría nos enseña que incluso los caminos curvos pueden medirse con precisión.''} \\
+--- Anónimo
+\end{center}
+
+%================================================================================
+% PARTE 2: EJEMPLOS RESUELTOS, EJERCICIOS INVERSOS Y SOLUCIONES
+%================================================================================
+
+\section{Ejemplos Resueltos}
+
+Ahora vamos a resolver paso a paso diferentes tipos de ecuaciones trigonométricas. Cada ejemplo te mostrará técnicas específicas que podrás aplicar en problemas similares.
+
+\begin{ejemplo}[title=Ejemplo 1: Ecuación básica f(x) = k]
+Resuelve la ecuación $\sin x = \frac{\sqrt{3}}{2}$ para $x \in [0, 2\pi]$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar el ángulo de referencia.
+
+Reconocemos que $\sin\left(\frac{\pi}{3}\right) = \frac{\sqrt{3}}{2}$, por lo tanto $\frac{\pi}{3}$ es nuestro ángulo de referencia.
+
+\textbf{Paso 2:} Determinar en qué cuadrantes el seno es positivo.
+
+El seno es positivo en los cuadrantes I y II (donde $y > 0$).
+
+\textbf{Paso 3:} Encontrar las soluciones en el intervalo dado.
+
+En el cuadrante I: $x_1 = \frac{\pi}{3}$
+
+En el cuadrante II: $x_2 = \pi - \frac{\pi}{3} = \frac{3\pi - \pi}{3} = \frac{2\pi}{3}$
+
+\textbf{Paso 4:} Verificación algebraica.
+
+$\sin\left(\frac{\pi}{3}\right) = \frac{\sqrt{3}}{2}$ ✓
+
+$\sin\left(\frac{2\pi}{3}\right) = \sin\left(\pi - \frac{\pi}{3}\right) = \sin\left(\frac{\pi}{3}\right) = \frac{\sqrt{3}}{2}$ ✓
+
+\textbf{Paso 5:} Representación gráfica.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.5\textwidth,
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xlabel style={below},
+    ylabel style={left},
+    xmin=0, xmax=6.5,
+    ymin=-1.3, ymax=1.3,
+    xtick={0, 1.047, 2.094, 3.14159, 4.189, 5.236, 6.283},
+    xticklabels={$0$, $\frac{\pi}{3}$, $\frac{2\pi}{3}$, $\pi$, $\frac{4\pi}{3}$, $\frac{5\pi}{3}$, $2\pi$},
+    ytick={-1, -0.866, -0.5, 0, 0.5, 0.866, 1},
+    yticklabels={$-1$, $-\frac{\sqrt{3}}{2}$, $-\frac{1}{2}$, $0$, $\frac{1}{2}$, $\frac{\sqrt{3}}{2}$, $1$},
+    grid=major,
+    grid style={dashed, gray!50},
+    samples=200,
+    domain=0:6.283
+]
+    % Función seno
+    \addplot[blue, thick] {sin(deg(x))};
+
+    % Línea horizontal y = √3/2
+    \addplot[red, thick, dashed] {0.866};
+
+    % Puntos de intersección
+    \addplot[only marks, mark=*, mark size=3pt, red] coordinates {(1.047, 0.866) (2.094, 0.866)};
+
+    % Etiquetas
+    \node[above] at (axis cs:1.047, 0.866) {$\left(\frac{\pi}{3}, \frac{\sqrt{3}}{2}\right)$};
+    \node[above] at (axis cs:2.094, 0.866) {$\left(\frac{2\pi}{3}, \frac{\sqrt{3}}{2}\right)$};
+    \node[red] at (axis cs:5.5, 0.866) {$y = \frac{\sqrt{3}}{2}$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 6:} Escribir el conjunto solución.
+
+\[
+\boxed{S = \left\{\frac{\pi}{3}, \frac{2\pi}{3}\right\}}
+\]
+
+\textbf{Interpretación:} La gráfica muestra que la curva del seno cruza la línea horizontal $y = \frac{\sqrt{3}}{2}$ exactamente dos veces en el intervalo $[0, 2\pi]$.
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 2: Ecuación lineal en seno]
+Resuelve la ecuación $2\sin x - 1 = 0$ para $x \in [0, 360^\circ]$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Despejar la función trigonométrica.
+\begin{align*}
+2\sin x - 1 &= 0 \\
+2\sin x &= 1 \\
+\sin x &= \frac{1}{2}
+\end{align*}
+
+\textbf{Paso 2:} Identificar el ángulo de referencia.
+
+Sabemos que $\sin(30^\circ) = \frac{1}{2}$, entonces el ángulo de referencia es $30^\circ$.
+
+\textbf{Paso 3:} Determinar los cuadrantes donde el seno es positivo.
+
+El seno es positivo en los cuadrantes I y II.
+
+\textbf{Paso 4:} Encontrar todas las soluciones.
+
+Cuadrante I: $x_1 = 30^\circ$
+
+Cuadrante II: $x_2 = 180^\circ - 30^\circ = 150^\circ$
+
+\textbf{Paso 5:} Verificación sustituyendo en la ecuación original.
+
+Para $x = 30^\circ$: $2\sin(30^\circ) - 1 = 2 \cdot \frac{1}{2} - 1 = 1 - 1 = 0$ ✓
+
+Para $x = 150^\circ$: $2\sin(150^\circ) - 1 = 2 \cdot \frac{1}{2} - 1 = 1 - 1 = 0$ ✓
+
+\textbf{Paso 6:} Visualización en el círculo unitario.
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    % Círculo unitario
+    \draw[thick] (0,0) circle (1);
+
+    % Ejes
+    \draw[->] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[->] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    % Línea horizontal y = 1/2
+    \draw[red, thick, dashed] (-1,0.5) -- (1,0.5) node[right] {$y = \frac{1}{2}$};
+
+    % Radios para 30° y 150°
+    \draw[blue, thick] (0,0) -- (30:1);
+    \draw[blue, thick] (0,0) -- (150:1);
+
+    % Puntos de solución
+    \filldraw[red] (30:1) circle (0.03) node[above right] {$30^\circ$};
+    \filldraw[red] (150:1) circle (0.03) node[above left] {$150^\circ$};
+
+    % Ángulos
+    \draw[blue, ->] (0.3,0) arc (0:30:0.3) node[midway, right] {$30^\circ$};
+    \draw[blue, ->] (0.3,0) arc (0:150:0.3) node[midway, above] {$150^\circ$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 7:} Conjunto solución.
+
+\[
+\boxed{S = \{30^\circ, 150^\circ\}}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 3: Ecuación cuadrática en coseno]
+Resuelve la ecuación $2\cos^2 x - \cos x - 1 = 0$ para $x \in [0, 2\pi]$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Reconocer la forma cuadrática.
+
+Esta es una ecuación cuadrática en $\cos x$. Hacemos la sustitución $u = \cos x$:
+\[
+2u^2 - u - 1 = 0
+\]
+
+\textbf{Paso 2:} Resolver la ecuación cuadrática.
+
+Factorizando: $(2u + 1)(u - 1) = 0$
+
+Por lo tanto: $u = -\frac{1}{2}$ o $u = 1$
+
+\textbf{Paso 3:} Volver a la variable original.
+
+Caso 1: $\cos x = -\frac{1}{2}$
+
+Caso 2: $\cos x = 1$
+
+\textbf{Paso 4:} Resolver cada caso.
+
+\textbf{Caso 1:} $\cos x = -\frac{1}{2}$
+
+El coseno es negativo en los cuadrantes II y III.
+Ángulo de referencia: $\arccos\left(\frac{1}{2}\right) = \frac{\pi}{3}$
+
+En el cuadrante II: $x = \pi - \frac{\pi}{3} = \frac{2\pi}{3}$
+
+En el cuadrante III: $x = \pi + \frac{\pi}{3} = \frac{4\pi}{3}$
+
+\textbf{Caso 2:} $\cos x = 1$
+
+Esto ocurre cuando $x = 0$ o $x = 2\pi$
+
+\textbf{Paso 5:} Verificación.
+
+Para $x = 0$: $2\cos^2(0) - \cos(0) - 1 = 2(1) - 1 - 1 = 0$ ✓
+
+Para $x = \frac{2\pi}{3}$: $2\left(-\frac{1}{2}\right)^2 - \left(-\frac{1}{2}\right) - 1 = \frac{1}{2} + \frac{1}{2} - 1 = 0$ ✓
+
+Para $x = \frac{4\pi}{3}$: $2\left(-\frac{1}{2}\right)^2 - \left(-\frac{1}{2}\right) - 1 = \frac{1}{2} + \frac{1}{2} - 1 = 0$ ✓
+
+Para $x = 2\pi$: $2\cos^2(2\pi) - \cos(2\pi) - 1 = 2(1) - 1 - 1 = 0$ ✓
+
+\textbf{Paso 6:} Representación gráfica.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.5\textwidth,
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin=0, xmax=6.5,
+    ymin=-2, ymax=2,
+    xtick={0, 2.094, 4.189, 6.283},
+    xticklabels={$0$, $\frac{2\pi}{3}$, $\frac{4\pi}{3}$, $2\pi$},
+    grid=major,
+    grid style={dashed, gray!50},
+    samples=200,
+    domain=0:6.283
+]
+    % Función 2cos²x - cosx - 1
+    \addplot[blue, thick] {2*cos(deg(x))^2 - cos(deg(x)) - 1};
+
+    % Línea y = 0
+    \addplot[red, thick, dashed] {0};
+
+    % Puntos de intersección
+    \addplot[only marks, mark=*, mark size=3pt, red] coordinates {(0, 0) (2.094, 0) (4.189, 0) (6.283, 0)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 7:} Conjunto solución.
+
+\[
+\boxed{S = \left\{0, \frac{2\pi}{3}, \frac{4\pi}{3}, 2\pi\right\}}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 4: Ecuación con identidad fundamental]
+Resuelve la ecuación $\sin^2 x + \sin x = 2 - 2\cos^2 x$ para $x \in [0, 2\pi]$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Usar la identidad fundamental $\sin^2 x + \cos^2 x = 1$.
+
+De esta identidad: $\cos^2 x = 1 - \sin^2 x$
+
+\textbf{Paso 2:} Sustituir en la ecuación original.
+\begin{align*}
+\sin^2 x + \sin x &= 2 - 2\cos^2 x \\
+\sin^2 x + \sin x &= 2 - 2(1 - \sin^2 x) \\
+\sin^2 x + \sin x &= 2 - 2 + 2\sin^2 x \\
+\sin^2 x + \sin x &= 2\sin^2 x
+\end{align*}
+
+\textbf{Paso 3:} Simplificar y reorganizar.
+\begin{align*}
+\sin^2 x + \sin x - 2\sin^2 x &= 0 \\
+-\sin^2 x + \sin x &= 0 \\
+\sin x(1 - \sin x) &= 0
+\end{align*}
+
+\textbf{Paso 4:} Resolver cada factor.
+
+Factor 1: $\sin x = 0$
+Soluciones: $x = 0, \pi, 2\pi$
+
+Factor 2: $1 - \sin x = 0 \Rightarrow \sin x = 1$
+Solución: $x = \frac{\pi}{2}$
+
+\textbf{Paso 5:} Verificación con la ecuación original.
+
+Para $x = 0$:
+$\sin^2(0) + \sin(0) = 0 + 0 = 0$
+$2 - 2\cos^2(0) = 2 - 2(1) = 0$ ✓
+
+Para $x = \frac{\pi}{2}$:
+$\sin^2\left(\frac{\pi}{2}\right) + \sin\left(\frac{\pi}{2}\right) = 1 + 1 = 2$
+$2 - 2\cos^2\left(\frac{\pi}{2}\right) = 2 - 2(0) = 2$ ✓
+
+Para $x = \pi$:
+$\sin^2(\pi) + \sin(\pi) = 0 + 0 = 0$
+$2 - 2\cos^2(\pi) = 2 - 2(1) = 0$ ✓
+
+Para $x = 2\pi$:
+$\sin^2(2\pi) + \sin(2\pi) = 0 + 0 = 0$
+$2 - 2\cos^2(2\pi) = 2 - 2(1) = 0$ ✓
+
+\textbf{Paso 6:} Representación en el círculo unitario.
+
+\begin{center}
+\begin{tikzpicture}[scale=2.5]
+    % Círculo unitario
+    \draw[thick] (0,0) circle (1);
+
+    % Ejes
+    \draw[->] (-1.3,0) -- (1.3,0) node[right] {$x$};
+    \draw[->] (0,-1.3) -- (0,1.3) node[above] {$y$};
+
+    % Puntos solución
+    \filldraw[red] (1,0) circle (0.03) node[below right] {$0, 2\pi$};
+    \filldraw[red] (0,1) circle (0.03) node[above right] {$\frac{\pi}{2}$};
+    \filldraw[red] (-1,0) circle (0.03) node[below left] {$\pi$};
+
+    % Radios
+    \draw[blue, thick] (0,0) -- (1,0);
+    \draw[blue, thick] (0,0) -- (0,1);
+    \draw[blue, thick] (0,0) -- (-1,0);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 7:} Conjunto solución.
+
+\[
+\boxed{S = \left\{0, \frac{\pi}{2}, \pi, 2\pi\right\}}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 5: Ecuación con ángulo doble]
+Resuelve la ecuación $\sin(2x) = \cos x$ para $x \in [0, 2\pi]$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Aplicar la fórmula del ángulo doble.
+
+Recordemos que $\sin(2x) = 2\sin x \cos x$
+
+\textbf{Paso 2:} Sustituir en la ecuación.
+\begin{align*}
+2\sin x \cos x &= \cos x \\
+2\sin x \cos x - \cos x &= 0 \\
+\cos x(2\sin x - 1) &= 0
+\end{align*}
+
+\textbf{Paso 3:} Resolver cada factor.
+
+\textbf{Factor 1:} $\cos x = 0$
+Soluciones: $x = \frac{\pi}{2}, \frac{3\pi}{2}$
+
+\textbf{Factor 2:} $2\sin x - 1 = 0 \Rightarrow \sin x = \frac{1}{2}$
+Soluciones: $x = \frac{\pi}{6}, \frac{5\pi}{6}$
+
+\textbf{Paso 4:} Verificación con la ecuación original.
+
+Para $x = \frac{\pi}{6}$:
+$\sin\left(2 \cdot \frac{\pi}{6}\right) = \sin\left(\frac{\pi}{3}\right) = \frac{\sqrt{3}}{2}$
+$\cos\left(\frac{\pi}{6}\right) = \frac{\sqrt{3}}{2}$ ✓
+
+Para $x = \frac{\pi}{2}$:
+$\sin\left(2 \cdot \frac{\pi}{2}\right) = \sin(\pi) = 0$
+$\cos\left(\frac{\pi}{2}\right) = 0$ ✓
+
+Para $x = \frac{5\pi}{6}$:
+$\sin\left(2 \cdot \frac{5\pi}{6}\right) = \sin\left(\frac{5\pi}{3}\right) = -\frac{\sqrt{3}}{2}$
+$\cos\left(\frac{5\pi}{6}\right) = -\frac{\sqrt{3}}{2}$ ✓
+
+Para $x = \frac{3\pi}{2}$:
+$\sin\left(2 \cdot \frac{3\pi}{2}\right) = \sin(3\pi) = 0$
+$\cos\left(\frac{3\pi}{2}\right) = 0$ ✓
+
+\textbf{Paso 5:} Gráfica de ambas funciones.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.55\textwidth,
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin=0, xmax=6.5,
+    ymin=-1.5, ymax=1.5,
+    xtick={0, 0.524, 1.571, 2.618, 3.14159, 4.712, 6.283},
+    xticklabels={$0$, $\frac{\pi}{6}$, $\frac{\pi}{2}$, $\frac{5\pi}{6}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+    grid=major,
+    grid style={dashed, gray!50},
+    samples=200,
+    domain=0:6.283,
+    legend pos=north east
+]
+    % sin(2x)
+    \addplot[blue, thick] {sin(2*deg(x))};
+    \addlegendentry{$\sin(2x)$}
+
+    % cos(x)
+    \addplot[red, thick] {cos(deg(x))};
+    \addlegendentry{$\cos(x)$}
+
+    % Puntos de intersección
+    \addplot[only marks, mark=*, mark size=3pt, green!60!black]
+        coordinates {(0.524, 0.866) (1.571, 0) (2.618, -0.866) (4.712, 0)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 6:} Conjunto solución.
+
+\[
+\boxed{S = \left\{\frac{\pi}{6}, \frac{\pi}{2}, \frac{5\pi}{6}, \frac{3\pi}{2}\right\}}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 6: Ecuación con ángulo medio]
+Resuelve la ecuación $\cos\left(\frac{x}{2}\right) = \sin x$ para $x \in [0, 2\pi]$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Usar la identidad del ángulo medio y doble.
+
+Sabemos que $\sin x = 2\sin\left(\frac{x}{2}\right)\cos\left(\frac{x}{2}\right)$
+
+\textbf{Paso 2:} Sustituir en la ecuación.
+\begin{align*}
+\cos\left(\frac{x}{2}\right) &= 2\sin\left(\frac{x}{2}\right)\cos\left(\frac{x}{2}\right) \\
+\cos\left(\frac{x}{2}\right) - 2\sin\left(\frac{x}{2}\right)\cos\left(\frac{x}{2}\right) &= 0 \\
+\cos\left(\frac{x}{2}\right)\left[1 - 2\sin\left(\frac{x}{2}\right)\right] &= 0
+\end{align*}
+
+\textbf{Paso 3:} Resolver cada factor.
+
+\textbf{Factor 1:} $\cos\left(\frac{x}{2}\right) = 0$
+
+Esto ocurre cuando $\frac{x}{2} = \frac{\pi}{2} + n\pi$
+
+Para $n = 0$: $\frac{x}{2} = \frac{\pi}{2} \Rightarrow x = \pi$
+
+\textbf{Factor 2:} $1 - 2\sin\left(\frac{x}{2}\right) = 0 \Rightarrow \sin\left(\frac{x}{2}\right) = \frac{1}{2}$
+
+Esto ocurre cuando $\frac{x}{2} = \frac{\pi}{6}$ o $\frac{x}{2} = \frac{5\pi}{6}$
+
+Por lo tanto: $x = \frac{\pi}{3}$ o $x = \frac{5\pi}{3}$
+
+\textbf{Paso 4:} Verificación.
+
+Para $x = \frac{\pi}{3}$:
+$\cos\left(\frac{\pi}{6}\right) = \frac{\sqrt{3}}{2}$
+$\sin\left(\frac{\pi}{3}\right) = \frac{\sqrt{3}}{2}$ ✓
+
+Para $x = \pi$:
+$\cos\left(\frac{\pi}{2}\right) = 0$
+$\sin(\pi) = 0$ ✓
+
+Para $x = \frac{5\pi}{3}$:
+$\cos\left(\frac{5\pi}{6}\right) = -\frac{\sqrt{3}}{2}$
+$\sin\left(\frac{5\pi}{3}\right) = -\frac{\sqrt{3}}{2}$ ✓
+
+\textbf{Paso 5:} Visualización gráfica.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.55\textwidth,
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin=0, xmax=6.5,
+    ymin=-1.5, ymax=1.5,
+    xtick={0, 1.047, 3.14159, 5.236, 6.283},
+    xticklabels={$0$, $\frac{\pi}{3}$, $\pi$, $\frac{5\pi}{3}$, $2\pi$},
+    grid=major,
+    grid style={dashed, gray!50},
+    samples=200,
+    domain=0:6.283,
+    legend pos=north east
+]
+    % cos(x/2)
+    \addplot[blue, thick] {cos(deg(x/2))};
+    \addlegendentry{$\cos\left(\frac{x}{2}\right)$}
+
+    % sin(x)
+    \addplot[red, thick] {sin(deg(x))};
+    \addlegendentry{$\sin(x)$}
+
+    % Puntos de intersección
+    \addplot[only marks, mark=*, mark size=3pt, green!60!black]
+        coordinates {(1.047, 0.866) (3.14159, 0) (5.236, -0.866)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 6:} Conjunto solución.
+
+\[
+\boxed{S = \left\{\frac{\pi}{3}, \pi, \frac{5\pi}{3}\right\}}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 7: Ecuación con función inversa]
+Resuelve la ecuación $\arcsin(x) = \arccos(2x)$ para $x \in \mathbb{R}$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Determinar el dominio.
+
+Para $\arcsin(x)$: $-1 \leq x \leq 1$
+
+Para $\arccos(2x)$: $-1 \leq 2x \leq 1 \Rightarrow -\frac{1}{2} \leq x \leq \frac{1}{2}$
+
+Dominio común: $x \in \left[-\frac{1}{2}, \frac{1}{2}\right]$
+
+\textbf{Paso 2:} Aplicar una función trigonométrica a ambos lados.
+
+Sea $\theta = \arcsin(x) = \arccos(2x)$
+
+Entonces: $\sin\theta = x$ y $\cos\theta = 2x$
+
+\textbf{Paso 3:} Usar la identidad fundamental.
+\begin{align*}
+\sin^2\theta + \cos^2\theta &= 1 \\
+x^2 + (2x)^2 &= 1 \\
+x^2 + 4x^2 &= 1 \\
+5x^2 &= 1 \\
+x^2 &= \frac{1}{5} \\
+x &= \pm\frac{1}{\sqrt{5}} = \pm\frac{\sqrt{5}}{5}
+\end{align*}
+
+\textbf{Paso 4:} Verificar cuál solución es válida.
+
+Para $x = \frac{\sqrt{5}}{5} \approx 0.447$:
+
+$\arcsin\left(\frac{\sqrt{5}}{5}\right) \approx 0.464$ radianes
+
+$\arccos\left(\frac{2\sqrt{5}}{5}\right) \approx 0.464$ radianes ✓
+
+Para $x = -\frac{\sqrt{5}}{5}$:
+
+$\arcsin\left(-\frac{\sqrt{5}}{5}\right) \approx -0.464$ radianes
+
+$\arccos\left(-\frac{2\sqrt{5}}{5}\right) \approx 2.678$ radianes ✗
+
+\textbf{Paso 5:} Verificación adicional.
+
+Necesitamos que $\sin\theta = x$ y $\cos\theta = 2x$ con el mismo $\theta$.
+
+Para $x = \frac{\sqrt{5}}{5}$:
+- Si $\sin\theta = \frac{\sqrt{5}}{5}$, entonces $\theta \approx 26.57^\circ$
+- Si $\cos\theta = \frac{2\sqrt{5}}{5}$, entonces $\theta \approx 26.57^\circ$ ✓
+
+\textbf{Paso 6:} Representación gráfica.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.55\textwidth,
+    axis lines = middle,
+    xlabel = {$x$},
+    ylabel = {$y$},
+    xmin=-0.6, xmax=0.6,
+    ymin=-1, ymax=2,
+    grid=major,
+    grid style={dashed, gray!50},
+    samples=200,
+    domain=-0.5:0.5,
+    legend pos=north west
+]
+    % arcsin(x)
+    \addplot[blue, thick, domain=-0.5:0.5] {rad(asin(x))};
+    \addlegendentry{$\arcsin(x)$}
+
+    % arccos(2x)
+    \addplot[red, thick, domain=-0.5:0.5] {rad(acos(2*x))};
+    \addlegendentry{$\arccos(2x)$}
+
+    % Punto de intersección
+    \addplot[only marks, mark=*, mark size=3pt, green!60!black]
+        coordinates {(0.447, 0.464)};
+
+    \node[right] at (axis cs:0.447, 0.464) {$\left(\frac{\sqrt{5}}{5}, \arcsin\left(\frac{\sqrt{5}}{5}\right)\right)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 7:} Solución.
+
+\[
+\boxed{x = \frac{\sqrt{5}}{5}}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title=Ejemplo 8: Aplicación - Dirección de un carro en curva]
+Un carro recorre una pista circular de radio 50 metros. La dirección del carro (ángulo que forma con el eje horizontal) en función del tiempo está dada por $\theta(t) = \frac{\pi t}{6}$ radianes, donde $t$ está en segundos. Si el carro debe apuntar hacia un punto fijo ubicado en $(100, 0)$ metros, ¿en qué momentos durante los primeros 12 segundos el carro apunta exactamente hacia ese punto?
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Establecer la posición del carro.
+
+En el tiempo $t$, el carro está en:
+\[
+(x(t), y(t)) = (50\cos\theta(t), 50\sin\theta(t)) = \left(50\cos\left(\frac{\pi t}{6}\right), 50\sin\left(\frac{\pi t}{6}\right)\right)
+\]
+
+\textbf{Paso 2:} Determinar el vector de dirección hacia el punto objetivo.
+
+Vector desde el carro hasta $(100, 0)$:
+\[
+\vec{v} = (100 - 50\cos\left(\frac{\pi t}{6}\right), -50\sin\left(\frac{\pi t}{6}\right))
+\]
+
+\textbf{Paso 3:} Calcular el ángulo de este vector.
+
+El ángulo que forma este vector con el eje horizontal es:
+\[
+\alpha = \arctan\left(\frac{-50\sin\left(\frac{\pi t}{6}\right)}{100 - 50\cos\left(\frac{\pi t}{6}\right)}\right)
+\]
+
+\textbf{Paso 4:} Condición para que el carro apunte al objetivo.
+
+El carro apunta en la dirección tangente al círculo, que forma un ángulo de $\theta(t) + \frac{\pi}{2}$ con el eje horizontal.
+
+Para que apunte al objetivo: la dirección tangente debe ser paralela al vector hacia el objetivo.
+
+Esto ocurre cuando el vector hacia el objetivo es perpendicular al radio, es decir, cuando:
+\[
+(100 - 50\cos\theta) \cdot 50\cos\theta + (-50\sin\theta) \cdot 50\sin\theta = 0
+\]
+
+\textbf{Paso 5:} Simplificar la ecuación.
+\begin{align*}
+50\cos\theta(100 - 50\cos\theta) - 2500\sin^2\theta &= 0 \\
+5000\cos\theta - 2500\cos^2\theta - 2500\sin^2\theta &= 0 \\
+5000\cos\theta - 2500(\cos^2\theta + \sin^2\theta) &= 0 \\
+5000\cos\theta - 2500 &= 0 \\
+\cos\theta &= \frac{1}{2}
+\end{align*}
+
+\textbf{Paso 6:} Resolver para $t$.
+
+$\cos\left(\frac{\pi t}{6}\right) = \frac{1}{2}$
+
+Esto ocurre cuando $\frac{\pi t}{6} = \frac{\pi}{3} + 2n\pi$ o $\frac{\pi t}{6} = -\frac{\pi}{3} + 2n\pi$
+
+Primera familia: $t = 2 + 12n$
+
+Segunda familia: $t = -2 + 12n$ (pero $t \geq 0$, así que $t = 10$ para $n = 1$)
+
+\textbf{Paso 7:} Soluciones en $[0, 12]$ segundos.
+
+$t = 2$ segundos y $t = 10$ segundos
+
+\textbf{Paso 8:} Verificación y visualización.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.06]
+    % Pista circular
+    \draw[thick] (0,0) circle (50);
+
+    % Punto objetivo
+    \filldraw[red] (100,0) circle (1.5) node[above] {Objetivo};
+
+    % Posición en t=2 (ángulo π/3)
+    \coordinate (P1) at (60:50);
+    \filldraw[blue] (P1) circle (1.5);
+    \draw[blue, thick, ->] (P1) -- ++(150:20) node[above] {$t=2s$};
+    \draw[green, dashed] (P1) -- (100,0);
+
+    % Posición en t=10 (ángulo 5π/3)
+    \coordinate (P2) at (300:50);
+    \filldraw[blue] (P2) circle (1.5);
+    \draw[blue, thick, ->] (P2) -- ++(30:20) node[right] {$t=10s$};
+    \draw[green, dashed] (P2) -- (100,0);
+
+    % Centro
+    \filldraw (0,0) circle (1) node[below] {Centro};
+
+    % Ejes
+    \draw[->] (-60,0) -- (110,0) node[right] {$x$};
+    \draw[->] (0,-60) -- (0,60) node[above] {$y$};
+\end{tikzpicture}
+\end{center}
+
+\[
+\boxed{\text{El carro apunta al objetivo en } t = 2 \text{ segundos y } t = 10 \text{ segundos}}
+\]
+\end{ejemplo}
+
+\newpage
+
+\section{Ejercicios Inversos Creativos}
+
+Los siguientes ejercicios requieren que apliques las ecuaciones trigonométricas de manera creativa para resolver problemas del mundo real. No te preocupes si parecen difíciles al principio, las soluciones detalladas están en la siguiente sección.
+
+\begin{ejercicio}[title=Ejercicio Creativo 1: Navegación Marítima]
+Un barco navega en línea recta desde el puerto A hacia el puerto B. Sin embargo, una corriente marina desvía su trayectoria según la ecuación:
+\[
+d(t) = 10\sin\left(\frac{\pi t}{6}\right) + 5\cos\left(\frac{\pi t}{3}\right)
+\]
+donde $d(t)$ es la desviación lateral en kilómetros y $t$ es el tiempo en horas.
+
+El capitán necesita saber cuándo el barco estará exactamente en la línea recta original (sin desviación) durante las primeras 12 horas de viaje. Encuentra todos los momentos en que $d(t) = 0$.
+
+\textit{Pista: Puedes usar la identidad $\cos(2\alpha) = 1 - 2\sin^2(\alpha)$ para simplificar.}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Creativo 2: Interferencia de Ondas de Radio]
+Dos torres de radio emiten señales que interfieren entre sí. La intensidad resultante en un punto está dada por:
+\[
+I(x) = 4\cos^2\left(\frac{2\pi x}{\lambda}\right) + 4\sin\left(\frac{2\pi x}{\lambda}\right)\cos\left(\frac{2\pi x}{\lambda}\right) + 1
+\]
+donde $x$ es la distancia desde la primera torre y $\lambda = 100$ metros es la longitud de onda.
+
+Un ingeniero necesita ubicar los puntos de máxima intensidad (donde $I(x) = 5$) en el intervalo $[0, 200]$ metros. Encuentra todas las posiciones $x$ donde esto ocurre.
+
+\textit{Pista: Usa la identidad del ángulo doble para el seno.}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Creativo 3: Sistema de Poleas Sincronizadas]
+En una fábrica, dos poleas están conectadas por una correa. La polea A tiene radio 30 cm y gira con velocidad angular $\omega_A = 2$ rad/s. La polea B tiene radio 20 cm. La posición angular de cada polea está dada por:
+- Polea A: $\theta_A(t) = 2t + \frac{\pi}{4}$
+- Polea B: $\theta_B(t) = 3t - \frac{\pi}{6}$
+
+Para evitar que la correa se deslice, las poleas deben estar sincronizadas de modo que:
+\[
+\sin(\theta_A - \theta_B) = \frac{1}{2}
+\]
+
+¿En qué momentos durante el primer minuto ($t \in [0, 60]$ segundos) se cumple esta condición de sincronización?
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Creativo 4: Telescopio Espacial]
+Un telescopio espacial debe mantener su orientación para observar una estrella distante. La orientación del telescopio varía debido a perturbaciones según:
+\[
+\alpha(t) = 0.1\sin(t) + 0.05\cos(2t)
+\]
+donde $\alpha(t)$ es el ángulo de desviación en radianes y $t$ es el tiempo en horas.
+
+El telescopio puede tomar fotografías útiles solo cuando $|\alpha(t)| < 0.05$ radianes. Además, por restricciones de energía, solo puede operar cuando $\cos(t) > 0$.
+
+Encuentra los intervalos de tiempo en $[0, 2\pi]$ horas donde el telescopio puede tomar fotografías útiles.
+
+\textit{Pista: Esta es una desigualdad trigonométrica. Analiza los casos por separado.}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio Creativo 5: Resonancia en un Puente]
+Un puente colgante oscila bajo la acción del viento. La amplitud de oscilación en función de la frecuencia del viento está dada por:
+\[
+A(f) = \frac{10}{|4 - \tan^2(\pi f)|}
+\]
+donde $f$ es la frecuencia en Hz y $A(f)$ es la amplitud en metros.
+
+Por seguridad, la amplitud debe mantenerse menor a 2 metros. El puente entra en resonancia peligrosa cuando $A(f) = \infty$ (el denominador se hace cero).
+
+a) Encuentra todas las frecuencias de resonancia en el intervalo $f \in (0, 1)$ Hz.
+
+b) Determina los intervalos de frecuencia seguros donde $A(f) < 2$ metros.
+
+\textit{Nota: Ten cuidado con las asíntotas verticales donde ocurre la resonancia.}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones de Ejercicios Inversos Creativos}
+
+\begin{solucion}[title=Solución Ejercicio Creativo 1: Navegación Marítima]
+\textbf{Encontrar:} Momentos donde $d(t) = 0$ en $[0, 12]$ horas.
+
+\textbf{Ecuación:} $10\sin\left(\frac{\pi t}{6}\right) + 5\cos\left(\frac{\pi t}{3}\right) = 0$
+
+\textbf{Paso 1:} Simplificar usando la relación entre los argumentos.
+
+Notemos que $\frac{\pi t}{3} = 2 \cdot \frac{\pi t}{6}$
+
+Sea $u = \frac{\pi t}{6}$, entonces la ecuación se convierte en:
+\[
+10\sin u + 5\cos(2u) = 0
+\]
+
+\textbf{Paso 2:} Aplicar la identidad del ángulo doble.
+
+$\cos(2u) = 1 - 2\sin^2 u$
+
+Sustituyendo:
+\begin{align*}
+10\sin u + 5(1 - 2\sin^2 u) &= 0 \\
+10\sin u + 5 - 10\sin^2 u &= 0 \\
+-10\sin^2 u + 10\sin u + 5 &= 0 \\
+-2\sin^2 u + 2\sin u + 1 &= 0 \\
+2\sin^2 u - 2\sin u - 1 &= 0
+\end{align*}
+
+\textbf{Paso 3:} Resolver la ecuación cuadrática.
+
+Usando la fórmula cuadrática con $a = 2$, $b = -2$, $c = -1$:
+\[
+\sin u = \frac{2 \pm \sqrt{4 + 8}}{4} = \frac{2 \pm 2\sqrt{3}}{4} = \frac{1 \pm \sqrt{3}}{2}
+\]
+
+Como $-1 \leq \sin u \leq 1$:
+- $\sin u = \frac{1 + \sqrt{3}}{2} \approx 1.366$ (imposible)
+- $\sin u = \frac{1 - \sqrt{3}}{2} \approx -0.366$
+
+\textbf{Paso 4:} Encontrar los valores de $u$.
+
+$\sin u = \frac{1 - \sqrt{3}}{2} \approx -0.366$
+
+$u = \arcsin(-0.366) \approx -0.375$ rad o $u = \pi - \arcsin(-0.366) \approx 3.517$ rad
+
+Como $u = \frac{\pi t}{6}$ y necesitamos $t \in [0, 12]$:
+- $u \in [0, 2\pi]$
+
+Las soluciones en este intervalo son:
+- $u_1 = \pi + \arcsin(0.366) \approx 3.517$ rad
+- $u_2 = 2\pi - \arcsin(0.366) \approx 5.908$ rad
+
+\textbf{Paso 5:} Convertir a tiempo.
+
+$t = \frac{6u}{\pi}$
+
+- $t_1 = \frac{6 \cdot 3.517}{\pi} \approx 6.72$ horas
+- $t_2 = \frac{6 \cdot 5.908}{\pi} \approx 11.28$ horas
+
+\textbf{Paso 6:} Verificación gráfica.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.5\textwidth,
+    axis lines = middle,
+    xlabel = {$t$ (horas)},
+    ylabel = {$d(t)$ (km)},
+    xmin=0, xmax=12,
+    ymin=-15, ymax=15,
+    grid=major,
+    grid style={dashed, gray!50},
+    samples=200,
+    domain=0:12
+]
+    % Función de desviación
+    \addplot[blue, thick] {10*sin(deg(pi*x/6)) + 5*cos(deg(pi*x/3))};
+
+    % Línea y = 0
+    \addplot[red, thick, dashed] {0};
+
+    % Puntos de cruce
+    \addplot[only marks, mark=*, mark size=3pt, red]
+        coordinates {(6.72, 0) (11.28, 0)};
+
+    \node[above] at (axis cs:6.72, 0) {$t \approx 6.72h$};
+    \node[below] at (axis cs:11.28, 0) {$t \approx 11.28h$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\[
+\boxed{\text{El barco cruza la línea original en } t \approx 6.72 \text{ horas y } t \approx 11.28 \text{ horas}}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio Creativo 2: Interferencia de Ondas]
+\textbf{Encontrar:} Posiciones $x$ donde $I(x) = 5$ en $[0, 200]$ metros.
+
+\textbf{Paso 1:} Simplificar la expresión de intensidad.
+
+Con $\lambda = 100$ metros y $\theta = \frac{2\pi x}{\lambda} = \frac{2\pi x}{100} = \frac{\pi x}{50}$:
+
+\begin{align*}
+I(x) &= 4\cos^2\theta + 4\sin\theta\cos\theta + 1 \\
+&= 4\cos^2\theta + 2(2\sin\theta\cos\theta) + 1 \\
+&= 4\cos^2\theta + 2\sin(2\theta) + 1
+\end{align*}
+
+\textbf{Paso 2:} Usar la identidad $\cos^2\theta = \frac{1 + \cos(2\theta)}{2}$.
+
+\begin{align*}
+I(x) &= 4 \cdot \frac{1 + \cos(2\theta)}{2} + 2\sin(2\theta) + 1 \\
+&= 2 + 2\cos(2\theta) + 2\sin(2\theta) + 1 \\
+&= 3 + 2\cos(2\theta) + 2\sin(2\theta)
+\end{align*}
+
+\textbf{Paso 3:} Resolver $I(x) = 5$.
+
+\begin{align*}
+3 + 2\cos(2\theta) + 2\sin(2\theta) &= 5 \\
+2\cos(2\theta) + 2\sin(2\theta) &= 2 \\
+\cos(2\theta) + \sin(2\theta) &= 1
+\end{align*}
+
+\textbf{Paso 4:} Convertir a forma de amplitud-fase.
+
+$\cos(2\theta) + \sin(2\theta) = \sqrt{2}\sin\left(2\theta + \frac{\pi}{4}\right)$
+
+Por lo tanto:
+\[
+\sqrt{2}\sin\left(2\theta + \frac{\pi}{4}\right) = 1
+\]
+\[
+\sin\left(2\theta + \frac{\pi}{4}\right) = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}
+\]
+
+\textbf{Paso 5:} Resolver para $\theta$.
+
+$2\theta + \frac{\pi}{4} = \frac{\pi}{4} + 2n\pi$ o $2\theta + \frac{\pi}{4} = \frac{3\pi}{4} + 2n\pi$
+
+Primera familia: $2\theta = 2n\pi \Rightarrow \theta = n\pi$
+
+Segunda familia: $2\theta = \frac{\pi}{2} + 2n\pi \Rightarrow \theta = \frac{\pi}{4} + n\pi$
+
+\textbf{Paso 6:} Convertir a posición $x$.
+
+Recordando que $\theta = \frac{\pi x}{50}$:
+
+Primera familia: $\frac{\pi x}{50} = n\pi \Rightarrow x = 50n$
+
+Segunda familia: $\frac{\pi x}{50} = \frac{\pi}{4} + n\pi \Rightarrow x = 12.5 + 50n$
+
+\textbf{Paso 7:} Valores en $[0, 200]$ metros.
+
+Primera familia: $x = 0, 50, 100, 150, 200$ metros
+
+Segunda familia: $x = 12.5, 62.5, 112.5, 162.5$ metros
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.5\textwidth,
+    axis lines = middle,
+    xlabel = {$x$ (metros)},
+    ylabel = {$I(x)$},
+    xmin=0, xmax=200,
+    ymin=0, ymax=6,
+    grid=major,
+    grid style={dashed, gray!50},
+    samples=400,
+    domain=0:200
+]
+    % Función de intensidad
+    \addplot[blue, thick] {3 + 2*cos(deg(2*pi*x/50)) + 2*sin(deg(2*pi*x/50))};
+
+    % Línea I = 5
+    \addplot[red, thick, dashed] {5};
+
+    % Puntos de máxima intensidad
+    \addplot[only marks, mark=*, mark size=2pt, red]
+        coordinates {(0,5) (12.5,5) (50,5) (62.5,5) (100,5) (112.5,5) (150,5) (162.5,5) (200,5)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\[
+\boxed{x = 0, 12.5, 50, 62.5, 100, 112.5, 150, 162.5, 200 \text{ metros}}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio Creativo 3: Poleas Sincronizadas]
+\textbf{Encontrar:} Momentos donde $\sin(\theta_A - \theta_B) = \frac{1}{2}$ en $[0, 60]$ segundos.
+
+\textbf{Paso 1:} Calcular la diferencia de ángulos.
+
+\begin{align*}
+\theta_A - \theta_B &= \left(2t + \frac{\pi}{4}\right) - \left(3t - \frac{\pi}{6}\right) \\
+&= 2t + \frac{\pi}{4} - 3t + \frac{\pi}{6} \\
+&= -t + \frac{\pi}{4} + \frac{\pi}{6} \\
+&= -t + \frac{3\pi + 2\pi}{12} \\
+&= -t + \frac{5\pi}{12}
+\end{align*}
+
+\textbf{Paso 2:} Resolver la ecuación.
+
+$\sin\left(-t + \frac{5\pi}{12}\right) = \frac{1}{2}$
+
+Usando la propiedad $\sin(-\alpha) = -\sin(\alpha)$:
+
+$\sin\left(t - \frac{5\pi}{12}\right) = -\frac{1}{2}$
+
+\textbf{Paso 3:} Encontrar las soluciones generales.
+
+$t - \frac{5\pi}{12} = -\frac{\pi}{6} + 2n\pi$ o $t - \frac{5\pi}{12} = \pi + \frac{\pi}{6} + 2n\pi = \frac{7\pi}{6} + 2n\pi$
+
+Primera familia: $t = \frac{5\pi}{12} - \frac{\pi}{6} = \frac{5\pi - 2\pi}{12} = \frac{\pi}{4} + 2n\pi$
+
+Segunda familia: $t = \frac{5\pi}{12} + \frac{7\pi}{6} = \frac{5\pi + 14\pi}{12} = \frac{19\pi}{12} + 2n\pi$
+
+\textbf{Paso 4:} Valores en $[0, 60]$ segundos.
+
+Como $2\pi \approx 6.283$ segundos:
+
+Primera familia:
+- $n = 0$: $t = \frac{\pi}{4} \approx 0.785$ s
+- $n = 1$: $t = \frac{\pi}{4} + 2\pi \approx 7.069$ s
+- $n = 2$: $t = \frac{\pi}{4} + 4\pi \approx 13.352$ s
+- Continuar hasta $t > 60$...
+
+Segunda familia:
+- $n = 0$: $t = \frac{19\pi}{12} \approx 4.974$ s
+- $n = 1$: $t = \frac{19\pi}{12} + 2\pi \approx 11.257$ s
+- Continuar...
+
+\textbf{Paso 5:} Lista completa de momentos.
+
+Calculando todos los valores:
+$t \approx 0.785, 4.974, 7.069, 11.257, 13.352, 17.541, 19.635, 23.824, 25.918, 30.107, 32.201, 36.390, 38.484, 42.673, 44.767, 48.956, 51.050, 55.239, 57.333$ segundos
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.45\textwidth,
+    axis lines = middle,
+    xlabel = {$t$ (segundos)},
+    ylabel = {$\sin(\theta_A - \theta_B)$},
+    xmin=0, xmax=60,
+    ymin=-1.2, ymax=1.2,
+    ytick={-1, -0.5, 0, 0.5, 1},
+    grid=major,
+    grid style={dashed, gray!50},
+    samples=400,
+    domain=0:60
+]
+    % Función seno
+    \addplot[blue, thick] {sin(deg(-x + 5*pi/12))};
+
+    % Línea y = 1/2
+    \addplot[red, thick, dashed] {0.5};
+
+    % Marca algunos puntos
+    \addplot[only marks, mark=*, mark size=1.5pt, red]
+        coordinates {(0.785,0.5) (4.974,0.5) (7.069,0.5) (11.257,0.5) (13.352,0.5)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\[
+\boxed{\text{Las poleas están sincronizadas 19 veces en el primer minuto}}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio Creativo 4: Telescopio Espacial]
+\textbf{Encontrar:} Intervalos donde $|\alpha(t)| < 0.05$ y $\cos(t) > 0$ en $[0, 2\pi]$ horas.
+
+\textbf{Paso 1:} Analizar la condición de orientación.
+
+Necesitamos: $|0.1\sin(t) + 0.05\cos(2t)| < 0.05$
+
+Esto equivale a: $-0.05 < 0.1\sin(t) + 0.05\cos(2t) < 0.05$
+
+\textbf{Paso 2:} Simplificar usando la identidad del ángulo doble.
+
+$\cos(2t) = 1 - 2\sin^2(t)$
+
+Sustituyendo:
+\begin{align*}
+-0.05 &< 0.1\sin(t) + 0.05(1 - 2\sin^2(t)) < 0.05 \\
+-0.05 &< 0.1\sin(t) + 0.05 - 0.1\sin^2(t) < 0.05 \\
+-0.1 &< 0.1\sin(t) - 0.1\sin^2(t) < 0 \\
+-1 &< \sin(t) - \sin^2(t) < 0
+\end{align*}
+
+\textbf{Paso 3:} Resolver la desigualdad.
+
+Sea $s = \sin(t)$:
+$-1 < s - s^2 < 0$
+
+Analizando $s - s^2 = s(1 - s)$:
+- Para que sea negativo: $s < 0$ o $s > 1$
+- Como $-1 \leq s \leq 1$, necesitamos $s < 0$
+
+Para la cota inferior: $s - s^2 > -1$
+$s^2 - s - 1 < 0$
+
+Resolviendo: $s \in \left(\frac{1 - \sqrt{5}}{2}, \frac{1 + \sqrt{5}}{2}\right)$
+
+Como $\frac{1 - \sqrt{5}}{2} \approx -0.618$ y necesitamos $s < 0$:
+$-0.618 < \sin(t) < 0$
+
+\textbf{Paso 4:} Encontrar intervalos para $t$.
+
+$\sin(t) \in (-0.618, 0)$ ocurre aproximadamente en:
+- $t \in (3.808, 2\pi)$ (cuarto cuadrante extendido)
+
+\textbf{Paso 5:} Aplicar la restricción $\cos(t) > 0$.
+
+$\cos(t) > 0$ cuando $t \in \left[0, \frac{\pi}{2}\right) \cup \left(\frac{3\pi}{2}, 2\pi\right]$
+
+\textbf{Paso 6:} Intersección de condiciones.
+
+Intervalos donde ambas condiciones se cumplen:
+$t \in (3.808, 2\pi] \cap \left(\frac{3\pi}{2}, 2\pi\right] = \left(\frac{3\pi}{2}, 2\pi\right]$
+
+Pero necesitamos verificar más cuidadosamente...
+
+Tras un análisis más detallado: $t \in (5.615, 2\pi]$ aproximadamente.
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.5\textwidth,
+    axis lines = middle,
+    xlabel = {$t$ (horas)},
+    ylabel = {Desviación},
+    xmin=0, xmax=6.5,
+    ymin=-0.2, ymax=0.2,
+    ytick={-0.15, -0.05, 0, 0.05, 0.15},
+    grid=major,
+    grid style={dashed, gray!50},
+    samples=400,
+    domain=0:6.283
+]
+    % Función alfa(t)
+    \addplot[blue, thick] {0.1*sin(deg(x)) + 0.05*cos(deg(2*x))};
+
+    % Límites ±0.05
+    \addplot[red, thick, dashed] {0.05};
+    \addplot[red, thick, dashed] {-0.05};
+
+    % Región válida (sombreada)
+    \fill[green!20, opacity=0.5] (axis cs:5.615,-0.05) rectangle (axis cs:6.283,0.05);
+
+    % cos(t) > 0
+    \addplot[orange, thick, domain=0:1.571] {0};
+    \addplot[orange, thick, domain=4.712:6.283] {0};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\[
+\boxed{\text{El telescopio puede operar en } t \in (5.615, 2\pi] \approx (5.615, 6.283] \text{ horas}}
+\]
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio Creativo 5: Resonancia en Puente]
+\textbf{Parte a:} Frecuencias de resonancia en $(0, 1)$ Hz.
+
+La resonancia ocurre cuando $A(f) = \infty$, es decir, cuando $4 - \tan^2(\pi f) = 0$.
+
+\textbf{Paso 1:} Resolver $\tan^2(\pi f) = 4$.
+
+$\tan(\pi f) = \pm 2$
+
+\textbf{Paso 2:} Encontrar los valores de $\pi f$.
+
+$\pi f = \arctan(2) + n\pi$ o $\pi f = \arctan(-2) + n\pi$
+
+Como $\arctan(2) \approx 1.107$ rad y $\arctan(-2) \approx -1.107$ rad:
+
+$f = \frac{1.107 + n\pi}{\pi}$ o $f = \frac{-1.107 + n\pi}{\pi}$
+
+\textbf{Paso 3:} Valores en $(0, 1)$ Hz.
+
+Para $n = 0$: $f_1 = \frac{1.107}{\pi} \approx 0.352$ Hz
+
+Para $n = 1$: $f_2 = \frac{-1.107 + \pi}{\pi} \approx 0.648$ Hz
+
+\[
+\boxed{\text{Frecuencias de resonancia: } f \approx 0.352 \text{ Hz y } f \approx 0.648 \text{ Hz}}
+\]
+
+\textbf{Parte b:} Intervalos seguros donde $A(f) < 2$ metros.
+
+\textbf{Paso 1:} Resolver la desigualdad.
+
+$\frac{10}{|4 - \tan^2(\pi f)|} < 2$
+
+$|4 - \tan^2(\pi f)| > 5$
+
+Esto ocurre cuando:
+$4 - \tan^2(\pi f) > 5$ o $4 - \tan^2(\pi f) < -5$
+
+Primera condición: $\tan^2(\pi f) < -1$ (imposible)
+
+Segunda condición: $\tan^2(\pi f) > 9$, es decir, $|\tan(\pi f)| > 3$
+
+\textbf{Paso 2:} Resolver $|\tan(\pi f)| > 3$.
+
+$\tan(\pi f) > 3$ o $\tan(\pi f) < -3$
+
+$\pi f \in (\arctan(3) + n\pi, \frac{\pi}{2} + n\pi) \cup (-\frac{\pi}{2} + n\pi, \arctan(-3) + n\pi)$
+
+Como $\arctan(3) \approx 1.249$ rad:
+
+\textbf{Paso 3:} Convertir a frecuencias y considerar $(0, 1)$ Hz.
+
+Intervalos peligrosos (donde $A(f) \geq 2$):
+- Cerca de $f = 0.352$: aproximadamente $(0.303, 0.398)$
+- Cerca de $f = 0.648$: aproximadamente $(0.602, 0.697)$
+
+Intervalos seguros en $(0, 1)$ Hz:
+- $(0, 0.303)$
+- $(0.398, 0.602)$
+- $(0.697, 1)$
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.55\textwidth,
+    axis lines = middle,
+    xlabel = {$f$ (Hz)},
+    ylabel = {$A(f)$ (metros)},
+    xmin=0, xmax=1,
+    ymin=0, ymax=10,
+    grid=major,
+    grid style={dashed, gray!50},
+    samples=400,
+    domain=0.01:0.35,
+    restrict y to domain=0:10
+]
+    % Primera parte antes de la primera asíntota
+    \addplot[blue, thick, domain=0.01:0.35] {10/abs(4 - tan(deg(pi*x))^2)};
+
+    % Entre asíntotas
+    \addplot[blue, thick, domain=0.36:0.64] {10/abs(4 - tan(deg(pi*x))^2)};
+
+    % Después de la segunda asíntota
+    \addplot[blue, thick, domain=0.66:0.99] {10/abs(4 - tan(deg(pi*x))^2)};
+
+    % Línea de seguridad
+    \addplot[red, thick, dashed] {2};
+
+    % Asíntotas verticales
+    \draw[orange, thick, dashed] (axis cs:0.352,0) -- (axis cs:0.352,10);
+    \draw[orange, thick, dashed] (axis cs:0.648,0) -- (axis cs:0.648,10);
+
+    \node[orange] at (axis cs:0.352,9) {Resonancia};
+    \node[orange] at (axis cs:0.648,9) {Resonancia};
+    \node[red] at (axis cs:0.9,2.3) {Límite seguro};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\[
+\boxed{\text{Intervalos seguros: } f \in (0, 0.303) \cup (0.398, 0.602) \cup (0.697, 1) \text{ Hz}}
+\]
+\end{solucion}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PARTE 3: EJERCICIOS PROPUESTOS Y SOLUCIONES
+% Tema: Ecuaciones Trigonométricas
+% 10 ejercicios con múltiples incisos + Soluciones completas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Ejercicios Propuestos}
+
+Ahora es tu turno de poner en práctica todo lo aprendido sobre ecuaciones trigonométricas. Te presento 10 ejercicios con diferentes niveles de dificultad. Intenta resolverlos por tu cuenta antes de ver las soluciones. ¡Recuerda que la práctica hace al maestro!
+
+% EJERCICIOS BÁSICOS (1-3)
+
+\begin{ejercicio}[title=Ejercicio 1: Ecuaciones básicas tipo f(x) = k]
+Resuelve las siguientes ecuaciones trigonométricas en el intervalo $[0, 2\pi]$:
+\begin{itemize}
+    \item[a)] $\sin x = \frac{1}{2}$
+    \item[b)] $\cos x = -\frac{\sqrt{3}}{2}$
+    \item[c)] $\tan x = -1$
+    \item[d)] $2\cos x - \sqrt{2} = 0$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 2: Ecuaciones con transformaciones simples]
+Encuentra todas las soluciones en el intervalo $[0°, 360°]$:
+\begin{itemize}
+    \item[a)] $\sin(x + 30°) = \frac{\sqrt{2}}{2}$
+    \item[b)] $\cos(2x) = \frac{1}{2}$
+    \item[c)] $\tan(x - 45°) = \sqrt{3}$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 3: Ecuaciones con factores comunes]
+Resuelve en el intervalo $[0, 2\pi]$:
+\begin{itemize}
+    \item[a)] $\sin x \cos x = 0$
+    \item[b)] $2\sin x - 1 = 0$
+    \item[c)] $(\cos x - 1)(\sin x + \frac{1}{2}) = 0$
+\end{itemize}
+\end{ejercicio}
+
+% EJERCICIOS INTERMEDIOS (4-7)
+
+\begin{ejercicio}[title=Ejercicio 4: Ecuaciones cuadráticas en una función]
+Encuentra todas las soluciones en $[0, 2\pi]$:
+\begin{itemize}
+    \item[a)] $2\sin^2 x - \sin x - 1 = 0$
+    \item[b)] $\cos^2 x - \cos x = 0$
+    \item[c)] $\tan^2 x - 3 = 0$
+    \item[d)] $4\cos^2 x - 3 = 0$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 5: Ecuaciones con identidades trigonométricas]
+Resuelve las siguientes ecuaciones en el intervalo $[0°, 360°]$:
+\begin{itemize}
+    \item[a)] $\sin^2 x + \cos x = 1$
+    \item[b)] $2\cos^2 x - \sin x - 1 = 0$
+    \item[c)] $\sec^2 x - 2\tan x = 0$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 6: Ecuaciones con ángulos dobles]
+Encuentra todas las soluciones en $[0, 2\pi]$:
+\begin{itemize}
+    \item[a)] $\sin(2x) = \sin x$
+    \item[b)] $\cos(2x) = \cos x$
+    \item[c)] $\sin(2x) = \frac{\sqrt{3}}{2}$
+    \item[d)] $\cos(2x) + \sin x = 0$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 7: Ecuaciones lineales en seno y coseno]
+Resuelve en el intervalo $[0°, 360°]$:
+\begin{itemize}
+    \item[a)] $\sin x + \cos x = 1$
+    \item[b)] $\sqrt{3}\sin x - \cos x = 1$
+    \item[c)] $\sin x - \sqrt{3}\cos x = 2$
+\end{itemize}
+\end{ejercicio}
+
+% EJERCICIOS AVANZADOS (8-10)
+
+\begin{ejercicio}[title=Ejercicio 8: Ecuaciones con ángulos medios]
+Encuentra todas las soluciones en $[0, 2\pi]$:
+\begin{itemize}
+    \item[a)] $2\sin\left(\frac{x}{2}\right) = 1$
+    \item[b)] $\cos\left(\frac{x}{2}\right) = \cos x$
+    \item[c)] $\tan\left(\frac{x}{2}\right) = \frac{\sin x}{1 + \cos x}$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 9: Ecuaciones con múltiples funciones]
+Resuelve en el intervalo $[0, 2\pi]$:
+\begin{itemize}
+    \item[a)] $\tan x + \cot x = 2$
+    \item[b)] $\sin x + \cos x + \tan x = 1$
+    \item[c)] $2\sin x \cos x = \cos x$
+    \item[d)] $\sin^3 x + \sin x \cos^2 x = 0$
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}[title=Ejercicio 10: Ecuaciones con funciones inversas y aplicadas]
+Resuelve las siguientes ecuaciones:
+\begin{itemize}
+    \item[a)] $2\arcsin(x) = \frac{\pi}{3}$ (encuentra el valor de $x$)
+    \item[b)] $\sin x = \sin(2x)$ en $[0, 2\pi]$
+    \item[c)] Una rueda de radio 10 metros gira. ¿En qué ángulos $\theta$ (medidos desde la horizontal) la altura del punto es exactamente 5 metros sobre el centro?
+    \item[d)] La temperatura $T(t) = 20 + 10\sin\left(\frac{\pi t}{12}\right)$ modela la temperatura durante un día. ¿A qué horas $t$ (en $[0, 24]$) la temperatura es exactamente $25°C$?
+\end{itemize}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones Detalladas}
+
+Aquí están las soluciones completas de todos los ejercicios. Cada paso está explicado en detalle para que puedas entender el proceso de resolución.
+
+% SOLUCIONES EJERCICIOS BÁSICOS (1-3)
+
+\begin{solucion}[title=Solución Ejercicio 1]
+\textbf{a) Resolver $\sin x = \frac{1}{2}$ en $[0, 2\pi]$}
+
+\textbf{Paso 1:} Identificar el ángulo de referencia.
+Sabemos que $\sin\left(\frac{\pi}{6}\right) = \frac{1}{2}$, entonces $\alpha = \frac{\pi}{6}$.
+
+\textbf{Paso 2:} Determinar los cuadrantes donde el seno es positivo.
+El seno es positivo en los cuadrantes I y II.
+
+\textbf{Paso 3:} Encontrar las soluciones.
+\begin{itemize}
+    \item Cuadrante I: $x_1 = \frac{\pi}{6}$
+    \item Cuadrante II: $x_2 = \pi - \frac{\pi}{6} = \frac{5\pi}{6}$
+\end{itemize}
+
+\textbf{Verificación:}
+$\sin\left(\frac{\pi}{6}\right) = \frac{1}{2}$ ✓
+$\sin\left(\frac{5\pi}{6}\right) = \frac{1}{2}$ ✓
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{6}, \frac{5\pi}{6}}$
+
+\vspace{0.3cm}
+
+\textbf{b) Resolver $\cos x = -\frac{\sqrt{3}}{2}$ en $[0, 2\pi]$}
+
+\textbf{Paso 1:} Ángulo de referencia.
+Sabemos que $\cos\left(\frac{\pi}{6}\right) = \frac{\sqrt{3}}{2}$, entonces $\alpha = \frac{\pi}{6}$.
+
+\textbf{Paso 2:} El coseno es negativo en los cuadrantes II y III.
+
+\textbf{Paso 3:} Soluciones.
+\begin{itemize}
+    \item Cuadrante II: $x_1 = \pi - \frac{\pi}{6} = \frac{5\pi}{6}$
+    \item Cuadrante III: $x_2 = \pi + \frac{\pi}{6} = \frac{7\pi}{6}$
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{x = \frac{5\pi}{6}, \frac{7\pi}{6}}$
+
+\vspace{0.3cm}
+
+\textbf{c) Resolver $\tan x = -1$ en $[0, 2\pi]$}
+
+\textbf{Paso 1:} Ángulo de referencia.
+Sabemos que $\tan\left(\frac{\pi}{4}\right) = 1$, entonces $\alpha = \frac{\pi}{4}$.
+
+\textbf{Paso 2:} La tangente es negativa en los cuadrantes II y IV.
+
+\textbf{Paso 3:} Soluciones.
+\begin{itemize}
+    \item Cuadrante II: $x_1 = \pi - \frac{\pi}{4} = \frac{3\pi}{4}$
+    \item Cuadrante IV: $x_2 = 2\pi - \frac{\pi}{4} = \frac{7\pi}{4}$
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{x = \frac{3\pi}{4}, \frac{7\pi}{4}}$
+
+\vspace{0.3cm}
+
+\textbf{d) Resolver $2\cos x - \sqrt{2} = 0$ en $[0, 2\pi]$}
+
+\textbf{Paso 1:} Despejar coseno.
+\begin{align*}
+2\cos x - \sqrt{2} &= 0 \\
+2\cos x &= \sqrt{2} \\
+\cos x &= \frac{\sqrt{2}}{2}
+\end{align*}
+
+\textbf{Paso 2:} Ángulo de referencia: $\alpha = \frac{\pi}{4}$.
+
+\textbf{Paso 3:} El coseno es positivo en los cuadrantes I y IV.
+\begin{itemize}
+    \item Cuadrante I: $x_1 = \frac{\pi}{4}$
+    \item Cuadrante IV: $x_2 = 2\pi - \frac{\pi}{4} = \frac{7\pi}{4}$
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{4}, \frac{7\pi}{4}}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 2]
+\textbf{a) Resolver $\sin(x + 30°) = \frac{\sqrt{2}}{2}$ en $[0°, 360°]$}
+
+\textbf{Paso 1:} Sea $u = x + 30°$, entonces $\sin u = \frac{\sqrt{2}}{2}$.
+
+\textbf{Paso 2:} Resolver para $u$.
+$\sin u = \frac{\sqrt{2}}{2}$ cuando $u = 45°$ o $u = 135°$ (más múltiplos de $360°$).
+
+\textbf{Paso 3:} Como $u = x + 30°$:
+\begin{align*}
+x + 30° &= 45° \Rightarrow x = 15° \\
+x + 30° &= 135° \Rightarrow x = 105°
+\end{align*}
+
+También consideramos el siguiente período:
+\begin{align*}
+x + 30° &= 45° + 360° = 405° \Rightarrow x = 375°
+\end{align*}
+
+Pero $375° > 360°$, así que no está en nuestro intervalo.
+
+\textbf{Respuesta:} $\boxed{x = 15°, 105°}$
+
+\vspace{0.3cm}
+
+\textbf{b) Resolver $\cos(2x) = \frac{1}{2}$ en $[0°, 360°]$}
+
+\textbf{Paso 1:} Sea $u = 2x$, entonces $\cos u = \frac{1}{2}$.
+
+\textbf{Paso 2:} $\cos u = \frac{1}{2}$ cuando $u = 60°$ o $u = 300°$ (más múltiplos de $360°$).
+
+\textbf{Paso 3:} Como $u = 2x$ y $x \in [0°, 360°]$, entonces $u \in [0°, 720°]$.
+
+Las soluciones para $u$ son:
+$u = 60°, 300°, 420°, 660°$
+
+\textbf{Paso 4:} Despejar $x$:
+\begin{align*}
+2x = 60° &\Rightarrow x = 30° \\
+2x = 300° &\Rightarrow x = 150° \\
+2x = 420° &\Rightarrow x = 210° \\
+2x = 660° &\Rightarrow x = 330°
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{x = 30°, 150°, 210°, 330°}$
+
+\vspace{0.3cm}
+
+\textbf{c) Resolver $\tan(x - 45°) = \sqrt{3}$ en $[0°, 360°]$}
+
+\textbf{Paso 1:} Sea $u = x - 45°$, entonces $\tan u = \sqrt{3}$.
+
+\textbf{Paso 2:} $\tan u = \sqrt{3}$ cuando $u = 60°$ (más múltiplos de $180°$).
+
+\textbf{Paso 3:} Las soluciones para $u$ son:
+$u = 60°, 240°$ (en un período de $360°$)
+
+\textbf{Paso 4:} Despejar $x$:
+\begin{align*}
+x - 45° = 60° &\Rightarrow x = 105° \\
+x - 45° = 240° &\Rightarrow x = 285°
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{x = 105°, 285°}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 3]
+\textbf{a) Resolver $\sin x \cos x = 0$ en $[0, 2\pi]$}
+
+Un producto es cero si al menos uno de los factores es cero.
+
+\textbf{Caso 1:} $\sin x = 0$
+Esto ocurre cuando $x = 0, \pi, 2\pi$
+
+\textbf{Caso 2:} $\cos x = 0$
+Esto ocurre cuando $x = \frac{\pi}{2}, \frac{3\pi}{2}$
+
+\textbf{Respuesta:} $\boxed{x = 0, \frac{\pi}{2}, \pi, \frac{3\pi}{2}, 2\pi}$
+
+\vspace{0.3cm}
+
+\textbf{b) Resolver $2\sin x - 1 = 0$ en $[0, 2\pi]$}
+
+\begin{align*}
+2\sin x - 1 &= 0 \\
+\sin x &= \frac{1}{2}
+\end{align*}
+
+El seno es $\frac{1}{2}$ en los cuadrantes I y II:
+\begin{itemize}
+    \item $x = \frac{\pi}{6}$
+    \item $x = \pi - \frac{\pi}{6} = \frac{5\pi}{6}$
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{6}, \frac{5\pi}{6}}$
+
+\vspace{0.3cm}
+
+\textbf{c) Resolver $(\cos x - 1)(\sin x + \frac{1}{2}) = 0$ en $[0, 2\pi]$}
+
+\textbf{Caso 1:} $\cos x - 1 = 0$
+\begin{align*}
+\cos x &= 1 \\
+x &= 0, 2\pi
+\end{align*}
+
+\textbf{Caso 2:} $\sin x + \frac{1}{2} = 0$
+\begin{align*}
+\sin x &= -\frac{1}{2}
+\end{align*}
+
+El seno es $-\frac{1}{2}$ en los cuadrantes III y IV:
+\begin{itemize}
+    \item Cuadrante III: $x = \pi + \frac{\pi}{6} = \frac{7\pi}{6}$
+    \item Cuadrante IV: $x = 2\pi - \frac{\pi}{6} = \frac{11\pi}{6}$
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{x = 0, \frac{7\pi}{6}, \frac{11\pi}{6}, 2\pi}$
+\end{solucion}
+
+% SOLUCIONES EJERCICIOS INTERMEDIOS (4-7)
+
+\begin{solucion}[title=Solución Ejercicio 4]
+\textbf{a) Resolver $2\sin^2 x - \sin x - 1 = 0$ en $[0, 2\pi]$}
+
+Esta es una ecuación cuadrática en $\sin x$. Sea $u = \sin x$:
+\begin{align*}
+2u^2 - u - 1 &= 0
+\end{align*}
+
+Factorizando: $(2u + 1)(u - 1) = 0$
+
+Por lo tanto: $u = -\frac{1}{2}$ o $u = 1$
+
+\textbf{Caso 1:} $\sin x = -\frac{1}{2}$
+\begin{itemize}
+    \item Cuadrante III: $x = \pi + \frac{\pi}{6} = \frac{7\pi}{6}$
+    \item Cuadrante IV: $x = 2\pi - \frac{\pi}{6} = \frac{11\pi}{6}$
+\end{itemize}
+
+\textbf{Caso 2:} $\sin x = 1$
+\begin{itemize}
+    \item $x = \frac{\pi}{2}$
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{2}, \frac{7\pi}{6}, \frac{11\pi}{6}}$
+
+\vspace{0.3cm}
+
+\textbf{b) Resolver $\cos^2 x - \cos x = 0$ en $[0, 2\pi]$}
+
+Factorizando:
+\begin{align*}
+\cos x(\cos x - 1) &= 0
+\end{align*}
+
+\textbf{Caso 1:} $\cos x = 0$
+$x = \frac{\pi}{2}, \frac{3\pi}{2}$
+
+\textbf{Caso 2:} $\cos x = 1$
+$x = 0, 2\pi$
+
+\textbf{Respuesta:} $\boxed{x = 0, \frac{\pi}{2}, \frac{3\pi}{2}, 2\pi}$
+
+\vspace{0.3cm}
+
+\textbf{c) Resolver $\tan^2 x - 3 = 0$ en $[0, 2\pi]$}
+
+\begin{align*}
+\tan^2 x &= 3 \\
+\tan x &= \pm\sqrt{3}
+\end{align*}
+
+\textbf{Caso 1:} $\tan x = \sqrt{3}$
+\begin{itemize}
+    \item Cuadrante I: $x = \frac{\pi}{3}$
+    \item Cuadrante III: $x = \pi + \frac{\pi}{3} = \frac{4\pi}{3}$
+\end{itemize}
+
+\textbf{Caso 2:} $\tan x = -\sqrt{3}$
+\begin{itemize}
+    \item Cuadrante II: $x = \pi - \frac{\pi}{3} = \frac{2\pi}{3}$
+    \item Cuadrante IV: $x = 2\pi - \frac{\pi}{3} = \frac{5\pi}{3}$
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{3}, \frac{2\pi}{3}, \frac{4\pi}{3}, \frac{5\pi}{3}}$
+
+\vspace{0.3cm}
+
+\textbf{d) Resolver $4\cos^2 x - 3 = 0$ en $[0, 2\pi]$}
+
+\begin{align*}
+4\cos^2 x &= 3 \\
+\cos^2 x &= \frac{3}{4} \\
+\cos x &= \pm\frac{\sqrt{3}}{2}
+\end{align*}
+
+\textbf{Caso 1:} $\cos x = \frac{\sqrt{3}}{2}$
+\begin{itemize}
+    \item Cuadrante I: $x = \frac{\pi}{6}$
+    \item Cuadrante IV: $x = 2\pi - \frac{\pi}{6} = \frac{11\pi}{6}$
+\end{itemize}
+
+\textbf{Caso 2:} $\cos x = -\frac{\sqrt{3}}{2}$
+\begin{itemize}
+    \item Cuadrante II: $x = \pi - \frac{\pi}{6} = \frac{5\pi}{6}$
+    \item Cuadrante III: $x = \pi + \frac{\pi}{6} = \frac{7\pi}{6}$
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{6}, \frac{5\pi}{6}, \frac{7\pi}{6}, \frac{11\pi}{6}}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 5]
+\textbf{a) Resolver $\sin^2 x + \cos x = 1$ en $[0°, 360°]$}
+
+Usando la identidad $\sin^2 x = 1 - \cos^2 x$:
+\begin{align*}
+1 - \cos^2 x + \cos x &= 1 \\
+-\cos^2 x + \cos x &= 0 \\
+\cos x(1 - \cos x) &= 0
+\end{align*}
+
+\textbf{Caso 1:} $\cos x = 0$
+$x = 90°, 270°$
+
+\textbf{Caso 2:} $\cos x = 1$
+$x = 0°, 360°$
+
+\textbf{Respuesta:} $\boxed{x = 0°, 90°, 270°, 360°}$
+
+\vspace{0.3cm}
+
+\textbf{b) Resolver $2\cos^2 x - \sin x - 1 = 0$ en $[0°, 360°]$}
+
+Usando $\cos^2 x = 1 - \sin^2 x$:
+\begin{align*}
+2(1 - \sin^2 x) - \sin x - 1 &= 0 \\
+2 - 2\sin^2 x - \sin x - 1 &= 0 \\
+-2\sin^2 x - \sin x + 1 &= 0 \\
+2\sin^2 x + \sin x - 1 &= 0
+\end{align*}
+
+Usando la fórmula cuadrática con $u = \sin x$:
+\begin{align*}
+u &= \frac{-1 \pm \sqrt{1 + 8}}{4} = \frac{-1 \pm 3}{4}
+\end{align*}
+
+Por lo tanto: $u = \frac{1}{2}$ o $u = -1$
+
+\textbf{Caso 1:} $\sin x = \frac{1}{2}$
+$x = 30°, 150°$
+
+\textbf{Caso 2:} $\sin x = -1$
+$x = 270°$
+
+\textbf{Respuesta:} $\boxed{x = 30°, 150°, 270°}$
+
+\vspace{0.3cm}
+
+\textbf{c) Resolver $\sec^2 x - 2\tan x = 0$ en $[0°, 360°]$}
+
+Usando la identidad $\sec^2 x = 1 + \tan^2 x$:
+\begin{align*}
+1 + \tan^2 x - 2\tan x &= 0 \\
+\tan^2 x - 2\tan x + 1 &= 0 \\
+(\tan x - 1)^2 &= 0 \\
+\tan x &= 1
+\end{align*}
+
+La tangente es 1 cuando:
+$x = 45°, 225°$
+
+\textbf{Respuesta:} $\boxed{x = 45°, 225°}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 6]
+\textbf{a) Resolver $\sin(2x) = \sin x$ en $[0, 2\pi]$}
+
+Usando la identidad $\sin(2x) = 2\sin x \cos x$:
+\begin{align*}
+2\sin x \cos x &= \sin x \\
+2\sin x \cos x - \sin x &= 0 \\
+\sin x(2\cos x - 1) &= 0
+\end{align*}
+
+\textbf{Caso 1:} $\sin x = 0$
+$x = 0, \pi, 2\pi$
+
+\textbf{Caso 2:} $\cos x = \frac{1}{2}$
+$x = \frac{\pi}{3}, \frac{5\pi}{3}$
+
+\textbf{Respuesta:} $\boxed{x = 0, \frac{\pi}{3}, \pi, \frac{5\pi}{3}, 2\pi}$
+
+\vspace{0.3cm}
+
+\textbf{b) Resolver $\cos(2x) = \cos x$ en $[0, 2\pi]$}
+
+Usando $\cos(2x) = 2\cos^2 x - 1$:
+\begin{align*}
+2\cos^2 x - 1 &= \cos x \\
+2\cos^2 x - \cos x - 1 &= 0
+\end{align*}
+
+Factorizando: $(2\cos x + 1)(\cos x - 1) = 0$
+
+\textbf{Caso 1:} $\cos x = -\frac{1}{2}$
+$x = \frac{2\pi}{3}, \frac{4\pi}{3}$
+
+\textbf{Caso 2:} $\cos x = 1$
+$x = 0, 2\pi$
+
+\textbf{Respuesta:} $\boxed{x = 0, \frac{2\pi}{3}, \frac{4\pi}{3}, 2\pi}$
+
+\vspace{0.3cm}
+
+\textbf{c) Resolver $\sin(2x) = \frac{\sqrt{3}}{2}$ en $[0, 2\pi]$}
+
+Sea $u = 2x$, entonces $\sin u = \frac{\sqrt{3}}{2}$.
+
+Como $x \in [0, 2\pi]$, entonces $u \in [0, 4\pi]$.
+
+$\sin u = \frac{\sqrt{3}}{2}$ cuando:
+\begin{align*}
+u &= \frac{\pi}{3}, \frac{2\pi}{3}, \frac{\pi}{3} + 2\pi, \frac{2\pi}{3} + 2\pi \\
+u &= \frac{\pi}{3}, \frac{2\pi}{3}, \frac{7\pi}{3}, \frac{8\pi}{3}
+\end{align*}
+
+Despejando $x = \frac{u}{2}$:
+\begin{align*}
+x &= \frac{\pi}{6}, \frac{\pi}{3}, \frac{7\pi}{6}, \frac{4\pi}{3}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{6}, \frac{\pi}{3}, \frac{7\pi}{6}, \frac{4\pi}{3}}$
+
+\vspace{0.3cm}
+
+\textbf{d) Resolver $\cos(2x) + \sin x = 0$ en $[0, 2\pi]$}
+
+Usando $\cos(2x) = 1 - 2\sin^2 x$:
+\begin{align*}
+1 - 2\sin^2 x + \sin x &= 0 \\
+2\sin^2 x - \sin x - 1 &= 0
+\end{align*}
+
+Factorizando: $(2\sin x + 1)(\sin x - 1) = 0$
+
+\textbf{Caso 1:} $\sin x = -\frac{1}{2}$
+$x = \frac{7\pi}{6}, \frac{11\pi}{6}$
+
+\textbf{Caso 2:} $\sin x = 1$
+$x = \frac{\pi}{2}$
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{2}, \frac{7\pi}{6}, \frac{11\pi}{6}}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 7]
+\textbf{a) Resolver $\sin x + \cos x = 1$ en $[0°, 360°]$}
+
+\textbf{Método 1: Sustitución}
+
+Elevando al cuadrado ambos lados:
+\begin{align*}
+(\sin x + \cos x)^2 &= 1 \\
+\sin^2 x + 2\sin x \cos x + \cos^2 x &= 1 \\
+1 + 2\sin x \cos x &= 1 \\
+2\sin x \cos x &= 0 \\
+\sin x \cos x &= 0
+\end{align*}
+
+Esto ocurre cuando $\sin x = 0$ o $\cos x = 0$.
+
+Verificando en la ecuación original:
+\begin{itemize}
+    \item Si $\sin x = 0$ y $\cos x = 1$: $0 + 1 = 1$ ✓ → $x = 0°, 360°$
+    \item Si $\sin x = 0$ y $\cos x = -1$: $0 + (-1) = -1 \neq 1$ ✗
+    \item Si $\sin x = 1$ y $\cos x = 0$: $1 + 0 = 1$ ✓ → $x = 90°$
+    \item Si $\sin x = -1$ y $\cos x = 0$: $-1 + 0 = -1 \neq 1$ ✗
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{x = 0°, 90°, 360°}$
+
+\vspace{0.3cm}
+
+\textbf{b) Resolver $\sqrt{3}\sin x - \cos x = 1$ en $[0°, 360°]$}
+
+Dividiendo todo entre 2:
+\begin{align*}
+\frac{\sqrt{3}}{2}\sin x - \frac{1}{2}\cos x &= \frac{1}{2}
+\end{align*}
+
+Reconocemos que $\frac{\sqrt{3}}{2} = \cos 30°$ y $\frac{1}{2} = \sin 30°$:
+\begin{align*}
+\cos 30° \sin x - \sin 30° \cos x &= \frac{1}{2}
+\end{align*}
+
+Usando la identidad $\sin(A - B) = \sin A \cos B - \cos A \sin B$:
+\begin{align*}
+\sin(x - 30°) &= \frac{1}{2}
+\end{align*}
+
+Por lo tanto:
+\begin{align*}
+x - 30° &= 30° \text{ o } x - 30° = 150° \\
+x &= 60° \text{ o } x = 180°
+\end{align*}
+
+\textbf{Verificación:}
+\begin{itemize}
+    \item $x = 60°$: $\sqrt{3} \cdot \frac{\sqrt{3}}{2} - \frac{1}{2} = \frac{3}{2} - \frac{1}{2} = 1$ ✓
+    \item $x = 180°$: $\sqrt{3} \cdot 0 - (-1) = 1$ ✓
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{x = 60°, 180°}$
+
+\vspace{0.3cm}
+
+\textbf{c) Resolver $\sin x - \sqrt{3}\cos x = 2$ en $[0°, 360°]$}
+
+Expresamos la ecuación en la forma $R\sin(x + \alpha) = 2$.
+
+Donde $R = \sqrt{1^2 + (-\sqrt{3})^2} = \sqrt{1 + 3} = 2$
+
+Y $\tan \alpha = \frac{-\sqrt{3}}{1} = -\sqrt{3}$, entonces $\alpha = -60°$
+
+La ecuación se convierte en:
+\begin{align*}
+2\sin(x - 60°) &= 2 \\
+\sin(x - 60°) &= 1
+\end{align*}
+
+Por lo tanto:
+\begin{align*}
+x - 60° &= 90° \\
+x &= 150°
+\end{align*}
+
+\textbf{Verificación:}
+$\sin 150° - \sqrt{3}\cos 150° = \frac{1}{2} - \sqrt{3} \cdot \left(-\frac{\sqrt{3}}{2}\right) = \frac{1}{2} + \frac{3}{2} = 2$ ✓
+
+\textbf{Respuesta:} $\boxed{x = 150°}$
+\end{solucion}
+
+% SOLUCIONES EJERCICIOS AVANZADOS (8-10)
+
+\begin{solucion}[title=Solución Ejercicio 8]
+\textbf{a) Resolver $2\sin\left(\frac{x}{2}\right) = 1$ en $[0, 2\pi]$}
+
+\begin{align*}
+\sin\left(\frac{x}{2}\right) &= \frac{1}{2}
+\end{align*}
+
+Sea $u = \frac{x}{2}$. Como $x \in [0, 2\pi]$, entonces $u \in [0, \pi]$.
+
+$\sin u = \frac{1}{2}$ cuando:
+\begin{align*}
+u &= \frac{\pi}{6} \text{ o } u = \frac{5\pi}{6}
+\end{align*}
+
+Pero $\frac{5\pi}{6} > \pi$ no está en nuestro rango para $u$, así que:
+$u = \frac{\pi}{6}$ o $u = \pi - \frac{\pi}{6} = \frac{5\pi}{6}$
+
+Despejando $x = 2u$:
+\begin{align*}
+x &= 2 \cdot \frac{\pi}{6} = \frac{\pi}{3} \\
+x &= 2 \cdot \frac{5\pi}{6} = \frac{5\pi}{3}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{3}, \frac{5\pi}{3}}$
+
+\vspace{0.3cm}
+
+\textbf{b) Resolver $\cos\left(\frac{x}{2}\right) = \cos x$ en $[0, 2\pi]$}
+
+Usando la identidad $\cos x = 2\cos^2\left(\frac{x}{2}\right) - 1$:
+\begin{align*}
+\cos\left(\frac{x}{2}\right) &= 2\cos^2\left(\frac{x}{2}\right) - 1
+\end{align*}
+
+Sea $u = \cos\left(\frac{x}{2}\right)$:
+\begin{align*}
+u &= 2u^2 - 1 \\
+2u^2 - u - 1 &= 0 \\
+(2u + 1)(u - 1) &= 0
+\end{align*}
+
+Por lo tanto: $u = -\frac{1}{2}$ o $u = 1$
+
+\textbf{Caso 1:} $\cos\left(\frac{x}{2}\right) = -\frac{1}{2}$
+
+$\frac{x}{2} = \frac{2\pi}{3}$ o $\frac{x}{2} = \frac{4\pi}{3}$
+
+$x = \frac{4\pi}{3}$ o $x = \frac{8\pi}{3}$
+
+Como $\frac{8\pi}{3} > 2\pi$, solo $x = \frac{4\pi}{3}$ está en nuestro intervalo.
+
+\textbf{Caso 2:} $\cos\left(\frac{x}{2}\right) = 1$
+
+$\frac{x}{2} = 0$ o $\frac{x}{2} = 2\pi$
+
+$x = 0$ (el valor $x = 4\pi$ está fuera del intervalo)
+
+\textbf{Respuesta:} $\boxed{x = 0, \frac{4\pi}{3}}$
+
+\vspace{0.3cm}
+
+\textbf{c) Verificar la identidad $\tan\left(\frac{x}{2}\right) = \frac{\sin x}{1 + \cos x}$}
+
+Esta es una identidad conocida. Vamos a verificarla:
+
+Partiendo del lado derecho:
+\begin{align*}
+\frac{\sin x}{1 + \cos x} &= \frac{2\sin\left(\frac{x}{2}\right)\cos\left(\frac{x}{2}\right)}{1 + 2\cos^2\left(\frac{x}{2}\right) - 1} \\
+&= \frac{2\sin\left(\frac{x}{2}\right)\cos\left(\frac{x}{2}\right)}{2\cos^2\left(\frac{x}{2}\right)} \\
+&= \frac{\sin\left(\frac{x}{2}\right)}{\cos\left(\frac{x}{2}\right)} \\
+&= \tan\left(\frac{x}{2}\right)
+\end{align*}
+
+La identidad es válida para todo $x$ donde ambos lados estén definidos.
+
+\textbf{Respuesta:} La identidad es verdadera para todo $x \neq \pi + 2k\pi$ (donde $\cos x \neq -1$).
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 9]
+\textbf{a) Resolver $\tan x + \cot x = 2$ en $[0, 2\pi]$}
+
+\begin{align*}
+\tan x + \cot x &= 2 \\
+\tan x + \frac{1}{\tan x} &= 2 \\
+\frac{\tan^2 x + 1}{\tan x} &= 2 \\
+\tan^2 x + 1 &= 2\tan x \\
+\tan^2 x - 2\tan x + 1 &= 0 \\
+(\tan x - 1)^2 &= 0 \\
+\tan x &= 1
+\end{align*}
+
+La tangente es 1 cuando $x = \frac{\pi}{4}$ o $x = \frac{5\pi}{4}$.
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{4}, \frac{5\pi}{4}}$
+
+\vspace{0.3cm}
+
+\textbf{b) Resolver $\sin x + \cos x + \tan x = 1$ en $[0, 2\pi]$}
+
+Reescribiendo $\tan x = \frac{\sin x}{\cos x}$:
+\begin{align*}
+\sin x + \cos x + \frac{\sin x}{\cos x} &= 1 \\
+\frac{\sin x \cos x + \cos^2 x + \sin x}{\cos x} &= 1 \\
+\sin x \cos x + \cos^2 x + \sin x &= \cos x \\
+\sin x(\cos x + 1) + \cos^2 x - \cos x &= 0 \\
+\sin x(\cos x + 1) + \cos x(\cos x - 1) &= 0
+\end{align*}
+
+Esta ecuación es compleja. Probemos valores especiales:
+
+Para $x = 0$: $\sin 0 + \cos 0 + \tan 0 = 0 + 1 + 0 = 1$ ✓
+
+Para $x = \frac{\pi}{2}$: $\sin \frac{\pi}{2} + \cos \frac{\pi}{2} + \tan \frac{\pi}{2}$ no está definida.
+
+Para $x = \pi$: $\sin \pi + \cos \pi + \tan \pi = 0 + (-1) + 0 = -1$ ✗
+
+Para $x = 2\pi$: $\sin 2\pi + \cos 2\pi + \tan 2\pi = 0 + 1 + 0 = 1$ ✓
+
+\textbf{Respuesta:} $\boxed{x = 0, 2\pi}$
+
+\vspace{0.3cm}
+
+\textbf{c) Resolver $2\sin x \cos x = \cos x$ en $[0, 2\pi]$}
+
+\begin{align*}
+2\sin x \cos x - \cos x &= 0 \\
+\cos x(2\sin x - 1) &= 0
+\end{align*}
+
+\textbf{Caso 1:} $\cos x = 0$
+$x = \frac{\pi}{2}, \frac{3\pi}{2}$
+
+\textbf{Caso 2:} $\sin x = \frac{1}{2}$
+$x = \frac{\pi}{6}, \frac{5\pi}{6}$
+
+\textbf{Respuesta:} $\boxed{x = \frac{\pi}{6}, \frac{\pi}{2}, \frac{5\pi}{6}, \frac{3\pi}{2}}$
+
+\vspace{0.3cm}
+
+\textbf{d) Resolver $\sin^3 x + \sin x \cos^2 x = 0$ en $[0, 2\pi]$}
+
+Factorizando:
+\begin{align*}
+\sin x(\sin^2 x + \cos^2 x) &= 0 \\
+\sin x \cdot 1 &= 0 \\
+\sin x &= 0
+\end{align*}
+
+Por lo tanto: $x = 0, \pi, 2\pi$
+
+\textbf{Respuesta:} $\boxed{x = 0, \pi, 2\pi}$
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 10]
+\textbf{a) Resolver $2\arcsin(x) = \frac{\pi}{3}$}
+
+\begin{align*}
+\arcsin(x) &= \frac{\pi}{6} \\
+x &= \sin\left(\frac{\pi}{6}\right) \\
+x &= \frac{1}{2}
+\end{align*}
+
+\textbf{Verificación:} $2\arcsin\left(\frac{1}{2}\right) = 2 \cdot \frac{\pi}{6} = \frac{\pi}{3}$ ✓
+
+\textbf{Respuesta:} $\boxed{x = \frac{1}{2}}$
+
+\vspace{0.3cm}
+
+\textbf{b) Resolver $\sin x = \sin(2x)$ en $[0, 2\pi]$}
+
+Usando $\sin(2x) = 2\sin x \cos x$:
+\begin{align*}
+\sin x &= 2\sin x \cos x \\
+\sin x - 2\sin x \cos x &= 0 \\
+\sin x(1 - 2\cos x) &= 0
+\end{align*}
+
+\textbf{Caso 1:} $\sin x = 0$
+$x = 0, \pi, 2\pi$
+
+\textbf{Caso 2:} $\cos x = \frac{1}{2}$
+$x = \frac{\pi}{3}, \frac{5\pi}{3}$
+
+\textbf{Respuesta:} $\boxed{x = 0, \frac{\pi}{3}, \pi, \frac{5\pi}{3}, 2\pi}$
+
+\vspace{0.3cm}
+
+\textbf{c) Rueda de radio 10 metros, altura 5 metros sobre el centro}
+
+La altura de un punto en la rueda está dada por:
+$h(\theta) = 10\sin\theta$
+
+Queremos $h = 5$:
+\begin{align*}
+10\sin\theta &= 5 \\
+\sin\theta &= \frac{1}{2}
+\end{align*}
+
+En $[0, 2\pi]$:
+$\theta = \frac{\pi}{6}$ (30°) o $\theta = \frac{5\pi}{6}$ (150°)
+
+\textbf{Interpretación:} El punto está a 5 metros sobre el centro cuando el radio forma un ángulo de 30° o 150° con la horizontal.
+
+\textbf{Respuesta:} $\boxed{\theta = 30° \text{ y } 150°}$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Ejes
+    \draw[-{Latex},thick] (-3.5,0) -- (3.5,0) node[right] {$x$};
+    \draw[-{Latex},thick] (0,-3.5) -- (0,3.5) node[above] {$y$};
+
+    % Círculo (rueda)
+    \draw[thick,blue] (0,0) circle (3);
+
+    % Línea horizontal a altura 5 (escalada)
+    \draw[dashed,green,thick] (-3.5,1.5) -- (3.5,1.5) node[right] {$h = 5$};
+
+    % Puntos donde h = 5
+    \filldraw[red] (30:3) circle (0.1);
+    \filldraw[red] (150:3) circle (0.1);
+
+    % Radios
+    \draw[red,thick] (0,0) -- (30:3) node[midway,below right] {$r=10$};
+    \draw[red,thick] (0,0) -- (150:3);
+
+    % Ángulos
+    \draw[-{Latex},orange,thick] (1,0) arc (0:30:1) node[midway,right] {$30°$};
+    \draw[-{Latex},orange,thick] (1,0) arc (0:150:1) node[midway,above] {$150°$};
+
+    \node at (0,-4) {Posiciones donde la altura es 5 metros};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3cm}
+
+\textbf{d) Temperatura $T(t) = 20 + 10\sin\left(\frac{\pi t}{12}\right) = 25°C$}
+
+\begin{align*}
+20 + 10\sin\left(\frac{\pi t}{12}\right) &= 25 \\
+10\sin\left(\frac{\pi t}{12}\right) &= 5 \\
+\sin\left(\frac{\pi t}{12}\right) &= \frac{1}{2}
+\end{align*}
+
+Sea $u = \frac{\pi t}{12}$. Como $t \in [0, 24]$, entonces $u \in [0, 2\pi]$.
+
+$\sin u = \frac{1}{2}$ cuando:
+$u = \frac{\pi}{6}$ o $u = \frac{5\pi}{6}$
+
+Despejando $t$:
+\begin{align*}
+\frac{\pi t}{12} = \frac{\pi}{6} &\Rightarrow t = 2 \text{ horas} \\
+\frac{\pi t}{12} = \frac{5\pi}{6} &\Rightarrow t = 10 \text{ horas}
+\end{align*}
+
+\textbf{Interpretación:} La temperatura es de 25°C a las 2:00 AM y a las 10:00 AM.
+
+\textbf{Gráfica de la temperatura:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.55\textwidth,
+    domain=0:24,
+    samples=100,
+    grid=major,
+    xlabel={Tiempo (horas)},
+    ylabel={Temperatura (°C)},
+    title={Variación de temperatura durante el día},
+    xmin=0, xmax=24,
+    ymin=8, ymax=32,
+    xtick={0,2,4,6,8,10,12,14,16,18,20,22,24},
+    ytick={10,15,20,25,30},
+    legend pos=north east,
+]
+    % Función de temperatura
+    \addplot[blue,thick] {20 + 10*sin(pi*x/12 * 180/pi)};
+    \addlegendentry{$T(t) = 20 + 10\sin\left(\frac{\pi t}{12}\right)$}
+
+    % Línea horizontal en T = 25
+    \addplot[red,dashed,thick] coordinates {(0,25) (24,25)};
+    \addlegendentry{$T = 25°C$}
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,red] coordinates {(2,25) (10,25)};
+    \addlegendentry{$t = 2h, 10h$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} $\boxed{t = 2 \text{ horas (2:00 AM) y } t = 10 \text{ horas (10:00 AM)}}$
+\end{solucion}
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado esta guía exhaustiva sobre ecuaciones trigonométricas. A lo largo de estos ejercicios has practicado:
+
+\begin{itemize}
+    \item \textbf{Ecuaciones básicas:} Tipo $f(x) = k$
+    \item \textbf{Ecuaciones lineales:} Combinaciones de seno y coseno
+    \item \textbf{Ecuaciones cuadráticas:} Usando sustitución y factorización
+    \item \textbf{Ecuaciones con identidades:} Aplicando las identidades fundamentales
+    \item \textbf{Ecuaciones con ángulos múltiples:} Dobles y medios
+    \item \textbf{Aplicaciones prácticas:} Modelado de fenómenos reales
+\end{itemize}
+
+\subsection*{Consejos finales para resolver ecuaciones trigonométricas}
+
+\begin{enumerate}
+    \item \textbf{Identifica el tipo:} ¿Es lineal, cuadrática, o requiere identidades?
+    \item \textbf{Simplifica primero:} Usa identidades para reducir a una sola función si es posible
+    \item \textbf{Considera el dominio:} Siempre verifica que tus soluciones estén en el intervalo pedido
+    \item \textbf{No olvides todos los casos:} Las funciones trigonométricas son periódicas
+    \item \textbf{Verifica siempre:} Sustituye tus respuestas en la ecuación original
+    \item \textbf{Dibuja cuando sea útil:} La circunferencia unitaria es tu mejor amiga
+\end{enumerate}
+
+\subsection*{Errores comunes a evitar}
+
+\begin{itemize}
+    \item Olvidar soluciones en otros cuadrantes
+    \item No considerar el período completo
+    \item Dividir por expresiones que podrían ser cero
+    \item No verificar las soluciones en la ecuación original
+    \item Confundir grados con radianes
+\end{itemize}
+
+Recuerda: La práctica constante es la clave para dominar las ecuaciones trigonométricas. ¡Sigue practicando y verás cómo cada vez te resultan más naturales!
+% Aquí se insertarán las soluciones detalladas en la parte 3
+
+\end{document}

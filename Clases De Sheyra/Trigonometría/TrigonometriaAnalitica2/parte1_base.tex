@@ -1,0 +1,959 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel,patterns,angles,quotes}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\pgfplotsset{compat=1.18}
+
+% Definición de colores
+\definecolor{maincolor}{RGB}{0,70,173}
+\definecolor{accentcolor}{RGB}{255,127,0}
+\definecolor{thirdcolor}{RGB}{0,150,0}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{thirdcolor}}{\thesubsubsection}{0.5em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Configuración de encabezados y pies de página
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad Ecuaciones Trigonométricas}}
+\fancyhead[RO]{\small\textcolor{maincolor}{Ecuaciones Trigonométricas \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+% Definición de cajas tcolorbox
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=blue!5,
+  colframe=blue!60!black,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+\newtcolorbox{teorema}[1][]{
+  enhanced,
+  breakable,
+  colback=purple!5,
+  colframe=purple!60!black,
+  fonttitle=\bfseries,
+  title=Teorema,
+  #1
+}
+
+% Título y datos del documento
+\title{\textbf{\Huge TRIGONOMETRÍA ANALÍTICA}\\[0.5cm]
+\Large Guía de Trigonometría - Grado 10}
+\author{Prof. Toribio De J Arrieta F\\
+\textit{La Pruebita}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Hola! Bienvenido al mundo fascinante de la trigonometría analítica, donde las matemáticas se vuelven verdaderamente emocionantes. ¿Alguna vez te has preguntado cómo los ingenieros calculan la dirección exacta de un carro en movimiento? ¿O cómo los navegantes encuentran su camino en medio del océano usando solo matemáticas? ¿Cómo es que tu teléfono puede recibir señales de radio tan claras? La respuesta a todas estas preguntas está en lo que vamos a estudiar: las ecuaciones trigonométricas.
+
+Imagina que eres un capitán de barco navegando por el océano Atlántico. No hay señales de GPS (supongamos que estamos en 1850), solo tienes las estrellas, un sextante y... ¡las ecuaciones trigonométricas! Con estas herramientas matemáticas, los navegantes han cruzado océanos durante siglos. O piensa en los ingenieros que diseñan las antenas de telecomunicaciones que permiten que puedas hablar con alguien al otro lado del mundo. Ellos usan ecuaciones trigonométricas para calcular exactamente cómo deben orientar las antenas para que las ondas electromagnéticas lleguen a su destino.
+
+\subsection*{¿Qué son las ecuaciones trigonométricas?}
+
+Las ecuaciones trigonométricas son como puzzles matemáticos donde necesitas encontrar los ángulos que hacen que una expresión sea verdadera. Por ejemplo, si te pregunto: ``¿Para qué ángulo el seno vale 0.5?'', estás resolviendo la ecuación $\sin x = 0.5$. Pero aquí viene lo interesante: ¡no hay solo una respuesta! Debido a que las funciones trigonométricas son periódicas (se repiten), hay infinitas soluciones. Es como preguntar: ``¿A qué hora las manecillas del reloj forman un ángulo recto?'' No solo a las 3:00, sino también a las 9:00, y si consideramos varios días, ¡infinitas veces!
+
+\subsection*{¿Por qué son tan importantes en el mundo real?}
+
+Las aplicaciones de las ecuaciones trigonométricas están por todas partes:
+
+\begin{itemize}
+    \item \textbf{Navegación marítima:} Los marineros usan ecuaciones trigonométricas para calcular su posición usando las estrellas y el sol. El método de navegación celestial depende completamente de resolver ecuaciones trigonométricas complejas.
+
+    \item \textbf{Ingeniería de ondas:} Cuando los ingenieros diseñan sistemas de sonido para un concierto, necesitan resolver ecuaciones trigonométricas para evitar que las ondas sonoras se cancelen entre sí (interferencia destructiva) y para crear puntos donde el sonido sea más fuerte (interferencia constructiva).
+
+    \item \textbf{Física ondulatoria:} El movimiento de las olas del mar, las vibraciones de una cuerda de guitarra, incluso la luz misma, todos se describen usando ecuaciones trigonométricas. Los físicos las usan para predecir cómo se comportarán las ondas en diferentes situaciones.
+
+    \item \textbf{Telecomunicaciones:} Tu celular funciona gracias a las ecuaciones trigonométricas. Las señales de radio son ondas, y para modularlas (agregar información) y demodularlas (extraer información), los ingenieros resuelven constantemente ecuaciones trigonométricas.
+
+    \item \textbf{Astronomía:} Los astrónomos usan ecuaciones trigonométricas para calcular las órbitas de los planetas, predecir eclipses y determinar la distancia a las estrellas. Sin ellas, no podríamos enviar sondas espaciales a Marte o calcular cuándo será el próximo eclipse solar.
+
+    \item \textbf{Dirección de vehículos:} Los sistemas de navegación de los carros modernos usan ecuaciones trigonométricas para calcular la mejor ruta. Cuando el GPS te dice ``gire a la derecha en 100 metros'', está resolviendo ecuaciones trigonométricas para determinar tu posición y dirección exactas.
+\end{itemize}
+
+\subsection*{Lo que aprenderás en esta guía}
+
+En esta guía vamos a explorar diferentes tipos de ecuaciones trigonométricas, desde las más simples hasta las más complejas. Aprenderás a:
+
+\begin{enumerate}
+    \item Resolver ecuaciones básicas como $\sin x = k$ o $\cos x = k$
+    \item Trabajar con ecuaciones lineales que involucran varias funciones trigonométricas
+    \item Dominar las ecuaciones cuadráticas trigonométricas (sí, como las ecuaciones cuadráticas que ya conoces, pero con senos y cosenos)
+    \item Usar identidades fundamentales para simplificar ecuaciones complicadas
+    \item Aplicar identidades de ángulo doble y ángulo medio para resolver problemas avanzados
+    \item Explorar las funciones trigonométricas inversas y sus aplicaciones
+    \item Ver cómo todo esto se aplica en la vida real, especialmente en la dirección de vehículos
+\end{enumerate}
+
+Prepárate para un viaje emocionante donde las matemáticas cobran vida. No estamos hablando de números abstractos sin sentido, sino de herramientas poderosas que literalmente mueven el mundo moderno. Cada vez que usas tu teléfono, escuchas música, o viajas en carro, las ecuaciones trigonométricas están trabajando silenciosamente en el fondo, haciendo posible la tecnología que damos por sentada.
+
+¡Comencemos este viaje juntos!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Ecuaciones Trigonométricas de la Forma $f(x) = k$}
+
+Empecemos con lo básico pero fundamental. Una ecuación trigonométrica de la forma $f(x) = k$ es aquella donde una función trigonométrica (seno, coseno, tangente, etc.) es igual a una constante. Por ejemplo: $\sin x = 0.5$, $\cos x = -0.7$, o $\tan x = 1$.
+
+\begin{definicion}
+Una ecuación trigonométrica básica tiene la forma:
+\[f(x) = k\]
+donde $f$ es una función trigonométrica (sen, cos, tan, csc, sec, cot) y $k$ es una constante real.
+\end{definicion}
+
+Lo fascinante de estas ecuaciones es que, debido a la naturaleza periódica de las funciones trigonométricas, generalmente tienen infinitas soluciones. Es como preguntarle a un reloj: ``¿Cuándo las manecillas forman este ángulo?'' La respuesta se repite cada 12 horas.
+
+\subsubsection{Resolución de $\sin x = k$}
+
+Para que la ecuación $\sin x = k$ tenga solución, necesitamos que $-1 \leq k \leq 1$ (porque el seno siempre está entre -1 y 1).
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-1.5, ymax=1.5,
+        xmin=0, xmax=720,
+        xtick={0,90,180,270,360,450,540,630,720},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$,$450°$,$540°$,$630°$,$720°$},
+        ytick={-1,-0.5,0,0.5,1},
+        width=0.9\textwidth,
+        height=0.5\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick
+    ]
+
+    % Función seno
+    \addplot[maincolor,very thick,smooth,domain=0:720,samples=100] {sin(x)};
+
+    % Línea horizontal y = 0.5
+    \addplot[accentcolor,thick,dashed,domain=0:720] {0.5};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(30,0.5) (150,0.5) (390,0.5) (510,0.5)};
+
+    % Etiquetas
+    \node[above,accentcolor] at (axis cs:30,0.5) {$30°$};
+    \node[above,accentcolor] at (axis cs:150,0.5) {$150°$};
+    \node[above,accentcolor] at (axis cs:390,0.5) {$390°$};
+    \node[above,accentcolor] at (axis cs:510,0.5) {$510°$};
+
+    \node[maincolor,above] at (axis cs:360,1) {$y = \sin x$};
+    \node[accentcolor] at (axis cs:650,0.5) {$y = 0.5$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Como puedes ver en la gráfica, cuando resolvemos $\sin x = 0.5$, encontramos múltiples soluciones: $x = 30°, 150°, 390°, 510°, ...$
+
+La solución general es:
+\begin{itemize}
+    \item Solución principal: $x = \arcsin(k)$ (también escrito como $\sin^{-1}(k)$)
+    \item Segunda solución en $[0°, 360°)$: $x = 180° - \arcsin(k)$
+    \item Solución general: $x = \arcsin(k) + 360°n$ o $x = 180° - \arcsin(k) + 360°n$, donde $n \in \mathbb{Z}$
+\end{itemize}
+
+\subsubsection{Resolución de $\cos x = k$}
+
+Similar al seno, para que $\cos x = k$ tenga solución, necesitamos $-1 \leq k \leq 1$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-1.5, ymax=1.5,
+        xmin=0, xmax=720,
+        xtick={0,90,180,270,360,450,540,630,720},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$,$450°$,$540°$,$630°$,$720°$},
+        ytick={-1,-0.5,0,0.5,1},
+        width=0.9\textwidth,
+        height=0.5\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick
+    ]
+
+    % Función coseno
+    \addplot[maincolor,very thick,smooth,domain=0:720,samples=100] {cos(x)};
+
+    % Línea horizontal y = -0.5
+    \addplot[accentcolor,thick,dashed,domain=0:720] {-0.5};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(120,-0.5) (240,-0.5) (480,-0.5) (600,-0.5)};
+
+    % Etiquetas
+    \node[below,accentcolor] at (axis cs:120,-0.5) {$120°$};
+    \node[below,accentcolor] at (axis cs:240,-0.5) {$240°$};
+    \node[below,accentcolor] at (axis cs:480,-0.5) {$480°$};
+    \node[below,accentcolor] at (axis cs:600,-0.5) {$600°$};
+
+    \node[maincolor,above] at (axis cs:180,-1) {$y = \cos x$};
+    \node[accentcolor] at (axis cs:650,-0.5) {$y = -0.5$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Para $\cos x = k$:
+\begin{itemize}
+    \item Solución principal: $x = \arccos(k)$
+    \item Segunda solución en $[0°, 360°)$: $x = 360° - \arccos(k)$
+    \item Solución general: $x = \pm\arccos(k) + 360°n$, donde $n \in \mathbb{Z}$
+\end{itemize}
+
+\subsubsection{Resolución de $\tan x = k$}
+
+La tangente es especial porque puede tomar cualquier valor real, así que $\tan x = k$ siempre tiene solución para cualquier $k \in \mathbb{R}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-3, ymax=3,
+        xmin=0, xmax=540,
+        xtick={0,90,180,270,360,450,540},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$,$450°$,$540°$},
+        ytick={-2,-1,0,1,2},
+        width=0.9\textwidth,
+        height=0.5\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick,
+        restrict y to domain=-3:3
+    ]
+
+    % Función tangente (por partes para evitar las asíntotas)
+    \addplot[maincolor,very thick,smooth,domain=0:85,samples=50] {tan(x)};
+    \addplot[maincolor,very thick,smooth,domain=95:265,samples=50] {tan(x)};
+    \addplot[maincolor,very thick,smooth,domain=275:445,samples=50] {tan(x)};
+    \addplot[maincolor,very thick,smooth,domain=455:540,samples=50] {tan(x)};
+
+    % Asíntotas verticales
+    \addplot[gray,dashed,thick] coordinates {(90,-3) (90,3)};
+    \addplot[gray,dashed,thick] coordinates {(270,-3) (270,3)};
+    \addplot[gray,dashed,thick] coordinates {(450,-3) (450,3)};
+
+    % Línea horizontal y = 1
+    \addplot[accentcolor,thick,dashed,domain=0:540] {1};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(45,1) (225,1) (405,1)};
+
+    % Etiquetas
+    \node[above,accentcolor] at (axis cs:45,1) {$45°$};
+    \node[above,accentcolor] at (axis cs:225,1) {$225°$};
+    \node[above,accentcolor] at (axis cs:405,1) {$405°$};
+
+    \node[maincolor] at (axis cs:135,2.5) {$y = \tan x$};
+    \node[accentcolor] at (axis cs:500,1) {$y = 1$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+La tangente tiene período $180°$ (no $360°$ como seno y coseno), así que:
+\begin{itemize}
+    \item Solución principal: $x = \arctan(k)$
+    \item Solución general: $x = \arctan(k) + 180°n$, donde $n \in \mathbb{Z}$
+\end{itemize}
+
+\subsection{Ecuaciones Trigonométricas Lineales}
+
+Las ecuaciones trigonométricas lineales involucran combinaciones lineales de funciones trigonométricas. Por ejemplo: $2\sin x + 3\cos x = 1$ o $\sin x - \cos x = 0$.
+
+\begin{definicion}
+Una ecuación trigonométrica lineal tiene la forma:
+\[a \cdot f(x) + b \cdot g(x) = c\]
+donde $f$ y $g$ son funciones trigonométricas, y $a$, $b$, $c$ son constantes.
+\end{definicion}
+
+\subsubsection{Método de Sustitución}
+
+Para resolver $a\sin x + b\cos x = c$, podemos usar la identidad:
+\[a\sin x + b\cos x = R\sin(x + \phi)\]
+donde $R = \sqrt{a^2 + b^2}$ y $\tan \phi = \frac{b}{a}$.
+
+Veamos un ejemplo concreto. Para resolver $\sin x + \cos x = 1$:
+
+\begin{enumerate}
+    \item Calculamos $R = \sqrt{1^2 + 1^2} = \sqrt{2}$
+    \item Calculamos $\tan \phi = \frac{1}{1} = 1$, entonces $\phi = 45°$
+    \item La ecuación se convierte en: $\sqrt{2}\sin(x + 45°) = 1$
+    \item Simplificando: $\sin(x + 45°) = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}$
+    \item Por lo tanto: $x + 45° = 45° + 360°n$ o $x + 45° = 135° + 360°n$
+    \item Solución: $x = 0° + 360°n$ o $x = 90° + 360°n$
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-2, ymax=2,
+        xmin=0, xmax=360,
+        xtick={0,90,180,270,360},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$},
+        ytick={-1,0,1},
+        width=0.9\textwidth,
+        height=0.6\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick
+    ]
+
+    % Función sin x + cos x
+    \addplot[maincolor,very thick,smooth,domain=0:360,samples=100] {sin(x) + cos(x)};
+
+    % Línea y = 1
+    \addplot[accentcolor,thick,dashed,domain=0:360] {1};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(0,1) (90,1)};
+
+    % Etiquetas
+    \node[above,accentcolor] at (axis cs:0,1) {$(0°, 1)$};
+    \node[above,accentcolor] at (axis cs:90,1) {$(90°, 1)$};
+
+    \node[maincolor] at (axis cs:270,0) {$y = \sin x + \cos x$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ecuaciones Trigonométricas Cuadráticas}
+
+Estas ecuaciones involucran términos cuadráticos de funciones trigonométricas, como $\sin^2 x$, $\cos^2 x$, etc.
+
+\begin{definicion}
+Una ecuación trigonométrica cuadrática tiene la forma:
+\[a \cdot [f(x)]^2 + b \cdot f(x) + c = 0\]
+donde $f$ es una función trigonométrica y $a \neq 0$.
+\end{definicion}
+
+\subsubsection{Método de Resolución}
+
+Para resolver estas ecuaciones, tratamos la función trigonométrica como una variable y aplicamos la fórmula cuadrática.
+
+Ejemplo: Resolver $2\sin^2 x - \sin x - 1 = 0$
+
+\begin{enumerate}
+    \item Sea $u = \sin x$, entonces: $2u^2 - u - 1 = 0$
+    \item Factorizando: $(2u + 1)(u - 1) = 0$
+    \item Por lo tanto: $u = -\frac{1}{2}$ o $u = 1$
+    \item Regresando a la variable original:
+    \begin{itemize}
+        \item $\sin x = -\frac{1}{2}$: $x = 210°, 330°$ (en $[0°, 360°)$)
+        \item $\sin x = 1$: $x = 90°$
+    \end{itemize}
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-2, ymax=2,
+        xmin=0, xmax=360,
+        xtick={0,90,180,270,360},
+        xticklabels={$0°$,$90°$,$180°$,$270°$,$360°$},
+        ytick={-1,0,1},
+        width=0.9\textwidth,
+        height=0.6\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick
+    ]
+
+    % Función 2sin²x - sin x - 1
+    \addplot[maincolor,very thick,smooth,domain=0:360,samples=100] {2*(sin(x))^2 - sin(x) - 1};
+
+    % Línea y = 0
+    \addplot[black,thick,domain=0:360] {0};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,accentcolor] coordinates {(90,0) (210,0) (330,0)};
+
+    % Etiquetas
+    \node[above,accentcolor] at (axis cs:90,0) {$90°$};
+    \node[below,accentcolor] at (axis cs:210,0) {$210°$};
+    \node[below,accentcolor] at (axis cs:330,0) {$330°$};
+
+    \node[maincolor] at (axis cs:180,1.5) {$y = 2\sin^2 x - \sin x - 1$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ecuaciones con Identidades Fundamentales}
+
+Las identidades trigonométricas son herramientas poderosas para simplificar y resolver ecuaciones complejas.
+
+\begin{teorema}[Identidades Pitagóricas]
+\begin{align}
+\sin^2 x + \cos^2 x &= 1 \\
+1 + \tan^2 x &= \sec^2 x \\
+1 + \cot^2 x &= \csc^2 x
+\end{align}
+\end{teorema}
+
+Estas identidades nos permiten convertir ecuaciones con múltiples funciones trigonométricas en ecuaciones con una sola función.
+
+Ejemplo: Resolver $\sin^2 x + \sin x \cos x - 2\cos^2 x = 0$
+
+\begin{enumerate}
+    \item Dividimos toda la ecuación por $\cos^2 x$ (asumiendo $\cos x \neq 0$):
+    \[\frac{\sin^2 x}{\cos^2 x} + \frac{\sin x}{\cos x} - 2 = 0\]
+
+    \item Esto se convierte en: $\tan^2 x + \tan x - 2 = 0$
+
+    \item Sea $u = \tan x$: $u^2 + u - 2 = 0$
+
+    \item Factorizando: $(u + 2)(u - 1) = 0$
+
+    \item Por lo tanto: $\tan x = -2$ o $\tan x = 1$
+
+    \item Soluciones:
+    \begin{itemize}
+        \item $\tan x = 1$: $x = 45°, 225°$
+        \item $\tan x = -2$: $x = \arctan(-2) + 180°n \approx 116.57°, 296.57°$
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Ecuaciones con Ángulos Dobles y Medios}
+
+Las identidades de ángulo doble y ángulo medio nos permiten resolver ecuaciones más complejas.
+
+\begin{teorema}[Identidades de Ángulo Doble]
+\begin{align}
+\sin(2x) &= 2\sin x \cos x \\
+\cos(2x) &= \cos^2 x - \sin^2 x = 2\cos^2 x - 1 = 1 - 2\sin^2 x \\
+\tan(2x) &= \frac{2\tan x}{1 - \tan^2 x}
+\end{align}
+\end{teorema}
+
+\begin{teorema}[Identidades de Ángulo Medio]
+\begin{align}
+\sin\left(\frac{x}{2}\right) &= \pm\sqrt{\frac{1 - \cos x}{2}} \\
+\cos\left(\frac{x}{2}\right) &= \pm\sqrt{\frac{1 + \cos x}{2}} \\
+\tan\left(\frac{x}{2}\right) &= \frac{\sin x}{1 + \cos x} = \frac{1 - \cos x}{\sin x}
+\end{align}
+\end{teorema}
+
+Ejemplo: Resolver $\sin(2x) = \cos x$
+
+\begin{enumerate}
+    \item Usamos la identidad $\sin(2x) = 2\sin x \cos x$:
+    \[2\sin x \cos x = \cos x\]
+
+    \item Factor común $\cos x$:
+    \[\cos x(2\sin x - 1) = 0\]
+
+    \item Por lo tanto:
+    \begin{itemize}
+        \item $\cos x = 0$: $x = 90°, 270°$
+        \item $\sin x = \frac{1}{2}$: $x = 30°, 150°$
+    \end{itemize}
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-1.5, ymax=1.5,
+        xmin=0, xmax=360,
+        xtick={0,30,90,150,180,270,360},
+        xticklabels={$0°$,$30°$,$90°$,$150°$,$180°$,$270°$,$360°$},
+        ytick={-1,0,1},
+        width=0.9\textwidth,
+        height=0.6\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick
+    ]
+
+    % Función sin(2x)
+    \addplot[maincolor,very thick,smooth,domain=0:360,samples=100] {sin(2*x)};
+
+    % Función cos(x)
+    \addplot[accentcolor,very thick,smooth,domain=0:360,samples=100] {cos(x)};
+
+    % Puntos de intersección
+    \addplot[only marks,mark=*,mark size=3pt,thirdcolor] coordinates {(30,0.866) (90,0) (150,0.866) (270,0)};
+
+    % Etiquetas
+    \node[above,thirdcolor] at (axis cs:30,0.866) {$30°$};
+    \node[above,thirdcolor] at (axis cs:90,0) {$90°$};
+    \node[above,thirdcolor] at (axis cs:150,0.866) {$150°$};
+    \node[below,thirdcolor] at (axis cs:270,0) {$270°$};
+
+    \node[maincolor] at (axis cs:200,0.8) {$y = \sin(2x)$};
+    \node[accentcolor] at (axis cs:45,0.5) {$y = \cos x$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Funciones Trigonométricas Inversas}
+
+Las funciones trigonométricas inversas nos permiten encontrar ángulos cuando conocemos el valor de la función trigonométrica.
+
+\begin{definicion}
+Las funciones trigonométricas inversas son:
+\begin{itemize}
+    \item $\arcsin(x)$ o $\sin^{-1}(x)$: devuelve el ángulo cuyo seno es $x$, donde $x \in [-1, 1]$
+    \item $\arccos(x)$ o $\cos^{-1}(x)$: devuelve el ángulo cuyo coseno es $x$, donde $x \in [-1, 1]$
+    \item $\arctan(x)$ o $\tan^{-1}(x)$: devuelve el ángulo cuya tangente es $x$, donde $x \in \mathbb{R}$
+\end{itemize}
+\end{definicion}
+
+Es importante recordar que estas funciones tienen rangos restringidos:
+\begin{itemize}
+    \item $\arcsin: [-1, 1] \rightarrow [-90°, 90°]$
+    \item $\arccos: [-1, 1] \rightarrow [0°, 180°]$
+    \item $\arctan: \mathbb{R} \rightarrow (-90°, 90°)$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-100, ymax=100,
+        xmin=-1.5, xmax=1.5,
+        ytick={-90,-45,0,45,90},
+        yticklabels={$-90°$,$-45°$,$0°$,$45°$,$90°$},
+        xtick={-1,-0.5,0,0.5,1},
+        width=0.45\textwidth,
+        height=0.6\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick,
+        title={$y = \arcsin(x)$}
+    ]
+
+    % Función arcsin
+    \addplot[maincolor,very thick,smooth,domain=-1:1,samples=50] {asin(x)*180/pi};
+
+    \end{axis}
+\end{tikzpicture}
+\hfill
+\begin{tikzpicture}[scale=1]
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        ymin=-10, ymax=190,
+        xmin=-1.5, xmax=1.5,
+        ytick={0,45,90,135,180},
+        yticklabels={$0°$,$45°$,$90°$,$135°$,$180°$},
+        xtick={-1,-0.5,0,0.5,1},
+        width=0.45\textwidth,
+        height=0.6\textwidth,
+        grid=major,
+        grid style={dashed,gray!50},
+        thick,
+        title={$y = \arccos(x)$}
+    ]
+
+    % Función arccos
+    \addplot[accentcolor,very thick,smooth,domain=-1:1,samples=50] {acos(x)*180/pi};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Ejemplo: Resolver $\arcsin(2x - 1) = 30°$
+
+\begin{enumerate}
+    \item Aplicamos seno a ambos lados:
+    \[\sin(\arcsin(2x - 1)) = \sin(30°)\]
+
+    \item Simplificamos:
+    \[2x - 1 = \frac{1}{2}\]
+
+    \item Resolvemos para $x$:
+    \[2x = \frac{3}{2}\]
+    \[x = \frac{3}{4}\]
+
+    \item Verificación: Necesitamos que $-1 \leq 2x - 1 \leq 1$
+    \[2 \cdot \frac{3}{4} - 1 = \frac{3}{2} - 1 = \frac{1}{2}\]
+    Como $\frac{1}{2} \in [-1, 1]$, la solución es válida.
+\end{enumerate}
+
+\subsection{Aplicación: Trigonometría en la Dirección de un Carro}
+
+Una de las aplicaciones más prácticas de las ecuaciones trigonométricas es en el cálculo de trayectorias y direcciones de vehículos. Imaginemos un carro que se mueve en una ciudad con calles que forman una cuadrícula.
+
+\subsubsection{Problema de Navegación}
+
+Un carro parte del origen y debe llegar a un punto $P(x_f, y_f)$. El ángulo de dirección $\theta$ que debe tomar se calcula resolviendo:
+
+\[\tan \theta = \frac{y_f}{x_f}\]
+
+Pero aquí viene lo interesante: debido a obstáculos (edificios, calles cerradas), el carro no puede ir en línea recta. Debe seguir una ruta que minimice la distancia total viajada.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Grid
+    \draw[gray!30,very thin] (-1,-1) grid (8,6);
+
+    % Axes
+    \draw[->,thick] (-1,0) -- (8.5,0) node[right] {$x$};
+    \draw[->,thick] (0,-1) -- (0,6.5) node[above] {$y$};
+
+    % Origin
+    \node[below left] at (0,0) {$O$};
+    \filldraw (0,0) circle (2pt);
+
+    % Destination
+    \node[above right] at (7,5) {$P(7,5)$};
+    \filldraw[red] (7,5) circle (2pt);
+
+    % Direct path (blocked)
+    \draw[red,dashed,thick] (0,0) -- (7,5);
+    \node[red,rotate=35] at (3.5,2.5) {$\times$ Bloqueado};
+
+    % Actual path
+    \draw[thirdcolor,very thick,->,>=stealth] (0,0) -- (4,0) node[midway,below] {Tramo 1};
+    \draw[thirdcolor,very thick,->,>=stealth] (4,0) -- (4,3) node[midway,right] {Tramo 2};
+    \draw[thirdcolor,very thick,->,>=stealth] (4,3) -- (7,3) node[midway,below] {Tramo 3};
+    \draw[thirdcolor,very thick,->,>=stealth] (4,3) -- (7,5) node[midway,above,sloped] {Tramo 4};
+
+    % Angles
+    \draw[accentcolor,->] (1,0) arc (0:35:1) node[midway,right] {$\theta_1$};
+    \draw[accentcolor,->] (4,0.5) arc (90:35:0.5);
+    \draw[accentcolor,->] (4.5,3) arc (0:34:0.5);
+
+    % Car icons
+    \node at (0,0) {\includegraphics[width=0.5cm]{car.png}};
+    \node at (7,5) {\includegraphics[width=0.5cm]{flag.png}};
+\end{tikzpicture}
+\end{center}
+
+Para cada tramo del viaje, necesitamos resolver ecuaciones trigonométricas:
+
+\begin{enumerate}
+    \item \textbf{Ángulo inicial ideal:} $\theta = \arctan\left(\frac{5}{7}\right) \approx 35.54°$
+
+    \item \textbf{Corrección por obstáculo:} Si hay un edificio en el camino, el carro debe calcular un nuevo ángulo $\theta'$ tal que:
+    \[\tan \theta' = \frac{y_{intermedio}}{x_{intermedio}}\]
+
+    \item \textbf{Distancia total:} Usando el teorema de Pitágoras para cada segmento:
+    \[d_{total} = \sum_{i=1}^n \sqrt{(\Delta x_i)^2 + (\Delta y_i)^2}\]
+\end{enumerate}
+
+\subsubsection{Curvas y Giros}
+
+Cuando un carro toma una curva, su dirección cambia continuamente. Si el carro sigue una trayectoria circular de radio $r$, su posición en función del tiempo está dada por:
+
+\begin{align}
+x(t) &= r\cos(\omega t + \phi_0) + x_c \\
+y(t) &= r\sin(\omega t + \phi_0) + y_c
+\end{align}
+
+donde $(x_c, y_c)$ es el centro de la curva, $\omega$ es la velocidad angular y $\phi_0$ es el ángulo inicial.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Círculo de la trayectoria
+    \draw[gray,dashed] (0,0) circle (2);
+
+    % Centro
+    \filldraw (0,0) circle (1pt) node[below] {Centro $(x_c, y_c)$};
+
+    % Radio
+    \draw[<->,thick] (0,0) -- (2,0) node[midway,above] {$r$};
+
+    % Trayectoria del carro
+    \draw[maincolor,very thick,->] (2,0) arc (0:120:2);
+
+    % Posiciones del carro
+    \filldraw[accentcolor] (2,0) circle (2pt) node[right] {$t=0$};
+    \filldraw[accentcolor] (60:2) circle (2pt) node[above right] {$t=t_1$};
+    \filldraw[accentcolor] (120:2) circle (2pt) node[above left] {$t=t_2$};
+
+    % Ángulos
+    \draw[thirdcolor,->] (0.5,0) arc (0:60:0.5) node[midway,right] {$\omega t_1$};
+    \draw[thirdcolor,->] (0.7,0) arc (0:120:0.7) node[near end,right] {$\omega t_2$};
+
+    % Vectores de velocidad (tangentes)
+    \draw[red,thick,->] (2,0) -- (2,0.7) node[right] {$\vec{v}$};
+    \draw[red,thick,->] (60:2) -- +(-30:0.7) node[above] {$\vec{v}$};
+    \draw[red,thick,->] (120:2) -- +(-210:0.7) node[left] {$\vec{v}$};
+\end{tikzpicture}
+\end{center}
+
+El ángulo de dirección del carro en cualquier momento es:
+\[\theta_{direccion}(t) = \omega t + \phi_0 + 90°\]
+
+(Se suma $90°$ porque la velocidad es perpendicular al radio)
+
+\subsubsection{Sistema de Posicionamiento Global (GPS)}
+
+Los sistemas GPS modernos usan ecuaciones trigonométricas constantemente. Cuando tu teléfono calcula tu posición, resuelve un sistema de ecuaciones que involucra las distancias a varios satélites:
+
+\begin{align}
+d_1 &= \sqrt{(x - x_1)^2 + (y - y_1)^2 + (z - z_1)^2} \\
+d_2 &= \sqrt{(x - x_2)^2 + (y - y_2)^2 + (z - z_2)^2} \\
+d_3 &= \sqrt{(x - x_3)^2 + (y - y_3)^2 + (z - z_3)^2} \\
+d_4 &= \sqrt{(x - x_4)^2 + (y - y_4)^2 + (z - z_4)^2}
+\end{align}
+
+donde $(x_i, y_i, z_i)$ son las posiciones conocidas de los satélites y $d_i$ son las distancias calculadas usando el tiempo que tarda la señal en llegar.
+
+Para convertir estas coordenadas cartesianas a coordenadas geográficas (latitud y longitud), se usan ecuaciones trigonométricas inversas:
+
+\begin{align}
+\text{Longitud} &= \arctan\left(\frac{y}{x}\right) \\
+\text{Latitud} &= \arctan\left(\frac{z}{\sqrt{x^2 + y^2}}\right)
+\end{align}
+
+\subsection{Resumen de Métodos de Resolución}
+
+Para cerrar esta sección de conceptos fundamentales, aquí está un resumen de los métodos principales para resolver ecuaciones trigonométricas:
+
+\begin{nota}[title=Guía Rápida de Resolución]
+\begin{enumerate}
+    \item \textbf{Ecuaciones básicas $f(x) = k$:}
+    \begin{itemize}
+        \item Usa funciones inversas
+        \item Considera la periodicidad
+        \item No olvides todas las soluciones en el intervalo dado
+    \end{itemize}
+
+    \item \textbf{Ecuaciones lineales:}
+    \begin{itemize}
+        \item Método de sustitución $R\sin(x + \phi)$
+        \item Elevar al cuadrado (con precaución)
+    \end{itemize}
+
+    \item \textbf{Ecuaciones cuadráticas:}
+    \begin{itemize}
+        \item Sustituir $u = \text{función trig}$
+        \item Aplicar fórmula cuadrática o factorización
+    \end{itemize}
+
+    \item \textbf{Ecuaciones con múltiples funciones:}
+    \begin{itemize}
+        \item Usar identidades para convertir a una sola función
+        \item Dividir por funciones comunes (verificar casos especiales)
+    \end{itemize}
+
+    \item \textbf{Ecuaciones con ángulos múltiples:}
+    \begin{itemize}
+        \item Aplicar identidades de ángulo doble/medio
+        \item Sustituir y simplificar
+    \end{itemize}
+\end{enumerate}
+\end{nota}
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado un viaje fascinante por el mundo de las ecuaciones trigonométricas. Ahora tienes en tus manos herramientas matemáticas poderosas que han sido usadas durante siglos para resolver problemas del mundo real.
+
+\subsection*{Lo que has aprendido}
+
+A lo largo de esta guía, has descubierto cómo:
+
+\begin{itemize}
+    \item Resolver ecuaciones trigonométricas básicas de la forma $f(x) = k$, entendiendo que la periodicidad de estas funciones genera múltiples soluciones
+    \item Trabajar con ecuaciones lineales combinando diferentes funciones trigonométricas
+    \item Aplicar técnicas algebraicas conocidas (como la fórmula cuadrática) a ecuaciones trigonométricas cuadráticas
+    \item Usar identidades fundamentales para simplificar ecuaciones complejas
+    \item Emplear identidades de ángulo doble y ángulo medio para resolver problemas avanzados
+    \item Utilizar funciones trigonométricas inversas para encontrar ángulos específicos
+    \item Aplicar todo esto a problemas prácticos, especialmente en navegación y dirección de vehículos
+\end{itemize}
+
+\subsection*{Fórmulas y Conceptos Clave}
+
+\begin{tcolorbox}[enhanced,colback=maincolor!10,colframe=maincolor,title=Resumen de Fórmulas Esenciales]
+
+\textbf{Soluciones Generales:}
+\begin{align*}
+\sin x = k: \quad & x = \arcsin(k) + 360°n \text{ o } x = 180° - \arcsin(k) + 360°n \\
+\cos x = k: \quad & x = \pm\arccos(k) + 360°n \\
+\tan x = k: \quad & x = \arctan(k) + 180°n
+\end{align*}
+
+\textbf{Identidades Fundamentales:}
+\begin{align*}
+\sin^2 x + \cos^2 x &= 1 \\
+1 + \tan^2 x &= \sec^2 x \\
+1 + \cot^2 x &= \csc^2 x
+\end{align*}
+
+\textbf{Ángulo Doble:}
+\begin{align*}
+\sin(2x) &= 2\sin x \cos x \\
+\cos(2x) &= \cos^2 x - \sin^2 x \\
+\tan(2x) &= \frac{2\tan x}{1 - \tan^2 x}
+\end{align*}
+
+\textbf{Transformación Lineal:}
+\[a\sin x + b\cos x = R\sin(x + \phi)\]
+donde $R = \sqrt{a^2 + b^2}$ y $\tan \phi = \frac{b}{a}$
+
+\end{tcolorbox}
+
+\subsection*{Consejos para el Éxito}
+
+\begin{enumerate}
+    \item \textbf{Visualiza siempre:} Las gráficas son tus mejores aliadas. Cuando resuelvas una ecuación, imagina o dibuja la función para entender mejor las soluciones.
+
+    \item \textbf{Verifica tus respuestas:} Siempre sustituye tus soluciones en la ecuación original. Es fácil cometer errores algebraicos, pero la verificación te salvará.
+
+    \item \textbf{Considera el dominio:} Algunas ecuaciones tienen restricciones. Por ejemplo, $\tan x$ no está definida cuando $x = 90° + 180°n$.
+
+    \item \textbf{Practica con aplicaciones reales:} Los problemas abstractos son importantes, pero las aplicaciones reales te ayudan a entender el "por qué" detrás de las matemáticas.
+
+    \item \textbf{No memorices, comprende:} En lugar de memorizar fórmulas, entiende de dónde vienen. Por ejemplo, la identidad $\sin^2 x + \cos^2 x = 1$ viene directamente del teorema de Pitágoras aplicado al círculo unitario.
+\end{enumerate}
+
+\subsection*{El Poder de la Trigonometría en Tu Vida}
+
+Cada vez que uses tu teléfono para navegar, escuches música, o veas una película, las ecuaciones trigonométricas están trabajando en el fondo. Los ingenieros las usan para:
+
+\begin{itemize}
+    \item Diseñar antenas de comunicación que transmiten datos a la velocidad de la luz
+    \item Crear sistemas de navegación que te guían con precisión de centímetros
+    \item Desarrollar tecnología de realidad virtual que rastrea tus movimientos
+    \item Construir puentes y edificios que resisten terremotos
+    \item Programar videojuegos con física realista
+    \item Analizar señales médicas como electrocardiogramas
+\end{itemize}
+
+\subsection*{Tu Próximo Paso}
+
+Ahora que dominas las ecuaciones trigonométricas, estás listo para explorar temas más avanzados como:
+
+\begin{itemize}
+    \item Series de Fourier (cómo cualquier señal puede descomponerse en senos y cosenos)
+    \item Números complejos y la fórmula de Euler
+    \item Cálculo diferencial e integral de funciones trigonométricas
+    \item Aplicaciones en física cuántica y relatividad
+    \item Procesamiento digital de señales
+\end{itemize}
+
+\subsection*{Reflexión Final}
+
+La trigonometría analítica no es solo un conjunto de fórmulas y técnicas; es un lenguaje universal que describe los patrones fundamentales del universo. Desde el movimiento de los planetas hasta las vibraciones de los átomos, desde las olas del mar hasta las ondas electromagnéticas que transmiten información alrededor del mundo, las ecuaciones trigonométricas están en todas partes.
+
+Al dominar estos conceptos, te has unido a una tradición milenaria de pensadores que han usado estas herramientas para entender y transformar el mundo. Desde los antiguos astrónomos babilonios hasta los ingenieros modernos que diseñan las misiones a Marte, todos han confiado en el poder de la trigonometría.
+
+Recuerda: las matemáticas no son solo números y símbolos abstractos. Son la clave para entender el universo y crear tecnología que mejora nuestras vidas. Cada ecuación que resuelves, cada identidad que aplicas, te acerca más a comprender los secretos del cosmos.
+
+\vspace{1cm}
+
+\begin{center}
+\textit{``Las matemáticas son el lenguaje con el que Dios escribió el universo.''} \\
+--- Galileo Galilei
+
+\vspace{0.5cm}
+
+\textit{``La trigonometría nos enseña que incluso los caminos curvos pueden medirse con precisión.''} \\
+--- Anónimo
+\end{center}
+
+%INSERTAR_EJEMPLOS_AQUI%
+% Aquí se insertarán los ejemplos resueltos adicionales en la parte 2
+
+\newpage
+
+%INSERTAR_EJERCICIOS_AQUI%
+% Aquí se insertarán los ejercicios propuestos en la parte 2
+
+\newpage
+
+%INSERTAR_SOLUCIONES_AQUI%
+% Aquí se insertarán las soluciones detalladas en la parte 3
+
+\end{document}
