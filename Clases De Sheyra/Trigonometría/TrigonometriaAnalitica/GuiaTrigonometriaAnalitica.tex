@@ -578,24 +578,24 @@ Para comprender mejor las identidades, es fundamental visualizarlas en el círcu
     \draw[-{Latex},thick] (0,-1.2) -- (0,1.2) node[above] {$y$};
 
     % Puntos importantes
-    \foreach \angle/\x/\y/\xtext/\ytext/\pos in {
-        0/1/0/1/0/right,
-        30/0.866/0.5/{\frac{\sqrt{3}}{2}}/{\frac{1}{2}}/above right,
-        45/0.707/0.707/{\frac{\sqrt{2}}{2}}/{\frac{\sqrt{2}}{2}}/above right,
-        60/0.5/0.866/{\frac{1}{2}}/{\frac{\sqrt{3}}{2}}/above right,
-        90/0/1/0/1/above,
-        120/-0.5/0.866/{-\frac{1}{2}}/{\frac{\sqrt{3}}{2}}/above left,
-        135/-0.707/0.707/{-\frac{\sqrt{2}}{2}}/{\frac{\sqrt{2}}{2}}/above left,
-        150/-0.866/0.5/{-\frac{\sqrt{3}}{2}}/{\frac{1}{2}}/above left,
-        180/-1/0/{-1}/0/left,
-        210/-0.866/-0.5/{-\frac{\sqrt{3}}{2}}/{-\frac{1}{2}}/below left,
-        225/-0.707/-0.707/{-\frac{\sqrt{2}}{2}}/{-\frac{\sqrt{2}}{2}}/below left,
-        240/-0.5/-0.866/{-\frac{1}{2}}/{-\frac{\sqrt{3}}{2}}/below left,
-        270/0/-1/0/{-1}/below,
-        300/0.5/-0.866/{\frac{1}{2}}/{-\frac{\sqrt{3}}{2}}/below right,
-        315/0.707/-0.707/{\frac{\sqrt{2}}{2}}/{-\frac{\sqrt{2}}{2}}/below right,
-        330/0.866/-0.5/{\frac{\sqrt{3}}{2}}/{-\frac{1}{2}}/below right
-    } {
+    \foreach \angle/\x/\y/\xtext/\ytext/\pos in {%
+0/1/0/1/0/right,%
+30/0.866/0.5/{\frac{\sqrt{3}}{2}}/{\frac{1}{2}}/above right,%
+45/0.707/0.707/{\frac{\sqrt{2}}{2}}/{\frac{\sqrt{2}}{2}}/above right,%
+60/0.5/0.866/{\frac{1}{2}}/{\frac{\sqrt{3}}{2}}/above right,%
+90/0/1/0/1/above,%
+120/-0.5/0.866/{-\frac{1}{2}}/{\frac{\sqrt{3}}{2}}/above left,%
+135/-0.707/0.707/{-\frac{\sqrt{2}}{2}}/{\frac{\sqrt{2}}{2}}/above left,%
+150/-0.866/0.5/{-\frac{\sqrt{3}}{2}}/{\frac{1}{2}}/above left,%
+180/-1/0/{-1}/0/left,%
+210/-0.866/-0.5/{-\frac{\sqrt{3}}{2}}/{-\frac{1}{2}}/below left,%
+225/-0.707/-0.707/{-\frac{\sqrt{2}}{2}}/{-\frac{\sqrt{2}}{2}}/below left,%
+240/-0.5/-0.866/{-\frac{1}{2}}/{-\frac{\sqrt{3}}{2}}/below left,%
+270/0/-1/0/{-1}/below,%
+300/0.5/-0.866/{\frac{1}{2}}/{-\frac{\sqrt{3}}{2}}/below right,%
+315/0.707/-0.707/{\frac{\sqrt{2}}{2}}/{-\frac{\sqrt{2}}{2}}/below right,%
+330/0.866/-0.5/{\frac{\sqrt{3}}{2}}/{-\frac{1}{2}}/below right%
+} {
         \coordinate (P\angle) at (\x,\y);
         \filldraw[accentcolor] (P\angle) circle (0.015);
         \draw[gray,thin] (0,0) -- (P\angle);
