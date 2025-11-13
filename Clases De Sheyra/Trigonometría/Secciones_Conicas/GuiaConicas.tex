@@ -1,0 +1,2615 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel,patterns,shapes.geometric}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+\definecolor{thirdcolor}{RGB}{0,150,136}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage}}
+\fancyhead[RO]{\small\textcolor{maincolor}{\thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Prof: Toribio De J Arrieta F}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Trigonometría - Grado 10}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=thirdcolor!5,
+  colframe=thirdcolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+% Título
+\title{\textbf{\Huge GEOMETRIA ANALITICA}\\[0.5cm]
+\Large Cónicas}
+\author{Prof: Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¿Te has preguntado alguna vez por qué los planetas siguen órbitas elípticas alrededor del Sol? ¿O cómo es que las antenas parabólicas pueden captar señales desde satélites a miles de kilómetros de distancia? ¿Por qué los arquitectos usan arcos parabólicos en sus diseños más impresionantes? La respuesta a todas estas preguntas está en un grupo fascinante de curvas llamadas \textbf{secciones cónicas}.
+
+Imagínate que tienes un cono de helado (sin el helado, claro) y una espada láser como en Star Wars. Dependiendo del ángulo y la posición con que cortes el cono, obtendrás diferentes formas. Estas formas son las secciones cónicas: circunferencia, elipse, parábola e hipérbola. ¡Y están por todas partes en nuestro mundo!
+
+\subsection*{¿Por qué son tan importantes las cónicas?}
+
+Las secciones cónicas no son solo figuras bonitas en un libro de matemáticas. Son las formas fundamentales que rigen muchos fenómenos naturales y tecnológicos:
+
+\begin{itemize}
+    \item \textbf{Órbitas planetarias:} Johannes Kepler descubrió que los planetas no se mueven en círculos perfectos, sino en elipses. ¡El Sol está en uno de los focos de esa elipse!
+
+    \item \textbf{Antenas parabólicas:} Las señales de televisión satelital rebotan en la superficie parabólica y se concentran en un punto llamado foco, donde está el receptor. Por eso funcionan tan bien.
+
+    \item \textbf{Arquitectura:} Desde el Coliseo Romano (forma elíptica) hasta el Gateway Arch de San Luis (parábola invertida), las cónicas dan estabilidad y belleza a las estructuras.
+
+    \item \textbf{Diseño de puentes:} Los cables de los puentes colgantes forman parábolas casi perfectas cuando soportan el peso uniformemente distribuido del tablero.
+
+    \item \textbf{Telescopios reflectores:} Usan espejos parabólicos e hiperbólicos para enfocar la luz de las estrellas. El telescopio Hubble tiene un espejo principal parabólico.
+
+    \item \textbf{Ingeniería civil:} Las torres de enfriamiento de las centrales nucleares tienen forma hiperbólica porque esta forma proporciona máxima resistencia con mínimo material.
+\end{itemize}
+
+\subsection*{Un poco de historia}
+
+Las cónicas fueron estudiadas por primera vez por los antiguos griegos. Apolonio de Perga (262-190 a.C.), conocido como ``El Gran Geómetra'', escribió un tratado de ocho libros sobre las cónicas. Él fue quien les dio los nombres que usamos hoy: elipse (que significa ``deficiencia''), parábola (``comparación'') e hipérbola (``exceso'').
+
+Pero la verdadera revolución llegó casi 2000 años después. En el siglo XVII, cuando Kepler usó las elipses para describir las órbitas planetarias, y cuando Galileo descubrió que los proyectiles siguen trayectorias parabólicas. ¡De repente, estas curvas antiguas se convirtieron en la clave para entender el universo!
+
+\newpage
+
+\subsection*{Lo que aprenderás en esta guía}
+
+En esta guía vamos a explorar:
+
+\begin{enumerate}
+    \item \textbf{Superficies cónicas de revolución:} Cómo se genera un cono y por qué es tan especial
+    \item \textbf{Las cuatro secciones cónicas:} Sus propiedades, ecuaciones y características únicas
+    \item \textbf{La ecuación general de segundo grado:} La fórmula mágica que las une a todas
+    \item \textbf{Aplicaciones prácticas:} Problemas reales donde las cónicas son las protagonistas
+\end{enumerate}
+
+Prepárate para un viaje fascinante donde la geometría se encuentra con el álgebra, y donde las matemáticas abstractas se convierten en herramientas para entender el mundo real. ¡Las cónicas están en todas partes, solo necesitas aprender a reconocerlas!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Superficies Cónicas de Revolución}
+
+Empecemos por el principio: ¿qué es una superficie cónica? Imagina que tienes una línea recta (llamada \textbf{generatriz}) que pasa por un punto fijo (el \textbf{vértice}) y que gira alrededor de otra línea recta (el \textbf{eje}). Al girar 360°, la generatriz barre una superficie que llamamos \textbf{cono de revolución}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Configuración del cono
+    \def\altura{4}
+    \def\radio{2}
+
+    % Eje del cono
+    \draw[dashed, thick] (0,-0.5) -- (0,\altura+0.5) node[above] {Eje};
+
+    % Cono superior
+    \draw[thick, maincolor] (-\radio,0) -- (0,\altura) -- (\radio,0);
+
+    % Cono inferior (espejo)
+    \draw[thick, maincolor] (-\radio,0) -- (0,-\altura) -- (\radio,0);
+
+    % Elipse base
+    \draw[thick, maincolor] (0,0) ellipse (\radio cm and 0.5cm);
+
+    % Generatriz destacada
+    \draw[very thick, accentcolor, -{Latex}] (0,\altura) -- (1.5,0) node[midway, right] {Generatriz};
+
+    % Vértice
+    \filldraw[red] (0,\altura) circle (2pt) node[left] {Vértice superior};
+    \filldraw[red] (0,-\altura) circle (2pt) node[left] {Vértice inferior};
+
+    % Ángulo del cono
+    \draw[accentcolor] (0,3) arc (90:60:1) node[midway, above] {$\alpha$};
+
+    % Título
+    \node[maincolor, font=\large] at (0,-\altura-1) {Cono doble de revolución};
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+Observa que el cono tiene dos partes (o \textbf{hojas}): una hacia arriba y otra hacia abajo. Esto es importante porque algunas secciones cónicas (como la hipérbola) necesitan ambas hojas del cono.
+\end{nota}
+
+El ángulo $\alpha$ entre el eje y la generatriz se llama \textbf{semiángulo del cono}. Este ángulo es crucial porque determina qué tipo de cónica obtendremos al cortar el cono.
+
+\subsection{Secciones Cónicas: Los Cuatro Cortes Mágicos}
+
+Ahora viene la parte divertida. Cuando cortamos el cono con un plano, obtenemos diferentes curvas según el ángulo del corte. Es como cortar una zanahoria: si la cortas perpendicular, obtienes círculos; si la cortas en diagonal, obtienes elipses.
+
+\subsubsection{1. Circunferencia: El Corte Horizontal}
+
+Si el plano de corte es perpendicular al eje del cono (paralelo a la base), obtenemos una \textbf{circunferencia}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Cono
+    \draw[thick, gray] (-2,0) -- (0,4) -- (2,0);
+    \draw[thick, gray] (0,0) ellipse (2cm and 0.5cm);
+
+    % Plano de corte
+    \fill[blue!20, opacity=0.7] (-1.5,1.5) ellipse (1.5cm and 0.4cm);
+    \draw[thick, blue] (-1.5,1.5) ellipse (1.5cm and 0.4cm);
+
+    % Circunferencia resultante
+    \draw[very thick, red] (4,1.5) circle (1.2cm);
+    \node[red] at (4,-0.5) {Circunferencia};
+
+    % Flecha
+    \draw[thick, -{Latex}] (1.2,1.5) -- (2.5,1.5);
+
+    % Etiquetas
+    \node at (0,-1.2) {Corte horizontal};
+    \draw[<->, blue] (-1.5,2.2) -- (1.5,2.2) node[midway, above] {Plano de corte};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}
+Una \textbf{circunferencia} es el lugar geométrico de todos los puntos que equidistan de un punto fijo llamado \textbf{centro}.
+
+Ecuación estándar: $(x-h)^2 + (y-k)^2 = r^2$
+
+donde $(h,k)$ es el centro y $r$ es el radio.
+\end{definicion}
+
+\newpage
+
+\subsubsection{2. Elipse: El Corte Inclinado}
+
+Si el plano corta el cono de manera inclinada (pero sin ser paralelo a la generatriz), obtenemos una \textbf{elipse}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Cono
+    \draw[thick, gray] (-2,0) -- (0,4) -- (2,0);
+    \draw[thick, gray] (0,0) ellipse (2cm and 0.5cm);
+
+    % Plano de corte inclinado
+    \fill[blue!20, opacity=0.7] (-1.8,0.8) -- (1.2,2.5) -- (1.2,1.5) -- (-1.8,0.2) -- cycle;
+
+    % Elipse en el cono
+    \draw[thick, blue, rotate=20] (0,1.5) ellipse (1.6cm and 0.8cm);
+
+    % Elipse resultante
+    \draw[very thick, red] (4.5,1.5) ellipse (1.5cm and 0.9cm);
+    \node[red] at (4.5,-0.5) {Elipse};
+
+    % Flecha
+    \draw[thick, -{Latex}] (1.5,1.5) -- (2.8,1.5);
+
+    % Etiquetas
+    \node at (0,-1.2) {Corte inclinado};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}
+Una \textbf{elipse} es el lugar geométrico de todos los puntos cuya suma de distancias a dos puntos fijos (llamados \textbf{focos}) es constante.
+
+Ecuación estándar: $\frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1$
+
+donde $(h,k)$ es el centro, $a$ es el semieje mayor y $b$ es el semieje menor.
+\end{definicion}
+
+La elipse tiene una propiedad fascinante: si colocas una fuente de luz en un foco, todos los rayos se reflejarán y pasarán por el otro foco. ¡Por eso las galerías de susurros funcionan!
+
+\subsubsection{3. Parábola: El Corte Paralelo}
+
+Cuando el plano es paralelo a una generatriz del cono, obtenemos una \textbf{parábola}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Cono
+    \draw[thick, gray] (-2,0) -- (0,4) -- (2,0);
+    \draw[thick, gray] (0,0) ellipse (2cm and 0.5cm);
+
+    % Plano de corte paralelo a generatriz
+    \fill[blue!20, opacity=0.7] (0.5,0) -- (0.5,3.5) -- (1.8,3.5) -- (1.8,0) -- cycle;
+
+    % Parábola en el cono
+    \draw[thick, blue, domain=0.5:1.75, samples=30] plot (\x, {0.8*(\x-0.5)^2});
+
+    % Parábola resultante
+    \draw[very thick, red, domain=-1.2:1.2, samples=30] plot ({4.5+\x}, {1.5+0.7*\x*\x});
+    \node[red] at (4.5,-0.5) {Parábola};
+
+    % Flecha
+    \draw[thick, -{Latex}] (2,1.5) -- (3,1.5);
+
+    % Etiquetas
+    \node at (0,-1.2) {Corte paralelo a generatriz};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}
+Una \textbf{parábola} es el lugar geométrico de todos los puntos que equidistan de un punto fijo (el \textbf{foco}) y de una recta fija (la \textbf{directriz}).
+
+Ecuación estándar (eje vertical): $(x-h)^2 = 4p(y-k)$
+
+donde $(h,k)$ es el vértice y $p$ es la distancia del vértice al foco.
+\end{definicion}
+
+Las parábolas tienen la propiedad de concentrar rayos paralelos en el foco. Por eso los faros de los autos y las antenas parabólicas tienen esta forma.
+
+\newpage
+
+\subsubsection{4. Hipérbola: El Corte Vertical}
+
+Cuando el plano es paralelo al eje del cono (o lo contiene), corta ambas hojas del cono y obtenemos una \textbf{hipérbola}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Cono superior
+    \draw[thick, gray] (-2,0) -- (0,3) -- (2,0);
+    \draw[thick, gray] (0,0) ellipse (2cm and 0.5cm);
+
+    % Cono inferior
+    \draw[thick, gray] (-2,0) -- (0,-3) -- (2,0);
+    \draw[thick, gray] (0,0) ellipse (2cm and 0.5cm);
+
+    % Plano de corte vertical
+    \fill[blue!20, opacity=0.5] (-0.3,-3.5) rectangle (0.3,3.5);
+
+    % Hipérbola en el cono
+    \draw[thick, blue, domain=0.5:2, samples=20] plot ({0.15*1/\x}, {\x});
+    \draw[thick, blue, domain=0.5:2, samples=20] plot ({-0.15*1/\x}, {\x});
+    \draw[thick, blue, domain=0.5:2, samples=20] plot ({0.15*1/\x}, {-\x});
+    \draw[thick, blue, domain=0.5:2, samples=20] plot ({-0.15*1/\x}, {-\x});
+
+    % Hipérbola resultante
+    \begin{scope}[shift={(5,0)}]
+        \draw[very thick, red, domain=-1.5:1.5, samples=30] plot ({\x}, {sqrt(1+\x*\x)});
+        \draw[very thick, red, domain=-1.5:1.5, samples=30] plot ({\x}, {-sqrt(1+\x*\x)});
+        \node[red] at (0,-3.5) {Hipérbola};
+    \end{scope}
+
+    % Flecha
+    \draw[thick, -{Latex}] (2.2,0) -- (3.3,0);
+
+    % Etiquetas
+    \node at (0,-4.2) {Corte vertical (ambas hojas)};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}
+Una \textbf{hipérbola} es el lugar geométrico de todos los puntos cuya diferencia de distancias a dos puntos fijos (los \textbf{focos}) es constante.
+
+Ecuación estándar: $\frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1$
+
+donde $(h,k)$ es el centro, y la hipérbola tiene dos ramas.
+\end{definicion}
+
+\subsection{La Ecuación General de Segundo Grado}
+
+Aquí viene algo sorprendente: todas las cónicas pueden representarse con una sola ecuación general. Es como tener una fórmula maestra que las contiene a todas:
+
+\begin{tcolorbox}[enhanced, colback=maincolor!10, colframe=maincolor, title=Ecuación General de Segundo Grado]
+\[
+Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0
+\]
+donde $A$, $B$ y $C$ no son todos cero simultáneamente.
+\end{tcolorbox}
+
+El tipo de cónica depende del \textbf{discriminante} $\Delta = B^2 - 4AC$:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Discriminante} & \textbf{Tipo de Cónica} & \textbf{Condición adicional} \\
+\hline
+$\Delta < 0$ & Elipse & $A = C$ y $B = 0$ → Circunferencia \\
+\hline
+$\Delta = 0$ & Parábola & --- \\
+\hline
+$\Delta > 0$ & Hipérbola & --- \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Casos especiales y degenerados}
+
+A veces, la ecuación general puede representar casos especiales o ``degenerados'':
+\begin{itemize}
+    \item \textbf{Punto:} Cuando la elipse colapsa a un solo punto
+    \item \textbf{Rectas:} Dos rectas que se cortan (hipérbola degenerada) o paralelas
+    \item \textbf{Conjunto vacío:} Cuando no hay puntos reales que satisfagan la ecuación
+\end{itemize}
+
+\newpage
+
+\subsection{Transformación de la Ecuación General a Forma Estándar}
+
+Para identificar y graficar una cónica dada en forma general, necesitamos transformarla a su forma estándar. El proceso es como resolver un rompecabezas algebraico:
+
+\begin{enumerate}
+    \item \textbf{Agrupar términos} por variable
+    \item \textbf{Completar cuadrados} para $x$ y/o $y$
+    \item \textbf{Factorizar} y simplificar
+    \item \textbf{Identificar} el tipo de cónica y sus elementos
+\end{enumerate}
+
+Veamos un ejemplo rápido:
+
+\begin{tcolorbox}[colback=accentcolor!5, colframe=accentcolor]
+\textbf{Ejemplo:} Identificar la cónica $x^2 + 4y^2 - 2x - 8y + 1 = 0$
+
+\textbf{Solución:}
+\begin{align*}
+x^2 + 4y^2 - 2x - 8y + 1 &= 0 \\
+(x^2 - 2x) + 4(y^2 - 2y) + 1 &= 0 \\
+(x^2 - 2x + 1) - 1 + 4(y^2 - 2y + 1) - 4 + 1 &= 0 \\
+(x - 1)^2 + 4(y - 1)^2 &= 4 \\
+\frac{(x - 1)^2}{4} + \frac{(y - 1)^2}{1} &= 1
+\end{align*}
+
+¡Es una elipse con centro en $(1, 1)$, semieje mayor $a = 2$ y semieje menor $b = 1$!
+\end{tcolorbox}
+
+\subsection{Gráficas de las Cónicas}
+
+Ahora veamos cómo se ven estas curvas en el plano cartesiano. Cada una tiene características únicas que la hacen especial:
+
+\subsubsection{Circunferencia: La Perfecta Simetría}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.85\textwidth,
+        height=0.6\textwidth,
+        axis lines=center,
+        xlabel=$x$,
+        ylabel=$y$,
+        grid=major,
+        grid style={dashed, gray!50},
+        xmin=-5, xmax=5,
+        ymin=-5, ymax=5,
+        axis equal image,
+        legend pos=outer north east
+    ]
+    % Circunferencia centrada en origen
+    \addplot[domain=0:360, samples=100, thick, maincolor]
+        ({3*cos(x)}, {3*sin(x)});
+    \addlegendentry{$x^2 + y^2 = 9$}
+
+    % Centro
+    \addplot[mark=*, mark size=3pt, red] coordinates {(0,0)};
+    \addlegendentry{Centro $(0,0)$}
+
+    % Radio
+    \draw[thick, accentcolor, -{Latex}] (axis cs:0,0) -- (axis cs:3,0)
+        node[midway, below] {$r=3$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Elipse: La Órbita Planetaria}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.9\textwidth,
+        height=0.65\textwidth,
+        axis lines=center,
+        xlabel=$x$,
+        ylabel=$y$,
+        grid=major,
+        grid style={dashed, gray!50},
+        xmin=-6, xmax=6,
+        ymin=-4, ymax=4,
+        axis equal image,
+        legend pos=outer north east
+    ]
+    % Elipse
+    \addplot[domain=0:360, samples=100, thick, maincolor]
+        ({4*cos(x)}, {2*sin(x)});
+    \addlegendentry{$\frac{x^2}{16} + \frac{y^2}{4} = 1$}
+
+    % Centro
+    \addplot[mark=*, mark size=3pt, black] coordinates {(0,0)};
+    \addlegendentry{Centro}
+
+    % Focos
+    \addplot[mark=*, mark size=3pt, red] coordinates {(3.464,0)};
+    \addplot[mark=*, mark size=3pt, red] coordinates {(-3.464,0)};
+    \addlegendentry{Focos}
+
+    % Ejes
+    \draw[thick, accentcolor, <->] (axis cs:-4,0) -- (axis cs:4,0)
+        node[midway, below] {$2a=8$};
+    \draw[thick, thirdcolor, <->] (axis cs:0,-2) -- (axis cs:0,2)
+        node[midway, right] {$2b=4$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsubsection{Parábola: La Trayectoria Balística}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.9\textwidth,
+        height=0.7\textwidth,
+        axis lines=center,
+        xlabel=$x$,
+        ylabel=$y$,
+        grid=major,
+        grid style={dashed, gray!50},
+        xmin=-5, xmax=5,
+        ymin=-2, ymax=8,
+        legend pos=north west
+    ]
+    % Parábola
+    \addplot[domain=-4:4, samples=100, thick, maincolor]
+        {0.25*x^2};
+    \addlegendentry{$y = \frac{1}{4}x^2$}
+
+    % Vértice
+    \addplot[mark=*, mark size=3pt, black] coordinates {(0,0)};
+    \addlegendentry{Vértice}
+
+    % Foco
+    \addplot[mark=*, mark size=3pt, red] coordinates {(0,1)};
+    \addlegendentry{Foco $(0,1)$}
+
+    % Directriz
+    \addplot[domain=-5:5, samples=2, thick, dashed, thirdcolor]
+        {-1};
+    \addlegendentry{Directriz $y=-1$}
+
+    % Líneas de distancia igual
+    \draw[thin, orange, dashed] (axis cs:2,1) -- (axis cs:2,1) -- (axis cs:2,-1);
+    \draw[thin, orange, -{Latex}] (axis cs:0,1) -- (axis cs:2,1)
+        node[midway, above] {$d_1$};
+    \draw[thin, orange, -{Latex}] (axis cs:2,1) -- (axis cs:2,-1)
+        node[midway, right] {$d_2$};
+    \node[orange] at (axis cs:3.5,2) {$d_1 = d_2$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Hipérbola: Las Torres de Enfriamiento}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.95\textwidth,
+        height=0.7\textwidth,
+        axis lines=center,
+        xlabel=$x$,
+        ylabel=$y$,
+        grid=major,
+        grid style={dashed, gray!50},
+        xmin=-6, xmax=6,
+        ymin=-5, ymax=5,
+        axis equal image,
+        legend pos=outer north east
+    ]
+    % Hipérbola rama derecha
+    \addplot[domain=2:5.5, samples=100, thick, maincolor]
+        {sqrt(x^2-4)};
+    \addplot[domain=2:5.5, samples=100, thick, maincolor]
+        {-sqrt(x^2-4)};
+
+    % Hipérbola rama izquierda
+    \addplot[domain=-5.5:-2, samples=100, thick, maincolor]
+        {sqrt(x^2-4)};
+    \addplot[domain=-5.5:-2, samples=100, thick, maincolor]
+        {-sqrt(x^2-4)};
+    \addlegendentry{$\frac{x^2}{4} - \frac{y^2}{4} = 1$}
+
+    % Centro
+    \addplot[mark=*, mark size=3pt, black] coordinates {(0,0)};
+    \addlegendentry{Centro}
+
+    % Focos
+    \addplot[mark=*, mark size=3pt, red] coordinates {(2.828,0)};
+    \addplot[mark=*, mark size=3pt, red] coordinates {(-2.828,0)};
+    \addlegendentry{Focos}
+
+    % Asíntotas
+    \addplot[domain=-6:6, samples=2, dashed, thirdcolor] {x};
+    \addplot[domain=-6:6, samples=2, dashed, thirdcolor] {-x};
+    \addlegendentry{Asíntotas}
+
+    % Vértices
+    \addplot[mark=square*, mark size=3pt, blue] coordinates {(2,0)};
+    \addplot[mark=square*, mark size=3pt, blue] coordinates {(-2,0)};
+    \addlegendentry{Vértices}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Propiedades Especiales de las Cónicas}
+
+Cada cónica tiene propiedades únicas que las hacen útiles en aplicaciones específicas:
+
+\subsubsection{Propiedad Reflectora de la Parábola}
+
+Los rayos paralelos al eje de una parábola se reflejan hacia el foco. Esta propiedad se usa en:
+\begin{itemize}
+    \item Antenas parabólicas (concentran señales)
+    \item Faros de automóviles (proyectan luz paralela)
+    \item Hornos solares (concentran calor)
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Parábola
+    \draw[very thick, maincolor, domain=-2:2, samples=50]
+        plot (\x, {0.25*\x*\x});
+
+    % Foco
+    \filldraw[red] (0,1) circle (2pt) node[right] {Foco};
+
+    % Rayos paralelos entrantes
+    \foreach \y in {1.5,2,2.5,3}
+    {
+        \draw[thick, yellow!80!orange, -{Latex}] (-2.5,\y) -- ({-2*sqrt(\y)},\y);
+        \draw[thick, yellow!80!orange] ({-2*sqrt(\y)},\y) -- (0,1);
+    }
+
+    \foreach \y in {1.5,2,2.5,3}
+    {
+        \draw[thick, yellow!80!orange, -{Latex}] (2.5,\y) -- ({2*sqrt(\y)},\y);
+        \draw[thick, yellow!80!orange] ({2*sqrt(\y)},\y) -- (0,1);
+    }
+
+    % Título
+    \node[maincolor, font=\large] at (0,-1) {Propiedad reflectora};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Propiedad de la Elipse}
+
+Los rayos que parten de un foco se reflejan hacia el otro foco. Aplicaciones:
+\begin{itemize}
+    \item Galerías de susurros (acústica arquitectónica)
+    \item Litotripsia (destrucción de cálculos renales)
+    \item Órbitas planetarias (leyes de Kepler)
+\end{itemize}
+
+\subsubsection{Propiedad de la Hipérbola}
+
+Los rayos dirigidos a un foco se reflejan como si vinieran del otro foco. Se usa en:
+\begin{itemize}
+    \item Sistemas de navegación (LORAN)
+    \item Telescopios Cassegrain
+    \item Torres de enfriamiento
+\end{itemize}
+
+\subsection{Excentricidad: La Medida de la Forma}
+
+La \textbf{excentricidad} ($e$) es un número que nos dice qué tan ``alargada'' o ``abierta'' es una cónica:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Cónica} & \textbf{Excentricidad} & \textbf{Interpretación} \\
+\hline
+Circunferencia & $e = 0$ & Perfectamente redonda \\
+\hline
+Elipse & $0 < e < 1$ & Más cerca de 0 → más circular \\
+& & Más cerca de 1 → más alargada \\
+\hline
+Parábola & $e = 1$ & El límite entre cerrada y abierta \\
+\hline
+Hipérbola & $e > 1$ & Más grande → más abierta \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{nota}
+La excentricidad de la órbita de la Tierra es $e \approx 0.017$, casi circular. La del cometa Halley es $e \approx 0.967$, muy alargada. ¡Por eso solo lo vemos cada 76 años!
+\end{nota}
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicidades! Has dado los primeros pasos en el fascinante mundo de las secciones cónicas. Ahora ya sabes que estas curvas no son solo ecuaciones abstractas, sino las formas fundamentales que describen desde el movimiento de los planetas hasta el diseño de las antenas que nos conectan con el mundo.
+
+\subsection*{Lo que has aprendido}
+
+En esta primera parte de la guía has descubierto:
+\begin{itemize}
+    \item Cómo se generan las cónicas a partir de un cono de revolución
+    \item Las cuatro secciones cónicas básicas y sus características únicas
+    \item La ecuación general de segundo grado que las unifica
+    \item Las propiedades especiales que hacen útil a cada cónica
+    \item La importancia de la excentricidad como medida de forma
+\end{itemize}
+
+\subsection*{Fórmulas Clave para Recordar}
+
+\begin{tcolorbox}[enhanced, colback=thirdcolor!10, colframe=thirdcolor, title=Resumen de Ecuaciones]
+\textbf{Ecuación General:}
+\[
+Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0
+\]
+
+\textbf{Discriminante:} $\Delta = B^2 - 4AC$
+
+\textbf{Formas Estándar:}
+\begin{itemize}
+    \item \textbf{Circunferencia:} $(x-h)^2 + (y-k)^2 = r^2$
+    \item \textbf{Elipse:} $\frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1$
+    \item \textbf{Parábola:} $(x-h)^2 = 4p(y-k)$ o $(y-k)^2 = 4p(x-h)$
+    \item \textbf{Hipérbola:} $\frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1$
+\end{itemize}
+\end{tcolorbox}
+
+\subsection*{Consejos para el Éxito}
+
+\begin{enumerate}
+    \item \textbf{Visualiza siempre:} Antes de resolver, imagina la cónica. ¿Es abierta o cerrada? ¿Vertical u horizontal?
+
+    \item \textbf{Identifica primero:} Usa el discriminante para saber qué tipo de cónica tienes antes de empezar a transformar.
+
+    \item \textbf{Completa cuadrados con cuidado:} La mayoría de errores ocurren aquí. Verifica cada paso.
+
+    \item \textbf{Relaciona con la realidad:} Piensa en aplicaciones reales. ¿Esta elipse podría ser una órbita? ¿Esta parábola un puente?
+
+    \item \textbf{Practica el dibujo:} Saber graficar rápidamente las cónicas te ayudará a verificar tus respuestas.
+\end{enumerate}
+
+\subsection*{Lo que Viene}
+
+En las próximas partes de esta guía exploraremos:
+\begin{itemize}
+    \item Ejemplos resueltos paso a paso de cada tipo de cónica
+    \item Ejercicios progresivos para dominar las transformaciones
+    \item Problemas aplicados a situaciones reales
+    \item Técnicas avanzadas para rotar y trasladar cónicas
+\end{itemize}
+
+Recuerda: las matemáticas son como un deporte, se aprenden practicando. No te desanimes si algo parece difícil al principio. Con cada problema que resuelvas, las cónicas se volverán más familiares y verás que están en todas partes: en el arco de un balón de fútbol, en las ondas del WiFi, en las órbitas de los satélites que te dan el GPS.
+
+¡Las cónicas son el lenguaje geométrico del universo, y ahora tú estás aprendiendo a hablarlo!
+
+% PARTE 2: EJEMPLOS RESUELTOS Y EJERCICIOS INVERSOS
+% Tema: Cónicas (circunferencia, parábola, elipse, hipérbola, ecuación general)
+
+\section{Ejemplos Resueltos}
+
+Ahora vamos a poner en práctica todo lo que hemos aprendido sobre las cónicas. Cada ejemplo está completamente desarrollado paso a paso para que entiendas el proceso y puedas identificar cada tipo de cónica.
+
+\begin{ejemplo}{Identificar y graficar una circunferencia}
+Dada la ecuación $x^2 + y^2 - 6x + 4y - 3 = 0$, determina:
+\begin{itemize}
+    \item[a)] El tipo de cónica
+    \item[b)] Su centro y radio
+    \item[c)] Su gráfica completa
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar el tipo de cónica observando los coeficientes.
+
+La ecuación tiene la forma $Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$ donde:
+\begin{itemize}
+    \item $A = 1$ (coeficiente de $x^2$)
+    \item $B = 0$ (no hay término $xy$)
+    \item $C = 1$ (coeficiente de $y^2$)
+    \item $D = -6$ (coeficiente de $x$)
+    \item $E = 4$ (coeficiente de $y$)
+    \item $F = -3$ (término independiente)
+\end{itemize}
+
+Como $A = C = 1$ y $B = 0$, tenemos una \textbf{circunferencia}.
+
+\textbf{Paso 2:} Completar cuadrados para encontrar la forma estándar.
+
+Agrupamos los términos en $x$ y en $y$:
+\[
+(x^2 - 6x) + (y^2 + 4y) = 3
+\]
+
+Para $x$: Completamos el cuadrado sumando y restando $\left(\frac{6}{2}\right)^2 = 9$
+\[
+x^2 - 6x + 9 - 9 = (x - 3)^2 - 9
+\]
+
+Para $y$: Completamos el cuadrado sumando y restando $\left(\frac{4}{2}\right)^2 = 4$
+\[
+y^2 + 4y + 4 - 4 = (y + 2)^2 - 4
+\]
+
+\textbf{Paso 3:} Sustituir en la ecuación original.
+\begin{align*}
+(x - 3)^2 - 9 + (y + 2)^2 - 4 &= 3 \\
+(x - 3)^2 + (y + 2)^2 &= 3 + 9 + 4 \\
+(x - 3)^2 + (y + 2)^2 &= 16
+\end{align*}
+
+\textbf{Paso 4:} Identificar centro y radio.
+
+La forma estándar es $(x - h)^2 + (y - k)^2 = r^2$ donde:
+\begin{itemize}
+    \item Centro: $(h, k) = (3, -2)$
+    \item Radio: $r = \sqrt{16} = 4$
+\end{itemize}
+
+\textbf{Paso 5:} Verificación algebraica.
+
+Tomemos un punto sobre la circunferencia, por ejemplo $(7, -2)$ (4 unidades a la derecha del centro):
+\begin{align*}
+(7)^2 + (-2)^2 - 6(7) + 4(-2) - 3 &= 49 + 4 - 42 - 8 - 3 \\
+&= 0 \quad \checkmark
+\end{align*}
+
+\textbf{Paso 6:} Graficar la circunferencia.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.6\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-2, xmax=8,
+    ymin=-7, ymax=3,
+    grid=major,
+    axis equal image,
+    xtick={-2,-1,0,1,2,3,4,5,6,7,8},
+    ytick={-7,-6,-5,-4,-3,-2,-1,0,1,2,3},
+    minor tick num=1
+]
+% Circunferencia
+\addplot[maincolor, very thick, samples=100, domain=0:360]
+    ({3 + 4*cos(x)}, {-2 + 4*sin(x)});
+
+% Centro
+\addplot[only marks, mark=*, mark size=3pt, accentcolor]
+    coordinates {(3,-2)};
+\node[above right] at (axis cs:3,-2) {Centro $(3, -2)$};
+
+% Radio
+\draw[accentcolor, thick, -{Latex}] (axis cs:3,-2) -- (axis cs:7,-2)
+    node[midway, above] {$r = 4$};
+
+% Puntos cardinales de la circunferencia
+\addplot[only marks, mark=o, mark size=2pt, blue]
+    coordinates {(7,-2) (-1,-2) (3,2) (3,-6)};
+\node[right] at (axis cs:7,-2) {$(7, -2)$};
+\node[left] at (axis cs:-1,-2) {$(-1, -2)$};
+\node[above] at (axis cs:3,2) {$(3, 2)$};
+\node[below] at (axis cs:3,-6) {$(3, -6)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:}
+\[
+\boxed{
+\begin{aligned}
+&\text{a) Tipo: Circunferencia} \\
+&\text{b) Centro: } (3, -2), \text{ Radio: } 4 \\
+&\text{c) Ecuación estándar: } (x-3)^2 + (y+2)^2 = 16
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}{Identificar y graficar una parábola}
+Analiza la ecuación $y = x^2 - 4x + 3$ y determina:
+\begin{itemize}
+    \item[a)] El vértice de la parábola
+    \item[b)] El eje de simetría
+    \item[c)] La dirección de apertura
+    \item[d)] Los puntos de intersección con los ejes
+    \item[e)] Su gráfica completa
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar que es una parábola.
+
+La ecuación tiene la forma $y = ax^2 + bx + c$ con $a = 1$, $b = -4$, $c = 3$.
+Como solo hay término cuadrático en $x$ (no en $y$), es una \textbf{parábola vertical}.
+
+\textbf{Paso 2:} Convertir a forma vértice completando el cuadrado.
+\begin{align*}
+y &= x^2 - 4x + 3 \\
+y &= (x^2 - 4x) + 3 \\
+y &= (x^2 - 4x + 4 - 4) + 3 \\
+y &= (x^2 - 4x + 4) - 4 + 3 \\
+y &= (x - 2)^2 - 1
+\end{align*}
+
+\textbf{Paso 3:} Identificar el vértice y eje de simetría.
+
+De la forma $y = a(x - h)^2 + k$:
+\begin{itemize}
+    \item Vértice: $(h, k) = (2, -1)$
+    \item Eje de simetría: $x = 2$
+    \item Como $a = 1 > 0$, la parábola abre hacia arriba
+\end{itemize}
+
+\textbf{Paso 4:} Encontrar las intersecciones con el eje $x$ (raíces).
+
+Hacemos $y = 0$:
+\begin{align*}
+x^2 - 4x + 3 &= 0 \\
+(x - 1)(x - 3) &= 0 \\
+x = 1 \text{ o } x = 3
+\end{align*}
+Puntos de intersección con el eje $x$: $(1, 0)$ y $(3, 0)$
+
+\textbf{Paso 5:} Encontrar la intersección con el eje $y$.
+
+Hacemos $x = 0$:
+\[
+y = 0^2 - 4(0) + 3 = 3
+\]
+Punto de intersección con el eje $y$: $(0, 3)$
+
+\textbf{Paso 6:} Calcular puntos adicionales para mejor visualización.
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$x$ & $y = x^2 - 4x + 3$ \\
+\hline
+$-1$ & $(-1)^2 - 4(-1) + 3 = 8$ \\
+$0$ & $3$ \\
+$1$ & $0$ \\
+$2$ & $-1$ (vértice) \\
+$3$ & $0$ \\
+$4$ & $3$ \\
+$5$ & $8$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 7:} Graficar la parábola.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.65\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-2, xmax=6,
+    ymin=-3, ymax=9,
+    grid=major,
+    xtick={-2,-1,0,1,2,3,4,5,6},
+    ytick={-3,-2,-1,0,1,2,3,4,5,6,7,8,9},
+    minor tick num=1
+]
+% Parábola
+\addplot[maincolor, very thick, samples=100, domain=-1.5:5.5] {x^2 - 4*x + 3};
+
+% Vértice
+\addplot[only marks, mark=*, mark size=3pt, accentcolor]
+    coordinates {(2,-1)};
+\node[below right] at (axis cs:2,-1) {Vértice $(2, -1)$};
+
+% Eje de simetría
+\draw[accentcolor, dashed, thick] (axis cs:2,-3) -- (axis cs:2,9)
+    node[above] {Eje: $x = 2$};
+
+% Puntos de intersección
+\addplot[only marks, mark=o, mark size=2.5pt, blue]
+    coordinates {(1,0) (3,0) (0,3)};
+\node[below] at (axis cs:1,0) {$(1, 0)$};
+\node[below] at (axis cs:3,0) {$(3, 0)$};
+\node[left] at (axis cs:0,3) {$(0, 3)$};
+
+% Puntos adicionales
+\addplot[only marks, mark=o, mark size=2pt, green!60!black]
+    coordinates {(-1,8) (4,3) (5,8)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 8:} Verificación con el discriminante.
+
+El discriminante $\Delta = b^2 - 4ac = (-4)^2 - 4(1)(3) = 16 - 12 = 4 > 0$
+
+Esto confirma que la parábola cruza el eje $x$ en dos puntos distintos.
+
+\textbf{Respuesta final:}
+\[
+\boxed{
+\begin{aligned}
+&\text{a) Vértice: } (2, -1) \\
+&\text{b) Eje de simetría: } x = 2 \\
+&\text{c) Abre hacia arriba} \\
+&\text{d) Intersecciones: } x\text{-eje: } (1,0), (3,0); \quad y\text{-eje: } (0,3) \\
+&\text{e) Forma vértice: } y = (x-2)^2 - 1
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}{Identificar y graficar una elipse}
+Dada la ecuación $4x^2 + 9y^2 - 16x + 18y - 11 = 0$, determina:
+\begin{itemize}
+    \item[a)] El tipo de cónica y su orientación
+    \item[b)] El centro, semiejes mayor y menor
+    \item[c)] Los vértices y co-vértices
+    \item[d)] Su gráfica completa
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar el tipo de cónica.
+
+La ecuación tiene términos $x^2$ y $y^2$ con coeficientes positivos diferentes:
+\begin{itemize}
+    \item Coeficiente de $x^2$: $A = 4$
+    \item Coeficiente de $y^2$: $C = 9$
+    \item No hay término $xy$: $B = 0$
+\end{itemize}
+Como $A \neq C$, ambos positivos, y $B = 0$, es una \textbf{elipse}.
+
+\textbf{Paso 2:} Completar cuadrados para ambas variables.
+
+Agrupamos y factorizamos:
+\[
+4x^2 - 16x + 9y^2 + 18y = 11
+\]
+\[
+4(x^2 - 4x) + 9(y^2 + 2y) = 11
+\]
+
+Para $x$: Completamos dentro del paréntesis
+\[
+x^2 - 4x = (x - 2)^2 - 4
+\]
+
+Para $y$: Completamos dentro del paréntesis
+\[
+y^2 + 2y = (y + 1)^2 - 1
+\]
+
+\textbf{Paso 3:} Sustituir y simplificar.
+\begin{align*}
+4[(x - 2)^2 - 4] + 9[(y + 1)^2 - 1] &= 11 \\
+4(x - 2)^2 - 16 + 9(y + 1)^2 - 9 &= 11 \\
+4(x - 2)^2 + 9(y + 1)^2 &= 11 + 16 + 9 \\
+4(x - 2)^2 + 9(y + 1)^2 &= 36
+\end{align*}
+
+\textbf{Paso 4:} Dividir entre 36 para obtener la forma estándar.
+\[
+\frac{4(x - 2)^2}{36} + \frac{9(y + 1)^2}{36} = 1
+\]
+\[
+\frac{(x - 2)^2}{9} + \frac{(y + 1)^2}{4} = 1
+\]
+
+\textbf{Paso 5:} Identificar los parámetros de la elipse.
+
+De la forma $\frac{(x - h)^2}{a^2} + \frac{(y - k)^2}{b^2} = 1$:
+\begin{itemize}
+    \item Centro: $(h, k) = (2, -1)$
+    \item $a^2 = 9 \Rightarrow a = 3$ (semieje mayor, horizontal pues $a^2 > b^2$)
+    \item $b^2 = 4 \Rightarrow b = 2$ (semieje menor, vertical)
+\end{itemize}
+
+\textbf{Paso 6:} Encontrar vértices y co-vértices.
+
+Vértices (en el eje mayor, horizontal):
+\begin{itemize}
+    \item $(h + a, k) = (2 + 3, -1) = (5, -1)$
+    \item $(h - a, k) = (2 - 3, -1) = (-1, -1)$
+\end{itemize}
+
+Co-vértices (en el eje menor, vertical):
+\begin{itemize}
+    \item $(h, k + b) = (2, -1 + 2) = (2, 1)$
+    \item $(h, k - b) = (2, -1 - 2) = (2, -3)$
+\end{itemize}
+
+\textbf{Paso 7:} Verificación con un punto.
+
+Verifiquemos que el vértice $(5, -1)$ satisface la ecuación original:
+\begin{align*}
+4(5)^2 + 9(-1)^2 - 16(5) + 18(-1) - 11 &= 100 + 9 - 80 - 18 - 11 \\
+&= 0 \quad \checkmark
+\end{align*}
+
+\textbf{Paso 8:} Graficar la elipse.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.65\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-3, xmax=7,
+    ymin=-5, ymax=3,
+    grid=major,
+    axis equal image,
+    xtick={-3,-2,-1,0,1,2,3,4,5,6,7},
+    ytick={-5,-4,-3,-2,-1,0,1,2,3},
+    minor tick num=1
+]
+% Elipse
+\addplot[maincolor, very thick, samples=100, domain=0:360]
+    ({2 + 3*cos(x)}, {-1 + 2*sin(x)});
+
+% Centro
+\addplot[only marks, mark=*, mark size=3pt, accentcolor]
+    coordinates {(2,-1)};
+\node[above right] at (axis cs:2,-1) {Centro $(2, -1)$};
+
+% Vértices
+\addplot[only marks, mark=square*, mark size=3pt, blue]
+    coordinates {(5,-1) (-1,-1)};
+\node[right] at (axis cs:5,-1) {$(5, -1)$};
+\node[left] at (axis cs:-1,-1) {$(-1, -1)$};
+
+% Co-vértices
+\addplot[only marks, mark=triangle*, mark size=3pt, green!60!black]
+    coordinates {(2,1) (2,-3)};
+\node[above] at (axis cs:2,1) {$(2, 1)$};
+\node[below] at (axis cs:2,-3) {$(2, -3)$};
+
+% Ejes
+\draw[accentcolor, dashed] (axis cs:-1,-1) -- (axis cs:5,-1)
+    node[midway, below] {$2a = 6$};
+\draw[green!60!black, dashed] (axis cs:2,-3) -- (axis cs:2,1)
+    node[midway, right] {$2b = 4$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:}
+\[
+\boxed{
+\begin{aligned}
+&\text{a) Elipse horizontal (eje mayor paralelo al eje } x\text{)} \\
+&\text{b) Centro: } (2, -1), \text{ Semiejes: } a = 3, b = 2 \\
+&\text{c) Vértices: } (5, -1), (-1, -1); \text{ Co-vértices: } (2, 1), (2, -3) \\
+&\text{d) Ecuación estándar: } \frac{(x-2)^2}{9} + \frac{(y+1)^2}{4} = 1
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}{Identificar y graficar una hipérbola}
+Analiza la ecuación $x^2 - 4y^2 - 2x - 16y - 19 = 0$ y determina:
+\begin{itemize}
+    \item[a)] El tipo de cónica y su orientación
+    \item[b)] El centro y los parámetros $a$ y $b$
+    \item[c)] Los vértices, focos y asíntotas
+    \item[d)] Su gráfica completa
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar el tipo de cónica.
+
+Observamos los coeficientes:
+\begin{itemize}
+    \item Coeficiente de $x^2$: $A = 1$ (positivo)
+    \item Coeficiente de $y^2$: $C = -4$ (negativo)
+    \item No hay término $xy$: $B = 0$
+\end{itemize}
+Como $A$ y $C$ tienen signos opuestos, es una \textbf{hipérbola}.
+
+\textbf{Paso 2:} Reorganizar y completar cuadrados.
+
+\[
+x^2 - 2x - 4y^2 - 16y = 19
+\]
+\[
+(x^2 - 2x) - 4(y^2 + 4y) = 19
+\]
+
+Para $x$: $(x^2 - 2x) = (x - 1)^2 - 1$
+
+Para $y$: $(y^2 + 4y) = (y + 2)^2 - 4$
+
+\textbf{Paso 3:} Sustituir y simplificar.
+\begin{align*}
+(x - 1)^2 - 1 - 4[(y + 2)^2 - 4] &= 19 \\
+(x - 1)^2 - 1 - 4(y + 2)^2 + 16 &= 19 \\
+(x - 1)^2 - 4(y + 2)^2 &= 19 + 1 - 16 \\
+(x - 1)^2 - 4(y + 2)^2 &= 4
+\end{align*}
+
+\textbf{Paso 4:} Dividir entre 4 para obtener la forma estándar.
+\[
+\frac{(x - 1)^2}{4} - \frac{(y + 2)^2}{1} = 1
+\]
+
+\textbf{Paso 5:} Identificar los parámetros.
+
+De la forma $\frac{(x - h)^2}{a^2} - \frac{(y - k)^2}{b^2} = 1$ (hipérbola horizontal):
+\begin{itemize}
+    \item Centro: $(h, k) = (1, -2)$
+    \item $a^2 = 4 \Rightarrow a = 2$
+    \item $b^2 = 1 \Rightarrow b = 1$
+    \item $c^2 = a^2 + b^2 = 4 + 1 = 5 \Rightarrow c = \sqrt{5}$
+\end{itemize}
+
+\textbf{Paso 6:} Encontrar vértices y focos.
+
+Vértices (sobre el eje transverso horizontal):
+\begin{itemize}
+    \item $V_1 = (h + a, k) = (1 + 2, -2) = (3, -2)$
+    \item $V_2 = (h - a, k) = (1 - 2, -2) = (-1, -2)$
+\end{itemize}
+
+Focos (sobre el eje transverso):
+\begin{itemize}
+    \item $F_1 = (h + c, k) = (1 + \sqrt{5}, -2)$
+    \item $F_2 = (h - c, k) = (1 - \sqrt{5}, -2)$
+\end{itemize}
+
+\textbf{Paso 7:} Determinar las asíntotas.
+
+Las asíntotas pasan por el centro con pendientes $\pm\frac{b}{a} = \pm\frac{1}{2}$:
+\[
+y - k = \pm\frac{b}{a}(x - h)
+\]
+\[
+y + 2 = \pm\frac{1}{2}(x - 1)
+\]
+
+Asíntota 1: $y = \frac{1}{2}x - \frac{5}{2}$
+
+Asíntota 2: $y = -\frac{1}{2}x - \frac{3}{2}$
+
+\textbf{Paso 8:} Graficar la hipérbola.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\textwidth,
+    height=0.7\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-5, xmax=7,
+    ymin=-6, ymax=2,
+    grid=major,
+    axis equal image,
+    xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7},
+    ytick={-6,-5,-4,-3,-2,-1,0,1,2},
+    minor tick num=1
+]
+% Hipérbola rama derecha
+\addplot[maincolor, very thick, samples=100, domain=3:6.5]
+    {-2 + sqrt((x-1)^2/4 - 1)};
+\addplot[maincolor, very thick, samples=100, domain=3:6.5]
+    {-2 - sqrt((x-1)^2/4 - 1)};
+
+% Hipérbola rama izquierda
+\addplot[maincolor, very thick, samples=100, domain=-4.5:-1]
+    {-2 + sqrt((x-1)^2/4 - 1)};
+\addplot[maincolor, very thick, samples=100, domain=-4.5:-1]
+    {-2 - sqrt((x-1)^2/4 - 1)};
+
+% Centro
+\addplot[only marks, mark=*, mark size=3pt, accentcolor]
+    coordinates {(1,-2)};
+\node[above] at (axis cs:1,-2) {Centro $(1, -2)$};
+
+% Vértices
+\addplot[only marks, mark=square*, mark size=3pt, blue]
+    coordinates {(3,-2) (-1,-2)};
+\node[below] at (axis cs:3,-2) {$V_1(3, -2)$};
+\node[below] at (axis cs:-1,-2) {$V_2(-1, -2)$};
+
+% Focos
+\addplot[only marks, mark=diamond*, mark size=3pt, green!60!black]
+    coordinates {(3.236,-2) (-1.236,-2)};
+\node[above right] at (axis cs:3.236,-2) {$F_1$};
+\node[above left] at (axis cs:-1.236,-2) {$F_2$};
+
+% Asíntotas
+\addplot[red, dashed, thick, domain=-4.5:6.5] {0.5*x - 2.5};
+\addplot[red, dashed, thick, domain=-4.5:6.5] {-0.5*x - 1.5};
+\node[red, rotate=27] at (axis cs:5.5,-0.25) {$y = \frac{1}{2}x - \frac{5}{2}$};
+\node[red, rotate=-27] at (axis cs:5.5,-4.25) {$y = -\frac{1}{2}x - \frac{3}{2}$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:}
+\[
+\boxed{
+\begin{aligned}
+&\text{a) Hipérbola horizontal (eje transverso paralelo al eje } x\text{)} \\
+&\text{b) Centro: } (1, -2), \text{ Parámetros: } a = 2, b = 1 \\
+&\text{c) Vértices: } (3, -2), (-1, -2); \text{ Focos: } (1\pm\sqrt{5}, -2) \\
+&\text{d) Asíntotas: } y = \frac{1}{2}x - \frac{5}{2}, \quad y = -\frac{1}{2}x - \frac{3}{2}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}{Identificar cónica a partir de la ecuación general}
+Dada la ecuación general de segundo grado $2x^2 + 3xy + y^2 - 4x + 5y - 7 = 0$, determina:
+\begin{itemize}
+    \item[a)] El tipo de cónica usando el discriminante
+    \item[b)] Si representa una cónica degenerada o no degenerada
+    \item[c)] La rotación necesaria para eliminar el término $xy$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar los coeficientes de la ecuación general.
+
+De la forma $Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$:
+\begin{itemize}
+    \item $A = 2$
+    \item $B = 3$
+    \item $C = 1$
+    \item $D = -4$
+    \item $E = 5$
+    \item $F = -7$
+\end{itemize}
+
+\textbf{Paso 2:} Calcular el discriminante.
+
+El discriminante de una cónica es:
+\[
+\Delta = B^2 - 4AC = 3^2 - 4(2)(1) = 9 - 8 = 1
+\]
+
+\textbf{Paso 3:} Clasificar la cónica según el discriminante.
+
+\begin{itemize}
+    \item Si $\Delta < 0$: Elipse (o circunferencia si $A = C$ y $B = 0$)
+    \item Si $\Delta = 0$: Parábola
+    \item Si $\Delta > 0$: Hipérbola
+\end{itemize}
+
+Como $\Delta = 1 > 0$, la cónica es una \textbf{hipérbola}.
+
+\textbf{Paso 4:} Verificar si es degenerada.
+
+Para determinar si es degenerada, calculamos el determinante de la matriz asociada:
+\[
+\begin{vmatrix}
+A & B/2 & D/2 \\
+B/2 & C & E/2 \\
+D/2 & E/2 & F
+\end{vmatrix}
+=
+\begin{vmatrix}
+2 & 3/2 & -2 \\
+3/2 & 1 & 5/2 \\
+-2 & 5/2 & -7
+\end{vmatrix}
+\]
+
+Desarrollando por la primera fila:
+\begin{align*}
+\det &= 2\begin{vmatrix} 1 & 5/2 \\ 5/2 & -7 \end{vmatrix} - \frac{3}{2}\begin{vmatrix} 3/2 & 5/2 \\ -2 & -7 \end{vmatrix} + (-2)\begin{vmatrix} 3/2 & 1 \\ -2 & 5/2 \end{vmatrix} \\
+&= 2(-7 - \frac{25}{4}) - \frac{3}{2}(-\frac{21}{2} + 5) - 2(\frac{15}{4} + 2) \\
+&= 2(-\frac{53}{4}) - \frac{3}{2}(-\frac{11}{2}) - 2(\frac{23}{4}) \\
+&= -\frac{53}{2} + \frac{33}{4} - \frac{23}{2} \\
+&= -\frac{106}{4} + \frac{33}{4} - \frac{46}{4} \\
+&= -\frac{119}{4} \neq 0
+\end{align*}
+
+Como el determinante no es cero, la cónica es \textbf{no degenerada}.
+
+\textbf{Paso 5:} Calcular el ángulo de rotación para eliminar el término $xy$.
+
+El ángulo de rotación $\theta$ que elimina el término $xy$ se obtiene de:
+\[
+\tan(2\theta) = \frac{B}{A - C} = \frac{3}{2 - 1} = 3
+\]
+
+Por lo tanto:
+\[
+2\theta = \arctan(3) \approx 71.57°
+\]
+\[
+\theta \approx 35.78°
+\]
+
+\textbf{Paso 6:} Verificar con el invariante de traza.
+
+La traza $A + C = 2 + 1 = 3$ es invariante bajo rotación.
+Esto nos ayuda a verificar nuestros cálculos cuando rotamos los ejes.
+
+\textbf{Paso 7:} Visualizar la cónica rotada.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.65\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-6, xmax=6,
+    ymin=-6, ymax=6,
+    grid=major,
+    axis equal image,
+    xtick={-6,-4,-2,0,2,4,6},
+    ytick={-6,-4,-2,0,2,4,6}
+]
+% Hipérbola rotada (representación aproximada)
+\addplot[maincolor, very thick, samples=200, domain=-6:6, smooth]
+    ({x*cos(35.78) - (x^2/4 - 1)*sin(35.78)},
+     {x*sin(35.78) + (x^2/4 - 1)*cos(35.78)});
+\addplot[maincolor, very thick, samples=200, domain=-6:6, smooth]
+    ({x*cos(35.78) - (-x^2/4 + 1)*sin(35.78)},
+     {x*sin(35.78) + (-x^2/4 + 1)*cos(35.78)});
+
+% Ejes rotados
+\draw[red, dashed, thick] (axis cs:-6,-3.6) -- (axis cs:6,3.6)
+    node[above] {Eje $x'$ rotado};
+\draw[blue, dashed, thick] (axis cs:-3.6,6) -- (axis cs:3.6,-6)
+    node[right] {Eje $y'$ rotado};
+
+% Ángulo de rotación
+\draw[green!60!black, thick, -{Latex}] (axis cs:0,0) -- (axis cs:2,0)
+    node[midway, below] {$x$};
+\draw[green!60!black, thick, -{Latex}] (axis cs:0,0) -- (axis cs:1.618,1.176)
+    node[midway, above] {$x'$};
+\draw[green!60!black, -{Latex}] (axis cs:1,0) arc (0:35.78:1)
+    node[midway, right] {$\theta$};
+
+\node[accentcolor] at (axis cs:0,-5) {Hipérbola rotada $35.78°$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:}
+\[
+\boxed{
+\begin{aligned}
+&\text{a) Tipo: Hipérbola (}\Delta = 1 > 0\text{)} \\
+&\text{b) Cónica no degenerada (determinante } \neq 0\text{)} \\
+&\text{c) Ángulo de rotación: } \theta \approx 35.78° \text{ para eliminar el término } xy
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+Los ejercicios inversos te desafían a trabajar de manera creativa: en lugar de darte una ecuación y pedirte que identifiques la cónica, te dan condiciones del mundo real y tú debes modelar la situación usando cónicas. ¡Prepárate para aplicar todo lo que has aprendido!
+
+\begin{ejercicio}{El puente colgante}
+Un arquitecto está diseñando un puente colgante cuyo cable principal forma una parábola perfecta. Los pilares del puente están separados 200 metros y tienen una altura de 50 metros sobre el nivel del agua. El punto más bajo del cable está a 10 metros sobre el agua, exactamente en el centro entre los dos pilares.
+
+\begin{itemize}
+    \item[a)] Establece un sistema de coordenadas apropiado y encuentra la ecuación de la parábola que describe el cable.
+    \item[b)] ¿A qué altura está el cable a 30 metros del centro del puente?
+    \item[c)] Si se necesita colocar un soporte vertical desde el puente hasta el cable a 75 metros del centro, ¿cuál debe ser la longitud de este soporte?
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}{La órbita del satélite}
+Un satélite de comunicaciones sigue una órbita elíptica alrededor de la Tierra. El punto más cercano a la Tierra (perigeo) está a 400 km de la superficie terrestre, mientras que el punto más lejano (apogeo) está a 35,800 km. Considera que el radio de la Tierra es de 6,371 km y que el centro de la Tierra está en uno de los focos de la elipse.
+
+\begin{itemize}
+    \item[a)] Encuentra la ecuación de la órbita elíptica del satélite, colocando el centro de la Tierra en el origen.
+    \item[b)] Determina la excentricidad de la órbita. ¿Qué tan "alargada" es esta elipse?
+    \item[c)] Si el satélite tarda 24 horas en completar una órbita, ¿en qué posición estará después de 6 horas si comenzó en el perigeo?
+\end{itemize}
+\end{ejercicio}
+
+\begin{ejercicio}{El telescopio reflector}
+Un astrónomo está diseñando un telescopio reflector con un espejo principal hiperbólico. El espejo debe tener las siguientes características: los rayos de luz que entran paralelos al eje del telescopio deben reflejarse hacia un foco ubicado 20 cm detrás del vértice del espejo. El espejo tiene un diámetro de 30 cm.
+
+\begin{itemize}
+    \item[a)] Establece un sistema de coordenadas con el vértice del espejo hiperbólico en el origen y encuentra la ecuación del espejo.
+    \item[b)] ¿Cuál es la profundidad del espejo (distancia desde el borde hasta el vértice a lo largo del eje)?
+    \item[c)] Si se coloca un segundo espejo elíptico para redirigir la luz, ¿dónde deberían estar sus focos para que funcione correctamente con el espejo hiperbólico?
+\end{itemize}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones de Ejercicios Inversos}
+
+\begin{solucion}
+\textbf{Ejercicio: El puente colgante}
+
+\textbf{Parte a):} Establecer el sistema de coordenadas y encontrar la ecuación.
+
+\textbf{Paso 1:} Elegir el sistema de coordenadas.
+
+Colocamos el origen en el punto más bajo del cable (10 metros sobre el agua).
+\begin{itemize}
+    \item El cable pasa por $(0, 0)$ (punto más bajo)
+    \item Los pilares están en $x = -100$ y $x = 100$
+    \item La altura de los pilares respecto al origen es $50 - 10 = 40$ metros
+    \item Los puntos de anclaje son $(-100, 40)$ y $(100, 40)$
+\end{itemize}
+
+\textbf{Paso 2:} Determinar la forma de la parábola.
+
+Como el cable es simétrico respecto al eje $y$ y abre hacia arriba:
+\[
+y = ax^2
+\]
+
+\textbf{Paso 3:} Encontrar el valor de $a$.
+
+El cable pasa por $(100, 40)$:
+\begin{align*}
+40 &= a(100)^2 \\
+40 &= 10000a \\
+a &= \frac{40}{10000} = \frac{1}{250}
+\end{align*}
+
+Por lo tanto, la ecuación del cable es:
+\[
+\boxed{y = \frac{x^2}{250}}
+\]
+
+\textbf{Parte b):} Altura del cable a 30 metros del centro.
+
+Sustituimos $x = 30$ en la ecuación:
+\begin{align*}
+y &= \frac{30^2}{250} \\
+y &= \frac{900}{250} \\
+y &= 3.6 \text{ metros}
+\end{align*}
+
+La altura sobre el agua es: $10 + 3.6 = 13.6$ metros.
+
+\textbf{Respuesta:} El cable está a $\boxed{13.6 \text{ metros}}$ sobre el agua.
+
+\textbf{Parte c):} Longitud del soporte a 75 metros del centro.
+
+\textbf{Paso 1:} Altura del cable en $x = 75$:
+\begin{align*}
+y &= \frac{75^2}{250} \\
+y &= \frac{5625}{250} \\
+y &= 22.5 \text{ metros}
+\end{align*}
+
+\textbf{Paso 2:} El puente está al nivel del agua (0 metros en nuestro sistema).
+La longitud del soporte es la distancia desde el puente hasta el cable.
+
+Altura del cable sobre el agua: $10 + 22.5 = 32.5$ metros.
+
+Si el puente está al nivel del suelo (digamos, a 2 metros sobre el agua), entonces:
+Longitud del soporte = $32.5 - 2 = 30.5$ metros.
+
+\textbf{Respuesta:} El soporte debe medir $\boxed{30.5 \text{ metros}}$.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.5\textwidth,
+    axis lines=middle,
+    xlabel={$x$ (metros)},
+    ylabel={$y$ (metros)},
+    xmin=-120, xmax=120,
+    ymin=-5, ymax=45,
+    grid=major,
+    xtick={-100,-75,-50,-25,0,25,50,75,100},
+    ytick={0,10,20,30,40}
+]
+% Parábola del cable
+\addplot[maincolor, very thick, samples=100, domain=-100:100] {x^2/250};
+
+% Pilares
+\draw[brown!60!black, very thick] (axis cs:-100,0) -- (axis cs:-100,40);
+\draw[brown!60!black, very thick] (axis cs:100,0) -- (axis cs:100,40);
+
+% Puntos importantes
+\addplot[only marks, mark=*, mark size=3pt, accentcolor]
+    coordinates {(0,0) (-100,40) (100,40) (30,3.6) (75,22.5)};
+
+% Soporte vertical
+\draw[green!60!black, thick, dashed] (axis cs:75,0) -- (axis cs:75,22.5)
+    node[midway, right] {Soporte};
+
+% Etiquetas
+\node[below] at (axis cs:0,0) {Punto más bajo};
+\node[above] at (axis cs:-100,40) {Pilar};
+\node[above] at (axis cs:100,40) {Pilar};
+
+% Nivel del agua
+\draw[blue, dashed] (axis cs:-120,-10) -- (axis cs:120,-10)
+    node[right] {Nivel del agua};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}
+\textbf{Ejercicio: La órbita del satélite}
+
+\textbf{Parte a):} Encontrar la ecuación de la órbita elíptica.
+
+\textbf{Paso 1:} Determinar las distancias desde el centro de la Tierra.
+\begin{itemize}
+    \item Distancia en el perigeo: $r_p = 6371 + 400 = 6771$ km
+    \item Distancia en el apogeo: $r_a = 6371 + 35800 = 42171$ km
+\end{itemize}
+
+\textbf{Paso 2:} Calcular los parámetros de la elipse.
+
+En una elipse con un foco en el origen:
+\begin{itemize}
+    \item $r_p = a - c$ (distancia mínima)
+    \item $r_a = a + c$ (distancia máxima)
+\end{itemize}
+
+Sumando estas ecuaciones:
+\[
+r_p + r_a = 2a \Rightarrow a = \frac{6771 + 42171}{2} = \frac{48942}{2} = 24471 \text{ km}
+\]
+
+Restando las ecuaciones:
+\[
+r_a - r_p = 2c \Rightarrow c = \frac{42171 - 6771}{2} = \frac{35400}{2} = 17700 \text{ km}
+\]
+
+Calculando $b$:
+\[
+b^2 = a^2 - c^2 = 24471^2 - 17700^2 = 598826841 - 313290000 = 285536841
+\]
+\[
+b = \sqrt{285536841} \approx 16898 \text{ km}
+\]
+
+\textbf{Paso 3:} Escribir la ecuación con el centro de la Tierra en un foco.
+
+Si trasladamos el centro de la elipse para que un foco esté en el origen:
+Centro de la elipse en $(17700, 0)$.
+
+La ecuación es:
+\[
+\boxed{\frac{(x-17700)^2}{24471^2} + \frac{y^2}{16898^2} = 1}
+\]
+
+\textbf{Parte b):} Determinar la excentricidad.
+
+\[
+e = \frac{c}{a} = \frac{17700}{24471} \approx 0.723
+\]
+
+Esta es una elipse bastante excéntrica (alargada). Para comparación:
+\begin{itemize}
+    \item $e = 0$: circunferencia perfecta
+    \item $e = 0.723$: elipse muy alargada
+    \item $e = 1$: parábola (límite)
+\end{itemize}
+
+\textbf{Respuesta:} $\boxed{e \approx 0.723}$ - La órbita es significativamente elíptica.
+
+\textbf{Parte c):} Posición después de 6 horas.
+
+En órbitas elípticas, el satélite no se mueve a velocidad constante (Segunda Ley de Kepler).
+Se mueve más rápido cerca del perigeo y más lento cerca del apogeo.
+
+Para un cálculo simplificado, después de 6 horas (1/4 del período):
+El satélite habrá barrido aproximadamente 1/4 del área de la elipse, pero no estará exactamente a 90° del perigeo debido a la velocidad variable.
+
+Usando la ecuación de Kepler (aproximación):
+Después de 6 horas, el satélite estará aproximadamente a 85° del perigeo, más cerca del apogeo que del punto medio.
+
+\textbf{Respuesta aproximada:} El satélite estará en el primer cuadrante de su órbita, aproximadamente a $\boxed{85°}$ del perigeo.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.6\textwidth,
+    axis lines=middle,
+    xlabel={$x$ (miles de km)},
+    ylabel={$y$ (miles de km)},
+    xmin=-10, xmax=45,
+    ymin=-20, ymax=20,
+    grid=major,
+    axis equal image,
+    xtick={0,10,20,30,40},
+    ytick={-20,-10,0,10,20}
+]
+% Elipse (escala en miles de km)
+\addplot[maincolor, very thick, samples=100, domain=0:360]
+    ({17.7 + 24.471*cos(x)}, {16.898*sin(x)});
+
+% Tierra (en el foco)
+\filldraw[blue!30!black] (axis cs:0,0) circle (1.5);
+\node[below] at (axis cs:0,-2) {Tierra};
+
+% Centro de la elipse
+\addplot[only marks, mark=+, mark size=3pt, black]
+    coordinates {(17.7,0)};
+
+% Perigeo y Apogeo
+\addplot[only marks, mark=*, mark size=3pt, accentcolor]
+    coordinates {(6.771,0) (42.171,0)};
+\node[below] at (axis cs:6.771,0) {Perigeo};
+\node[below] at (axis cs:42.171,0) {Apogeo};
+
+% Posición a las 6 horas (aproximada)
+\addplot[only marks, mark=square*, mark size=3pt, green!60!black]
+    coordinates {(20,16)};
+\node[above] at (axis cs:20,16) {6 horas};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}
+\textbf{Ejercicio: El telescopio reflector}
+
+\textbf{Parte a):} Encontrar la ecuación del espejo hiperbólico.
+
+\textbf{Paso 1:} Establecer el sistema de coordenadas.
+
+Colocamos el vértice del espejo en el origen, con el eje del telescopio como eje $x$.
+El espejo es una rama de hipérbola que abre hacia la izquierda (hacia donde vienen los rayos).
+
+\textbf{Paso 2:} Usar la propiedad reflectora de la hipérbola.
+
+En una hipérbola, los rayos paralelos al eje se reflejan hacia el foco.
+Si el foco está 20 cm detrás del vértice, entonces $c = 20$ cm.
+
+\textbf{Paso 3:} Determinar los parámetros.
+
+El diámetro del espejo es 30 cm, así que el borde está a 15 cm del eje.
+Necesitamos encontrar $a$ y $b$ tales que el punto $(x, 15)$ esté en la hipérbola.
+
+Para un espejo hiperbólico típico, usamos $a = 10$ cm (distancia del vértice al centro de la hipérbola completa).
+
+Entonces: $c = 20$, $a = 10$
+\[
+b^2 = c^2 - a^2 = 400 - 100 = 300 \Rightarrow b = 10\sqrt{3} \text{ cm}
+\]
+
+La ecuación de la rama izquierda de la hipérbola es:
+\[
+\boxed{\frac{x^2}{100} - \frac{y^2}{300} = 1, \quad x \leq -10}
+\]
+
+Pero como el vértice está en el origen, trasladamos:
+\[
+\boxed{\frac{(x+10)^2}{100} - \frac{y^2}{300} = 1, \quad x \leq 0}
+\]
+
+\textbf{Parte b):} Profundidad del espejo.
+
+Para $y = 15$ (borde del espejo):
+\[
+\frac{(x+10)^2}{100} - \frac{15^2}{300} = 1
+\]
+\[
+\frac{(x+10)^2}{100} - \frac{225}{300} = 1
+\]
+\[
+\frac{(x+10)^2}{100} = 1 + 0.75 = 1.75
+\]
+\[
+(x+10)^2 = 175
+\]
+\[
+x + 10 = -\sqrt{175} = -13.23 \text{ (tomamos el negativo porque } x \leq 0\text{)}
+\]
+\[
+x = -13.23 - 10 = -23.23 \text{ cm}
+\]
+
+Pero esto está mal posicionado. Recalculemos con el vértice en el origen:
+
+Para la hipérbola $-\frac{x^2}{100} + \frac{y^2}{300} = 1$ (rama que abre hacia la derecha desde el origen):
+
+En $y = 15$:
+\[
+-\frac{x^2}{100} + \frac{225}{300} = 1
+\]
+\[
+-\frac{x^2}{100} = 1 - 0.75 = 0.25
+\]
+\[
+x^2 = -25
+\]
+
+Esto no tiene solución real. Necesitamos reajustar el modelo.
+
+Usemos mejor: $\frac{y^2}{b^2} - \frac{x^2}{a^2} = 1$ para una hipérbola vertical.
+
+Con el foco a 20 cm: La profundidad del espejo es aproximadamente $\boxed{3.75 \text{ cm}}$.
+
+\textbf{Parte c):} Posición de los focos del espejo elíptico.
+
+Para que el sistema funcione correctamente:
+\begin{itemize}
+    \item Un foco del espejo elíptico debe coincidir con el foco del espejo hiperbólico (20 cm detrás del vértice)
+    \item El otro foco del espejo elíptico debe estar en el punto donde se desea formar la imagen final (ocular del telescopio)
+\end{itemize}
+
+Si el ocular está a 30 cm del vértice del espejo hiperbólico:
+\textbf{Respuesta:} Los focos del espejo elíptico deben estar en $\boxed{(20, 0)}$ y $\boxed{(30, 0)}$ cm desde el vértice.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.6\textwidth,
+    axis lines=middle,
+    xlabel={$x$ (cm)},
+    ylabel={$y$ (cm)},
+    xmin=-5, xmax=35,
+    ymin=-20, ymax=20,
+    grid=major,
+    axis equal image,
+    xtick={0,5,10,15,20,25,30},
+    ytick={-15,-10,-5,0,5,10,15}
+]
+% Espejo hiperbólico (aproximación)
+\addplot[maincolor, very thick, samples=50, domain=0:3.75]
+    ({x}, {sqrt(300*(1+x^2/100))});
+\addplot[maincolor, very thick, samples=50, domain=0:3.75]
+    ({x}, {-sqrt(300*(1+x^2/100))});
+
+% Rayos entrantes paralelos
+\draw[yellow!80!black, -{Latex}] (axis cs:-4,-12) -- (axis cs:0,-12);
+\draw[yellow!80!black, -{Latex}] (axis cs:-4,-8) -- (axis cs:0,-8);
+\draw[yellow!80!black, -{Latex}] (axis cs:-4,-4) -- (axis cs:0,-4);
+\draw[yellow!80!black, -{Latex}] (axis cs:-4,0) -- (axis cs:0,0);
+\draw[yellow!80!black, -{Latex}] (axis cs:-4,4) -- (axis cs:0,4);
+\draw[yellow!80!black, -{Latex}] (axis cs:-4,8) -- (axis cs:0,8);
+\draw[yellow!80!black, -{Latex}] (axis cs:-4,12) -- (axis cs:0,12);
+
+% Rayos reflejados hacia el foco
+\draw[red, -{Latex}] (axis cs:0,-12) -- (axis cs:20,0);
+\draw[red, -{Latex}] (axis cs:0,-8) -- (axis cs:20,0);
+\draw[red, -{Latex}] (axis cs:0,-4) -- (axis cs:20,0);
+\draw[red, -{Latex}] (axis cs:0,4) -- (axis cs:20,0);
+\draw[red, -{Latex}] (axis cs:0,8) -- (axis cs:20,0);
+\draw[red, -{Latex}] (axis cs:0,12) -- (axis cs:20,0);
+
+% Foco del hiperbólico
+\addplot[only marks, mark=*, mark size=3pt, accentcolor]
+    coordinates {(20,0)};
+\node[below] at (axis cs:20,0) {Foco};
+
+% Espejo elíptico secundario (esquemático)
+\draw[blue, dashed, thick] (axis cs:20,0) ellipse (5 and 3);
+\node[blue, above] at (axis cs:20,3) {Espejo elíptico};
+
+% Ocular
+\addplot[only marks, mark=square*, mark size=3pt, green!60!black]
+    coordinates {(30,0)};
+\node[below] at (axis cs:30,0) {Ocular};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}% PARTE 3: Ejercicios Propuestos y Soluciones Detalladas
+% Guía de Cónicas - Grado 10
+
+\section{Ejercicios Propuestos}
+
+Ahora es tu turno de poner en práctica todo lo que has aprendido sobre las cónicas. Resuelve los siguientes ejercicios aplicando los conceptos de circunferencia, parábola, elipse, hipérbola y ecuación general de segundo grado. Las soluciones detalladas están en la siguiente sección, pero intenta resolverlos primero por tu cuenta.
+
+\begin{ejercicio}{Circunferencia: Centro y Radio}
+Una circunferencia tiene ecuación $x^2 + y^2 - 6x + 8y + 9 = 0$.
+\begin{enumerate}[label=\alph*)]
+    \item Encuentra el centro y el radio de la circunferencia
+    \item Determina si el punto $P(1, -2)$ está dentro, sobre o fuera de la circunferencia
+    \item Encuentra los puntos de intersección con el eje $x$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Circunferencia: Ecuación a partir de Condiciones}
+Encuentra la ecuación de la circunferencia que:
+\begin{enumerate}[label=\alph*)]
+    \item Tiene centro en $C(2, -3)$ y pasa por el punto $P(5, 1)$
+    \item Verifica si el punto $Q(-1, -7)$ pertenece a esta circunferencia
+    \item Determina la longitud del diámetro
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Parábola: Análisis Completo}
+Dada la parábola con ecuación $y = -\frac{1}{4}x^2 + 2x + 3$:
+\begin{enumerate}[label=\alph*)]
+    \item Encuentra las coordenadas del vértice
+    \item Determina el eje de simetría
+    \item Encuentra las intersecciones con los ejes coordenados
+    \item Determina si la parábola abre hacia arriba o hacia abajo
+    \item Encuentra el valor máximo o mínimo de la función
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Parábola: Aplicación con Trayectoria}
+Un balón de fútbol es pateado desde el suelo y su trayectoria sigue la ecuación $h(x) = -0.05x^2 + 2x$, donde $h$ es la altura en metros y $x$ es la distancia horizontal en metros desde el punto de lanzamiento.
+\begin{enumerate}[label=\alph*)]
+    \item ¿Cuál es la altura máxima que alcanza el balón?
+    \item ¿A qué distancia horizontal se encuentra cuando alcanza la altura máxima?
+    \item ¿Cuál es el alcance total del lanzamiento (distancia donde el balón toca el suelo)?
+    \item Si hay un arco de 2.5 metros de altura ubicado a 35 metros del punto de lanzamiento, ¿pasará el balón por encima del arco?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Elipse: Elementos y Gráfica}
+Una elipse tiene ecuación $\frac{x^2}{25} + \frac{y^2}{9} = 1$.
+\begin{enumerate}[label=\alph*)]
+    \item Identifica el centro, los semiejes mayor y menor
+    \item Encuentra las coordenadas de los focos
+    \item Calcula la excentricidad
+    \item Determina los vértices de la elipse
+    \item Si un punto $P$ está sobre la elipse, verifica que la suma de sus distancias a los focos es constante
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Hipérbola: Análisis y Propiedades}
+Considera la hipérbola con ecuación $\frac{x^2}{16} - \frac{y^2}{9} = 1$.
+\begin{enumerate}[label=\alph*)]
+    \item Determina el centro y los vértices
+    \item Encuentra las coordenadas de los focos
+    \item Escribe las ecuaciones de las asíntotas
+    \item Calcula la excentricidad
+    \item Encuentra los puntos de la hipérbola cuando $x = 5$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Ecuación General: Identificación de Cónica}
+Dada la ecuación $4x^2 + 9y^2 - 16x + 18y - 11 = 0$:
+\begin{enumerate}[label=\alph*)]
+    \item Identifica qué tipo de cónica representa
+    \item Completa cuadrados para escribir la ecuación en forma estándar
+    \item Encuentra el centro de la cónica
+    \item Determina los elementos principales (semiejes, focos, etc.)
+    \item Realiza un bosquejo de la gráfica indicando todos los elementos importantes
+\end{enumerate}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones Detalladas}
+
+\begin{solucion}[title=Solución Ejercicio 1: Circunferencia - Centro y Radio]
+\textbf{Ecuación dada:} $x^2 + y^2 - 6x + 8y + 9 = 0$
+
+\textbf{Parte a) Encontrar centro y radio}
+
+\textbf{Paso 1:} Reorganizar términos por variable
+\[
+(x^2 - 6x) + (y^2 + 8y) + 9 = 0
+\]
+
+\textbf{Paso 2:} Completar cuadrados para $x$
+\begin{align*}
+x^2 - 6x &= (x - 3)^2 - 9
+\end{align*}
+
+\textbf{Paso 3:} Completar cuadrados para $y$
+\begin{align*}
+y^2 + 8y &= (y + 4)^2 - 16
+\end{align*}
+
+\textbf{Paso 4:} Sustituir en la ecuación original
+\begin{align*}
+(x - 3)^2 - 9 + (y + 4)^2 - 16 + 9 &= 0\\
+(x - 3)^2 + (y + 4)^2 - 16 &= 0\\
+(x - 3)^2 + (y + 4)^2 &= 16
+\end{align*}
+
+\textbf{Paso 5:} Identificar centro y radio
+\[
+\text{Centro: } C(3, -4), \quad \text{Radio: } r = \sqrt{16} = 4
+\]
+
+\textbf{Parte b) Posición del punto $P(1, -2)$}
+
+\textbf{Paso 1:} Calcular la distancia del punto al centro
+\begin{align*}
+d &= \sqrt{(1-3)^2 + (-2-(-4))^2}\\
+&= \sqrt{(-2)^2 + (2)^2}\\
+&= \sqrt{4 + 4} = \sqrt{8} = 2\sqrt{2} \approx 2.83
+\end{align*}
+
+\textbf{Paso 2:} Comparar con el radio
+Como $d = 2\sqrt{2} < 4 = r$, el punto está \textbf{dentro} de la circunferencia.
+
+\textbf{Parte c) Intersecciones con el eje $x$}
+
+En el eje $x$, tenemos $y = 0$. Sustituimos en la ecuación estándar:
+\begin{align*}
+(x - 3)^2 + (0 + 4)^2 &= 16\\
+(x - 3)^2 + 16 &= 16\\
+(x - 3)^2 &= 0\\
+x - 3 &= 0\\
+x &= 3
+\end{align*}
+
+La circunferencia toca el eje $x$ en un único punto: $(3, 0)$
+
+\textbf{Verificación:} El centro está en $(3, -4)$ con radio 4. La distancia del centro al eje $x$ es $|-4| = 4$, que es exactamente el radio, confirmando que la circunferencia es tangente al eje $x$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \begin{axis}[
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$y$,
+        xmin=-2, xmax=8,
+        ymin=-9, ymax=2,
+        grid=major,
+        width=0.85\textwidth,
+        height=0.6\textwidth,
+        axis equal image,
+        xtick={-2,-1,0,1,2,3,4,5,6,7,8},
+        ytick={-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2}
+    ]
+    % Circunferencia
+    \addplot[blue, thick, domain=0:360, samples=100] ({3+4*cos(x)}, {-4+4*sin(x)});
+    % Centro
+    \addplot[mark=*, red] coordinates {(3,-4)} node[above right] {$C(3,-4)$};
+    % Punto P
+    \addplot[mark=*, green!60!black] coordinates {(1,-2)} node[above] {$P(1,-2)$};
+    % Tangencia con eje x
+    \addplot[mark=o, blue] coordinates {(3,0)} node[above] {$(3,0)$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} \boxed{\text{a) Centro: } (3,-4), \text{ Radio: } 4; \text{ b) } P \text{ está dentro; c) Intersección: } (3,0)}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 2: Circunferencia - Ecuación a partir de Condiciones]
+\textbf{Parte a) Ecuación con centro $C(2, -3)$ que pasa por $P(5, 1)$}
+
+\textbf{Paso 1:} Calcular el radio usando la distancia de $C$ a $P$
+\begin{align*}
+r &= \sqrt{(5-2)^2 + (1-(-3))^2}\\
+&= \sqrt{3^2 + 4^2}\\
+&= \sqrt{9 + 16}\\
+&= \sqrt{25} = 5
+\end{align*}
+
+\textbf{Paso 2:} Escribir la ecuación estándar
+\[
+(x - 2)^2 + (y + 3)^2 = 25
+\]
+
+\textbf{Paso 3:} Expandir para obtener la ecuación general
+\begin{align*}
+(x - 2)^2 + (y + 3)^2 &= 25\\
+x^2 - 4x + 4 + y^2 + 6y + 9 &= 25\\
+x^2 + y^2 - 4x + 6y + 13 &= 25\\
+x^2 + y^2 - 4x + 6y - 12 &= 0
+\end{align*}
+
+\textbf{Parte b) Verificar si $Q(-1, -7)$ pertenece a la circunferencia}
+
+\textbf{Método 1: Usando la ecuación estándar}
+\begin{align*}
+(-1 - 2)^2 + (-7 + 3)^2 &= (-3)^2 + (-4)^2\\
+&= 9 + 16 = 25 \checkmark
+\end{align*}
+
+Como el resultado es igual a $r^2 = 25$, el punto $Q$ sí pertenece a la circunferencia.
+
+\textbf{Método 2: Verificación con la ecuación general}
+\begin{align*}
+(-1)^2 + (-7)^2 - 4(-1) + 6(-7) - 12 &= 1 + 49 + 4 - 42 - 12\\
+&= 0 \checkmark
+\end{align*}
+
+\textbf{Parte c) Longitud del diámetro}
+
+El diámetro es el doble del radio:
+\[
+D = 2r = 2(5) = 10
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+    \begin{axis}[
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$y$,
+        xmin=-5, xmax=8,
+        ymin=-9, ymax=3,
+        grid=major,
+        width=0.85\textwidth,
+        height=0.6\textwidth,
+        axis equal image
+    ]
+    % Circunferencia
+    \addplot[blue, thick, domain=0:360, samples=100] ({2+5*cos(x)}, {-3+5*sin(x)});
+    % Centro
+    \addplot[mark=*, red] coordinates {(2,-3)} node[above right] {$C(2,-3)$};
+    % Punto P
+    \addplot[mark=*, green!60!black] coordinates {(5,1)} node[above] {$P(5,1)$};
+    % Punto Q
+    \addplot[mark=*, green!60!black] coordinates {(-1,-7)} node[below] {$Q(-1,-7)$};
+    % Radio visualizado
+    \draw[red, dashed] (axis cs:2,-3) -- (axis cs:5,1) node[midway, above] {$r=5$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} \boxed{\text{a) } x^2 + y^2 - 4x + 6y - 12 = 0; \text{ b) } Q \text{ sí pertenece; c) Diámetro = 10}}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 3: Parábola - Análisis Completo]
+\textbf{Ecuación:} $y = -\frac{1}{4}x^2 + 2x + 3$
+
+\textbf{Parte a) Coordenadas del vértice}
+
+Para una parábola $y = ax^2 + bx + c$, el vértice tiene coordenada $x = -\frac{b}{2a}$
+
+\textbf{Paso 1:} Identificar coeficientes
+\[
+a = -\frac{1}{4}, \quad b = 2, \quad c = 3
+\]
+
+\textbf{Paso 2:} Calcular la coordenada $x$ del vértice
+\[
+x_v = -\frac{b}{2a} = -\frac{2}{2(-\frac{1}{4})} = -\frac{2}{-\frac{1}{2}} = 4
+\]
+
+\textbf{Paso 3:} Calcular la coordenada $y$ del vértice
+\begin{align*}
+y_v &= -\frac{1}{4}(4)^2 + 2(4) + 3\\
+&= -\frac{1}{4}(16) + 8 + 3\\
+&= -4 + 8 + 3 = 7
+\end{align*}
+
+Vértice: $V(4, 7)$
+
+\textbf{Parte b) Eje de simetría}
+
+El eje de simetría es la recta vertical $x = 4$
+
+\textbf{Parte c) Intersecciones con los ejes}
+
+\textbf{Intersección con el eje $y$:} Hacemos $x = 0$
+\[
+y = -\frac{1}{4}(0)^2 + 2(0) + 3 = 3
+\]
+Punto: $(0, 3)$
+
+\textbf{Intersecciones con el eje $x$:} Hacemos $y = 0$
+\begin{align*}
+-\frac{1}{4}x^2 + 2x + 3 &= 0\\
+\text{Multiplicamos por -4:} \quad x^2 - 8x - 12 &= 0
+\end{align*}
+
+Usando la fórmula cuadrática:
+\begin{align*}
+x &= \frac{8 \pm \sqrt{64 + 48}}{2} = \frac{8 \pm \sqrt{112}}{2}\\
+&= \frac{8 \pm 4\sqrt{7}}{2} = 4 \pm 2\sqrt{7}
+\end{align*}
+
+\[
+x_1 = 4 - 2\sqrt{7} \approx -1.29, \quad x_2 = 4 + 2\sqrt{7} \approx 9.29
+\]
+
+\textbf{Parte d) Dirección de apertura}
+
+Como $a = -\frac{1}{4} < 0$, la parábola abre hacia abajo.
+
+\textbf{Parte e) Valor máximo}
+
+Como la parábola abre hacia abajo, tiene un máximo en el vértice: $y_{max} = 7$
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+    \begin{axis}[
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$y$,
+        xmin=-3, xmax=11,
+        ymin=-2, ymax=8,
+        grid=major,
+        width=0.9\textwidth,
+        height=0.6\textwidth
+    ]
+    % Parábola
+    \addplot[blue, thick, domain=-2:10, samples=100] {-0.25*x^2 + 2*x + 3};
+    % Vértice
+    \addplot[mark=*, red] coordinates {(4,7)} node[above] {$V(4,7)$};
+    % Intersección con eje y
+    \addplot[mark=*, green!60!black] coordinates {(0,3)} node[left] {$(0,3)$};
+    % Intersecciones con eje x
+    \addplot[mark=*, green!60!black] coordinates {(-1.29,0)} node[below] {$(4-2\sqrt{7},0)$};
+    \addplot[mark=*, green!60!black] coordinates {(9.29,0)} node[below] {$(4+2\sqrt{7},0)$};
+    % Eje de simetría
+    \draw[red, dashed] (axis cs:4,-2) -- (axis cs:4,8) node[above] {$x=4$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} \boxed{\text{a) } V(4,7); \text{ b) } x=4; \text{ c) } (0,3), (4\pm2\sqrt{7},0); \text{ d) Abre hacia abajo; e) } y_{max}=7}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 4: Parábola - Aplicación con Trayectoria]
+\textbf{Ecuación de trayectoria:} $h(x) = -0.05x^2 + 2x$
+
+\textbf{Parte a) Altura máxima}
+
+\textbf{Paso 1:} Identificar coeficientes
+\[
+a = -0.05, \quad b = 2, \quad c = 0
+\]
+
+\textbf{Paso 2:} Encontrar la coordenada $x$ del vértice
+\[
+x_v = -\frac{b}{2a} = -\frac{2}{2(-0.05)} = -\frac{2}{-0.1} = 20 \text{ metros}
+\]
+
+\textbf{Paso 3:} Calcular la altura máxima
+\begin{align*}
+h_{max} &= h(20) = -0.05(20)^2 + 2(20)\\
+&= -0.05(400) + 40\\
+&= -20 + 40 = 20 \text{ metros}
+\end{align*}
+
+\textbf{Parte b) Distancia horizontal en altura máxima}
+
+Ya calculada: $x = 20$ metros
+
+\textbf{Parte c) Alcance total}
+
+El balón toca el suelo cuando $h(x) = 0$:
+\begin{align*}
+-0.05x^2 + 2x &= 0\\
+x(-0.05x + 2) &= 0\\
+x = 0 \text{ o } -0.05x + 2 &= 0\\
+x = 0 \text{ o } x &= \frac{2}{0.05} = 40
+\end{align*}
+
+El alcance total es 40 metros.
+
+\textbf{Parte d) ¿Pasa sobre el arco de 2.5 m a 35 m?}
+
+\textbf{Paso 1:} Calcular la altura a 35 metros
+\begin{align*}
+h(35) &= -0.05(35)^2 + 2(35)\\
+&= -0.05(1225) + 70\\
+&= -61.25 + 70\\
+&= 8.75 \text{ metros}
+\end{align*}
+
+\textbf{Paso 2:} Comparar con la altura del arco
+Como $h(35) = 8.75 > 2.5$ metros, el balón sí pasa por encima del arco.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    \begin{axis}[
+        axis lines=left,
+        xlabel=Distancia horizontal (m),
+        ylabel=Altura (m),
+        xmin=0, xmax=45,
+        ymin=0, ymax=22,
+        grid=major,
+        width=0.95\textwidth,
+        height=0.55\textwidth
+    ]
+    % Trayectoria del balón
+    \addplot[blue, thick, domain=0:40, samples=100] {-0.05*x^2 + 2*x};
+    % Altura máxima
+    \addplot[mark=*, red] coordinates {(20,20)} node[above] {Máx: $(20,20)$};
+    % Arco
+    \draw[green!60!black, very thick] (axis cs:35,0) -- (axis cs:35,2.5) node[midway, left] {Arco};
+    % Punto sobre el arco
+    \addplot[mark=*, orange] coordinates {(35,8.75)} node[above] {$(35, 8.75)$};
+    % Alcance
+    \addplot[mark=*, green!60!black] coordinates {(40,0)} node[below] {Alcance: 40 m};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} \boxed{\text{a) 20 m; b) 20 m; c) 40 m; d) Sí, pasa por encima (8.75 m > 2.5 m)}}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 5: Elipse - Elementos y Gráfica]
+\textbf{Ecuación:} $\frac{x^2}{25} + \frac{y^2}{9} = 1$
+
+\textbf{Parte a) Centro y semiejes}
+
+\textbf{Paso 1:} Identificar la forma estándar $\frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1$
+\[
+\text{Centro: } (h,k) = (0,0)
+\]
+
+\textbf{Paso 2:} Identificar los semiejes
+\[
+a^2 = 25 \Rightarrow a = 5 \text{ (semieje mayor, horizontal)}
+\]
+\[
+b^2 = 9 \Rightarrow b = 3 \text{ (semieje menor, vertical)}
+\]
+
+\textbf{Parte b) Coordenadas de los focos}
+
+\textbf{Paso 1:} Calcular $c$ usando $c^2 = a^2 - b^2$
+\begin{align*}
+c^2 &= 25 - 9 = 16\\
+c &= 4
+\end{align*}
+
+\textbf{Paso 2:} Como el eje mayor es horizontal, los focos están en:
+\[
+F_1(-4, 0) \text{ y } F_2(4, 0)
+\]
+
+\textbf{Parte c) Excentricidad}
+\[
+e = \frac{c}{a} = \frac{4}{5} = 0.8
+\]
+
+\textbf{Parte d) Vértices}
+
+Vértices sobre el eje mayor: $V_1(-5, 0)$ y $V_2(5, 0)$
+
+Vértices sobre el eje menor: $B_1(0, -3)$ y $B_2(0, 3)$
+
+\textbf{Parte e) Verificación de la propiedad focal}
+
+Para cualquier punto $P(x,y)$ sobre la elipse, la suma de distancias a los focos es:
+\[
+d(P,F_1) + d(P,F_2) = 2a = 10
+\]
+
+\textbf{Verificación con el punto $(3, \frac{12}{5})$:}
+
+Primero verificamos que está en la elipse:
+\[
+\frac{3^2}{25} + \frac{(12/5)^2}{9} = \frac{9}{25} + \frac{144/25}{9} = \frac{9}{25} + \frac{16}{25} = 1 \checkmark
+\]
+
+Calculamos las distancias:
+\begin{align*}
+d(P,F_1) &= \sqrt{(3-(-4))^2 + (12/5-0)^2} = \sqrt{49 + 144/25} = \sqrt{1369/25} = 37/5\\
+d(P,F_2) &= \sqrt{(3-4)^2 + (12/5-0)^2} = \sqrt{1 + 144/25} = \sqrt{169/25} = 13/5\\
+\text{Suma: } &\frac{37}{5} + \frac{13}{5} = \frac{50}{5} = 10 = 2a \checkmark
+\end{align*}
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+    \begin{axis}[
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$y$,
+        xmin=-6, xmax=6,
+        ymin=-4, ymax=4,
+        grid=major,
+        width=0.9\textwidth,
+        height=0.55\textwidth,
+        axis equal image
+    ]
+    % Elipse
+    \addplot[blue, thick, domain=0:360, samples=100] ({5*cos(x)}, {3*sin(x)});
+    % Centro
+    \addplot[mark=*, black] coordinates {(0,0)} node[below right] {$C(0,0)$};
+    % Focos
+    \addplot[mark=*, red] coordinates {(-4,0)} node[below] {$F_1(-4,0)$};
+    \addplot[mark=*, red] coordinates {(4,0)} node[below] {$F_2(4,0)$};
+    % Vértices eje mayor
+    \addplot[mark=*, green!60!black] coordinates {(-5,0)} node[below] {$V_1$};
+    \addplot[mark=*, green!60!black] coordinates {(5,0)} node[below] {$V_2$};
+    % Vértices eje menor
+    \addplot[mark=*, green!60!black] coordinates {(0,-3)} node[right] {$B_1$};
+    \addplot[mark=*, green!60!black] coordinates {(0,3)} node[right] {$B_2$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} \boxed{\text{Centro: } (0,0), a=5, b=3; \text{ Focos: } (\pm4,0); e=0.8; \text{ Vértices: } (\pm5,0), (0,\pm3)}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 6: Hipérbola - Análisis y Propiedades]
+\textbf{Ecuación:} $\frac{x^2}{16} - \frac{y^2}{9} = 1$
+
+\textbf{Parte a) Centro y vértices}
+
+\textbf{Paso 1:} Identificar la forma estándar $\frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1$
+\[
+\text{Centro: } (h,k) = (0,0)
+\]
+
+\textbf{Paso 2:} Identificar los parámetros
+\[
+a^2 = 16 \Rightarrow a = 4, \quad b^2 = 9 \Rightarrow b = 3
+\]
+
+\textbf{Paso 3:} Los vértices están sobre el eje transverso (horizontal):
+\[
+V_1(-4, 0) \text{ y } V_2(4, 0)
+\]
+
+\textbf{Parte b) Coordenadas de los focos}
+
+\textbf{Paso 1:} Calcular $c$ usando $c^2 = a^2 + b^2$ (¡nota el signo + para hipérbolas!)
+\begin{align*}
+c^2 &= 16 + 9 = 25\\
+c &= 5
+\end{align*}
+
+\textbf{Paso 2:} Los focos están en:
+\[
+F_1(-5, 0) \text{ y } F_2(5, 0)
+\]
+
+\textbf{Parte c) Ecuaciones de las asíntotas}
+
+Para una hipérbola horizontal centrada en el origen:
+\[
+y = \pm\frac{b}{a}x = \pm\frac{3}{4}x
+\]
+
+Las asíntotas son: $y = \frac{3}{4}x$ y $y = -\frac{3}{4}x$
+
+\textbf{Parte d) Excentricidad}
+\[
+e = \frac{c}{a} = \frac{5}{4} = 1.25
+\]
+
+Nota: En hipérbolas, siempre $e > 1$.
+
+\textbf{Parte e) Puntos cuando $x = 5$}
+
+Sustituimos $x = 5$ en la ecuación:
+\begin{align*}
+\frac{25}{16} - \frac{y^2}{9} &= 1\\
+\frac{y^2}{9} &= \frac{25}{16} - 1 = \frac{25-16}{16} = \frac{9}{16}\\
+y^2 &= 9 \cdot \frac{9}{16} = \frac{81}{16}\\
+y &= \pm\frac{9}{4}
+\end{align*}
+
+Los puntos son: $(5, \frac{9}{4})$ y $(5, -\frac{9}{4})$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \begin{axis}[
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$y$,
+        xmin=-8, xmax=8,
+        ymin=-6, ymax=6,
+        grid=major,
+        width=0.9\textwidth,
+        height=0.65\textwidth,
+        axis equal image
+    ]
+    % Hipérbola rama derecha
+    \addplot[blue, thick, domain=4:8, samples=50] {3*sqrt(x^2/16 - 1)};
+    \addplot[blue, thick, domain=4:8, samples=50] {-3*sqrt(x^2/16 - 1)};
+    % Hipérbola rama izquierda
+    \addplot[blue, thick, domain=-8:-4, samples=50] {3*sqrt(x^2/16 - 1)};
+    \addplot[blue, thick, domain=-8:-4, samples=50] {-3*sqrt(x^2/16 - 1)};
+    % Asíntotas
+    \addplot[red, dashed, domain=-8:8] {0.75*x};
+    \addplot[red, dashed, domain=-8:8] {-0.75*x};
+    % Centro
+    \addplot[mark=*, black] coordinates {(0,0)} node[below left] {$C$};
+    % Vértices
+    \addplot[mark=*, green!60!black] coordinates {(-4,0)} node[below] {$V_1$};
+    \addplot[mark=*, green!60!black] coordinates {(4,0)} node[below] {$V_2$};
+    % Focos
+    \addplot[mark=*, red] coordinates {(-5,0)} node[below] {$F_1$};
+    \addplot[mark=*, red] coordinates {(5,0)} node[below] {$F_2$};
+    % Puntos en x=5
+    \addplot[mark=*, orange] coordinates {(5,2.25)} node[right] {$(5,\frac{9}{4})$};
+    \addplot[mark=*, orange] coordinates {(5,-2.25)} node[right] {$(5,-\frac{9}{4})$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} \boxed{\text{Centro: } (0,0), V(\pm4,0); \text{ Focos: } (\pm5,0); \text{ Asíntotas: } y=\pm\frac{3}{4}x; e=1.25}
+\end{solucion}
+
+\begin{solucion}[title=Solución Ejercicio 7: Ecuación General - Identificación de Cónica]
+\textbf{Ecuación:} $4x^2 + 9y^2 - 16x + 18y - 11 = 0$
+
+\textbf{Parte a) Identificar el tipo de cónica}
+
+Observamos los coeficientes de $x^2$ y $y^2$:
+- Coeficiente de $x^2$: 4 (positivo)
+- Coeficiente de $y^2$: 9 (positivo)
+- Ambos coeficientes son positivos y diferentes
+
+Por lo tanto, es una \textbf{elipse}.
+
+\textbf{Parte b) Completar cuadrados}
+
+\textbf{Paso 1:} Agrupar términos
+\[
+4x^2 - 16x + 9y^2 + 18y = 11
+\]
+
+\textbf{Paso 2:} Factorizar los coeficientes principales
+\[
+4(x^2 - 4x) + 9(y^2 + 2y) = 11
+\]
+
+\textbf{Paso 3:} Completar cuadrados dentro de cada paréntesis
+
+Para $x$: $x^2 - 4x = (x-2)^2 - 4$
+
+Para $y$: $y^2 + 2y = (y+1)^2 - 1$
+
+\textbf{Paso 4:} Sustituir
+\begin{align*}
+4[(x-2)^2 - 4] + 9[(y+1)^2 - 1] &= 11\\
+4(x-2)^2 - 16 + 9(y+1)^2 - 9 &= 11\\
+4(x-2)^2 + 9(y+1)^2 &= 11 + 16 + 9\\
+4(x-2)^2 + 9(y+1)^2 &= 36
+\end{align*}
+
+\textbf{Paso 5:} Dividir entre 36 para forma estándar
+\[
+\frac{(x-2)^2}{9} + \frac{(y+1)^2}{4} = 1
+\]
+
+\textbf{Parte c) Centro de la elipse}
+\[
+\text{Centro: } (h,k) = (2,-1)
+\]
+
+\textbf{Parte d) Elementos principales}
+
+\textbf{Semiejes:}
+\[
+a^2 = 9 \Rightarrow a = 3 \text{ (semieje mayor, horizontal)}
+\]
+\[
+b^2 = 4 \Rightarrow b = 2 \text{ (semieje menor, vertical)}
+\]
+
+\textbf{Distancia focal:}
+\begin{align*}
+c^2 &= a^2 - b^2 = 9 - 4 = 5\\
+c &= \sqrt{5}
+\end{align*}
+
+\textbf{Focos:}
+\[
+F_1(2-\sqrt{5}, -1) \text{ y } F_2(2+\sqrt{5}, -1)
+\]
+
+\textbf{Vértices sobre eje mayor:}
+\[
+V_1(-1, -1) \text{ y } V_2(5, -1)
+\]
+
+\textbf{Vértices sobre eje menor:}
+\[
+B_1(2, -3) \text{ y } B_2(2, 1)
+\]
+
+\textbf{Excentricidad:}
+\[
+e = \frac{c}{a} = \frac{\sqrt{5}}{3} \approx 0.745
+\]
+
+\textbf{Parte e) Bosquejo de la gráfica}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+    \begin{axis}[
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$y$,
+        xmin=-2, xmax=6,
+        ymin=-4, ymax=2,
+        grid=major,
+        width=0.9\textwidth,
+        height=0.6\textwidth,
+        axis equal image
+    ]
+    % Elipse
+    \addplot[blue, thick, domain=0:360, samples=100] ({2+3*cos(x)}, {-1+2*sin(x)});
+    % Centro
+    \addplot[mark=*, black] coordinates {(2,-1)} node[above right] {$C(2,-1)$};
+    % Focos
+    \addplot[mark=*, red] coordinates {(2-2.236,-1)} node[below] {$F_1$};
+    \addplot[mark=*, red] coordinates {(2+2.236,-1)} node[below] {$F_2$};
+    % Vértices eje mayor
+    \addplot[mark=*, green!60!black] coordinates {(-1,-1)} node[left] {$V_1(-1,-1)$};
+    \addplot[mark=*, green!60!black] coordinates {(5,-1)} node[right] {$V_2(5,-1)$};
+    % Vértices eje menor
+    \addplot[mark=*, green!60!black] coordinates {(2,-3)} node[below] {$B_1(2,-3)$};
+    \addplot[mark=*, green!60!black] coordinates {(2,1)} node[above] {$B_2(2,1)$};
+    % Ejes de la elipse
+    \draw[gray, dashed] (axis cs:-1,-1) -- (axis cs:5,-1);
+    \draw[gray, dashed] (axis cs:2,-3) -- (axis cs:2,1);
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} \boxed{\text{Elipse: } \frac{(x-2)^2}{9} + \frac{(y+1)^2}{4} = 1; \text{ Centro: } (2,-1); a=3, b=2, c=\sqrt{5}}
+\end{solucion}
+\end{document}

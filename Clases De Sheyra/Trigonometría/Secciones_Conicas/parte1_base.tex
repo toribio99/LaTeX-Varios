@@ -1,0 +1,761 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel,patterns,shapes.geometric}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+\definecolor{thirdcolor}{RGB}{0,150,136}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage}}
+\fancyhead[RO]{\small\textcolor{maincolor}{\thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Prof: Toribio De J Arrieta F}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Trigonometría - Grado 10}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=thirdcolor!5,
+  colframe=thirdcolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+% Título
+\title{\textbf{\Huge GEOMETRIA ANALITICA}\\[0.5cm]
+\Large Cónicas}
+\author{Prof: Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¿Te has preguntado alguna vez por qué los planetas siguen órbitas elípticas alrededor del Sol? ¿O cómo es que las antenas parabólicas pueden captar señales desde satélites a miles de kilómetros de distancia? ¿Por qué los arquitectos usan arcos parabólicos en sus diseños más impresionantes? La respuesta a todas estas preguntas está en un grupo fascinante de curvas llamadas \textbf{secciones cónicas}.
+
+Imagínate que tienes un cono de helado (sin el helado, claro) y una espada láser como en Star Wars. Dependiendo del ángulo y la posición con que cortes el cono, obtendrás diferentes formas. Estas formas son las secciones cónicas: circunferencia, elipse, parábola e hipérbola. ¡Y están por todas partes en nuestro mundo!
+
+\subsection*{¿Por qué son tan importantes las cónicas?}
+
+Las secciones cónicas no son solo figuras bonitas en un libro de matemáticas. Son las formas fundamentales que rigen muchos fenómenos naturales y tecnológicos:
+
+\begin{itemize}
+    \item \textbf{Órbitas planetarias:} Johannes Kepler descubrió que los planetas no se mueven en círculos perfectos, sino en elipses. ¡El Sol está en uno de los focos de esa elipse!
+
+    \item \textbf{Antenas parabólicas:} Las señales de televisión satelital rebotan en la superficie parabólica y se concentran en un punto llamado foco, donde está el receptor. Por eso funcionan tan bien.
+
+    \item \textbf{Arquitectura:} Desde el Coliseo Romano (forma elíptica) hasta el Gateway Arch de San Luis (parábola invertida), las cónicas dan estabilidad y belleza a las estructuras.
+
+    \item \textbf{Diseño de puentes:} Los cables de los puentes colgantes forman parábolas casi perfectas cuando soportan el peso uniformemente distribuido del tablero.
+
+    \item \textbf{Telescopios reflectores:} Usan espejos parabólicos e hiperbólicos para enfocar la luz de las estrellas. El telescopio Hubble tiene un espejo principal parabólico.
+
+    \item \textbf{Ingeniería civil:} Las torres de enfriamiento de las centrales nucleares tienen forma hiperbólica porque esta forma proporciona máxima resistencia con mínimo material.
+\end{itemize}
+
+\subsection*{Un poco de historia}
+
+Las cónicas fueron estudiadas por primera vez por los antiguos griegos. Apolonio de Perga (262-190 a.C.), conocido como ``El Gran Geómetra'', escribió un tratado de ocho libros sobre las cónicas. Él fue quien les dio los nombres que usamos hoy: elipse (que significa ``deficiencia''), parábola (``comparación'') e hipérbola (``exceso'').
+
+Pero la verdadera revolución llegó casi 2000 años después. En el siglo XVII, cuando Kepler usó las elipses para describir las órbitas planetarias, y cuando Galileo descubrió que los proyectiles siguen trayectorias parabólicas. ¡De repente, estas curvas antiguas se convirtieron en la clave para entender el universo!
+
+\newpage
+
+\subsection*{Lo que aprenderás en esta guía}
+
+En esta guía vamos a explorar:
+
+\begin{enumerate}
+    \item \textbf{Superficies cónicas de revolución:} Cómo se genera un cono y por qué es tan especial
+    \item \textbf{Las cuatro secciones cónicas:} Sus propiedades, ecuaciones y características únicas
+    \item \textbf{La ecuación general de segundo grado:} La fórmula mágica que las une a todas
+    \item \textbf{Aplicaciones prácticas:} Problemas reales donde las cónicas son las protagonistas
+\end{enumerate}
+
+Prepárate para un viaje fascinante donde la geometría se encuentra con el álgebra, y donde las matemáticas abstractas se convierten en herramientas para entender el mundo real. ¡Las cónicas están en todas partes, solo necesitas aprender a reconocerlas!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Superficies Cónicas de Revolución}
+
+Empecemos por el principio: ¿qué es una superficie cónica? Imagina que tienes una línea recta (llamada \textbf{generatriz}) que pasa por un punto fijo (el \textbf{vértice}) y que gira alrededor de otra línea recta (el \textbf{eje}). Al girar 360°, la generatriz barre una superficie que llamamos \textbf{cono de revolución}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Configuración del cono
+    \def\altura{4}
+    \def\radio{2}
+
+    % Eje del cono
+    \draw[dashed, thick] (0,-0.5) -- (0,\altura+0.5) node[above] {Eje};
+
+    % Cono superior
+    \draw[thick, maincolor] (-\radio,0) -- (0,\altura) -- (\radio,0);
+
+    % Cono inferior (espejo)
+    \draw[thick, maincolor] (-\radio,0) -- (0,-\altura) -- (\radio,0);
+
+    % Elipse base
+    \draw[thick, maincolor] (0,0) ellipse (\radio cm and 0.5cm);
+
+    % Generatriz destacada
+    \draw[very thick, accentcolor, -{Latex}] (0,\altura) -- (1.5,0) node[midway, right] {Generatriz};
+
+    % Vértice
+    \filldraw[red] (0,\altura) circle (2pt) node[left] {Vértice superior};
+    \filldraw[red] (0,-\altura) circle (2pt) node[left] {Vértice inferior};
+
+    % Ángulo del cono
+    \draw[accentcolor] (0,3) arc (90:60:1) node[midway, above] {$\alpha$};
+
+    % Título
+    \node[maincolor, font=\large] at (0,-\altura-1) {Cono doble de revolución};
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+Observa que el cono tiene dos partes (o \textbf{hojas}): una hacia arriba y otra hacia abajo. Esto es importante porque algunas secciones cónicas (como la hipérbola) necesitan ambas hojas del cono.
+\end{nota}
+
+El ángulo $\alpha$ entre el eje y la generatriz se llama \textbf{semiángulo del cono}. Este ángulo es crucial porque determina qué tipo de cónica obtendremos al cortar el cono.
+
+\subsection{Secciones Cónicas: Los Cuatro Cortes Mágicos}
+
+Ahora viene la parte divertida. Cuando cortamos el cono con un plano, obtenemos diferentes curvas según el ángulo del corte. Es como cortar una zanahoria: si la cortas perpendicular, obtienes círculos; si la cortas en diagonal, obtienes elipses.
+
+\subsubsection{1. Circunferencia: El Corte Horizontal}
+
+Si el plano de corte es perpendicular al eje del cono (paralelo a la base), obtenemos una \textbf{circunferencia}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Cono
+    \draw[thick, gray] (-2,0) -- (0,4) -- (2,0);
+    \draw[thick, gray] (0,0) ellipse (2cm and 0.5cm);
+
+    % Plano de corte
+    \fill[blue!20, opacity=0.7] (-1.5,1.5) ellipse (1.5cm and 0.4cm);
+    \draw[thick, blue] (-1.5,1.5) ellipse (1.5cm and 0.4cm);
+
+    % Circunferencia resultante
+    \draw[very thick, red] (4,1.5) circle (1.2cm);
+    \node[red] at (4,-0.5) {Circunferencia};
+
+    % Flecha
+    \draw[thick, -{Latex}] (1.2,1.5) -- (2.5,1.5);
+
+    % Etiquetas
+    \node at (0,-1.2) {Corte horizontal};
+    \draw[<->, blue] (-1.5,2.2) -- (1.5,2.2) node[midway, above] {Plano de corte};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}
+Una \textbf{circunferencia} es el lugar geométrico de todos los puntos que equidistan de un punto fijo llamado \textbf{centro}.
+
+Ecuación estándar: $(x-h)^2 + (y-k)^2 = r^2$
+
+donde $(h,k)$ es el centro y $r$ es el radio.
+\end{definicion}
+
+\newpage
+
+\subsubsection{2. Elipse: El Corte Inclinado}
+
+Si el plano corta el cono de manera inclinada (pero sin ser paralelo a la generatriz), obtenemos una \textbf{elipse}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Cono
+    \draw[thick, gray] (-2,0) -- (0,4) -- (2,0);
+    \draw[thick, gray] (0,0) ellipse (2cm and 0.5cm);
+
+    % Plano de corte inclinado
+    \fill[blue!20, opacity=0.7] (-1.8,0.8) -- (1.2,2.5) -- (1.2,1.5) -- (-1.8,0.2) -- cycle;
+
+    % Elipse en el cono
+    \draw[thick, blue, rotate=20] (0,1.5) ellipse (1.6cm and 0.8cm);
+
+    % Elipse resultante
+    \draw[very thick, red] (4.5,1.5) ellipse (1.5cm and 0.9cm);
+    \node[red] at (4.5,-0.5) {Elipse};
+
+    % Flecha
+    \draw[thick, -{Latex}] (1.5,1.5) -- (2.8,1.5);
+
+    % Etiquetas
+    \node at (0,-1.2) {Corte inclinado};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}
+Una \textbf{elipse} es el lugar geométrico de todos los puntos cuya suma de distancias a dos puntos fijos (llamados \textbf{focos}) es constante.
+
+Ecuación estándar: $\frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1$
+
+donde $(h,k)$ es el centro, $a$ es el semieje mayor y $b$ es el semieje menor.
+\end{definicion}
+
+La elipse tiene una propiedad fascinante: si colocas una fuente de luz en un foco, todos los rayos se reflejarán y pasarán por el otro foco. ¡Por eso las galerías de susurros funcionan!
+
+\subsubsection{3. Parábola: El Corte Paralelo}
+
+Cuando el plano es paralelo a una generatriz del cono, obtenemos una \textbf{parábola}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Cono
+    \draw[thick, gray] (-2,0) -- (0,4) -- (2,0);
+    \draw[thick, gray] (0,0) ellipse (2cm and 0.5cm);
+
+    % Plano de corte paralelo a generatriz
+    \fill[blue!20, opacity=0.7] (0.5,0) -- (0.5,3.5) -- (1.8,3.5) -- (1.8,0) -- cycle;
+
+    % Parábola en el cono
+    \draw[thick, blue, domain=0.5:1.75, samples=30] plot (\x, {0.8*(\x-0.5)^2});
+
+    % Parábola resultante
+    \draw[very thick, red, domain=-1.2:1.2, samples=30] plot ({4.5+\x}, {1.5+0.7*\x*\x});
+    \node[red] at (4.5,-0.5) {Parábola};
+
+    % Flecha
+    \draw[thick, -{Latex}] (2,1.5) -- (3,1.5);
+
+    % Etiquetas
+    \node at (0,-1.2) {Corte paralelo a generatriz};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}
+Una \textbf{parábola} es el lugar geométrico de todos los puntos que equidistan de un punto fijo (el \textbf{foco}) y de una recta fija (la \textbf{directriz}).
+
+Ecuación estándar (eje vertical): $(x-h)^2 = 4p(y-k)$
+
+donde $(h,k)$ es el vértice y $p$ es la distancia del vértice al foco.
+\end{definicion}
+
+Las parábolas tienen la propiedad de concentrar rayos paralelos en el foco. Por eso los faros de los autos y las antenas parabólicas tienen esta forma.
+
+\newpage
+
+\subsubsection{4. Hipérbola: El Corte Vertical}
+
+Cuando el plano es paralelo al eje del cono (o lo contiene), corta ambas hojas del cono y obtenemos una \textbf{hipérbola}.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Cono superior
+    \draw[thick, gray] (-2,0) -- (0,3) -- (2,0);
+    \draw[thick, gray] (0,0) ellipse (2cm and 0.5cm);
+
+    % Cono inferior
+    \draw[thick, gray] (-2,0) -- (0,-3) -- (2,0);
+    \draw[thick, gray] (0,0) ellipse (2cm and 0.5cm);
+
+    % Plano de corte vertical
+    \fill[blue!20, opacity=0.5] (-0.3,-3.5) rectangle (0.3,3.5);
+
+    % Hipérbola en el cono
+    \draw[thick, blue, domain=0.5:2, samples=20] plot ({0.15*1/\x}, {\x});
+    \draw[thick, blue, domain=0.5:2, samples=20] plot ({-0.15*1/\x}, {\x});
+    \draw[thick, blue, domain=0.5:2, samples=20] plot ({0.15*1/\x}, {-\x});
+    \draw[thick, blue, domain=0.5:2, samples=20] plot ({-0.15*1/\x}, {-\x});
+
+    % Hipérbola resultante
+    \begin{scope}[shift={(5,0)}]
+        \draw[very thick, red, domain=-1.5:1.5, samples=30] plot ({\x}, {sqrt(1+\x*\x)});
+        \draw[very thick, red, domain=-1.5:1.5, samples=30] plot ({\x}, {-sqrt(1+\x*\x)});
+        \node[red] at (0,-3.5) {Hipérbola};
+    \end{scope}
+
+    % Flecha
+    \draw[thick, -{Latex}] (2.2,0) -- (3.3,0);
+
+    % Etiquetas
+    \node at (0,-4.2) {Corte vertical (ambas hojas)};
+\end{tikzpicture}
+\end{center}
+
+\begin{definicion}
+Una \textbf{hipérbola} es el lugar geométrico de todos los puntos cuya diferencia de distancias a dos puntos fijos (los \textbf{focos}) es constante.
+
+Ecuación estándar: $\frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1$
+
+donde $(h,k)$ es el centro, y la hipérbola tiene dos ramas.
+\end{definicion}
+
+\subsection{La Ecuación General de Segundo Grado}
+
+Aquí viene algo sorprendente: todas las cónicas pueden representarse con una sola ecuación general. Es como tener una fórmula maestra que las contiene a todas:
+
+\begin{tcolorbox}[enhanced, colback=maincolor!10, colframe=maincolor, title=Ecuación General de Segundo Grado]
+\[
+Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0
+\]
+donde $A$, $B$ y $C$ no son todos cero simultáneamente.
+\end{tcolorbox}
+
+El tipo de cónica depende del \textbf{discriminante} $\Delta = B^2 - 4AC$:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Discriminante} & \textbf{Tipo de Cónica} & \textbf{Condición adicional} \\
+\hline
+$\Delta < 0$ & Elipse & $A = C$ y $B = 0$ → Circunferencia \\
+\hline
+$\Delta = 0$ & Parábola & --- \\
+\hline
+$\Delta > 0$ & Hipérbola & --- \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Casos especiales y degenerados}
+
+A veces, la ecuación general puede representar casos especiales o ``degenerados'':
+\begin{itemize}
+    \item \textbf{Punto:} Cuando la elipse colapsa a un solo punto
+    \item \textbf{Rectas:} Dos rectas que se cortan (hipérbola degenerada) o paralelas
+    \item \textbf{Conjunto vacío:} Cuando no hay puntos reales que satisfagan la ecuación
+\end{itemize}
+
+\newpage
+
+\subsection{Transformación de la Ecuación General a Forma Estándar}
+
+Para identificar y graficar una cónica dada en forma general, necesitamos transformarla a su forma estándar. El proceso es como resolver un rompecabezas algebraico:
+
+\begin{enumerate}
+    \item \textbf{Agrupar términos} por variable
+    \item \textbf{Completar cuadrados} para $x$ y/o $y$
+    \item \textbf{Factorizar} y simplificar
+    \item \textbf{Identificar} el tipo de cónica y sus elementos
+\end{enumerate}
+
+Veamos un ejemplo rápido:
+
+\begin{tcolorbox}[colback=accentcolor!5, colframe=accentcolor]
+\textbf{Ejemplo:} Identificar la cónica $x^2 + 4y^2 - 2x - 8y + 1 = 0$
+
+\textbf{Solución:}
+\begin{align*}
+x^2 + 4y^2 - 2x - 8y + 1 &= 0 \\
+(x^2 - 2x) + 4(y^2 - 2y) + 1 &= 0 \\
+(x^2 - 2x + 1) - 1 + 4(y^2 - 2y + 1) - 4 + 1 &= 0 \\
+(x - 1)^2 + 4(y - 1)^2 &= 4 \\
+\frac{(x - 1)^2}{4} + \frac{(y - 1)^2}{1} &= 1
+\end{align*}
+
+¡Es una elipse con centro en $(1, 1)$, semieje mayor $a = 2$ y semieje menor $b = 1$!
+\end{tcolorbox}
+
+\subsection{Gráficas de las Cónicas}
+
+Ahora veamos cómo se ven estas curvas en el plano cartesiano. Cada una tiene características únicas que la hacen especial:
+
+\subsubsection{Circunferencia: La Perfecta Simetría}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.85\textwidth,
+        height=0.6\textwidth,
+        axis lines=center,
+        xlabel=$x$,
+        ylabel=$y$,
+        grid=major,
+        grid style={dashed, gray!50},
+        xmin=-5, xmax=5,
+        ymin=-5, ymax=5,
+        axis equal image,
+        legend pos=outer north east
+    ]
+    % Circunferencia centrada en origen
+    \addplot[domain=0:360, samples=100, thick, maincolor]
+        ({3*cos(x)}, {3*sin(x)});
+    \addlegendentry{$x^2 + y^2 = 9$}
+
+    % Centro
+    \addplot[mark=*, mark size=3pt, red] coordinates {(0,0)};
+    \addlegendentry{Centro $(0,0)$}
+
+    % Radio
+    \draw[thick, accentcolor, -{Latex}] (axis cs:0,0) -- (axis cs:3,0)
+        node[midway, below] {$r=3$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Elipse: La Órbita Planetaria}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.9\textwidth,
+        height=0.65\textwidth,
+        axis lines=center,
+        xlabel=$x$,
+        ylabel=$y$,
+        grid=major,
+        grid style={dashed, gray!50},
+        xmin=-6, xmax=6,
+        ymin=-4, ymax=4,
+        axis equal image,
+        legend pos=outer north east
+    ]
+    % Elipse
+    \addplot[domain=0:360, samples=100, thick, maincolor]
+        ({4*cos(x)}, {2*sin(x)});
+    \addlegendentry{$\frac{x^2}{16} + \frac{y^2}{4} = 1$}
+
+    % Centro
+    \addplot[mark=*, mark size=3pt, black] coordinates {(0,0)};
+    \addlegendentry{Centro}
+
+    % Focos
+    \addplot[mark=*, mark size=3pt, red] coordinates {(3.464,0)};
+    \addplot[mark=*, mark size=3pt, red] coordinates {(-3.464,0)};
+    \addlegendentry{Focos}
+
+    % Ejes
+    \draw[thick, accentcolor, <->] (axis cs:-4,0) -- (axis cs:4,0)
+        node[midway, below] {$2a=8$};
+    \draw[thick, thirdcolor, <->] (axis cs:0,-2) -- (axis cs:0,2)
+        node[midway, right] {$2b=4$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsubsection{Parábola: La Trayectoria Balística}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.9\textwidth,
+        height=0.7\textwidth,
+        axis lines=center,
+        xlabel=$x$,
+        ylabel=$y$,
+        grid=major,
+        grid style={dashed, gray!50},
+        xmin=-5, xmax=5,
+        ymin=-2, ymax=8,
+        legend pos=north west
+    ]
+    % Parábola
+    \addplot[domain=-4:4, samples=100, thick, maincolor]
+        {0.25*x^2};
+    \addlegendentry{$y = \frac{1}{4}x^2$}
+
+    % Vértice
+    \addplot[mark=*, mark size=3pt, black] coordinates {(0,0)};
+    \addlegendentry{Vértice}
+
+    % Foco
+    \addplot[mark=*, mark size=3pt, red] coordinates {(0,1)};
+    \addlegendentry{Foco $(0,1)$}
+
+    % Directriz
+    \addplot[domain=-5:5, samples=2, thick, dashed, thirdcolor]
+        {-1};
+    \addlegendentry{Directriz $y=-1$}
+
+    % Líneas de distancia igual
+    \draw[thin, orange, dashed] (axis cs:2,1) -- (axis cs:2,1) -- (axis cs:2,-1);
+    \draw[thin, orange, -{Latex}] (axis cs:0,1) -- (axis cs:2,1)
+        node[midway, above] {$d_1$};
+    \draw[thin, orange, -{Latex}] (axis cs:2,1) -- (axis cs:2,-1)
+        node[midway, right] {$d_2$};
+    \node[orange] at (axis cs:3.5,2) {$d_1 = d_2$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Hipérbola: Las Torres de Enfriamiento}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.95\textwidth,
+        height=0.7\textwidth,
+        axis lines=center,
+        xlabel=$x$,
+        ylabel=$y$,
+        grid=major,
+        grid style={dashed, gray!50},
+        xmin=-6, xmax=6,
+        ymin=-5, ymax=5,
+        axis equal image,
+        legend pos=outer north east
+    ]
+    % Hipérbola rama derecha
+    \addplot[domain=2:5.5, samples=100, thick, maincolor]
+        {sqrt(x^2-4)};
+    \addplot[domain=2:5.5, samples=100, thick, maincolor]
+        {-sqrt(x^2-4)};
+
+    % Hipérbola rama izquierda
+    \addplot[domain=-5.5:-2, samples=100, thick, maincolor]
+        {sqrt(x^2-4)};
+    \addplot[domain=-5.5:-2, samples=100, thick, maincolor]
+        {-sqrt(x^2-4)};
+    \addlegendentry{$\frac{x^2}{4} - \frac{y^2}{4} = 1$}
+
+    % Centro
+    \addplot[mark=*, mark size=3pt, black] coordinates {(0,0)};
+    \addlegendentry{Centro}
+
+    % Focos
+    \addplot[mark=*, mark size=3pt, red] coordinates {(2.828,0)};
+    \addplot[mark=*, mark size=3pt, red] coordinates {(-2.828,0)};
+    \addlegendentry{Focos}
+
+    % Asíntotas
+    \addplot[domain=-6:6, samples=2, dashed, thirdcolor] {x};
+    \addplot[domain=-6:6, samples=2, dashed, thirdcolor] {-x};
+    \addlegendentry{Asíntotas}
+
+    % Vértices
+    \addplot[mark=square*, mark size=3pt, blue] coordinates {(2,0)};
+    \addplot[mark=square*, mark size=3pt, blue] coordinates {(-2,0)};
+    \addlegendentry{Vértices}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Propiedades Especiales de las Cónicas}
+
+Cada cónica tiene propiedades únicas que las hacen útiles en aplicaciones específicas:
+
+\subsubsection{Propiedad Reflectora de la Parábola}
+
+Los rayos paralelos al eje de una parábola se reflejan hacia el foco. Esta propiedad se usa en:
+\begin{itemize}
+    \item Antenas parabólicas (concentran señales)
+    \item Faros de automóviles (proyectan luz paralela)
+    \item Hornos solares (concentran calor)
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Parábola
+    \draw[very thick, maincolor, domain=-2:2, samples=50]
+        plot (\x, {0.25*\x*\x});
+
+    % Foco
+    \filldraw[red] (0,1) circle (2pt) node[right] {Foco};
+
+    % Rayos paralelos entrantes
+    \foreach \y in {1.5,2,2.5,3}
+    {
+        \draw[thick, yellow!80!orange, -{Latex}] (-2.5,\y) -- ({-2*sqrt(\y)},\y);
+        \draw[thick, yellow!80!orange] ({-2*sqrt(\y)},\y) -- (0,1);
+    }
+
+    \foreach \y in {1.5,2,2.5,3}
+    {
+        \draw[thick, yellow!80!orange, -{Latex}] (2.5,\y) -- ({2*sqrt(\y)},\y);
+        \draw[thick, yellow!80!orange] ({2*sqrt(\y)},\y) -- (0,1);
+    }
+
+    % Título
+    \node[maincolor, font=\large] at (0,-1) {Propiedad reflectora};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Propiedad de la Elipse}
+
+Los rayos que parten de un foco se reflejan hacia el otro foco. Aplicaciones:
+\begin{itemize}
+    \item Galerías de susurros (acústica arquitectónica)
+    \item Litotripsia (destrucción de cálculos renales)
+    \item Órbitas planetarias (leyes de Kepler)
+\end{itemize}
+
+\subsubsection{Propiedad de la Hipérbola}
+
+Los rayos dirigidos a un foco se reflejan como si vinieran del otro foco. Se usa en:
+\begin{itemize}
+    \item Sistemas de navegación (LORAN)
+    \item Telescopios Cassegrain
+    \item Torres de enfriamiento
+\end{itemize}
+
+\subsection{Excentricidad: La Medida de la Forma}
+
+La \textbf{excentricidad} ($e$) es un número que nos dice qué tan ``alargada'' o ``abierta'' es una cónica:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Cónica} & \textbf{Excentricidad} & \textbf{Interpretación} \\
+\hline
+Circunferencia & $e = 0$ & Perfectamente redonda \\
+\hline
+Elipse & $0 < e < 1$ & Más cerca de 0 → más circular \\
+& & Más cerca de 1 → más alargada \\
+\hline
+Parábola & $e = 1$ & El límite entre cerrada y abierta \\
+\hline
+Hipérbola & $e > 1$ & Más grande → más abierta \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{nota}
+La excentricidad de la órbita de la Tierra es $e \approx 0.017$, casi circular. La del cometa Halley es $e \approx 0.967$, muy alargada. ¡Por eso solo lo vemos cada 76 años!
+\end{nota}
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicidades! Has dado los primeros pasos en el fascinante mundo de las secciones cónicas. Ahora ya sabes que estas curvas no son solo ecuaciones abstractas, sino las formas fundamentales que describen desde el movimiento de los planetas hasta el diseño de las antenas que nos conectan con el mundo.
+
+\subsection*{Lo que has aprendido}
+
+En esta primera parte de la guía has descubierto:
+\begin{itemize}
+    \item Cómo se generan las cónicas a partir de un cono de revolución
+    \item Las cuatro secciones cónicas básicas y sus características únicas
+    \item La ecuación general de segundo grado que las unifica
+    \item Las propiedades especiales que hacen útil a cada cónica
+    \item La importancia de la excentricidad como medida de forma
+\end{itemize}
+
+\subsection*{Fórmulas Clave para Recordar}
+
+\begin{tcolorbox}[enhanced, colback=thirdcolor!10, colframe=thirdcolor, title=Resumen de Ecuaciones]
+\textbf{Ecuación General:}
+\[
+Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0
+\]
+
+\textbf{Discriminante:} $\Delta = B^2 - 4AC$
+
+\textbf{Formas Estándar:}
+\begin{itemize}
+    \item \textbf{Circunferencia:} $(x-h)^2 + (y-k)^2 = r^2$
+    \item \textbf{Elipse:} $\frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1$
+    \item \textbf{Parábola:} $(x-h)^2 = 4p(y-k)$ o $(y-k)^2 = 4p(x-h)$
+    \item \textbf{Hipérbola:} $\frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1$
+\end{itemize}
+\end{tcolorbox}
+
+\subsection*{Consejos para el Éxito}
+
+\begin{enumerate}
+    \item \textbf{Visualiza siempre:} Antes de resolver, imagina la cónica. ¿Es abierta o cerrada? ¿Vertical u horizontal?
+
+    \item \textbf{Identifica primero:} Usa el discriminante para saber qué tipo de cónica tienes antes de empezar a transformar.
+
+    \item \textbf{Completa cuadrados con cuidado:} La mayoría de errores ocurren aquí. Verifica cada paso.
+
+    \item \textbf{Relaciona con la realidad:} Piensa en aplicaciones reales. ¿Esta elipse podría ser una órbita? ¿Esta parábola un puente?
+
+    \item \textbf{Practica el dibujo:} Saber graficar rápidamente las cónicas te ayudará a verificar tus respuestas.
+\end{enumerate}
+
+\subsection*{Lo que Viene}
+
+En las próximas partes de esta guía exploraremos:
+\begin{itemize}
+    \item Ejemplos resueltos paso a paso de cada tipo de cónica
+    \item Ejercicios progresivos para dominar las transformaciones
+    \item Problemas aplicados a situaciones reales
+    \item Técnicas avanzadas para rotar y trasladar cónicas
+\end{itemize}
+
+Recuerda: las matemáticas son como un deporte, se aprenden practicando. No te desanimes si algo parece difícil al principio. Con cada problema que resuelvas, las cónicas se volverán más familiares y verás que están en todas partes: en el arco de un balón de fútbol, en las ondas del WiFi, en las órbitas de los satélites que te dan el GPS.
+
+¡Las cónicas son el lenguaje geométrico del universo, y ahora tú estás aprendiendo a hablarlo!
+
+%INSERTAR_EJEMPLOS_AQUI%
+
+%INSERTAR_EJERCICIOS_INVERSOS_AQUI%
+
+%INSERTAR_EJERCICIOS_AQUI%
+
+%INSERTAR_SOLUCIONES_AQUI%
+
+\end{document}
