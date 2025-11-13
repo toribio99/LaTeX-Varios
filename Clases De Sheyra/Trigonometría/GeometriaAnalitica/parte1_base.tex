@@ -1,0 +1,1020 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+
+% Paquetes esenciales
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{titlesec}
+
+% Configuración de TikZ y pgfplots
+\usetikzlibrary{calc,arrows.meta,babel,patterns,angles,quotes}
+\pgfplotsset{compat=1.18}
+\tcbuselibrary{breakable,skins,theorems}
+
+% Definición de colores
+\definecolor{maincolor}{RGB}{0,70,173}
+\definecolor{accentcolor}{RGB}{255,127,0}
+\definecolor{thirdcolor}{RGB}{0,150,0}
+
+% Configuración de títulos
+\titleformat{\section}[block]
+{\normalfont\Large\bfseries\color{maincolor}}
+{\thesection}{1em}{}[\color{maincolor}\titlerule]
+
+\titleformat{\subsection}[block]
+{\normalfont\large\bfseries\color{maincolor}}
+{\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}[block]
+{\normalfont\normalsize\bfseries\color{maincolor}}
+{\thesubsubsection}{1em}{}
+
+% Entornos tcolorbox
+\newtcolorbox{ejemplo}[1][]{
+  colback=blue!5!white,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  breakable,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  colback=orange!5!white,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  breakable,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  colback=green!5!white,
+  colframe=thirdcolor,
+  fonttitle=\bfseries,
+  title=Solución,
+  breakable,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  colback=yellow!10!white,
+  colframe=yellow!50!black,
+  fonttitle=\bfseries,
+  title=Nota,
+  breakable,
+  #1
+}
+
+\newtcolorbox{definicion}[1][]{
+  colback=blue!5!white,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  breakable,
+  #1
+}
+
+\newtcolorbox{teorema}[1][]{
+  colback=green!5!white,
+  colframe=thirdcolor,
+  fonttitle=\bfseries,
+  title=Teorema,
+  breakable,
+  #1
+}
+
+% Configuración de encabezados
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO,RE]{\textit{La Línea Recta - Geometría Analítica}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+% Portada
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\Huge\bfseries GEOMETRÍA ANALÍTICA\par}
+\vspace{1cm}
+{\LARGE\bfseries La Línea Recta\par}
+\vspace{2cm}
+{\Large Prof: Toribio De J Arrieta F\par}
+\vspace{1cm}
+{\large Institución: La Pruebita\par}
+\vspace{1cm}
+{\large Grado: 10\par}
+\vspace{0.5cm}
+{\large Asignatura: Trigonometría\par}
+\vfill
+{\large \today\par}
+\end{titlepage}
+
+\newpage
+
+% Tabla de contenidos
+\tableofcontents
+\newpage
+
+% Introducción
+\section{Introducción}
+
+¡Bienvenidos al fascinante mundo de la Geometría Analítica! En esta guía, exploraremos uno de los conceptos más fundamentales y poderosos de las matemáticas: \textbf{la línea recta}. Aunque pueda parecer simple a primera vista, la línea recta es la base sobre la cual se construye gran parte de nuestro entendimiento del mundo que nos rodea.
+
+Imagina por un momento todo lo que te rodea. Los edificios con sus paredes verticales, las calles que se extienden hacia el horizonte, los rayos de luz que viajan desde el sol hasta tus ojos, incluso la trayectoria que sigues cuando caminas de tu casa al colegio. ¿Qué tienen todos estos elementos en común? ¡Exacto! Todos involucran líneas rectas de alguna manera.
+
+La Geometría Analítica, también conocida como geometría de coordenadas, es esa rama maravillosa de las matemáticas que nos permite describir figuras geométricas usando números y ecuaciones. Fue desarrollada en el siglo XVII por dos genios matemáticos: René Descartes y Pierre de Fermat. Su gran idea fue revolucionaria: ¿por qué no usar un sistema de coordenadas para representar puntos en el plano y luego usar álgebra para estudiar las propiedades geométricas?
+
+\subsection*{¿Por qué es tan importante la línea recta?}
+
+La línea recta es el camino más corto entre dos puntos. Esta simple propiedad la convierte en fundamental para innumerables aplicaciones:
+
+\begin{itemize}
+\item \textbf{En ingeniería civil}: Los ingenieros usan líneas rectas para diseñar carreteras, puentes y túneles. Cuando ves un puente colgante, cada cable forma una línea recta perfecta bajo tensión.
+
+\item \textbf{En arquitectura}: Los arquitectos trazan líneas rectas para crear planos precisos. Las fachadas de los edificios, las líneas de perspectiva en los diseños, todo se basa en el dominio de la línea recta.
+
+\item \textbf{En diseño gráfico}: Los diseñadores utilizan líneas rectas para crear composiciones equilibradas, establecer puntos de fuga en dibujos de perspectiva y guiar la vista del observador.
+
+\item \textbf{En navegación GPS}: Tu teléfono calcula la ruta más corta entre dos puntos usando conceptos de líneas rectas. Aunque la Tierra es curva, a pequeña escala, las rutas se aproximan mediante segmentos rectos.
+
+\item \textbf{En economía}: Los economistas usan líneas rectas para representar relaciones simples entre variables, como la oferta y la demanda.
+
+\item \textbf{En física}: El movimiento rectilíneo uniforme, la propagación de la luz, las trayectorias de partículas... ¡todo involucra líneas rectas!
+\end{itemize}
+
+\subsection*{¿Qué aprenderás en esta guía?}
+
+Durante nuestro recorrido por este fascinante tema, dominarás conceptos fundamentales que te permitirán:
+
+\begin{enumerate}
+\item Entender qué es un \textbf{lugar geométrico} y cómo la línea recta es un ejemplo perfecto de este concepto.
+
+\item Calcular la \textbf{distancia entre dos puntos} usando la famosa fórmula derivada del teorema de Pitágoras.
+
+\item Encontrar el \textbf{punto medio} de cualquier segmento, una habilidad útil en muchos problemas prácticos.
+
+\item Comprender qué es la \textbf{pendiente} de una recta y cómo esta nos dice qué tan inclinada está.
+
+\item Manejar las diferentes formas de la \textbf{ecuación de la recta}: desde la forma punto-pendiente hasta la forma general.
+
+\item Aplicar todos estos conceptos en problemas del mundo real.
+
+\item Determinar las \textbf{posiciones relativas} de dos rectas: ¿son paralelas?, ¿perpendiculares?, ¿se cruzan?
+\end{enumerate}
+
+\subsection*{Conexión con tus conocimientos previos}
+
+¿Recuerdas cuando aprendiste sobre el plano cartesiano en años anteriores? ¿Cómo ubicar puntos usando coordenadas (x, y)? ¡Perfecto! Ese conocimiento será tu base. También usaremos algo de álgebra básica: resolver ecuaciones, trabajar con fracciones, y simplificar expresiones. Si has olvidado algo, no te preocupes, lo repasaremos cuando sea necesario.
+
+\subsection*{Un viaje de descubrimiento}
+
+Piensa en esta guía como un viaje. Comenzaremos con conceptos simples y, paso a paso, construiremos un entendimiento profundo de la línea recta. Cada nuevo concepto se apoyará en el anterior, como subir una escalera donde cada peldaño te acerca más a la cima del conocimiento.
+
+Lo más emocionante es que estos conceptos no son solo teoría abstracta. Cada vez que uses Google Maps, cuando observes la arquitectura de un edificio, cuando juegues videojuegos con gráficos 3D, o incluso cuando patees un balón de fútbol, estarás viendo aplicaciones de lo que aprenderás aquí.
+
+\subsection*{Metodología de trabajo}
+
+Para aprovechar al máximo esta guía, te recomendamos:
+
+\begin{itemize}
+\item Lee cada sección con calma, no hay prisa. Las matemáticas requieren reflexión.
+\item Dibuja las gráficas mientras lees. Ver es entender.
+\item Intenta los ejemplos por tu cuenta antes de ver la solución.
+\item No memorices fórmulas, entiende de dónde vienen.
+\item Relaciona cada concepto con situaciones de tu vida diaria.
+\item Pregunta cuando no entiendas algo. No hay preguntas tontas en matemáticas.
+\end{itemize}
+
+\subsection*{Un mensaje final antes de comenzar}
+
+Las matemáticas, y en particular la geometría analítica, son como un lenguaje. Al principio, puede parecer extraño y difícil, pero con práctica y paciencia, comenzarás a "hablar" este lenguaje con fluidez. Cada problema resuelto es una conversación, cada gráfica es una historia visual, cada ecuación es una descripción precisa de una realidad geométrica.
+
+No te desanimes si algo parece difícil al principio. Incluso los grandes matemáticos tuvieron que empezar desde cero. Lo importante es mantener la curiosidad y la perseverancia. Recuerda: no estás solo en este viaje. Esta guía está diseñada para acompañarte paso a paso.
+
+¡Prepárate para descubrir el poder y la belleza de la línea recta! Lo que aprenderás aquí no solo te ayudará en tus exámenes, sino que te dará herramientas para entender mejor el mundo que te rodea. Desde la pantalla de tu celular hasta las estrellas en el cielo, las líneas rectas están en todas partes, esperando a ser descubiertas y comprendidas.
+
+¡Comencemos esta aventura matemática!
+
+\newpage
+
+% Conceptos Fundamentales
+\section{Conceptos Fundamentales}
+
+\subsection{Lugar Geométrico}
+
+Comenzamos nuestro estudio con uno de los conceptos más elegantes y fundamentales de la geometría: el \textbf{lugar geométrico}. Pero, ¿qué es exactamente un lugar geométrico? Vamos a descubrirlo juntos.
+
+\begin{definicion}
+Un \textbf{lugar geométrico} es el conjunto de todos los puntos del plano (o del espacio) que cumplen una determinada propiedad o condición.
+\end{definicion}
+
+Pensemos en esto de manera más cotidiana. Imagina que estás en el patio del colegio y tu profesor te dice: "Quiero que todos los estudiantes que midan exactamente 1.70 metros se paren en una línea". Esa línea donde se paran esos estudiantes sería como un "lugar" donde todos cumplen la misma condición: medir 1.70 metros.
+
+En geometría, hacemos algo similar pero con puntos en el plano. Por ejemplo:
+
+\begin{itemize}
+\item Si pedimos todos los puntos que están a la misma distancia de un punto central, obtenemos una \textbf{circunferencia}.
+\item Si pedimos todos los puntos que están a la misma distancia de dos puntos dados, obtenemos la \textbf{mediatriz} (una línea recta perpendicular al segmento que une esos dos puntos).
+\item Si pedimos todos los puntos cuya suma de distancias a dos puntos fijos es constante, obtenemos una \textbf{elipse}.
+\end{itemize}
+
+\begin{nota}
+La línea recta también es un lugar geométrico. Es el conjunto de todos los puntos que mantienen la misma dirección respecto a un punto inicial, o dicho de otra manera, todos los puntos que satisfacen una ecuación lineal de la forma $ax + by + c = 0$.
+\end{nota}
+
+Veamos algunos ejemplos visuales de lugares geométricos:
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\begin{axis}[
+    width=0.90\textwidth,
+    height=0.60\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-6, xmax=6,
+    ymin=-6, ymax=6,
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=outer north east,
+    title={Ejemplos de Lugares Geométricos}
+]
+
+% Circunferencia
+\addplot[maincolor, thick, samples=100, domain=0:360]
+    ({3*cos(x)}, {3*sin(x)});
+\addlegendentry{Circunferencia: $x^2 + y^2 = 9$}
+
+% Línea recta
+\addplot[accentcolor, thick, domain=-6:6] {0.5*x + 1};
+\addlegendentry{Recta: $y = 0.5x + 1$}
+
+% Parábola
+\addplot[thirdcolor, thick, samples=100, domain=-3:3] {0.3*x^2 - 2};
+\addlegendentry{Parábola: $y = 0.3x^2 - 2$}
+
+% Punto central de la circunferencia
+\addplot[mark=*, mark size=3pt, maincolor] coordinates {(0,0)};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Como puedes ver, cada curva en el gráfico representa un lugar geométrico diferente. La circunferencia azul contiene todos los puntos que están a distancia 3 del origen. La línea recta naranja contiene todos los puntos que satisfacen la ecuación $y = 0.5x + 1$. La parábola verde contiene todos los puntos que satisfacen $y = 0.3x^2 - 2$.
+
+La belleza del concepto de lugar geométrico es que nos permite describir formas complejas mediante condiciones simples. Es como dar una "receta" matemática para construir una figura geométrica.
+
+\subsection{Distancia Entre Dos Puntos}
+
+Ahora que entendemos qué es un lugar geométrico, necesitamos una herramienta fundamental para trabajar con puntos en el plano: la fórmula de la distancia. Esta fórmula es tan importante que la usarás no solo en geometría, sino también en física, ingeniería, y muchas otras áreas.
+
+\begin{definicion}
+La \textbf{distancia} entre dos puntos $P_1(x_1, y_1)$ y $P_2(x_2, y_2)$ en el plano cartesiano se calcula mediante la fórmula:
+$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+\end{definicion}
+
+¿De dónde viene esta fórmula? ¡Del famoso teorema de Pitágoras! Veámoslo gráficamente:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.60\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=8,
+    ymin=-1, ymax=7,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Distancia entre dos puntos usando el Teorema de Pitágoras}
+]
+
+% Puntos
+\coordinate (P1) at (axis cs:2,2);
+\coordinate (P2) at (axis cs:6,5);
+
+% Triángulo rectángulo
+\draw[thick, accentcolor, dashed] (P1) -- (axis cs:6,2) node[midway, below] {$\Delta x = x_2 - x_1 = 4$};
+\draw[thick, thirdcolor, dashed] (axis cs:6,2) -- (P2) node[midway, right] {$\Delta y = y_2 - y_1 = 3$};
+\draw[thick, maincolor] (P1) -- (P2) node[midway, above left] {$d = 5$};
+
+% Marcar el ángulo recto
+\draw[thick] (axis cs:5.7,2) -- (axis cs:5.7,2.3) -- (axis cs:6,2.3);
+
+% Puntos
+\addplot[mark=*, mark size=4pt, maincolor] coordinates {(2,2)};
+\addplot[mark=*, mark size=4pt, maincolor] coordinates {(6,5)};
+\node[above left] at (P1) {$P_1(2,2)$};
+\node[above right] at (P2) {$P_2(6,5)$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Como puedes observar, cuando trazamos un segmento entre dos puntos, podemos formar un triángulo rectángulo donde:
+- La base (cateto horizontal) mide $|x_2 - x_1|$
+- La altura (cateto vertical) mide $|y_2 - y_1|$
+- La hipotenusa es la distancia $d$ que buscamos
+
+Por el teorema de Pitágoras: $d^2 = (x_2 - x_1)^2 + (y_2 - y_1)^2$
+
+Resolviendo para $d$, obtenemos nuestra fórmula.
+
+\textbf{Ejemplo resuelto paso a paso:}
+
+Encontremos la distancia entre los puntos $A(1, 3)$ y $B(5, 6)$.
+
+\begin{solucion}
+Paso 1: Identificar las coordenadas
+- $x_1 = 1$, $y_1 = 3$ (punto A)
+- $x_2 = 5$, $y_2 = 6$ (punto B)
+
+Paso 2: Calcular las diferencias
+- $x_2 - x_1 = 5 - 1 = 4$
+- $y_2 - y_1 = 6 - 3 = 3$
+
+Paso 3: Aplicar la fórmula
+$$d = \sqrt{(4)^2 + (3)^2} = \sqrt{16 + 9} = \sqrt{25} = 5$$
+
+Por lo tanto, la distancia entre A y B es 5 unidades.
+\end{solucion}
+
+Esta fórmula tiene aplicaciones prácticas increíbles. Por ejemplo, cuando tu GPS calcula la distancia en línea recta entre dos ubicaciones, está usando exactamente esta fórmula (aunque luego debe ajustar para las calles reales). Los videojuegos la usan constantemente para detectar colisiones entre objetos.
+
+\subsection{Punto Medio de un Segmento}
+
+Muchas veces en problemas de geometría, necesitamos encontrar el punto que está exactamente a la mitad entre dos puntos dados. Este punto especial se llama \textbf{punto medio}.
+
+\begin{definicion}
+El \textbf{punto medio} $M$ de un segmento con extremos $P_1(x_1, y_1)$ y $P_2(x_2, y_2)$ tiene coordenadas:
+$$M = \left(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}\right)$$
+\end{definicion}
+
+La idea es muy intuitiva: para encontrar el punto medio, simplemente promediamos las coordenadas x de los extremos, y promediamos las coordenadas y de los extremos. ¡Es como encontrar el promedio de dos números, pero en dos dimensiones!
+
+Veámoslo gráficamente:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.60\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=9,
+    ymin=-1, ymax=7,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Punto Medio de un Segmento}
+]
+
+% Puntos extremos
+\coordinate (P1) at (axis cs:2,1);
+\coordinate (P2) at (axis cs:7,5);
+\coordinate (M) at (axis cs:4.5,3);
+
+% Segmento
+\draw[thick, maincolor] (P1) -- (P2);
+
+% Marcas de división igual
+\draw[thick, accentcolor] (P1) -- (M) node[midway, below, sloped] {$d/2$};
+\draw[thick, accentcolor] (M) -- (P2) node[midway, above, sloped] {$d/2$};
+
+% Puntos
+\addplot[mark=*, mark size=4pt, maincolor] coordinates {(2,1)};
+\addplot[mark=*, mark size=4pt, maincolor] coordinates {(7,5)};
+\addplot[mark=square*, mark size=5pt, accentcolor] coordinates {(4.5,3)};
+
+% Etiquetas
+\node[below left] at (P1) {$P_1(2,1)$};
+\node[above right] at (P2) {$P_2(7,5)$};
+\node[below right] at (M) {$M(4.5,3)$};
+
+% Líneas auxiliares
+\draw[dashed, gray] (axis cs:2,3) -- (M) -- (axis cs:4.5,1);
+\draw[dashed, gray] (axis cs:7,3) -- (M) -- (axis cs:4.5,5);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Ejemplo numérico:}
+
+Encontremos el punto medio del segmento que une $A(3, 7)$ con $B(9, 1)$.
+
+\begin{solucion}
+Aplicando la fórmula directamente:
+$$M = \left(\frac{3 + 9}{2}, \frac{7 + 1}{2}\right) = \left(\frac{12}{2}, \frac{8}{2}\right) = (6, 4)$$
+
+El punto medio es $M(6, 4)$.
+\end{solucion}
+
+El punto medio es fundamental en muchas construcciones geométricas. Por ejemplo, en arquitectura, cuando se quiere colocar una columna exactamente al centro de una habitación rectangular, se usa el concepto de punto medio. En diseño gráfico, para centrar elementos, constantemente se calculan puntos medios.
+
+\subsection{Pendiente de una Recta}
+
+Llegamos a uno de los conceptos más importantes: la \textbf{pendiente}. La pendiente nos dice qué tan "inclinada" está una recta. Es como medir la inclinación de una rampa o una escalera.
+
+\begin{definicion}
+La \textbf{pendiente} $m$ de una recta que pasa por los puntos $P_1(x_1, y_1)$ y $P_2(x_2, y_2)$ se calcula como:
+$$m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{\text{cambio vertical}}{\text{cambio horizontal}} = \frac{\Delta y}{\Delta x}$$
+\end{definicion}
+
+La pendiente nos dice cuánto "sube" o "baja" la recta por cada unidad que avanza horizontalmente. Piensa en esto como subir escaleras: si por cada paso horizontal subes mucho verticalmente, la escalera es muy empinada (pendiente grande). Si subes poco, la escalera es suave (pendiente pequeña).
+
+\begin{nota}
+\begin{itemize}
+\item Si $m > 0$: la recta sube de izquierda a derecha (pendiente positiva)
+\item Si $m < 0$: la recta baja de izquierda a derecha (pendiente negativa)
+\item Si $m = 0$: la recta es horizontal
+\item Si el denominador es 0: la recta es vertical (pendiente indefinida)
+\end{itemize}
+\end{nota}
+
+Veamos diferentes tipos de pendientes:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.90\textwidth,
+    height=0.70\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-6, xmax=6,
+    ymin=-5, ymax=5,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Diferentes tipos de pendientes},
+    legend pos=outer north east
+]
+
+% Pendiente positiva grande
+\addplot[maincolor, thick, domain=-2:4] {1.5*x - 2};
+\addlegendentry{$m = 1.5$ (positiva grande)}
+
+% Pendiente positiva pequeña
+\addplot[accentcolor, thick, domain=-5:5] {0.3*x + 1};
+\addlegendentry{$m = 0.3$ (positiva pequeña)}
+
+% Pendiente negativa
+\addplot[thirdcolor, thick, domain=-4:5] {-0.8*x + 2};
+\addlegendentry{$m = -0.8$ (negativa)}
+
+% Pendiente cero (horizontal)
+\addplot[purple, thick, domain=-6:6] {-1.5};
+\addlegendentry{$m = 0$ (horizontal)}
+
+% Recta vertical
+\draw[brown, thick] (axis cs:3,-5) -- (axis cs:3,5);
+\node[brown, right] at (axis cs:3,4) {$m = \infty$ (vertical)};
+
+% Ángulos de inclinación
+\draw[->, thick] (axis cs:0,0) -- (axis cs:1,0);
+\draw[->, thick, maincolor] (axis cs:0,0) -- (axis cs:0.5,0.75)
+    node[midway, left] {$\theta_1$};
+\draw[thick, maincolor] (axis cs:0.3,0) arc (0:56:0.3);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Relación con el ángulo de inclinación:}
+
+La pendiente también está relacionada con el ángulo $\theta$ que forma la recta con el eje horizontal:
+$$m = \tan(\theta)$$
+
+Esto significa que si conoces el ángulo de inclinación, puedes calcular la pendiente, y viceversa.
+
+\textbf{Aplicaciones prácticas de la pendiente:}
+
+\begin{itemize}
+\item \textbf{En construcción}: Las rampas para sillas de ruedas deben tener una pendiente máxima de 1:12 (aproximadamente $m = 0.083$) según las normas de accesibilidad.
+\item \textbf{En carreteras}: Las señales de tráfico indican la pendiente de las subidas o bajadas en porcentaje. Una pendiente del 10\% significa $m = 0.1$.
+\item \textbf{En economía}: La pendiente de la curva de demanda nos dice cómo cambia la cantidad demandada cuando cambia el precio.
+\item \textbf{En física}: La pendiente de un gráfico posición-tiempo nos da la velocidad.
+\end{itemize}
+
+\subsection{Ecuación de la Recta}
+
+Ahora que entendemos la pendiente, podemos expresar cualquier recta mediante una ecuación. Existen varias formas de escribir la ecuación de una recta, cada una útil en diferentes situaciones.
+
+\subsubsection{Forma Punto-Pendiente}
+
+Si conocemos un punto $(x_1, y_1)$ por donde pasa la recta y su pendiente $m$:
+
+\begin{definicion}
+$$y - y_1 = m(x - x_1)$$
+\end{definicion}
+
+Esta forma es muy útil cuando conocemos un punto específico y la pendiente.
+
+\subsubsection{Forma Pendiente-Ordenada}
+
+Esta es probablemente la forma más común:
+
+\begin{definicion}
+$$y = mx + b$$
+donde $m$ es la pendiente y $b$ es la ordenada al origen (donde la recta corta al eje $y$).
+\end{definicion}
+
+\subsubsection{Forma General}
+
+Cualquier recta en el plano puede escribirse como:
+
+\begin{definicion}
+$$Ax + By + C = 0$$
+donde $A$, $B$ y $C$ son constantes reales, con $A$ y $B$ no ambas cero.
+\end{definicion}
+
+\subsubsection{Forma Simétrica}
+
+Cuando conocemos los puntos donde la recta corta a los ejes:
+
+\begin{definicion}
+$$\frac{x}{a} + \frac{y}{b} = 1$$
+donde $a$ es la intersección con el eje $x$ y $b$ es la intersección con el eje $y$.
+\end{definicion}
+
+Veamos una recta con todos sus elementos identificados:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.90\textwidth,
+    height=0.65\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-2, xmax=8,
+    ymin=-2, ymax=6,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Elementos de una recta: $y = 0.75x + 1.5$}
+]
+
+% La recta
+\addplot[maincolor, thick, domain=-2:7] {0.75*x + 1.5};
+
+% Ordenada al origen
+\addplot[mark=*, mark size=4pt, accentcolor] coordinates {(0,1.5)};
+\node[right, accentcolor] at (axis cs:0.2,1.5) {$b = 1.5$ (ordenada al origen)};
+
+% Punto donde corta el eje x
+\addplot[mark=*, mark size=4pt, thirdcolor] coordinates {(-2,0)};
+\node[below, thirdcolor] at (axis cs:-2,0) {$(-2,0)$};
+
+% Otro punto de la recta
+\addplot[mark=*, mark size=4pt, purple] coordinates {(4,4.5)};
+\node[above left, purple] at (axis cs:4,4.5) {$(4, 4.5)$};
+
+% Triángulo para mostrar la pendiente
+\draw[thick, dashed, orange] (axis cs:2,3) -- (axis cs:5,3) node[midway, below] {$\Delta x = 3$};
+\draw[thick, dashed, orange] (axis cs:5,3) -- (axis cs:5,5.25) node[midway, right] {$\Delta y = 2.25$};
+\node[orange, below right] at (axis cs:2.5,4) {$m = \frac{2.25}{3} = 0.75$};
+
+% Ángulo de inclinación
+\draw[thick, red] (axis cs:0.5,0) arc (0:37:0.5);
+\node[red] at (axis cs:1,0.3) {$\theta \approx 37°$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conversión entre formas:}
+
+Es importante poder convertir entre las diferentes formas según lo que necesitemos:
+
+\begin{ejemplo}
+Convierte $2x - 3y + 6 = 0$ (forma general) a la forma pendiente-ordenada.
+
+Solución:
+\begin{align}
+2x - 3y + 6 &= 0\\
+-3y &= -2x - 6\\
+y &= \frac{2}{3}x + 2
+\end{align}
+
+Por lo tanto, $m = \frac{2}{3}$ y $b = 2$.
+\end{ejemplo}
+
+\subsection{Aplicaciones de la Línea Recta}
+
+Las aplicaciones de la línea recta en el mundo real son innumerables. Exploremos algunas de las más fascinantes e importantes:
+
+\subsubsection{Ingeniería Civil: Diseño de Carreteras}
+
+Cuando los ingenieros diseñan carreteras, deben considerar la pendiente máxima segura. Una pendiente muy pronunciada puede ser peligrosa para vehículos pesados o en condiciones de lluvia. Las autopistas generalmente tienen pendientes menores al 6\% ($m = 0.06$), mientras que las carreteras de montaña pueden llegar hasta el 10\% o 12\%.
+
+\subsubsection{Arquitectura: Líneas de Horizonte y Perspectiva}
+
+Los arquitectos usan líneas rectas para crear perspectivas en sus diseños. El concepto de "punto de fuga" en el dibujo arquitectónico se basa en que todas las líneas paralelas en la realidad convergen visualmente en un punto cuando se ven en perspectiva.
+
+\subsubsection{Diseño Gráfico: Composición y Balance}
+
+Los diseñadores gráficos utilizan líneas guía invisibles (basadas en rectas) para crear composiciones equilibradas. La "regla de los tercios" en fotografía divide la imagen con líneas rectas imaginarias.
+
+\subsubsection{Navegación GPS: Rutas Óptimas}
+
+Aunque la Tierra es esférica, para distancias cortas, el GPS aproxima las rutas usando segmentos de líneas rectas. La distancia más corta entre dos puntos en un mapa plano es siempre una línea recta.
+
+\subsubsection{Economía: Análisis de Tendencias}
+
+Los economistas usan rectas de regresión para analizar tendencias en datos. Por ejemplo, la relación entre oferta y demanda se modela inicialmente con líneas rectas para simplificar el análisis.
+
+\subsubsection{Física: Movimiento Rectilíneo Uniforme}
+
+Cuando un objeto se mueve con velocidad constante en línea recta, su posición en función del tiempo es una línea recta. La pendiente de esta línea es la velocidad del objeto.
+
+Veamos una aplicación práctica visualizada:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.88\textwidth,
+    height=0.60\textwidth,
+    axis lines=middle,
+    xlabel={Tiempo (horas)},
+    ylabel={Distancia (km)},
+    xmin=0, xmax=6,
+    ymin=0, ymax=300,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Aplicación: Trayectoria de dos vehículos},
+    legend pos=north west
+]
+
+% Vehículo 1: sale del origen con velocidad 60 km/h
+\addplot[maincolor, thick, domain=0:5] {60*x};
+\addlegendentry{Vehículo A: $v = 60$ km/h}
+
+% Vehículo 2: sale 1 hora después con velocidad 80 km/h
+\addplot[accentcolor, thick, domain=1:5] {80*(x-1)};
+\addlegendentry{Vehículo B: $v = 80$ km/h}
+
+% Punto de encuentro
+\addplot[mark=*, mark size=5pt, thirdcolor] coordinates {(4,240)};
+\node[above right, thirdcolor] at (axis cs:4,240) {Punto de encuentro};
+
+% Líneas auxiliares
+\draw[dashed, gray] (axis cs:4,0) -- (axis cs:4,240);
+\draw[dashed, gray] (axis cs:0,240) -- (axis cs:4,240);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+En este ejemplo, podemos ver cómo dos vehículos que viajan en línea recta con velocidades diferentes se encuentran en un punto. El vehículo A (azul) sale primero con velocidad de 60 km/h. El vehículo B (naranja) sale una hora después pero viaja más rápido a 80 km/h. Se encuentran después de 4 horas del inicio, habiendo recorrido 240 km.
+
+\subsection{Posiciones Relativas de Dos Rectas en el Plano}
+
+Cuando tenemos dos rectas en el plano, estas pueden relacionarse de diferentes maneras. Entender estas relaciones es fundamental para resolver problemas geométricos y tiene aplicaciones prácticas importantes.
+
+\subsubsection{Rectas Paralelas}
+
+Dos rectas son \textbf{paralelas} cuando nunca se cruzan, sin importar cuánto las extendamos. Matemáticamente:
+
+\begin{teorema}
+Dos rectas con ecuaciones $y = m_1x + b_1$ y $y = m_2x + b_2$ son paralelas si y solo si:
+$$m_1 = m_2 \text{ y } b_1 \neq b_2$$
+\end{teorema}
+
+Las rectas paralelas tienen la misma pendiente pero diferentes ordenadas al origen.
+
+\subsubsection{Rectas Perpendiculares}
+
+Dos rectas son \textbf{perpendiculares} cuando se cruzan formando un ángulo de 90°.
+
+\begin{teorema}
+Dos rectas con pendientes $m_1$ y $m_2$ son perpendiculares si y solo si:
+$$m_1 \cdot m_2 = -1$$
+O equivalentemente: $m_2 = -\frac{1}{m_1}$
+\end{teorema}
+
+Esto significa que la pendiente de una recta perpendicular es el negativo del recíproco de la pendiente original.
+
+\subsubsection{Rectas Secantes}
+
+Dos rectas son \textbf{secantes} cuando se cruzan en exactamente un punto. Esto ocurre cuando tienen diferentes pendientes:
+
+$$m_1 \neq m_2$$
+
+Para encontrar el punto de intersección, resolvemos el sistema de ecuaciones formado por las dos rectas.
+
+\subsubsection{Rectas Coincidentes}
+
+Dos rectas son \textbf{coincidentes} cuando son exactamente la misma recta. Tienen todos sus puntos en común:
+
+$$m_1 = m_2 \text{ y } b_1 = b_2$$
+
+Veamos gráficamente estos cuatro casos:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.92\textwidth,
+    height=0.70\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-5, xmax=5,
+    ymin=-5, ymax=5,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Posiciones Relativas de Dos Rectas}
+]
+
+% Rectas paralelas
+\addplot[maincolor, thick, domain=-5:2] {0.5*x + 3} node[pos=0.8, above, sloped] {Paralelas};
+\addplot[maincolor, thick, domain=-5:2] {0.5*x + 1};
+
+% Rectas perpendiculares
+\addplot[accentcolor, thick, domain=-1:5] {0.75*x - 2} node[pos=0.7, below, sloped] {Perpendiculares};
+\addplot[accentcolor, thick, domain=-2:5] {-1.333*x + 0.666};
+
+% Marcar ángulo recto
+\coordinate (O) at (axis cs:2.133,-0.4);
+\draw[accentcolor, thick] ($(O) + (-0.3,-0.225)$) -- ($(O) + (-0.3,0.075)$) -- ($(O) + (0,0.075)$);
+
+% Rectas secantes
+\addplot[thirdcolor, thick, domain=-5:-1] {-0.6*x - 4} node[pos=0.2, below, sloped] {Secantes};
+\addplot[thirdcolor, thick, domain=-5:-1] {0.8*x - 1.2};
+
+% Punto de intersección secantes
+\addplot[mark=*, mark size=3pt, thirdcolor] coordinates {(-3.5,-1.9)};
+
+% Rectas coincidentes (se ve como una sola)
+\addplot[purple, ultra thick, domain=1:5] {-x + 3} node[pos=0.5, above, sloped] {Coincidentes};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Ángulo Entre Dos Rectas}
+
+Cuando dos rectas se cruzan, forman cuatro ángulos. El ángulo agudo $\alpha$ entre dos rectas con pendientes $m_1$ y $m_2$ se puede calcular con:
+
+\begin{definicion}
+$$\tan(\alpha) = \left|\frac{m_2 - m_1}{1 + m_1 \cdot m_2}\right|$$
+\end{definicion}
+
+Este ángulo siempre está entre 0° y 90°.
+
+\textbf{Aplicaciones de las posiciones relativas:}
+
+\begin{itemize}
+\item \textbf{Urbanismo}: Las calles paralelas facilitan la navegación y el diseño de ciudades.
+\item \textbf{Carpintería}: Los carpinteros usan escuadras para verificar que dos piezas son perpendiculares.
+\item \textbf{Diseño de circuitos}: Las pistas en una placa de circuito impreso deben diseñarse considerando cruces y paralelismos.
+\item \textbf{Geometría en videojuegos}: La detección de colisiones entre objetos usa conceptos de intersección de rectas.
+\end{itemize}
+
+\subsection{Tabla Resumen de Fórmulas Importantes}
+
+Para facilitar tu estudio y referencia rápida, aquí está un resumen de todas las fórmulas importantes que hemos aprendido:
+
+\begin{tcolorbox}[
+    colback=blue!5!white,
+    colframe=maincolor,
+    title=Fórmulas de la Línea Recta,
+    breakable
+]
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Concepto} & \textbf{Fórmula} \\
+\hline
+\hline
+Distancia entre dos puntos & $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$ \\
+\hline
+Punto medio & $M = \left(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}\right)$ \\
+\hline
+Pendiente & $m = \frac{y_2 - y_1}{x_2 - x_1}$ \\
+\hline
+Relación pendiente-ángulo & $m = \tan(\theta)$ \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Formas de la ecuación de la recta}} \\
+\hline
+Punto-pendiente & $y - y_1 = m(x - x_1)$ \\
+\hline
+Pendiente-ordenada & $y = mx + b$ \\
+\hline
+General & $Ax + By + C = 0$ \\
+\hline
+Simétrica & $\frac{x}{a} + \frac{y}{b} = 1$ \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Posiciones relativas}} \\
+\hline
+Paralelas & $m_1 = m_2$, $b_1 \neq b_2$ \\
+\hline
+Perpendiculares & $m_1 \cdot m_2 = -1$ \\
+\hline
+Ángulo entre rectas & $\tan(\alpha) = \left|\frac{m_2 - m_1}{1 + m_1 \cdot m_2}\right|$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{tcolorbox}
+
+Estas fórmulas son las herramientas fundamentales para trabajar con líneas rectas en el plano cartesiano. Con práctica, las usarás con naturalidad para resolver problemas cada vez más complejos e interesantes.
+
+%INSERTAR_EJEMPLOS_AQUI%
+%INSERTAR_EJERCICIOS_AQUI%
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado un viaje fascinante a través del mundo de la línea recta en geometría analítica. Lo que comenzó como una simple idea - el camino más corto entre dos puntos - se ha transformado en un conjunto poderoso de herramientas matemáticas que te permitirán analizar y resolver problemas complejos.
+
+\subsection*{Recapitulación de lo Aprendido}
+
+Durante este recorrido, has dominado conceptos fundamentales que son la base de muchas áreas de las matemáticas y sus aplicaciones:
+
+\begin{enumerate}
+\item \textbf{Lugar Geométrico}: Aprendiste que las figuras geométricas pueden definirse como conjuntos de puntos que cumplen ciertas condiciones. La línea recta es un ejemplo perfecto de esto: todos sus puntos satisfacen una ecuación lineal.
+
+\item \textbf{Distancia entre Dos Puntos}: Dominas ahora la fórmula derivada del teorema de Pitágoras, una herramienta esencial no solo en geometría, sino en física, ingeniería y muchas otras disciplinas.
+
+\item \textbf{Punto Medio}: Sabes encontrar el centro exacto de cualquier segmento, una habilidad útil en diseño, arquitectura y resolución de problemas geométricos.
+
+\item \textbf{Pendiente}: Comprendes este concepto crucial que nos dice la inclinación de una recta, su dirección de crecimiento, y cómo se relaciona con el ángulo de inclinación.
+
+\item \textbf{Ecuaciones de la Recta}: Manejas las diferentes formas de expresar una recta algebraicamente, y puedes convertir entre ellas según lo que necesites.
+
+\item \textbf{Posiciones Relativas}: Puedes determinar si dos rectas son paralelas, perpendiculares, secantes o coincidentes, y calcular el ángulo entre ellas.
+\end{enumerate}
+
+\begin{tcolorbox}[
+    colback=green!5!white,
+    colframe=thirdcolor,
+    title=Tabla de Fórmulas Esenciales para Referencia Rápida,
+    breakable
+]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{5cm}|p{7cm}|p{3cm}|}
+\hline
+\textbf{Concepto} & \textbf{Fórmula} & \textbf{Uso Principal} \\
+\hline
+\hline
+\textbf{Distancia} & $d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$ & Longitud de segmentos \\
+\hline
+\textbf{Punto Medio} & $M = \left(\frac{x_1+x_2}{2}, \frac{y_1+y_2}{2}\right)$ & Centro de segmentos \\
+\hline
+\textbf{Pendiente} & $m = \frac{y_2-y_1}{x_2-x_1} = \tan(\theta)$ & Inclinación de rectas \\
+\hline
+\textbf{Ec. Punto-Pendiente} & $y - y_1 = m(x - x_1)$ & Cuando conoces un punto y pendiente \\
+\hline
+\textbf{Ec. Pendiente-Ordenada} & $y = mx + b$ & Forma más común \\
+\hline
+\textbf{Ec. General} & $Ax + By + C = 0$ & Forma estándar \\
+\hline
+\textbf{Condición Paralelismo} & $m_1 = m_2$ & Rectas que nunca se cruzan \\
+\hline
+\textbf{Condición Perpendicularidad} & $m_1 \cdot m_2 = -1$ & Rectas a 90° \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{tcolorbox}
+
+\subsection*{Consejos para Trabajar con Líneas Rectas}
+
+Basándome en los conceptos que has aprendido, aquí van algunos consejos prácticos que te ayudarán a resolver problemas más eficientemente:
+
+\begin{nota}
+\textbf{Consejos de Oro:}
+\begin{enumerate}
+\item \textbf{Siempre dibuja}: Antes de resolver cualquier problema, haz un bosquejo. Ver el problema geométricamente te dará intuición sobre la solución.
+
+\item \textbf{Identifica qué tienes y qué necesitas}: Antes de aplicar fórmulas, lista los datos que conoces y lo que debes encontrar.
+
+\item \textbf{Elige la forma correcta de la ecuación}:
+   - Si conoces pendiente y un punto: usa punto-pendiente
+   - Si conoces dos puntos: calcula primero la pendiente
+   - Si necesitas graficar: convierte a pendiente-ordenada
+
+\item \textbf{Verifica tus respuestas}: Sustituye puntos en tu ecuación final para verificar que la satisfacen.
+
+\item \textbf{Practica la conversión entre formas}: Ser fluido en convertir entre diferentes formas de la ecuación te ahorrará mucho tiempo.
+\end{enumerate}
+\end{nota}
+
+\subsection*{Aplicaciones Avanzadas y Conexiones con Otros Temas}
+
+Lo que has aprendido sobre la línea recta es solo el comienzo. Estos conceptos se conectan y extienden a muchas otras áreas fascinantes de las matemáticas:
+
+\subsubsection*{En Cálculo Diferencial}
+
+La pendiente de una recta es la base para entender la derivada. La derivada de una función en un punto es la pendiente de la recta tangente a la curva en ese punto. Cuando estudies cálculo, verás que todo lo que aprendiste aquí sobre pendientes se generaliza a curvas más complejas.
+
+\subsubsection*{En Álgebra Lineal}
+
+Los sistemas de ecuaciones lineales, que estudiarás más adelante, son conjuntos de rectas (en 2D) o planos (en 3D). Resolver un sistema es encontrar dónde se intersectan estas rectas o planos.
+
+\subsubsection*{En Estadística}
+
+La regresión lineal, una herramienta fundamental en estadística, busca la recta que mejor se ajusta a un conjunto de datos. Los conceptos de pendiente e intersección tienen interpretaciones importantes en el análisis de datos.
+
+\subsubsection*{En Programación y Computación Gráfica}
+
+Los videojuegos y las aplicaciones de diseño usan constantemente ecuaciones de rectas para:
+- Detectar colisiones entre objetos
+- Trazar rayos de luz en renderizado 3D
+- Calcular trayectorias de proyectiles
+- Implementar algoritmos de pathfinding (encontrar rutas)
+
+\subsubsection*{En Física}
+
+- Las leyes de la óptica geométrica se basan en la propagación rectilínea de la luz
+- El movimiento rectilíneo uniforme se describe con ecuaciones de rectas
+- Las fuerzas se representan como vectores (segmentos de recta con dirección)
+
+\subsection*{Recomendaciones para Continuar Aprendiendo}
+
+Para profundizar y consolidar tu conocimiento:
+
+\begin{enumerate}
+\item \textbf{Practica con problemas variados}: No te limites a ejercicios mecánicos. Busca problemas que requieran pensar y aplicar varios conceptos.
+
+\item \textbf{Conecta con el mundo real}: Cuando veas edificios, carreteras, o cualquier estructura, piensa en las líneas rectas involucradas.
+
+\item \textbf{Explora con software}: Usa programas como GeoGebra para experimentar con rectas dinámicamente. Cambiar parámetros y ver resultados instantáneos refuerza la comprensión.
+
+\item \textbf{Enseña a otros}: Explicar estos conceptos a compañeros es una excelente manera de consolidar tu propio entendimiento.
+
+\item \textbf{Prepárate para el siguiente nivel}: Los conceptos de línea recta se extienden naturalmente a:
+   - Cónicas (parábolas, elipses, hipérbolas)
+   - Geometría en 3D
+   - Vectores y espacios vectoriales
+   - Transformaciones geométricas
+\end{enumerate}
+
+\subsection*{Reflexión Final}
+
+La geometría analítica, y en particular el estudio de la línea recta, representa uno de los grandes logros del pensamiento matemático: la unificación del álgebra y la geometría. Lo que Descartes y Fermat iniciaron hace casi 400 años sigue siendo fundamental en la tecnología del siglo XXI.
+
+Cada vez que uses tu teléfono para navegar con GPS, cada vez que un arquitecto diseñe un edificio, cada vez que un programador cree gráficos en una computadora, están usando los conceptos que has aprendido en esta guía. Las matemáticas no son solo números y símbolos abstractos; son el lenguaje con el que describimos y entendemos el mundo.
+
+Has demostrado perseverancia y dedicación al completar este estudio. Los conceptos que ahora dominas no son solo herramientas para resolver problemas en papel; son instrumentos para entender y moldear la realidad. La línea recta, en su aparente simplicidad, encierra profundidad y belleza matemática.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.55\textwidth,
+    axis lines=none,
+    xmin=-10, xmax=10,
+    ymin=-10, ymax=10,
+    title={\Large\textbf{El Arte de las Líneas Rectas}}
+]
+
+% Crear un patrón artístico con líneas rectas
+\foreach \i in {0,20,...,340} {
+    \addplot[maincolor!70, opacity=0.7] coordinates {
+        ({8*cos(\i)}, {8*sin(\i)})
+        ({8*cos(\i+120)}, {8*sin(\i+120)})
+    };
+    \addplot[accentcolor!70, opacity=0.7] coordinates {
+        ({6*cos(\i+10)}, {6*sin(\i+10)})
+        ({6*cos(\i+130)}, {6*sin(\i+130)})
+    };
+    \addplot[thirdcolor!70, opacity=0.7] coordinates {
+        ({4*cos(\i+20)}, {4*sin(\i+20)})
+        ({4*cos(\i+140)}, {4*sin(\i+140)})
+    };
+}
+
+\node at (axis cs:0,-12) {\textit{``La geometría es el arte de razonar bien con figuras mal hechas''} - Poincaré};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Recuerda siempre que las matemáticas son un viaje, no un destino. Cada concepto que aprendes abre puertas a nuevos territorios por explorar. La línea recta ha sido tu primera gran conquista en geometría analítica, pero es solo el comienzo de aventuras matemáticas aún más emocionantes.
+
+¡Sigue adelante con confianza! Has demostrado que puedes dominar conceptos matemáticos complejos. Usa lo que has aprendido, practícalo, compártelo, y sobre todo, disfruta del poder y la elegancia de las matemáticas.
+
+\textbf{¡Felicitaciones por completar este estudio sobre la línea recta!}
+
+Tu viaje en la geometría analítica apenas comienza, y las herramientas que ahora posees te acompañarán en todos tus futuros estudios matemáticos y científicos.
+
+\end{document}

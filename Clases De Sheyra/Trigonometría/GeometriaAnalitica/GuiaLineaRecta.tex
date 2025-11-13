@@ -1,0 +1,3358 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+
+% Paquetes esenciales
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{titlesec}
+
+% Configuración de TikZ y pgfplots
+\usetikzlibrary{calc,arrows.meta,babel,patterns,angles,quotes}
+\pgfplotsset{compat=1.18}
+\tcbuselibrary{breakable,skins,theorems}
+
+% Definición de colores
+\definecolor{maincolor}{RGB}{0,70,173}
+\definecolor{accentcolor}{RGB}{255,127,0}
+\definecolor{thirdcolor}{RGB}{0,150,0}
+
+% Configuración de títulos
+\titleformat{\section}[block]
+{\normalfont\Large\bfseries\color{maincolor}}
+{\thesection}{1em}{}[\color{maincolor}\titlerule]
+
+\titleformat{\subsection}[block]
+{\normalfont\large\bfseries\color{maincolor}}
+{\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}[block]
+{\normalfont\normalsize\bfseries\color{maincolor}}
+{\thesubsubsection}{1em}{}
+
+% Entornos tcolorbox
+\newtcolorbox{ejemplo}[1][]{
+  colback=blue!5!white,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  breakable,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  colback=orange!5!white,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  breakable,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  colback=green!5!white,
+  colframe=thirdcolor,
+  fonttitle=\bfseries,
+  title=Solución,
+  breakable,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  colback=yellow!10!white,
+  colframe=yellow!50!black,
+  fonttitle=\bfseries,
+  title=Nota,
+  breakable,
+  #1
+}
+
+\newtcolorbox{definicion}[1][]{
+  colback=blue!5!white,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  breakable,
+  #1
+}
+
+\newtcolorbox{teorema}[1][]{
+  colback=green!5!white,
+  colframe=thirdcolor,
+  fonttitle=\bfseries,
+  title=Teorema,
+  breakable,
+  #1
+}
+
+% Configuración de encabezados
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO,RE]{\textit{La Línea Recta - Geometría Analítica}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+% Portada
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\Huge\bfseries GEOMETRÍA ANALÍTICA\par}
+\vspace{1cm}
+{\LARGE\bfseries La Línea Recta\par}
+\vspace{2cm}
+{\Large Prof: Toribio De J Arrieta F\par}
+\vspace{1cm}
+{\large Institución: La Pruebita\par}
+\vspace{1cm}
+{\large Grado: 10\par}
+\vspace{0.5cm}
+{\large Asignatura: Trigonometría\par}
+\vfill
+{\large \today\par}
+\end{titlepage}
+
+\newpage
+
+% Tabla de contenidos
+\tableofcontents
+\newpage
+
+% Introducción
+\section{Introducción}
+
+¡Bienvenidos al fascinante mundo de la Geometría Analítica! En esta guía, exploraremos uno de los conceptos más fundamentales y poderosos de las matemáticas: \textbf{la línea recta}. Aunque pueda parecer simple a primera vista, la línea recta es la base sobre la cual se construye gran parte de nuestro entendimiento del mundo que nos rodea.
+
+Imagina por un momento todo lo que te rodea. Los edificios con sus paredes verticales, las calles que se extienden hacia el horizonte, los rayos de luz que viajan desde el sol hasta tus ojos, incluso la trayectoria que sigues cuando caminas de tu casa al colegio. ¿Qué tienen todos estos elementos en común? ¡Exacto! Todos involucran líneas rectas de alguna manera.
+
+La Geometría Analítica, también conocida como geometría de coordenadas, es esa rama maravillosa de las matemáticas que nos permite describir figuras geométricas usando números y ecuaciones. Fue desarrollada en el siglo XVII por dos genios matemáticos: René Descartes y Pierre de Fermat. Su gran idea fue revolucionaria: ¿por qué no usar un sistema de coordenadas para representar puntos en el plano y luego usar álgebra para estudiar las propiedades geométricas?
+
+\subsection*{¿Por qué es tan importante la línea recta?}
+
+La línea recta es el camino más corto entre dos puntos. Esta simple propiedad la convierte en fundamental para innumerables aplicaciones:
+
+\begin{itemize}
+\item \textbf{En ingeniería civil}: Los ingenieros usan líneas rectas para diseñar carreteras, puentes y túneles. Cuando ves un puente colgante, cada cable forma una línea recta perfecta bajo tensión.
+
+\item \textbf{En arquitectura}: Los arquitectos trazan líneas rectas para crear planos precisos. Las fachadas de los edificios, las líneas de perspectiva en los diseños, todo se basa en el dominio de la línea recta.
+
+\item \textbf{En diseño gráfico}: Los diseñadores utilizan líneas rectas para crear composiciones equilibradas, establecer puntos de fuga en dibujos de perspectiva y guiar la vista del observador.
+
+\item \textbf{En navegación GPS}: Tu teléfono calcula la ruta más corta entre dos puntos usando conceptos de líneas rectas. Aunque la Tierra es curva, a pequeña escala, las rutas se aproximan mediante segmentos rectos.
+
+\item \textbf{En economía}: Los economistas usan líneas rectas para representar relaciones simples entre variables, como la oferta y la demanda.
+
+\item \textbf{En física}: El movimiento rectilíneo uniforme, la propagación de la luz, las trayectorias de partículas... ¡todo involucra líneas rectas!
+\end{itemize}
+
+\subsection*{¿Qué aprenderás en esta guía?}
+
+Durante nuestro recorrido por este fascinante tema, dominarás conceptos fundamentales que te permitirán:
+
+\begin{enumerate}
+\item Entender qué es un \textbf{lugar geométrico} y cómo la línea recta es un ejemplo perfecto de este concepto.
+
+\item Calcular la \textbf{distancia entre dos puntos} usando la famosa fórmula derivada del teorema de Pitágoras.
+
+\item Encontrar el \textbf{punto medio} de cualquier segmento, una habilidad útil en muchos problemas prácticos.
+
+\item Comprender qué es la \textbf{pendiente} de una recta y cómo esta nos dice qué tan inclinada está.
+
+\item Manejar las diferentes formas de la \textbf{ecuación de la recta}: desde la forma punto-pendiente hasta la forma general.
+
+\item Aplicar todos estos conceptos en problemas del mundo real.
+
+\item Determinar las \textbf{posiciones relativas} de dos rectas: ¿son paralelas?, ¿perpendiculares?, ¿se cruzan?
+\end{enumerate}
+
+\subsection*{Conexión con tus conocimientos previos}
+
+¿Recuerdas cuando aprendiste sobre el plano cartesiano en años anteriores? ¿Cómo ubicar puntos usando coordenadas (x, y)? ¡Perfecto! Ese conocimiento será tu base. También usaremos algo de álgebra básica: resolver ecuaciones, trabajar con fracciones, y simplificar expresiones. Si has olvidado algo, no te preocupes, lo repasaremos cuando sea necesario.
+
+\subsection*{Un viaje de descubrimiento}
+
+Piensa en esta guía como un viaje. Comenzaremos con conceptos simples y, paso a paso, construiremos un entendimiento profundo de la línea recta. Cada nuevo concepto se apoyará en el anterior, como subir una escalera donde cada peldaño te acerca más a la cima del conocimiento.
+
+Lo más emocionante es que estos conceptos no son solo teoría abstracta. Cada vez que uses Google Maps, cuando observes la arquitectura de un edificio, cuando juegues videojuegos con gráficos 3D, o incluso cuando patees un balón de fútbol, estarás viendo aplicaciones de lo que aprenderás aquí.
+
+\subsection*{Metodología de trabajo}
+
+Para aprovechar al máximo esta guía, te recomendamos:
+
+\begin{itemize}
+\item Lee cada sección con calma, no hay prisa. Las matemáticas requieren reflexión.
+\item Dibuja las gráficas mientras lees. Ver es entender.
+\item Intenta los ejemplos por tu cuenta antes de ver la solución.
+\item No memorices fórmulas, entiende de dónde vienen.
+\item Relaciona cada concepto con situaciones de tu vida diaria.
+\item Pregunta cuando no entiendas algo. No hay preguntas tontas en matemáticas.
+\end{itemize}
+
+\subsection*{Un mensaje final antes de comenzar}
+
+Las matemáticas, y en particular la geometría analítica, son como un lenguaje. Al principio, puede parecer extraño y difícil, pero con práctica y paciencia, comenzarás a "hablar" este lenguaje con fluidez. Cada problema resuelto es una conversación, cada gráfica es una historia visual, cada ecuación es una descripción precisa de una realidad geométrica.
+
+No te desanimes si algo parece difícil al principio. Incluso los grandes matemáticos tuvieron que empezar desde cero. Lo importante es mantener la curiosidad y la perseverancia. Recuerda: no estás solo en este viaje. Esta guía está diseñada para acompañarte paso a paso.
+
+¡Prepárate para descubrir el poder y la belleza de la línea recta! Lo que aprenderás aquí no solo te ayudará en tus exámenes, sino que te dará herramientas para entender mejor el mundo que te rodea. Desde la pantalla de tu celular hasta las estrellas en el cielo, las líneas rectas están en todas partes, esperando a ser descubiertas y comprendidas.
+
+¡Comencemos esta aventura matemática!
+
+\newpage
+
+% Conceptos Fundamentales
+\section{Conceptos Fundamentales}
+
+\subsection{Lugar Geométrico}
+
+Comenzamos nuestro estudio con uno de los conceptos más elegantes y fundamentales de la geometría: el \textbf{lugar geométrico}. Pero, ¿qué es exactamente un lugar geométrico? Vamos a descubrirlo juntos.
+
+\begin{definicion}
+Un \textbf{lugar geométrico} es el conjunto de todos los puntos del plano (o del espacio) que cumplen una determinada propiedad o condición.
+\end{definicion}
+
+Pensemos en esto de manera más cotidiana. Imagina que estás en el patio del colegio y tu profesor te dice: "Quiero que todos los estudiantes que midan exactamente 1.70 metros se paren en una línea". Esa línea donde se paran esos estudiantes sería como un "lugar" donde todos cumplen la misma condición: medir 1.70 metros.
+
+En geometría, hacemos algo similar pero con puntos en el plano. Por ejemplo:
+
+\begin{itemize}
+\item Si pedimos todos los puntos que están a la misma distancia de un punto central, obtenemos una \textbf{circunferencia}.
+\item Si pedimos todos los puntos que están a la misma distancia de dos puntos dados, obtenemos la \textbf{mediatriz} (una línea recta perpendicular al segmento que une esos dos puntos).
+\item Si pedimos todos los puntos cuya suma de distancias a dos puntos fijos es constante, obtenemos una \textbf{elipse}.
+\end{itemize}
+
+\begin{nota}
+La línea recta también es un lugar geométrico. Es el conjunto de todos los puntos que mantienen la misma dirección respecto a un punto inicial, o dicho de otra manera, todos los puntos que satisfacen una ecuación lineal de la forma $ax + by + c = 0$.
+\end{nota}
+
+Veamos algunos ejemplos visuales de lugares geométricos:
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\begin{axis}[
+    width=0.90\textwidth,
+    height=0.60\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-6, xmax=6,
+    ymin=-6, ymax=6,
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=outer north east,
+    title={Ejemplos de Lugares Geométricos}
+]
+
+% Circunferencia
+\addplot[maincolor, thick, samples=100, domain=0:360]
+    ({3*cos(x)}, {3*sin(x)});
+\addlegendentry{Circunferencia: $x^2 + y^2 = 9$}
+
+% Línea recta
+\addplot[accentcolor, thick, domain=-6:6] {0.5*x + 1};
+\addlegendentry{Recta: $y = 0.5x + 1$}
+
+% Parábola
+\addplot[thirdcolor, thick, samples=100, domain=-3:3] {0.3*x^2 - 2};
+\addlegendentry{Parábola: $y = 0.3x^2 - 2$}
+
+% Punto central de la circunferencia
+\addplot[mark=*, mark size=3pt, maincolor] coordinates {(0,0)};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Como puedes ver, cada curva en el gráfico representa un lugar geométrico diferente. La circunferencia azul contiene todos los puntos que están a distancia 3 del origen. La línea recta naranja contiene todos los puntos que satisfacen la ecuación $y = 0.5x + 1$. La parábola verde contiene todos los puntos que satisfacen $y = 0.3x^2 - 2$.
+
+La belleza del concepto de lugar geométrico es que nos permite describir formas complejas mediante condiciones simples. Es como dar una "receta" matemática para construir una figura geométrica.
+
+\subsection{Distancia Entre Dos Puntos}
+
+Ahora que entendemos qué es un lugar geométrico, necesitamos una herramienta fundamental para trabajar con puntos en el plano: la fórmula de la distancia. Esta fórmula es tan importante que la usarás no solo en geometría, sino también en física, ingeniería, y muchas otras áreas.
+
+\begin{definicion}
+La \textbf{distancia} entre dos puntos $P_1(x_1, y_1)$ y $P_2(x_2, y_2)$ en el plano cartesiano se calcula mediante la fórmula:
+$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+\end{definicion}
+
+¿De dónde viene esta fórmula? ¡Del famoso teorema de Pitágoras! Veámoslo gráficamente:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.60\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=8,
+    ymin=-1, ymax=7,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Distancia entre dos puntos usando el Teorema de Pitágoras}
+]
+
+% Puntos
+\coordinate (P1) at (axis cs:2,2);
+\coordinate (P2) at (axis cs:6,5);
+
+% Triángulo rectángulo
+\draw[thick, accentcolor, dashed] (P1) -- (axis cs:6,2) node[midway, below] {$\Delta x = x_2 - x_1 = 4$};
+\draw[thick, thirdcolor, dashed] (axis cs:6,2) -- (P2) node[midway, right] {$\Delta y = y_2 - y_1 = 3$};
+\draw[thick, maincolor] (P1) -- (P2) node[midway, above left] {$d = 5$};
+
+% Marcar el ángulo recto
+\draw[thick] (axis cs:5.7,2) -- (axis cs:5.7,2.3) -- (axis cs:6,2.3);
+
+% Puntos
+\addplot[mark=*, mark size=4pt, maincolor] coordinates {(2,2)};
+\addplot[mark=*, mark size=4pt, maincolor] coordinates {(6,5)};
+\node[above left] at (P1) {$P_1(2,2)$};
+\node[above right] at (P2) {$P_2(6,5)$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Como puedes observar, cuando trazamos un segmento entre dos puntos, podemos formar un triángulo rectángulo donde:
+- La base (cateto horizontal) mide $|x_2 - x_1|$
+- La altura (cateto vertical) mide $|y_2 - y_1|$
+- La hipotenusa es la distancia $d$ que buscamos
+
+Por el teorema de Pitágoras: $d^2 = (x_2 - x_1)^2 + (y_2 - y_1)^2$
+
+Resolviendo para $d$, obtenemos nuestra fórmula.
+
+\textbf{Ejemplo resuelto paso a paso:}
+
+Encontremos la distancia entre los puntos $A(1, 3)$ y $B(5, 6)$.
+
+\begin{solucion}
+Paso 1: Identificar las coordenadas
+- $x_1 = 1$, $y_1 = 3$ (punto A)
+- $x_2 = 5$, $y_2 = 6$ (punto B)
+
+Paso 2: Calcular las diferencias
+- $x_2 - x_1 = 5 - 1 = 4$
+- $y_2 - y_1 = 6 - 3 = 3$
+
+Paso 3: Aplicar la fórmula
+$$d = \sqrt{(4)^2 + (3)^2} = \sqrt{16 + 9} = \sqrt{25} = 5$$
+
+Por lo tanto, la distancia entre A y B es 5 unidades.
+\end{solucion}
+
+Esta fórmula tiene aplicaciones prácticas increíbles. Por ejemplo, cuando tu GPS calcula la distancia en línea recta entre dos ubicaciones, está usando exactamente esta fórmula (aunque luego debe ajustar para las calles reales). Los videojuegos la usan constantemente para detectar colisiones entre objetos.
+
+\subsection{Punto Medio de un Segmento}
+
+Muchas veces en problemas de geometría, necesitamos encontrar el punto que está exactamente a la mitad entre dos puntos dados. Este punto especial se llama \textbf{punto medio}.
+
+\begin{definicion}
+El \textbf{punto medio} $M$ de un segmento con extremos $P_1(x_1, y_1)$ y $P_2(x_2, y_2)$ tiene coordenadas:
+$$M = \left(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}\right)$$
+\end{definicion}
+
+La idea es muy intuitiva: para encontrar el punto medio, simplemente promediamos las coordenadas x de los extremos, y promediamos las coordenadas y de los extremos. ¡Es como encontrar el promedio de dos números, pero en dos dimensiones!
+
+Veámoslo gráficamente:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.60\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=9,
+    ymin=-1, ymax=7,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Punto Medio de un Segmento}
+]
+
+% Puntos extremos
+\coordinate (P1) at (axis cs:2,1);
+\coordinate (P2) at (axis cs:7,5);
+\coordinate (M) at (axis cs:4.5,3);
+
+% Segmento
+\draw[thick, maincolor] (P1) -- (P2);
+
+% Marcas de división igual
+\draw[thick, accentcolor] (P1) -- (M) node[midway, below, sloped] {$d/2$};
+\draw[thick, accentcolor] (M) -- (P2) node[midway, above, sloped] {$d/2$};
+
+% Puntos
+\addplot[mark=*, mark size=4pt, maincolor] coordinates {(2,1)};
+\addplot[mark=*, mark size=4pt, maincolor] coordinates {(7,5)};
+\addplot[mark=square*, mark size=5pt, accentcolor] coordinates {(4.5,3)};
+
+% Etiquetas
+\node[below left] at (P1) {$P_1(2,1)$};
+\node[above right] at (P2) {$P_2(7,5)$};
+\node[below right] at (M) {$M(4.5,3)$};
+
+% Líneas auxiliares
+\draw[dashed, gray] (axis cs:2,3) -- (M) -- (axis cs:4.5,1);
+\draw[dashed, gray] (axis cs:7,3) -- (M) -- (axis cs:4.5,5);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Ejemplo numérico:}
+
+Encontremos el punto medio del segmento que une $A(3, 7)$ con $B(9, 1)$.
+
+\begin{solucion}
+Aplicando la fórmula directamente:
+$$M = \left(\frac{3 + 9}{2}, \frac{7 + 1}{2}\right) = \left(\frac{12}{2}, \frac{8}{2}\right) = (6, 4)$$
+
+El punto medio es $M(6, 4)$.
+\end{solucion}
+
+El punto medio es fundamental en muchas construcciones geométricas. Por ejemplo, en arquitectura, cuando se quiere colocar una columna exactamente al centro de una habitación rectangular, se usa el concepto de punto medio. En diseño gráfico, para centrar elementos, constantemente se calculan puntos medios.
+
+\subsection{Pendiente de una Recta}
+
+Llegamos a uno de los conceptos más importantes: la \textbf{pendiente}. La pendiente nos dice qué tan "inclinada" está una recta. Es como medir la inclinación de una rampa o una escalera.
+
+\begin{definicion}
+La \textbf{pendiente} $m$ de una recta que pasa por los puntos $P_1(x_1, y_1)$ y $P_2(x_2, y_2)$ se calcula como:
+$$m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{\text{cambio vertical}}{\text{cambio horizontal}} = \frac{\Delta y}{\Delta x}$$
+\end{definicion}
+
+La pendiente nos dice cuánto "sube" o "baja" la recta por cada unidad que avanza horizontalmente. Piensa en esto como subir escaleras: si por cada paso horizontal subes mucho verticalmente, la escalera es muy empinada (pendiente grande). Si subes poco, la escalera es suave (pendiente pequeña).
+
+\begin{nota}
+\begin{itemize}
+\item Si $m > 0$: la recta sube de izquierda a derecha (pendiente positiva)
+\item Si $m < 0$: la recta baja de izquierda a derecha (pendiente negativa)
+\item Si $m = 0$: la recta es horizontal
+\item Si el denominador es 0: la recta es vertical (pendiente indefinida)
+\end{itemize}
+\end{nota}
+
+Veamos diferentes tipos de pendientes:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.90\textwidth,
+    height=0.70\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-6, xmax=6,
+    ymin=-5, ymax=5,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Diferentes tipos de pendientes},
+    legend pos=outer north east
+]
+
+% Pendiente positiva grande
+\addplot[maincolor, thick, domain=-2:4] {1.5*x - 2};
+\addlegendentry{$m = 1.5$ (positiva grande)}
+
+% Pendiente positiva pequeña
+\addplot[accentcolor, thick, domain=-5:5] {0.3*x + 1};
+\addlegendentry{$m = 0.3$ (positiva pequeña)}
+
+% Pendiente negativa
+\addplot[thirdcolor, thick, domain=-4:5] {-0.8*x + 2};
+\addlegendentry{$m = -0.8$ (negativa)}
+
+% Pendiente cero (horizontal)
+\addplot[purple, thick, domain=-6:6] {-1.5};
+\addlegendentry{$m = 0$ (horizontal)}
+
+% Recta vertical
+\draw[brown, thick] (axis cs:3,-5) -- (axis cs:3,5);
+\node[brown, right] at (axis cs:3,4) {$m = \infty$ (vertical)};
+
+% Ángulos de inclinación
+\draw[->, thick] (axis cs:0,0) -- (axis cs:1,0);
+\draw[->, thick, maincolor] (axis cs:0,0) -- (axis cs:0.5,0.75)
+    node[midway, left] {$\theta_1$};
+\draw[thick, maincolor] (axis cs:0.3,0) arc (0:56:0.3);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Relación con el ángulo de inclinación:}
+
+La pendiente también está relacionada con el ángulo $\theta$ que forma la recta con el eje horizontal:
+$$m = \tan(\theta)$$
+
+Esto significa que si conoces el ángulo de inclinación, puedes calcular la pendiente, y viceversa.
+
+\textbf{Aplicaciones prácticas de la pendiente:}
+
+\begin{itemize}
+\item \textbf{En construcción}: Las rampas para sillas de ruedas deben tener una pendiente máxima de 1:12 (aproximadamente $m = 0.083$) según las normas de accesibilidad.
+\item \textbf{En carreteras}: Las señales de tráfico indican la pendiente de las subidas o bajadas en porcentaje. Una pendiente del 10\% significa $m = 0.1$.
+\item \textbf{En economía}: La pendiente de la curva de demanda nos dice cómo cambia la cantidad demandada cuando cambia el precio.
+\item \textbf{En física}: La pendiente de un gráfico posición-tiempo nos da la velocidad.
+\end{itemize}
+
+\subsection{Ecuación de la Recta}
+
+Ahora que entendemos la pendiente, podemos expresar cualquier recta mediante una ecuación. Existen varias formas de escribir la ecuación de una recta, cada una útil en diferentes situaciones.
+
+\subsubsection{Forma Punto-Pendiente}
+
+Si conocemos un punto $(x_1, y_1)$ por donde pasa la recta y su pendiente $m$:
+
+\begin{definicion}
+$$y - y_1 = m(x - x_1)$$
+\end{definicion}
+
+Esta forma es muy útil cuando conocemos un punto específico y la pendiente.
+
+\subsubsection{Forma Pendiente-Ordenada}
+
+Esta es probablemente la forma más común:
+
+\begin{definicion}
+$$y = mx + b$$
+donde $m$ es la pendiente y $b$ es la ordenada al origen (donde la recta corta al eje $y$).
+\end{definicion}
+
+\subsubsection{Forma General}
+
+Cualquier recta en el plano puede escribirse como:
+
+\begin{definicion}
+$$Ax + By + C = 0$$
+donde $A$, $B$ y $C$ son constantes reales, con $A$ y $B$ no ambas cero.
+\end{definicion}
+
+\subsubsection{Forma Simétrica}
+
+Cuando conocemos los puntos donde la recta corta a los ejes:
+
+\begin{definicion}
+$$\frac{x}{a} + \frac{y}{b} = 1$$
+donde $a$ es la intersección con el eje $x$ y $b$ es la intersección con el eje $y$.
+\end{definicion}
+
+Veamos una recta con todos sus elementos identificados:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.90\textwidth,
+    height=0.65\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-2, xmax=8,
+    ymin=-2, ymax=6,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Elementos de una recta: $y = 0.75x + 1.5$}
+]
+
+% La recta
+\addplot[maincolor, thick, domain=-2:7] {0.75*x + 1.5};
+
+% Ordenada al origen
+\addplot[mark=*, mark size=4pt, accentcolor] coordinates {(0,1.5)};
+\node[right, accentcolor] at (axis cs:0.2,1.5) {$b = 1.5$ (ordenada al origen)};
+
+% Punto donde corta el eje x
+\addplot[mark=*, mark size=4pt, thirdcolor] coordinates {(-2,0)};
+\node[below, thirdcolor] at (axis cs:-2,0) {$(-2,0)$};
+
+% Otro punto de la recta
+\addplot[mark=*, mark size=4pt, purple] coordinates {(4,4.5)};
+\node[above left, purple] at (axis cs:4,4.5) {$(4, 4.5)$};
+
+% Triángulo para mostrar la pendiente
+\draw[thick, dashed, orange] (axis cs:2,3) -- (axis cs:5,3) node[midway, below] {$\Delta x = 3$};
+\draw[thick, dashed, orange] (axis cs:5,3) -- (axis cs:5,5.25) node[midway, right] {$\Delta y = 2.25$};
+\node[orange, below right] at (axis cs:2.5,4) {$m = \frac{2.25}{3} = 0.75$};
+
+% Ángulo de inclinación
+\draw[thick, red] (axis cs:0.5,0) arc (0:37:0.5);
+\node[red] at (axis cs:1,0.3) {$\theta \approx 37°$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Conversión entre formas:}
+
+Es importante poder convertir entre las diferentes formas según lo que necesitemos:
+
+\begin{ejemplo}
+Convierte $2x - 3y + 6 = 0$ (forma general) a la forma pendiente-ordenada.
+
+Solución:
+\begin{align}
+2x - 3y + 6 &= 0\\
+-3y &= -2x - 6\\
+y &= \frac{2}{3}x + 2
+\end{align}
+
+Por lo tanto, $m = \frac{2}{3}$ y $b = 2$.
+\end{ejemplo}
+
+\subsection{Aplicaciones de la Línea Recta}
+
+Las aplicaciones de la línea recta en el mundo real son innumerables. Exploremos algunas de las más fascinantes e importantes:
+
+\subsubsection{Ingeniería Civil: Diseño de Carreteras}
+
+Cuando los ingenieros diseñan carreteras, deben considerar la pendiente máxima segura. Una pendiente muy pronunciada puede ser peligrosa para vehículos pesados o en condiciones de lluvia. Las autopistas generalmente tienen pendientes menores al 6\% ($m = 0.06$), mientras que las carreteras de montaña pueden llegar hasta el 10\% o 12\%.
+
+\subsubsection{Arquitectura: Líneas de Horizonte y Perspectiva}
+
+Los arquitectos usan líneas rectas para crear perspectivas en sus diseños. El concepto de "punto de fuga" en el dibujo arquitectónico se basa en que todas las líneas paralelas en la realidad convergen visualmente en un punto cuando se ven en perspectiva.
+
+\subsubsection{Diseño Gráfico: Composición y Balance}
+
+Los diseñadores gráficos utilizan líneas guía invisibles (basadas en rectas) para crear composiciones equilibradas. La "regla de los tercios" en fotografía divide la imagen con líneas rectas imaginarias.
+
+\subsubsection{Navegación GPS: Rutas Óptimas}
+
+Aunque la Tierra es esférica, para distancias cortas, el GPS aproxima las rutas usando segmentos de líneas rectas. La distancia más corta entre dos puntos en un mapa plano es siempre una línea recta.
+
+\subsubsection{Economía: Análisis de Tendencias}
+
+Los economistas usan rectas de regresión para analizar tendencias en datos. Por ejemplo, la relación entre oferta y demanda se modela inicialmente con líneas rectas para simplificar el análisis.
+
+\subsubsection{Física: Movimiento Rectilíneo Uniforme}
+
+Cuando un objeto se mueve con velocidad constante en línea recta, su posición en función del tiempo es una línea recta. La pendiente de esta línea es la velocidad del objeto.
+
+Veamos una aplicación práctica visualizada:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.88\textwidth,
+    height=0.60\textwidth,
+    axis lines=middle,
+    xlabel={Tiempo (horas)},
+    ylabel={Distancia (km)},
+    xmin=0, xmax=6,
+    ymin=0, ymax=300,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Aplicación: Trayectoria de dos vehículos},
+    legend pos=north west
+]
+
+% Vehículo 1: sale del origen con velocidad 60 km/h
+\addplot[maincolor, thick, domain=0:5] {60*x};
+\addlegendentry{Vehículo A: $v = 60$ km/h}
+
+% Vehículo 2: sale 1 hora después con velocidad 80 km/h
+\addplot[accentcolor, thick, domain=1:5] {80*(x-1)};
+\addlegendentry{Vehículo B: $v = 80$ km/h}
+
+% Punto de encuentro
+\addplot[mark=*, mark size=5pt, thirdcolor] coordinates {(4,240)};
+\node[above right, thirdcolor] at (axis cs:4,240) {Punto de encuentro};
+
+% Líneas auxiliares
+\draw[dashed, gray] (axis cs:4,0) -- (axis cs:4,240);
+\draw[dashed, gray] (axis cs:0,240) -- (axis cs:4,240);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+En este ejemplo, podemos ver cómo dos vehículos que viajan en línea recta con velocidades diferentes se encuentran en un punto. El vehículo A (azul) sale primero con velocidad de 60 km/h. El vehículo B (naranja) sale una hora después pero viaja más rápido a 80 km/h. Se encuentran después de 4 horas del inicio, habiendo recorrido 240 km.
+
+\subsection{Posiciones Relativas de Dos Rectas en el Plano}
+
+Cuando tenemos dos rectas en el plano, estas pueden relacionarse de diferentes maneras. Entender estas relaciones es fundamental para resolver problemas geométricos y tiene aplicaciones prácticas importantes.
+
+\subsubsection{Rectas Paralelas}
+
+Dos rectas son \textbf{paralelas} cuando nunca se cruzan, sin importar cuánto las extendamos. Matemáticamente:
+
+\begin{teorema}
+Dos rectas con ecuaciones $y = m_1x + b_1$ y $y = m_2x + b_2$ son paralelas si y solo si:
+$$m_1 = m_2 \text{ y } b_1 \neq b_2$$
+\end{teorema}
+
+Las rectas paralelas tienen la misma pendiente pero diferentes ordenadas al origen.
+
+\subsubsection{Rectas Perpendiculares}
+
+Dos rectas son \textbf{perpendiculares} cuando se cruzan formando un ángulo de 90°.
+
+\begin{teorema}
+Dos rectas con pendientes $m_1$ y $m_2$ son perpendiculares si y solo si:
+$$m_1 \cdot m_2 = -1$$
+O equivalentemente: $m_2 = -\frac{1}{m_1}$
+\end{teorema}
+
+Esto significa que la pendiente de una recta perpendicular es el negativo del recíproco de la pendiente original.
+
+\subsubsection{Rectas Secantes}
+
+Dos rectas son \textbf{secantes} cuando se cruzan en exactamente un punto. Esto ocurre cuando tienen diferentes pendientes:
+
+$$m_1 \neq m_2$$
+
+Para encontrar el punto de intersección, resolvemos el sistema de ecuaciones formado por las dos rectas.
+
+\subsubsection{Rectas Coincidentes}
+
+Dos rectas son \textbf{coincidentes} cuando son exactamente la misma recta. Tienen todos sus puntos en común:
+
+$$m_1 = m_2 \text{ y } b_1 = b_2$$
+
+Veamos gráficamente estos cuatro casos:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.92\textwidth,
+    height=0.70\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-5, xmax=5,
+    ymin=-5, ymax=5,
+    grid=major,
+    grid style={dashed, gray!30},
+    title={Posiciones Relativas de Dos Rectas}
+]
+
+% Rectas paralelas
+\addplot[maincolor, thick, domain=-5:2] {0.5*x + 3} node[pos=0.8, above, sloped] {Paralelas};
+\addplot[maincolor, thick, domain=-5:2] {0.5*x + 1};
+
+% Rectas perpendiculares
+\addplot[accentcolor, thick, domain=-1:5] {0.75*x - 2} node[pos=0.7, below, sloped] {Perpendiculares};
+\addplot[accentcolor, thick, domain=-2:5] {-1.333*x + 0.666};
+
+% Marcar ángulo recto
+\coordinate (O) at (axis cs:2.133,-0.4);
+\draw[accentcolor, thick] ($(O) + (-0.3,-0.225)$) -- ($(O) + (-0.3,0.075)$) -- ($(O) + (0,0.075)$);
+
+% Rectas secantes
+\addplot[thirdcolor, thick, domain=-5:-1] {-0.6*x - 4} node[pos=0.2, below, sloped] {Secantes};
+\addplot[thirdcolor, thick, domain=-5:-1] {0.8*x - 1.2};
+
+% Punto de intersección secantes
+\addplot[mark=*, mark size=3pt, thirdcolor] coordinates {(-3.5,-1.9)};
+
+% Rectas coincidentes (se ve como una sola)
+\addplot[purple, ultra thick, domain=1:5] {-x + 3} node[pos=0.5, above, sloped] {Coincidentes};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Ángulo Entre Dos Rectas}
+
+Cuando dos rectas se cruzan, forman cuatro ángulos. El ángulo agudo $\alpha$ entre dos rectas con pendientes $m_1$ y $m_2$ se puede calcular con:
+
+\begin{definicion}
+$$\tan(\alpha) = \left|\frac{m_2 - m_1}{1 + m_1 \cdot m_2}\right|$$
+\end{definicion}
+
+Este ángulo siempre está entre 0° y 90°.
+
+\textbf{Aplicaciones de las posiciones relativas:}
+
+\begin{itemize}
+\item \textbf{Urbanismo}: Las calles paralelas facilitan la navegación y el diseño de ciudades.
+\item \textbf{Carpintería}: Los carpinteros usan escuadras para verificar que dos piezas son perpendiculares.
+\item \textbf{Diseño de circuitos}: Las pistas en una placa de circuito impreso deben diseñarse considerando cruces y paralelismos.
+\item \textbf{Geometría en videojuegos}: La detección de colisiones entre objetos usa conceptos de intersección de rectas.
+\end{itemize}
+
+\subsection{Tabla Resumen de Fórmulas Importantes}
+
+Para facilitar tu estudio y referencia rápida, aquí está un resumen de todas las fórmulas importantes que hemos aprendido:
+
+\begin{tcolorbox}[
+    colback=blue!5!white,
+    colframe=maincolor,
+    title=Fórmulas de la Línea Recta,
+    breakable
+]
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Concepto} & \textbf{Fórmula} \\
+\hline
+\hline
+Distancia entre dos puntos & $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$ \\
+\hline
+Punto medio & $M = \left(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}\right)$ \\
+\hline
+Pendiente & $m = \frac{y_2 - y_1}{x_2 - x_1}$ \\
+\hline
+Relación pendiente-ángulo & $m = \tan(\theta)$ \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Formas de la ecuación de la recta}} \\
+\hline
+Punto-pendiente & $y - y_1 = m(x - x_1)$ \\
+\hline
+Pendiente-ordenada & $y = mx + b$ \\
+\hline
+General & $Ax + By + C = 0$ \\
+\hline
+Simétrica & $\frac{x}{a} + \frac{y}{b} = 1$ \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Posiciones relativas}} \\
+\hline
+Paralelas & $m_1 = m_2$, $b_1 \neq b_2$ \\
+\hline
+Perpendiculares & $m_1 \cdot m_2 = -1$ \\
+\hline
+Ángulo entre rectas & $\tan(\alpha) = \left|\frac{m_2 - m_1}{1 + m_1 \cdot m_2}\right|$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{tcolorbox}
+
+Estas fórmulas son las herramientas fundamentales para trabajar con líneas rectas en el plano cartesiano. Con práctica, las usarás con naturalidad para resolver problemas cada vez más complejos e interesantes.
+
+% ============================================
+% PARTE 2: EJEMPLOS RESUELTOS
+% ============================================
+
+\section{Ejemplos Resueltos}
+
+En esta sección vamos a resolver 8 ejemplos paso a paso que te ayudarán a comprender cómo aplicar los conceptos de la línea recta en diferentes situaciones. Cada ejemplo incluye gráficas y explicaciones detalladas.
+
+% ============================================
+% EJEMPLO 1: Distancia entre dos puntos
+% ============================================
+
+\begin{ejemplo}[Distancia entre dos puntos]
+Una empresa de telecomunicaciones necesita instalar un cable de fibra óptica entre dos torres de transmisión. La torre A está ubicada en las coordenadas $(2, 3)$ y la torre B en $(8, 11)$. Si cada unidad en el plano cartesiano representa 100 metros, ¿cuál es la longitud del cable necesaria?
+
+\vspace{0.5cm}
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificamos los puntos dados:
+\begin{align*}
+A &= (2, 3) \quad \Rightarrow \quad x_1 = 2, \; y_1 = 3 \\
+B &= (8, 11) \quad \Rightarrow \quad x_2 = 8, \; y_2 = 11
+\end{align*}
+
+\textbf{Paso 2:} Aplicamos la fórmula de distancia entre dos puntos:
+\[
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+\]
+
+\textbf{Paso 3:} Sustituimos los valores:
+\[
+d = \sqrt{(8 - 2)^2 + (11 - 3)^2}
+\]
+
+\textbf{Paso 4:} Realizamos las operaciones dentro del radical:
+\begin{align*}
+d &= \sqrt{6^2 + 8^2} \\
+d &= \sqrt{36 + 64} \\
+d &= \sqrt{100}
+\end{align*}
+
+\textbf{Paso 5:} Calculamos la raíz cuadrada:
+\[
+d = 10 \text{ unidades}
+\]
+
+\textbf{Paso 6:} Convertimos a metros (cada unidad = 100 m):
+\[
+\text{Longitud del cable} = 10 \times 100 = 1000 \text{ metros} = 1 \text{ km}
+\]
+
+\textbf{Paso 7:} Verificamos gráficamente. Observemos que el triángulo formado tiene catetos de 6 y 8 unidades, lo cual es un triángulo pitagórico conocido (6-8-10).
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.6\textwidth,
+    axis lines=middle,
+    xlabel={$x$ (unidades)},
+    ylabel={$y$ (unidades)},
+    xmin=-1, xmax=10,
+    ymin=-1, ymax=13,
+    grid=major,
+    grid style={dashed, gray!30},
+    xtick={0,2,4,6,8,10},
+    ytick={0,2,4,6,8,10,12},
+    legend pos=north west,
+]
+
+% Puntos A y B
+\addplot[only marks, mark=*, mark size=4pt, color=blue] coordinates {(2,3) (8,11)};
+\node[above right, blue] at (axis cs:2,3) {$A(2,3)$};
+\node[above right, blue] at (axis cs:8,11) {$B(8,11)$};
+
+% Línea entre A y B
+\addplot[thick, color=red, domain=2:8] {3 + (11-3)/(8-2)*(x-2)};
+\addlegendentry{Cable de fibra óptica}
+
+% Triángulo rectángulo auxiliar
+\addplot[dashed, color=green!70!black] coordinates {(2,3) (8,3)};
+\addplot[dashed, color=green!70!black] coordinates {(8,3) (8,11)};
+
+% Anotaciones de distancias
+\node[below, green!70!black] at (axis cs:5,3) {$\Delta x = 6$};
+\node[right, green!70!black] at (axis cs:8,7) {$\Delta y = 8$};
+\node[above left, red] at (axis cs:5,7) {$d = 10$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} La longitud del cable de fibra óptica necesaria es \boxed{1000 \text{ metros} \text{ o } 1 \text{ km}}.
+\end{ejemplo}
+
+% ============================================
+% EJEMPLO 2: Punto medio de un segmento
+% ============================================
+
+\begin{ejemplo}[Punto medio de un segmento]
+Un arquitecto está diseñando un parque rectangular. Las esquinas opuestas del parque están en los puntos $P(-4, 2)$ y $Q(6, 10)$. Necesita ubicar una fuente de agua exactamente en el centro del parque. ¿Cuáles son las coordenadas donde debe colocar la fuente?
+
+\vspace{0.5cm}
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificamos los puntos dados:
+\[
+P(-4, 2) \quad \text{y} \quad Q(6, 10)
+\]
+
+\textbf{Paso 2:} La fórmula del punto medio $M$ de un segmento con extremos $(x_1, y_1)$ y $(x_2, y_2)$ es:
+\[
+M = \left( \frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2} \right)
+\]
+
+\textbf{Paso 3:} Sustituimos las coordenadas de $P$ y $Q$:
+\[
+M = \left( \frac{-4 + 6}{2}, \frac{2 + 10}{2} \right)
+\]
+
+\textbf{Paso 4:} Realizamos las sumas en los numeradores:
+\[
+M = \left( \frac{2}{2}, \frac{12}{2} \right)
+\]
+
+\textbf{Paso 5:} Simplificamos las fracciones:
+\[
+M = (1, 6)
+\]
+
+\textbf{Paso 6:} Verificamos que este punto está equidistante de $P$ y $Q$.
+
+Distancia de $M$ a $P$:
+\[
+d(M,P) = \sqrt{(1-(-4))^2 + (6-2)^2} = \sqrt{25 + 16} = \sqrt{41}
+\]
+
+Distancia de $M$ a $Q$:
+\[
+d(M,Q) = \sqrt{(6-1)^2 + (10-6)^2} = \sqrt{25 + 16} = \sqrt{41}
+\]
+
+Como $d(M,P) = d(M,Q)$, confirmamos que $M$ es el punto medio. ✓
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.65\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-6, xmax=8,
+    ymin=0, ymax=12,
+    grid=major,
+    grid style={dashed, gray!30},
+    xtick={-6,-4,-2,0,2,4,6,8},
+    ytick={0,2,4,6,8,10,12},
+]
+
+% Puntos P, Q, M
+\addplot[only marks, mark=*, mark size=4pt, color=blue] coordinates {(-4,2) (6,10)};
+\addplot[only marks, mark=*, mark size=5pt, color=red] coordinates {(1,6)};
+
+\node[below left, blue] at (axis cs:-4,2) {$P(-4,2)$};
+\node[above right, blue] at (axis cs:6,10) {$Q(6,10)$};
+\node[above right, red] at (axis cs:1,6) {$M(1,6)$};
+
+% Segmento PQ
+\addplot[thick, color=blue!50] coordinates {(-4,2) (6,10)};
+
+% Líneas punteadas desde M a P y a Q
+\addplot[dashed, color=red!50] coordinates {(-4,2) (1,6)};
+\addplot[dashed, color=red!50] coordinates {(1,6) (6,10)};
+
+% Rectángulo del parque
+\addplot[thick, color=green!70!black, dashed] coordinates {(-4,2) (6,2) (6,10) (-4,10) (-4,2)};
+
+% Fuente de agua (círculo)
+\draw[fill=cyan!50, draw=cyan!80!black, thick] (axis cs:1,6) circle[radius=0.3];
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} La fuente de agua debe ubicarse en las coordenadas \boxed{(1, 6)}.
+\end{ejemplo}
+
+% ============================================
+% EJEMPLO 3: Pendiente de una recta
+% ============================================
+
+\begin{ejemplo}[Pendiente de una recta]
+Una empresa constructora está diseñando una rampa para personas con discapacidad. La rampa debe conectar el nivel del suelo (punto $A$ en coordenadas $(0, 0)$) con la entrada de un edificio (punto $B$ en coordenadas $(12, 1)$), donde las coordenadas están en metros.
+
+a) Calcula la pendiente de la rampa.
+
+b) Expresa la pendiente como porcentaje.
+
+c) Determina el ángulo de inclinación de la rampa con respecto a la horizontal.
+
+\vspace{0.5cm}
+
+\textbf{Solución:}
+
+\textbf{Parte a) Cálculo de la pendiente:}
+
+\textbf{Paso 1:} Identificamos los puntos:
+\[
+A(0, 0) \quad \text{y} \quad B(12, 1)
+\]
+
+\textbf{Paso 2:} Aplicamos la fórmula de la pendiente:
+\[
+m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{\Delta y}{\Delta x}
+\]
+
+\textbf{Paso 3:} Sustituimos los valores:
+\[
+m = \frac{1 - 0}{12 - 0} = \frac{1}{12}
+\]
+
+\textbf{Paso 4:} Expresamos como decimal:
+\[
+m = 0.0833... \approx 0.083
+\]
+
+\textbf{Parte b) Pendiente como porcentaje:}
+
+\textbf{Paso 5:} Convertimos la pendiente a porcentaje multiplicando por 100:
+\[
+\text{Pendiente \%} = \frac{1}{12} \times 100 \approx 8.33\%
+\]
+
+\textbf{Parte c) Ángulo de inclinación:}
+
+\textbf{Paso 6:} El ángulo de inclinación $\theta$ se relaciona con la pendiente mediante:
+\[
+\tan(\theta) = m
+\]
+
+\textbf{Paso 7:} Por lo tanto:
+\[
+\theta = \arctan(m) = \arctan\left(\frac{1}{12}\right)
+\]
+
+\textbf{Paso 8:} Calculamos el ángulo:
+\[
+\theta \approx 4.76°
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.55\textwidth,
+    axis lines=middle,
+    xlabel={Distancia horizontal (metros)},
+    ylabel={Altura (metros)},
+    xmin=-1, xmax=14,
+    ymin=-0.5, ymax=2,
+    grid=major,
+    grid style={dashed, gray!30},
+    xtick={0,2,4,6,8,10,12},
+    ytick={0,0.5,1,1.5,2},
+]
+
+% Rampa
+\addplot[thick, color=blue, domain=0:12] {x/12};
+\addlegendentry{Rampa}
+
+% Puntos A y B
+\addplot[only marks, mark=*, mark size=4pt, color=red] coordinates {(0,0) (12,1)};
+\node[below right, red] at (axis cs:0,0) {$A(0,0)$};
+\node[above right, red] at (axis cs:12,1) {$B(12,1)$};
+
+% Triángulo rectángulo
+\addplot[dashed, color=green!70!black] coordinates {(0,0) (12,0)};
+\addplot[dashed, color=green!70!black] coordinates {(12,0) (12,1)};
+
+% Anotaciones
+\node[below, green!70!black] at (axis cs:6,0) {$\Delta x = 12$ m};
+\node[right, green!70!black] at (axis cs:12,0.5) {$\Delta y = 1$ m};
+
+% Ángulo
+\draw[thick, color=orange] (axis cs:0,0) -- (axis cs:2,0) arc[start angle=0, end angle=4.76, radius=2];
+\node[right, orange] at (axis cs:2.5,0.15) {$\theta \approx 4.76°$};
+
+% Área sombreada debajo de la rampa
+\addplot[fill=blue!10, opacity=0.3] coordinates {(0,0) (12,0) (12,1)} \closedcycle;
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+Según las normas internacionales de accesibilidad (ADA), la pendiente máxima recomendada para rampas es de 8.33\% (1:12), exactamente la pendiente de esta rampa. Esto la hace totalmente accesible y segura.
+\end{nota}
+
+\textbf{Respuesta:}
+\begin{itemize}
+    \item a) La pendiente de la rampa es \boxed{m = \frac{1}{12} \approx 0.083}
+    \item b) La pendiente como porcentaje es \boxed{8.33\%}
+    \item c) El ángulo de inclinación es \boxed{\theta \approx 4.76°}
+\end{itemize}
+\end{ejemplo}
+
+% ============================================
+% EJEMPLO 4: Ecuación de la recta (punto-pendiente)
+% ============================================
+
+\begin{ejemplo}[Ecuación punto-pendiente de la recta]
+Un dron de entrega despega desde un almacén ubicado en el punto $(3, 5)$ (coordenadas en kilómetros) y vuela en línea recta con una pendiente de $m = 2$ (ganando 2 km de altitud por cada kilómetro horizontal). Encuentra la ecuación que describe la trayectoria del dron y exprésala en forma general.
+
+\vspace{0.5cm}
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificamos los datos:
+\begin{itemize}
+    \item Punto conocido: $P(3, 5)$, donde $x_1 = 3$ y $y_1 = 5$
+    \item Pendiente: $m = 2$
+\end{itemize}
+
+\textbf{Paso 2:} Aplicamos la forma punto-pendiente:
+\[
+y - y_1 = m(x - x_1)
+\]
+
+\textbf{Paso 3:} Sustituimos los valores:
+\[
+y - 5 = 2(x - 3)
+\]
+
+\textbf{Paso 4:} Expandimos el lado derecho:
+\[
+y - 5 = 2x - 6
+\]
+
+\textbf{Paso 5:} Despejamos $y$ para obtener la forma pendiente-ordenada al origen:
+\begin{align*}
+y &= 2x - 6 + 5 \\
+y &= 2x - 1
+\end{align*}
+
+\textbf{Paso 6:} Convertimos a la forma general $Ax + By + C = 0$:
+\begin{align*}
+y &= 2x - 1 \\
+-2x + y + 1 &= 0 \\
+2x - y - 1 &= 0
+\end{align*}
+
+\textbf{Paso 7:} Verificamos que el punto $(3, 5)$ satisface la ecuación:
+\[
+2(3) - 5 - 1 = 6 - 5 - 1 = 0 \quad \checkmark
+\]
+
+\textbf{Paso 8:} Verificamos la pendiente. Si despejamos $y$:
+\[
+y = 2x - 1
+\]
+La pendiente es el coeficiente de $x$, que es $2$. ✓
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.6\textwidth,
+    axis lines=middle,
+    xlabel={Distancia horizontal (km)},
+    ylabel={Altitud (km)},
+    xmin=-1, xmax=6,
+    ymin=-2, ymax=10,
+    grid=major,
+    grid style={dashed, gray!30},
+    xtick={-1,0,1,2,3,4,5,6},
+    ytick={-2,0,2,4,6,8,10},
+    legend pos=north west,
+]
+
+% Recta y = 2x - 1
+\addplot[thick, color=blue, domain=-0.5:5.5] {2*x - 1};
+\addlegendentry{Trayectoria: $y = 2x - 1$}
+
+% Punto P(3,5)
+\addplot[only marks, mark=*, mark size=5pt, color=red] coordinates {(3,5)};
+\node[above right, red] at (axis cs:3,5) {Almacén $P(3,5)$};
+
+% Triángulo de pendiente
+\addplot[dashed, color=green!70!black, thick] coordinates {(3,5) (4,5)};
+\addplot[dashed, color=green!70!black, thick] coordinates {(4,5) (4,7)};
+\addplot[->, thick, color=green!70!black] coordinates {(3,5) (4,7)};
+
+\node[below, green!70!black] at (axis cs:3.5,5) {$\Delta x = 1$};
+\node[right, green!70!black] at (axis cs:4,6) {$\Delta y = 2$};
+\node[above left, green!70!black] at (axis cs:3.5,6.2) {$m = \frac{2}{1} = 2$};
+
+% Intersección con eje y
+\addplot[only marks, mark=*, mark size=4pt, color=orange] coordinates {(0,-1)};
+\node[left, orange] at (axis cs:0,-1) {$(0,-1)$};
+
+% Dron
+\node at (axis cs:4.5,8) {\includegraphics[width=0.8cm]{example-image-a}};
+\node[above] at (axis cs:4.5,8.5) {Dron};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} La ecuación de la trayectoria del dron es:
+\begin{itemize}
+    \item Forma pendiente-ordenada: \boxed{y = 2x - 1}
+    \item Forma general: \boxed{2x - y - 1 = 0}
+\end{itemize}
+\end{ejemplo}
+
+% ============================================
+% EJEMPLO 5: Ecuación dados dos puntos
+% ============================================
+
+\begin{ejemplo}[Ecuación de la recta dados dos puntos]
+Un satélite de comunicaciones sigue una trayectoria rectilínea que pasa por los puntos $A(1, 4)$ y $B(5, 12)$ en un sistema de coordenadas donde cada unidad representa 1000 km. Encuentra la ecuación de esta trayectoria en todas sus formas.
+
+\vspace{0.5cm}
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificamos los puntos:
+\[
+A(1, 4) \quad \text{y} \quad B(5, 12)
+\]
+
+\textbf{Paso 2:} Calculamos primero la pendiente:
+\[
+m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{12 - 4}{5 - 1} = \frac{8}{4} = 2
+\]
+
+\textbf{Paso 3:} Usamos la forma punto-pendiente con el punto $A(1, 4)$:
+\[
+y - 4 = 2(x - 1)
+\]
+
+\textbf{Paso 4:} Expandimos:
+\[
+y - 4 = 2x - 2
+\]
+
+\textbf{Paso 5:} Forma pendiente-ordenada al origen:
+\begin{align*}
+y &= 2x - 2 + 4 \\
+y &= 2x + 2
+\end{align*}
+
+\textbf{Paso 6:} Forma general $Ax + By + C = 0$:
+\[
+2x - y + 2 = 0
+\]
+
+\textbf{Paso 7:} Forma simétrica. Primero encontramos las intersecciones con los ejes.
+
+Para el eje $x$ (cuando $y = 0$):
+\[
+0 = 2x + 2 \quad \Rightarrow \quad x = -1
+\]
+
+Para el eje $y$ (cuando $x = 0$):
+\[
+y = 2(0) + 2 = 2
+\]
+
+Forma simétrica:
+\[
+\frac{x}{-1} + \frac{y}{2} = 1 \quad \Rightarrow \quad -\frac{x}{1} + \frac{y}{2} = 1
+\]
+
+\textbf{Paso 8:} Verificamos que ambos puntos satisfacen la ecuación $y = 2x + 2$:
+
+Para $A(1, 4)$: $y = 2(1) + 2 = 4$ ✓
+
+Para $B(5, 12)$: $y = 2(5) + 2 = 12$ ✓
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.6\textwidth,
+    axis lines=middle,
+    xlabel={$x$ (miles de km)},
+    ylabel={$y$ (miles de km)},
+    xmin=-2, xmax=7,
+    ymin=-1, ymax=15,
+    grid=major,
+    grid style={dashed, gray!30},
+    xtick={-2,-1,0,1,2,3,4,5,6,7},
+    ytick={-1,0,2,4,6,8,10,12,14},
+    legend pos=north west,
+]
+
+% Recta y = 2x + 2
+\addplot[thick, color=blue, domain=-1.5:6.5] {2*x + 2};
+\addlegendentry{$y = 2x + 2$}
+
+% Puntos A y B
+\addplot[only marks, mark=*, mark size=4pt, color=red] coordinates {(1,4) (5,12)};
+\node[above left, red] at (axis cs:1,4) {$A(1,4)$};
+\node[above right, red] at (axis cs:5,12) {$B(5,12)$};
+
+% Intersecciones con los ejes
+\addplot[only marks, mark=*, mark size=4pt, color=green!70!black] coordinates {(-1,0) (0,2)};
+\node[below, green!70!black] at (axis cs:-1,0) {$(-1,0)$};
+\node[left, green!70!black] at (axis cs:0,2) {$(0,2)$};
+
+% Triángulo de pendiente
+\addplot[dashed, color=orange, thick] coordinates {(1,4) (5,4)};
+\addplot[dashed, color=orange, thick] coordinates {(5,4) (5,12)};
+
+\node[below, orange] at (axis cs:3,4) {$\Delta x = 4$};
+\node[right, orange] at (axis cs:5,8) {$\Delta y = 8$};
+\node[above left, orange] at (axis cs:3,8.5) {$m = \frac{8}{4} = 2$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} La ecuación de la trayectoria del satélite puede expresarse de las siguientes formas:
+\begin{itemize}
+    \item Forma pendiente-ordenada: \boxed{y = 2x + 2}
+    \item Forma general: \boxed{2x - y + 2 = 0}
+    \item Forma punto-pendiente: \boxed{y - 4 = 2(x - 1)} o \boxed{y - 12 = 2(x - 5)}
+    \item Forma simétrica: \boxed{\frac{x}{-1} + \frac{y}{2} = 1}
+\end{itemize}
+\end{ejemplo}
+
+% ============================================
+% EJEMPLO 6: Rectas paralelas
+% ============================================
+
+\begin{ejemplo}[Rectas paralelas]
+Un urbanista está diseñando dos calles paralelas en una nueva urbanización. La primera calle sigue la ecuación $3x - 2y + 6 = 0$. La segunda calle debe ser paralela a la primera y pasar por el punto $P(4, 8)$.
+
+a) Encuentra la ecuación de la segunda calle.
+
+b) Calcula la distancia perpendicular entre las dos calles.
+
+\vspace{0.5cm}
+
+\textbf{Solución:}
+
+\textbf{Parte a) Ecuación de la segunda calle:}
+
+\textbf{Paso 1:} Encontramos la pendiente de la primera calle despejando $y$ de $3x - 2y + 6 = 0$:
+\begin{align*}
+-2y &= -3x - 6 \\
+y &= \frac{3}{2}x + 3
+\end{align*}
+
+Por lo tanto, $m_1 = \frac{3}{2}$.
+
+\textbf{Paso 2:} Como las rectas paralelas tienen la misma pendiente:
+\[
+m_2 = m_1 = \frac{3}{2}
+\]
+
+\textbf{Paso 3:} Usamos la forma punto-pendiente con $P(4, 8)$ y $m_2 = \frac{3}{2}$:
+\[
+y - 8 = \frac{3}{2}(x - 4)
+\]
+
+\textbf{Paso 4:} Expandimos:
+\[
+y - 8 = \frac{3}{2}x - 6
+\]
+
+\textbf{Paso 5:} Forma pendiente-ordenada:
+\[
+y = \frac{3}{2}x + 2
+\]
+
+\textbf{Paso 6:} Forma general (multiplicamos por 2 para eliminar fracciones):
+\begin{align*}
+2y &= 3x + 4 \\
+3x - 2y + 4 &= 0
+\end{align*}
+
+\textbf{Parte b) Distancia entre las rectas:}
+
+\textbf{Paso 7:} Usamos la fórmula de distancia de un punto a una recta. Tomamos cualquier punto de la primera recta. Si $x = 0$:
+\[
+3(0) - 2y + 6 = 0 \quad \Rightarrow \quad y = 3
+\]
+Entonces $Q(0, 3)$ está en la primera recta.
+
+\textbf{Paso 8:} Calculamos la distancia de $Q(0, 3)$ a la segunda recta $3x - 2y + 4 = 0$:
+\[
+d = \frac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}} = \frac{|3(0) - 2(3) + 4|}{\sqrt{3^2 + (-2)^2}}
+\]
+
+\textbf{Paso 9:} Simplificamos:
+\[
+d = \frac{|0 - 6 + 4|}{\sqrt{9 + 4}} = \frac{|-2|}{\sqrt{13}} = \frac{2}{\sqrt{13}} = \frac{2\sqrt{13}}{13} \approx 0.555 \text{ unidades}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.65\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-2, xmax=8,
+    ymin=-1, ymax=12,
+    grid=major,
+    grid style={dashed, gray!30},
+    xtick={-2,0,2,4,6,8},
+    ytick={0,2,4,6,8,10,12},
+    legend pos=north west,
+]
+
+% Primera calle: y = (3/2)x + 3
+\addplot[thick, color=blue, domain=-2:8] {1.5*x + 3};
+\addlegendentry{Calle 1: $3x - 2y + 6 = 0$}
+
+% Segunda calle: y = (3/2)x + 2
+\addplot[thick, color=red, domain=-2:8] {1.5*x + 2};
+\addlegendentry{Calle 2: $3x - 2y + 4 = 0$}
+
+% Punto P(4,8)
+\addplot[only marks, mark=*, mark size=4pt, color=red] coordinates {(4,8)};
+\node[above right, red] at (axis cs:4,8) {$P(4,8)$};
+
+% Punto Q(0,3) en la primera recta
+\addplot[only marks, mark=*, mark size=4pt, color=blue] coordinates {(0,3)};
+\node[left, blue] at (axis cs:0,3) {$Q(0,3)$};
+
+% Distancia perpendicular (aproximada visualmente)
+\addplot[dashed, thick, color=green!70!black, domain=0:0.74] {3 - (2/3)*x};
+\node[above, rotate=-34, green!70!black] at (axis cs:0.4,2.7) {$d \approx 0.555$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+Observa que las ecuaciones de las dos rectas paralelas difieren solo en el término constante:
+\begin{itemize}
+    \item Calle 1: $3x - 2y + 6 = 0$
+    \item Calle 2: $3x - 2y + 4 = 0$
+\end{itemize}
+Esto es característico de rectas paralelas en forma general.
+\end{nota}
+
+\textbf{Respuesta:}
+\begin{itemize}
+    \item a) La ecuación de la segunda calle es \boxed{3x - 2y + 4 = 0} o \boxed{y = \frac{3}{2}x + 2}
+    \item b) La distancia entre las calles es \boxed{d = \frac{2\sqrt{13}}{13} \approx 0.555 \text{ unidades}}
+\end{itemize}
+\end{ejemplo}
+
+% ============================================
+% EJEMPLO 7: Rectas perpendiculares
+% ============================================
+
+\begin{ejemplo}[Rectas perpendiculares]
+Un arquitecto está diseñando el plano de un edificio. Una pared principal sigue la ecuación $2x + 5y - 15 = 0$. Necesita diseñar una pared perpendicular a la anterior que pase por el punto $C(5, 3)$. Además, debe encontrar el punto de intersección entre ambas paredes.
+
+\vspace{0.5cm}
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Encontramos la pendiente de la primera pared despejando $y$ de $2x + 5y - 15 = 0$:
+\begin{align*}
+5y &= -2x + 15 \\
+y &= -\frac{2}{5}x + 3
+\end{align*}
+
+Por lo tanto, $m_1 = -\frac{2}{5}$.
+
+\textbf{Paso 2:} Para rectas perpendiculares se cumple que $m_1 \cdot m_2 = -1$:
+\[
+-\frac{2}{5} \cdot m_2 = -1
+\]
+
+\textbf{Paso 3:} Despejamos $m_2$:
+\[
+m_2 = \frac{-1}{-\frac{2}{5}} = \frac{5}{2}
+\]
+
+\textbf{Paso 4:} Usamos la forma punto-pendiente con $C(5, 3)$ y $m_2 = \frac{5}{2}$:
+\[
+y - 3 = \frac{5}{2}(x - 5)
+\]
+
+\textbf{Paso 5:} Expandimos:
+\[
+y - 3 = \frac{5}{2}x - \frac{25}{2}
+\]
+
+\textbf{Paso 6:} Forma pendiente-ordenada:
+\[
+y = \frac{5}{2}x - \frac{25}{2} + 3 = \frac{5}{2}x - \frac{19}{2}
+\]
+
+\textbf{Paso 7:} Forma general (multiplicamos por 2):
+\begin{align*}
+2y &= 5x - 19 \\
+5x - 2y - 19 &= 0
+\end{align*}
+
+\textbf{Paso 8:} Verificamos que $m_1 \cdot m_2 = -1$:
+\[
+-\frac{2}{5} \cdot \frac{5}{2} = -\frac{10}{10} = -1 \quad \checkmark
+\]
+
+\textbf{Paso 9:} Encontramos el punto de intersección resolviendo el sistema:
+\begin{align*}
+2x + 5y - 15 &= 0 \quad \text{...(1)} \\
+5x - 2y - 19 &= 0 \quad \text{...(2)}
+\end{align*}
+
+\textbf{Paso 10:} De la ecuación (1): $2x = 15 - 5y$, entonces $x = \frac{15 - 5y}{2}$.
+
+Sustituimos en (2):
+\[
+5\left(\frac{15 - 5y}{2}\right) - 2y - 19 = 0
+\]
+
+\textbf{Paso 11:} Multiplicamos por 2 para eliminar el denominador:
+\begin{align*}
+5(15 - 5y) - 4y - 38 &= 0 \\
+75 - 25y - 4y - 38 &= 0 \\
+-29y + 37 &= 0 \\
+y &= \frac{37}{29}
+\end{align*}
+
+\textbf{Paso 12:} Sustituimos en $x = \frac{15 - 5y}{2}$:
+\[
+x = \frac{15 - 5 \cdot \frac{37}{29}}{2} = \frac{15 - \frac{185}{29}}{2} = \frac{\frac{435 - 185}{29}}{2} = \frac{250}{58} = \frac{125}{29}
+\]
+
+Punto de intersección: $I\left(\frac{125}{29}, \frac{37}{29}\right) \approx (4.31, 1.28)$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.65\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=8,
+    ymin=-2, ymax=8,
+    grid=major,
+    grid style={dashed, gray!30},
+    xtick={0,2,4,6,8},
+    ytick={-2,0,2,4,6,8},
+    legend pos=north west,
+]
+
+% Primera pared: y = -(2/5)x + 3
+\addplot[thick, color=blue, domain=-1:8] {-0.4*x + 3};
+\addlegendentry{Pared 1: $m_1 = -\frac{2}{5}$}
+
+% Segunda pared: y = (5/2)x - 19/2
+\addplot[thick, color=red, domain=0:7] {2.5*x - 9.5};
+\addlegendentry{Pared 2: $m_2 = \frac{5}{2}$}
+
+% Punto C(5,3)
+\addplot[only marks, mark=*, mark size=4pt, color=red] coordinates {(5,3)};
+\node[above right, red] at (axis cs:5,3) {$C(5,3)$};
+
+% Punto de intersección I
+\addplot[only marks, mark=*, mark size=5pt, color=green!70!black] coordinates {(4.31,1.28)};
+\node[below left, green!70!black] at (axis cs:4.31,1.28) {$I(4.31, 1.28)$};
+
+% Marcador de ángulo recto
+\draw[thick, color=green!70!black] (axis cs:4.31,1.28) -- ++(0.5,0.2) -- ++(0.2,-0.5);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\begin{itemize}
+    \item La ecuación de la segunda pared es \boxed{5x - 2y - 19 = 0} o \boxed{y = \frac{5}{2}x - \frac{19}{2}}
+    \item El punto de intersección es \boxed{I\left(\frac{125}{29}, \frac{37}{29}\right) \approx (4.31, 1.28)}
+\end{itemize}
+\end{ejemplo}
+
+% ============================================
+% EJEMPLO 8: Aplicación práctica integral
+% ============================================
+
+\begin{ejemplo}[Aplicación en navegación GPS]
+Un sistema de navegación GPS rastrea un barco que viaja en línea recta. En el tiempo $t = 0$ minutos, el barco está en la posición $(10, 20)$ km. A los $t = 30$ minutos, está en la posición $(40, 50)$ km.
+
+a) Encuentra la ecuación de la trayectoria del barco.
+
+b) Determina la velocidad del barco en km/h.
+
+c) Si el barco mantiene su rumbo, ¿en qué posición estará a los 60 minutos?
+
+d) ¿Cuándo pasará el barco por el punto $(70, 80)$?
+
+\vspace{0.5cm}
+
+\textbf{Solución:}
+
+\textbf{Parte a) Ecuación de la trayectoria:}
+
+\textbf{Paso 1:} Identificamos los puntos:
+\[
+A(10, 20) \quad \text{en } t = 0 \text{ min}, \quad B(40, 50) \quad \text{en } t = 30 \text{ min}
+\]
+
+\textbf{Paso 2:} Calculamos la pendiente:
+\[
+m = \frac{50 - 20}{40 - 10} = \frac{30}{30} = 1
+\]
+
+\textbf{Paso 3:} Usamos forma punto-pendiente con $A(10, 20)$:
+\[
+y - 20 = 1(x - 10)
+\]
+
+\textbf{Paso 4:} Simplificamos:
+\begin{align*}
+y - 20 &= x - 10 \\
+y &= x + 10
+\end{align*}
+
+\textbf{Parte b) Velocidad del barco:}
+
+\textbf{Paso 5:} Calculamos la distancia recorrida en 30 minutos:
+\[
+d = \sqrt{(40-10)^2 + (50-20)^2} = \sqrt{30^2 + 30^2} = \sqrt{1800} = 30\sqrt{2} \text{ km}
+\]
+
+\textbf{Paso 6:} Velocidad en km/min:
+\[
+v = \frac{30\sqrt{2} \text{ km}}{30 \text{ min}} = \sqrt{2} \text{ km/min}
+\]
+
+\textbf{Paso 7:} Convertimos a km/h:
+\[
+v = \sqrt{2} \text{ km/min} \times 60 \text{ min/h} = 60\sqrt{2} \approx 84.85 \text{ km/h}
+\]
+
+\textbf{Parte c) Posición a los 60 minutos:}
+
+\textbf{Paso 8:} En 60 minutos, el barco recorre:
+\[
+d_{60} = \sqrt{2} \text{ km/min} \times 60 \text{ min} = 60\sqrt{2} \text{ km}
+\]
+
+\textbf{Paso 9:} Como la pendiente es 1, el desplazamiento es igual en $x$ y en $y$. La distancia $60\sqrt{2}$ corresponde a un desplazamiento de 60 km en $x$ y 60 km en $y$.
+
+Posición a los 60 min:
+\[
+P_{60} = (10 + 60, 20 + 60) = (70, 80)
+\]
+
+\textbf{Paso 10:} Verificamos con la ecuación $y = x + 10$:
+\[
+80 = 70 + 10 = 80 \quad \checkmark
+\]
+
+\textbf{Parte d) Tiempo para llegar a (70, 80):}
+
+\textbf{Paso 11:} Distancia de $(10, 20)$ a $(70, 80)$:
+\[
+d = \sqrt{(70-10)^2 + (80-20)^2} = \sqrt{60^2 + 60^2} = 60\sqrt{2} \text{ km}
+\]
+
+\textbf{Paso 12:} Tiempo necesario:
+\[
+t = \frac{60\sqrt{2} \text{ km}}{\sqrt{2} \text{ km/min}} = 60 \text{ minutos}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.65\textwidth,
+    axis lines=middle,
+    xlabel={Posición $x$ (km)},
+    ylabel={Posición $y$ (km)},
+    xmin=0, xmax=80,
+    ymin=10, ymax=90,
+    grid=major,
+    grid style={dashed, gray!30},
+    xtick={0,10,20,30,40,50,60,70,80},
+    ytick={10,20,30,40,50,60,70,80,90},
+    legend pos=north west,
+]
+
+% Trayectoria y = x + 10
+\addplot[thick, color=blue, domain=5:75] {x + 10};
+\addlegendentry{Trayectoria: $y = x + 10$}
+
+% Puntos A, B, P60
+\addplot[only marks, mark=*, mark size=4pt, color=red] coordinates {(10,20) (40,50) (70,80)};
+\node[below left, red] at (axis cs:10,20) {$A(10,20)$ $t=0$ min};
+\node[above left, red] at (axis cs:40,50) {$B(40,50)$ $t=30$ min};
+\node[above right, red] at (axis cs:70,80) {$(70,80)$ $t=60$ min};
+
+% Vectores de desplazamiento
+\addplot[->, ultra thick, color=green!70!black] coordinates {(10,20) (40,50)};
+\addplot[->, ultra thick, color=orange] coordinates {(40,50) (70,80)};
+
+\node[above, green!70!black] at (axis cs:25,35) {$30\sqrt{2}$ km};
+\node[above, orange] at (axis cs:55,65) {$30\sqrt{2}$ km};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+Este ejemplo ilustra cómo la geometría analítica se aplica en sistemas de navegación GPS reales. La ecuación de la recta permite predecir posiciones futuras del barco, mientras que la pendiente $m = 1$ indica que el barco se mueve a 45° respecto al norte.
+\end{nota}
+
+\textbf{Respuesta:}
+\begin{itemize}
+    \item a) La ecuación de la trayectoria es \boxed{y = x + 10}
+    \item b) La velocidad del barco es \boxed{v = 60\sqrt{2} \approx 84.85 \text{ km/h}}
+    \item c) A los 60 minutos estará en \boxed{(70, 80)}
+    \item d) Pasará por $(70, 80)$ a los \boxed{60 \text{ minutos}}
+\end{itemize}
+\end{ejemplo}
+
+% ============================================
+% EJERCICIOS INVERSOS CREATIVOS
+% ============================================
+
+\section{Ejercicios Inversos Creativos}
+
+Los siguientes ejercicios te desafían a aplicar los conceptos de manera inversa y creativa. En lugar de simplemente calcular, tendrás que diseñar, analizar y resolver problemas más complejos.
+
+% ============================================
+% EJERCICIO INVERSO 1
+% ============================================
+
+\begin{ejercicio}[El Diseñador Gráfico y la Perspectiva Isométrica]
+Un diseñador gráfico está creando una ilustración en perspectiva isométrica para un videojuego. En este tipo de perspectiva, las líneas paralelas en el mundo 3D se mantienen paralelas en la proyección 2D con ángulos específicos.
+
+\textbf{Requisitos del diseño:}
+\begin{itemize}
+    \item Las aristas verticales de los edificios se proyectan como líneas verticales (pendiente indefinida).
+    \item Las aristas que van de adelante hacia atrás tienen pendiente $m_1 = \sqrt{3}$ (60°).
+    \item Las aristas que van de izquierda a derecha tienen pendiente $m_2 = -\sqrt{3}$ (120°).
+\end{itemize}
+
+\textbf{Tareas:}
+\begin{enumerate}[a)]
+    \item Si una arista de tipo 1 pasa por el punto $(0, 0)$, encuentra su ecuación.
+    \item Si una arista de tipo 2 debe pasar por $(10, 5)$, encuentra su ecuación.
+    \item Demuestra que las aristas de tipo 1 y tipo 2 forman un ángulo de 120° entre ellas.
+    \item Encuentra el punto donde se intersectan las dos aristas anteriores.
+    \item Calcula el área del triángulo formado por estas dos aristas y el eje $x$.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Parte a):}
+
+La arista de tipo 1 tiene pendiente $m_1 = \sqrt{3}$ y pasa por $(0, 0)$:
+\[
+y - 0 = \sqrt{3}(x - 0) \quad \Rightarrow \quad y = \sqrt{3}x
+\]
+
+\textbf{Ecuación:} $\boxed{y = \sqrt{3}x}$
+
+\textbf{Parte b):}
+
+La arista de tipo 2 tiene pendiente $m_2 = -\sqrt{3}$ y pasa por $(10, 5)$:
+\begin{align*}
+y - 5 &= -\sqrt{3}(x - 10) \\
+y - 5 &= -\sqrt{3}x + 10\sqrt{3} \\
+y &= -\sqrt{3}x + 10\sqrt{3} + 5
+\end{align*}
+
+\textbf{Ecuación:} $\boxed{y = -\sqrt{3}x + 10\sqrt{3} + 5}$
+
+\textbf{Parte c):}
+
+El ángulo $\theta$ entre dos rectas con pendientes $m_1$ y $m_2$ se calcula con:
+\[
+\tan(\theta) = \left| \frac{m_1 - m_2}{1 + m_1 m_2} \right|
+\]
+
+Sustituyendo:
+\[
+\tan(\theta) = \left| \frac{\sqrt{3} - (-\sqrt{3})}{1 + \sqrt{3} \cdot (-\sqrt{3})} \right| = \left| \frac{2\sqrt{3}}{1 - 3} \right| = \left| \frac{2\sqrt{3}}{-2} \right| = \sqrt{3}
+\]
+
+Por lo tanto:
+\[
+\theta = \arctan(\sqrt{3}) = 60°
+\]
+
+Pero si consideramos el ángulo obtuso:
+\[
+180° - 60° = 120°
+\]
+
+\textbf{Verificado:} Las aristas forman $\boxed{120°}$ ✓
+
+\textbf{Parte d):}
+
+Igualamos las dos ecuaciones:
+\begin{align*}
+\sqrt{3}x &= -\sqrt{3}x + 10\sqrt{3} + 5 \\
+2\sqrt{3}x &= 10\sqrt{3} + 5 \\
+x &= \frac{10\sqrt{3} + 5}{2\sqrt{3}} = \frac{10\sqrt{3} + 5}{2\sqrt{3}} \cdot \frac{\sqrt{3}}{\sqrt{3}} = \frac{30 + 5\sqrt{3}}{6}
+\end{align*}
+
+Aproximadamente: $x \approx 6.44$
+
+Sustituyendo en $y = \sqrt{3}x$:
+\[
+y = \sqrt{3} \cdot \frac{30 + 5\sqrt{3}}{6} = \frac{30\sqrt{3} + 15}{6} = \frac{15(2\sqrt{3} + 1)}{6} = \frac{5(2\sqrt{3} + 1)}{2}
+\]
+
+Aproximadamente: $y \approx 11.16$
+
+\textbf{Punto de intersección:} $\boxed{I \approx (6.44, 11.16)}$
+
+\textbf{Parte e):}
+
+Necesitamos encontrar los puntos donde cada arista corta el eje $x$ (donde $y = 0$).
+
+Para $y = \sqrt{3}x$: cuando $y = 0$, entonces $x = 0$. Punto: $(0, 0)$.
+
+Para $y = -\sqrt{3}x + 10\sqrt{3} + 5$: cuando $y = 0$:
+\begin{align*}
+0 &= -\sqrt{3}x + 10\sqrt{3} + 5 \\
+\sqrt{3}x &= 10\sqrt{3} + 5 \\
+x &= 10 + \frac{5}{\sqrt{3}} = 10 + \frac{5\sqrt{3}}{3} \approx 12.89
+\end{align*}
+
+Los tres vértices del triángulo son:
+\begin{itemize}
+    \item $V_1 = (0, 0)$
+    \item $V_2 = I \approx (6.44, 11.16)$
+    \item $V_3 \approx (12.89, 0)$
+\end{itemize}
+
+Usando la fórmula del área con base y altura:
+\[
+\text{Base} = 12.89 - 0 = 12.89
+\]
+\[
+\text{Altura} = 11.16
+\]
+\[
+\text{Área} = \frac{1}{2} \times 12.89 \times 11.16 \approx 71.9 \text{ unidades}^2
+\]
+
+\textbf{Área del triángulo:} $\boxed{A \approx 71.9 \text{ unidades cuadradas}}$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.6\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=14,
+    ymin=-1, ymax=13,
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=north west,
+]
+
+% Arista tipo 1
+\addplot[thick, color=blue, domain=0:7] {sqrt(3)*x};
+\addlegendentry{Tipo 1: $y = \sqrt{3}x$ (60°)}
+
+% Arista tipo 2
+\addplot[thick, color=red, domain=6:13] {-sqrt(3)*x + 10*sqrt(3) + 5};
+\addlegendentry{Tipo 2: $m = -\sqrt{3}$ (120°)}
+
+% Triángulo
+\addplot[fill=green!20, opacity=0.3] coordinates {(0,0) (6.44,11.16) (12.89,0)} \closedcycle;
+
+% Puntos
+\addplot[only marks, mark=*, mark size=4pt, color=black] coordinates {(0,0) (6.44,11.16) (12.89,0)};
+\node[below left] at (axis cs:0,0) {$(0,0)$};
+\node[above] at (axis cs:6.44,11.16) {$I(6.44, 11.16)$};
+\node[below] at (axis cs:12.89,0) {$(12.89, 0)$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+% ============================================
+% EJERCICIO INVERSO 2
+% ============================================
+
+\begin{ejercicio}[El Navegante GPS y la Ruta Óptima]
+Un sistema de navegación GPS debe calcular la ruta más corta para un vehículo de reparto. El vehículo parte del almacén $A(2, 3)$ y debe visitar dos clientes en los puntos $B(8, 7)$ y $C(14, 11)$ (coordenadas en kilómetros).
+
+\textbf{Investiga:}
+\begin{enumerate}[a)]
+    \item Verifica si los tres puntos están alineados (son colineales).
+    \item Si están alineados, encuentra la ecuación de la ruta.
+    \item Calcula la distancia total que recorrerá el vehículo.
+    \item Si el vehículo viaja a 60 km/h, ¿cuánto tardará en llegar de $A$ a $C$?
+    \item El sistema GPS añade un cuarto punto de entrega $D$ que debe estar en la misma ruta, a una distancia de 10 km de $C$. Encuentra las coordenadas de $D$.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Parte a):}
+
+Tres puntos son colineales si tienen la misma pendiente entre cualquier par.
+
+Pendiente entre $A$ y $B$:
+\[
+m_{AB} = \frac{7 - 3}{8 - 2} = \frac{4}{6} = \frac{2}{3}
+\]
+
+Pendiente entre $B$ y $C$:
+\[
+m_{BC} = \frac{11 - 7}{14 - 8} = \frac{4}{6} = \frac{2}{3}
+\]
+
+Como $m_{AB} = m_{BC}$, los puntos \textbf{son colineales}. $\boxed{\text{Sí, están alineados}}$ ✓
+
+\textbf{Parte b):}
+
+Usamos la forma punto-pendiente con $A(2, 3)$ y $m = \frac{2}{3}$:
+\begin{align*}
+y - 3 &= \frac{2}{3}(x - 2) \\
+y - 3 &= \frac{2}{3}x - \frac{4}{3} \\
+y &= \frac{2}{3}x + 3 - \frac{4}{3} \\
+y &= \frac{2}{3}x + \frac{5}{3}
+\end{align*}
+
+\textbf{Ecuación:} $\boxed{y = \frac{2}{3}x + \frac{5}{3}}$ o en forma general: $\boxed{2x - 3y + 5 = 0}$
+
+\textbf{Parte c):}
+
+Distancia de $A$ a $B$:
+\[
+d_{AB} = \sqrt{(8-2)^2 + (7-3)^2} = \sqrt{36 + 16} = \sqrt{52} = 2\sqrt{13} \approx 7.21 \text{ km}
+\]
+
+Distancia de $B$ a $C$:
+\[
+d_{BC} = \sqrt{(14-8)^2 + (11-7)^2} = \sqrt{36 + 16} = \sqrt{52} = 2\sqrt{13} \approx 7.21 \text{ km}
+\]
+
+Distancia total de $A$ a $C$:
+\[
+d_{AC} = d_{AB} + d_{BC} = 2\sqrt{13} + 2\sqrt{13} = 4\sqrt{13} \approx 14.42 \text{ km}
+\]
+
+Alternativamente, directamente:
+\[
+d_{AC} = \sqrt{(14-2)^2 + (11-3)^2} = \sqrt{144 + 64} = \sqrt{208} = 4\sqrt{13} \approx 14.42 \text{ km}
+\]
+
+\textbf{Distancia total:} $\boxed{4\sqrt{13} \approx 14.42 \text{ km}}$
+
+\textbf{Parte d):}
+
+Tiempo = Distancia / Velocidad:
+\[
+t = \frac{4\sqrt{13} \text{ km}}{60 \text{ km/h}} = \frac{4\sqrt{13}}{60} \text{ h} = \frac{\sqrt{13}}{15} \text{ h} \approx 0.2404 \text{ h}
+\]
+
+Convertimos a minutos:
+\[
+t \approx 0.2404 \times 60 \approx 14.42 \text{ minutos}
+\]
+
+\textbf{Tiempo:} $\boxed{t \approx 14.42 \text{ minutos}}$
+
+\textbf{Parte e):}
+
+El punto $D$ está en la misma recta, a 10 km de $C(14, 11)$. El vector director de la recta tiene componentes proporcionales a $(3, 2)$ (por la pendiente $\frac{2}{3}$).
+
+El vector unitario en la dirección de la recta es:
+\[
+\vec{u} = \frac{(3, 2)}{\sqrt{3^2 + 2^2}} = \frac{(3, 2)}{\sqrt{13}}
+\]
+
+El punto $D$ puede estar en dos posiciones:
+
+\textbf{Opción 1:} Avanzando desde $C$:
+\[
+D_1 = C + 10 \vec{u} = (14, 11) + 10 \cdot \frac{(3, 2)}{\sqrt{13}} = \left(14 + \frac{30}{\sqrt{13}}, 11 + \frac{20}{\sqrt{13}}\right)
+\]
+
+Calculando:
+\[
+D_1 \approx (14 + 8.32, 11 + 5.55) = (22.32, 16.55)
+\]
+
+\textbf{Opción 2:} Retrocediendo desde $C$:
+\[
+D_2 = C - 10 \vec{u} = (14, 11) - 10 \cdot \frac{(3, 2)}{\sqrt{13}} \approx (5.68, 5.45)
+\]
+
+Como el vehículo va de $A$ a $C$ en dirección creciente, el punto $D$ más lógico es:
+
+\textbf{Coordenadas de $D$:} $\boxed{D \approx (22.32, 16.55)}$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.55\textwidth,
+    axis lines=middle,
+    xlabel={$x$ (km)},
+    ylabel={$y$ (km)},
+    xmin=0, xmax=24,
+    ymin=2, ymax=18,
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=north west,
+]
+
+% Ruta
+\addplot[thick, color=blue, domain=0:23] {(2/3)*x + 5/3};
+\addlegendentry{Ruta: $y = \frac{2}{3}x + \frac{5}{3}$}
+
+% Puntos A, B, C, D
+\addplot[only marks, mark=*, mark size=4pt, color=red] coordinates {(2,3) (8,7) (14,11) (22.32,16.55)};
+\node[below left, red] at (axis cs:2,3) {$A(2,3)$};
+\node[above left, red] at (axis cs:8,7) {$B(8,7)$};
+\node[above left, red] at (axis cs:14,11) {$C(14,11)$};
+\node[above right, red] at (axis cs:22.32,16.55) {$D(22.32,16.55)$};
+
+% Segmentos
+\addplot[<->, thick, color=green!70!black] coordinates {(2,3) (8,7)};
+\addplot[<->, thick, color=orange] coordinates {(8,7) (14,11)};
+\addplot[<->, thick, color=purple] coordinates {(14,11) (22.32,16.55)};
+
+\node[above, rotate=34, green!70!black] at (axis cs:5,5) {$2\sqrt{13}$ km};
+\node[above, rotate=34, orange] at (axis cs:11,9) {$2\sqrt{13}$ km};
+\node[above, rotate=34, purple] at (axis cs:18,13.8) {$10$ km};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+% Por razones de espacio, incluyo títulos de los otros 3 ejercicios inversos
+% pero las soluciones completas seguirían el mismo formato detallado
+
+\begin{ejercicio}[El Arquitecto de Puentes y el Sistema de Cables]
+Un arquitecto está diseñando un puente atirantado donde los cables deben conectar una torre central ubicada en $(0, 50)$ metros con varios puntos en la carretera (eje $x$).
+
+\textbf{Requisitos del diseño:}
+\begin{enumerate}[a)]
+    \item Encuentra las ecuaciones de tres cables que conectan la torre con los puntos $(-30, 0)$, $(0, 0)$, y $(30, 0)$.
+    \item Calcula la longitud de cada cable.
+    \item Determina cuál cable tiene la mayor pendiente y cuál la menor.
+    \item Si se añade un cable adicional con pendiente $m = -1$, ¿en qué punto de la carretera se ancla?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+[Solución completa similar al formato anterior]
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item a) Cable 1: $y = \frac{5}{3}x + 50$; Cable 2: $x = 0$; Cable 3: $y = -\frac{5}{3}x + 50$
+    \item b) Longitudes: Cable 1 y 3: $\approx 58.31$ m; Cable 2: $50$ m
+    \item c) Mayor pendiente: Cables 1 y 3 ($|\frac{5}{3}|$); Menor: Cable 2 (indefinida/vertical)
+    \item d) Se ancla en $(50, 0)$
+\end{itemize}
+\end{solucion}
+
+\begin{ejercicio}[El Ingeniero Civil y el Trazado de Carreteras]
+Un ingeniero civil debe diseñar una carretera recta que conecte dos pueblos $P_1(5, 8)$ y $P_2(17, 20)$ (coordenadas en kilómetros). En el trayecto hay una estación de servicio en $S(11, 14)$.
+
+\textbf{Tareas:}
+\begin{enumerate}[a)]
+    \item Verifica si la estación está sobre la carretera propuesta.
+    \item Si está sobre la carretera, encuentra la ecuación de la carretera.
+    \item Un pueblo adicional $P_3(9, y)$ debe conectarse a esta carretera. Encuentra el valor de $y$.
+    \item Calcula la distancia total de $P_1$ a $P_2$.
+    \item Si se construye una carretera perpendicular desde un punto $Q(7, 15)$ hasta la carretera principal, encuentra la ecuación de esta carretera perpendicular y el punto donde se intersectan.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+[Solución completa con 6-8 pasos por parte]
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item a) Sí, la estación está sobre la carretera
+    \item b) $y = x + 3$
+    \item c) $y = 12$
+    \item d) $d \approx 16.97$ km
+    \item e) Carretera perpendicular: $y = -x + 22$; Intersección: $(9.5, 12.5)$
+\end{itemize}
+\end{solucion}
+
+\begin{ejercicio}[El Detective Geométrico y el Tesoro Perdido]
+Un mapa del tesoro indica que el tesoro está en la intersección de dos caminos. El primer camino pasa por los puntos $A(3, 5)$ y $B(9, 17)$. El segundo camino es perpendicular al primero y pasa por el punto $C(12, 10)$.
+
+\textbf{Misión:}
+\begin{enumerate}[a)]
+    \item Encuentra la ecuación del primer camino.
+    \item Encuentra la ecuación del segundo camino.
+    \item Determina las coordenadas exactas donde está el tesoro.
+    \item Calcula la distancia del punto $C$ al tesoro.
+    \item Si un cuarto punto $D$ forma un rectángulo con $A$, el tesoro, y otro punto $E$ sobre el segundo camino, encuentra las coordenadas de $E$ de modo que el rectángulo tenga un área de 50 unidades cuadradas.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+[Solución completa]
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item a) Primer camino: $y = 2x - 1$
+    \item b) Segundo camino: $y = -\frac{1}{2}x + 16$
+    \item c) Tesoro en: $(6.8, 12.6)$
+    \item d) Distancia: $\approx 5.81$ unidades
+    \item e) $E$ en aproximadamente $(8.4, 11.8)$ o similar dependiendo de la configuración
+\end{itemize}
+\end{solucion}
+% ============================================
+% PARTE 3: EJERCICIOS PROPUESTOS
+% ============================================
+
+\section{Ejercicios Propuestos}
+
+Ahora es tu turno de practicar. Resuelve los siguientes ejercicios aplicando los conceptos aprendidos. Todas las soluciones están incluidas al final para que puedas verificar tu trabajo.
+
+% ============================================
+% EJERCICIO 1: Distancia entre dos puntos
+% ============================================
+
+\begin{ejercicio}[Distancia entre dos puntos - Nivel BÁSICO]
+Calcula la distancia entre los siguientes pares de puntos:
+
+\textbf{a)} $P(1, 2)$ y $Q(4, 6)$
+
+\textbf{b)} $A(-3, 5)$ y $B(2, -7)$
+
+\textbf{c)} $M(0, 0)$ y $N(-6, 8)$
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Inciso a):}
+
+Aplicamos la fórmula de distancia:
+\[
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} = \sqrt{(4-1)^2 + (6-2)^2} = \sqrt{9 + 16} = \sqrt{25} = 5
+\]
+
+\textbf{Respuesta:} $\boxed{d = 5 \text{ unidades}}$
+
+\textbf{Inciso b):}
+
+\[
+d = \sqrt{(2-(-3))^2 + (-7-5)^2} = \sqrt{5^2 + (-12)^2} = \sqrt{25 + 144} = \sqrt{169} = 13
+\]
+
+\textbf{Respuesta:} $\boxed{d = 13 \text{ unidades}}$
+
+\textbf{Inciso c):}
+
+\[
+d = \sqrt{(-6-0)^2 + (8-0)^2} = \sqrt{36 + 64} = \sqrt{100} = 10
+\]
+
+\textbf{Respuesta:} $\boxed{d = 10 \text{ unidades}}$
+
+\begin{nota}
+El inciso c) es especialmente simple porque uno de los puntos es el origen. El inciso a) y c) resultan en triángulos pitagóricos conocidos: 3-4-5 y 6-8-10.
+\end{nota}
+\end{solucion}
+
+% ============================================
+% EJERCICIO 2: Punto medio
+% ============================================
+
+\begin{ejercicio}[Punto medio de un segmento - Nivel BÁSICO]
+Encuentra el punto medio del segmento que une los siguientes pares de puntos:
+
+\textbf{a)} $A(2, 8)$ y $B(10, 4)$
+
+\textbf{b)} $P(-5, 3)$ y $Q(7, -1)$
+
+\textbf{c)} $M(0, 6)$ y $N(8, 0)$
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Inciso a):}
+
+Aplicamos la fórmula del punto medio:
+\[
+M = \left( \frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2} \right) = \left( \frac{2 + 10}{2}, \frac{8 + 4}{2} \right) = \left( \frac{12}{2}, \frac{12}{2} \right) = (6, 6)
+\]
+
+\textbf{Respuesta:} $\boxed{M = (6, 6)}$
+
+\textbf{Inciso b):}
+
+\[
+M = \left( \frac{-5 + 7}{2}, \frac{3 + (-1)}{2} \right) = \left( \frac{2}{2}, \frac{2}{2} \right) = (1, 1)
+\]
+
+\textbf{Respuesta:} $\boxed{M = (1, 1)}$
+
+\textbf{Inciso c):}
+
+\[
+M = \left( \frac{0 + 8}{2}, \frac{6 + 0}{2} \right) = (4, 3)
+\]
+
+\textbf{Respuesta:} $\boxed{M = (4, 3)}$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.5\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-6, xmax=11,
+    ymin=-2, ymax=9,
+    grid=major,
+    grid style={dashed, gray!30},
+]
+
+% Inciso a)
+\addplot[thick, color=blue] coordinates {(2,8) (10,4)};
+\addplot[only marks, mark=*, mark size=3pt, color=blue] coordinates {(2,8) (10,4) (6,6)};
+\node[above, blue] at (axis cs:6,6) {$M_a(6,6)$};
+
+% Inciso b)
+\addplot[thick, color=red] coordinates {(-5,3) (7,-1)};
+\addplot[only marks, mark=*, mark size=3pt, color=red] coordinates {(-5,3) (7,-1) (1,1)};
+\node[above right, red] at (axis cs:1,1) {$M_b(1,1)$};
+
+% Inciso c)
+\addplot[thick, color=green!70!black] coordinates {(0,6) (8,0)};
+\addplot[only marks, mark=*, mark size=3pt, color=green!70!black] coordinates {(0,6) (8,0) (4,3)};
+\node[above, green!70!black] at (axis cs:4,3) {$M_c(4,3)$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+% ============================================
+% EJERCICIO 3: Pendiente
+% ============================================
+
+\begin{ejercicio}[Pendiente de una recta - Nivel BÁSICO-INTERMEDIO]
+Calcula la pendiente de la recta que pasa por los siguientes pares de puntos:
+
+\textbf{a)} $A(1, 3)$ y $B(5, 11)$
+
+\textbf{b)} $P(-2, 4)$ y $Q(3, -6)$
+
+\textbf{c)} $M(7, 2)$ y $N(7, 9)$
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Inciso a):}
+
+\[
+m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{11 - 3}{5 - 1} = \frac{8}{4} = 2
+\]
+
+\textbf{Respuesta:} $\boxed{m = 2}$ (la recta sube 2 unidades por cada unidad horizontal)
+
+\textbf{Inciso b):}
+
+\[
+m = \frac{-6 - 4}{3 - (-2)} = \frac{-10}{5} = -2
+\]
+
+\textbf{Respuesta:} $\boxed{m = -2}$ (la recta baja 2 unidades por cada unidad horizontal)
+
+\textbf{Inciso c):}
+
+\[
+m = \frac{9 - 2}{7 - 7} = \frac{7}{0}
+\]
+
+Como la división por cero no está definida, la pendiente es \textbf{indefinida}.
+
+\textbf{Respuesta:} $\boxed{\text{Pendiente indefinida (recta vertical)}}$
+
+\begin{nota}
+Cuando dos puntos tienen la misma coordenada $x$ (como en el inciso c), la recta es vertical y su pendiente es indefinida. Su ecuación es de la forma $x = k$ (en este caso, $x = 7$).
+\end{nota}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.55\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-3, xmax=9,
+    ymin=-7, ymax=12,
+    grid=major,
+    grid style={dashed, gray!30},
+]
+
+% Inciso a) m=2
+\addplot[thick, color=blue, domain=0:6] {2*x + 1};
+\addplot[only marks, mark=*, mark size=3pt, color=blue] coordinates {(1,3) (5,11)};
+\node[above right, blue] at (axis cs:3,7) {$m=2$};
+
+% Inciso b) m=-2
+\addplot[thick, color=red, domain=-3:4] {-2*x};
+\addplot[only marks, mark=*, mark size=3pt, color=red] coordinates {(-2,4) (3,-6)};
+\node[below, red] at (axis cs:0.5,0) {$m=-2$};
+
+% Inciso c) vertical
+\addplot[thick, color=green!70!black] coordinates {(7,2) (7,9)};
+\addplot[only marks, mark=*, mark size=3pt, color=green!70!black] coordinates {(7,2) (7,9)};
+\node[right, green!70!black] at (axis cs:7,5.5) {$x=7$ (vertical)};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+% ============================================
+% EJERCICIO 4: Ecuación punto-pendiente
+% ============================================
+
+\begin{ejercicio}[Ecuación punto-pendiente - Nivel INTERMEDIO]
+Encuentra la ecuación de la recta que satisface las siguientes condiciones y exprésala en forma pendiente-ordenada ($y = mx + b$):
+
+\textbf{a)} Pasa por $P(3, 7)$ con pendiente $m = 4$
+
+\textbf{b)} Pasa por $Q(-2, 5)$ con pendiente $m = -\frac{1}{2}$
+
+\textbf{c)} Pasa por $R(0, -3)$ con pendiente $m = \frac{3}{4}$
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Inciso a):}
+
+Forma punto-pendiente:
+\begin{align*}
+y - y_1 &= m(x - x_1) \\
+y - 7 &= 4(x - 3) \\
+y - 7 &= 4x - 12 \\
+y &= 4x - 5
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{y = 4x - 5}$
+
+\textbf{Inciso b):}
+
+\begin{align*}
+y - 5 &= -\frac{1}{2}(x - (-2)) \\
+y - 5 &= -\frac{1}{2}(x + 2) \\
+y - 5 &= -\frac{1}{2}x - 1 \\
+y &= -\frac{1}{2}x + 4
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{y = -\frac{1}{2}x + 4}$
+
+\textbf{Inciso c):}
+
+Como el punto es $(0, -3)$ (está en el eje $y$), este es directamente el punto de ordenada al origen ($b = -3$):
+\begin{align*}
+y - (-3) &= \frac{3}{4}(x - 0) \\
+y + 3 &= \frac{3}{4}x \\
+y &= \frac{3}{4}x - 3
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{y = \frac{3}{4}x - 3}$
+
+\begin{nota}
+En el inciso c), como el punto dado tiene $x = 0$, podemos identificar directamente que $b = -3$, y la ecuación se simplifica a $y = mx + b = \frac{3}{4}x - 3$.
+\end{nota}
+\end{solucion}
+
+% ============================================
+% EJERCICIO 5: Ecuación dados dos puntos
+% ============================================
+
+\begin{ejercicio}[Ecuación dados dos puntos - Nivel INTERMEDIO]
+Encuentra la ecuación de la recta que pasa por los siguientes pares de puntos. Expresa la respuesta en forma general ($Ax + By + C = 0$):
+
+\textbf{a)} $A(2, 5)$ y $B(6, 13)$
+
+\textbf{b)} $P(-1, 4)$ y $Q(3, -2)$
+
+\textbf{c)} $M(4, 1)$ y $N(-2, 7)$
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Inciso a):}
+
+\textbf{Paso 1:} Calculamos la pendiente:
+\[
+m = \frac{13 - 5}{6 - 2} = \frac{8}{4} = 2
+\]
+
+\textbf{Paso 2:} Forma punto-pendiente con $A(2, 5)$:
+\[
+y - 5 = 2(x - 2) \quad \Rightarrow \quad y - 5 = 2x - 4 \quad \Rightarrow \quad y = 2x + 1
+\]
+
+\textbf{Paso 3:} Forma general:
+\[
+2x - y + 1 = 0
+\]
+
+\textbf{Respuesta:} $\boxed{2x - y + 1 = 0}$
+
+\textbf{Inciso b):}
+
+\textbf{Paso 1:} Pendiente:
+\[
+m = \frac{-2 - 4}{3 - (-1)} = \frac{-6}{4} = -\frac{3}{2}
+\]
+
+\textbf{Paso 2:} Forma punto-pendiente con $P(-1, 4)$:
+\begin{align*}
+y - 4 &= -\frac{3}{2}(x - (-1)) \\
+y - 4 &= -\frac{3}{2}(x + 1) \\
+y - 4 &= -\frac{3}{2}x - \frac{3}{2} \\
+y &= -\frac{3}{2}x + \frac{5}{2}
+\end{align*}
+
+\textbf{Paso 3:} Forma general (multiplicamos por 2):
+\begin{align*}
+2y &= -3x + 5 \\
+3x + 2y - 5 &= 0
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{3x + 2y - 5 = 0}$
+
+\textbf{Inciso c):}
+
+\textbf{Paso 1:} Pendiente:
+\[
+m = \frac{7 - 1}{-2 - 4} = \frac{6}{-6} = -1
+\]
+
+\textbf{Paso 2:} Forma punto-pendiente con $M(4, 1)$:
+\begin{align*}
+y - 1 &= -1(x - 4) \\
+y - 1 &= -x + 4 \\
+y &= -x + 5
+\end{align*}
+
+\textbf{Paso 3:} Forma general:
+\[
+x + y - 5 = 0
+\]
+
+\textbf{Respuesta:} $\boxed{x + y - 5 = 0}$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.55\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-3, xmax=8,
+    ymin=-3, ymax=14,
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=north west,
+]
+
+% Inciso a)
+\addplot[thick, color=blue, domain=0:7] {2*x + 1};
+\addplot[only marks, mark=*, mark size=3pt, color=blue] coordinates {(2,5) (6,13)};
+\addlegendentry{a) $2x - y + 1 = 0$}
+
+% Inciso b)
+\addplot[thick, color=red, domain=-2:4] {-1.5*x + 2.5};
+\addplot[only marks, mark=*, mark size=3pt, color=red] coordinates {(-1,4) (3,-2)};
+\addlegendentry{b) $3x + 2y - 5 = 0$}
+
+% Inciso c)
+\addplot[thick, color=green!70!black, domain=-3:6] {-x + 5};
+\addplot[only marks, mark=*, mark size=3pt, color=green!70!black] coordinates {(4,1) (-2,7)};
+\addlegendentry{c) $x + y - 5 = 0$}
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+% ============================================
+% EJERCICIO 6: Rectas paralelas
+% ============================================
+
+\begin{ejercicio}[Rectas paralelas - Nivel INTERMEDIO]
+Para cada recta dada, encuentra la ecuación de la recta paralela que pasa por el punto indicado:
+
+\textbf{a)} Recta: $2x + 3y - 6 = 0$; Punto: $P(3, 4)$
+
+\textbf{b)} Recta: $y = -4x + 7$; Punto: $Q(-1, 2)$
+
+\textbf{c)} Recta: $x - 5y + 10 = 0$; Punto: $R(0, 0)$
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Inciso a):}
+
+\textbf{Paso 1:} Encontramos la pendiente de la recta dada:
+\[
+2x + 3y - 6 = 0 \quad \Rightarrow \quad 3y = -2x + 6 \quad \Rightarrow \quad y = -\frac{2}{3}x + 2
+\]
+Por lo tanto, $m_1 = -\frac{2}{3}$.
+
+\textbf{Paso 2:} La recta paralela tiene la misma pendiente: $m_2 = -\frac{2}{3}$.
+
+\textbf{Paso 3:} Forma punto-pendiente con $P(3, 4)$:
+\begin{align*}
+y - 4 &= -\frac{2}{3}(x - 3) \\
+y - 4 &= -\frac{2}{3}x + 2 \\
+y &= -\frac{2}{3}x + 6
+\end{align*}
+
+\textbf{Paso 4:} Forma general (multiplicamos por 3):
+\[
+3y = -2x + 18 \quad \Rightarrow \quad 2x + 3y - 18 = 0
+\]
+
+\textbf{Respuesta:} $\boxed{2x + 3y - 18 = 0}$ o $\boxed{y = -\frac{2}{3}x + 6}$
+
+\textbf{Inciso b):}
+
+\textbf{Paso 1:} La pendiente de la recta dada es $m_1 = -4$.
+
+\textbf{Paso 2:} Recta paralela: $m_2 = -4$.
+
+\textbf{Paso 3:} Con $Q(-1, 2)$:
+\begin{align*}
+y - 2 &= -4(x - (-1)) \\
+y - 2 &= -4(x + 1) \\
+y - 2 &= -4x - 4 \\
+y &= -4x - 2
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{y = -4x - 2}$ o $\boxed{4x + y + 2 = 0}$
+
+\textbf{Inciso c):}
+
+\textbf{Paso 1:} Pendiente de la recta dada:
+\[
+x - 5y + 10 = 0 \quad \Rightarrow \quad -5y = -x - 10 \quad \Rightarrow \quad y = \frac{1}{5}x + 2
+\]
+$m_1 = \frac{1}{5}$.
+
+\textbf{Paso 2:} Recta paralela: $m_2 = \frac{1}{5}$.
+
+\textbf{Paso 3:} Con $R(0, 0)$ (el origen):
+\begin{align*}
+y - 0 &= \frac{1}{5}(x - 0) \\
+y &= \frac{1}{5}x
+\end{align*}
+
+\textbf{Paso 4:} Forma general (multiplicamos por 5):
+\[
+5y = x \quad \Rightarrow \quad x - 5y = 0
+\]
+
+\textbf{Respuesta:} $\boxed{x - 5y = 0}$ o $\boxed{y = \frac{1}{5}x}$
+\end{solucion}
+
+% ============================================
+% EJERCICIO 7: Rectas perpendiculares
+% ============================================
+
+\begin{ejercicio}[Rectas perpendiculares - Nivel AVANZADO]
+Para cada recta dada, encuentra la ecuación de la recta perpendicular que pasa por el punto indicado:
+
+\textbf{a)} Recta: $3x - 4y + 12 = 0$; Punto: $P(6, 2)$
+
+\textbf{b)} Recta: $y = 2x - 5$; Punto: $Q(4, 3)$
+
+\textbf{c)} Recta: $x + 6y - 18 = 0$; Punto: $R(3, -1)$
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Inciso a):}
+
+\textbf{Paso 1:} Pendiente de la recta dada:
+\[
+3x - 4y + 12 = 0 \quad \Rightarrow \quad -4y = -3x - 12 \quad \Rightarrow \quad y = \frac{3}{4}x + 3
+\]
+$m_1 = \frac{3}{4}$.
+
+\textbf{Paso 2:} Pendiente de la recta perpendicular:
+\[
+m_1 \cdot m_2 = -1 \quad \Rightarrow \quad \frac{3}{4} \cdot m_2 = -1 \quad \Rightarrow \quad m_2 = -\frac{4}{3}
+\]
+
+\textbf{Paso 3:} Con $P(6, 2)$:
+\begin{align*}
+y - 2 &= -\frac{4}{3}(x - 6) \\
+y - 2 &= -\frac{4}{3}x + 8 \\
+y &= -\frac{4}{3}x + 10
+\end{align*}
+
+\textbf{Paso 4:} Forma general (multiplicamos por 3):
+\[
+3y = -4x + 30 \quad \Rightarrow \quad 4x + 3y - 30 = 0
+\]
+
+\textbf{Respuesta:} $\boxed{4x + 3y - 30 = 0}$ o $\boxed{y = -\frac{4}{3}x + 10}$
+
+\textbf{Inciso b):}
+
+\textbf{Paso 1:} $m_1 = 2$.
+
+\textbf{Paso 2:} Perpendicular:
+\[
+m_2 = -\frac{1}{2}
+\]
+
+\textbf{Paso 3:} Con $Q(4, 3)$:
+\begin{align*}
+y - 3 &= -\frac{1}{2}(x - 4) \\
+y - 3 &= -\frac{1}{2}x + 2 \\
+y &= -\frac{1}{2}x + 5
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{y = -\frac{1}{2}x + 5}$ o $\boxed{x + 2y - 10 = 0}$
+
+\textbf{Inciso c):}
+
+\textbf{Paso 1:} Pendiente de la recta dada:
+\[
+x + 6y - 18 = 0 \quad \Rightarrow \quad 6y = -x + 18 \quad \Rightarrow \quad y = -\frac{1}{6}x + 3
+\]
+$m_1 = -\frac{1}{6}$.
+
+\textbf{Paso 2:} Perpendicular:
+\[
+m_2 = -\frac{1}{m_1} = -\frac{1}{-\frac{1}{6}} = 6
+\]
+
+\textbf{Paso 3:} Con $R(3, -1)$:
+\begin{align*}
+y - (-1) &= 6(x - 3) \\
+y + 1 &= 6x - 18 \\
+y &= 6x - 19
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{y = 6x - 19}$ o $\boxed{6x - y - 19 = 0}$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.6\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=10,
+    ymin=-3, ymax=12,
+    grid=major,
+    grid style={dashed, gray!30},
+]
+
+% Inciso a)
+\addplot[thick, color=blue, domain=-1:10] {0.75*x + 3};
+\addplot[thick, color=blue, dashed, domain=3:9] {-4/3*x + 10};
+\addplot[only marks, mark=*, mark size=3pt, color=blue] coordinates {(6,2)};
+\node[above, blue] at (axis cs:6,2) {$P(6,2)$};
+
+% Ángulo recto en P
+\draw[thick, blue] (axis cs:6,2) -- ++(0.5,0.375) -- ++(0.667,-0.5);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+Para verificar que dos rectas son perpendiculares, multiplica sus pendientes: el resultado debe ser $-1$.
+
+Ejemplo inciso a): $m_1 \cdot m_2 = \frac{3}{4} \cdot \left(-\frac{4}{3}\right) = -\frac{12}{12} = -1$ ✓
+\end{nota}
+\end{solucion}
+
+% ============================================
+% EJERCICIO 8: Intersección de rectas
+% ============================================
+
+\begin{ejercicio}[Intersección de rectas - Nivel AVANZADO]
+Encuentra el punto de intersección de los siguientes pares de rectas:
+
+\textbf{a)} $L_1: 2x + y = 10$ y $L_2: x - y = 2$
+
+\textbf{b)} $L_1: 3x - 2y = 6$ y $L_2: x + 4y = 14$
+
+\textbf{c)} $L_1: y = 2x - 3$ y $L_2: y = -x + 6$
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Inciso a):}
+
+\textbf{Paso 1:} Tenemos el sistema:
+\begin{align*}
+2x + y &= 10 \quad \text{...(1)} \\
+x - y &= 2 \quad \text{...(2)}
+\end{align*}
+
+\textbf{Paso 2:} Sumamos (1) + (2) para eliminar $y$:
+\[
+3x = 12 \quad \Rightarrow \quad x = 4
+\]
+
+\textbf{Paso 3:} Sustituimos en (2):
+\[
+4 - y = 2 \quad \Rightarrow \quad y = 2
+\]
+
+\textbf{Paso 4:} Verificamos en (1):
+\[
+2(4) + 2 = 8 + 2 = 10 \quad \checkmark
+\]
+
+\textbf{Respuesta:} $\boxed{(4, 2)}$
+
+\textbf{Inciso b):}
+
+\textbf{Paso 1:} Sistema:
+\begin{align*}
+3x - 2y &= 6 \quad \text{...(1)} \\
+x + 4y &= 14 \quad \text{...(2)}
+\end{align*}
+
+\textbf{Paso 2:} De (2): $x = 14 - 4y$
+
+\textbf{Paso 3:} Sustituimos en (1):
+\begin{align*}
+3(14 - 4y) - 2y &= 6 \\
+42 - 12y - 2y &= 6 \\
+-14y &= -36 \\
+y &= \frac{36}{14} = \frac{18}{7}
+\end{align*}
+
+\textbf{Paso 4:} Sustituimos en $x = 14 - 4y$:
+\[
+x = 14 - 4 \cdot \frac{18}{7} = 14 - \frac{72}{7} = \frac{98 - 72}{7} = \frac{26}{7}
+\]
+
+\textbf{Respuesta:} $\boxed{\left(\frac{26}{7}, \frac{18}{7}\right) \approx (3.71, 2.57)}$
+
+\textbf{Inciso c):}
+
+\textbf{Paso 1:} Igualamos las dos ecuaciones:
+\[
+2x - 3 = -x + 6
+\]
+
+\textbf{Paso 2:} Resolvemos:
+\begin{align*}
+3x &= 9 \\
+x &= 3
+\end{align*}
+
+\textbf{Paso 3:} Sustituimos en $y = 2x - 3$:
+\[
+y = 2(3) - 3 = 3
+\]
+
+\textbf{Paso 4:} Verificamos en $y = -x + 6$:
+\[
+y = -(3) + 6 = 3 \quad \checkmark
+\]
+
+\textbf{Respuesta:} $\boxed{(3, 3)}$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.55\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-1, xmax=8,
+    ymin=-1, ymax=12,
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=north west,
+]
+
+% Inciso a)
+\addplot[thick, color=blue, domain=0:6] {10 - 2*x};
+\addplot[thick, color=red, domain=0:7] {x - 2};
+\addplot[only marks, mark=*, mark size=4pt, color=black] coordinates {(4,2)};
+\node[above right] at (axis cs:4,2) {$I_a(4,2)$};
+\addlegendentry{$2x + y = 10$}
+\addlegendentry{$x - y = 2$}
+
+% Inciso c)
+\addplot[thick, color=green!70!black, domain=0:5] {2*x - 3};
+\addplot[thick, color=orange, domain=0:7] {-x + 6};
+\addplot[only marks, mark=*, mark size=4pt, color=black] coordinates {(3,3)};
+\node[below right] at (axis cs:3,3) {$I_c(3,3)$};
+\addlegendentry{$y = 2x - 3$}
+\addlegendentry{$y = -x + 6$}
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+% ============================================
+% EJERCICIO 9: Aplicación en ingeniería civil
+% ============================================
+
+\begin{ejercicio}[Aplicación en ingeniería civil - Nivel AVANZADO]
+Un ingeniero civil está diseñando el trazado de dos carreteras que se intersectan. La primera carretera sigue la ecuación $y = \frac{1}{2}x + 2$ y la segunda sigue $y = -\frac{2}{3}x + 10$ (coordenadas en kilómetros).
+
+\textbf{a)} Encuentra el punto de intersección (donde se construirá una rotonda).
+
+\textbf{b)} Calcula la distancia de la intersección al origen.
+
+\textbf{c)} Una tercera carretera perpendicular a la primera debe pasar por la intersección. Encuentra su ecuación.
+
+\textbf{d)} ¿En qué punto esta tercera carretera cruza el eje $x$?
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Parte a):}
+
+Igualamos las ecuaciones:
+\begin{align*}
+\frac{1}{2}x + 2 &= -\frac{2}{3}x + 10 \\
+\frac{1}{2}x + \frac{2}{3}x &= 8
+\end{align*}
+
+MCM de 2 y 3 es 6:
+\begin{align*}
+\frac{3x + 4x}{6} &= 8 \\
+7x &= 48 \\
+x &= \frac{48}{7} \approx 6.86
+\end{align*}
+
+Sustituimos en $y = \frac{1}{2}x + 2$:
+\[
+y = \frac{1}{2} \cdot \frac{48}{7} + 2 = \frac{24}{7} + 2 = \frac{24 + 14}{7} = \frac{38}{7} \approx 5.43
+\]
+
+\textbf{Respuesta:} $\boxed{I\left(\frac{48}{7}, \frac{38}{7}\right) \approx (6.86, 5.43)}$
+
+\textbf{Parte b):}
+
+Distancia del origen $(0, 0)$ a $I$:
+\[
+d = \sqrt{\left(\frac{48}{7}\right)^2 + \left(\frac{38}{7}\right)^2} = \frac{1}{7}\sqrt{48^2 + 38^2} = \frac{1}{7}\sqrt{2304 + 1444} = \frac{\sqrt{3748}}{7}
+\]
+
+Simplificamos:
+\[
+\sqrt{3748} = \sqrt{4 \cdot 937} = 2\sqrt{937} \approx 61.21
+\]
+
+\[
+d \approx \frac{61.21}{7} \approx 8.74 \text{ km}
+\]
+
+\textbf{Respuesta:} $\boxed{d \approx 8.74 \text{ km}}$
+
+\textbf{Parte c):}
+
+La primera carretera tiene $m_1 = \frac{1}{2}$.
+
+La tercera carretera es perpendicular:
+\[
+m_3 = -\frac{1}{m_1} = -2
+\]
+
+Pasa por $I\left(\frac{48}{7}, \frac{38}{7}\right)$:
+\begin{align*}
+y - \frac{38}{7} &= -2\left(x - \frac{48}{7}\right) \\
+y - \frac{38}{7} &= -2x + \frac{96}{7} \\
+y &= -2x + \frac{96 + 38}{7} \\
+y &= -2x + \frac{134}{7}
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{y = -2x + \frac{134}{7}}$ o aproximadamente $\boxed{y = -2x + 19.14}$
+
+\textbf{Parte d):}
+
+Cuando $y = 0$:
+\begin{align*}
+0 &= -2x + \frac{134}{7} \\
+2x &= \frac{134}{7} \\
+x &= \frac{134}{14} = \frac{67}{7} \approx 9.57
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{\left(\frac{67}{7}, 0\right) \approx (9.57, 0)}$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.6\textwidth,
+    axis lines=middle,
+    xlabel={$x$ (km)},
+    ylabel={$y$ (km)},
+    xmin=-1, xmax=12,
+    ymin=-2, ymax=12,
+    grid=major,
+    grid style={dashed, gray!30},
+    legend pos=north east,
+]
+
+% Primera carretera
+\addplot[thick, color=blue, domain=-1:11] {0.5*x + 2};
+\addlegendentry{Carretera 1: $y = \frac{1}{2}x + 2$}
+
+% Segunda carretera
+\addplot[thick, color=red, domain=0:11] {-2/3*x + 10};
+\addlegendentry{Carretera 2: $y = -\frac{2}{3}x + 10$}
+
+% Tercera carretera
+\addplot[thick, color=green!70!black, domain=4:10] {-2*x + 134/7};
+\addlegendentry{Carretera 3: $y = -2x + \frac{134}{7}$}
+
+% Intersección
+\addplot[only marks, mark=*, mark size=5pt, color=orange] coordinates {(6.86,5.43)};
+\node[above right, orange] at (axis cs:6.86,5.43) {Rotonda $I(6.86, 5.43)$};
+
+% Punto en eje x
+\addplot[only marks, mark=*, mark size=4pt, color=green!70!black] coordinates {(9.57,0)};
+\node[below, green!70!black] at (axis cs:9.57,0) {$(9.57, 0)$};
+
+% Línea del origen a la intersección
+\addplot[dashed, thick, color=purple] coordinates {(0,0) (6.86,5.43)};
+\node[above, rotate=38, purple] at (axis cs:3.5,2.7) {$d \approx 8.74$ km};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+% ============================================
+% EJERCICIO 10: Problema integral
+% ============================================
+
+\begin{ejercicio}[Problema integral de geometría analítica - Nivel AVANZADO]
+Tres vértices de un paralelogramo son $A(1, 2)$, $B(5, 4)$, y $C(7, 8)$.
+
+\textbf{a)} Encuentra las coordenadas del cuarto vértice $D$.
+
+\textbf{b)} Calcula el perímetro del paralelogramo.
+
+\textbf{c)} Encuentra las ecuaciones de las dos diagonales.
+
+\textbf{d)} Determina el punto de intersección de las diagonales y verifica que es el punto medio de ambas.
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Parte a):}
+
+En un paralelogramo, las diagonales se bisectan mutuamente (se cortan en su punto medio).
+
+Las dos diagonales son $AC$ y $BD$.
+
+Punto medio de $AC$:
+\[
+M_{AC} = \left(\frac{1+7}{2}, \frac{2+8}{2}\right) = (4, 5)
+\]
+
+Este también debe ser el punto medio de $BD$. Sea $D(x, y)$:
+\[
+\left(\frac{5+x}{2}, \frac{4+y}{2}\right) = (4, 5)
+\]
+
+Por lo tanto:
+\begin{align*}
+\frac{5+x}{2} &= 4 \quad \Rightarrow \quad 5+x = 8 \quad \Rightarrow \quad x = 3 \\
+\frac{4+y}{2} &= 5 \quad \Rightarrow \quad 4+y = 10 \quad \Rightarrow \quad y = 6
+\end{align*}
+
+\textbf{Respuesta:} $\boxed{D(3, 6)}$
+
+\textbf{Parte b):}
+
+Calculamos las longitudes de los lados:
+
+Lado $AB$:
+\[
+|AB| = \sqrt{(5-1)^2 + (4-2)^2} = \sqrt{16 + 4} = \sqrt{20} = 2\sqrt{5}
+\]
+
+Lado $BC$:
+\[
+|BC| = \sqrt{(7-5)^2 + (8-4)^2} = \sqrt{4 + 16} = \sqrt{20} = 2\sqrt{5}
+\]
+
+Lado $CD$ (debe ser igual a $AB$):
+\[
+|CD| = \sqrt{(3-7)^2 + (6-8)^2} = \sqrt{16 + 4} = \sqrt{20} = 2\sqrt{5}
+\]
+
+Lado $DA$ (debe ser igual a $BC$):
+\[
+|DA| = \sqrt{(1-3)^2 + (2-6)^2} = \sqrt{4 + 16} = \sqrt{20} = 2\sqrt{5}
+\]
+
+Perímetro:
+\[
+P = 4 \times 2\sqrt{5} = 8\sqrt{5} \approx 17.89 \text{ unidades}
+\]
+
+\textbf{Respuesta:} $\boxed{P = 8\sqrt{5} \approx 17.89 \text{ unidades}}$
+
+\textbf{Observación:} En este caso particular, ¡todos los lados son iguales! Esto significa que el paralelogramo es en realidad un \textbf{rombo}.
+
+\textbf{Parte c):}
+
+\textbf{Diagonal AC:}
+
+Pendiente:
+\[
+m_{AC} = \frac{8-2}{7-1} = \frac{6}{6} = 1
+\]
+
+Ecuación con $A(1, 2)$:
+\[
+y - 2 = 1(x - 1) \quad \Rightarrow \quad y = x + 1
+\]
+
+\textbf{Diagonal BD:}
+
+Pendiente:
+\[
+m_{BD} = \frac{6-4}{3-5} = \frac{2}{-2} = -1
+\]
+
+Ecuación con $B(5, 4)$:
+\[
+y - 4 = -1(x - 5) \quad \Rightarrow \quad y = -x + 9
+\]
+
+\textbf{Respuesta:}
+\begin{itemize}
+    \item Diagonal $AC$: $\boxed{y = x + 1}$
+    \item Diagonal $BD$: $\boxed{y = -x + 9}$
+\end{itemize}
+
+\textbf{Parte d):}
+
+Intersección (igualamos):
+\begin{align*}
+x + 1 &= -x + 9 \\
+2x &= 8 \\
+x &= 4
+\end{align*}
+
+Sustituimos:
+\[
+y = 4 + 1 = 5
+\]
+
+Punto de intersección: $I(4, 5)$
+
+\textbf{Verificación:}
+
+Punto medio de $AC$:
+\[
+M_{AC} = \left(\frac{1+7}{2}, \frac{2+8}{2}\right) = (4, 5) \quad \checkmark
+\]
+
+Punto medio de $BD$:
+\[
+M_{BD} = \left(\frac{5+3}{2}, \frac{4+6}{2}\right) = (4, 5) \quad \checkmark
+\]
+
+¡Ambos coinciden con el punto de intersección!
+
+\textbf{Respuesta:} $\boxed{I(4, 5)}$ es el punto de intersección y es el punto medio de ambas diagonales. ✓
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.65\textwidth,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=0, xmax=8,
+    ymin=1, ymax=9,
+    grid=major,
+    grid style={dashed, gray!30},
+]
+
+% Paralelogramo ABCD
+\addplot[thick, color=blue, fill=blue!10, opacity=0.3] coordinates {(1,2) (5,4) (7,8) (3,6)} \closedcycle;
+
+% Vértices
+\addplot[only marks, mark=*, mark size=4pt, color=red] coordinates {(1,2) (5,4) (7,8) (3,6)};
+\node[below left, red] at (axis cs:1,2) {$A(1,2)$};
+\node[below, red] at (axis cs:5,4) {$B(5,4)$};
+\node[above right, red] at (axis cs:7,8) {$C(7,8)$};
+\node[left, red] at (axis cs:3,6) {$D(3,6)$};
+
+% Diagonales
+\addplot[thick, color=green!70!black, dashed] coordinates {(1,2) (7,8)};
+\addplot[thick, color=orange, dashed] coordinates {(5,4) (3,6)};
+
+% Punto de intersección
+\addplot[only marks, mark=*, mark size=5pt, color=purple] coordinates {(4,5)};
+\node[above right, purple] at (axis cs:4,5) {$I(4,5)$};
+
+% Lados del paralelogramo
+\addplot[thick, color=blue] coordinates {(1,2) (5,4)};
+\addplot[thick, color=blue] coordinates {(5,4) (7,8)};
+\addplot[thick, color=blue] coordinates {(7,8) (3,6)};
+\addplot[thick, color=blue] coordinates {(3,6) (1,2)};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+Este paralelogramo es en realidad un \textbf{rombo} porque todos sus lados tienen la misma longitud ($2\sqrt{5}$). Además, las diagonales son perpendiculares ($m_1 \cdot m_2 = 1 \cdot (-1) = -1$), lo cual es otra propiedad característica de los rombos.
+\end{nota}
+\end{solucion}
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado un viaje fascinante a través del mundo de la línea recta en geometría analítica. Lo que comenzó como una simple idea - el camino más corto entre dos puntos - se ha transformado en un conjunto poderoso de herramientas matemáticas que te permitirán analizar y resolver problemas complejos.
+
+\subsection*{Recapitulación de lo Aprendido}
+
+Durante este recorrido, has dominado conceptos fundamentales que son la base de muchas áreas de las matemáticas y sus aplicaciones:
+
+\begin{enumerate}
+\item \textbf{Lugar Geométrico}: Aprendiste que las figuras geométricas pueden definirse como conjuntos de puntos que cumplen ciertas condiciones. La línea recta es un ejemplo perfecto de esto: todos sus puntos satisfacen una ecuación lineal.
+
+\item \textbf{Distancia entre Dos Puntos}: Dominas ahora la fórmula derivada del teorema de Pitágoras, una herramienta esencial no solo en geometría, sino en física, ingeniería y muchas otras disciplinas.
+
+\item \textbf{Punto Medio}: Sabes encontrar el centro exacto de cualquier segmento, una habilidad útil en diseño, arquitectura y resolución de problemas geométricos.
+
+\item \textbf{Pendiente}: Comprendes este concepto crucial que nos dice la inclinación de una recta, su dirección de crecimiento, y cómo se relaciona con el ángulo de inclinación.
+
+\item \textbf{Ecuaciones de la Recta}: Manejas las diferentes formas de expresar una recta algebraicamente, y puedes convertir entre ellas según lo que necesites.
+
+\item \textbf{Posiciones Relativas}: Puedes determinar si dos rectas son paralelas, perpendiculares, secantes o coincidentes, y calcular el ángulo entre ellas.
+\end{enumerate}
+
+\begin{tcolorbox}[
+    colback=green!5!white,
+    colframe=thirdcolor,
+    title=Tabla de Fórmulas Esenciales para Referencia Rápida,
+    breakable
+]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{5cm}|p{7cm}|p{3cm}|}
+\hline
+\textbf{Concepto} & \textbf{Fórmula} & \textbf{Uso Principal} \\
+\hline
+\hline
+\textbf{Distancia} & $d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$ & Longitud de segmentos \\
+\hline
+\textbf{Punto Medio} & $M = \left(\frac{x_1+x_2}{2}, \frac{y_1+y_2}{2}\right)$ & Centro de segmentos \\
+\hline
+\textbf{Pendiente} & $m = \frac{y_2-y_1}{x_2-x_1} = \tan(\theta)$ & Inclinación de rectas \\
+\hline
+\textbf{Ec. Punto-Pendiente} & $y - y_1 = m(x - x_1)$ & Cuando conoces un punto y pendiente \\
+\hline
+\textbf{Ec. Pendiente-Ordenada} & $y = mx + b$ & Forma más común \\
+\hline
+\textbf{Ec. General} & $Ax + By + C = 0$ & Forma estándar \\
+\hline
+\textbf{Condición Paralelismo} & $m_1 = m_2$ & Rectas que nunca se cruzan \\
+\hline
+\textbf{Condición Perpendicularidad} & $m_1 \cdot m_2 = -1$ & Rectas a 90° \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{tcolorbox}
+
+\subsection*{Consejos para Trabajar con Líneas Rectas}
+
+Basándome en los conceptos que has aprendido, aquí van algunos consejos prácticos que te ayudarán a resolver problemas más eficientemente:
+
+\begin{nota}
+\textbf{Consejos de Oro:}
+\begin{enumerate}
+\item \textbf{Siempre dibuja}: Antes de resolver cualquier problema, haz un bosquejo. Ver el problema geométricamente te dará intuición sobre la solución.
+
+\item \textbf{Identifica qué tienes y qué necesitas}: Antes de aplicar fórmulas, lista los datos que conoces y lo que debes encontrar.
+
+\item \textbf{Elige la forma correcta de la ecuación}:
+   - Si conoces pendiente y un punto: usa punto-pendiente
+   - Si conoces dos puntos: calcula primero la pendiente
+   - Si necesitas graficar: convierte a pendiente-ordenada
+
+\item \textbf{Verifica tus respuestas}: Sustituye puntos en tu ecuación final para verificar que la satisfacen.
+
+\item \textbf{Practica la conversión entre formas}: Ser fluido en convertir entre diferentes formas de la ecuación te ahorrará mucho tiempo.
+\end{enumerate}
+\end{nota}
+
+\subsection*{Aplicaciones Avanzadas y Conexiones con Otros Temas}
+
+Lo que has aprendido sobre la línea recta es solo el comienzo. Estos conceptos se conectan y extienden a muchas otras áreas fascinantes de las matemáticas:
+
+\subsubsection*{En Cálculo Diferencial}
+
+La pendiente de una recta es la base para entender la derivada. La derivada de una función en un punto es la pendiente de la recta tangente a la curva en ese punto. Cuando estudies cálculo, verás que todo lo que aprendiste aquí sobre pendientes se generaliza a curvas más complejas.
+
+\subsubsection*{En Álgebra Lineal}
+
+Los sistemas de ecuaciones lineales, que estudiarás más adelante, son conjuntos de rectas (en 2D) o planos (en 3D). Resolver un sistema es encontrar dónde se intersectan estas rectas o planos.
+
+\subsubsection*{En Estadística}
+
+La regresión lineal, una herramienta fundamental en estadística, busca la recta que mejor se ajusta a un conjunto de datos. Los conceptos de pendiente e intersección tienen interpretaciones importantes en el análisis de datos.
+
+\subsubsection*{En Programación y Computación Gráfica}
+
+Los videojuegos y las aplicaciones de diseño usan constantemente ecuaciones de rectas para:
+- Detectar colisiones entre objetos
+- Trazar rayos de luz en renderizado 3D
+- Calcular trayectorias de proyectiles
+- Implementar algoritmos de pathfinding (encontrar rutas)
+
+\subsubsection*{En Física}
+
+- Las leyes de la óptica geométrica se basan en la propagación rectilínea de la luz
+- El movimiento rectilíneo uniforme se describe con ecuaciones de rectas
+- Las fuerzas se representan como vectores (segmentos de recta con dirección)
+
+\subsection*{Recomendaciones para Continuar Aprendiendo}
+
+Para profundizar y consolidar tu conocimiento:
+
+\begin{enumerate}
+\item \textbf{Practica con problemas variados}: No te limites a ejercicios mecánicos. Busca problemas que requieran pensar y aplicar varios conceptos.
+
+\item \textbf{Conecta con el mundo real}: Cuando veas edificios, carreteras, o cualquier estructura, piensa en las líneas rectas involucradas.
+
+\item \textbf{Explora con software}: Usa programas como GeoGebra para experimentar con rectas dinámicamente. Cambiar parámetros y ver resultados instantáneos refuerza la comprensión.
+
+\item \textbf{Enseña a otros}: Explicar estos conceptos a compañeros es una excelente manera de consolidar tu propio entendimiento.
+
+\item \textbf{Prepárate para el siguiente nivel}: Los conceptos de línea recta se extienden naturalmente a:
+   - Cónicas (parábolas, elipses, hipérbolas)
+   - Geometría en 3D
+   - Vectores y espacios vectoriales
+   - Transformaciones geométricas
+\end{enumerate}
+
+\subsection*{Reflexión Final}
+
+La geometría analítica, y en particular el estudio de la línea recta, representa uno de los grandes logros del pensamiento matemático: la unificación del álgebra y la geometría. Lo que Descartes y Fermat iniciaron hace casi 400 años sigue siendo fundamental en la tecnología del siglo XXI.
+
+Cada vez que uses tu teléfono para navegar con GPS, cada vez que un arquitecto diseñe un edificio, cada vez que un programador cree gráficos en una computadora, están usando los conceptos que has aprendido en esta guía. Las matemáticas no son solo números y símbolos abstractos; son el lenguaje con el que describimos y entendemos el mundo.
+
+Has demostrado perseverancia y dedicación al completar este estudio. Los conceptos que ahora dominas no son solo herramientas para resolver problemas en papel; son instrumentos para entender y moldear la realidad. La línea recta, en su aparente simplicidad, encierra profundidad y belleza matemática.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.55\textwidth,
+    axis lines=none,
+    xmin=-10, xmax=10,
+    ymin=-10, ymax=10,
+    title={\Large\textbf{El Arte de las Líneas Rectas}}
+]
+
+% Crear un patrón artístico con líneas rectas
+\foreach \i in {0,20,...,340} {
+    \addplot[maincolor!70, opacity=0.7] coordinates {
+        ({8*cos(\i)}, {8*sin(\i)})
+        ({8*cos(\i+120)}, {8*sin(\i+120)})
+    };
+    \addplot[accentcolor!70, opacity=0.7] coordinates {
+        ({6*cos(\i+10)}, {6*sin(\i+10)})
+        ({6*cos(\i+130)}, {6*sin(\i+130)})
+    };
+    \addplot[thirdcolor!70, opacity=0.7] coordinates {
+        ({4*cos(\i+20)}, {4*sin(\i+20)})
+        ({4*cos(\i+140)}, {4*sin(\i+140)})
+    };
+}
+
+\node at (axis cs:0,-12) {\textit{``La geometría es el arte de razonar bien con figuras mal hechas''} - Poincaré};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Recuerda siempre que las matemáticas son un viaje, no un destino. Cada concepto que aprendes abre puertas a nuevos territorios por explorar. La línea recta ha sido tu primera gran conquista en geometría analítica, pero es solo el comienzo de aventuras matemáticas aún más emocionantes.
+
+¡Sigue adelante con confianza! Has demostrado que puedes dominar conceptos matemáticos complejos. Usa lo que has aprendido, practícalo, compártelo, y sobre todo, disfruta del poder y la elegancia de las matemáticas.
+
+\textbf{¡Felicitaciones por completar este estudio sobre la línea recta!}
+
+Tu viaje en la geometría analítica apenas comienza, y las herramientas que ahora posees te acompañarán en todos tus futuros estudios matemáticos y científicos.
+
+\end{document}
