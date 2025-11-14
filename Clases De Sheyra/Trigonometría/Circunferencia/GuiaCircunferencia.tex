@@ -288,14 +288,14 @@ Esta definición aparentemente simple esconde una profunda verdad matemática: l
     axis equal image,
     grid=major,
     grid style={gray!30},
-    xmin=-5, xmax=5,
-    ymin=-5, ymax=5,
+    xmin=-2, xmax=6,
+    ymin=-3, ymax=5,
     xlabel={$x$},
     ylabel={$y$},
     axis lines=middle,
     width=0.85\textwidth,
     height=0.85\textwidth,
-    xtick={-4,-3,-2,-1,0,1,2,3,4},
+    xtick={-4,-3,-2,-1,0,1,2,3,4, 5, 6},
     ytick={-4,-3,-2,-1,0,1,2,3,4},
   ]
   % Circunferencia
@@ -314,7 +314,7 @@ Esta definición aparentemente simple esconde una profunda verdad matemática: l
 
   % Radio etiquetado
   \addplot[ColorAcento, thick] coordinates {(2,1) (5,1)};
-  \node[above] at (axis cs:3.5,1) {$r$ (radio)};
+  \node[below right] at (axis cs:3.5,1) {$r$ (radio)};
 
   % Puntos sobre la circunferencia
   \addplot[mark=*, blue, mark size=2pt] coordinates {(5,1)};
@@ -395,13 +395,17 @@ Veamos algunos ejemplos visuales:
     grid=major,
     grid style={gray!30},
     xmin=-6, xmax=6,
-    ymin=-6, ymax=6,
+    ymin=-5, ymax=6,
     xlabel={$x$},
     ylabel={$y$},
     axis lines=middle,
     width=0.9\textwidth,
     height=0.9\textwidth,
-    legend pos=outer north east,
+    legend style={
+	at={(0.22,0.85)},
+	anchor=south,
+	font=\small
+	}
   ]
 
   % Circunferencia con centro en origen
@@ -578,13 +582,17 @@ d = \frac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}}
     grid=major,
     grid style={gray!30},
     xmin=-6, xmax=6,
-    ymin=-6, ymax=6,
+    ymin=-4, ymax=6,
     xlabel={$x$},
     ylabel={$y$},
     axis lines=middle,
     width=0.95\textwidth,
     height=0.95\textwidth,
-    legend pos=outer north east,
+    legend style={
+	at={(0.15,0)},
+	anchor=south,
+	font=\small
+	}
   ]
 
   % Circunferencia
@@ -702,8 +710,8 @@ Concéntricas & $d = 0$ \\
     \fill (0,0) circle (2pt);
     \fill (1.5,0) circle (2pt);
     \draw[dashed] (0,0) -- (1.5,0);
-    \fill[red] (0.65,0.95) circle (3pt);
-    \fill[red] (0.65,-0.95) circle (3pt);
+    \fill[red] (0.9,0.73) circle (3pt);
+    \fill[red] (0.9,-0.73) circle (3pt);
   \end{scope}
 
   % Tangentes interiormente
@@ -873,7 +881,11 @@ Desarrollando los binomios:
     xmin=-40, xmax=45,
     ymin=-35, ymax=45,
     title={Diseño de rueda de bicicleta - Vista frontal},
-    legend pos=north east
+    legend style={
+	at={(0.7,0.52)},
+	anchor=south,
+	font=\scriptsize
+	}
 ]
 % Circunferencia exterior de la rueda
 \addplot[domain=0:360, samples=100, thick, blue, variable=\t]
@@ -963,7 +975,11 @@ Comparando con $(x - h)^2 + (y - k)^2 = r^2$:
     xmin=-13, xmax=5,
     ymin=-2, ymax=14,
     title={Cobertura del Sistema de Radar},
-    legend pos=north east
+	legend style={
+	at={(0.63,0.56)},
+	anchor=south,
+	font=\scriptsize
+	}
 ]
 % Área de cobertura del radar
 \addplot[domain=0:360, samples=100, thick, blue, fill=blue!10, variable=\t]
@@ -1058,7 +1074,11 @@ Radio: $r = \sqrt{225} = 15$ (en cientos de km)
     xmin=-12, xmax=22,
     ymin=-24, ymax=10,
     title={Órbita Circular del Satélite de Comunicaciones},
-    legend pos=north east
+	legend style={
+	at={(0.65,0.52)},
+	anchor=south,
+	font=\scriptsize
+	}
 ]
 % Órbita del satélite
 \addplot[domain=0:360, samples=100, thick, blue, variable=\t]
@@ -1179,7 +1199,11 @@ $$7x^2 + 7y^2 - 62x - 80y + 273 = 0$$
     xmin=0, xmax=10,
     ymin=1, ymax=11,
     title={Diseño del Arco Circular - Vista Frontal},
-    legend pos=north west
+	legend style={
+	at={(0.55,0.56)},
+	anchor=south,
+	font=\scriptsize
+	}
 ]
 % Circunferencia completa
 \addplot[domain=0:360, samples=100, thin, gray, dashed, variable=\t]
@@ -1275,7 +1299,11 @@ Para $x_2 = 1.65$: $y_2 = \frac{3(1.65) + 5}{4} = \frac{9.95}{4} = 2.49$
     xmin=-2, xmax=22,
     ymin=-3, ymax=20,
     title={Sistema de Defensa: Radar vs Trayectoria del Misil},
-    legend pos=north west
+	legend style={
+	at={(0.49,0.65)},
+	anchor=south,
+	font=\scriptsize
+	}
 ]
 % Área de cobertura del radar
 \addplot[domain=0:360, samples=100, thick, blue, fill=blue!15, variable=\t]
@@ -1366,7 +1394,11 @@ $$3x + 4y - 52 = 0$$ ✓
     xmin=-1, xmax=12,
     ymin=-2, ymax=10,
     title={Diseño de Engranaje con Banda Tangente},
-    legend pos=north west
+	legend style={
+	at={(0.49,0.15)},
+	anchor=south,
+	font=\scriptsize
+	}
 ]
 % Engranaje (circunferencia)
 \addplot[domain=0:360, samples=100, thick, blue, variable=\t]
@@ -1597,7 +1629,7 @@ Ecuación: $(x - 5.98)^2 + (y - 6.96)^2 = 25.5$
     xmin=-5, xmax=12,
     ymin=-8, ymax=13,
     title={Diseño de Rotonda - Soluciones Posibles},
-    legend pos=north east
+    legend pos=south east
 ]
 % Carretera principal (recta tangente)
 \addplot[domain=-5:12, thick, gray, samples=2] {x + 8};
@@ -1777,7 +1809,11 @@ $$P_{lejano} \approx (19.16, 20.64)$$
     xmin=-2, xmax=24,
     ymin=-2, ymax=24,
     title={Órbita del Satélite de Observación},
-    legend pos=north west
+	legend style={
+	at={(0.75,0)},
+	anchor=south,
+	font=\scriptsize
+	}
 ]
 % Órbita del satélite
 \addplot[domain=0:360, samples=100, thick, blue, variable=\t]
@@ -1978,7 +2014,11 @@ $$\text{Área total} = 400\pi + 611\pi + 225\pi = 1236\pi \approx 3883.01 \text{
     xmin=-25, xmax=70,
     ymin=-40, ymax=55,
     title={Complejo de Plazas Circulares},
-    legend pos=outer north east
+	legend style={
+	at={(0.85,0.765)},
+	anchor=south,
+	font=\scriptsize
+	}
 ]
 % Plaza Principal
 \addplot[domain=0:360, samples=100, thick, blue, fill=blue!15, variable=\t]
@@ -2151,7 +2191,7 @@ Radio mínimo para área conexa: $r_C = \max(13.01, 10.85) = 13.01$ km
     xmin=-35, xmax=50,
     ymin=-35, ymax=40,
     title={Sistema de Torres de Telecomunicaciones},
-    legend pos=outer north east
+    legend pos= south east
 ]
 % Torre A
 \addplot[domain=0:360, samples=100, thick, blue, fill=blue!10, variable=\t]
@@ -2332,7 +2372,7 @@ Punto equidistante: $(15.83, -1.33)$ píxeles
     xmin=-10, xmax=25,
     ymin=-16, ymax=15,
     title={Mecánica de Colisiones - Billar Espacial},
-    legend pos=outer north east
+    legend pos=south east
 ]
 % Bola Objetivo
 \addplot[domain=0:360, samples=100, thick, blue, variable=\t]
@@ -2541,14 +2581,14 @@ Hallar la ecuación de la circunferencia que pasa por los tres puntos dados:
 \textbf{Respuesta:} \boxed{x^2 + (y+2)^2 = 36}
 
 \begin{center}
-\begin{tikzpicture}[scale=0.5]
+\begin{tikzpicture}[scale=0.85]
 \begin{axis}[
     width=0.85\textwidth,
     axis equal image,
     grid=major,
     xlabel={$x$},
     ylabel={$y$},
-    xmin=-5, xmax=8,
+    xmin=-7, xmax=8,
     ymin=-9, ymax=10,
     xtick={-4,-2,0,2,4,6,8},
     ytick={-8,-6,-4,-2,0,2,4,6,8}
