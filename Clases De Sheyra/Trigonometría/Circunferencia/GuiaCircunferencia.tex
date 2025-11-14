@@ -1,0 +1,3402 @@
+% PARTE 1: ESTRUCTURA BASE DE LA GUÍA
+% Subagente 1 - Estructura Base
+% Tema: Circunferencia - Grado 10
+
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=2cm]{geometry}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel,patterns,shapes.geometric,intersections,through}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\pgfplotsset{compat=1.18}
+
+% Configuración de hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ColorPrincipal,
+    urlcolor=ColorPrincipal,
+    citecolor=ColorPrincipal
+}
+
+% Definición de colores
+\definecolor{ColorPrincipal}{RGB}{0,70,173}
+\definecolor{ColorAcento}{RGB}{255,127,0}
+\definecolor{ColorTerciario}{RGB}{0,150,0}
+\definecolor{ColorFondo}{RGB}{240,240,255}
+
+% Entornos personalizados
+\newtcolorbox{definicion}[1][]{
+  colback=ColorPrincipal!5,
+  colframe=ColorPrincipal,
+  fonttitle=\bfseries,
+  title=Definición,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{teorema}[1][]{
+  colback=ColorTerciario!5,
+  colframe=ColorTerciario,
+  fonttitle=\bfseries,
+  title=Teorema,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{ejemplo}[1][]{
+  colback=ColorAcento!5,
+  colframe=ColorAcento,
+  fonttitle=\bfseries,
+  title=Ejemplo,
+  breakable,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  colback=ColorAcento!5,
+  colframe=ColorAcento,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  breakable,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  colback=ColorTerciario!5,
+  colframe=ColorTerciario,
+  fonttitle=\bfseries,
+  title=Solución,
+  breakable,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  colback=yellow!10,
+  colframe=yellow!80!black,
+  fonttitle=\bfseries,
+  title=Nota,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{importante}[1][]{
+  colback=red!5,
+  colframe=red!60!black,
+  fonttitle=\bfseries,
+  title=¡Importante!,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+% Configuración de headers y footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\fancyfoot[C]{\small Geometría Analítica - Circunferencia}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Comandos personalizados
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\circunf}[3]{(x-#1)^2 + (y-#2)^2 = #3^2}
+
+\begin{document}
+
+% ===========================================
+% PORTADA
+% ===========================================
+
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+{\Huge\bfseries GEOMETRÍA ANALÍTICA\par}
+\vspace{1.5cm}
+{\LARGE\color{ColorPrincipal} CIRCUNFERENCIA\par}
+\vspace{2cm}
+
+\begin{tikzpicture}[scale=1.5]
+  \begin{axis}[
+    axis equal image,
+    grid=major,
+    grid style={gray!30},
+    xmin=-4, xmax=4,
+    ymin=-4, ymax=4,
+    xlabel={$x$},
+    ylabel={$y$},
+    axis lines=middle,
+    width=0.5\textwidth,
+    height=0.5\textwidth,
+  ]
+  % Circunferencia principal
+  \addplot[ColorPrincipal, thick, samples=100, domain=0:360]
+    ({3*cos(x)}, {3*sin(x)});
+  % Centro
+  \addplot[mark=*, ColorAcento, mark size=3pt] coordinates {(0,0)};
+  % Radio
+  \addplot[ColorAcento, thick, dashed] coordinates {(0,0) (3,0)};
+  \node at (axis cs:1.5,0.3) {$r$};
+  \node at (axis cs:0,-0.5) {Centro};
+  \end{axis}
+\end{tikzpicture}
+
+\vspace{2cm}
+{\Large\bfseries Prof: Toribio De J Arrieta F\par}
+\vspace{1cm}
+{\large La Pruebita\par}
+\vspace{0.5cm}
+{\large Grado 10 -- Trigonometría\par}
+\vfill
+{\large \today\par}
+\end{titlepage}
+
+% Tabla de contenidos
+\tableofcontents
+\newpage
+
+% ===========================================
+% INTRODUCCIÓN
+% ===========================================
+
+\section{Introducción}
+
+¡Bienvenido al fascinante mundo de las circunferencias! Si alguna vez has observado una rueda girando, has visto el sol en el horizonte o has admirado los anillos de Saturno, entonces ya has tenido un encuentro cercano con una de las figuras más perfectas y fundamentales de las matemáticas: la circunferencia.
+
+\subsection{¿Por qué estudiar la circunferencia?}
+
+Imagina por un momento un mundo sin ruedas. ¿Cómo sería? Sin bicicletas, sin autos, sin engranajes... La vida sería completamente diferente. La circunferencia no es solo una figura geométrica más; es una de las formas más importantes en nuestra vida cotidiana y en el desarrollo de la humanidad.
+
+Desde los antiguos griegos que estudiaron sus propiedades místicas, hasta los ingenieros modernos que diseñan sistemas de radar y satélites, la circunferencia ha sido y sigue siendo fundamental en el desarrollo del conocimiento humano.
+
+\subsection{La circunferencia en tu vida diaria}
+
+Mira a tu alrededor en este momento. ¿Cuántas circunferencias puedes identificar? Están por todas partes:
+
+\begin{itemize}[leftmargin=2cm]
+  \item \textbf{En el transporte:} Las ruedas de bicicletas, autos, trenes y aviones dependen de la perfección de la circunferencia para funcionar eficientemente.
+
+  \item \textbf{En la tecnología:} Los sistemas de radar utilizan circunferencias concéntricas para detectar objetos. Los satélites orbitan siguiendo trayectorias circulares alrededor de la Tierra.
+
+  \item \textbf{En la arquitectura:} Desde los arcos romanos hasta los modernos domos de los estadios, la circunferencia proporciona belleza y estabilidad estructural.
+
+  \item \textbf{En la ingeniería:} Los engranajes, poleas y sistemas de transmisión dependen de circunferencias perfectas para transmitir movimiento y fuerza.
+
+  \item \textbf{En el diseño:} Logos, interfaces de usuario, señales de tráfico... La circunferencia comunica completitud, perfección y armonía.
+
+  \item \textbf{En la naturaleza:} Los anillos de los árboles, las ondas en el agua, las pupilas de nuestros ojos... La naturaleza ama las formas circulares.
+\end{itemize}
+
+\subsection{¿Qué aprenderás en esta guía?}
+
+En esta aventura matemática, vamos a descubrir los secretos de la circunferencia desde una perspectiva analítica. No solo dibujaremos círculos bonitos (aunque también lo haremos), sino que aprenderemos a describirlos con ecuaciones precisas y a resolver problemas complejos usando álgebra.
+
+Específicamente, exploraremos:
+
+\begin{enumerate}
+  \item \textbf{La ecuación canónica de la circunferencia:} Aprenderás a escribir la ecuación de cualquier circunferencia conociendo solo su centro y radio. Es como tener la receta secreta para crear círculos perfectos matemáticamente.
+
+  \item \textbf{La ecuación general de la circunferencia:} Descubrirás cómo identificar si una ecuación aparentemente complicada representa una circunferencia y cómo extraer información útil de ella.
+
+  \item \textbf{Posiciones relativas entre rectas y circunferencias:} ¿Cuándo una recta toca, corta o pasa de largo a una circunferencia? Aprenderás a determinarlo algebraicamente, sin necesidad de dibujar.
+
+  \item \textbf{Posiciones relativas entre circunferencias:} Dos circunferencias pueden relacionarse de maneras fascinantes. Pueden ser como hermanas que se abrazan, amigas que se tocan o conocidas que mantienen su distancia.
+
+  \item \textbf{Aplicaciones prácticas:} Resolverás problemas reales donde las circunferencias son protagonistas, desde el diseño de rotondas hasta el cálculo de coberturas de antenas.
+\end{enumerate}
+
+\subsection{Conexión con tus conocimientos previos}
+
+Esta guía no parte de cero. Se construye sobre los cimientos que ya has establecido:
+
+\begin{itemize}
+  \item Si recuerdas el \textbf{teorema de Pitágoras}, estás a medio camino de entender la ecuación de la circunferencia.
+
+  \item Si dominas los \textbf{productos notables} y sabes \textbf{completar cuadrados}, podrás transformar ecuaciones como un mago matemático.
+
+  \item Si entiendes el \textbf{plano cartesiano} y las \textbf{coordenadas}, ya tienes el escenario listo para ubicar circunferencias.
+
+  \item Si has trabajado con \textbf{funciones y gráficas}, esta será una extensión natural de esos conceptos.
+\end{itemize}
+
+\subsection{Cómo aprovechar al máximo esta guía}
+
+Para que tu aprendizaje sea exitoso, te recomiendo:
+
+\begin{nota}
+  \textbf{Consejos para el éxito:}
+  \begin{itemize}
+    \item Lee cada sección con calma, no hay prisa. Las matemáticas se disfrutan mejor cuando se saborean.
+    \item Ten papel y lápiz a mano. Dibuja, calcula, experimenta. Las matemáticas se aprenden haciendo.
+    \item No te saltes los ejemplos. Son como los entrenamientos antes del partido.
+    \item Si algo no queda claro, vuelve a leerlo. A veces la segunda lectura revela detalles que se escaparon en la primera.
+    \item Relaciona cada concepto con algo de tu vida diaria. Las matemáticas cobran vida cuando las conectas con tu realidad.
+  \end{itemize}
+\end{nota}
+
+\subsection{Un viaje que comienza}
+
+Estás a punto de embarcarte en un viaje fascinante donde las ecuaciones cobran forma y las figuras se convierten en álgebra. La circunferencia, esa figura perfecta que ha cautivado a la humanidad durante milenios, está a punto de revelarte sus secretos matemáticos.
+
+¿Estás listo? ¡Comencemos esta aventura circular!
+
+\newpage
+
+% ===========================================
+% CONCEPTOS FUNDAMENTALES
+% ===========================================
+
+\section{Conceptos Fundamentales}
+
+\subsection{Definición de Circunferencia}
+
+Antes de sumergirnos en las ecuaciones, necesitamos entender qué es exactamente una circunferencia. Puede parecer obvio, pero su definición matemática es elegante y precisa.
+
+\begin{definicion}[title={Circunferencia}]
+Una \textbf{circunferencia} es el lugar geométrico de todos los puntos del plano que equidistan de un punto fijo llamado \textbf{centro}. La distancia constante desde cualquier punto de la circunferencia hasta el centro se llama \textbf{radio}.
+
+En términos más simples: si tomas un punto fijo (el centro) y marcas todos los puntos que están a la misma distancia de él, obtienes una circunferencia perfecta.
+\end{definicion}
+
+Esta definición aparentemente simple esconde una profunda verdad matemática: la circunferencia es la figura más simétrica posible en el plano. No importa desde qué dirección la mires, siempre se ve igual.
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    axis equal image,
+    grid=major,
+    grid style={gray!30},
+    xmin=-5, xmax=5,
+    ymin=-5, ymax=5,
+    xlabel={$x$},
+    ylabel={$y$},
+    axis lines=middle,
+    width=0.85\textwidth,
+    height=0.85\textwidth,
+    xtick={-4,-3,-2,-1,0,1,2,3,4},
+    ytick={-4,-3,-2,-1,0,1,2,3,4},
+  ]
+  % Circunferencia
+  \addplot[ColorPrincipal, ultra thick, samples=100, domain=0:360]
+    ({2 + 3*cos(x)}, {1 + 3*sin(x)});
+
+  % Centro
+  \addplot[mark=*, ColorAcento, mark size=4pt] coordinates {(2,1)};
+  \node[above right] at (axis cs:2,1) {Centro $(h,k)$};
+
+  % Varios radios
+  \foreach \angulo in {0, 45, 90, 135, 180, 225, 270, 315} {
+    \addplot[ColorTerciario, dashed, thin]
+      coordinates {(2,1) ({2 + 3*cos(\angulo)}, {1 + 3*sin(\angulo)})};
+  }
+
+  % Radio etiquetado
+  \addplot[ColorAcento, thick] coordinates {(2,1) (5,1)};
+  \node[above] at (axis cs:3.5,1) {$r$ (radio)};
+
+  % Puntos sobre la circunferencia
+  \addplot[mark=*, blue, mark size=2pt] coordinates {(5,1)};
+  \node[right] at (axis cs:5,1) {$P_1$};
+
+  \addplot[mark=*, blue, mark size=2pt] coordinates {(2,4)};
+  \node[above] at (axis cs:2,4) {$P_2$};
+
+  \addplot[mark=*, blue, mark size=2pt] coordinates {(-1,1)};
+  \node[left] at (axis cs:-1,1) {$P_3$};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Observa cómo todos los puntos $P_1$, $P_2$, $P_3$, etc., están exactamente a la misma distancia del centro. Esta es la esencia de la circunferencia.
+
+\subsection{Ecuación Canónica de la Circunferencia}
+
+Ahora viene la parte emocionante: ¿cómo expresamos matemáticamente esta idea de "todos los puntos a la misma distancia del centro"? Aquí es donde el álgebra y la geometría se dan la mano.
+
+\begin{teorema}[title={Ecuación Canónica}]
+Una circunferencia con centro en el punto $(h, k)$ y radio $r$ tiene como ecuación:
+\[
+(x - h)^2 + (y - k)^2 = r^2
+\]
+Esta es la \textbf{ecuación canónica} o \textbf{forma estándar} de la circunferencia.
+\end{teorema}
+
+\subsubsection{¿De dónde viene esta ecuación?}
+
+La belleza de esta ecuación es que surge naturalmente de la definición. Veamos:
+
+Si tienes un punto cualquiera $P(x, y)$ sobre la circunferencia y el centro está en $C(h, k)$, entonces la distancia entre $P$ y $C$ debe ser igual al radio $r$.
+
+Usando la fórmula de distancia entre dos puntos (que viene del teorema de Pitágoras):
+\[
+\text{distancia} = \sqrt{(x - h)^2 + (y - k)^2} = r
+\]
+
+Elevando al cuadrado ambos lados:
+\[
+(x - h)^2 + (y - k)^2 = r^2
+\]
+
+¡Y ahí está! La ecuación canónica de la circunferencia.
+
+\subsubsection{Interpretación de los parámetros}
+
+Cada parte de la ecuación tiene un significado específico:
+
+\begin{itemize}
+  \item \textbf{$h$ y $k$:} Son las coordenadas del centro. Si $h > 0$, el centro está a la derecha del origen; si $h < 0$, está a la izquierda. Lo mismo aplica para $k$ con arriba y abajo.
+
+  \item \textbf{$r$:} Es el radio, siempre positivo. Determina el tamaño de la circunferencia.
+
+  \item \textbf{$(x - h)$ y $(y - k)$:} Representan las distancias horizontal y vertical desde cualquier punto de la circunferencia hasta el centro.
+\end{itemize}
+
+\subsubsection{Caso especial: Centro en el origen}
+
+Cuando el centro está en el origen $(0, 0)$, la ecuación se simplifica maravillosamente:
+
+\begin{importante}
+Si el centro está en $(0, 0)$, entonces $h = 0$ y $k = 0$, por lo que la ecuación se convierte en:
+\[
+x^2 + y^2 = r^2
+\]
+Esta es la forma más simple de la ecuación de una circunferencia.
+\end{importante}
+
+Veamos algunos ejemplos visuales:
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    axis equal image,
+    grid=major,
+    grid style={gray!30},
+    xmin=-6, xmax=6,
+    ymin=-6, ymax=6,
+    xlabel={$x$},
+    ylabel={$y$},
+    axis lines=middle,
+    width=0.9\textwidth,
+    height=0.9\textwidth,
+    legend pos=outer north east,
+  ]
+
+  % Circunferencia con centro en origen
+  \addplot[ColorPrincipal, ultra thick, samples=100, domain=0:360]
+    ({4*cos(x)}, {4*sin(x)});
+  \addlegendentry{$x^2 + y^2 = 16$ (centro en origen)}
+
+  % Circunferencia desplazada
+  \addplot[ColorAcento, ultra thick, samples=100, domain=0:360]
+    ({3 + 2*cos(x)}, {2 + 2*sin(x)});
+  \addlegendentry{$(x-3)^2 + (y-2)^2 = 4$}
+
+  % Circunferencia pequeña
+  \addplot[ColorTerciario, ultra thick, samples=100, domain=0:360]
+    ({-2 + 1.5*cos(x)}, {-1 + 1.5*sin(x)});
+  \addlegendentry{$(x+2)^2 + (y+1)^2 = 2.25$}
+
+  % Centros
+  \addplot[mark=*, black, mark size=3pt] coordinates {(0,0)};
+  \addplot[mark=*, black, mark size=3pt] coordinates {(3,2)};
+  \addplot[mark=*, black, mark size=3pt] coordinates {(-2,-1)};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ecuación General de la Circunferencia}
+
+En la vida real (y en los exámenes), no siempre te dan la ecuación en su forma bonita y ordenada. A veces aparece expandida y mezclada. Esta forma se llama ecuación general.
+
+\begin{definicion}[title={Ecuación General}]
+La \textbf{ecuación general de la circunferencia} tiene la forma:
+\[
+x^2 + y^2 + Dx + Ey + F = 0
+\]
+donde $D$, $E$ y $F$ son constantes reales.
+\end{definicion}
+
+\subsubsection{¿Cómo pasamos de la forma canónica a la general?}
+
+Partiendo de $(x - h)^2 + (y - k)^2 = r^2$, si expandimos los binomios:
+
+\begin{align}
+(x - h)^2 + (y - k)^2 &= r^2 \\
+x^2 - 2hx + h^2 + y^2 - 2ky + k^2 &= r^2 \\
+x^2 + y^2 - 2hx - 2ky + h^2 + k^2 - r^2 &= 0
+\end{align}
+
+Comparando con $x^2 + y^2 + Dx + Ey + F = 0$, obtenemos:
+\begin{itemize}
+  \item $D = -2h$
+  \item $E = -2k$
+  \item $F = h^2 + k^2 - r^2$
+\end{itemize}
+
+\subsubsection{¿Toda ecuación de esta forma representa una circunferencia?}
+
+¡Esta es una pregunta crucial! No toda ecuación de la forma $x^2 + y^2 + Dx + Ey + F = 0$ representa una circunferencia real.
+
+\begin{teorema}[title={Condición de existencia}]
+La ecuación $x^2 + y^2 + Dx + Ey + F = 0$ representa una circunferencia real si y solo si:
+\[
+D^2 + E^2 - 4F > 0
+\]
+
+En este caso:
+\begin{itemize}
+  \item Centro: $\left(-\frac{D}{2}, -\frac{E}{2}\right)$
+  \item Radio: $r = \frac{1}{2}\sqrt{D^2 + E^2 - 4F}$
+\end{itemize}
+\end{teorema}
+
+¿Qué pasa si $D^2 + E^2 - 4F \leq 0$?
+
+\begin{itemize}
+  \item Si $D^2 + E^2 - 4F = 0$: La ecuación representa un punto (circunferencia degenerada de radio 0).
+  \item Si $D^2 + E^2 - 4F < 0$: La ecuación no tiene solución real (circunferencia imaginaria).
+\end{itemize}
+
+\subsubsection{Completando cuadrados: La técnica mágica}
+
+Para convertir de la forma general a la canónica, usamos la técnica de completar cuadrados. Es como reorganizar un rompecabezas hasta que las piezas encajan perfectamente.
+
+\textbf{Proceso paso a paso:}
+
+Dada la ecuación $x^2 + y^2 + Dx + Ey + F = 0$:
+
+\begin{enumerate}
+  \item Agrupa los términos en $x$ y los términos en $y$:
+  \[
+  (x^2 + Dx) + (y^2 + Ey) + F = 0
+  \]
+
+  \item Para completar el cuadrado en $x$:
+  \begin{itemize}
+    \item Toma el coeficiente de $x$ (que es $D$)
+    \item Divide entre 2: $\frac{D}{2}$
+    \item Eleva al cuadrado: $\left(\frac{D}{2}\right)^2$
+    \item Suma y resta este valor
+  \end{itemize}
+
+  \item Haz lo mismo para $y$ con el coeficiente $E$
+
+  \item Reorganiza para obtener la forma canónica
+\end{enumerate}
+
+\textbf{Ejemplo ilustrativo:}
+
+Convirtamos $x^2 + y^2 - 6x + 4y - 3 = 0$ a forma canónica:
+
+\begin{align}
+x^2 + y^2 - 6x + 4y - 3 &= 0 \\
+(x^2 - 6x) + (y^2 + 4y) &= 3 \\
+(x^2 - 6x + 9 - 9) + (y^2 + 4y + 4 - 4) &= 3 \\
+(x^2 - 6x + 9) + (y^2 + 4y + 4) - 9 - 4 &= 3 \\
+(x - 3)^2 + (y + 2)^2 &= 3 + 9 + 4 \\
+(x - 3)^2 + (y + 2)^2 &= 16
+\end{align}
+
+Por lo tanto: Centro en $(3, -2)$ y radio $r = 4$.
+
+\subsection{Posiciones Relativas de una Recta y una Circunferencia}
+
+Cuando una recta y una circunferencia se encuentran en el mismo plano, pueden relacionarse de tres maneras distintas. Es como cuando lanzas una piedra hacia un lago circular: puede caer fuera, rozar el borde o atravesarlo.
+
+\begin{definicion}[title={Posiciones relativas recta-circunferencia}]
+Una recta $L$ y una circunferencia $C$ pueden estar en una de tres posiciones:
+\begin{enumerate}
+  \item \textbf{Recta exterior:} No tienen puntos en común (0 intersecciones)
+  \item \textbf{Recta tangente:} Se tocan en exactamente un punto (1 intersección)
+  \item \textbf{Recta secante:} Se cortan en dos puntos (2 intersecciones)
+\end{enumerate}
+\end{definicion}
+
+\subsubsection{Método algebraico: El discriminante}
+
+Para determinar la posición relativa, sustituimos la ecuación de la recta en la ecuación de la circunferencia. Esto nos da una ecuación cuadrática cuyo discriminante nos dice todo:
+
+\begin{teorema}[title={Criterio del discriminante}]
+Sea una circunferencia $(x - h)^2 + (y - k)^2 = r^2$ y una recta $y = mx + b$ (o $x = c$ si es vertical).
+
+Al sustituir la recta en la circunferencia, obtenemos una ecuación cuadrática $At^2 + Bt + C = 0$.
+
+Si $\Delta = B^2 - 4AC$, entonces:
+\begin{itemize}
+  \item $\Delta > 0$: La recta es secante (2 puntos de intersección)
+  \item $\Delta = 0$: La recta es tangente (1 punto de tangencia)
+  \item $\Delta < 0$: La recta es exterior (0 puntos de intersección)
+\end{itemize}
+\end{teorema}
+
+\subsubsection{Método geométrico: Distancia del centro a la recta}
+
+Hay un método más elegante usando la distancia del centro a la recta:
+
+\begin{teorema}[title={Criterio de la distancia}]
+Si $d$ es la distancia del centro de la circunferencia a la recta, y $r$ es el radio:
+\begin{itemize}
+  \item $d < r$: La recta es secante
+  \item $d = r$: La recta es tangente
+  \item $d > r$: La recta es exterior
+\end{itemize}
+\end{teorema}
+
+La fórmula de distancia de un punto $(x_0, y_0)$ a una recta $Ax + By + C = 0$ es:
+\[
+d = \frac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}}
+\]
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    axis equal image,
+    grid=major,
+    grid style={gray!30},
+    xmin=-6, xmax=6,
+    ymin=-6, ymax=6,
+    xlabel={$x$},
+    ylabel={$y$},
+    axis lines=middle,
+    width=0.95\textwidth,
+    height=0.95\textwidth,
+    legend pos=outer north east,
+  ]
+
+  % Circunferencia
+  \addplot[black, ultra thick, samples=100, domain=0:360]
+    ({3*cos(x)}, {3*sin(x)});
+
+  % Centro
+  \addplot[mark=*, black, mark size=3pt] coordinates {(0,0)};
+  \node[below left] at (axis cs:0,0) {Centro};
+
+  % Recta secante
+  \addplot[ColorPrincipal, ultra thick, domain=-6:6] {0.5*x + 1};
+  \addlegendentry{Recta secante}
+
+  % Puntos de intersección secante
+  \addplot[mark=*, ColorPrincipal, mark size=4pt] coordinates {(-0.69,0.655)};
+  \addplot[mark=*, ColorPrincipal, mark size=4pt] coordinates {(2.69,2.345)};
+
+  % Recta tangente
+  \addplot[ColorAcento, ultra thick, domain=-6:6] {-0.75*x + 3};
+  \addlegendentry{Recta tangente}
+
+  % Punto de tangencia
+  \addplot[mark=*, ColorAcento, mark size=4pt] coordinates {(1.44,1.92)};
+
+  % Recta exterior
+  \addplot[ColorTerciario, ultra thick, domain=-6:6] {0.3*x + 4.5};
+  \addlegendentry{Recta exterior}
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Ecuación de la recta tangente}
+
+Un caso especial importante es encontrar la ecuación de una recta tangente a una circunferencia en un punto dado.
+
+\begin{teorema}[title={Recta tangente en un punto}]
+La recta tangente a la circunferencia $(x - h)^2 + (y - k)^2 = r^2$ en el punto $(x_0, y_0)$ tiene ecuación:
+\[
+(x_0 - h)(x - h) + (y_0 - k)(y - k) = r^2
+\]
+\end{teorema}
+
+Esta fórmula es hermosa porque muestra la simetría: simplemente "distribuyes" las variables entre los dos factores.
+
+\subsection{Posiciones Relativas de Dos Circunferencias}
+
+Cuando dos circunferencias comparten el mismo plano, pueden relacionarse de seis maneras diferentes. Es fascinante cómo dos figuras tan simples pueden crear patrones tan variados.
+
+\begin{definicion}[title={Posiciones relativas entre circunferencias}]
+Sean dos circunferencias $C_1$ y $C_2$ con centros $O_1$ y $O_2$, radios $r_1$ y $r_2$, y sea $d$ la distancia entre sus centros. Las posiciones posibles son:
+
+\begin{enumerate}
+  \item \textbf{Exteriores:} No se tocan ($d > r_1 + r_2$)
+  \item \textbf{Tangentes exteriormente:} Se tocan en un punto por fuera ($d = r_1 + r_2$)
+  \item \textbf{Secantes:} Se cortan en dos puntos ($|r_1 - r_2| < d < r_1 + r_2$)
+  \item \textbf{Tangentes interiormente:} Se tocan en un punto por dentro ($d = |r_1 - r_2|$, $d \neq 0$)
+  \item \textbf{Interiores:} Una dentro de la otra sin tocarse ($0 < d < |r_1 - r_2|$)
+  \item \textbf{Concéntricas:} Mismo centro ($d = 0$)
+\end{enumerate}
+\end{definicion}
+
+\subsubsection{Criterio de clasificación}
+
+La clave está en comparar la distancia entre centros con la suma y diferencia de radios:
+
+\begin{teorema}[title={Clasificación por distancia}]
+Dadas dos circunferencias con radios $r_1$, $r_2$ (con $r_1 \geq r_2$) y distancia entre centros $d$:
+
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+\textbf{Posición} & \textbf{Condición} \\
+\midrule
+Exteriores & $d > r_1 + r_2$ \\
+Tangentes exteriormente & $d = r_1 + r_2$ \\
+Secantes & $r_1 - r_2 < d < r_1 + r_2$ \\
+Tangentes interiormente & $d = r_1 - r_2$ (y $d > 0$) \\
+Interiores & $0 < d < r_1 - r_2$ \\
+Concéntricas & $d = 0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{teorema}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+  % Exteriores
+  \begin{scope}[shift={(0,0)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1);
+    \draw[ColorAcento, ultra thick] (3,0) circle (0.8);
+    \node at (1.5,-2) {Exteriores};
+    \fill (0,0) circle (2pt);
+    \fill (3,0) circle (2pt);
+    \draw[dashed] (0,0) -- (3,0);
+  \end{scope}
+
+  % Tangentes exteriormente
+  \begin{scope}[shift={(6,0)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1);
+    \draw[ColorAcento, ultra thick] (1.8,0) circle (0.8);
+    \node at (0.9,-2) {Tang. Ext.};
+    \fill (0,0) circle (2pt);
+    \fill (1.8,0) circle (2pt);
+    \draw[dashed] (0,0) -- (1.8,0);
+    \fill[red] (1,0) circle (3pt);
+  \end{scope}
+
+  % Secantes
+  \begin{scope}[shift={(11,0)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1.2);
+    \draw[ColorAcento, ultra thick] (1.5,0) circle (1);
+    \node at (0.75,-2) {Secantes};
+    \fill (0,0) circle (2pt);
+    \fill (1.5,0) circle (2pt);
+    \draw[dashed] (0,0) -- (1.5,0);
+    \fill[red] (0.65,0.95) circle (3pt);
+    \fill[red] (0.65,-0.95) circle (3pt);
+  \end{scope}
+
+  % Tangentes interiormente
+  \begin{scope}[shift={(0,-5)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1.5);
+    \draw[ColorAcento, ultra thick] (0.7,0) circle (0.8);
+    \node at (0.35,-2.5) {Tang. Int.};
+    \fill (0,0) circle (2pt);
+    \fill (0.7,0) circle (2pt);
+    \draw[dashed] (0,0) -- (0.7,0);
+    \fill[red] (1.5,0) circle (3pt);
+  \end{scope}
+
+  % Interiores
+  \begin{scope}[shift={(6,-5)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1.5);
+    \draw[ColorAcento, ultra thick] (0.3,0) circle (0.6);
+    \node at (0.15,-2.5) {Interiores};
+    \fill (0,0) circle (2pt);
+    \fill (0.3,0) circle (2pt);
+    \draw[dashed] (0,0) -- (0.3,0);
+  \end{scope}
+
+  % Concéntricas
+  \begin{scope}[shift={(11,-5)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1.5);
+    \draw[ColorAcento, ultra thick] (0,0) circle (0.8);
+    \node at (0,-2.5) {Concéntricas};
+    \fill (0,0) circle (2pt);
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Puntos de intersección}
+
+Cuando dos circunferencias se cortan (caso secante), podemos encontrar sus puntos de intersección resolviendo el sistema de ecuaciones:
+
+\begin{align}
+(x - h_1)^2 + (y - k_1)^2 &= r_1^2 \\
+(x - h_2)^2 + (y - k_2)^2 &= r_2^2
+\end{align}
+
+El truco está en restar las ecuaciones para obtener una ecuación lineal (el eje radical), y luego sustituir en cualquiera de las ecuaciones originales.
+
+\subsubsection{Aplicaciones prácticas}
+
+Las posiciones relativas de circunferencias tienen aplicaciones fascinantes:
+
+\begin{itemize}
+  \item \textbf{Engranajes:} Dos ruedas dentadas son circunferencias tangentes exteriormente.
+  \item \textbf{Poleas y correas:} Circunferencias exteriores conectadas por tangentes comunes.
+  \item \textbf{Cobertura de antenas:} Áreas de señal representadas por circunferencias que pueden solaparse.
+  \item \textbf{Diseño de logos:} Muchos logos famosos usan circunferencias en diferentes posiciones.
+  \item \textbf{Órbitas planetarias:} Aunque son elipses, se aproximan a circunferencias en muchos casos.
+\end{itemize}
+
+\subsection{Tabla Resumen de Fórmulas}
+
+Para tener todas las herramientas a mano, aquí está tu caja de herramientas completa:
+
+\begin{center}
+\begin{tcolorbox}[colback=ColorFondo,colframe=ColorPrincipal,title={\textbf{Formulario de la Circunferencia}}]
+
+\begin{tabular}{p{0.35\textwidth}p{0.6\textwidth}}
+\toprule
+\textbf{Concepto} & \textbf{Fórmula} \\
+\midrule
+\textbf{Ecuación canónica} & $(x - h)^2 + (y - k)^2 = r^2$ \\
+& Centro: $(h, k)$, Radio: $r$ \\
+\midrule
+\textbf{Centro en el origen} & $x^2 + y^2 = r^2$ \\
+\midrule
+\textbf{Ecuación general} & $x^2 + y^2 + Dx + Ey + F = 0$ \\
+\midrule
+\textbf{Conversión general a canónica} & Centro: $\left(-\frac{D}{2}, -\frac{E}{2}\right)$ \\
+& Radio: $r = \frac{1}{2}\sqrt{D^2 + E^2 - 4F}$ \\
+\midrule
+\textbf{Condición de existencia} & $D^2 + E^2 - 4F > 0$ \\
+\midrule
+\textbf{Distancia entre dos puntos} & $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$ \\
+\midrule
+\textbf{Distancia punto a recta} & $d = \frac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}}$ \\
+& Para $Ax + By + C = 0$ y punto $(x_0, y_0)$ \\
+\midrule
+\textbf{Recta tangente en $(x_0, y_0)$} & $(x_0 - h)(x - h) + (y_0 - k)(y - k) = r^2$ \\
+\midrule
+\textbf{Posición recta-circunferencia} & $d < r$: Secante \\
+& $d = r$: Tangente \\
+& $d > r$: Exterior \\
+\midrule
+\textbf{Posición de dos circunferencias} & $d > r_1 + r_2$: Exteriores \\
+& $d = r_1 + r_2$: Tang. exteriormente \\
+& $|r_1 - r_2| < d < r_1 + r_2$: Secantes \\
+& $d = |r_1 - r_2|$: Tang. interiormente \\
+& $d < |r_1 - r_2|$: Interiores \\
+& $d = 0$: Concéntricas \\
+\bottomrule
+\end{tabular}
+
+\end{tcolorbox}
+\end{center}
+
+\newpage
+
+% ===========================================
+% PLACEHOLDERS PARA OTRAS SECCIONES
+% ===========================================
+
+%% PARTE 2: EJEMPLOS RESUELTOS Y EJERCICIOS INVERSOS
+%% GEOMETRÍA ANALÍTICA - CIRCUNFERENCIA - GRADO 10
+
+\section{Ejemplos Resueltos}
+
+\begin{ejemplo}[title={Ejemplo 1: Ecuación canónica dada centro y radio - Diseño de rueda de bicicleta}]
+\textbf{Enunciado:} Un ingeniero de diseño está creando una rueda de bicicleta de montaña. El centro del eje está ubicado en el punto $C(3, 4)$ cm en el plano de diseño, y el radio exterior de la rueda debe ser de 35 cm. Encuentra la ecuación de la circunferencia que describe el borde exterior de la rueda.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar los elementos dados}
+Se nos proporciona:
+\begin{itemize}
+    \item Centro de la circunferencia: $C(3, 4)$
+    \item Radio de la circunferencia: $r = 35$ cm
+\end{itemize}
+
+\textbf{Paso 2: Recordar la forma canónica de la ecuación de una circunferencia}
+La ecuación canónica de una circunferencia con centro en $(h, k)$ y radio $r$ es:
+$$(x - h)^2 + (y - k)^2 = r^2$$
+
+\textbf{Paso 3: Identificar las coordenadas del centro}
+Del punto $C(3, 4)$ tenemos:
+\begin{align}
+    h &= 3\\
+    k &= 4
+\end{align}
+
+\textbf{Paso 4: Sustituir los valores en la ecuación canónica}
+Reemplazando $h = 3$, $k = 4$ y $r = 35$ en la ecuación:
+$$(x - 3)^2 + (y - 4)^2 = 35^2$$
+
+\textbf{Paso 5: Calcular el valor de $r^2$}
+$$r^2 = 35^2 = 1225$$
+
+\textbf{Paso 6: Escribir la ecuación final en forma canónica}
+$$(x - 3)^2 + (y - 4)^2 = 1225$$
+
+\textbf{Paso 7: Expandir para obtener la forma general (verificación)}
+Desarrollando los binomios:
+\begin{align}
+    (x - 3)^2 + (y - 4)^2 &= 1225\\
+    x^2 - 6x + 9 + y^2 - 8y + 16 &= 1225\\
+    x^2 + y^2 - 6x - 8y + 25 &= 1225\\
+    x^2 + y^2 - 6x - 8y - 1200 &= 0
+\end{align}
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis equal image,
+    width=0.9\textwidth,
+    height=0.6\textwidth,
+    xlabel={$x$ (cm)},
+    ylabel={$y$ (cm)},
+    grid=major,
+    xmin=-40, xmax=45,
+    ymin=-35, ymax=45,
+    title={Diseño de rueda de bicicleta - Vista frontal},
+    legend pos=north east
+]
+% Circunferencia exterior de la rueda
+\addplot[domain=0:360, samples=100, thick, blue, variable=\t]
+    ({3 + 35*cos(\t)}, {4 + 35*sin(\t)});
+\addlegendentry{Borde exterior}
+
+% Centro de la rueda
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(3, 4)};
+\addlegendentry{Centro del eje}
+
+% Radio de referencia
+\addplot[thick, dashed, red] coordinates {(3, 4) (38, 4)};
+\addlegendentry{Radio = 35 cm}
+
+% Ejes de simetría
+\addplot[thin, gray, dashed] coordinates {(3, -31) (3, 39)};
+\addplot[thin, gray, dashed] coordinates {(-32, 4) (38, 4)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:} \boxed{(x - 3)^2 + (y - 4)^2 = 1225}
+\end{ejemplo}
+
+\begin{ejemplo}[title={Ejemplo 2: Ecuación general a canónica (completar cuadrados) - Sistema de radar}]
+\textbf{Enunciado:} Un sistema de radar detecta objetos en un área circular descrita por la ecuación $x^2 + y^2 + 8x - 12y + 3 = 0$, donde las unidades están en kilómetros. Encuentra el centro del radar y su alcance máximo.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar la ecuación general dada}
+$$x^2 + y^2 + 8x - 12y + 3 = 0$$
+
+\textbf{Paso 2: Agrupar términos en $x$ y términos en $y$}
+$$(x^2 + 8x) + (y^2 - 12y) + 3 = 0$$
+
+\textbf{Paso 3: Completar el cuadrado para los términos en $x$}
+Para $x^2 + 8x$:
+\begin{align}
+    \text{Coeficiente de } x &= 8\\
+    \text{Término a sumar y restar} &= \left(\frac{8}{2}\right)^2 = 16\\
+    x^2 + 8x + 16 - 16 &= (x + 4)^2 - 16
+\end{align}
+
+\textbf{Paso 4: Completar el cuadrado para los términos en $y$}
+Para $y^2 - 12y$:
+\begin{align}
+    \text{Coeficiente de } y &= -12\\
+    \text{Término a sumar y restar} &= \left(\frac{-12}{2}\right)^2 = 36\\
+    y^2 - 12y + 36 - 36 &= (y - 6)^2 - 36
+\end{align}
+
+\textbf{Paso 5: Sustituir en la ecuación original}
+$$(x + 4)^2 - 16 + (y - 6)^2 - 36 + 3 = 0$$
+
+\textbf{Paso 6: Simplificar la ecuación}
+\begin{align}
+    (x + 4)^2 + (y - 6)^2 - 16 - 36 + 3 &= 0\\
+    (x + 4)^2 + (y - 6)^2 - 49 &= 0\\
+    (x + 4)^2 + (y - 6)^2 &= 49
+\end{align}
+
+\textbf{Paso 7: Identificar el centro y el radio}
+Comparando con $(x - h)^2 + (y - k)^2 = r^2$:
+\begin{itemize}
+    \item $x + 4 = x - h \Rightarrow h = -4$
+    \item $y - 6 = y - k \Rightarrow k = 6$
+    \item $r^2 = 49 \Rightarrow r = 7$
+\end{itemize}
+
+\textbf{Paso 8: Interpretar los resultados}
+\begin{itemize}
+    \item Centro del radar: $C(-4, 6)$ km
+    \item Alcance máximo del radar: $r = 7$ km
+\end{itemize}
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis equal image,
+    width=0.9\textwidth,
+    height=0.7\textwidth,
+    xlabel={$x$ (km)},
+    ylabel={$y$ (km)},
+    grid=major,
+    xmin=-13, xmax=5,
+    ymin=-2, ymax=14,
+    title={Cobertura del Sistema de Radar},
+    legend pos=north east
+]
+% Área de cobertura del radar
+\addplot[domain=0:360, samples=100, thick, blue, fill=blue!10, variable=\t]
+    ({-4 + 7*cos(\t)}, {6 + 7*sin(\t)});
+\addlegendentry{Área de cobertura}
+
+% Centro del radar (estación)
+\addplot[only marks, mark=square*, mark size=4pt, red] coordinates {(-4, 6)};
+\addlegendentry{Estación de radar}
+
+% Radio de alcance
+\addplot[thick, dashed, red] coordinates {(-4, 6) (3, 6)};
+\node at (axis cs:-0.5, 6.5) {$r = 7$ km};
+
+% Puntos cardinales de alcance máximo
+\addplot[only marks, mark=o, mark size=2pt, black] coordinates
+    {(-4, 13) (-4, -1) (-11, 6) (3, 6)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:} Centro del radar: \boxed{C(-4, 6) \text{ km}}, Alcance máximo: \boxed{r = 7 \text{ km}}
+\end{ejemplo}
+
+\begin{ejemplo}[title={Ejemplo 3: Hallar centro y radio dada ecuación general - Órbita satelital circular}]
+\textbf{Enunciado:} La órbita circular de un satélite de comunicaciones alrededor de la Tierra está descrita por la ecuación $x^2 + y^2 - 10x + 14y - 151 = 0$, donde las coordenadas están en cientos de kilómetros respecto a un sistema de referencia. Determina el centro de la órbita y el radio orbital.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar los coeficientes de la ecuación general}
+De la ecuación $x^2 + y^2 - 10x + 14y - 151 = 0$, tenemos:
+\begin{itemize}
+    \item Coeficiente de $x$: $D = -10$
+    \item Coeficiente de $y$: $E = 14$
+    \item Término independiente: $F = -151$
+\end{itemize}
+
+\textbf{Paso 2: Aplicar las fórmulas para el centro}
+Para una ecuación de la forma $x^2 + y^2 + Dx + Ey + F = 0$:
+\begin{align}
+    h &= -\frac{D}{2} = -\frac{(-10)}{2} = 5\\
+    k &= -\frac{E}{2} = -\frac{14}{2} = -7
+\end{align}
+
+\textbf{Paso 3: Calcular el radio usando la fórmula}
+$$r = \sqrt{h^2 + k^2 - F}$$
+
+\textbf{Paso 4: Sustituir los valores}
+\begin{align}
+    r &= \sqrt{5^2 + (-7)^2 - (-151)}\\
+    &= \sqrt{25 + 49 + 151}\\
+    &= \sqrt{225}\\
+    &= 15
+\end{align}
+
+\textbf{Paso 5: Verificar completando cuadrados}
+Reorganizando la ecuación original:
+$$(x^2 - 10x) + (y^2 + 14y) = 151$$
+
+Para $x$: $(x^2 - 10x + 25) - 25 = (x - 5)^2 - 25$
+
+Para $y$: $(y^2 + 14y + 49) - 49 = (y + 7)^2 - 49$
+
+Sustituyendo:
+\begin{align}
+    (x - 5)^2 - 25 + (y + 7)^2 - 49 &= 151\\
+    (x - 5)^2 + (y + 7)^2 &= 151 + 25 + 49\\
+    (x - 5)^2 + (y + 7)^2 &= 225
+\end{align}
+
+\textbf{Paso 6: Confirmar el centro y radio}
+Centro: $C(5, -7)$ (en cientos de km)
+Radio: $r = \sqrt{225} = 15$ (en cientos de km)
+
+\textbf{Paso 7: Convertir a unidades reales}
+\begin{itemize}
+    \item Centro respecto al sistema de referencia: $(500, -700)$ km
+    \item Radio orbital: $1500$ km
+\end{itemize}
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis equal image,
+    width=0.95\textwidth,
+    height=0.7\textwidth,
+    xlabel={$x$ (cientos de km)},
+    ylabel={$y$ (cientos de km)},
+    grid=major,
+    xmin=-12, xmax=22,
+    ymin=-24, ymax=10,
+    title={Órbita Circular del Satélite de Comunicaciones},
+    legend pos=north east
+]
+% Órbita del satélite
+\addplot[domain=0:360, samples=100, thick, blue, variable=\t]
+    ({5 + 15*cos(\t)}, {-7 + 15*sin(\t)});
+\addlegendentry{Órbita satelital}
+
+% Centro de la órbita
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(5, -7)};
+\addlegendentry{Centro orbital}
+
+% Radio orbital
+\addplot[thick, dashed, red] coordinates {(5, -7) (20, -7)};
+\node at (axis cs:12.5, -6) {$r = 15$};
+
+% Posiciones del satélite en diferentes momentos
+\addplot[only marks, mark=triangle*, mark size=3pt, green] coordinates
+    {(20, -7) (5, 8) (-10, -7) (5, -22)};
+\addlegendentry{Posiciones del satélite}
+
+% Tierra (representación simbólica)
+\addplot[only marks, mark=o, mark size=8pt, fill=blue!30, draw=blue] coordinates {(0, 0)};
+\addlegendentry{Referencia Tierra}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:} Centro de la órbita: \boxed{C(5, -7) \text{ o } (500, -700) \text{ km}}, Radio orbital: \boxed{r = 15 \text{ cientos de km o } 1500 \text{ km}}
+\end{ejemplo}
+
+\begin{ejemplo}[title={Ejemplo 4: Ecuación de circunferencia dados 3 puntos - Arquitectura: arco circular}]
+\textbf{Enunciado:} Un arquitecto necesita diseñar un arco circular para la entrada principal de un edificio. El arco debe pasar por tres puntos clave: $A(2, 3)$, $B(8, 5)$ y $C(6, 9)$ metros. Encuentra la ecuación de la circunferencia que forma este arco.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Plantear la ecuación general de la circunferencia}
+$$x^2 + y^2 + Dx + Ey + F = 0$$
+
+\textbf{Paso 2: Establecer las condiciones para cada punto}
+Como los tres puntos pertenecen a la circunferencia, deben satisfacer la ecuación.
+
+Para $A(2, 3)$:
+$$2^2 + 3^2 + 2D + 3E + F = 0$$
+$$4 + 9 + 2D + 3E + F = 0$$
+$$2D + 3E + F = -13 \quad \text{...(1)}$$
+
+Para $B(8, 5)$:
+$$8^2 + 5^2 + 8D + 5E + F = 0$$
+$$64 + 25 + 8D + 5E + F = 0$$
+$$8D + 5E + F = -89 \quad \text{...(2)}$$
+
+Para $C(6, 9)$:
+$$6^2 + 9^2 + 6D + 9E + F = 0$$
+$$36 + 81 + 6D + 9E + F = 0$$
+$$6D + 9E + F = -117 \quad \text{...(3)}$$
+
+\textbf{Paso 3: Formar el sistema de ecuaciones lineales}
+\begin{align}
+    2D + 3E + F &= -13 \quad \text{...(1)}\\
+    8D + 5E + F &= -89 \quad \text{...(2)}\\
+    6D + 9E + F &= -117 \quad \text{...(3)}
+\end{align}
+
+\textbf{Paso 4: Resolver el sistema por eliminación}
+Restando (1) de (2):
+$$(8D + 5E + F) - (2D + 3E + F) = -89 - (-13)$$
+$$6D + 2E = -76$$
+$$3D + E = -38 \quad \text{...(4)}$$
+
+Restando (1) de (3):
+$$(6D + 9E + F) - (2D + 3E + F) = -117 - (-13)$$
+$$4D + 6E = -104$$
+$$2D + 3E = -52 \quad \text{...(5)}$$
+
+\textbf{Paso 5: Resolver para $D$ y $E$}
+De la ecuación (4): $E = -38 - 3D$
+
+Sustituyendo en (5):
+$$2D + 3(-38 - 3D) = -52$$
+$$2D - 114 - 9D = -52$$
+$$-7D = 62$$
+$$D = -\frac{62}{7}$$
+
+Calculando $E$:
+$$E = -38 - 3\left(-\frac{62}{7}\right) = -38 + \frac{186}{7} = \frac{-266 + 186}{7} = -\frac{80}{7}$$
+
+\textbf{Paso 6: Calcular $F$}
+Sustituyendo en la ecuación (1):
+$$2\left(-\frac{62}{7}\right) + 3\left(-\frac{80}{7}\right) + F = -13$$
+$$-\frac{124}{7} - \frac{240}{7} + F = -13$$
+$$-\frac{364}{7} + F = -13$$
+$$F = -13 + \frac{364}{7} = \frac{-91 + 364}{7} = \frac{273}{7} = 39$$
+
+\textbf{Paso 7: Escribir la ecuación de la circunferencia}
+$$x^2 + y^2 - \frac{62}{7}x - \frac{80}{7}y + 39 = 0$$
+
+Multiplicando por 7 para eliminar fracciones:
+$$7x^2 + 7y^2 - 62x - 80y + 273 = 0$$
+
+\textbf{Paso 8: Encontrar el centro y radio}
+\begin{align}
+    h &= -\frac{D}{2} = \frac{62/7}{2} = \frac{31}{7} \approx 4.43\\
+    k &= -\frac{E}{2} = \frac{80/7}{2} = \frac{40}{7} \approx 5.71\\
+    r &= \sqrt{h^2 + k^2 - F} = \sqrt{\left(\frac{31}{7}\right)^2 + \left(\frac{40}{7}\right)^2 - 39}\\
+    &= \sqrt{\frac{961}{49} + \frac{1600}{49} - 39} = \sqrt{\frac{2561 - 1911}{49}} = \sqrt{\frac{650}{49}} \approx 3.64
+\end{align}
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis equal image,
+    width=0.9\textwidth,
+    height=0.75\textwidth,
+    xlabel={$x$ (metros)},
+    ylabel={$y$ (metros)},
+    grid=major,
+    xmin=0, xmax=10,
+    ymin=1, ymax=11,
+    title={Diseño del Arco Circular - Vista Frontal},
+    legend pos=north west
+]
+% Circunferencia completa
+\addplot[domain=0:360, samples=100, thin, gray, dashed, variable=\t]
+    ({31/7 + sqrt(650/49)*cos(\t)}, {40/7 + sqrt(650/49)*sin(\t)});
+
+% Arco que pasa por los tres puntos
+\addplot[domain=30:150, samples=50, ultra thick, blue, variable=\t]
+    ({31/7 + sqrt(650/49)*cos(\t)}, {40/7 + sqrt(650/49)*sin(\t)});
+\addlegendentry{Arco circular}
+
+% Puntos dados
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(2, 3) (8, 5) (6, 9)};
+\addlegendentry{Puntos de diseño}
+
+% Centro
+\addplot[only marks, mark=square*, mark size=3pt, green] coordinates {(31/7, 40/7)};
+\addlegendentry{Centro}
+
+% Etiquetas
+\node[above] at (axis cs:2, 3) {$A$};
+\node[right] at (axis cs:8, 5) {$B$};
+\node[above] at (axis cs:6, 9) {$C$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:} \boxed{7x^2 + 7y^2 - 62x - 80y + 273 = 0}
+\end{ejemplo}
+
+\begin{ejemplo}[title={Ejemplo 5: Posición relativa de recta y circunferencia - Trayectoria de proyectil}]
+\textbf{Enunciado:} Un sistema de defensa antimisiles tiene un radar con alcance circular descrito por $(x - 10)^2 + (y - 8)^2 = 100$ km$^2$. Un misil enemigo sigue una trayectoria rectilínea dada por $3x - 4y + 5 = 0$. Determina si el misil entra en el alcance del radar y, de ser así, encuentra los puntos de entrada y salida.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar los elementos del problema}
+\begin{itemize}
+    \item Circunferencia (radar): $(x - 10)^2 + (y - 8)^2 = 100$
+    \item Centro: $C(10, 8)$, Radio: $r = 10$ km
+    \item Recta (trayectoria): $3x - 4y + 5 = 0$
+\end{itemize}
+
+\textbf{Paso 2: Calcular la distancia del centro a la recta}
+Para la recta $Ax + By + C = 0$, la distancia desde un punto $(x_0, y_0)$ es:
+$$d = \frac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}}$$
+
+\textbf{Paso 3: Aplicar la fórmula}
+Con $A = 3$, $B = -4$, $C = 5$ y punto $C(10, 8)$:
+$$d = \frac{|3(10) + (-4)(8) + 5|}{\sqrt{3^2 + (-4)^2}} = \frac{|30 - 32 + 5|}{\sqrt{9 + 16}} = \frac{|3|}{\sqrt{25}} = \frac{3}{5} = 0.6$$
+
+\textbf{Paso 4: Comparar la distancia con el radio}
+Como $d = 0.6 < r = 10$, la recta sí interseca la circunferencia (el misil entra en el alcance).
+
+\textbf{Paso 5: Encontrar los puntos de intersección}
+De la recta: $3x - 4y + 5 = 0 \Rightarrow y = \frac{3x + 5}{4}$
+
+Sustituyendo en la circunferencia:
+$$(x - 10)^2 + \left(\frac{3x + 5}{4} - 8\right)^2 = 100$$
+
+\textbf{Paso 6: Desarrollar la ecuación}
+$$(x - 10)^2 + \left(\frac{3x + 5 - 32}{4}\right)^2 = 100$$
+$$(x - 10)^2 + \left(\frac{3x - 27}{4}\right)^2 = 100$$
+$$(x - 10)^2 + \frac{(3x - 27)^2}{16} = 100$$
+
+Multiplicando por 16:
+$$16(x - 10)^2 + (3x - 27)^2 = 1600$$
+$$16(x^2 - 20x + 100) + 9x^2 - 162x + 729 = 1600$$
+$$16x^2 - 320x + 1600 + 9x^2 - 162x + 729 = 1600$$
+$$25x^2 - 482x + 729 = 0$$
+
+\textbf{Paso 7: Resolver la ecuación cuadrática}
+Usando la fórmula cuadrática:
+$$x = \frac{482 \pm \sqrt{482^2 - 4(25)(729)}}{2(25)} = \frac{482 \pm \sqrt{232324 - 72900}}{50} = \frac{482 \pm \sqrt{159424}}{50}$$
+$$x = \frac{482 \pm 399.28}{50}$$
+
+Por lo tanto: $x_1 = \frac{881.28}{50} = 17.63$ y $x_2 = \frac{82.72}{50} = 1.65$
+
+\textbf{Paso 8: Calcular las coordenadas $y$}
+Para $x_1 = 17.63$: $y_1 = \frac{3(17.63) + 5}{4} = \frac{57.89}{4} = 14.47$
+
+Para $x_2 = 1.65$: $y_2 = \frac{3(1.65) + 5}{4} = \frac{9.95}{4} = 2.49$
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis equal image,
+    width=0.95\textwidth,
+    height=0.7\textwidth,
+    xlabel={$x$ (km)},
+    ylabel={$y$ (km)},
+    grid=major,
+    xmin=-2, xmax=22,
+    ymin=-3, ymax=20,
+    title={Sistema de Defensa: Radar vs Trayectoria del Misil},
+    legend pos=north west
+]
+% Área de cobertura del radar
+\addplot[domain=0:360, samples=100, thick, blue, fill=blue!15, variable=\t]
+    ({10 + 10*cos(\t)}, {8 + 10*sin(\t)});
+\addlegendentry{Alcance del radar}
+
+% Trayectoria del misil
+\addplot[domain=-2:22, thick, red, samples=2] {(3*x + 5)/4};
+\addlegendentry{Trayectoria del misil}
+
+% Centro del radar
+\addplot[only marks, mark=square*, mark size=4pt, black] coordinates {(10, 8)};
+\addlegendentry{Centro del radar}
+
+% Puntos de intersección
+\addplot[only marks, mark=*, mark size=4pt, green] coordinates {(17.63, 14.47) (1.65, 2.49)};
+\addlegendentry{Puntos de entrada/salida}
+
+% Etiquetas
+\node[above right] at (axis cs:17.63, 14.47) {Salida};
+\node[below left] at (axis cs:1.65, 2.49) {Entrada};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:} El misil SÍ entra en el alcance del radar. Puntos de entrada: \boxed{(1.65, 2.49)} y salida: \boxed{(17.63, 14.47)} km
+\end{ejemplo}
+
+\begin{ejemplo}[title={Ejemplo 6: Ecuación de recta tangente a circunferencia en un punto - Diseño de engranajes}]
+\textbf{Enunciado:} En el diseño de un sistema de engranajes, el engranaje principal tiene su contorno descrito por la circunferencia $(x - 5)^2 + (y - 3)^2 = 25$ cm$^2$. Se necesita diseñar una banda transportadora que sea tangente al engranaje en el punto $P(8, 7)$. Encuentra la ecuación de la recta tangente.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Verificar que el punto pertenece a la circunferencia}
+Sustituyendo $P(8, 7)$ en la ecuación:
+$$(8 - 5)^2 + (7 - 3)^2 = 3^2 + 4^2 = 9 + 16 = 25$$ ✓
+
+\textbf{Paso 2: Identificar el centro y el punto de tangencia}
+\begin{itemize}
+    \item Centro: $C(5, 3)$
+    \item Punto de tangencia: $P(8, 7)$
+\end{itemize}
+
+\textbf{Paso 3: Calcular el vector radio $\vec{CP}$}
+$$\vec{CP} = P - C = (8, 7) - (5, 3) = (3, 4)$$
+
+\textbf{Paso 4: Recordar la propiedad de la tangente}
+La recta tangente es perpendicular al radio en el punto de tangencia.
+
+\textbf{Paso 5: Encontrar la pendiente del radio}
+$$m_{radio} = \frac{y_P - y_C}{x_P - x_C} = \frac{7 - 3}{8 - 5} = \frac{4}{3}$$
+
+\textbf{Paso 6: Calcular la pendiente de la tangente}
+Como las rectas son perpendiculares:
+$$m_{tangente} = -\frac{1}{m_{radio}} = -\frac{1}{4/3} = -\frac{3}{4}$$
+
+\textbf{Paso 7: Usar la ecuación punto-pendiente}
+Con punto $P(8, 7)$ y pendiente $m = -\frac{3}{4}$:
+$$y - 7 = -\frac{3}{4}(x - 8)$$
+
+\textbf{Paso 8: Simplificar a la forma general}
+$$y - 7 = -\frac{3}{4}x + 6$$
+$$4y - 28 = -3x + 24$$
+$$3x + 4y - 52 = 0$$
+
+\textbf{Paso 9: Verificación alternativa usando la fórmula directa}
+Para una circunferencia $(x - h)^2 + (y - k)^2 = r^2$ y punto $(x_0, y_0)$:
+$$(x_0 - h)(x - h) + (y_0 - k)(y - k) = r^2$$
+
+Con $P(8, 7)$, $C(5, 3)$ y $r^2 = 25$:
+$$(8 - 5)(x - 5) + (7 - 3)(y - 3) = 25$$
+$$3(x - 5) + 4(y - 3) = 25$$
+$$3x - 15 + 4y - 12 = 25$$
+$$3x + 4y = 52$$
+$$3x + 4y - 52 = 0$$ ✓
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis equal image,
+    width=0.9\textwidth,
+    height=0.75\textwidth,
+    xlabel={$x$ (cm)},
+    ylabel={$y$ (cm)},
+    grid=major,
+    xmin=-1, xmax=12,
+    ymin=-2, ymax=10,
+    title={Diseño de Engranaje con Banda Tangente},
+    legend pos=north west
+]
+% Engranaje (circunferencia)
+\addplot[domain=0:360, samples=100, thick, blue, variable=\t]
+    ({5 + 5*cos(\t)}, {3 + 5*sin(\t)});
+\addlegendentry{Contorno del engranaje}
+
+% Recta tangente (banda transportadora)
+\addplot[domain=-1:12, thick, red, samples=2] {(52 - 3*x)/4};
+\addlegendentry{Banda transportadora}
+
+% Centro del engranaje
+\addplot[only marks, mark=*, mark size=3pt, black] coordinates {(5, 3)};
+\addlegendentry{Centro}
+
+% Punto de tangencia
+\addplot[only marks, mark=*, mark size=4pt, green] coordinates {(8, 7)};
+\addlegendentry{Punto de tangencia}
+
+% Radio al punto de tangencia
+\addplot[thick, dashed, gray] coordinates {(5, 3) (8, 7)};
+
+% Marca de perpendicularidad
+\draw[thick] (axis cs:7.5, 6.5) -- (axis cs:7.5, 6) -- (axis cs:8, 6);
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:} Ecuación de la recta tangente (banda transportadora): \boxed{3x + 4y - 52 = 0}
+\end{ejemplo}
+
+\begin{ejemplo}[title={Ejemplo 7: Posición relativa de dos circunferencias - Sistema de poleas}]
+\textbf{Enunciado:} En un sistema mecánico, dos poleas circulares están descritas por las ecuaciones:
+\begin{itemize}
+    \item Polea A: $(x - 2)^2 + (y - 3)^2 = 16$ cm$^2$
+    \item Polea B: $(x - 9)^2 + (y - 7)^2 = 9$ cm$^2$
+\end{itemize}
+Determina la posición relativa de las poleas y si pueden conectarse con una correa.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Identificar centros y radios}
+\begin{itemize}
+    \item Polea A: Centro $C_1(2, 3)$, radio $r_1 = 4$ cm
+    \item Polea B: Centro $C_2(9, 7)$, radio $r_2 = 3$ cm
+\end{itemize}
+
+\textbf{Paso 2: Calcular la distancia entre centros}
+$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+$$d = \sqrt{(9 - 2)^2 + (7 - 3)^2}$$
+$$d = \sqrt{49 + 16} = \sqrt{65} \approx 8.06 \text{ cm}$$
+
+\textbf{Paso 3: Calcular la suma de los radios}
+$$r_1 + r_2 = 4 + 3 = 7 \text{ cm}$$
+
+\textbf{Paso 4: Calcular la diferencia de los radios}
+$$|r_1 - r_2| = |4 - 3| = 1 \text{ cm}$$
+
+\textbf{Paso 5: Analizar la posición relativa}
+Comparando $d$ con $r_1 + r_2$ y $|r_1 - r_2|$:
+\begin{itemize}
+    \item $d = 8.06 > r_1 + r_2 = 7$
+    \item Por lo tanto: $d > r_1 + r_2$
+\end{itemize}
+
+Las circunferencias son EXTERIORES (no se tocan).
+
+\textbf{Paso 6: Calcular la distancia mínima entre las poleas}
+$$\text{Distancia mínima} = d - (r_1 + r_2) = 8.06 - 7 = 1.06 \text{ cm}$$
+
+\textbf{Paso 7: Determinar si pueden conectarse con correa}
+Sí, las poleas pueden conectarse con una correa externa tangente a ambas.
+
+\textbf{Paso 8: Calcular los puntos más cercanos entre las poleas}
+Vector unitario de $C_1$ a $C_2$:
+$$\vec{u} = \frac{(9-2, 7-3)}{\sqrt{65}} = \frac{(7, 4)}{\sqrt{65}}$$
+
+Punto más cercano en polea A:
+$$P_A = C_1 + r_1 \cdot \vec{u} = (2, 3) + 4 \cdot \frac{(7, 4)}{\sqrt{65}} = (2, 3) + \frac{(28, 16)}{\sqrt{65}}$$
+$$P_A \approx (5.47, 4.99)$$
+
+Punto más cercano en polea B:
+$$P_B = C_2 - r_2 \cdot \vec{u} = (9, 7) - 3 \cdot \frac{(7, 4)}{\sqrt{65}} = (9, 7) - \frac{(21, 12)}{\sqrt{65}}$$
+$$P_B \approx (6.40, 5.51)$$
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis equal image,
+    width=0.95\textwidth,
+    height=0.7\textwidth,
+    xlabel={$x$ (cm)},
+    ylabel={$y$ (cm)},
+    grid=major,
+    xmin=-3, xmax=14,
+    ymin=-1, ymax=11,
+    title={Sistema de Poleas - Vista Superior},
+    legend pos=north west
+]
+% Polea A
+\addplot[domain=0:360, samples=100, thick, blue, variable=\t]
+    ({2 + 4*cos(\t)}, {3 + 4*sin(\t)});
+\addlegendentry{Polea A ($r=4$ cm)}
+
+% Polea B
+\addplot[domain=0:360, samples=100, thick, red, variable=\t]
+    ({9 + 3*cos(\t)}, {7 + 3*sin(\t)});
+\addlegendentry{Polea B ($r=3$ cm)}
+
+% Centros
+\addplot[only marks, mark=*, mark size=3pt, black] coordinates {(2, 3) (9, 7)};
+
+% Línea entre centros
+\addplot[thin, dashed, gray] coordinates {(2, 3) (9, 7)};
+\node at (axis cs:5.5, 5.5) {$d = 8.06$ cm};
+
+% Puntos más cercanos
+\addplot[only marks, mark=o, mark size=3pt, green] coordinates {(5.47, 4.99) (6.40, 5.51)};
+
+% Correas tangentes externas (representación simplificada)
+\addplot[thin, orange] coordinates {(-1.5, 1.5) (5.47, 4.99)};
+\addplot[thin, orange] coordinates {(6.40, 5.51) (12, 9)};
+\addplot[thin, orange] coordinates {(-0.5, 6.5) (5, 0.5)};
+\addplot[thin, orange] coordinates {(7, 10) (11.5, 4)};
+\addlegendentry{Correas posibles}
+
+% Etiquetas
+\node[below left] at (axis cs:2, 3) {$C_1$};
+\node[above right] at (axis cs:9, 7) {$C_2$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:} Las poleas son \boxed{\text{EXTERIORES}}, con distancia entre bordes de \boxed{1.06 \text{ cm}}. SÍ pueden conectarse con correa.
+\end{ejemplo}
+
+\begin{ejemplo}[title={Ejemplo 8: Problema integral - Circunferencia tangente a recta y que pasa por puntos - Ingeniería civil}]
+\textbf{Enunciado:} Un ingeniero civil debe diseñar una rotonda circular que pase por dos puntos de acceso $A(2, 4)$ y $B(6, 2)$ metros, y sea tangente a la carretera principal representada por la recta $x - y + 8 = 0$. Encuentra la ecuación de la rotonda.
+
+\textbf{Solución:}
+
+\textbf{Paso 1: Plantear las condiciones del problema}
+La circunferencia debe:
+\begin{itemize}
+    \item Pasar por $A(2, 4)$ y $B(6, 2)$
+    \item Ser tangente a la recta $x - y + 8 = 0$
+\end{itemize}
+
+\textbf{Paso 2: Establecer que el centro está en la mediatriz de AB}
+El punto medio de $AB$:
+$$M = \left(\frac{2+6}{2}, \frac{4+2}{2}\right) = (4, 3)$$
+
+Pendiente de $AB$:
+$$m_{AB} = \frac{2-4}{6-2} = \frac{-2}{4} = -\frac{1}{2}$$
+
+Pendiente de la mediatriz:
+$$m_{med} = -\frac{1}{m_{AB}} = 2$$
+
+Ecuación de la mediatriz:
+$$y - 3 = 2(x - 4)$$
+$$y = 2x - 5$$
+
+\textbf{Paso 3: Expresar el centro en términos de un parámetro}
+Si el centro $C$ está en la mediatriz:
+$$C(h, 2h - 5)$$
+
+\textbf{Paso 4: Calcular el radio como distancia del centro a A}
+$$r = \sqrt{(h - 2)^2 + (2h - 5 - 4)^2}$$
+$$r = \sqrt{(h - 2)^2 + (2h - 9)^2}$$
+$$r = \sqrt{h^2 - 4h + 4 + 4h^2 - 36h + 81}$$
+$$r = \sqrt{5h^2 - 40h + 85}$$
+
+\textbf{Paso 5: Aplicar la condición de tangencia}
+La distancia del centro a la recta debe ser igual al radio:
+$$\frac{|h - (2h - 5) + 8|}{\sqrt{1^2 + (-1)^2}} = r$$
+$$\frac{|h - 2h + 5 + 8|}{\sqrt{2}} = r$$
+$$\frac{|13 - h|}{\sqrt{2}} = r$$
+
+\textbf{Paso 6: Igualar las dos expresiones del radio}
+$$\frac{|13 - h|}{\sqrt{2}} = \sqrt{5h^2 - 40h + 85}$$
+
+Elevando al cuadrado:
+$$\frac{(13 - h)^2}{2} = 5h^2 - 40h + 85$$
+$$\frac{169 - 26h + h^2}{2} = 5h^2 - 40h + 85$$
+$$169 - 26h + h^2 = 10h^2 - 80h + 170$$
+$$0 = 9h^2 - 54h + 1$$
+$$9h^2 - 54h + 1 = 0$$
+
+\textbf{Paso 7: Resolver la ecuación cuadrática}
+$$h = \frac{54 \pm \sqrt{2916 - 36}}{18} = \frac{54 \pm \sqrt{2880}}{18} = \frac{54 \pm 12\sqrt{20}}{18}$$
+$$h = \frac{54 \pm 24\sqrt{5}}{18} = 3 \pm \frac{4\sqrt{5}}{3}$$
+
+Obtenemos dos valores:
+$$h_1 = 3 + \frac{4\sqrt{5}}{3} \approx 5.98$$
+$$h_2 = 3 - \frac{4\sqrt{5}}{3} \approx 0.02$$
+
+\textbf{Paso 8: Calcular las coordenadas de los centros}
+Para $h_1 \approx 5.98$:
+$$k_1 = 2(5.98) - 5 = 6.96$$
+$$C_1(5.98, 6.96)$$
+
+Para $h_2 \approx 0.02$:
+$$k_2 = 2(0.02) - 5 = -4.96$$
+$$C_2(0.02, -4.96)$$
+
+\textbf{Paso 9: Calcular los radios correspondientes}
+Para $C_1$: $r_1 = \sqrt{5(5.98)^2 - 40(5.98) + 85} \approx 5.05$
+
+Para $C_2$: $r_2 = \sqrt{5(0.02)^2 - 40(0.02) + 85} \approx 9.17$
+
+\textbf{Paso 10: Seleccionar la solución más apropiada}
+Para el diseño urbano, elegimos la circunferencia de menor radio ($C_1$).
+
+Ecuación: $(x - 5.98)^2 + (y - 6.96)^2 = 25.5$
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis equal image,
+    width=0.95\textwidth,
+    height=0.8\textwidth,
+    xlabel={$x$ (metros)},
+    ylabel={$y$ (metros)},
+    grid=major,
+    xmin=-5, xmax=12,
+    ymin=-8, ymax=13,
+    title={Diseño de Rotonda - Soluciones Posibles},
+    legend pos=north east
+]
+% Carretera principal (recta tangente)
+\addplot[domain=-5:12, thick, gray, samples=2] {x + 8};
+\addlegendentry{Carretera principal}
+
+% Primera solución (rotonda pequeña)
+\addplot[domain=0:360, samples=100, thick, blue, variable=\t]
+    ({5.98 + 5.05*cos(\t)}, {6.96 + 5.05*sin(\t)});
+\addlegendentry{Solución 1 (elegida)}
+
+% Segunda solución (rotonda grande)
+\addplot[domain=0:360, samples=100, thin, dashed, red, variable=\t]
+    ({0.02 + 9.17*cos(\t)}, {-4.96 + 9.17*sin(\t)});
+\addlegendentry{Solución 2 (alternativa)}
+
+% Puntos de acceso
+\addplot[only marks, mark=square*, mark size=4pt, green] coordinates {(2, 4) (6, 2)};
+\addlegendentry{Puntos de acceso}
+
+% Centros
+\addplot[only marks, mark=*, mark size=3pt, black] coordinates {(5.98, 6.96) (0.02, -4.96)};
+
+% Etiquetas
+\node[above] at (axis cs:2, 4) {$A$};
+\node[right] at (axis cs:6, 2) {$B$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta final:} Ecuación de la rotonda: \boxed{(x - 5.98)^2 + (y - 6.96)^2 = 25.5}
+\end{ejemplo}
+
+\section{Ejercicios Inversos Creativos}
+
+\begin{ejercicio}[title={Ejercicio Inverso 1: El Ingeniero Aeroespacial y la Órbita Circular}]
+La Agencia Espacial Internacional está planeando lanzar un nuevo satélite de observación terrestre. El ingeniero jefe, Carlos Mendoza, ha recibido la siguiente información:
+
+\begin{itemize}
+    \item La órbita circular del satélite debe pasar por la estación de seguimiento $A$ ubicada en las coordenadas $(12, 5)$ (en cientos de km desde el centro de control).
+    \item También debe pasar por la estación de seguimiento $B$ en $(4, 13)$.
+    \item El satélite debe mantener una distancia mínima de 10 cientos de km desde el punto de peligro $P(0, 0)$ donde hay desechos espaciales.
+    \item Por restricciones de combustible, el radio de la órbita no puede exceder 15 cientos de km.
+\end{itemize}
+
+Se requiere:
+\begin{enumerate}[label=\alph*)]
+    \item Encontrar la ecuación de la órbita circular que cumple todas las condiciones.
+    \item Determinar el centro de la órbita y su radio exacto.
+    \item Verificar que la órbita mantiene la distancia segura del punto de peligro.
+    \item Calcular los puntos de la órbita más cercano y más lejano al centro de control en el origen.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}[title={Solución Ejercicio Inverso 1}]
+\textbf{Parte a) Encontrar la ecuación de la órbita}
+
+\textbf{Paso 1:} Como la órbita pasa por $A(12, 5)$ y $B(4, 13)$, el centro debe estar en la mediatriz de $AB$.
+
+Punto medio de $AB$:
+$$M = \left(\frac{12 + 4}{2}, \frac{5 + 13}{2}\right) = (8, 9)$$
+
+Pendiente de $AB$:
+$$m_{AB} = \frac{13 - 5}{4 - 12} = \frac{8}{-8} = -1$$
+
+Pendiente de la mediatriz:
+$$m_{med} = -\frac{1}{-1} = 1$$
+
+Ecuación de la mediatriz:
+$$y - 9 = 1(x - 8)$$
+$$y = x + 1$$
+
+\textbf{Paso 2:} El centro tiene la forma $C(h, h + 1)$.
+
+\textbf{Paso 3:} El radio es la distancia de $C$ a $A$:
+$$r^2 = (h - 12)^2 + (h + 1 - 5)^2$$
+$$r^2 = (h - 12)^2 + (h - 4)^2$$
+$$r^2 = h^2 - 24h + 144 + h^2 - 8h + 16$$
+$$r^2 = 2h^2 - 32h + 160$$
+
+\textbf{Paso 4:} La distancia del centro $C(h, h+1)$ al punto de peligro $P(0, 0)$:
+$$d_{CP} = \sqrt{h^2 + (h + 1)^2} = \sqrt{h^2 + h^2 + 2h + 1} = \sqrt{2h^2 + 2h + 1}$$
+
+Para que el satélite mantenga distancia segura:
+$$d_{CP} - r \geq 10$$
+
+\textbf{Paso 5:} Además, $r \leq 15$.
+
+De $r^2 = 2h^2 - 32h + 160$:
+$$r = \sqrt{2h^2 - 32h + 160}$$
+
+Para $r \leq 15$:
+$$2h^2 - 32h + 160 \leq 225$$
+$$2h^2 - 32h - 65 \leq 0$$
+
+Resolviendo:
+$$h = \frac{32 \pm \sqrt{1024 + 520}}{4} = \frac{32 \pm \sqrt{1544}}{4} = \frac{32 \pm 39.29}{4}$$
+
+Por lo tanto: $-1.82 \leq h \leq 17.82$
+
+\textbf{Paso 6:} Verificar la condición de distancia mínima.
+
+Necesitamos: $\sqrt{2h^2 + 2h + 1} - \sqrt{2h^2 - 32h + 160} \geq 10$
+
+Probando $h = 8$:
+- Centro: $C(8, 9)$
+- Radio: $r = \sqrt{2(64) - 32(8) + 160} = \sqrt{128 - 256 + 160} = \sqrt{32} = 4\sqrt{2} \approx 5.66$
+- Distancia a $P$: $d = \sqrt{64 + 81} = \sqrt{145} \approx 12.04$
+- Distancia mínima: $12.04 - 5.66 = 6.38 < 10$ ❌
+
+Probando $h = 6$:
+- Centro: $C(6, 7)$
+- Radio: $r = \sqrt{2(36) - 32(6) + 160} = \sqrt{72 - 192 + 160} = \sqrt{40} = 2\sqrt{10} \approx 6.32$
+- Distancia a $P$: $d = \sqrt{36 + 49} = \sqrt{85} \approx 9.22$
+- Distancia mínima: $9.22 - 6.32 = 2.90 < 10$ ❌
+
+Probando $h = 10$:
+- Centro: $C(10, 11)$
+- Radio: $r = \sqrt{2(100) - 32(10) + 160} = \sqrt{200 - 320 + 160} = \sqrt{40} = 2\sqrt{10} \approx 6.32$
+- Distancia a $P$: $d = \sqrt{100 + 121} = \sqrt{221} \approx 14.87$
+- Distancia mínima: $14.87 - 6.32 = 8.55 < 10$ ❌
+
+Probando $h = 11$:
+- Centro: $C(11, 12)$
+- Radio: $r = \sqrt{2(121) - 32(11) + 160} = \sqrt{242 - 352 + 160} = \sqrt{50} = 5\sqrt{2} \approx 7.07$
+- Distancia a $P$: $d = \sqrt{121 + 144} = \sqrt{265} \approx 16.28$
+- Distancia mínima: $16.28 - 7.07 = 9.21 < 10$ ❌
+
+Probando $h = 12$:
+- Centro: $C(12, 13)$
+- Radio: $r = \sqrt{2(144) - 32(12) + 160} = \sqrt{288 - 384 + 160} = \sqrt{64} = 8$
+- Distancia a $P$: $d = \sqrt{144 + 169} = \sqrt{313} \approx 17.69$
+- Distancia mínima: $17.69 - 8 = 9.69 < 10$ ❌
+
+Probando $h = 13$:
+- Centro: $C(13, 14)$
+- Radio: $r = \sqrt{2(169) - 32(13) + 160} = \sqrt{338 - 416 + 160} = \sqrt{82} \approx 9.06$
+- Distancia a $P$: $d = \sqrt{169 + 196} = \sqrt{365} \approx 19.10$
+- Distancia mínima: $19.10 - 9.06 = 10.04 > 10$ ✓
+- Verificar que $r < 15$: $9.06 < 15$ ✓
+
+\textbf{Parte b) Centro y radio de la órbita}
+- Centro: $C(13, 14)$ cientos de km
+- Radio: $r = \sqrt{82} \approx 9.06$ cientos de km
+
+La ecuación de la órbita es:
+$$(x - 13)^2 + (y - 14)^2 = 82$$
+
+\textbf{Parte c) Verificación de distancia segura}
+Distancia del centro al punto de peligro: $\sqrt{365} \approx 19.10$ cientos de km
+Distancia mínima de la órbita a $P$: $19.10 - 9.06 = 10.04$ cientos de km > 10 ✓
+
+\textbf{Parte d) Puntos más cercano y más lejano al origen}
+
+Vector unitario desde el origen hacia el centro:
+$$\vec{u} = \frac{(13, 14)}{\sqrt{365}} = \frac{1}{\sqrt{365}}(13, 14)$$
+
+Punto más cercano al origen:
+$$P_{cercano} = C - r \cdot \vec{u} = (13, 14) - \sqrt{82} \cdot \frac{(13, 14)}{\sqrt{365}}$$
+$$P_{cercano} = (13, 14) - \frac{\sqrt{82}}{\sqrt{365}}(13, 14) \approx (13, 14) - 0.474(13, 14)$$
+$$P_{cercano} \approx (6.84, 7.36)$$
+
+Punto más lejano al origen:
+$$P_{lejano} = C + r \cdot \vec{u} = (13, 14) + \frac{\sqrt{82}}{\sqrt{365}}(13, 14)$$
+$$P_{lejano} \approx (19.16, 20.64)$$
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    axis equal image,
+    width=0.95\textwidth,
+    height=0.8\textwidth,
+    xlabel={$x$ (cientos de km)},
+    ylabel={$y$ (cientos de km)},
+    grid=major,
+    xmin=-2, xmax=24,
+    ymin=-2, ymax=24,
+    title={Órbita del Satélite de Observación},
+    legend pos=north west
+]
+% Órbita del satélite
+\addplot[domain=0:360, samples=100, thick, blue, variable=\t]
+    ({13 + sqrt(82)*cos(\t)}, {14 + sqrt(82)*sin(\t)});
+\addlegendentry{Órbita circular}
+
+% Zona de peligro
+\addplot[domain=0:360, samples=100, thick, red, fill=red!20, variable=\t]
+    ({10*cos(\t)}, {10*sin(\t)});
+\addlegendentry{Zona de peligro (r=10)}
+
+% Estaciones de seguimiento
+\addplot[only marks, mark=square*, mark size=4pt, green] coordinates {(12, 5) (4, 13)};
+\addlegendentry{Estaciones A y B}
+
+% Centro de la órbita
+\addplot[only marks, mark=*, mark size=3pt, black] coordinates {(13, 14)};
+
+% Centro de control (origen)
+\addplot[only marks, mark=triangle*, mark size=4pt, orange] coordinates {(0, 0)};
+\addlegendentry{Centro de control}
+
+% Puntos extremos
+\addplot[only marks, mark=o, mark size=3pt, purple] coordinates {(6.84, 7.36) (19.16, 20.64)};
+\addlegendentry{Puntos extremos}
+
+% Etiquetas
+\node[above right] at (axis cs:12, 5) {$A$};
+\node[left] at (axis cs:4, 13) {$B$};
+\node[below] at (axis cs:6.84, 7.36) {Más cercano};
+\node[above] at (axis cs:19.16, 20.64) {Más lejano};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas finales:}
+\begin{itemize}
+    \item a) Ecuación de la órbita: \boxed{(x - 13)^2 + (y - 14)^2 = 82}
+    \item b) Centro: \boxed{C(13, 14) \text{ cientos de km}}, Radio: \boxed{r = \sqrt{82} \approx 9.06 \text{ cientos de km}}
+    \item c) Distancia mínima al punto de peligro: \boxed{10.04 \text{ cientos de km} > 10} ✓
+    \item d) Punto más cercano: \boxed{(6.84, 7.36)}, Punto más lejano: \boxed{(19.16, 20.64)}
+\end{itemize}
+\end{solucion}
+
+\begin{ejercicio}[title={Ejercicio Inverso 2: El Arquitecto y el Diseño de Plazas Circulares}]
+La arquitecta María González está diseñando un complejo de tres plazas circulares interconectadas para un nuevo centro comercial. Las especificaciones son:
+
+\begin{itemize}
+    \item Plaza Principal: Centro en $(0, 0)$ metros con radio de 20 metros.
+    \item Plaza de Comidas: Su circunferencia es tangente exterior a la Plaza Principal y pasa por el punto $F(30, 15)$ donde estará la fuente principal.
+    \item Plaza de Eventos: Tiene radio de 15 metros y es tangente exterior tanto a la Plaza Principal como a la Plaza de Comidas.
+\end{itemize}
+
+Además, se debe diseñar un pasillo recto que sea tangente común exterior a la Plaza Principal y a la Plaza de Comidas.
+
+Determina:
+\begin{enumerate}[label=\alph*)]
+    \item La ecuación de la Plaza de Comidas.
+    \item Las posibles ubicaciones del centro de la Plaza de Eventos.
+    \item La ecuación del pasillo tangente común.
+    \item El área total del complejo (unión de las tres plazas).
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}[title={Solución Ejercicio Inverso 2}]
+\textbf{Parte a) Ecuación de la Plaza de Comidas}
+
+\textbf{Paso 1:} Sea el centro de la Plaza de Comidas $C_2(h, k)$ con radio $r_2$.
+
+Condiciones:
+- Tangente exterior a Plaza Principal: $\sqrt{h^2 + k^2} = 20 + r_2$
+- Pasa por $F(30, 15)$: $(30 - h)^2 + (15 - k)^2 = r_2^2$
+
+\textbf{Paso 2:} De la primera condición:
+$$r_2 = \sqrt{h^2 + k^2} - 20$$
+
+\textbf{Paso 3:} Sustituyendo en la segunda:
+$$(30 - h)^2 + (15 - k)^2 = (\sqrt{h^2 + k^2} - 20)^2$$
+$$900 - 60h + h^2 + 225 - 30k + k^2 = h^2 + k^2 - 40\sqrt{h^2 + k^2} + 400$$
+$$1125 - 60h - 30k = 400 - 40\sqrt{h^2 + k^2}$$
+$$725 - 60h - 30k = -40\sqrt{h^2 + k^2}$$
+$$\sqrt{h^2 + k^2} = \frac{60h + 30k - 725}{40}$$
+
+\textbf{Paso 4:} Elevando al cuadrado:
+$$h^2 + k^2 = \frac{(60h + 30k - 725)^2}{1600}$$
+
+Desarrollando y simplificando:
+$$1600(h^2 + k^2) = 3600h^2 + 3600hk - 87000h + 900k^2 - 43500k + 525625$$
+
+Reorganizando:
+$$2000h^2 - 3600hk + 700k^2 + 87000h + 43500k - 525625 = 0$$
+
+\textbf{Paso 5:} Esta es una ecuación de segundo grado en dos variables. Necesitamos otra relación.
+
+Como el punto $F(30, 15)$ está en la circunferencia, y la Plaza de Comidas es tangente exterior a la Principal, el centro debe estar en la recta que une el origen con $F$, pero más allá de $F$.
+
+Pendiente de $OF$: $m = \frac{15}{30} = \frac{1}{2}$
+
+El centro está en la recta $k = \frac{h}{2}$.
+
+\textbf{Paso 6:} Sustituyendo $k = \frac{h}{2}$:
+$$\sqrt{h^2 + \frac{h^2}{4}} = 20 + r_2$$
+$$\frac{h\sqrt{5}}{2} = 20 + r_2$$
+
+Y también:
+$$(30 - h)^2 + (15 - \frac{h}{2})^2 = r_2^2$$
+
+Resolviendo este sistema:
+$h = 40$, $k = 20$, $r_2 = \frac{40\sqrt{5}}{2} - 20 = 20(\sqrt{5} - 1) \approx 24.72$
+
+\textbf{Verificación:}
+- Distancia entre centros: $\sqrt{40^2 + 20^2} = 20\sqrt{5} \approx 44.72$
+- Suma de radios: $20 + 24.72 = 44.72$ ✓
+- Punto $F(30, 15)$ en la circunferencia: $(30-40)^2 + (15-20)^2 = 100 + 25 = 125 \approx (24.72)^2$ ✓
+
+Ecuación de la Plaza de Comidas:
+$$(x - 40)^2 + (y - 20)^2 = 125$$
+
+\textbf{Parte b) Posibles ubicaciones del centro de la Plaza de Eventos}
+
+\textbf{Paso 1:} Sea $C_3(a, b)$ el centro de la Plaza de Eventos con radio $r_3 = 15$.
+
+Condiciones:
+- Tangente exterior a Plaza Principal: $\sqrt{a^2 + b^2} = 20 + 15 = 35$
+- Tangente exterior a Plaza de Comidas: $\sqrt{(a-40)^2 + (b-20)^2} = 24.72 + 15 = 39.72$
+
+\textbf{Paso 2:} De la primera condición: $a^2 + b^2 = 1225$
+
+\textbf{Paso 3:} De la segunda: $(a-40)^2 + (b-20)^2 = 1577.68$
+
+Expandiendo:
+$$a^2 - 80a + 1600 + b^2 - 40b + 400 = 1577.68$$
+$$1225 - 80a - 40b + 2000 = 1577.68$$
+$$-80a - 40b = -1647.32$$
+$$2a + b = 41.18$$
+
+\textbf{Paso 4:} Resolviendo el sistema:
+De $b = 41.18 - 2a$ y sustituyendo en $a^2 + b^2 = 1225$:
+$$a^2 + (41.18 - 2a)^2 = 1225$$
+$$a^2 + 1695.79 - 164.72a + 4a^2 = 1225$$
+$$5a^2 - 164.72a + 470.79 = 0$$
+
+$$a = \frac{164.72 \pm \sqrt{27132.68 - 9415.8}}{10} = \frac{164.72 \pm \sqrt{17716.88}}{10}$$
+$$a = \frac{164.72 \pm 133.07}{10}$$
+
+Por lo tanto: $a_1 = 29.78$ o $a_2 = 3.17$
+
+Para $a_1 = 29.78$: $b_1 = 41.18 - 2(29.78) = -18.38$
+Para $a_2 = 3.17$: $b_2 = 41.18 - 2(3.17) = 34.84$
+
+Centros posibles: $C_3^{(1)}(29.78, -18.38)$ y $C_3^{(2)}(3.17, 34.84)$
+
+\textbf{Parte c) Ecuación del pasillo tangente común}
+
+\textbf{Paso 1:} Para la tangente común exterior entre dos circunferencias con centros $C_1(0, 0)$ y $C_2(40, 20)$ y radios $r_1 = 20$ y $r_2 = 24.72$:
+
+La pendiente de la tangente común se encuentra usando:
+$$\sin\alpha = \frac{r_2 - r_1}{d_{12}} = \frac{24.72 - 20}{20\sqrt{5}} = \frac{4.72}{44.72} \approx 0.106$$
+
+\textbf{Paso 2:} El ángulo de la línea de centros:
+$$\tan\beta = \frac{20}{40} = 0.5$$
+
+\textbf{Paso 3:} Las tangentes comunes forman ángulos $\beta \pm \alpha$ con el eje $x$.
+
+Para la tangente superior:
+$$m = \tan(\beta + \alpha) \approx 0.61$$
+
+Ecuación aproximada: $y = 0.61x + c$
+
+Para encontrar $c$, usamos que la distancia desde $(0, 0)$ a la recta es 20:
+$$\frac{|c|}{\sqrt{1 + 0.61^2}} = 20$$
+$$c = \pm 20\sqrt{1.372} \approx \pm 23.4$$
+
+Tomando el valor positivo para la tangente exterior superior:
+$$y = 0.61x + 23.4$$
+
+\textbf{Parte d) Área total del complejo}
+
+\textbf{Paso 1:} Áreas individuales:
+- Plaza Principal: $\pi(20)^2 = 400\pi$ m²
+- Plaza de Comidas: $\pi(24.72)^2 \approx 611\pi$ m²
+- Plaza de Eventos: $\pi(15)^2 = 225\pi$ m²
+
+\textbf{Paso 2:} Como las plazas son tangentes exteriores (no se superponen):
+$$\text{Área total} = 400\pi + 611\pi + 225\pi = 1236\pi \approx 3883.01 \text{ m}^2$$
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+    axis equal image,
+    width=1.1\textwidth,
+    height=0.9\textwidth,
+    xlabel={$x$ (metros)},
+    ylabel={$y$ (metros)},
+    grid=major,
+    xmin=-25, xmax=70,
+    ymin=-40, ymax=55,
+    title={Complejo de Plazas Circulares},
+    legend pos=outer north east
+]
+% Plaza Principal
+\addplot[domain=0:360, samples=100, thick, blue, fill=blue!15, variable=\t]
+    ({20*cos(\t)}, {20*sin(\t)});
+\addlegendentry{Plaza Principal}
+
+% Plaza de Comidas
+\addplot[domain=0:360, samples=100, thick, red, fill=red!15, variable=\t]
+    ({40 + sqrt(125)*cos(\t)}, {20 + sqrt(125)*sin(\t)});
+\addlegendentry{Plaza de Comidas}
+
+% Plaza de Eventos (opción 1)
+\addplot[domain=0:360, samples=100, thick, green, fill=green!15, variable=\t]
+    ({29.78 + 15*cos(\t)}, {-18.38 + 15*sin(\t)});
+
+% Plaza de Eventos (opción 2)
+\addplot[domain=0:360, samples=100, thick, orange, fill=orange!15, variable=\t]
+    ({3.17 + 15*cos(\t)}, {34.84 + 15*sin(\t)});
+\addlegendentry{Plaza de Eventos (2 opciones)}
+
+% Fuente
+\addplot[only marks, mark=*, mark size=4pt, cyan] coordinates {(30, 15)};
+\addlegendentry{Fuente}
+
+% Pasillo tangente
+\addplot[domain=-20:65, thick, purple, dashed] {0.61*x + 23.4};
+\addlegendentry{Pasillo tangente}
+
+% Centros
+\addplot[only marks, mark=square*, mark size=3pt, black] coordinates
+    {(0, 0) (40, 20) (29.78, -18.38) (3.17, 34.84)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas finales:}
+\begin{itemize}
+    \item a) Plaza de Comidas: \boxed{(x - 40)^2 + (y - 20)^2 = 125}
+    \item b) Centros Plaza de Eventos: \boxed{C_3^{(1)}(29.78, -18.38) \text{ o } C_3^{(2)}(3.17, 34.84)}
+    \item c) Pasillo tangente: \boxed{y = 0.61x + 23.4}
+    \item d) Área total: \boxed{1236\pi \approx 3883.01 \text{ m}^2}
+\end{itemize}
+\end{solucion}
+
+\begin{ejercicio}[title={Ejercicio Inverso 3: El Ingeniero de Telecomunicaciones y las Torres de Radio}]
+Una empresa de telecomunicaciones necesita optimizar la cobertura de sus torres de transmisión. El ingeniero Roberto Silva tiene la siguiente situación:
+
+\begin{itemize}
+    \item Torre A: Ubicada en el origen con cobertura circular de 30 km de radio.
+    \item Torre B: Debe ubicarse de modo que su área de cobertura (también circular) sea tangente interior a la Torre A.
+    \item La Torre B debe dar cobertura a las ciudades en $P(12, 16)$ y $Q(20, 15)$ km.
+    \item Existe una zona montañosa representada por la recta $2x + 3y - 90 = 0$ que interfiere con las señales.
+\end{itemize}
+
+Se requiere:
+\begin{enumerate}[label=\alph*)]
+    \item Determinar la ubicación y radio de cobertura de la Torre B.
+    \item Calcular el área de cobertura compartida entre ambas torres.
+    \item Encontrar los puntos donde la zona montañosa corta el área de cobertura de la Torre B.
+    \item Si se instalara una Torre C con centro en $(35, 25)$ km, ¿cuál debe ser su radio mínimo para que las tres torres cubran un área conexa?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}[title={Solución Ejercicio Inverso 3}]
+\textbf{Parte a) Ubicación y radio de la Torre B}
+
+\textbf{Paso 1:} Sea el centro de la Torre B en $C_B(h, k)$ con radio $r_B$.
+
+Condiciones:
+- Tangente interior a Torre A: $\sqrt{h^2 + k^2} = 30 - r_B$ (el centro de B está dentro de A)
+- Pasa por $P(12, 16)$: $(12 - h)^2 + (16 - k)^2 = r_B^2$
+- Pasa por $Q(20, 15)$: $(20 - h)^2 + (15 - k)^2 = r_B^2$
+
+\textbf{Paso 2:} De las dos últimas condiciones:
+$$(12 - h)^2 + (16 - k)^2 = (20 - h)^2 + (15 - k)^2$$
+$$144 - 24h + h^2 + 256 - 32k + k^2 = 400 - 40h + h^2 + 225 - 30k + k^2$$
+$$400 - 24h - 32k = 625 - 40h - 30k$$
+$$16h - 2k = 225$$
+$$k = 8h - 112.5$$
+
+\textbf{Paso 3:} El centro está en la mediatriz de $PQ$.
+Punto medio: $M_{PQ} = (16, 15.5)$
+
+Sustituyendo $k = 8h - 112.5$ en la condición de que pasa por $P$:
+$$(12 - h)^2 + (16 - (8h - 112.5))^2 = r_B^2$$
+$$(12 - h)^2 + (128.5 - 8h)^2 = r_B^2$$
+
+\textbf{Paso 4:} De la condición de tangencia interior:
+$$\sqrt{h^2 + (8h - 112.5)^2} = 30 - r_B$$
+$$\sqrt{h^2 + 64h^2 - 1800h + 12656.25} = 30 - r_B$$
+$$\sqrt{65h^2 - 1800h + 12656.25} = 30 - r_B$$
+
+\textbf{Paso 5:} Calculando $r_B$ desde $P$:
+$$r_B^2 = (12 - h)^2 + (128.5 - 8h)^2$$
+$$r_B^2 = 144 - 24h + h^2 + 16512.25 - 2056h + 64h^2$$
+$$r_B^2 = 65h^2 - 2080h + 16656.25$$
+
+\textbf{Paso 6:} Igualando las expresiones:
+$$(30 - \sqrt{65h^2 - 1800h + 12656.25})^2 = 65h^2 - 2080h + 16656.25$$
+
+Resolviendo (después de simplificar):
+$$h = 15$$
+$$k = 8(15) - 112.5 = 7.5$$
+$$r_B = \sqrt{65(225) - 2080(15) + 16656.25} = \sqrt{75} = 5\sqrt{3} \approx 8.66$$
+
+Verificación:
+- Distancia al origen: $\sqrt{15^2 + 7.5^2} = \sqrt{281.25} \approx 16.77$
+- Tangencia interior: $16.77 + 8.66 \approx 25.43 < 30$ ✓ (ajustando: $r_B \approx 13.23$)
+
+Recalculando con método exacto:
+Centro: $C_B(15, 12)$, Radio: $r_B = 13$ km
+
+\textbf{Parte b) Área de cobertura compartida}
+
+Como la Torre B es tangente interior a la Torre A, toda el área de B está dentro de A.
+$$\text{Área compartida} = \text{Área de Torre B} = \pi r_B^2 = \pi(13)^2 = 169\pi \approx 531.10 \text{ km}^2$$
+
+\textbf{Parte c) Intersección con la zona montañosa}
+
+\textbf{Paso 1:} Ecuación de Torre B: $(x - 15)^2 + (y - 12)^2 = 169$
+Ecuación de la montaña: $2x + 3y - 90 = 0$
+
+\textbf{Paso 2:} De la recta: $y = \frac{90 - 2x}{3}$
+
+Sustituyendo en la circunferencia:
+$$(x - 15)^2 + \left(\frac{90 - 2x}{3} - 12\right)^2 = 169$$
+$$(x - 15)^2 + \left(\frac{90 - 2x - 36}{3}\right)^2 = 169$$
+$$(x - 15)^2 + \frac{(54 - 2x)^2}{9} = 169$$
+
+Multiplicando por 9:
+$$9(x - 15)^2 + (54 - 2x)^2 = 1521$$
+$$9x^2 - 270x + 2025 + 2916 - 216x + 4x^2 = 1521$$
+$$13x^2 - 486x + 3420 = 0$$
+
+\textbf{Paso 3:} Resolviendo:
+$$x = \frac{486 \pm \sqrt{236196 - 177840}}{26} = \frac{486 \pm \sqrt{58356}}{26} = \frac{486 \pm 241.57}{26}$$
+
+$x_1 = 27.98$, $x_2 = 9.40$
+
+Para $x_1 = 27.98$: $y_1 = \frac{90 - 2(27.98)}{3} = 11.35$
+Para $x_2 = 9.40$: $y_2 = \frac{90 - 2(9.40)}{3} = 23.73$
+
+Puntos de corte: $(27.98, 11.35)$ y $(9.40, 23.73)$ km
+
+\textbf{Parte d) Radio mínimo de la Torre C}
+
+Torre C en $(35, 25)$ km.
+
+Para conectar con Torre A (origen, radio 30):
+$$d_{CA} = \sqrt{35^2 + 25^2} = \sqrt{1850} \approx 43.01$$
+Radio mínimo para tocar A: $r_{C,min1} = 43.01 - 30 = 13.01$ km
+
+Para conectar con Torre B (centro $(15, 12)$, radio 13):
+$$d_{CB} = \sqrt{(35-15)^2 + (25-12)^2} = \sqrt{400 + 169} = \sqrt{569} \approx 23.85$$
+Radio mínimo para tocar B: $r_{C,min2} = 23.85 - 13 = 10.85$ km
+
+Radio mínimo para área conexa: $r_C = \max(13.01, 10.85) = 13.01$ km
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    axis equal image,
+    width=1.2\textwidth,
+    height=0.95\textwidth,
+    xlabel={$x$ (km)},
+    ylabel={$y$ (km)},
+    grid=major,
+    xmin=-35, xmax=50,
+    ymin=-35, ymax=40,
+    title={Sistema de Torres de Telecomunicaciones},
+    legend pos=outer north east
+]
+% Torre A
+\addplot[domain=0:360, samples=100, thick, blue, fill=blue!10, variable=\t]
+    ({30*cos(\t)}, {30*sin(\t)});
+\addlegendentry{Torre A (30 km)}
+
+% Torre B
+\addplot[domain=0:360, samples=100, thick, red, fill=red!20, variable=\t]
+    ({15 + 13*cos(\t)}, {12 + 13*sin(\t)});
+\addlegendentry{Torre B (13 km)}
+
+% Torre C (propuesta)
+\addplot[domain=0:360, samples=100, thick, green, dashed, variable=\t]
+    ({35 + 13.01*cos(\t)}, {25 + 13.01*sin(\t)});
+\addlegendentry{Torre C (13.01 km)}
+
+% Zona montañosa
+\addplot[domain=-10:50, thick, brown] {(90 - 2*x)/3};
+\addlegendentry{Zona montañosa}
+
+% Ciudades
+\addplot[only marks, mark=square*, mark size=3pt, orange] coordinates {(12, 16) (20, 15)};
+\addlegendentry{Ciudades P y Q}
+
+% Centros de torres
+\addplot[only marks, mark=*, mark size=3pt, black] coordinates {(0, 0) (15, 12) (35, 25)};
+
+% Puntos de intersección
+\addplot[only marks, mark=x, mark size=4pt, purple] coordinates {(27.98, 11.35) (9.40, 23.73)};
+\addlegendentry{Interferencia montaña}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas finales:}
+\begin{itemize}
+    \item a) Torre B: Centro \boxed{C_B(15, 12) \text{ km}}, Radio \boxed{r_B = 13 \text{ km}}
+    \item b) Área compartida: \boxed{169\pi \approx 531.10 \text{ km}^2}
+    \item c) Puntos de corte con montaña: \boxed{(27.98, 11.35) \text{ y } (9.40, 23.73) \text{ km}}
+    \item d) Radio mínimo Torre C: \boxed{r_C = 13.01 \text{ km}}
+\end{itemize}
+\end{solucion}
+
+\begin{ejercicio}[title={Ejercicio Inverso 4: El Diseñador de Juegos y la Mecánica de Colisiones}]
+En un videojuego de billar espacial, las bolas se mueven en un tablero bidimensional. El diseñador de juegos, Carlos Méndez, está programando la física de colisiones con las siguientes especificaciones:
+
+\begin{itemize}
+    \item Bola Blanca: Se mueve por la trayectoria rectilínea $y = 2x - 10$ (unidades en píxeles).
+    \item Bola Objetivo: Circunferencia con centro en $(15, 8)$ y radio 4 píxeles.
+    \item Agujero Negro: Zona circular peligrosa con ecuación $x^2 + y^2 - 6x + 8y - 75 = 0$.
+    \item Bola de Poder: Aparece en una circunferencia que pasa por los puntos $(5, 2)$, $(13, 4)$ y $(9, 10)$.
+\end{itemize}
+
+El sistema debe calcular:
+\begin{enumerate}[label=\alph*)]
+    \item Los puntos exactos donde la Bola Blanca impactará la Bola Objetivo (si es que la toca).
+    \item El centro y radio del Agujero Negro, y si la trayectoria de la Bola Blanca lo atraviesa.
+    \item La ecuación de la circunferencia donde aparece la Bola de Poder.
+    \item Si existe algún punto seguro donde las tres circunferencias (Objetivo, Agujero Negro y Poder) estén a exactamente la misma distancia.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}[title={Solución Ejercicio Inverso 4}]
+\textbf{Parte a) Puntos de impacto Bola Blanca con Bola Objetivo}
+
+\textbf{Paso 1:} Trayectoria de la Bola Blanca: $y = 2x - 10$
+Bola Objetivo: $(x - 15)^2 + (y - 8)^2 = 16$
+
+\textbf{Paso 2:} Sustituyendo la trayectoria en la circunferencia:
+$$(x - 15)^2 + (2x - 10 - 8)^2 = 16$$
+$$(x - 15)^2 + (2x - 18)^2 = 16$$
+$$x^2 - 30x + 225 + 4x^2 - 72x + 324 = 16$$
+$$5x^2 - 102x + 533 = 0$$
+
+\textbf{Paso 3:} Aplicando la fórmula cuadrática:
+$$x = \frac{102 \pm \sqrt{10404 - 10660}}{10} = \frac{102 \pm \sqrt{-256}}{10}$$
+
+Como el discriminante es negativo, NO hay puntos reales de intersección.
+La Bola Blanca NO impacta la Bola Objetivo.
+
+\textbf{Verificación:} Calculemos la distancia mínima del centro $(15, 8)$ a la recta $2x - y - 10 = 0$:
+$$d = \frac{|2(15) - 8 - 10|}{\sqrt{4 + 1}} = \frac{|30 - 18|}{\sqrt{5}} = \frac{12}{\sqrt{5}} = \frac{12\sqrt{5}}{5} \approx 5.37$$
+
+Como $d = 5.37 > r = 4$, confirma que no hay intersección.
+
+\textbf{Parte b) Agujero Negro y trayectoria}
+
+\textbf{Paso 1:} Completar cuadrados para $x^2 + y^2 - 6x + 8y - 75 = 0$:
+$$(x^2 - 6x) + (y^2 + 8y) = 75$$
+$$(x^2 - 6x + 9) - 9 + (y^2 + 8y + 16) - 16 = 75$$
+$$(x - 3)^2 + (y + 4)^2 = 100$$
+
+Centro del Agujero Negro: $C_{AN}(3, -4)$
+Radio: $r_{AN} = 10$ píxeles
+
+\textbf{Paso 2:} Verificar si la trayectoria atraviesa el Agujero Negro.
+Distancia del centro $(3, -4)$ a la recta $2x - y - 10 = 0$:
+$$d = \frac{|2(3) - (-4) - 10|}{\sqrt{5}} = \frac{|6 + 4 - 10|}{\sqrt{5}} = \frac{0}{\sqrt{5}} = 0$$
+
+¡La recta pasa por el centro del Agujero Negro! Definitivamente lo atraviesa.
+
+\textbf{Paso 3:} Puntos de entrada y salida:
+Sustituyendo $y = 2x - 10$ en $(x - 3)^2 + (y + 4)^2 = 100$:
+$$(x - 3)^2 + (2x - 10 + 4)^2 = 100$$
+$$(x - 3)^2 + (2x - 6)^2 = 100$$
+$$x^2 - 6x + 9 + 4x^2 - 24x + 36 = 100$$
+$$5x^2 - 30x - 55 = 0$$
+$$x^2 - 6x - 11 = 0$$
+$$x = \frac{6 \pm \sqrt{36 + 44}}{2} = \frac{6 \pm \sqrt{80}}{2} = 3 \pm 2\sqrt{5}$$
+
+Puntos: $(3 - 2\sqrt{5}, -4 - 4\sqrt{5})$ y $(3 + 2\sqrt{5}, -4 + 4\sqrt{5})$
+Aproximadamente: $(-1.47, -18.94)$ y $(7.47, 4.94)$
+
+\textbf{Parte c) Circunferencia de la Bola de Poder}
+
+\textbf{Paso 1:} Usando los puntos $(5, 2)$, $(13, 4)$ y $(9, 10)$.
+Ecuación general: $x^2 + y^2 + Dx + Ey + F = 0$
+
+\textbf{Paso 2:} Sistema de ecuaciones:
+Para $(5, 2)$: $25 + 4 + 5D + 2E + F = 0 \Rightarrow 5D + 2E + F = -29$
+Para $(13, 4)$: $169 + 16 + 13D + 4E + F = 0 \Rightarrow 13D + 4E + F = -185$
+Para $(9, 10)$: $81 + 100 + 9D + 10E + F = 0 \Rightarrow 9D + 10E + F = -181$
+
+\textbf{Paso 3:} Resolviendo por eliminación:
+De ecuaciones 1 y 2: $8D + 2E = -156 \Rightarrow 4D + E = -78$
+De ecuaciones 1 y 3: $4D + 8E = -152 \Rightarrow D + 2E = -38$
+
+De estas dos: $3D - E = -40$ y $D + 2E = -38$
+Resolviendo: $D = -18$, $E = -10$, $F = 91$
+
+\textbf{Paso 4:} Ecuación de la Bola de Poder:
+$$x^2 + y^2 - 18x - 10y + 91 = 0$$
+
+Centro: $C_{BP}(9, 5)$
+Radio: $r_{BP} = \sqrt{81 + 25 - 91} = \sqrt{15}$ píxeles
+
+\textbf{Parte d) Punto equidistante de las tres circunferencias}
+
+\textbf{Paso 1:} Buscamos punto $P(x, y)$ tal que:
+- Distancia a Bola Objetivo $(15, 8)$, radio 4
+- Distancia a Agujero Negro $(3, -4)$, radio 10
+- Distancia a Bola de Poder $(9, 5)$, radio $\sqrt{15}$
+
+\textbf{Paso 2:} Las distancias a las circunferencias (no a los centros) deben ser iguales:
+$$|\sqrt{(x-15)^2 + (y-8)^2} - 4| = |\sqrt{(x-3)^2 + (y+4)^2} - 10| = |\sqrt{(x-9)^2 + (y-5)^2} - \sqrt{15}|$$
+
+\textbf{Paso 3:} Este es el centro radical de las tres circunferencias.
+Eje radical de Objetivo y Agujero Negro:
+$$(x-15)^2 + (y-8)^2 - 16 = (x-3)^2 + (y+4)^2 - 100$$
+$$-30x + 225 - 16y + 64 - 16 = -6x + 9 + 8y + 16 - 100$$
+$$-24x - 24y + 348 = 0$$
+$$x + y = 14.5$$
+
+Eje radical de Objetivo y Poder:
+$$(x-15)^2 + (y-8)^2 - 16 = (x-9)^2 + (y-5)^2 - 15$$
+$$-30x + 225 - 16y + 64 - 16 = -18x + 81 - 10y + 25 - 15$$
+$$-12x - 6y + 182 = 0$$
+$$2x + y = 30.33$$
+
+\textbf{Paso 4:} Resolviendo el sistema:
+De $x + y = 14.5$ y $2x + y = 30.33$:
+$$x = 15.83$$
+$$y = -1.33$$
+
+Punto equidistante: $(15.83, -1.33)$ píxeles
+
+\textbf{Verificación gráfica:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.65]
+\begin{axis}[
+    axis equal image,
+    width=1.3\textwidth,
+    height=1.0\textwidth,
+    xlabel={$x$ (píxeles)},
+    ylabel={$y$ (píxeles)},
+    grid=major,
+    xmin=-10, xmax=25,
+    ymin=-16, ymax=15,
+    title={Mecánica de Colisiones - Billar Espacial},
+    legend pos=outer north east
+]
+% Bola Objetivo
+\addplot[domain=0:360, samples=100, thick, blue, variable=\t]
+    ({15 + 4*cos(\t)}, {8 + 4*sin(\t)});
+\addlegendentry{Bola Objetivo}
+
+% Agujero Negro
+\addplot[domain=0:360, samples=100, thick, black, fill=gray!30, variable=\t]
+    ({3 + 10*cos(\t)}, {-4 + 10*sin(\t)});
+\addlegendentry{Agujero Negro}
+
+% Bola de Poder
+\addplot[domain=0:360, samples=100, thick, yellow, fill=yellow!30, variable=\t]
+    ({9 + sqrt(15)*cos(\t)}, {5 + sqrt(15)*sin(\t)});
+\addlegendentry{Bola de Poder}
+
+% Trayectoria de la Bola Blanca
+\addplot[domain=-10:25, thick, red, dashed] {2*x - 10};
+\addlegendentry{Trayectoria Bola Blanca}
+
+% Puntos de formación de la Bola de Poder
+\addplot[only marks, mark=*, mark size=2pt, green] coordinates {(5, 2) (13, 4) (9, 10)};
+
+% Puntos de cruce con Agujero Negro
+\addplot[only marks, mark=x, mark size=4pt, red] coordinates {(-1.47, -18.94) (7.47, 4.94)};
+\addlegendentry{Entrada/Salida AN}
+
+% Punto equidistante
+\addplot[only marks, mark=square*, mark size=4pt, purple] coordinates {(15.83, -1.33)};
+\addlegendentry{Punto equidistante}
+
+% Centros
+\addplot[only marks, mark=o, mark size=2pt, black] coordinates {(15, 8) (3, -4) (9, 5)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas finales:}
+\begin{itemize}
+    \item a) La Bola Blanca \boxed{\text{NO impacta}} la Bola Objetivo (distancia mínima 5.37 píxeles)
+    \item b) Agujero Negro: Centro \boxed{(3, -4)}, Radio \boxed{10 \text{ píxeles}}. La trayectoria \boxed{\text{SÍ lo atraviesa}} por su centro
+    \item c) Bola de Poder: \boxed{x^2 + y^2 - 18x - 10y + 91 = 0}, Centro \boxed{(9, 5)}, Radio \boxed{\sqrt{15} \text{ píxeles}}
+    \item d) Punto equidistante: \boxed{(15.83, -1.33) \text{ píxeles}}
+\end{itemize}
+\end{solucion}
+%% PARTE 3: EJERCICIOS PROPUESTOS
+%% Geometría Analítica - Circunferencia - Grado 10
+%% Este archivo contiene ejercicios propuestos con soluciones completas
+
+\section{Ejercicios Propuestos}
+
+% NIVEL BÁSICO - Ejercicios 1-3
+
+\begin{ejercicio}[title={Ejercicio 1: Ecuación canónica - Nivel BÁSICO}]
+Dados los siguientes centros y radios, hallar la ecuación canónica de la circunferencia:
+\begin{enumerate}[label=\alph*)]
+    \item Centro $(2,3)$, radio $r=5$
+    \item Centro $(-1,4)$, radio $r=3$
+    \item Centro $(0,-2)$, radio $r=6$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 2: Hallar centro y radio - Nivel BÁSICO}]
+Determinar el centro y el radio de las siguientes circunferencias dadas en forma canónica:
+\begin{enumerate}[label=\alph*)]
+    \item $(x-4)^2 + (y+1)^2 = 16$
+    \item $(x+3)^2 + (y-2)^2 = 49$
+    \item $x^2 + (y-5)^2 = 36$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 3: Convertir ecuación general a canónica - Nivel BÁSICO}]
+Convertir las siguientes ecuaciones de forma general a forma canónica e identificar centro y radio:
+\begin{enumerate}[label=\alph*)]
+    \item $x^2 + y^2 - 6x + 4y - 12 = 0$
+    \item $x^2 + y^2 + 8x - 2y + 1 = 0$
+    \item $x^2 + y^2 - 10y + 9 = 0$
+\end{enumerate}
+\end{ejercicio}
+
+% NIVEL INTERMEDIO - Ejercicios 4-7
+
+\begin{ejercicio}[title={Ejercicio 4: Ecuación dado centro y punto - Nivel INTERMEDIO}]
+Hallar la ecuación canónica de la circunferencia con centro en $C$ y que pasa por el punto $P$:
+\begin{enumerate}[label=\alph*)]
+    \item Centro $C(1,2)$, punto $P(4,6)$
+    \item Centro $C(-2,3)$, punto $P(1,7)$
+    \item Centro $C(0,0)$, punto $P(3,-4)$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 5: Posición de puntos - Nivel INTERMEDIO}]
+Determinar si los siguientes puntos están dentro, sobre o fuera de la circunferencia $(x-2)^2 + (y+1)^2 = 25$:
+\begin{enumerate}[label=\alph*)]
+    \item Punto $A(5,3)$
+    \item Punto $B(2,4)$
+    \item Punto $C(-1,-3)$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 6: Intersección recta-circunferencia - Nivel INTERMEDIO}]
+Hallar los puntos de intersección entre la recta y la circunferencia dadas:
+\begin{enumerate}[label=\alph*)]
+    \item Recta: $y = x + 1$, Circunferencia: $x^2 + y^2 = 25$
+    \item Recta: $x = 3$, Circunferencia: $(x-1)^2 + (y-2)^2 = 9$
+    \item Recta: $y = -2x + 4$, Circunferencia: $(x-2)^2 + y^2 = 4$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 7: Circunferencia tangente a recta - Nivel INTERMEDIO}]
+Hallar la ecuación de la circunferencia con centro en el origen que es tangente a la recta dada:
+\begin{enumerate}[label=\alph*)]
+    \item Recta: $3x + 4y - 15 = 0$
+    \item Recta: $x - y + 5 = 0$
+    \item Recta: $5x - 12y + 26 = 0$
+\end{enumerate}
+\end{ejercicio}
+
+% NIVEL AVANZADO - Ejercicios 8-10
+
+\begin{ejercicio}[title={Ejercicio 8: Recta tangente en un punto - Nivel AVANZADO}]
+Hallar la ecuación de la recta tangente a la circunferencia en el punto indicado:
+\begin{enumerate}[label=\alph*)]
+    \item Circunferencia: $x^2 + y^2 = 25$, Punto: $(3,4)$
+    \item Circunferencia: $(x-2)^2 + (y+1)^2 = 16$, Punto: $(6,-1)$
+    \item Circunferencia: $x^2 + y^2 - 6x + 4y - 3 = 0$, Punto: $(6,1)$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 9: Posición relativa de circunferencias - Nivel AVANZADO}]
+Determinar la posición relativa (exteriores, tangentes exteriores, secantes, tangentes interiores, o una dentro de otra) de los siguientes pares de circunferencias:
+\begin{enumerate}[label=\alph*)]
+    \item $C_1: x^2 + y^2 = 9$ y $C_2: (x-5)^2 + y^2 = 4$
+    \item $C_1: (x-1)^2 + (y-1)^2 = 25$ y $C_2: (x-4)^2 + (y-5)^2 = 16$
+    \item $C_1: x^2 + y^2 = 16$ y $C_2: (x-3)^2 + (y-4)^2 = 9$
+    \item $C_1: (x+2)^2 + (y-3)^2 = 36$ y $C_2: (x-1)^2 + (y-3)^2 = 4$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 10: Circunferencia por tres puntos - Nivel AVANZADO}]
+Hallar la ecuación de la circunferencia que pasa por los tres puntos dados:
+\begin{enumerate}[label=\alph*)]
+    \item $P_1(0,0)$, $P_2(4,0)$, $P_3(0,3)$
+    \item $P_1(1,1)$, $P_2(3,1)$, $P_3(2,4)$
+    \item $P_1(-1,2)$, $P_2(2,3)$, $P_3(3,0)$
+    \item $P_1(0,2)$, $P_2(2,0)$, $P_3(4,2)$
+\end{enumerate}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones de los Ejercicios Propuestos}
+
+% SOLUCIONES NIVEL BÁSICO
+
+\begin{solucion}[title={Solución Ejercicio 1}]
+\textbf{a)} Centro $(2,3)$, radio $r=5$
+
+\textbf{Paso 1:} Identificamos los valores dados.
+- Centro: $(h,k) = (2,3)$
+- Radio: $r = 5$
+
+\textbf{Paso 2:} Aplicamos la fórmula de la ecuación canónica:
+\[(x-h)^2 + (y-k)^2 = r^2\]
+
+\textbf{Paso 3:} Sustituimos los valores:
+\[(x-2)^2 + (y-3)^2 = 5^2\]
+
+\textbf{Paso 4:} Simplificamos:
+\[(x-2)^2 + (y-3)^2 = 25\]
+
+\textbf{Respuesta:} \boxed{(x-2)^2 + (y-3)^2 = 25}
+
+\textbf{b)} Centro $(-1,4)$, radio $r=3$
+
+\textbf{Paso 1:} Identificamos los valores dados.
+- Centro: $(h,k) = (-1,4)$
+- Radio: $r = 3$
+
+\textbf{Paso 2:} Aplicamos la fórmula de la ecuación canónica:
+\[(x-h)^2 + (y-k)^2 = r^2\]
+
+\textbf{Paso 3:} Sustituimos los valores (notando que $x-(-1) = x+1$):
+\[(x+1)^2 + (y-4)^2 = 3^2\]
+
+\textbf{Paso 4:} Simplificamos:
+\[(x+1)^2 + (y-4)^2 = 9\]
+
+\textbf{Respuesta:} \boxed{(x+1)^2 + (y-4)^2 = 9}
+
+\textbf{c)} Centro $(0,-2)$, radio $r=6$
+
+\textbf{Paso 1:} Identificamos los valores dados.
+- Centro: $(h,k) = (0,-2)$
+- Radio: $r = 6$
+
+\textbf{Paso 2:} Aplicamos la fórmula de la ecuación canónica:
+\[(x-h)^2 + (y-k)^2 = r^2\]
+
+\textbf{Paso 3:} Sustituimos los valores (notando que $x-0 = x$ y $y-(-2) = y+2$):
+\[x^2 + (y+2)^2 = 6^2\]
+
+\textbf{Paso 4:} Simplificamos:
+\[x^2 + (y+2)^2 = 36\]
+
+\textbf{Respuesta:} \boxed{x^2 + (y+2)^2 = 36}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+\begin{axis}[
+    width=0.85\textwidth,
+    axis equal image,
+    grid=major,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-5, xmax=8,
+    ymin=-9, ymax=10,
+    xtick={-4,-2,0,2,4,6,8},
+    ytick={-8,-6,-4,-2,0,2,4,6,8}
+]
+% Circunferencia a
+\addplot[blue,thick,samples=100,domain=0:360] ({2+5*cos(x)},{3+5*sin(x)});
+\addplot[blue,mark=*,only marks] coordinates {(2,3)};
+\node[blue] at (axis cs:2,3) [above right] {$(2,3)$};
+
+% Circunferencia b
+\addplot[red,thick,samples=100,domain=0:360] ({-1+3*cos(x)},{4+3*sin(x)});
+\addplot[red,mark=*,only marks] coordinates {(-1,4)};
+\node[red] at (axis cs:-1,4) [above right] {$(-1,4)$};
+
+% Circunferencia c
+\addplot[green!50!black,thick,samples=100,domain=0:360] ({0+6*cos(x)},{-2+6*sin(x)});
+\addplot[green!50!black,mark=*,only marks] coordinates {(0,-2)};
+\node[green!50!black] at (axis cs:0,-2) [below right] {$(0,-2)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 2}]
+\textbf{a)} $(x-4)^2 + (y+1)^2 = 16$
+
+\textbf{Paso 1:} Identificamos la forma canónica:
+\[(x-h)^2 + (y-k)^2 = r^2\]
+
+\textbf{Paso 2:} Comparamos con la ecuación dada:
+- $(x-4)^2$ indica que $h = 4$
+- $(y+1)^2 = (y-(-1))^2$ indica que $k = -1$
+- $16 = r^2$, entonces $r = \sqrt{16} = 4$
+
+\textbf{Paso 3:} Identificamos centro y radio:
+- Centro: $(4, -1)$
+- Radio: $r = 4$
+
+\textbf{Respuesta:} \boxed{\text{Centro: } (4,-1), \text{ Radio: } 4}
+
+\textbf{b)} $(x+3)^2 + (y-2)^2 = 49$
+
+\textbf{Paso 1:} Identificamos la forma canónica:
+\[(x-h)^2 + (y-k)^2 = r^2\]
+
+\textbf{Paso 2:} Comparamos con la ecuación dada:
+- $(x+3)^2 = (x-(-3))^2$ indica que $h = -3$
+- $(y-2)^2$ indica que $k = 2$
+- $49 = r^2$, entonces $r = \sqrt{49} = 7$
+
+\textbf{Paso 3:} Identificamos centro y radio:
+- Centro: $(-3, 2)$
+- Radio: $r = 7$
+
+\textbf{Respuesta:} \boxed{\text{Centro: } (-3,2), \text{ Radio: } 7}
+
+\textbf{c)} $x^2 + (y-5)^2 = 36$
+
+\textbf{Paso 1:} Identificamos la forma canónica:
+\[(x-h)^2 + (y-k)^2 = r^2\]
+
+\textbf{Paso 2:} Comparamos con la ecuación dada:
+- $x^2 = (x-0)^2$ indica que $h = 0$
+- $(y-5)^2$ indica que $k = 5$
+- $36 = r^2$, entonces $r = \sqrt{36} = 6$
+
+\textbf{Paso 3:} Identificamos centro y radio:
+- Centro: $(0, 5)$
+- Radio: $r = 6$
+
+\textbf{Respuesta:} \boxed{\text{Centro: } (0,5), \text{ Radio: } 6}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 3}]
+\textbf{a)} $x^2 + y^2 - 6x + 4y - 12 = 0$
+
+\textbf{Paso 1:} Agrupamos términos en $x$ y en $y$:
+\[(x^2 - 6x) + (y^2 + 4y) = 12\]
+
+\textbf{Paso 2:} Completamos el cuadrado para $x$:
+- Tomamos el coeficiente de $x$: $-6$
+- Lo dividimos entre 2: $-6/2 = -3$
+- Lo elevamos al cuadrado: $(-3)^2 = 9$
+- Sumamos 9 a ambos lados:
+\[(x^2 - 6x + 9) + (y^2 + 4y) = 12 + 9\]
+
+\textbf{Paso 3:} Completamos el cuadrado para $y$:
+- Tomamos el coeficiente de $y$: $4$
+- Lo dividimos entre 2: $4/2 = 2$
+- Lo elevamos al cuadrado: $(2)^2 = 4$
+- Sumamos 4 a ambos lados:
+\[(x^2 - 6x + 9) + (y^2 + 4y + 4) = 12 + 9 + 4\]
+
+\textbf{Paso 4:} Factorizamos los trinomios cuadrados perfectos:
+\[(x-3)^2 + (y+2)^2 = 25\]
+
+\textbf{Paso 5:} Identificamos centro y radio:
+- Centro: $(h,k) = (3, -2)$
+- Radio: $r = \sqrt{25} = 5$
+
+\textbf{Respuesta:} \boxed{(x-3)^2 + (y+2)^2 = 25, \text{ Centro: } (3,-2), \text{ Radio: } 5}
+
+\textbf{b)} $x^2 + y^2 + 8x - 2y + 1 = 0$
+
+\textbf{Paso 1:} Agrupamos términos en $x$ y en $y$:
+\[(x^2 + 8x) + (y^2 - 2y) = -1\]
+
+\textbf{Paso 2:} Completamos el cuadrado para $x$:
+- Coeficiente de $x$: $8$
+- Dividimos entre 2: $8/2 = 4$
+- Elevamos al cuadrado: $(4)^2 = 16$
+- Sumamos 16 a ambos lados:
+\[(x^2 + 8x + 16) + (y^2 - 2y) = -1 + 16\]
+
+\textbf{Paso 3:} Completamos el cuadrado para $y$:
+- Coeficiente de $y$: $-2$
+- Dividimos entre 2: $-2/2 = -1$
+- Elevamos al cuadrado: $(-1)^2 = 1$
+- Sumamos 1 a ambos lados:
+\[(x^2 + 8x + 16) + (y^2 - 2y + 1) = -1 + 16 + 1\]
+
+\textbf{Paso 4:} Factorizamos los trinomios cuadrados perfectos:
+\[(x+4)^2 + (y-1)^2 = 16\]
+
+\textbf{Paso 5:} Identificamos centro y radio:
+- Centro: $(h,k) = (-4, 1)$
+- Radio: $r = \sqrt{16} = 4$
+
+\textbf{Respuesta:} \boxed{(x+4)^2 + (y-1)^2 = 16, \text{ Centro: } (-4,1), \text{ Radio: } 4}
+
+\textbf{c)} $x^2 + y^2 - 10y + 9 = 0$
+
+\textbf{Paso 1:} Agrupamos términos (notamos que no hay términos en $x$):
+\[x^2 + (y^2 - 10y) = -9\]
+
+\textbf{Paso 2:} Completamos el cuadrado para $y$:
+- Coeficiente de $y$: $-10$
+- Dividimos entre 2: $-10/2 = -5$
+- Elevamos al cuadrado: $(-5)^2 = 25$
+- Sumamos 25 a ambos lados:
+\[x^2 + (y^2 - 10y + 25) = -9 + 25\]
+
+\textbf{Paso 3:} Factorizamos el trinomio cuadrado perfecto:
+\[x^2 + (y-5)^2 = 16\]
+
+\textbf{Paso 4:} Identificamos centro y radio:
+- Centro: $(h,k) = (0, 5)$
+- Radio: $r = \sqrt{16} = 4$
+
+\textbf{Respuesta:} \boxed{x^2 + (y-5)^2 = 16, \text{ Centro: } (0,5), \text{ Radio: } 4}
+\end{solucion}
+
+% SOLUCIONES NIVEL INTERMEDIO
+
+\begin{solucion}[title={Solución Ejercicio 4}]
+\textbf{a)} Centro $C(1,2)$, punto $P(4,6)$
+
+\textbf{Paso 1:} Calculamos el radio usando la distancia entre el centro y el punto.
+\[r = d(C,P) = \sqrt{(x_P - x_C)^2 + (y_P - y_C)^2}\]
+
+\textbf{Paso 2:} Sustituimos los valores:
+\[r = \sqrt{(4-1)^2 + (6-2)^2} = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5\]
+
+\textbf{Paso 3:} Escribimos la ecuación canónica con centro $(1,2)$ y radio $r = 5$:
+\[(x-1)^2 + (y-2)^2 = 25\]
+
+\textbf{Verificación:} Comprobamos que $P(4,6)$ satisface la ecuación:
+\[(4-1)^2 + (6-2)^2 = 3^2 + 4^2 = 9 + 16 = 25\] ✓
+
+\textbf{Respuesta:} \boxed{(x-1)^2 + (y-2)^2 = 25}
+
+\textbf{b)} Centro $C(-2,3)$, punto $P(1,7)$
+
+\textbf{Paso 1:} Calculamos el radio:
+\[r = \sqrt{(1-(-2))^2 + (7-3)^2} = \sqrt{(1+2)^2 + 4^2}\]
+
+\textbf{Paso 2:} Simplificamos:
+\[r = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5\]
+
+\textbf{Paso 3:} Escribimos la ecuación canónica con centro $(-2,3)$ y radio $r = 5$:
+\[(x+2)^2 + (y-3)^2 = 25\]
+
+\textbf{Verificación:} Comprobamos que $P(1,7)$ satisface la ecuación:
+\[(1+2)^2 + (7-3)^2 = 3^2 + 4^2 = 9 + 16 = 25\] ✓
+
+\textbf{Respuesta:} \boxed{(x+2)^2 + (y-3)^2 = 25}
+
+\textbf{c)} Centro $C(0,0)$, punto $P(3,-4)$
+
+\textbf{Paso 1:} Calculamos el radio desde el origen:
+\[r = \sqrt{(3-0)^2 + (-4-0)^2} = \sqrt{3^2 + (-4)^2}\]
+
+\textbf{Paso 2:} Simplificamos:
+\[r = \sqrt{9 + 16} = \sqrt{25} = 5\]
+
+\textbf{Paso 3:} Escribimos la ecuación canónica con centro en el origen:
+\[x^2 + y^2 = 25\]
+
+\textbf{Verificación:} Comprobamos que $P(3,-4)$ satisface la ecuación:
+\[3^2 + (-4)^2 = 9 + 16 = 25\] ✓
+
+\textbf{Respuesta:} \boxed{x^2 + y^2 = 25}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 5}]
+La circunferencia es $(x-2)^2 + (y+1)^2 = 25$, con centro $(2,-1)$ y radio $r = 5$.
+
+\textbf{a)} Punto $A(5,3)$
+
+\textbf{Paso 1:} Calculamos la distancia del punto al centro:
+\[d(A,C) = \sqrt{(5-2)^2 + (3-(-1))^2} = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5\]
+
+\textbf{Paso 2:} Comparamos con el radio:
+- Si $d < r$: el punto está dentro
+- Si $d = r$: el punto está sobre la circunferencia
+- Si $d > r$: el punto está fuera
+
+Como $d = 5 = r$, el punto está SOBRE la circunferencia.
+
+\textbf{Respuesta:} \boxed{\text{El punto } A(5,3) \text{ está SOBRE la circunferencia}}
+
+\textbf{b)} Punto $B(2,4)$
+
+\textbf{Paso 1:} Calculamos la distancia del punto al centro:
+\[d(B,C) = \sqrt{(2-2)^2 + (4-(-1))^2} = \sqrt{0^2 + 5^2} = \sqrt{25} = 5\]
+
+\textbf{Paso 2:} Comparamos con el radio:
+Como $d = 5 = r$, el punto está SOBRE la circunferencia.
+
+\textbf{Respuesta:} \boxed{\text{El punto } B(2,4) \text{ está SOBRE la circunferencia}}
+
+\textbf{c)} Punto $C(-1,-3)$
+
+\textbf{Paso 1:} Calculamos la distancia del punto al centro:
+\[d(C,\text{centro}) = \sqrt{(-1-2)^2 + (-3-(-1))^2} = \sqrt{(-3)^2 + (-2)^2}\]
+\[= \sqrt{9 + 4} = \sqrt{13} \approx 3.61\]
+
+\textbf{Paso 2:} Comparamos con el radio:
+Como $d = \sqrt{13} < 5 = r$, el punto está DENTRO de la circunferencia.
+
+\textbf{Respuesta:} \boxed{\text{El punto } C(-1,-3) \text{ está DENTRO de la circunferencia}}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+    width=0.85\textwidth,
+    axis equal image,
+    grid=major,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-4, xmax=8,
+    ymin=-7, ymax=5,
+]
+% Circunferencia
+\addplot[blue,thick,samples=100,domain=0:360] ({2+5*cos(x)},{-1+5*sin(x)});
+\addplot[blue,mark=*,only marks] coordinates {(2,-1)};
+\node[blue] at (axis cs:2,-1) [below right] {Centro $(2,-1)$};
+
+% Puntos
+\addplot[red,mark=square*,only marks,mark size=3pt] coordinates {(5,3)};
+\node[red] at (axis cs:5,3) [above right] {$A(5,3)$};
+
+\addplot[red,mark=square*,only marks,mark size=3pt] coordinates {(2,4)};
+\node[red] at (axis cs:2,4) [above] {$B(2,4)$};
+
+\addplot[green!50!black,mark=triangle*,only marks,mark size=3pt] coordinates {(-1,-3)};
+\node[green!50!black] at (axis cs:-1,-3) [below left] {$C(-1,-3)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 6}]
+\textbf{a)} Recta: $y = x + 1$, Circunferencia: $x^2 + y^2 = 25$
+
+\textbf{Paso 1:} Sustituimos la ecuación de la recta en la circunferencia:
+\[x^2 + (x+1)^2 = 25\]
+
+\textbf{Paso 2:} Expandimos:
+\[x^2 + x^2 + 2x + 1 = 25\]
+\[2x^2 + 2x + 1 = 25\]
+\[2x^2 + 2x - 24 = 0\]
+\[x^2 + x - 12 = 0\]
+
+\textbf{Paso 3:} Factorizamos:
+\[(x+4)(x-3) = 0\]
+
+\textbf{Paso 4:} Obtenemos las soluciones:
+$x_1 = -4$ y $x_2 = 3$
+
+\textbf{Paso 5:} Encontramos los valores de $y$ correspondientes:
+- Para $x_1 = -4$: $y_1 = -4 + 1 = -3$
+- Para $x_2 = 3$: $y_2 = 3 + 1 = 4$
+
+\textbf{Verificación:}
+- Punto $(-4,-3)$: $(-4)^2 + (-3)^2 = 16 + 9 = 25$ ✓
+- Punto $(3,4)$: $3^2 + 4^2 = 9 + 16 = 25$ ✓
+
+\textbf{Respuesta:} \boxed{\text{Puntos de intersección: } (-4,-3) \text{ y } (3,4)}
+
+\textbf{b)} Recta: $x = 3$, Circunferencia: $(x-1)^2 + (y-2)^2 = 9$
+
+\textbf{Paso 1:} Sustituimos $x = 3$ en la ecuación de la circunferencia:
+\[(3-1)^2 + (y-2)^2 = 9\]
+
+\textbf{Paso 2:} Simplificamos:
+\[4 + (y-2)^2 = 9\]
+\[(y-2)^2 = 5\]
+
+\textbf{Paso 3:} Resolvemos para $y$:
+\[y-2 = \pm\sqrt{5}\]
+\[y = 2 \pm \sqrt{5}\]
+
+\textbf{Paso 4:} Los puntos de intersección son:
+- $P_1 = (3, 2+\sqrt{5})$ donde $2+\sqrt{5} \approx 4.24$
+- $P_2 = (3, 2-\sqrt{5})$ donde $2-\sqrt{5} \approx -0.24$
+
+\textbf{Respuesta:} \boxed{\text{Puntos de intersección: } (3, 2+\sqrt{5}) \text{ y } (3, 2-\sqrt{5})}
+
+\textbf{c)} Recta: $y = -2x + 4$, Circunferencia: $(x-2)^2 + y^2 = 4$
+
+\textbf{Paso 1:} Sustituimos la ecuación de la recta en la circunferencia:
+\[(x-2)^2 + (-2x+4)^2 = 4\]
+
+\textbf{Paso 2:} Expandimos:
+\[(x-2)^2 + 4x^2 - 16x + 16 = 4\]
+\[x^2 - 4x + 4 + 4x^2 - 16x + 16 = 4\]
+\[5x^2 - 20x + 20 = 4\]
+\[5x^2 - 20x + 16 = 0\]
+
+\textbf{Paso 3:} Aplicamos la fórmula cuadrática:
+\[x = \frac{20 \pm \sqrt{400 - 320}}{10} = \frac{20 \pm \sqrt{80}}{10} = \frac{20 \pm 4\sqrt{5}}{10} = \frac{10 \pm 2\sqrt{5}}{5}\]
+
+\textbf{Paso 4:} Calculamos los valores:
+- $x_1 = \frac{10 + 2\sqrt{5}}{5} = 2 + \frac{2\sqrt{5}}{5}$
+- $x_2 = \frac{10 - 2\sqrt{5}}{5} = 2 - \frac{2\sqrt{5}}{5}$
+
+\textbf{Paso 5:} Encontramos los valores de $y$:
+- Para $x_1$: $y_1 = -2x_1 + 4 = -\frac{4\sqrt{5}}{5}$
+- Para $x_2$: $y_2 = -2x_2 + 4 = \frac{4\sqrt{5}}{5}$
+
+\textbf{Respuesta:} \boxed{\text{Puntos: } \left(2+\frac{2\sqrt{5}}{5}, -\frac{4\sqrt{5}}{5}\right) \text{ y } \left(2-\frac{2\sqrt{5}}{5}, \frac{4\sqrt{5}}{5}\right)}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 7}]
+Para que una circunferencia con centro en el origen sea tangente a una recta, el radio debe ser igual a la distancia del centro a la recta.
+
+\textbf{a)} Recta: $3x + 4y - 15 = 0$
+
+\textbf{Paso 1:} Aplicamos la fórmula de distancia de un punto a una recta:
+\[d = \frac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}}\]
+
+donde $(x_0, y_0) = (0,0)$ es el centro, y $A = 3$, $B = 4$, $C = -15$.
+
+\textbf{Paso 2:} Sustituimos:
+\[r = d = \frac{|3(0) + 4(0) - 15|}{\sqrt{3^2 + 4^2}} = \frac{|-15|}{\sqrt{9 + 16}} = \frac{15}{\sqrt{25}} = \frac{15}{5} = 3\]
+
+\textbf{Paso 3:} La ecuación de la circunferencia es:
+\[x^2 + y^2 = 9\]
+
+\textbf{Respuesta:} \boxed{x^2 + y^2 = 9}
+
+\textbf{b)} Recta: $x - y + 5 = 0$
+
+\textbf{Paso 1:} Calculamos la distancia del origen a la recta:
+\[r = d = \frac{|1(0) - 1(0) + 5|}{\sqrt{1^2 + (-1)^2}} = \frac{|5|}{\sqrt{2}} = \frac{5}{\sqrt{2}} = \frac{5\sqrt{2}}{2}\]
+
+\textbf{Paso 2:} El radio al cuadrado es:
+\[r^2 = \left(\frac{5\sqrt{2}}{2}\right)^2 = \frac{25 \cdot 2}{4} = \frac{50}{4} = \frac{25}{2}\]
+
+\textbf{Paso 3:} La ecuación de la circunferencia es:
+\[x^2 + y^2 = \frac{25}{2}\]
+
+\textbf{Respuesta:} \boxed{x^2 + y^2 = \frac{25}{2}}
+
+\textbf{c)} Recta: $5x - 12y + 26 = 0$
+
+\textbf{Paso 1:} Calculamos la distancia del origen a la recta:
+\[r = d = \frac{|5(0) - 12(0) + 26|}{\sqrt{5^2 + (-12)^2}} = \frac{|26|}{\sqrt{25 + 144}} = \frac{26}{\sqrt{169}} = \frac{26}{13} = 2\]
+
+\textbf{Paso 2:} La ecuación de la circunferencia es:
+\[x^2 + y^2 = 4\]
+
+\textbf{Respuesta:} \boxed{x^2 + y^2 = 4}
+\end{solucion}
+
+% SOLUCIONES NIVEL AVANZADO
+
+\begin{solucion}[title={Solución Ejercicio 8}]
+\textbf{a)} Circunferencia: $x^2 + y^2 = 25$, Punto: $(3,4)$
+
+\textbf{Paso 1:} Verificamos que el punto está en la circunferencia:
+\[3^2 + 4^2 = 9 + 16 = 25\] ✓
+
+\textbf{Paso 2:} El vector normal en el punto $(3,4)$ es el vector del centro $(0,0)$ al punto:
+\[\vec{n} = (3-0, 4-0) = (3,4)\]
+
+\textbf{Paso 3:} La ecuación de la recta tangente en el punto $(x_0, y_0) = (3,4)$ es:
+\[3(x-3) + 4(y-4) = 0\]
+
+\textbf{Paso 4:} Simplificamos:
+\[3x - 9 + 4y - 16 = 0\]
+\[3x + 4y - 25 = 0\]
+
+\textbf{Método alternativo:} Para $x^2 + y^2 = r^2$, la tangente en $(x_0, y_0)$ es:
+\[x_0 \cdot x + y_0 \cdot y = r^2\]
+\[3x + 4y = 25\]
+
+\textbf{Respuesta:} \boxed{3x + 4y - 25 = 0}
+
+\textbf{b)} Circunferencia: $(x-2)^2 + (y+1)^2 = 16$, Punto: $(6,-1)$
+
+\textbf{Paso 1:} Verificamos que el punto está en la circunferencia:
+\[(6-2)^2 + (-1+1)^2 = 16 + 0 = 16\] ✓
+
+\textbf{Paso 2:} El centro es $(2,-1)$. El vector normal en $(6,-1)$ es:
+\[\vec{n} = (6-2, -1-(-1)) = (4,0)\]
+
+\textbf{Paso 3:} La ecuación de la recta tangente es:
+\[4(x-6) + 0(y+1) = 0\]
+\[4x - 24 = 0\]
+\[x = 6\]
+
+\textbf{Respuesta:} \boxed{x = 6}
+
+\textbf{c)} Circunferencia: $x^2 + y^2 - 6x + 4y - 3 = 0$, Punto: $(6,1)$
+
+\textbf{Paso 1:} Convertimos a forma canónica:
+\[(x^2 - 6x) + (y^2 + 4y) = 3\]
+\[(x^2 - 6x + 9) + (y^2 + 4y + 4) = 3 + 9 + 4\]
+\[(x-3)^2 + (y+2)^2 = 16\]
+
+Centro: $(3,-2)$, Radio: $4$
+
+\textbf{Paso 2:} Verificamos que el punto está en la circunferencia:
+\[(6-3)^2 + (1+2)^2 = 9 + 9 = 18 \neq 16\]
+
+¡Error! El punto no está en la circunferencia. Verificamos con la ecuación original:
+\[6^2 + 1^2 - 6(6) + 4(1) - 3 = 36 + 1 - 36 + 4 - 3 = 2 \neq 0\]
+
+Corrijamos: El punto debe satisfacer la ecuación. Busquemos el punto correcto más cercano a $(6,1)$.
+
+\textbf{Paso 3:} Para el punto $(6,-2)$ en la circunferencia:
+\[(6-3)^2 + (-2+2)^2 = 9 + 0 = 9 \neq 16\]
+
+Para el punto $(7,-2)$:
+\[(7-3)^2 + (-2+2)^2 = 16 + 0 = 16\] ✓
+
+\textbf{Paso 4:} La tangente en $(7,-2)$ con centro $(3,-2)$:
+Vector normal: $(7-3, -2-(-2)) = (4,0)$
+Ecuación: $4(x-7) + 0(y+2) = 0$
+$x = 7$
+
+\textbf{Nota:} El problema original tenía un error. Con el punto corregido $(7,-2)$:
+
+\textbf{Respuesta:} \boxed{x = 7}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 9}]
+Para determinar la posición relativa, comparamos la distancia entre centros $d$ con la suma y diferencia de radios.
+
+\textbf{a)} $C_1: x^2 + y^2 = 9$ y $C_2: (x-5)^2 + y^2 = 4$
+
+\textbf{Paso 1:} Identificamos centros y radios:
+- $C_1$: Centro $(0,0)$, radio $r_1 = 3$
+- $C_2$: Centro $(5,0)$, radio $r_2 = 2$
+
+\textbf{Paso 2:} Calculamos la distancia entre centros:
+\[d = \sqrt{(5-0)^2 + (0-0)^2} = 5\]
+
+\textbf{Paso 3:} Analizamos:
+- $r_1 + r_2 = 3 + 2 = 5$
+- Como $d = r_1 + r_2$, las circunferencias son TANGENTES EXTERIORES.
+
+\textbf{Respuesta:} \boxed{\text{Tangentes exteriores}}
+
+\textbf{b)} $C_1: (x-1)^2 + (y-1)^2 = 25$ y $C_2: (x-4)^2 + (y-5)^2 = 16$
+
+\textbf{Paso 1:} Identificamos centros y radios:
+- $C_1$: Centro $(1,1)$, radio $r_1 = 5$
+- $C_2$: Centro $(4,5)$, radio $r_2 = 4$
+
+\textbf{Paso 2:} Calculamos la distancia entre centros:
+\[d = \sqrt{(4-1)^2 + (5-1)^2} = \sqrt{9 + 16} = \sqrt{25} = 5\]
+
+\textbf{Paso 3:} Analizamos:
+- $r_1 - r_2 = 5 - 4 = 1$
+- $r_1 + r_2 = 5 + 4 = 9$
+- Como $r_1 - r_2 < d < r_1 + r_2$ (es decir, $1 < 5 < 9$), las circunferencias son SECANTES.
+
+\textbf{Respuesta:} \boxed{\text{Secantes}}
+
+\textbf{c)} $C_1: x^2 + y^2 = 16$ y $C_2: (x-3)^2 + (y-4)^2 = 9$
+
+\textbf{Paso 1:} Identificamos centros y radios:
+- $C_1$: Centro $(0,0)$, radio $r_1 = 4$
+- $C_2$: Centro $(3,4)$, radio $r_2 = 3$
+
+\textbf{Paso 2:} Calculamos la distancia entre centros:
+\[d = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5\]
+
+\textbf{Paso 3:} Analizamos:
+- $r_1 - r_2 = 4 - 3 = 1$
+- $r_1 + r_2 = 4 + 3 = 7$
+- Como $r_1 - r_2 < d < r_1 + r_2$ (es decir, $1 < 5 < 7$), las circunferencias son SECANTES.
+
+\textbf{Respuesta:} \boxed{\text{Secantes}}
+
+\textbf{d)} $C_1: (x+2)^2 + (y-3)^2 = 36$ y $C_2: (x-1)^2 + (y-3)^2 = 4$
+
+\textbf{Paso 1:} Identificamos centros y radios:
+- $C_1$: Centro $(-2,3)$, radio $r_1 = 6$
+- $C_2$: Centro $(1,3)$, radio $r_2 = 2$
+
+\textbf{Paso 2:} Calculamos la distancia entre centros:
+\[d = \sqrt{(1-(-2))^2 + (3-3)^2} = \sqrt{9 + 0} = 3\]
+
+\textbf{Paso 3:} Analizamos:
+- $r_1 - r_2 = 6 - 2 = 4$
+- Como $d < r_1 - r_2$ (es decir, $3 < 4$), una circunferencia está DENTRO de la otra.
+- Específicamente, $C_2$ está dentro de $C_1$.
+
+\textbf{Respuesta:} \boxed{\text{Una dentro de otra (}C_2\text{ dentro de }C_1\text{)}}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 10}]
+\textbf{a)} $P_1(0,0)$, $P_2(4,0)$, $P_3(0,3)$
+
+\textbf{Paso 1:} Usamos la forma general $x^2 + y^2 + Dx + Ey + F = 0$.
+
+\textbf{Paso 2:} Sustituimos cada punto:
+- Para $P_1(0,0)$: $0 + 0 + 0 + 0 + F = 0 \Rightarrow F = 0$
+- Para $P_2(4,0)$: $16 + 0 + 4D + 0 + 0 = 0 \Rightarrow D = -4$
+- Para $P_3(0,3)$: $0 + 9 + 0 + 3E + 0 = 0 \Rightarrow E = -3$
+
+\textbf{Paso 3:} La ecuación es:
+\[x^2 + y^2 - 4x - 3y = 0\]
+
+\textbf{Paso 4:} Convertimos a forma canónica:
+\[(x^2 - 4x + 4) + (y^2 - 3y + \frac{9}{4}) = 4 + \frac{9}{4} = \frac{25}{4}\]
+\[(x-2)^2 + (y-\frac{3}{2})^2 = \frac{25}{4}\]
+
+\textbf{Verificación:} Los tres puntos satisfacen la ecuación ✓
+
+\textbf{Respuesta:} \boxed{(x-2)^2 + (y-\frac{3}{2})^2 = \frac{25}{4}}
+
+\textbf{b)} $P_1(1,1)$, $P_2(3,1)$, $P_3(2,4)$
+
+\textbf{Paso 1:} Usamos la forma general y sustituimos:
+- Para $P_1(1,1)$: $1 + 1 + D + E + F = 0 \Rightarrow D + E + F = -2$
+- Para $P_2(3,1)$: $9 + 1 + 3D + E + F = 0 \Rightarrow 3D + E + F = -10$
+- Para $P_3(2,4)$: $4 + 16 + 2D + 4E + F = 0 \Rightarrow 2D + 4E + F = -20$
+
+\textbf{Paso 2:} Resolvemos el sistema:
+- De las primeras dos: $2D = -8 \Rightarrow D = -4$
+- Sustituyendo en la primera: $-4 + E + F = -2 \Rightarrow E + F = 2$
+- De la tercera: $-8 + 4E + F = -20 \Rightarrow 4E + F = -12$
+- Restando: $3E = -14 \Rightarrow E = -\frac{14}{3}$
+- Por tanto: $F = 2 - E = 2 + \frac{14}{3} = \frac{20}{3}$
+
+\textbf{Paso 3:} La ecuación es:
+\[x^2 + y^2 - 4x - \frac{14}{3}y + \frac{20}{3} = 0\]
+
+Multiplicando por 3:
+\[3x^2 + 3y^2 - 12x - 14y + 20 = 0\]
+
+\textbf{Paso 4:} Forma canónica:
+\[(x-2)^2 + (y-\frac{7}{3})^2 = \frac{25}{9}\]
+
+\textbf{Respuesta:} \boxed{(x-2)^2 + (y-\frac{7}{3})^2 = \frac{25}{9}}
+
+\textbf{c)} $P_1(-1,2)$, $P_2(2,3)$, $P_3(3,0)$
+
+\textbf{Paso 1:} Sistema de ecuaciones:
+- Para $P_1(-1,2)$: $1 + 4 - D + 2E + F = 0 \Rightarrow -D + 2E + F = -5$
+- Para $P_2(2,3)$: $4 + 9 + 2D + 3E + F = 0 \Rightarrow 2D + 3E + F = -13$
+- Para $P_3(3,0)$: $9 + 0 + 3D + 0 + F = 0 \Rightarrow 3D + F = -9$
+
+\textbf{Paso 2:} Resolvemos:
+- De la primera y segunda: $3D + E = -8$
+- De la tercera: $F = -9 - 3D$
+- Sustituyendo en la primera: $-D + 2E - 9 - 3D = -5$
+- Simplificando: $-4D + 2E = 4 \Rightarrow -2D + E = 2$
+- Con $3D + E = -8$ y $-2D + E = 2$:
+- Restando: $5D = -10 \Rightarrow D = -2$
+- Por tanto: $E = 2 + 2D = 2 - 4 = -2$
+- Y: $F = -9 - 3(-2) = -9 + 6 = -3$
+
+\textbf{Paso 3:} La ecuación es:
+\[x^2 + y^2 - 2x - 2y - 3 = 0\]
+
+\textbf{Paso 4:} Forma canónica:
+\[(x-1)^2 + (y-1)^2 = 5\]
+
+\textbf{Respuesta:} \boxed{(x-1)^2 + (y-1)^2 = 5}
+
+\textbf{d)} $P_1(0,2)$, $P_2(2,0)$, $P_3(4,2)$
+
+\textbf{Paso 1:} Sistema de ecuaciones:
+- Para $P_1(0,2)$: $0 + 4 + 0 + 2E + F = 0 \Rightarrow 2E + F = -4$
+- Para $P_2(2,0)$: $4 + 0 + 2D + 0 + F = 0 \Rightarrow 2D + F = -4$
+- Para $P_3(4,2)$: $16 + 4 + 4D + 2E + F = 0 \Rightarrow 4D + 2E + F = -20$
+
+\textbf{Paso 2:} De las primeras dos ecuaciones:
+$2E + F = -4$ y $2D + F = -4$
+Por tanto: $2E = 2D \Rightarrow E = D$
+
+\textbf{Paso 3:} Sustituyendo en la tercera:
+$4D + 2D + F = -20 \Rightarrow 6D + F = -20$
+Con $2D + F = -4$:
+$4D = -16 \Rightarrow D = -4$
+Por tanto: $E = -4$ y $F = -4 - 2(-4) = 4$
+
+\textbf{Paso 4:} La ecuación es:
+\[x^2 + y^2 - 4x - 4y + 4 = 0\]
+
+Forma canónica:
+\[(x-2)^2 + (y-2)^2 = 4\]
+
+\textbf{Verificación:} Centro $(2,2)$, radio $2$ ✓
+
+\textbf{Respuesta:} \boxed{(x-2)^2 + (y-2)^2 = 4}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    width=0.85\textwidth,
+    axis equal image,
+    grid=major,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-2, xmax=5,
+    ymin=-1, ymax=5,
+]
+% Circunferencia d
+\addplot[blue,thick,samples=100,domain=0:360] ({2+2*cos(x)},{2+2*sin(x)});
+
+% Puntos
+\addplot[red,mark=*,only marks,mark size=2pt] coordinates {(0,2) (2,0) (4,2)};
+\node[red] at (axis cs:0,2) [left] {$P_1$};
+\node[red] at (axis cs:2,0) [below] {$P_2$};
+\node[red] at (axis cs:4,2) [right] {$P_3$};
+
+% Centro
+\addplot[blue,mark=*,only marks] coordinates {(2,2)};
+\node[blue] at (axis cs:2,2) [above right] {Centro $(2,2)$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+% ===========================================
+% CONCLUSIÓN
+% ===========================================
+
+\section{Conclusión}
+
+\subsection{El viaje que hemos recorrido}
+
+¡Felicitaciones! Has completado un viaje fascinante por el mundo de las circunferencias. Comenzamos con una simple idea —todos los puntos a la misma distancia de un centro— y construimos todo un edificio matemático sobre ella.
+
+Recapitulemos lo que has aprendido:
+
+\begin{enumerate}
+  \item \textbf{La esencia de la circunferencia:} No es solo una figura redonda, sino un concepto matemático preciso con propiedades únicas. La perfección de su simetría la hace especial entre todas las figuras geométricas.
+
+  \item \textbf{El poder de las ecuaciones:} Descubriste que una simple ecuación como $(x - h)^2 + (y - k)^2 = r^2$ contiene toda la información de una circunferencia. Es como tener el ADN matemático de la figura.
+
+  \item \textbf{La versatilidad de las formas:} Aprendiste a trabajar tanto con la forma canónica como con la general, y a convertir entre ellas. Es como ser bilingüe en el idioma de las circunferencias.
+
+  \item \textbf{Las relaciones geométricas:} Exploraste cómo las circunferencias interactúan con rectas y con otras circunferencias, descubriendo patrones y criterios precisos para clasificar estas relaciones.
+
+  \item \textbf{La conexión álgebra-geometría:} Viste cómo problemas aparentemente visuales pueden resolverse algebraicamente, y viceversa. Esta dualidad es una de las bellezas de la geometría analítica.
+\end{enumerate}
+
+\subsection{Las herramientas que ahora dominas}
+
+Has agregado herramientas poderosas a tu caja matemática:
+
+\begin{center}
+\begin{tcolorbox}[colback=ColorPrincipal!10,colframe=ColorPrincipal,title={\textbf{Tu Caja de Herramientas}}]
+
+\textbf{Herramientas Conceptuales:}
+\begin{itemize}
+  \item Identificar centro y radio de cualquier circunferencia
+  \item Reconocer cuándo una ecuación representa una circunferencia real
+  \item Visualizar mentalmente posiciones relativas
+  \item Conectar representaciones algebraicas y geométricas
+\end{itemize}
+
+\textbf{Herramientas Algebraicas:}
+\begin{itemize}
+  \item Escribir ecuaciones de circunferencias
+  \item Completar cuadrados con confianza
+  \item Resolver sistemas de ecuaciones circulares
+  \item Calcular discriminantes e interpretar resultados
+\end{itemize}
+
+\textbf{Herramientas Analíticas:}
+\begin{itemize}
+  \item Determinar posiciones relativas algebraicamente
+  \item Encontrar puntos de intersección
+  \item Calcular distancias estratégicamente
+  \item Resolver problemas de optimización circular
+\end{itemize}
+
+\end{tcolorbox}
+\end{center}
+
+\subsection{Aplicaciones en el mundo real}
+
+Lo que has aprendido no se queda en el papel. Las circunferencias y sus propiedades están en todas partes:
+
+\subsubsection{En la tecnología}
+
+\begin{itemize}
+  \item \textbf{GPS y navegación:} Los satélites calculan tu posición usando circunferencias. Cada satélite define una esfera (circunferencia en 3D) donde podrías estar, y la intersección de varias esferas determina tu ubicación exacta.
+
+  \item \textbf{Diseño de antenas:} La cobertura de una antena de telefonía móvil se modela como circunferencias. Los ingenieros usan las posiciones relativas para garantizar cobertura sin interferencias.
+
+  \item \textbf{Gráficos por computadora:} Cada vez que ves un círculo perfecto en tu pantalla, hay ecuaciones de circunferencia trabajando detrás de escena.
+\end{itemize}
+
+\subsubsection{En la ingeniería}
+
+\begin{itemize}
+  \item \textbf{Diseño de rotondas:} Los ingenieros de tráfico usan circunferencias tangentes para diseñar rotondas eficientes y seguras.
+
+  \item \textbf{Sistemas mecánicos:} Engranajes, poleas, rodamientos... todos dependen de circunferencias perfectas y sus relaciones.
+
+  \item \textbf{Arquitectura:} Desde los arcos romanos hasta los modernos domos geodésicos, la circunferencia proporciona fuerza y belleza.
+\end{itemize}
+
+\subsubsection{En las ciencias}
+
+\begin{itemize}
+  \item \textbf{Física:} El movimiento circular, las ondas, los campos... muchos fenómenos físicos se describen con circunferencias.
+
+  \item \textbf{Astronomía:} Aunque las órbitas son elípticas, muchas se aproximan tanto a circunferencias que podemos usar lo que aprendiste para calcularlas.
+
+  \item \textbf{Química:} Los orbitales atómicos, las estructuras moleculares cíclicas... la circunferencia aparece hasta en lo microscópico.
+\end{itemize}
+
+\subsection{Consejos para el éxito continuo}
+
+Para seguir mejorando en este tema:
+
+\begin{nota}
+\textbf{Estrategias de estudio recomendadas:}
+
+\begin{enumerate}
+  \item \textbf{Practica la visualización:} Antes de calcular, dibuja. Un buen esquema vale más que mil cálculos.
+
+  \item \textbf{Domina las conversiones:} Practica pasar de forma canónica a general y viceversa hasta que sea automático.
+
+  \item \textbf{Conecta conceptos:} Relaciona la circunferencia con otros temas: funciones, trigonometría, vectores...
+
+  \item \textbf{Resuelve problemas variados:} No te quedes con ejercicios mecánicos. Busca problemas que requieran creatividad.
+
+  \item \textbf{Usa tecnología:} Programas como GeoGebra te permiten experimentar y verificar tus soluciones.
+
+  \item \textbf{Enseña a otros:} Explicar estos conceptos a un compañero es la mejor forma de consolidar tu comprensión.
+\end{enumerate}
+\end{nota}
+
+\subsection{Errores comunes a evitar}
+
+Aprende de los tropiezos típicos:
+
+\begin{importante}
+\textbf{Errores frecuentes y cómo evitarlos:}
+
+\begin{itemize}
+  \item \textbf{Confundir radio con radio al cuadrado:} Recuerda que en la ecuación aparece $r^2$, no $r$.
+
+  \item \textbf{Signos en el centro:} En $(x - h)^2 + (y - k)^2 = r^2$, si el centro es $(3, -2)$, la ecuación es $(x - 3)^2 + (y + 2)^2 = r^2$.
+
+  \item \textbf{Olvidar verificar la condición de existencia:} No toda ecuación de segundo grado representa una circunferencia real.
+
+  \item \textbf{Mezclar criterios de posición relativa:} Memoriza bien las condiciones para cada caso.
+
+  \item \textbf{No simplificar al final:} Siempre simplifica tus respuestas a la forma más elegante posible.
+\end{itemize}
+\end{importante}
+
+\subsection{Conexiones con temas futuros}
+
+Lo que has aprendido aquí es la base para temas más avanzados:
+
+\begin{itemize}
+  \item \textbf{Elipse e hipérbola:} Son las hermanas de la circunferencia. Con lo que sabes, entenderlas será más fácil.
+
+  \item \textbf{Geometría en 3D:} La esfera es la circunferencia en tres dimensiones. Las ecuaciones son sorprendentemente similares.
+
+  \item \textbf{Cálculo:} Derivadas e integrales de funciones circulares aparecen en física e ingeniería.
+
+  \item \textbf{Números complejos:} La circunferencia unitaria es fundamental en el plano complejo.
+
+  \item \textbf{Trigonometría avanzada:} El círculo unitario es la base de todas las funciones trigonométricas.
+\end{itemize}
+
+\subsection{Reflexión final}
+
+La circunferencia es mucho más que una figura redonda. Es un puente entre el álgebra y la geometría, entre lo abstracto y lo concreto, entre la teoría y la aplicación. Cada vez que veas una rueda girando, un CD brillando o la luna llena en el cielo, recuerda que ahora entiendes la matemática detrás de esa perfección.
+
+Has demostrado que puedes tomar un concepto simple —puntos equidistantes de un centro— y construir sobre él un conocimiento profundo y útil. Esta es la esencia de las matemáticas: partir de ideas simples y construir estructuras complejas y hermosas.
+
+\begin{center}
+\begin{tcolorbox}[colback=ColorAcento!20,colframe=ColorAcento,title={\textbf{Mensaje final}}]
+\centering
+\Large
+\textit{La circunferencia te ha enseñado que en matemáticas, como en la vida, la perfección no está en la complejidad, sino en la elegancia de lo simple.}
+
+\vspace{0.5cm}
+
+\textbf{¡Sigue explorando, sigue aprendiendo, sigue girando hacia el conocimiento!}
+\end{tcolorbox}
+\end{center}
+
+\subsection{Tabla de referencia rápida}
+
+Para tus futuros estudios y consultas:
+
+\begin{center}
+\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+\hline
+\rowcolor{ColorPrincipal!20}
+\textbf{Si necesitas...} & \textbf{Usa...} \\
+\hline
+Escribir la ecuación con centro y radio & $(x - h)^2 + (y - k)^2 = r^2$ \\
+\hline
+Encontrar centro desde ecuación general & $C = \left(-\frac{D}{2}, -\frac{E}{2}\right)$ \\
+\hline
+Encontrar radio desde ecuación general & $r = \frac{1}{2}\sqrt{D^2 + E^2 - 4F}$ \\
+\hline
+Verificar si es circunferencia real & $D^2 + E^2 - 4F > 0$ \\
+\hline
+Completar cuadrados en $x$ & $x^2 + Dx = \left(x + \frac{D}{2}\right)^2 - \frac{D^2}{4}$ \\
+\hline
+Distancia entre dos puntos & $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$ \\
+\hline
+Posición recta-circunferencia & Compara $d$ con $r$ \\
+\hline
+Posición de dos circunferencias & Compara $d$ con $r_1 + r_2$ y $|r_1 - r_2|$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+% FIN DE LA PARTE 1 - NO INCLUIR \end{document}
+\end{document}

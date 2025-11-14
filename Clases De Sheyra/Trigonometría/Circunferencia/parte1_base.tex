@@ -1,0 +1,1013 @@
+% PARTE 1: ESTRUCTURA BASE DE LA GUÍA
+% Subagente 1 - Estructura Base
+% Tema: Circunferencia - Grado 10
+
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=2cm]{geometry}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel,patterns,shapes.geometric,intersections,through}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{booktabs}
+\pgfplotsset{compat=1.18}
+
+% Configuración de hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ColorPrincipal,
+    urlcolor=ColorPrincipal,
+    citecolor=ColorPrincipal
+}
+
+% Definición de colores
+\definecolor{ColorPrincipal}{RGB}{0,70,173}
+\definecolor{ColorAcento}{RGB}{255,127,0}
+\definecolor{ColorTerciario}{RGB}{0,150,0}
+\definecolor{ColorFondo}{RGB}{240,240,255}
+
+% Entornos personalizados
+\newtcolorbox{definicion}[1][]{
+  colback=ColorPrincipal!5,
+  colframe=ColorPrincipal,
+  fonttitle=\bfseries,
+  title=Definición,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{teorema}[1][]{
+  colback=ColorTerciario!5,
+  colframe=ColorTerciario,
+  fonttitle=\bfseries,
+  title=Teorema,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{ejemplo}[1][]{
+  colback=ColorAcento!5,
+  colframe=ColorAcento,
+  fonttitle=\bfseries,
+  title=Ejemplo,
+  breakable,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  colback=ColorAcento!5,
+  colframe=ColorAcento,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  breakable,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  colback=ColorTerciario!5,
+  colframe=ColorTerciario,
+  fonttitle=\bfseries,
+  title=Solución,
+  breakable,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  colback=yellow!10,
+  colframe=yellow!80!black,
+  fonttitle=\bfseries,
+  title=Nota,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+\newtcolorbox{importante}[1][]{
+  colback=red!5,
+  colframe=red!60!black,
+  fonttitle=\bfseries,
+  title=¡Importante!,
+  sharp corners,
+  boxrule=1pt,
+  #1
+}
+
+% Configuración de headers y footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\fancyfoot[C]{\small Geometría Analítica - Circunferencia}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Comandos personalizados
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\circunf}[3]{(x-#1)^2 + (y-#2)^2 = #3^2}
+
+\begin{document}
+
+% ===========================================
+% PORTADA
+% ===========================================
+
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+{\Huge\bfseries GEOMETRÍA ANALÍTICA\par}
+\vspace{1.5cm}
+{\LARGE\color{ColorPrincipal} CIRCUNFERENCIA\par}
+\vspace{2cm}
+
+\begin{tikzpicture}[scale=1.5]
+  \begin{axis}[
+    axis equal image,
+    grid=major,
+    grid style={gray!30},
+    xmin=-4, xmax=4,
+    ymin=-4, ymax=4,
+    xlabel={$x$},
+    ylabel={$y$},
+    axis lines=middle,
+    width=0.5\textwidth,
+    height=0.5\textwidth,
+  ]
+  % Circunferencia principal
+  \addplot[ColorPrincipal, thick, samples=100, domain=0:360]
+    ({3*cos(x)}, {3*sin(x)});
+  % Centro
+  \addplot[mark=*, ColorAcento, mark size=3pt] coordinates {(0,0)};
+  % Radio
+  \addplot[ColorAcento, thick, dashed] coordinates {(0,0) (3,0)};
+  \node at (axis cs:1.5,0.3) {$r$};
+  \node at (axis cs:0,-0.5) {Centro};
+  \end{axis}
+\end{tikzpicture}
+
+\vspace{2cm}
+{\Large\bfseries Prof: Toribio De J Arrieta F\par}
+\vspace{1cm}
+{\large La Pruebita\par}
+\vspace{0.5cm}
+{\large Grado 10 -- Trigonometría\par}
+\vfill
+{\large \today\par}
+\end{titlepage}
+
+% Tabla de contenidos
+\tableofcontents
+\newpage
+
+% ===========================================
+% INTRODUCCIÓN
+% ===========================================
+
+\section{Introducción}
+
+¡Bienvenido al fascinante mundo de las circunferencias! Si alguna vez has observado una rueda girando, has visto el sol en el horizonte o has admirado los anillos de Saturno, entonces ya has tenido un encuentro cercano con una de las figuras más perfectas y fundamentales de las matemáticas: la circunferencia.
+
+\subsection{¿Por qué estudiar la circunferencia?}
+
+Imagina por un momento un mundo sin ruedas. ¿Cómo sería? Sin bicicletas, sin autos, sin engranajes... La vida sería completamente diferente. La circunferencia no es solo una figura geométrica más; es una de las formas más importantes en nuestra vida cotidiana y en el desarrollo de la humanidad.
+
+Desde los antiguos griegos que estudiaron sus propiedades místicas, hasta los ingenieros modernos que diseñan sistemas de radar y satélites, la circunferencia ha sido y sigue siendo fundamental en el desarrollo del conocimiento humano.
+
+\subsection{La circunferencia en tu vida diaria}
+
+Mira a tu alrededor en este momento. ¿Cuántas circunferencias puedes identificar? Están por todas partes:
+
+\begin{itemize}[leftmargin=2cm]
+  \item \textbf{En el transporte:} Las ruedas de bicicletas, autos, trenes y aviones dependen de la perfección de la circunferencia para funcionar eficientemente.
+
+  \item \textbf{En la tecnología:} Los sistemas de radar utilizan circunferencias concéntricas para detectar objetos. Los satélites orbitan siguiendo trayectorias circulares alrededor de la Tierra.
+
+  \item \textbf{En la arquitectura:} Desde los arcos romanos hasta los modernos domos de los estadios, la circunferencia proporciona belleza y estabilidad estructural.
+
+  \item \textbf{En la ingeniería:} Los engranajes, poleas y sistemas de transmisión dependen de circunferencias perfectas para transmitir movimiento y fuerza.
+
+  \item \textbf{En el diseño:} Logos, interfaces de usuario, señales de tráfico... La circunferencia comunica completitud, perfección y armonía.
+
+  \item \textbf{En la naturaleza:} Los anillos de los árboles, las ondas en el agua, las pupilas de nuestros ojos... La naturaleza ama las formas circulares.
+\end{itemize}
+
+\subsection{¿Qué aprenderás en esta guía?}
+
+En esta aventura matemática, vamos a descubrir los secretos de la circunferencia desde una perspectiva analítica. No solo dibujaremos círculos bonitos (aunque también lo haremos), sino que aprenderemos a describirlos con ecuaciones precisas y a resolver problemas complejos usando álgebra.
+
+Específicamente, exploraremos:
+
+\begin{enumerate}
+  \item \textbf{La ecuación canónica de la circunferencia:} Aprenderás a escribir la ecuación de cualquier circunferencia conociendo solo su centro y radio. Es como tener la receta secreta para crear círculos perfectos matemáticamente.
+
+  \item \textbf{La ecuación general de la circunferencia:} Descubrirás cómo identificar si una ecuación aparentemente complicada representa una circunferencia y cómo extraer información útil de ella.
+
+  \item \textbf{Posiciones relativas entre rectas y circunferencias:} ¿Cuándo una recta toca, corta o pasa de largo a una circunferencia? Aprenderás a determinarlo algebraicamente, sin necesidad de dibujar.
+
+  \item \textbf{Posiciones relativas entre circunferencias:} Dos circunferencias pueden relacionarse de maneras fascinantes. Pueden ser como hermanas que se abrazan, amigas que se tocan o conocidas que mantienen su distancia.
+
+  \item \textbf{Aplicaciones prácticas:} Resolverás problemas reales donde las circunferencias son protagonistas, desde el diseño de rotondas hasta el cálculo de coberturas de antenas.
+\end{enumerate}
+
+\subsection{Conexión con tus conocimientos previos}
+
+Esta guía no parte de cero. Se construye sobre los cimientos que ya has establecido:
+
+\begin{itemize}
+  \item Si recuerdas el \textbf{teorema de Pitágoras}, estás a medio camino de entender la ecuación de la circunferencia.
+
+  \item Si dominas los \textbf{productos notables} y sabes \textbf{completar cuadrados}, podrás transformar ecuaciones como un mago matemático.
+
+  \item Si entiendes el \textbf{plano cartesiano} y las \textbf{coordenadas}, ya tienes el escenario listo para ubicar circunferencias.
+
+  \item Si has trabajado con \textbf{funciones y gráficas}, esta será una extensión natural de esos conceptos.
+\end{itemize}
+
+\subsection{Cómo aprovechar al máximo esta guía}
+
+Para que tu aprendizaje sea exitoso, te recomiendo:
+
+\begin{nota}
+  \textbf{Consejos para el éxito:}
+  \begin{itemize}
+    \item Lee cada sección con calma, no hay prisa. Las matemáticas se disfrutan mejor cuando se saborean.
+    \item Ten papel y lápiz a mano. Dibuja, calcula, experimenta. Las matemáticas se aprenden haciendo.
+    \item No te saltes los ejemplos. Son como los entrenamientos antes del partido.
+    \item Si algo no queda claro, vuelve a leerlo. A veces la segunda lectura revela detalles que se escaparon en la primera.
+    \item Relaciona cada concepto con algo de tu vida diaria. Las matemáticas cobran vida cuando las conectas con tu realidad.
+  \end{itemize}
+\end{nota}
+
+\subsection{Un viaje que comienza}
+
+Estás a punto de embarcarte en un viaje fascinante donde las ecuaciones cobran forma y las figuras se convierten en álgebra. La circunferencia, esa figura perfecta que ha cautivado a la humanidad durante milenios, está a punto de revelarte sus secretos matemáticos.
+
+¿Estás listo? ¡Comencemos esta aventura circular!
+
+\newpage
+
+% ===========================================
+% CONCEPTOS FUNDAMENTALES
+% ===========================================
+
+\section{Conceptos Fundamentales}
+
+\subsection{Definición de Circunferencia}
+
+Antes de sumergirnos en las ecuaciones, necesitamos entender qué es exactamente una circunferencia. Puede parecer obvio, pero su definición matemática es elegante y precisa.
+
+\begin{definicion}[title={Circunferencia}]
+Una \textbf{circunferencia} es el lugar geométrico de todos los puntos del plano que equidistan de un punto fijo llamado \textbf{centro}. La distancia constante desde cualquier punto de la circunferencia hasta el centro se llama \textbf{radio}.
+
+En términos más simples: si tomas un punto fijo (el centro) y marcas todos los puntos que están a la misma distancia de él, obtienes una circunferencia perfecta.
+\end{definicion}
+
+Esta definición aparentemente simple esconde una profunda verdad matemática: la circunferencia es la figura más simétrica posible en el plano. No importa desde qué dirección la mires, siempre se ve igual.
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    axis equal image,
+    grid=major,
+    grid style={gray!30},
+    xmin=-5, xmax=5,
+    ymin=-5, ymax=5,
+    xlabel={$x$},
+    ylabel={$y$},
+    axis lines=middle,
+    width=0.85\textwidth,
+    height=0.85\textwidth,
+    xtick={-4,-3,-2,-1,0,1,2,3,4},
+    ytick={-4,-3,-2,-1,0,1,2,3,4},
+  ]
+  % Circunferencia
+  \addplot[ColorPrincipal, ultra thick, samples=100, domain=0:360]
+    ({2 + 3*cos(x)}, {1 + 3*sin(x)});
+
+  % Centro
+  \addplot[mark=*, ColorAcento, mark size=4pt] coordinates {(2,1)};
+  \node[above right] at (axis cs:2,1) {Centro $(h,k)$};
+
+  % Varios radios
+  \foreach \angulo in {0, 45, 90, 135, 180, 225, 270, 315} {
+    \addplot[ColorTerciario, dashed, thin]
+      coordinates {(2,1) ({2 + 3*cos(\angulo)}, {1 + 3*sin(\angulo)})};
+  }
+
+  % Radio etiquetado
+  \addplot[ColorAcento, thick] coordinates {(2,1) (5,1)};
+  \node[above] at (axis cs:3.5,1) {$r$ (radio)};
+
+  % Puntos sobre la circunferencia
+  \addplot[mark=*, blue, mark size=2pt] coordinates {(5,1)};
+  \node[right] at (axis cs:5,1) {$P_1$};
+
+  \addplot[mark=*, blue, mark size=2pt] coordinates {(2,4)};
+  \node[above] at (axis cs:2,4) {$P_2$};
+
+  \addplot[mark=*, blue, mark size=2pt] coordinates {(-1,1)};
+  \node[left] at (axis cs:-1,1) {$P_3$};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+Observa cómo todos los puntos $P_1$, $P_2$, $P_3$, etc., están exactamente a la misma distancia del centro. Esta es la esencia de la circunferencia.
+
+\subsection{Ecuación Canónica de la Circunferencia}
+
+Ahora viene la parte emocionante: ¿cómo expresamos matemáticamente esta idea de "todos los puntos a la misma distancia del centro"? Aquí es donde el álgebra y la geometría se dan la mano.
+
+\begin{teorema}[title={Ecuación Canónica}]
+Una circunferencia con centro en el punto $(h, k)$ y radio $r$ tiene como ecuación:
+\[
+(x - h)^2 + (y - k)^2 = r^2
+\]
+Esta es la \textbf{ecuación canónica} o \textbf{forma estándar} de la circunferencia.
+\end{teorema}
+
+\subsubsection{¿De dónde viene esta ecuación?}
+
+La belleza de esta ecuación es que surge naturalmente de la definición. Veamos:
+
+Si tienes un punto cualquiera $P(x, y)$ sobre la circunferencia y el centro está en $C(h, k)$, entonces la distancia entre $P$ y $C$ debe ser igual al radio $r$.
+
+Usando la fórmula de distancia entre dos puntos (que viene del teorema de Pitágoras):
+\[
+\text{distancia} = \sqrt{(x - h)^2 + (y - k)^2} = r
+\]
+
+Elevando al cuadrado ambos lados:
+\[
+(x - h)^2 + (y - k)^2 = r^2
+\]
+
+¡Y ahí está! La ecuación canónica de la circunferencia.
+
+\subsubsection{Interpretación de los parámetros}
+
+Cada parte de la ecuación tiene un significado específico:
+
+\begin{itemize}
+  \item \textbf{$h$ y $k$:} Son las coordenadas del centro. Si $h > 0$, el centro está a la derecha del origen; si $h < 0$, está a la izquierda. Lo mismo aplica para $k$ con arriba y abajo.
+
+  \item \textbf{$r$:} Es el radio, siempre positivo. Determina el tamaño de la circunferencia.
+
+  \item \textbf{$(x - h)$ y $(y - k)$:} Representan las distancias horizontal y vertical desde cualquier punto de la circunferencia hasta el centro.
+\end{itemize}
+
+\subsubsection{Caso especial: Centro en el origen}
+
+Cuando el centro está en el origen $(0, 0)$, la ecuación se simplifica maravillosamente:
+
+\begin{importante}
+Si el centro está en $(0, 0)$, entonces $h = 0$ y $k = 0$, por lo que la ecuación se convierte en:
+\[
+x^2 + y^2 = r^2
+\]
+Esta es la forma más simple de la ecuación de una circunferencia.
+\end{importante}
+
+Veamos algunos ejemplos visuales:
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    axis equal image,
+    grid=major,
+    grid style={gray!30},
+    xmin=-6, xmax=6,
+    ymin=-6, ymax=6,
+    xlabel={$x$},
+    ylabel={$y$},
+    axis lines=middle,
+    width=0.9\textwidth,
+    height=0.9\textwidth,
+    legend pos=outer north east,
+  ]
+
+  % Circunferencia con centro en origen
+  \addplot[ColorPrincipal, ultra thick, samples=100, domain=0:360]
+    ({4*cos(x)}, {4*sin(x)});
+  \addlegendentry{$x^2 + y^2 = 16$ (centro en origen)}
+
+  % Circunferencia desplazada
+  \addplot[ColorAcento, ultra thick, samples=100, domain=0:360]
+    ({3 + 2*cos(x)}, {2 + 2*sin(x)});
+  \addlegendentry{$(x-3)^2 + (y-2)^2 = 4$}
+
+  % Circunferencia pequeña
+  \addplot[ColorTerciario, ultra thick, samples=100, domain=0:360]
+    ({-2 + 1.5*cos(x)}, {-1 + 1.5*sin(x)});
+  \addlegendentry{$(x+2)^2 + (y+1)^2 = 2.25$}
+
+  % Centros
+  \addplot[mark=*, black, mark size=3pt] coordinates {(0,0)};
+  \addplot[mark=*, black, mark size=3pt] coordinates {(3,2)};
+  \addplot[mark=*, black, mark size=3pt] coordinates {(-2,-1)};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ecuación General de la Circunferencia}
+
+En la vida real (y en los exámenes), no siempre te dan la ecuación en su forma bonita y ordenada. A veces aparece expandida y mezclada. Esta forma se llama ecuación general.
+
+\begin{definicion}[title={Ecuación General}]
+La \textbf{ecuación general de la circunferencia} tiene la forma:
+\[
+x^2 + y^2 + Dx + Ey + F = 0
+\]
+donde $D$, $E$ y $F$ son constantes reales.
+\end{definicion}
+
+\subsubsection{¿Cómo pasamos de la forma canónica a la general?}
+
+Partiendo de $(x - h)^2 + (y - k)^2 = r^2$, si expandimos los binomios:
+
+\begin{align}
+(x - h)^2 + (y - k)^2 &= r^2 \\
+x^2 - 2hx + h^2 + y^2 - 2ky + k^2 &= r^2 \\
+x^2 + y^2 - 2hx - 2ky + h^2 + k^2 - r^2 &= 0
+\end{align}
+
+Comparando con $x^2 + y^2 + Dx + Ey + F = 0$, obtenemos:
+\begin{itemize}
+  \item $D = -2h$
+  \item $E = -2k$
+  \item $F = h^2 + k^2 - r^2$
+\end{itemize}
+
+\subsubsection{¿Toda ecuación de esta forma representa una circunferencia?}
+
+¡Esta es una pregunta crucial! No toda ecuación de la forma $x^2 + y^2 + Dx + Ey + F = 0$ representa una circunferencia real.
+
+\begin{teorema}[title={Condición de existencia}]
+La ecuación $x^2 + y^2 + Dx + Ey + F = 0$ representa una circunferencia real si y solo si:
+\[
+D^2 + E^2 - 4F > 0
+\]
+
+En este caso:
+\begin{itemize}
+  \item Centro: $\left(-\frac{D}{2}, -\frac{E}{2}\right)$
+  \item Radio: $r = \frac{1}{2}\sqrt{D^2 + E^2 - 4F}$
+\end{itemize}
+\end{teorema}
+
+¿Qué pasa si $D^2 + E^2 - 4F \leq 0$?
+
+\begin{itemize}
+  \item Si $D^2 + E^2 - 4F = 0$: La ecuación representa un punto (circunferencia degenerada de radio 0).
+  \item Si $D^2 + E^2 - 4F < 0$: La ecuación no tiene solución real (circunferencia imaginaria).
+\end{itemize}
+
+\subsubsection{Completando cuadrados: La técnica mágica}
+
+Para convertir de la forma general a la canónica, usamos la técnica de completar cuadrados. Es como reorganizar un rompecabezas hasta que las piezas encajan perfectamente.
+
+\textbf{Proceso paso a paso:}
+
+Dada la ecuación $x^2 + y^2 + Dx + Ey + F = 0$:
+
+\begin{enumerate}
+  \item Agrupa los términos en $x$ y los términos en $y$:
+  \[
+  (x^2 + Dx) + (y^2 + Ey) + F = 0
+  \]
+
+  \item Para completar el cuadrado en $x$:
+  \begin{itemize}
+    \item Toma el coeficiente de $x$ (que es $D$)
+    \item Divide entre 2: $\frac{D}{2}$
+    \item Eleva al cuadrado: $\left(\frac{D}{2}\right)^2$
+    \item Suma y resta este valor
+  \end{itemize}
+
+  \item Haz lo mismo para $y$ con el coeficiente $E$
+
+  \item Reorganiza para obtener la forma canónica
+\end{enumerate}
+
+\textbf{Ejemplo ilustrativo:}
+
+Convirtamos $x^2 + y^2 - 6x + 4y - 3 = 0$ a forma canónica:
+
+\begin{align}
+x^2 + y^2 - 6x + 4y - 3 &= 0 \\
+(x^2 - 6x) + (y^2 + 4y) &= 3 \\
+(x^2 - 6x + 9 - 9) + (y^2 + 4y + 4 - 4) &= 3 \\
+(x^2 - 6x + 9) + (y^2 + 4y + 4) - 9 - 4 &= 3 \\
+(x - 3)^2 + (y + 2)^2 &= 3 + 9 + 4 \\
+(x - 3)^2 + (y + 2)^2 &= 16
+\end{align}
+
+Por lo tanto: Centro en $(3, -2)$ y radio $r = 4$.
+
+\subsection{Posiciones Relativas de una Recta y una Circunferencia}
+
+Cuando una recta y una circunferencia se encuentran en el mismo plano, pueden relacionarse de tres maneras distintas. Es como cuando lanzas una piedra hacia un lago circular: puede caer fuera, rozar el borde o atravesarlo.
+
+\begin{definicion}[title={Posiciones relativas recta-circunferencia}]
+Una recta $L$ y una circunferencia $C$ pueden estar en una de tres posiciones:
+\begin{enumerate}
+  \item \textbf{Recta exterior:} No tienen puntos en común (0 intersecciones)
+  \item \textbf{Recta tangente:} Se tocan en exactamente un punto (1 intersección)
+  \item \textbf{Recta secante:} Se cortan en dos puntos (2 intersecciones)
+\end{enumerate}
+\end{definicion}
+
+\subsubsection{Método algebraico: El discriminante}
+
+Para determinar la posición relativa, sustituimos la ecuación de la recta en la ecuación de la circunferencia. Esto nos da una ecuación cuadrática cuyo discriminante nos dice todo:
+
+\begin{teorema}[title={Criterio del discriminante}]
+Sea una circunferencia $(x - h)^2 + (y - k)^2 = r^2$ y una recta $y = mx + b$ (o $x = c$ si es vertical).
+
+Al sustituir la recta en la circunferencia, obtenemos una ecuación cuadrática $At^2 + Bt + C = 0$.
+
+Si $\Delta = B^2 - 4AC$, entonces:
+\begin{itemize}
+  \item $\Delta > 0$: La recta es secante (2 puntos de intersección)
+  \item $\Delta = 0$: La recta es tangente (1 punto de tangencia)
+  \item $\Delta < 0$: La recta es exterior (0 puntos de intersección)
+\end{itemize}
+\end{teorema}
+
+\subsubsection{Método geométrico: Distancia del centro a la recta}
+
+Hay un método más elegante usando la distancia del centro a la recta:
+
+\begin{teorema}[title={Criterio de la distancia}]
+Si $d$ es la distancia del centro de la circunferencia a la recta, y $r$ es el radio:
+\begin{itemize}
+  \item $d < r$: La recta es secante
+  \item $d = r$: La recta es tangente
+  \item $d > r$: La recta es exterior
+\end{itemize}
+\end{teorema}
+
+La fórmula de distancia de un punto $(x_0, y_0)$ a una recta $Ax + By + C = 0$ es:
+\[
+d = \frac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}}
+\]
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    axis equal image,
+    grid=major,
+    grid style={gray!30},
+    xmin=-6, xmax=6,
+    ymin=-6, ymax=6,
+    xlabel={$x$},
+    ylabel={$y$},
+    axis lines=middle,
+    width=0.95\textwidth,
+    height=0.95\textwidth,
+    legend pos=outer north east,
+  ]
+
+  % Circunferencia
+  \addplot[black, ultra thick, samples=100, domain=0:360]
+    ({3*cos(x)}, {3*sin(x)});
+
+  % Centro
+  \addplot[mark=*, black, mark size=3pt] coordinates {(0,0)};
+  \node[below left] at (axis cs:0,0) {Centro};
+
+  % Recta secante
+  \addplot[ColorPrincipal, ultra thick, domain=-6:6] {0.5*x + 1};
+  \addlegendentry{Recta secante}
+
+  % Puntos de intersección secante
+  \addplot[mark=*, ColorPrincipal, mark size=4pt] coordinates {(-0.69,0.655)};
+  \addplot[mark=*, ColorPrincipal, mark size=4pt] coordinates {(2.69,2.345)};
+
+  % Recta tangente
+  \addplot[ColorAcento, ultra thick, domain=-6:6] {-0.75*x + 3};
+  \addlegendentry{Recta tangente}
+
+  % Punto de tangencia
+  \addplot[mark=*, ColorAcento, mark size=4pt] coordinates {(1.44,1.92)};
+
+  % Recta exterior
+  \addplot[ColorTerciario, ultra thick, domain=-6:6] {0.3*x + 4.5};
+  \addlegendentry{Recta exterior}
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Ecuación de la recta tangente}
+
+Un caso especial importante es encontrar la ecuación de una recta tangente a una circunferencia en un punto dado.
+
+\begin{teorema}[title={Recta tangente en un punto}]
+La recta tangente a la circunferencia $(x - h)^2 + (y - k)^2 = r^2$ en el punto $(x_0, y_0)$ tiene ecuación:
+\[
+(x_0 - h)(x - h) + (y_0 - k)(y - k) = r^2
+\]
+\end{teorema}
+
+Esta fórmula es hermosa porque muestra la simetría: simplemente "distribuyes" las variables entre los dos factores.
+
+\subsection{Posiciones Relativas de Dos Circunferencias}
+
+Cuando dos circunferencias comparten el mismo plano, pueden relacionarse de seis maneras diferentes. Es fascinante cómo dos figuras tan simples pueden crear patrones tan variados.
+
+\begin{definicion}[title={Posiciones relativas entre circunferencias}]
+Sean dos circunferencias $C_1$ y $C_2$ con centros $O_1$ y $O_2$, radios $r_1$ y $r_2$, y sea $d$ la distancia entre sus centros. Las posiciones posibles son:
+
+\begin{enumerate}
+  \item \textbf{Exteriores:} No se tocan ($d > r_1 + r_2$)
+  \item \textbf{Tangentes exteriormente:} Se tocan en un punto por fuera ($d = r_1 + r_2$)
+  \item \textbf{Secantes:} Se cortan en dos puntos ($|r_1 - r_2| < d < r_1 + r_2$)
+  \item \textbf{Tangentes interiormente:} Se tocan en un punto por dentro ($d = |r_1 - r_2|$, $d \neq 0$)
+  \item \textbf{Interiores:} Una dentro de la otra sin tocarse ($0 < d < |r_1 - r_2|$)
+  \item \textbf{Concéntricas:} Mismo centro ($d = 0$)
+\end{enumerate}
+\end{definicion}
+
+\subsubsection{Criterio de clasificación}
+
+La clave está en comparar la distancia entre centros con la suma y diferencia de radios:
+
+\begin{teorema}[title={Clasificación por distancia}]
+Dadas dos circunferencias con radios $r_1$, $r_2$ (con $r_1 \geq r_2$) y distancia entre centros $d$:
+
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+\textbf{Posición} & \textbf{Condición} \\
+\midrule
+Exteriores & $d > r_1 + r_2$ \\
+Tangentes exteriormente & $d = r_1 + r_2$ \\
+Secantes & $r_1 - r_2 < d < r_1 + r_2$ \\
+Tangentes interiormente & $d = r_1 - r_2$ (y $d > 0$) \\
+Interiores & $0 < d < r_1 - r_2$ \\
+Concéntricas & $d = 0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{teorema}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+  % Exteriores
+  \begin{scope}[shift={(0,0)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1);
+    \draw[ColorAcento, ultra thick] (3,0) circle (0.8);
+    \node at (1.5,-2) {Exteriores};
+    \fill (0,0) circle (2pt);
+    \fill (3,0) circle (2pt);
+    \draw[dashed] (0,0) -- (3,0);
+  \end{scope}
+
+  % Tangentes exteriormente
+  \begin{scope}[shift={(6,0)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1);
+    \draw[ColorAcento, ultra thick] (1.8,0) circle (0.8);
+    \node at (0.9,-2) {Tang. Ext.};
+    \fill (0,0) circle (2pt);
+    \fill (1.8,0) circle (2pt);
+    \draw[dashed] (0,0) -- (1.8,0);
+    \fill[red] (1,0) circle (3pt);
+  \end{scope}
+
+  % Secantes
+  \begin{scope}[shift={(11,0)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1.2);
+    \draw[ColorAcento, ultra thick] (1.5,0) circle (1);
+    \node at (0.75,-2) {Secantes};
+    \fill (0,0) circle (2pt);
+    \fill (1.5,0) circle (2pt);
+    \draw[dashed] (0,0) -- (1.5,0);
+    \fill[red] (0.65,0.95) circle (3pt);
+    \fill[red] (0.65,-0.95) circle (3pt);
+  \end{scope}
+
+  % Tangentes interiormente
+  \begin{scope}[shift={(0,-5)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1.5);
+    \draw[ColorAcento, ultra thick] (0.7,0) circle (0.8);
+    \node at (0.35,-2.5) {Tang. Int.};
+    \fill (0,0) circle (2pt);
+    \fill (0.7,0) circle (2pt);
+    \draw[dashed] (0,0) -- (0.7,0);
+    \fill[red] (1.5,0) circle (3pt);
+  \end{scope}
+
+  % Interiores
+  \begin{scope}[shift={(6,-5)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1.5);
+    \draw[ColorAcento, ultra thick] (0.3,0) circle (0.6);
+    \node at (0.15,-2.5) {Interiores};
+    \fill (0,0) circle (2pt);
+    \fill (0.3,0) circle (2pt);
+    \draw[dashed] (0,0) -- (0.3,0);
+  \end{scope}
+
+  % Concéntricas
+  \begin{scope}[shift={(11,-5)}]
+    \draw[ColorPrincipal, ultra thick] (0,0) circle (1.5);
+    \draw[ColorAcento, ultra thick] (0,0) circle (0.8);
+    \node at (0,-2.5) {Concéntricas};
+    \fill (0,0) circle (2pt);
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Puntos de intersección}
+
+Cuando dos circunferencias se cortan (caso secante), podemos encontrar sus puntos de intersección resolviendo el sistema de ecuaciones:
+
+\begin{align}
+(x - h_1)^2 + (y - k_1)^2 &= r_1^2 \\
+(x - h_2)^2 + (y - k_2)^2 &= r_2^2
+\end{align}
+
+El truco está en restar las ecuaciones para obtener una ecuación lineal (el eje radical), y luego sustituir en cualquiera de las ecuaciones originales.
+
+\subsubsection{Aplicaciones prácticas}
+
+Las posiciones relativas de circunferencias tienen aplicaciones fascinantes:
+
+\begin{itemize}
+  \item \textbf{Engranajes:} Dos ruedas dentadas son circunferencias tangentes exteriormente.
+  \item \textbf{Poleas y correas:} Circunferencias exteriores conectadas por tangentes comunes.
+  \item \textbf{Cobertura de antenas:} Áreas de señal representadas por circunferencias que pueden solaparse.
+  \item \textbf{Diseño de logos:} Muchos logos famosos usan circunferencias en diferentes posiciones.
+  \item \textbf{Órbitas planetarias:} Aunque son elipses, se aproximan a circunferencias en muchos casos.
+\end{itemize}
+
+\subsection{Tabla Resumen de Fórmulas}
+
+Para tener todas las herramientas a mano, aquí está tu caja de herramientas completa:
+
+\begin{center}
+\begin{tcolorbox}[colback=ColorFondo,colframe=ColorPrincipal,title={\textbf{Formulario de la Circunferencia}}]
+
+\begin{tabular}{p{0.35\textwidth}p{0.6\textwidth}}
+\toprule
+\textbf{Concepto} & \textbf{Fórmula} \\
+\midrule
+\textbf{Ecuación canónica} & $(x - h)^2 + (y - k)^2 = r^2$ \\
+& Centro: $(h, k)$, Radio: $r$ \\
+\midrule
+\textbf{Centro en el origen} & $x^2 + y^2 = r^2$ \\
+\midrule
+\textbf{Ecuación general} & $x^2 + y^2 + Dx + Ey + F = 0$ \\
+\midrule
+\textbf{Conversión general a canónica} & Centro: $\left(-\frac{D}{2}, -\frac{E}{2}\right)$ \\
+& Radio: $r = \frac{1}{2}\sqrt{D^2 + E^2 - 4F}$ \\
+\midrule
+\textbf{Condición de existencia} & $D^2 + E^2 - 4F > 0$ \\
+\midrule
+\textbf{Distancia entre dos puntos} & $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$ \\
+\midrule
+\textbf{Distancia punto a recta} & $d = \frac{|Ax_0 + By_0 + C|}{\sqrt{A^2 + B^2}}$ \\
+& Para $Ax + By + C = 0$ y punto $(x_0, y_0)$ \\
+\midrule
+\textbf{Recta tangente en $(x_0, y_0)$} & $(x_0 - h)(x - h) + (y_0 - k)(y - k) = r^2$ \\
+\midrule
+\textbf{Posición recta-circunferencia} & $d < r$: Secante \\
+& $d = r$: Tangente \\
+& $d > r$: Exterior \\
+\midrule
+\textbf{Posición de dos circunferencias} & $d > r_1 + r_2$: Exteriores \\
+& $d = r_1 + r_2$: Tang. exteriormente \\
+& $|r_1 - r_2| < d < r_1 + r_2$: Secantes \\
+& $d = |r_1 - r_2|$: Tang. interiormente \\
+& $d < |r_1 - r_2|$: Interiores \\
+& $d = 0$: Concéntricas \\
+\bottomrule
+\end{tabular}
+
+\end{tcolorbox}
+\end{center}
+
+\newpage
+
+% ===========================================
+% PLACEHOLDERS PARA OTRAS SECCIONES
+% ===========================================
+
+%INSERTAR_EJEMPLOS_AQUI%
+
+%INSERTAR_EJERCICIOS_AQUI%
+
+% ===========================================
+% CONCLUSIÓN
+% ===========================================
+
+\section{Conclusión}
+
+\subsection{El viaje que hemos recorrido}
+
+¡Felicitaciones! Has completado un viaje fascinante por el mundo de las circunferencias. Comenzamos con una simple idea —todos los puntos a la misma distancia de un centro— y construimos todo un edificio matemático sobre ella.
+
+Recapitulemos lo que has aprendido:
+
+\begin{enumerate}
+  \item \textbf{La esencia de la circunferencia:} No es solo una figura redonda, sino un concepto matemático preciso con propiedades únicas. La perfección de su simetría la hace especial entre todas las figuras geométricas.
+
+  \item \textbf{El poder de las ecuaciones:} Descubriste que una simple ecuación como $(x - h)^2 + (y - k)^2 = r^2$ contiene toda la información de una circunferencia. Es como tener el ADN matemático de la figura.
+
+  \item \textbf{La versatilidad de las formas:} Aprendiste a trabajar tanto con la forma canónica como con la general, y a convertir entre ellas. Es como ser bilingüe en el idioma de las circunferencias.
+
+  \item \textbf{Las relaciones geométricas:} Exploraste cómo las circunferencias interactúan con rectas y con otras circunferencias, descubriendo patrones y criterios precisos para clasificar estas relaciones.
+
+  \item \textbf{La conexión álgebra-geometría:} Viste cómo problemas aparentemente visuales pueden resolverse algebraicamente, y viceversa. Esta dualidad es una de las bellezas de la geometría analítica.
+\end{enumerate}
+
+\subsection{Las herramientas que ahora dominas}
+
+Has agregado herramientas poderosas a tu caja matemática:
+
+\begin{center}
+\begin{tcolorbox}[colback=ColorPrincipal!10,colframe=ColorPrincipal,title={\textbf{Tu Caja de Herramientas}}]
+
+\textbf{Herramientas Conceptuales:}
+\begin{itemize}
+  \item Identificar centro y radio de cualquier circunferencia
+  \item Reconocer cuándo una ecuación representa una circunferencia real
+  \item Visualizar mentalmente posiciones relativas
+  \item Conectar representaciones algebraicas y geométricas
+\end{itemize}
+
+\textbf{Herramientas Algebraicas:}
+\begin{itemize}
+  \item Escribir ecuaciones de circunferencias
+  \item Completar cuadrados con confianza
+  \item Resolver sistemas de ecuaciones circulares
+  \item Calcular discriminantes e interpretar resultados
+\end{itemize}
+
+\textbf{Herramientas Analíticas:}
+\begin{itemize}
+  \item Determinar posiciones relativas algebraicamente
+  \item Encontrar puntos de intersección
+  \item Calcular distancias estratégicamente
+  \item Resolver problemas de optimización circular
+\end{itemize}
+
+\end{tcolorbox}
+\end{center}
+
+\subsection{Aplicaciones en el mundo real}
+
+Lo que has aprendido no se queda en el papel. Las circunferencias y sus propiedades están en todas partes:
+
+\subsubsection{En la tecnología}
+
+\begin{itemize}
+  \item \textbf{GPS y navegación:} Los satélites calculan tu posición usando circunferencias. Cada satélite define una esfera (circunferencia en 3D) donde podrías estar, y la intersección de varias esferas determina tu ubicación exacta.
+
+  \item \textbf{Diseño de antenas:} La cobertura de una antena de telefonía móvil se modela como circunferencias. Los ingenieros usan las posiciones relativas para garantizar cobertura sin interferencias.
+
+  \item \textbf{Gráficos por computadora:} Cada vez que ves un círculo perfecto en tu pantalla, hay ecuaciones de circunferencia trabajando detrás de escena.
+\end{itemize}
+
+\subsubsection{En la ingeniería}
+
+\begin{itemize}
+  \item \textbf{Diseño de rotondas:} Los ingenieros de tráfico usan circunferencias tangentes para diseñar rotondas eficientes y seguras.
+
+  \item \textbf{Sistemas mecánicos:} Engranajes, poleas, rodamientos... todos dependen de circunferencias perfectas y sus relaciones.
+
+  \item \textbf{Arquitectura:} Desde los arcos romanos hasta los modernos domos geodésicos, la circunferencia proporciona fuerza y belleza.
+\end{itemize}
+
+\subsubsection{En las ciencias}
+
+\begin{itemize}
+  \item \textbf{Física:} El movimiento circular, las ondas, los campos... muchos fenómenos físicos se describen con circunferencias.
+
+  \item \textbf{Astronomía:} Aunque las órbitas son elípticas, muchas se aproximan tanto a circunferencias que podemos usar lo que aprendiste para calcularlas.
+
+  \item \textbf{Química:} Los orbitales atómicos, las estructuras moleculares cíclicas... la circunferencia aparece hasta en lo microscópico.
+\end{itemize}
+
+\subsection{Consejos para el éxito continuo}
+
+Para seguir mejorando en este tema:
+
+\begin{nota}
+\textbf{Estrategias de estudio recomendadas:}
+
+\begin{enumerate}
+  \item \textbf{Practica la visualización:} Antes de calcular, dibuja. Un buen esquema vale más que mil cálculos.
+
+  \item \textbf{Domina las conversiones:} Practica pasar de forma canónica a general y viceversa hasta que sea automático.
+
+  \item \textbf{Conecta conceptos:} Relaciona la circunferencia con otros temas: funciones, trigonometría, vectores...
+
+  \item \textbf{Resuelve problemas variados:} No te quedes con ejercicios mecánicos. Busca problemas que requieran creatividad.
+
+  \item \textbf{Usa tecnología:} Programas como GeoGebra te permiten experimentar y verificar tus soluciones.
+
+  \item \textbf{Enseña a otros:} Explicar estos conceptos a un compañero es la mejor forma de consolidar tu comprensión.
+\end{enumerate}
+\end{nota}
+
+\subsection{Errores comunes a evitar}
+
+Aprende de los tropiezos típicos:
+
+\begin{importante}
+\textbf{Errores frecuentes y cómo evitarlos:}
+
+\begin{itemize}
+  \item \textbf{Confundir radio con radio al cuadrado:} Recuerda que en la ecuación aparece $r^2$, no $r$.
+
+  \item \textbf{Signos en el centro:} En $(x - h)^2 + (y - k)^2 = r^2$, si el centro es $(3, -2)$, la ecuación es $(x - 3)^2 + (y + 2)^2 = r^2$.
+
+  \item \textbf{Olvidar verificar la condición de existencia:} No toda ecuación de segundo grado representa una circunferencia real.
+
+  \item \textbf{Mezclar criterios de posición relativa:} Memoriza bien las condiciones para cada caso.
+
+  \item \textbf{No simplificar al final:} Siempre simplifica tus respuestas a la forma más elegante posible.
+\end{itemize}
+\end{importante}
+
+\subsection{Conexiones con temas futuros}
+
+Lo que has aprendido aquí es la base para temas más avanzados:
+
+\begin{itemize}
+  \item \textbf{Elipse e hipérbola:} Son las hermanas de la circunferencia. Con lo que sabes, entenderlas será más fácil.
+
+  \item \textbf{Geometría en 3D:} La esfera es la circunferencia en tres dimensiones. Las ecuaciones son sorprendentemente similares.
+
+  \item \textbf{Cálculo:} Derivadas e integrales de funciones circulares aparecen en física e ingeniería.
+
+  \item \textbf{Números complejos:} La circunferencia unitaria es fundamental en el plano complejo.
+
+  \item \textbf{Trigonometría avanzada:} El círculo unitario es la base de todas las funciones trigonométricas.
+\end{itemize}
+
+\subsection{Reflexión final}
+
+La circunferencia es mucho más que una figura redonda. Es un puente entre el álgebra y la geometría, entre lo abstracto y lo concreto, entre la teoría y la aplicación. Cada vez que veas una rueda girando, un CD brillando o la luna llena en el cielo, recuerda que ahora entiendes la matemática detrás de esa perfección.
+
+Has demostrado que puedes tomar un concepto simple —puntos equidistantes de un centro— y construir sobre él un conocimiento profundo y útil. Esta es la esencia de las matemáticas: partir de ideas simples y construir estructuras complejas y hermosas.
+
+\begin{center}
+\begin{tcolorbox}[colback=ColorAcento!20,colframe=ColorAcento,title={\textbf{Mensaje final}}]
+\centering
+\Large
+\textit{La circunferencia te ha enseñado que en matemáticas, como en la vida, la perfección no está en la complejidad, sino en la elegancia de lo simple.}
+
+\vspace{0.5cm}
+
+\textbf{¡Sigue explorando, sigue aprendiendo, sigue girando hacia el conocimiento!}
+\end{tcolorbox}
+\end{center}
+
+\subsection{Tabla de referencia rápida}
+
+Para tus futuros estudios y consultas:
+
+\begin{center}
+\begin{tcolorbox}[colback=ColorFondo,colframe=ColorPrincipal,title={\textbf{Referencia Rápida - Circunferencia}}]
+
+\begin{tabular}{ll}
+\toprule
+\textbf{Si necesitas...} & \textbf{Usa...} \\
+\midrule
+Escribir la ecuación con centro y radio & $(x - h)^2 + (y - k)^2 = r^2$ \\
+Encontrar centro desde ecuación general & $C = \left(-\frac{D}{2}, -\frac{E}{2}\right)$ \\
+Encontrar radio desde ecuación general & $r = \frac{1}{2}\sqrt{D^2 + E^2 - 4F}$ \\
+Verificar si es circunferencia real & $D^2 + E^2 - 4F > 0$ \\
+Completar cuadrados en $x$ & $x^2 + Dx = \left(x + \frac{D}{2}\right)^2 - \frac{D^2}{4}$ \\
+Distancia entre dos puntos & $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$ \\
+Posición recta-circunferencia & Compara $d$ con $r$ \\
+Posición de dos circunferencias & Compara $d$ con $r_1 + r_2$ y $|r_1 - r_2|$ \\
+\bottomrule
+\end{tabular}
+
+\end{tcolorbox}
+\end{center}
+
+\vspace{1cm}
+
+% FIN DE LA PARTE 1 - NO INCLUIR \end{document}
