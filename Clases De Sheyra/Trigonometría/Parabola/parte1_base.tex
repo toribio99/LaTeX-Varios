@@ -1,0 +1,844 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad La Parábola}}
+\fancyhead[RO]{\small\textcolor{maincolor}{La Parábola \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=blue!5,
+  colframe=blue!60!black,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+\newtcolorbox{teorema}[1][]{
+  enhanced,
+  breakable,
+  colback=red!5,
+  colframe=red!60!black,
+  fonttitle=\bfseries,
+  title=Teorema,
+  #1
+}
+
+% Título
+\title{\textbf{\Huge GEOMETRÍA ANALÍTICA}\\[0.5cm]
+\Large La Parábola}
+\author{Prof. Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Hola! Seguramente has visto parábolas por todas partes sin darte cuenta. ¿Has notado la forma de un chorro de agua que sale de una manguera? ¿O la curva que hace una pelota de básquet cuando la lanzas hacia el aro? ¿Has visto alguna vez una antena parabólica? Todas estas formas tienen algo en común: ¡son parábolas!
+
+La parábola es una de las curvas más fascinantes y útiles de las matemáticas. Imagínate que tienes una linterna y la apuntas hacia una pared de forma inclinada... la forma de luz que se proyecta puede ser una parábola. O piensa en los faros de un automóvil: usan espejos parabólicos para concentrar la luz y alumbrar mejor el camino.
+
+\subsection*{¿Qué es una parábola?}
+
+De manera sencilla, una parábola es como una curva en forma de ``U'' (puede estar abierta hacia arriba, hacia abajo, hacia la izquierda o hacia la derecha). Lo genial es que no es cualquier curva... es una curva muy especial con propiedades únicas que la hacen perfecta para muchas aplicaciones.
+
+Digamos que estás en un parque y lanzas una pelota hacia arriba. La trayectoria que sigue la pelota es... ¡exacto, una parábola! Esto no es casualidad, es física pura: la gravedad hace que todos los objetos lanzados (sin considerar la resistencia del aire) sigan trayectorias parabólicas.
+
+\subsection*{Definición intuitiva}
+
+Aquí viene lo interesante. Una parábola es el conjunto de todos los puntos que están a la misma distancia de:
+\begin{itemize}
+    \item Un punto fijo llamado \textbf{foco} (imagínalo como un imán especial)
+    \item Una línea recta fija llamada \textbf{directriz} (como una barrera invisible)
+\end{itemize}
+
+Es como si cada punto de la parábola estuviera ``indeciso'' entre acercarse al foco o a la directriz, así que se mantiene exactamente a la misma distancia de ambos. ¡Por eso la curva tiene esa forma tan particular!
+
+\subsection*{¿Por qué son tan importantes las parábolas?}
+
+Las parábolas aparecen en nuestra vida diaria más de lo que piensas:
+
+\begin{itemize}
+    \item \textbf{Antenas parabólicas:} ¿Te has preguntado por qué las antenas de TV satelital tienen esa forma? La forma parabólica hace que todas las señales que llegan paralelas se concentren en un solo punto (el foco), donde está el receptor. ¡Por eso captan señales de satélites que están a miles de kilómetros!
+
+    \item \textbf{Puentes colgantes:} Los cables principales de muchos puentes colgantes forman parábolas casi perfectas. Esta forma distribuye el peso de manera óptima, haciendo que el puente sea fuerte y estable.
+
+    \item \textbf{Trayectorias de proyectiles:} Desde una pelota de fútbol hasta un cohete espacial (en su fase inicial), todos siguen trayectorias parabólicas. Los videojuegos usan esta matemática para hacer que los movimientos se vean realistas.
+
+    \item \textbf{Faros de automóviles:} Los faros usan reflectores parabólicos. Cuando la bombilla está en el foco, la luz sale en rayos paralelos, iluminando eficientemente el camino. ¡Sin parábolas, manejar de noche sería mucho más difícil!
+
+    \item \textbf{Telescopios reflectores:} Los grandes telescopios usan espejos parabólicos para concentrar la luz de las estrellas en un punto. Gracias a las parábolas podemos ver galaxias que están a millones de años luz.
+\end{itemize}
+
+\subsection*{Un dato curioso}
+
+¿Sabías que Galileo Galilei fue uno de los primeros en descubrir que las trayectorias de los proyectiles son parabólicas? Antes de él, la gente pensaba que los objetos lanzados seguían líneas rectas y luego caían verticalmente. Galileo demostró que no, que la trayectoria es una hermosa curva parabólica. ¡Revolucionó la física con esta observación!
+
+\subsection*{¿Qué aprenderemos en esta guía?}
+
+En esta guía vamos a explorar:
+\begin{enumerate}
+    \item Cómo construir una parábola usando su definición geométrica
+    \item Los elementos importantes: vértice, foco, directriz, eje de simetría
+    \item Las diferentes ecuaciones de la parábola y cómo usarlas
+    \item Cómo graficar parábolas y entender sus propiedades
+    \item Problemas reales donde las parábolas son las protagonistas
+\end{enumerate}
+
+Así que prepárate para ver el mundo con otros ojos. Después de esta guía, cada vez que veas un chorro de agua, un puente o una antena parabólica, entenderás la matemática que hay detrás. ¡Vamos a descubrir juntos el fascinante mundo de las parábolas!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Construcción Geométrica de la Parábola}
+
+Vamos a construir una parábola paso a paso para entender realmente qué es. Imagina que tienes:
+\begin{itemize}
+    \item Un punto fijo \textbf{F} (el foco) - piénsalo como un faro
+    \item Una línea recta \textbf{L} (la directriz) - piénsala como una pared
+\end{itemize}
+
+La parábola es el conjunto de todos los puntos \textbf{P} que cumplen esta condición especial:
+\[
+\text{Distancia de P al foco} = \text{Distancia de P a la directriz}
+\]
+
+Es decir: $d(P,F) = d(P,L)$
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % Directriz
+    \draw[thick, blue] (-3,-2) -- (3,-2) node[right] {Directriz};
+
+    % Foco
+    \filldraw[red] (0,2) circle (0.08) node[above right] {Foco $F$};
+
+    % Parábola
+    \draw[very thick, maincolor, domain=-2.5:2.5, samples=100] plot (\x, {0.25*\x*\x});
+
+    % Punto en la parábola
+    \coordinate (P) at (2,1);
+    \filldraw[black] (P) circle (0.05) node[above right] {$P$};
+
+    % Distancia al foco
+    \draw[dashed, red] (P) -- (0,2) node[midway, above left] {$d_1$};
+
+    % Distancia a la directriz
+    \draw[dashed, blue] (P) -- (2,-2) node[midway, right] {$d_2$};
+
+    % Vértice
+    \filldraw[green!60!black] (0,0) circle (0.05) node[below left] {Vértice};
+
+    % Eje de simetría
+    \draw[dotted, thick] (0,-2.5) -- (0,3);
+    \node at (-0.3,3) {Eje};
+\end{tikzpicture}
+\end{center}
+
+¿Ves cómo cada punto de la parábola mantiene el equilibrio perfecto entre el foco y la directriz? ¡Es como una competencia de tira y jalar donde siempre hay empate!
+
+\subsection{Definición Formal}
+
+\begin{definicion}
+Una \textbf{parábola} es el lugar geométrico de todos los puntos del plano que equidistan de un punto fijo llamado \textbf{foco} y de una recta fija llamada \textbf{directriz}.
+
+Matemáticamente, si $F$ es el foco y $L$ es la directriz, entonces un punto $P(x,y)$ pertenece a la parábola si y solo si:
+\[
+d(P,F) = d(P,L)
+\]
+\end{definicion}
+
+\subsection{Elementos de la Parábola}
+
+Cada parábola tiene varios elementos importantes que debemos conocer:
+
+\subsubsection{1. Vértice (V)}
+Es el punto de la parábola más cercano a la directriz (o al foco). Es como la ``punta'' de la U. El vértice está exactamente a la mitad entre el foco y la directriz.
+
+\subsubsection{2. Foco (F)}
+Es el punto fijo que define la parábola. Todas las señales o rayos que llegan paralelos al eje se reflejan hacia el foco (por eso las antenas parabólicas funcionan).
+
+\subsubsection{3. Directriz (L)}
+Es la línea recta fija. Siempre es perpendicular al eje de simetría.
+
+\subsubsection{4. Eje de Simetría}
+Es la línea recta que pasa por el foco y es perpendicular a la directriz. La parábola es simétrica respecto a este eje (si la doblas por este eje, las dos mitades coinciden perfectamente).
+
+\subsubsection{5. Parámetro (p)}
+Es la distancia del vértice al foco (también es la distancia del vértice a la directriz). Este valor determina qué tan ``abierta'' o ``cerrada'' está la parábola:
+\begin{itemize}
+    \item Si $p$ es grande, la parábola es más abierta
+    \item Si $p$ es pequeño, la parábola es más cerrada
+\end{itemize}
+
+\subsubsection{6. Lado Recto}
+Es el segmento de recta que pasa por el foco, es perpendicular al eje de simetría y tiene sus extremos en la parábola. Su longitud es siempre $|4p|$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Parábola vertical con vértice en origen
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin=-4, xmax=4,
+        ymin=-1, ymax=5,
+        grid = major,
+        width=0.9\textwidth,
+        height=8cm,
+        axis equal image
+    ]
+
+    % Parábola x² = 4y (p=1)
+    \addplot[
+        domain=-3.5:3.5,
+        samples=100,
+        very thick,
+        maincolor
+    ] {x^2/4};
+
+    % Vértice
+    \node[label={180:{Vértice $(0,0)$}},circle,fill,inner sep=2pt] at (axis cs:0,0) {};
+
+    % Foco
+    \node[label={45:{Foco $(0,1)$}},circle,fill,red,inner sep=2pt] at (axis cs:0,1) {};
+
+    % Directriz
+    \addplot[blue, thick, dashed] coordinates {(-4,-1) (4,-1)};
+    \node[blue] at (axis cs:3.5,-1.3) {Directriz: $y = -1$};
+
+    % Eje de simetría
+    \addplot[dotted, thick] coordinates {(0,-1) (0,5)};
+
+    % Lado recto
+    \addplot[green!60!black, very thick] coordinates {(-2,1) (2,1)};
+    \node[green!60!black] at (axis cs:0,0.5) {Lado recto: $4p = 4$};
+
+    % Parámetro p
+    \draw[<->, thick, orange] (axis cs:-0.3,0) -- (axis cs:-0.3,1);
+    \node[orange] at (axis cs:-0.7,0.5) {$p=1$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ecuación Canónica con Vértice en el Origen (0,0)}
+
+Cuando el vértice de la parábola está en el origen, las ecuaciones son más sencillas. Hay cuatro casos según hacia dónde se abre la parábola:
+
+\subsubsection{Caso 1: Parábola que abre hacia la derecha}
+
+\begin{center}
+\fbox{\Large $y^2 = 4px$ \quad (donde $p > 0$)}
+\end{center}
+
+\begin{itemize}
+    \item Vértice: $(0,0)$
+    \item Foco: $(p,0)$
+    \item Directriz: $x = -p$
+    \item Eje de simetría: eje $x$ (horizontal)
+    \item Lado recto: $4p$
+\end{itemize}
+
+\subsubsection{Caso 2: Parábola que abre hacia la izquierda}
+
+\begin{center}
+\fbox{\Large $y^2 = -4px$ \quad (donde $p > 0$)}
+\end{center}
+
+\begin{itemize}
+    \item Vértice: $(0,0)$
+    \item Foco: $(-p,0)$
+    \item Directriz: $x = p$
+    \item Eje de simetría: eje $x$ (horizontal)
+    \item Lado recto: $4p$
+\end{itemize}
+
+\subsubsection{Caso 3: Parábola que abre hacia arriba}
+
+\begin{center}
+\fbox{\Large $x^2 = 4py$ \quad (donde $p > 0$)}
+\end{center}
+
+\begin{itemize}
+    \item Vértice: $(0,0)$
+    \item Foco: $(0,p)$
+    \item Directriz: $y = -p$
+    \item Eje de simetría: eje $y$ (vertical)
+    \item Lado recto: $4p$
+\end{itemize}
+
+\subsubsection{Caso 4: Parábola que abre hacia abajo}
+
+\begin{center}
+\fbox{\Large $x^2 = -4py$ \quad (donde $p > 0$)}
+\end{center}
+
+\begin{itemize}
+    \item Vértice: $(0,0)$
+    \item Foco: $(0,-p)$
+    \item Directriz: $y = p$
+    \item Eje de simetría: eje $y$ (vertical)
+    \item Lado recto: $4p$
+\end{itemize}
+
+\begin{nota}
+Un truco para recordar:
+\begin{itemize}
+    \item Si la variable al cuadrado es $y^2$, la parábola es horizontal
+    \item Si la variable al cuadrado es $x^2$, la parábola es vertical
+    \item El signo determina hacia dónde se abre
+\end{itemize}
+\end{nota}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Cuatro parábolas con vértice en el origen
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin=-4, xmax=4,
+        ymin=-4, ymax=4,
+        grid = major,
+        width=0.85\textwidth,
+        height=0.85\textwidth,
+        axis equal image,
+        legend pos=outer north east
+    ]
+
+    % Parábola hacia la derecha: y² = 4x
+    \addplot[
+        domain=0:3.5,
+        samples=100,
+        very thick,
+        blue,
+        name path=A
+    ] ({x^2/4}, x);
+    \addplot[
+        domain=-3.5:0,
+        samples=100,
+        very thick,
+        blue
+    ] ({x^2/4}, x);
+    \addlegendentry{$y^2 = 4x$ (derecha)}
+
+    % Parábola hacia la izquierda: y² = -4x
+    \addplot[
+        domain=0:3.5,
+        samples=100,
+        very thick,
+        red
+    ] ({-x^2/4}, x);
+    \addplot[
+        domain=-3.5:0,
+        samples=100,
+        very thick,
+        red
+    ] ({-x^2/4}, x);
+    \addlegendentry{$y^2 = -4x$ (izquierda)}
+
+    % Parábola hacia arriba: x² = 4y
+    \addplot[
+        domain=-3.5:3.5,
+        samples=100,
+        very thick,
+        green!60!black
+    ] {x^2/4};
+    \addlegendentry{$x^2 = 4y$ (arriba)}
+
+    % Parábola hacia abajo: x² = -4y
+    \addplot[
+        domain=-3.5:3.5,
+        samples=100,
+        very thick,
+        orange
+    ] {-x^2/4};
+    \addlegendentry{$x^2 = -4y$ (abajo)}
+
+    % Vértice común
+    \node[label={45:{$(0,0)$}},circle,fill,inner sep=2pt] at (axis cs:0,0) {};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ecuación Canónica con Vértice en (h,k)}
+
+Cuando el vértice no está en el origen sino en un punto $(h,k)$, las ecuaciones se transforman mediante una traslación:
+
+\subsubsection{Parábolas Horizontales (eje paralelo al eje x)}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Abre hacia la derecha} & \textbf{Abre hacia la izquierda} \\
+\hline
+$(y-k)^2 = 4p(x-h)$ & $(y-k)^2 = -4p(x-h)$ \\
+$p > 0$ & $p > 0$ \\
+\hline
+Vértice: $(h,k)$ & Vértice: $(h,k)$ \\
+Foco: $(h+p,k)$ & Foco: $(h-p,k)$ \\
+Directriz: $x = h-p$ & Directriz: $x = h+p$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Parábolas Verticales (eje paralelo al eje y)}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Abre hacia arriba} & \textbf{Abre hacia abajo} \\
+\hline
+$(x-h)^2 = 4p(y-k)$ & $(x-h)^2 = -4p(y-k)$ \\
+$p > 0$ & $p > 0$ \\
+\hline
+Vértice: $(h,k)$ & Vértice: $(h,k)$ \\
+Foco: $(h,k+p)$ & Foco: $(h,k-p)$ \\
+Directriz: $y = k-p$ & Directriz: $y = k+p$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{ejemplo}
+Encuentra los elementos de la parábola $(x-3)^2 = 8(y-2)$
+
+\textbf{Solución:}
+Comparando con $(x-h)^2 = 4p(y-k)$:
+\begin{itemize}
+    \item $h = 3$, $k = 2$, $4p = 8 \Rightarrow p = 2$
+    \item Vértice: $(3, 2)$
+    \item Como es de la forma $(x-h)^2 = 4p(y-k)$ con $p > 0$, abre hacia arriba
+    \item Foco: $(h, k+p) = (3, 2+2) = (3, 4)$
+    \item Directriz: $y = k-p = 2-2 = 0$ (el eje $x$)
+    \item Eje de simetría: $x = 3$ (línea vertical)
+    \item Lado recto: $4p = 8$
+\end{itemize}
+\end{ejemplo}
+
+\subsection{Ecuación General de la Parábola}
+
+La ecuación general de segundo grado:
+\[
+Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0
+\]
+
+representa una parábola cuando:
+\begin{itemize}
+    \item $B = 0$ (no hay término $xy$)
+    \item Exactamente uno de $A$ o $C$ es cero (no ambos)
+\end{itemize}
+
+Esto nos da dos formas posibles:
+
+\subsubsection{Parábola con eje vertical}
+\[
+Ax^2 + Dx + Ey + F = 0 \quad (A \neq 0, C = 0)
+\]
+
+Se puede reescribir como:
+\[
+x^2 + \frac{D}{A}x + \frac{E}{A}y + \frac{F}{A} = 0
+\]
+
+\subsubsection{Parábola con eje horizontal}
+\[
+Cy^2 + Dx + Ey + F = 0 \quad (C \neq 0, A = 0)
+\]
+
+Se puede reescribir como:
+\[
+y^2 + \frac{D}{C}x + \frac{E}{C}y + \frac{F}{C} = 0
+\]
+
+\subsection{Conversión entre Formas}
+
+\subsubsection{De General a Canónica}
+
+Para convertir de la forma general a la canónica, completamos el cuadrado:
+
+\begin{ejemplo}
+Convierte $x^2 - 6x - 4y + 1 = 0$ a la forma canónica.
+
+\textbf{Solución:}
+\begin{align}
+x^2 - 6x - 4y + 1 &= 0 \\
+x^2 - 6x &= 4y - 1 \\
+x^2 - 6x + 9 &= 4y - 1 + 9 \\
+(x - 3)^2 &= 4y + 8 \\
+(x - 3)^2 &= 4(y + 2)
+\end{align}
+
+Por lo tanto, la forma canónica es $(x-3)^2 = 4(y+2)$ con:
+\begin{itemize}
+    \item Vértice: $(3, -2)$
+    \item $4p = 4 \Rightarrow p = 1$
+    \item Foco: $(3, -1)$
+    \item Directriz: $y = -3$
+\end{itemize}
+\end{ejemplo}
+
+\subsubsection{De Canónica a General}
+
+Para convertir de canónica a general, expandimos los binomios:
+
+\begin{ejemplo}
+Convierte $(y-2)^2 = 12(x+1)$ a la forma general.
+
+\textbf{Solución:}
+\begin{align}
+(y-2)^2 &= 12(x+1) \\
+y^2 - 4y + 4 &= 12x + 12 \\
+y^2 - 4y + 4 - 12x - 12 &= 0 \\
+y^2 - 12x - 4y - 8 &= 0
+\end{align}
+
+La forma general es: $y^2 - 12x - 4y - 8 = 0$
+\end{ejemplo}
+
+\subsection{Tabla Resumen de Fórmulas}
+
+\begin{center}
+\begin{tcolorbox}[enhanced,colback=maincolor!10,colframe=maincolor,title=Resumen de Ecuaciones y Elementos]
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Orientación} & \textbf{Ecuación} & \textbf{Vértice} & \textbf{Foco} & \textbf{Directriz} \\
+\hline
+\multicolumn{5}{|c|}{\textbf{Vértice en el origen $(0,0)$}} \\
+\hline
+Abre derecha & $y^2 = 4px$ & $(0,0)$ & $(p,0)$ & $x = -p$ \\
+Abre izquierda & $y^2 = -4px$ & $(0,0)$ & $(-p,0)$ & $x = p$ \\
+Abre arriba & $x^2 = 4py$ & $(0,0)$ & $(0,p)$ & $y = -p$ \\
+Abre abajo & $x^2 = -4py$ & $(0,0)$ & $(0,-p)$ & $y = p$ \\
+\hline
+\multicolumn{5}{|c|}{\textbf{Vértice en $(h,k)$}} \\
+\hline
+Abre derecha & $(y-k)^2 = 4p(x-h)$ & $(h,k)$ & $(h+p,k)$ & $x = h-p$ \\
+Abre izquierda & $(y-k)^2 = -4p(x-h)$ & $(h,k)$ & $(h-p,k)$ & $x = h+p$ \\
+Abre arriba & $(x-h)^2 = 4p(y-k)$ & $(h,k)$ & $(h,k+p)$ & $y = k-p$ \\
+Abre abajo & $(x-h)^2 = -4p(y-k)$ & $(h,k)$ & $(h,k-p)$ & $y = k+p$ \\
+\hline
+\end{tabular}
+\end{tcolorbox}
+\end{center}
+
+\subsection{Gráficas Ilustrativas}
+
+Veamos algunos ejemplos de parábolas con diferentes valores de $p$ para entender cómo afecta la abertura:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin=-5, xmax=5,
+        ymin=-1, ymax=8,
+        grid = major,
+        width=0.95\textwidth,
+        height=10cm,
+        axis equal image,
+        legend pos=outer north east
+    ]
+
+    % Parábola con p = 0.5 (más cerrada)
+    \addplot[
+        domain=-3:3,
+        samples=100,
+        very thick,
+        blue
+    ] {x^2/2};
+    \addlegendentry{$x^2 = 2y$ $(p = 0.5)$}
+
+    % Parábola con p = 1
+    \addplot[
+        domain=-3.5:3.5,
+        samples=100,
+        very thick,
+        red
+    ] {x^2/4};
+    \addlegendentry{$x^2 = 4y$ $(p = 1)$}
+
+    % Parábola con p = 2 (más abierta)
+    \addplot[
+        domain=-4.5:4.5,
+        samples=100,
+        very thick,
+        green!60!black
+    ] {x^2/8};
+    \addlegendentry{$x^2 = 8y$ $(p = 2)$}
+
+    % Focos
+    \node[label={0:{$F_1$}},circle,fill,blue,inner sep=1.5pt] at (axis cs:0,0.5) {};
+    \node[label={0:{$F_2$}},circle,fill,red,inner sep=1.5pt] at (axis cs:0,1) {};
+    \node[label={0:{$F_3$}},circle,fill,green!60!black,inner sep=1.5pt] at (axis cs:0,2) {};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+Observa que mientras más grande es $p$, más ``abierta'' es la parábola. Esto es porque el foco está más lejos del vértice, entonces los puntos de la parábola tienen que ``abrirse'' más para mantener la condición de equidistancia.
+\end{nota}
+
+Ahora veamos parábolas con vértice trasladado:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$x$},
+        ylabel = {$y$},
+        xmin=-2, xmax=8,
+        ymin=-2, ymax=6,
+        grid = major,
+        width=0.95\textwidth,
+        height=10cm,
+        axis equal image
+    ]
+
+    % Parábola (x-3)² = 4(y-1)
+    \addplot[
+        domain=0:6,
+        samples=100,
+        very thick,
+        maincolor
+    ] {(x-3)^2/4 + 1};
+
+    % Vértice
+    \node[label={225:{Vértice $(3,1)$}},circle,fill,inner sep=2pt] at (axis cs:3,1) {};
+
+    % Foco
+    \node[label={45:{Foco $(3,2)$}},circle,fill,red,inner sep=2pt] at (axis cs:3,2) {};
+
+    % Directriz
+    \addplot[blue, thick, dashed] coordinates {(-1,0) (7,0)};
+    \node[blue] at (axis cs:6.5,-0.3) {Directriz: $y = 0$};
+
+    % Eje de simetría
+    \addplot[dotted, thick] coordinates {(3,-1.5) (3,5.5)};
+    \node at (axis cs:3.5,5) {Eje: $x = 3$};
+
+    % Lado recto
+    \addplot[green!60!black, very thick] coordinates {(1,2) (5,2)};
+
+    % Ecuación
+    \node[maincolor] at (axis cs:5,4.5) {$(x-3)^2 = 4(y-1)$};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+%INSERTAR_EJEMPLOS_AQUI%
+
+%INSERTAR_EJERCICIOS_AQUI%
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicidades! Has completado un viaje fascinante por el mundo de las parábolas. Ahora ya sabes que estas curvas no son solo figuras matemáticas abstractas, sino formas que aparecen constantemente en nuestro mundo y que tienen aplicaciones increíbles.
+
+\subsection*{Resumen de Conceptos Clave}
+
+Repasemos lo más importante que hemos aprendido:
+
+\begin{enumerate}
+    \item \textbf{Definición fundamental:} Una parábola es el conjunto de todos los puntos que están a la misma distancia de un punto fijo (foco) y de una línea recta fija (directriz).
+
+    \item \textbf{Elementos esenciales:}
+    \begin{itemize}
+        \item Vértice: El punto ``clave'' de la parábola
+        \item Foco: El punto especial que define la curva
+        \item Directriz: La línea de referencia
+        \item Eje de simetría: La línea que divide la parábola en dos partes iguales
+        \item Parámetro $p$: Determina qué tan abierta está la parábola
+        \item Lado recto: Siempre mide $4p$
+    \end{itemize}
+
+    \item \textbf{Ecuaciones que debes dominar:}
+    \begin{itemize}
+        \item Con vértice en el origen: $y^2 = 4px$, $x^2 = 4py$
+        \item Con vértice en $(h,k)$: $(y-k)^2 = 4p(x-h)$, $(x-h)^2 = 4p(y-k)$
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Fórmulas Esenciales - Tu Kit de Supervivencia}
+
+\begin{tcolorbox}[enhanced,colback=accentcolor!10,colframe=accentcolor,title=Fórmulas Rápidas para Parábolas]
+\textbf{Para identificar rápidamente:}
+\begin{itemize}
+    \item Si ves $y^2$: La parábola es horizontal (abre a derecha o izquierda)
+    \item Si ves $x^2$: La parábola es vertical (abre arriba o abajo)
+    \item Signo positivo: Abre hacia la derecha (si $y^2$) o hacia arriba (si $x^2$)
+    \item Signo negativo: Abre hacia la izquierda (si $y^2$) o hacia abajo (si $x^2$)
+\end{itemize}
+
+\textbf{Para encontrar elementos:}
+\begin{itemize}
+    \item Distancia vértice-foco = $p$
+    \item Distancia vértice-directriz = $p$
+    \item Longitud del lado recto = $4p$
+\end{itemize}
+
+\textbf{Para convertir ecuaciones:}
+\begin{itemize}
+    \item General → Canónica: Completa el cuadrado
+    \item Canónica → General: Expande los binomios
+\end{itemize}
+\end{tcolorbox}
+
+\subsection*{Consejos para Estudiantes}
+
+Aquí van algunos tips que te ayudarán a dominar las parábolas:
+
+\begin{enumerate}
+    \item \textbf{Dibuja siempre:} Hacer un bosquejo rápido te ayuda a visualizar el problema. No tiene que ser perfecto, solo ubica el vértice, el foco y la directriz.
+
+    \item \textbf{Identifica el tipo primero:} Antes de resolver, determina si la parábola es horizontal o vertical. Esto te dirá qué fórmulas usar.
+
+    \item \textbf{El parámetro $p$ es tu amigo:} Una vez que encuentras $p$, puedes hallar todos los demás elementos fácilmente.
+
+    \item \textbf{Verifica con un punto:} Cuando termines, sustituye las coordenadas de un punto conocido (como el vértice) en tu ecuación para verificar.
+
+    \item \textbf{Practica la conversión:} Saber cambiar entre forma general y canónica es súper útil. Es como traducir entre dos idiomas matemáticos.
+
+    \item \textbf{Relaciona con la vida real:} Cuando veas una antena parabólica o un chorro de agua, piensa en la matemática detrás. Esto hace que el aprendizaje sea más significativo.
+\end{enumerate}
+
+\subsection*{Tabla de Referencia Rápida}
+
+\begin{center}
+\begin{tcolorbox}[enhanced,colback=blue!5,colframe=blue!60!black,title=Guía Rápida de Parábolas]
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{3cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{Si tienes...} & \textbf{Forma de la ecuación} & \textbf{Característica principal} \\
+\hline
+Parábola horizontal abriendo a la derecha & $(y-k)^2 = 4p(x-h)$ & Foco a la derecha del vértice \\
+\hline
+Parábola horizontal abriendo a la izquierda & $(y-k)^2 = -4p(x-h)$ & Foco a la izquierda del vértice \\
+\hline
+Parábola vertical abriendo hacia arriba & $(x-h)^2 = 4p(y-k)$ & Foco arriba del vértice \\
+\hline
+Parábola vertical abriendo hacia abajo & $(x-h)^2 = -4p(y-k)$ & Foco abajo del vértice \\
+\hline
+Ecuación con $x^2$ & $Ax^2 + Dx + Ey + F = 0$ & Parábola vertical \\
+\hline
+Ecuación con $y^2$ & $Cy^2 + Dx + Ey + F = 0$ & Parábola horizontal \\
+\hline
+\end{tabular}
+\end{tcolorbox}
+\end{center}
+
+\subsection*{¿Qué sigue?}
+
+Ahora que dominas las bases de las parábolas, estás listo para:
+
+\begin{itemize}
+    \item Resolver problemas más complejos de aplicación
+    \item Estudiar otras cónicas (elipse, hipérbola)
+    \item Explorar las parábolas en coordenadas polares
+    \item Aplicar tus conocimientos en física (movimiento de proyectiles)
+    \item Entender mejor el diseño de estructuras parabólicas
+\end{itemize}
+
+\subsection*{Reflexión Final}
+
+Las parábolas son mucho más que curvas en un papel. Son la forma que toma el agua al salir de una fuente, el camino de una pelota de béisbol hacia el home run, la estructura de los puentes que cruzan ríos, y la forma de las antenas que nos conectan con el espacio.
+
+Cada vez que resuelvas un problema de parábolas, recuerda que estás trabajando con una de las formas más elegantes y útiles de la naturaleza. La misma matemática que usas en clase es la que usan los ingenieros para diseñar los faros de los autos, los arquitectos para crear edificios impresionantes, y los científicos para entender el universo.
+
+\begin{center}
+\textit{``La naturaleza está escrita en lenguaje matemático, y las letras son triángulos, círculos y otras figuras geométricas.''} \\
+--- Galileo Galilei
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\Large
+\textbf{¡Sigue explorando el fascinante mundo de las cónicas!}
+\end{center}
+
+% No cerramos el documento aquí, será cerrado en el ensamblaje final

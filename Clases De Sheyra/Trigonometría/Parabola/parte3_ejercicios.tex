@@ -1,0 +1,945 @@
+% PARTE 3: EJERCICIOS PROPUESTOS Y SOLUCIONES
+% Guía sobre la Parábola - Geometría Analítica
+
+\section{Ejercicios Propuestos}
+
+Los siguientes ejercicios están diseñados para reforzar tu comprensión de las parábolas. Intenta resolverlos antes de consultar las soluciones detalladas.
+
+\begin{ejercicio}[title={Ejercicio 1: Ecuación Canónica - Vértice en el Origen}]
+Para cada parábola con vértice en el origen, escribe su ecuación canónica y determina el foco y la directriz:
+\begin{enumerate}[label=\alph*)]
+    \item Parábola que abre hacia arriba con $p = 3$
+    \item Parábola que abre hacia la izquierda con distancia focal de 5 unidades
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 2: Ecuación Canónica - Vértice Trasladado}]
+Encuentra la ecuación canónica de cada parábola:
+\begin{enumerate}[label=\alph*)]
+    \item Vértice en $(2, -1)$, abre hacia la derecha, $p = 4$
+    \item Vértice en $(-3, 5)$, abre hacia abajo, foco a 2 unidades del vértice
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 3: Identificación de Elementos}]
+Para cada ecuación, encuentra el vértice, foco, directriz y eje de simetría:
+\begin{enumerate}[label=\alph*)]
+    \item $(x - 4)^2 = 12(y + 2)$
+    \item $(y + 1)^2 = -8(x - 3)$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 4: De Forma General a Canónica}]
+Transforma cada ecuación a su forma canónica completando el cuadrado:
+\begin{enumerate}[label=\alph*)]
+    \item $x^2 - 6x - 8y + 17 = 0$
+    \item $y^2 + 4y + 12x - 8 = 0$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 5: Parábola Dados Foco y Directriz}]
+Encuentra la ecuación de la parábola con:
+\begin{enumerate}[label=\alph*)]
+    \item Foco en $F(0, 4)$ y directriz $y = -4$
+    \item Foco en $F(5, 2)$ y directriz $x = -1$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 6: Parábola por Tres Puntos}]
+Encuentra la ecuación de la parábola vertical que pasa por los puntos:
+\begin{enumerate}[label=\alph*)]
+    \item $A(0, 3)$, $B(2, -1)$ y $C(4, 3)$
+    \item $P(1, 0)$, $Q(3, 4)$ y $R(-1, 4)$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 7: Determinación de Orientación y Elementos}]
+Para cada ecuación, determina la orientación de la parábola y todos sus elementos geométricos:
+\begin{enumerate}[label=\alph*)]
+    \item $x^2 + 8x - 4y + 20 = 0$
+    \item $2y^2 - 12y - 5x + 13 = 0$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 8: Aplicación Práctica - Antena Parabólica}]
+Una antena parabólica tiene 8 metros de diámetro y 2 metros de profundidad.
+\begin{enumerate}[label=\alph*)]
+    \item Encuentra la ecuación de la parábola considerando el vértice en el origen
+    \item Determina la posición del foco (receptor de señales)
+    \item Si un rayo llega paralelo al eje de simetría a 3 metros del vértice, ¿a qué distancia del vértice se encuentra el punto donde el rayo toca la parábola?
+\end{enumerate}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones Detalladas}
+
+\begin{solucion}[title={Solución Ejercicio 1}]
+\textbf{Parte a)} Parábola con vértice en el origen, abre hacia arriba, $p = 3$
+
+\textbf{Paso 1:} Identificar la orientación y el valor de $p$.
+- Abre hacia arriba: forma $x^2 = 4py$
+- $p = 3$ (positivo porque abre hacia arriba)
+
+\textbf{Paso 2:} Escribir la ecuación canónica.
+\[
+x^2 = 4py = 4(3)y = 12y
+\]
+\[
+\boxed{x^2 = 12y}
+\]
+
+\textbf{Paso 3:} Determinar el foco.
+- Como abre hacia arriba, el foco está en $(0, p)$
+\[
+F(0, 3)
+\]
+
+\textbf{Paso 4:} Determinar la directriz.
+- La directriz es una línea horizontal: $y = -p$
+\[
+y = -3
+\]
+
+\textbf{Paso 5:} Verificación de la definición.
+- Punto en la parábola: si $x = 6$, entonces $36 = 12y$, así $y = 3$
+- Punto $P(6, 3)$
+- Distancia al foco: $d(P, F) = \sqrt{(6-0)^2 + (3-3)^2} = 6$
+- Distancia a la directriz: $d(P, y=-3) = |3-(-3)| = 6$ ✓
+
+\textbf{Parte b)} Parábola con vértice en el origen, abre hacia la izquierda, distancia focal 5
+
+\textbf{Paso 1:} Interpretar la información.
+- Abre hacia la izquierda: forma $y^2 = 4px$ con $p < 0$
+- Distancia focal = $|p| = 5$, entonces $p = -5$
+
+\textbf{Paso 2:} Escribir la ecuación canónica.
+\[
+y^2 = 4px = 4(-5)x = -20x
+\]
+\[
+\boxed{y^2 = -20x}
+\]
+
+\textbf{Paso 3:} Determinar el foco.
+- Como abre hacia la izquierda, el foco está en $(p, 0)$
+\[
+F(-5, 0)
+\]
+
+\textbf{Paso 4:} Determinar la directriz.
+- La directriz es una línea vertical: $x = -p$
+\[
+x = 5
+\]
+
+\textbf{Paso 5:} Graficar para visualizar.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.4]
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-8, xmax=8,
+        ymin=-10, ymax=10,
+        grid=major,
+        width=0.9\textwidth,
+        height=0.6\textwidth,
+        axis equal image
+    ]
+    % Parte a: x^2 = 12y
+    \addplot[domain=-8:8, samples=100, thick, blue] {x^2/12};
+    \addplot[only marks, mark=*, blue] coordinates {(0,3)};
+    \node[blue] at (axis cs: 0,3) [above right] {$F(0,3)$};
+    \addplot[dashed, blue, domain=-8:8] {-3};
+    \node[blue] at (axis cs: 7,-3) [below] {$y=-3$};
+
+    % Parte b: y^2 = -20x
+    \addplot[domain=-8:0, samples=100, thick, red, parametric] ({-t^2/20}, {t});
+    \addplot[only marks, mark=*, red] coordinates {(-5,0)};
+    \node[red] at (axis cs: -5,0) [below left] {$F(-5,0)$};
+    \addplot[dashed, red, samples=2] coordinates {(5,-10) (5,10)};
+    \node[red] at (axis cs: 5,8) [right] {$x=5$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta completa:}
+\begin{itemize}
+    \item \textbf{Parte a:} Ecuación: $x^2 = 12y$, Foco: $F(0,3)$, Directriz: $y = -3$
+    \item \textbf{Parte b:} Ecuación: $y^2 = -20x$, Foco: $F(-5,0)$, Directriz: $x = 5$
+\end{itemize}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 2}]
+\textbf{Parte a)} Vértice en $(2, -1)$, abre hacia la derecha, $p = 4$
+
+\textbf{Paso 1:} Identificar la forma de la ecuación.
+- Vértice: $V(h, k) = (2, -1)$
+- Abre hacia la derecha: eje horizontal
+- Forma: $(y - k)^2 = 4p(x - h)$
+
+\textbf{Paso 2:} Sustituir valores.
+\[
+(y - (-1))^2 = 4(4)(x - 2)
+\]
+\[
+(y + 1)^2 = 16(x - 2)
+\]
+\[
+\boxed{(y + 1)^2 = 16(x - 2)}
+\]
+
+\textbf{Paso 3:} Determinar el foco.
+- El foco está a $p = 4$ unidades a la derecha del vértice
+\[
+F(h + p, k) = F(2 + 4, -1) = F(6, -1)
+\]
+
+\textbf{Paso 4:} Determinar la directriz.
+- La directriz es vertical: $x = h - p$
+\[
+x = 2 - 4 = -2
+\]
+
+\textbf{Paso 5:} Verificar con un punto.
+- Si $x = 6$: $(y + 1)^2 = 16(6 - 2) = 64$
+- Entonces $y + 1 = \pm 8$, así $y = 7$ o $y = -9$
+- Puntos: $(6, 7)$ y $(6, -9)$
+
+\textbf{Parte b)} Vértice en $(-3, 5)$, abre hacia abajo, foco a 2 unidades
+
+\textbf{Paso 1:} Determinar el valor de $p$.
+- Abre hacia abajo: $p < 0$
+- Distancia del foco al vértice: $|p| = 2$
+- Por tanto: $p = -2$
+
+\textbf{Paso 2:} Escribir la ecuación.
+- Vértice: $V(-3, 5)$
+- Abre hacia abajo: eje vertical
+- Forma: $(x - h)^2 = 4p(y - k)$
+\[
+(x - (-3))^2 = 4(-2)(y - 5)
+\]
+\[
+(x + 3)^2 = -8(y - 5)
+\]
+\[
+\boxed{(x + 3)^2 = -8(y - 5)}
+\]
+
+\textbf{Paso 3:} Determinar el foco.
+- El foco está a 2 unidades debajo del vértice
+\[
+F(h, k + p) = F(-3, 5 + (-2)) = F(-3, 3)
+\]
+
+\textbf{Paso 4:} Determinar la directriz.
+- La directriz es horizontal: $y = k - p$
+\[
+y = 5 - (-2) = 7
+\]
+
+\textbf{Paso 5:} Desarrollar a forma general.
+\begin{align}
+(x + 3)^2 &= -8(y - 5)\\
+x^2 + 6x + 9 &= -8y + 40\\
+x^2 + 6x + 8y - 31 &= 0
+\end{align}
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item \textbf{Parte a:} $(y + 1)^2 = 16(x - 2)$, Foco: $F(6, -1)$, Directriz: $x = -2$
+    \item \textbf{Parte b:} $(x + 3)^2 = -8(y - 5)$, Foco: $F(-3, 3)$, Directriz: $y = 7$
+\end{itemize}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 3}]
+\textbf{Parte a)} $(x - 4)^2 = 12(y + 2)$
+
+\textbf{Paso 1:} Identificar la forma y orientación.
+- Forma: $(x - h)^2 = 4p(y - k)$
+- Variable al cuadrado: $x$ → eje vertical
+- Coeficiente positivo → abre hacia arriba
+
+\textbf{Paso 2:} Identificar $h$, $k$ y $4p$.
+- Comparando: $(x - 4)^2 = 12(y - (-2))$
+- $h = 4$, $k = -2$
+- $4p = 12$, entonces $p = 3$
+
+\textbf{Paso 3:} Determinar el vértice.
+\[
+V(h, k) = V(4, -2)
+\]
+
+\textbf{Paso 4:} Determinar el foco.
+- Como abre hacia arriba: $F(h, k + p)$
+\[
+F(4, -2 + 3) = F(4, 1)
+\]
+
+\textbf{Paso 5:} Determinar la directriz.
+- Línea horizontal: $y = k - p$
+\[
+y = -2 - 3 = -5
+\]
+
+\textbf{Paso 6:} Determinar el eje de simetría.
+- Línea vertical que pasa por el vértice
+\[
+x = 4
+\]
+
+\textbf{Parte b)} $(y + 1)^2 = -8(x - 3)$
+
+\textbf{Paso 1:} Identificar la forma y orientación.
+- Forma: $(y - k)^2 = 4p(x - h)$
+- Variable al cuadrado: $y$ → eje horizontal
+- Coeficiente negativo → abre hacia la izquierda
+
+\textbf{Paso 2:} Identificar $h$, $k$ y $4p$.
+- Comparando: $(y - (-1))^2 = -8(x - 3)$
+- $h = 3$, $k = -1$
+- $4p = -8$, entonces $p = -2$
+
+\textbf{Paso 3:} Determinar el vértice.
+\[
+V(h, k) = V(3, -1)
+\]
+
+\textbf{Paso 4:} Determinar el foco.
+- Como abre hacia la izquierda: $F(h + p, k)$
+\[
+F(3 + (-2), -1) = F(1, -1)
+\]
+
+\textbf{Paso 5:} Determinar la directriz.
+- Línea vertical: $x = h - p$
+\[
+x = 3 - (-2) = 5
+\]
+
+\textbf{Paso 6:} Determinar el eje de simetría.
+- Línea horizontal que pasa por el vértice
+\[
+y = -1
+\]
+
+\textbf{Paso 7:} Graficar ambas parábolas.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-2, xmax=10,
+        ymin=-7, ymax=5,
+        grid=major,
+        width=0.95\textwidth,
+        height=0.65\textwidth,
+        axis equal image
+    ]
+    % Parte a
+    \addplot[domain=0:8, samples=100, thick, blue] ({x}, {(x-4)^2/12 - 2});
+    \addplot[only marks, mark=*, blue] coordinates {(4,-2) (4,1)};
+    \node[blue] at (axis cs: 4,-2) [below right] {$V(4,-2)$};
+    \node[blue] at (axis cs: 4,1) [above right] {$F(4,1)$};
+    \addplot[dashed, blue] coordinates {(-2,-5) (10,-5)};
+    \node[blue] at (axis cs: 8,-5) [below] {$y=-5$};
+
+    % Parte b
+    \addplot[domain=-5:3, samples=100, thick, red, parametric] ({3-(t+1)^2/8}, {t});
+    \addplot[only marks, mark=*, red] coordinates {(3,-1) (1,-1)};
+    \node[red] at (axis cs: 3,-1) [above left] {$V(3,-1)$};
+    \node[red] at (axis cs: 1,-1) [below left] {$F(1,-1)$};
+    \addplot[dashed, red] coordinates {(5,-7) (5,5)};
+    \node[red] at (axis cs: 5,3) [right] {$x=5$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas completas:}
+\begin{itemize}
+    \item \textbf{Parte a:} $V(4,-2)$, $F(4,1)$, Directriz: $y=-5$, Eje: $x=4$
+    \item \textbf{Parte b:} $V(3,-1)$, $F(1,-1)$, Directriz: $x=5$, Eje: $y=-1$
+\end{itemize}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 4}]
+\textbf{Parte a)} $x^2 - 6x - 8y + 17 = 0$
+
+\textbf{Paso 1:} Agrupar términos con la misma variable.
+\[
+x^2 - 6x = 8y - 17
+\]
+
+\textbf{Paso 2:} Completar el cuadrado para $x$.
+- Coeficiente de $x$: $-6$
+- Mitad del coeficiente: $-3$
+- Cuadrado: $(-3)^2 = 9$
+
+\textbf{Paso 3:} Añadir y restar 9.
+\[
+x^2 - 6x + 9 = 8y - 17 + 9
+\]
+\[
+(x - 3)^2 = 8y - 8
+\]
+
+\textbf{Paso 4:} Factorizar el lado derecho.
+\[
+(x - 3)^2 = 8(y - 1)
+\]
+\[
+\boxed{(x - 3)^2 = 8(y - 1)}
+\]
+
+\textbf{Paso 5:} Identificar elementos.
+- Vértice: $V(3, 1)$
+- $4p = 8$, entonces $p = 2$
+- Foco: $F(3, 1 + 2) = F(3, 3)$
+- Directriz: $y = 1 - 2 = -1$
+
+\textbf{Parte b)} $y^2 + 4y + 12x - 8 = 0$
+
+\textbf{Paso 1:} Reorganizar la ecuación.
+\[
+y^2 + 4y = -12x + 8
+\]
+
+\textbf{Paso 2:} Completar el cuadrado para $y$.
+- Coeficiente de $y$: $4$
+- Mitad del coeficiente: $2$
+- Cuadrado: $(2)^2 = 4$
+
+\textbf{Paso 3:} Añadir 4 a ambos lados.
+\[
+y^2 + 4y + 4 = -12x + 8 + 4
+\]
+\[
+(y + 2)^2 = -12x + 12
+\]
+
+\textbf{Paso 4:} Factorizar el lado derecho.
+\[
+(y + 2)^2 = -12(x - 1)
+\]
+\[
+\boxed{(y + 2)^2 = -12(x - 1)}
+\]
+
+\textbf{Paso 5:} Identificar elementos.
+- Vértice: $V(1, -2)$
+- $4p = -12$, entonces $p = -3$
+- Abre hacia la izquierda
+- Foco: $F(1 - 3, -2) = F(-2, -2)$
+- Directriz: $x = 1 - (-3) = 4$
+
+\textbf{Paso 6:} Verificación expandiendo.
+\begin{align}
+(y + 2)^2 &= -12(x - 1)\\
+y^2 + 4y + 4 &= -12x + 12\\
+y^2 + 4y + 12x - 8 &= 0 \checkmark
+\end{align}
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item \textbf{Parte a:} $(x - 3)^2 = 8(y - 1)$, $V(3,1)$, $F(3,3)$, Directriz: $y = -1$
+    \item \textbf{Parte b:} $(y + 2)^2 = -12(x - 1)$, $V(1,-2)$, $F(-2,-2)$, Directriz: $x = 4$
+\end{itemize}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 5}]
+\textbf{Parte a)} Foco en $F(0, 4)$ y directriz $y = -4$
+
+\textbf{Paso 1:} Encontrar el vértice.
+- El vértice está a mitad de camino entre el foco y la directriz
+- Coordenada $x$ del vértice: $x = 0$ (mismo que el foco)
+- Coordenada $y$ del vértice: $y = \frac{4 + (-4)}{2} = 0$
+- Vértice: $V(0, 0)$
+
+\textbf{Paso 2:} Calcular $p$.
+- Distancia del vértice al foco: $p = 4 - 0 = 4$
+- Como el foco está arriba del vértice: $p > 0$
+
+\textbf{Paso 3:} Determinar la orientación.
+- Directriz horizontal, foco arriba → abre hacia arriba
+- Forma: $x^2 = 4py$
+
+\textbf{Paso 4:} Escribir la ecuación.
+\[
+x^2 = 4(4)y = 16y
+\]
+\[
+\boxed{x^2 = 16y}
+\]
+
+\textbf{Paso 5:} Verificación con la definición.
+- Punto de prueba: $(4, 1)$ debe estar en la parábola
+- Verificar: $16 = 16(1)$ ✓
+- Distancia al foco: $d = \sqrt{(4-0)^2 + (1-4)^2} = \sqrt{16 + 9} = 5$
+- Distancia a la directriz: $d = |1 - (-4)| = 5$ ✓
+
+\textbf{Parte b)} Foco en $F(5, 2)$ y directriz $x = -1$
+
+\textbf{Paso 1:} Encontrar el vértice.
+- Directriz vertical en $x = -1$
+- Foco en $x = 5$
+- Coordenada $x$ del vértice: $x = \frac{5 + (-1)}{2} = 2$
+- Coordenada $y$ del vértice: $y = 2$ (mismo que el foco)
+- Vértice: $V(2, 2)$
+
+\textbf{Paso 2:} Calcular $p$.
+- Distancia del vértice al foco: $p = 5 - 2 = 3$
+- Como el foco está a la derecha: $p > 0$
+
+\textbf{Paso 3:} Determinar la orientación.
+- Directriz vertical, foco a la derecha → abre hacia la derecha
+- Forma: $(y - k)^2 = 4p(x - h)$
+
+\textbf{Paso 4:} Escribir la ecuación.
+\[
+(y - 2)^2 = 4(3)(x - 2)
+\]
+\[
+\boxed{(y - 2)^2 = 12(x - 2)}
+\]
+
+\textbf{Paso 5:} Desarrollar a forma general.
+\begin{align}
+(y - 2)^2 &= 12(x - 2)\\
+y^2 - 4y + 4 &= 12x - 24\\
+y^2 - 4y - 12x + 28 &= 0
+\end{align}
+
+\textbf{Paso 6:} Graficar ambas parábolas.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.35]
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-6, xmax=8,
+        ymin=-6, ymax=8,
+        grid=major,
+        width=0.9\textwidth,
+        height=0.9\textwidth,
+        axis equal image
+    ]
+    % Parte a: x^2 = 16y
+    \addplot[domain=-8:8, samples=100, thick, blue] {x^2/16};
+    \addplot[only marks, mark=*, blue] coordinates {(0,0) (0,4)};
+    \node[blue] at (axis cs: 0,0) [below left] {$V$};
+    \node[blue] at (axis cs: 0,4) [above right] {$F(0,4)$};
+    \addplot[dashed, blue, domain=-8:8] {-4};
+    \node[blue] at (axis cs: 6,-4) [below] {$y=-4$};
+
+    % Parte b: (y-2)^2 = 12(x-2)
+    \addplot[domain=-2:8, samples=100, thick, red, parametric] ({2 + t^2/12}, {2 + t});
+    \addplot[only marks, mark=*, red] coordinates {(2,2) (5,2)};
+    \node[red] at (axis cs: 2,2) [below left] {$V(2,2)$};
+    \node[red] at (axis cs: 5,2) [above] {$F(5,2)$};
+    \addplot[dashed, red] coordinates {(-1,-6) (-1,8)};
+    \node[red] at (axis cs: -1,6) [left] {$x=-1$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item \textbf{Parte a:} $x^2 = 16y$ o en forma general: $x^2 - 16y = 0$
+    \item \textbf{Parte b:} $(y - 2)^2 = 12(x - 2)$ o $y^2 - 4y - 12x + 28 = 0$
+\end{itemize}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 6}]
+\textbf{Parte a)} Parábola vertical por $A(0, 3)$, $B(2, -1)$ y $C(4, 3)$
+
+\textbf{Paso 1:} Plantear la forma general de una parábola vertical.
+\[
+y = ax^2 + bx + c
+\]
+
+\textbf{Paso 2:} Sustituir cada punto para obtener un sistema de ecuaciones.
+
+Para $A(0, 3)$:
+\[
+3 = a(0)^2 + b(0) + c \Rightarrow c = 3
+\]
+
+Para $B(2, -1)$:
+\[
+-1 = a(2)^2 + b(2) + 3 \Rightarrow 4a + 2b = -4
+\]
+
+Para $C(4, 3)$:
+\[
+3 = a(4)^2 + b(4) + 3 \Rightarrow 16a + 4b = 0
+\]
+
+\textbf{Paso 3:} Resolver el sistema.
+De la tercera ecuación: $16a + 4b = 0 \Rightarrow b = -4a$
+
+Sustituyendo en la segunda ecuación:
+\[
+4a + 2(-4a) = -4
+\]
+\[
+4a - 8a = -4
+\]
+\[
+-4a = -4
+\]
+\[
+a = 1
+\]
+
+Por lo tanto: $b = -4(1) = -4$
+
+\textbf{Paso 4:} Escribir la ecuación.
+\[
+y = x^2 - 4x + 3
+\]
+
+\textbf{Paso 5:} Convertir a forma canónica.
+\begin{align}
+y &= x^2 - 4x + 3\\
+y &= (x^2 - 4x + 4) - 4 + 3\\
+y &= (x - 2)^2 - 1\\
+y + 1 &= (x - 2)^2
+\end{align}
+\[
+\boxed{(x - 2)^2 = y + 1}
+\]
+
+\textbf{Paso 6:} Verificar con los puntos originales.
+- $A(0, 3)$: $(0-2)^2 = 4 = 3+1$ ✓
+- $B(2, -1)$: $(2-2)^2 = 0 = -1+1$ ✓
+- $C(4, 3)$: $(4-2)^2 = 4 = 3+1$ ✓
+
+\textbf{Parte b)} Parábola vertical por $P(1, 0)$, $Q(3, 4)$ y $R(-1, 4)$
+
+\textbf{Paso 1:} Usar la forma general $y = ax^2 + bx + c$.
+
+\textbf{Paso 2:} Sustituir los puntos.
+
+Para $P(1, 0)$:
+\[
+0 = a(1)^2 + b(1) + c \Rightarrow a + b + c = 0
+\]
+
+Para $Q(3, 4)$:
+\[
+4 = a(3)^2 + b(3) + c \Rightarrow 9a + 3b + c = 4
+\]
+
+Para $R(-1, 4)$:
+\[
+4 = a(-1)^2 + b(-1) + c \Rightarrow a - b + c = 4
+\]
+
+\textbf{Paso 3:} Resolver el sistema.
+De la primera ecuación: $c = -a - b$
+
+Restando la tercera ecuación de la primera:
+\[
+(a + b + c) - (a - b + c) = 0 - 4
+\]
+\[
+2b = -4 \Rightarrow b = -2
+\]
+
+Sustituyendo $b = -2$ y $c = -a - b = -a + 2$ en la segunda ecuación:
+\[
+9a + 3(-2) + (-a + 2) = 4
+\]
+\[
+9a - 6 - a + 2 = 4
+\]
+\[
+8a - 4 = 4
+\]
+\[
+8a = 8 \Rightarrow a = 1
+\]
+
+Por lo tanto: $c = -1 - (-2) = 1$
+
+\textbf{Paso 4:} Escribir la ecuación.
+\[
+y = x^2 - 2x + 1
+\]
+
+\textbf{Paso 5:} Reconocer el cuadrado perfecto.
+\[
+y = (x - 1)^2
+\]
+\[
+\boxed{(x - 1)^2 = y}
+\]
+
+\textbf{Paso 6:} Identificar elementos.
+- Vértice: $V(1, 0)$ (¡coincide con el punto $P$!)
+- $4p = 1$, entonces $p = 1/4$
+- Foco: $F(1, 1/4)$
+- Directriz: $y = -1/4$
+
+\textbf{Respuestas:}
+\begin{itemize}
+    \item \textbf{Parte a:} $(x - 2)^2 = y + 1$ o $y = x^2 - 4x + 3$
+    \item \textbf{Parte b:} $(x - 1)^2 = y$ o $y = x^2 - 2x + 1$
+\end{itemize}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 7}]
+\textbf{Parte a)} $x^2 + 8x - 4y + 20 = 0$
+
+\textbf{Paso 1:} Determinar la orientación.
+- Variable al cuadrado: $x^2$ → eje vertical
+- Reorganizar: $x^2 + 8x = 4y - 20$
+
+\textbf{Paso 2:} Completar el cuadrado.
+\[
+x^2 + 8x + 16 = 4y - 20 + 16
+\]
+\[
+(x + 4)^2 = 4y - 4
+\]
+\[
+(x + 4)^2 = 4(y - 1)
+\]
+
+\textbf{Paso 3:} Identificar la orientación definitiva.
+- Coeficiente positivo → abre hacia arriba
+
+\textbf{Paso 4:} Determinar todos los elementos.
+- Vértice: $V(-4, 1)$
+- $4p = 4$, entonces $p = 1$
+- Foco: $F(-4, 1 + 1) = F(-4, 2)$
+- Directriz: $y = 1 - 1 = 0$
+- Eje de simetría: $x = -4$
+- Lado recto: $|4p| = 4$
+
+\textbf{Paso 5:} Puntos adicionales para graficar.
+- Extremos del lado recto: cuando $y = 2$ (altura del foco)
+  $(x + 4)^2 = 4(2 - 1) = 4$
+  $x + 4 = \pm 2$
+  $x = -6$ o $x = -2$
+- Puntos: $(-6, 2)$ y $(-2, 2)$
+
+\textbf{Parte b)} $2y^2 - 12y - 5x + 13 = 0$
+
+\textbf{Paso 1:} Normalizar el coeficiente principal.
+\[
+y^2 - 6y - \frac{5x}{2} + \frac{13}{2} = 0
+\]
+\[
+y^2 - 6y = \frac{5x}{2} - \frac{13}{2}
+\]
+
+\textbf{Paso 2:} Completar el cuadrado.
+\[
+y^2 - 6y + 9 = \frac{5x}{2} - \frac{13}{2} + 9
+\]
+\[
+(y - 3)^2 = \frac{5x}{2} + \frac{5}{2}
+\]
+\[
+(y - 3)^2 = \frac{5}{2}(x + 1)
+\]
+
+\textbf{Paso 3:} Identificar la orientación.
+- Variable al cuadrado: $y$ → eje horizontal
+- Coeficiente positivo → abre hacia la derecha
+
+\textbf{Paso 4:} Determinar elementos.
+- Vértice: $V(-1, 3)$
+- $4p = \frac{5}{2}$, entonces $p = \frac{5}{8}$
+- Foco: $F(-1 + \frac{5}{8}, 3) = F(-\frac{3}{8}, 3)$
+- Directriz: $x = -1 - \frac{5}{8} = -\frac{13}{8}$
+- Eje de simetría: $y = 3$
+- Lado recto: $|4p| = \frac{5}{2}$
+
+\textbf{Paso 5:} Graficar ambas parábolas.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.4]
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        xmin=-8, xmax=2,
+        ymin=-2, ymax=6,
+        grid=major,
+        width=0.95\textwidth,
+        height=0.7\textwidth,
+        axis equal image
+    ]
+    % Parte a
+    \addplot[domain=-8:0, samples=100, thick, blue] ({x}, {(x+4)^2/4 + 1});
+    \addplot[only marks, mark=*, blue] coordinates {(-4,1) (-4,2)};
+    \node[blue] at (axis cs: -4,1) [below right] {$V(-4,1)$};
+    \node[blue] at (axis cs: -4,2) [above right] {$F(-4,2)$};
+    \addplot[dashed, blue, domain=-8:0] {0};
+    \node[blue] at (axis cs: -2,0) [below] {$y=0$};
+
+    % Parte b
+    \addplot[domain=-1:2, samples=100, thick, red, parametric] ({-1 + 2*(t-3)^2/5}, {t});
+    \addplot[only marks, mark=*, red] coordinates {(-1,3) (-3/8,3)};
+    \node[red] at (axis cs: -1,3) [above left] {$V(-1,3)$};
+    \node[red] at (axis cs: -3/8,3) [above] {$F$};
+    \addplot[dashed, red] coordinates {(-13/8,-2) (-13/8,6)};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas completas:}
+\begin{itemize}
+    \item \textbf{Parte a:} Abre hacia arriba, $V(-4,1)$, $F(-4,2)$, Directriz: $y=0$, Eje: $x=-4$
+    \item \textbf{Parte b:} Abre hacia la derecha, $V(-1,3)$, $F(-\frac{3}{8},3)$, Directriz: $x=-\frac{13}{8}$, Eje: $y=3$
+\end{itemize}
+\end{solucion}
+
+\begin{solucion}[title={Solución Ejercicio 8}]
+\textbf{Antena parabólica:} 8 metros de diámetro, 2 metros de profundidad
+
+\textbf{Parte a)} Ecuación con vértice en el origen
+
+\textbf{Paso 1:} Establecer el sistema de coordenadas.
+- Vértice en el origen: $V(0, 0)$
+- Eje de simetría: eje $x$ (antena abre hacia la derecha)
+- Forma: $y^2 = 4px$
+
+\textbf{Paso 2:} Usar la información dada.
+- Diámetro = 8 m → radio = 4 m
+- Profundidad = 2 m
+- El punto $(2, 4)$ está en la parábola (borde superior)
+- El punto $(2, -4)$ está en la parábola (borde inferior)
+
+\textbf{Paso 3:} Encontrar $p$ usando un punto.
+Sustituyendo $(2, 4)$ en $y^2 = 4px$:
+\[
+16 = 4p(2)
+\]
+\[
+16 = 8p
+\]
+\[
+p = 2
+\]
+
+\textbf{Paso 4:} Escribir la ecuación.
+\[
+y^2 = 4(2)x
+\]
+\[
+\boxed{y^2 = 8x}
+\]
+
+\textbf{Paso 5:} Verificar con el otro punto.
+Para $(2, -4)$: $(-4)^2 = 16 = 8(2)$ ✓
+
+\textbf{Parte b)} Posición del foco (receptor)
+
+\textbf{Paso 1:} Usar el valor de $p$.
+- $p = 2$ metros
+- El foco está a $p$ unidades del vértice en la dirección de apertura
+
+\textbf{Paso 2:} Determinar la posición.
+\[
+F(p, 0) = F(2, 0)
+\]
+
+\textbf{Respuesta:} El receptor debe colocarse a 2 metros del vértice de la antena.
+
+\textbf{Parte c)} Punto donde un rayo paralelo toca la parábola
+
+\textbf{Paso 1:} Entender el problema.
+- Rayo paralelo al eje de simetría
+- A 3 metros del vértice → altura $y = 3$
+- Necesitamos encontrar la coordenada $x$
+
+\textbf{Paso 2:} Sustituir en la ecuación.
+\[
+(3)^2 = 8x
+\]
+\[
+9 = 8x
+\]
+\[
+x = \frac{9}{8} = 1.125
+\]
+
+\textbf{Paso 3:} Interpretar el resultado.
+- El punto es $\left(\frac{9}{8}, 3\right)$
+- Distancia del vértice: $\frac{9}{8}$ metros = 1.125 metros
+
+\textbf{Paso 4:} Verificar la propiedad reflectora.
+- Todo rayo paralelo al eje se refleja hacia el foco
+- Distancia del punto al foco:
+\[
+d = \sqrt{\left(\frac{9}{8} - 2\right)^2 + (3 - 0)^2} = \sqrt{\left(-\frac{7}{8}\right)^2 + 9}
+\]
+\[
+d = \sqrt{\frac{49}{64} + \frac{576}{64}} = \sqrt{\frac{625}{64}} = \frac{25}{8}
+\]
+
+\textbf{Paso 5:} Graficar la situación.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$x$ (metros)},
+        ylabel={$y$ (metros)},
+        xmin=-0.5, xmax=3,
+        ymin=-5, ymax=5,
+        grid=major,
+        width=0.9\textwidth,
+        height=0.7\textwidth,
+        axis equal image
+    ]
+    % Parábola
+    \addplot[domain=-4:4, samples=100, thick, blue, parametric] ({t^2/8}, {t});
+
+    % Vértice y foco
+    \addplot[only marks, mark=*, blue] coordinates {(0,0) (2,0)};
+    \node[blue] at (axis cs: 0,0) [below left] {$V(0,0)$};
+    \node[blue] at (axis cs: 2,0) [below] {$F(2,0)$};
+
+    % Puntos del borde
+    \addplot[only marks, mark=o, red] coordinates {(2,4) (2,-4)};
+    \node[red] at (axis cs: 2,4) [above] {$(2,4)$};
+    \node[red] at (axis cs: 2,-4) [below] {$(2,-4)$};
+
+    % Rayo y punto de incidencia
+    \draw[green, thick, -{Latex}] (axis cs: -0.5,3) -- (axis cs: 9/8,3);
+    \addplot[only marks, mark=*, green] coordinates {(9/8,3)};
+    \node[green] at (axis cs: 9/8,3) [above right] {$(\frac{9}{8},3)$};
+
+    % Rayo reflejado hacia el foco
+    \draw[green, thick, dashed, -{Latex}] (axis cs: 9/8,3) -- (axis cs: 2,0);
+
+    % Dimensiones
+    \draw[<->, thick, gray] (axis cs: 0,-4.5) -- (axis cs: 2,-4.5);
+    \node[gray] at (axis cs: 1,-4.5) [below] {2 m};
+    \draw[<->, thick, gray] (axis cs: 2.5,-4) -- (axis cs: 2.5,4);
+    \node[gray] at (axis cs: 2.5,0) [right] {8 m};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas completas:}
+\begin{itemize}
+    \item \textbf{Parte a:} Ecuación: $y^2 = 8x$
+    \item \textbf{Parte b:} Foco (receptor) en $F(2, 0)$, a 2 metros del vértice
+    \item \textbf{Parte c:} El rayo toca la parábola a $\frac{9}{8} = 1.125$ metros del vértice
+\end{itemize}
+
+\textbf{Nota práctica:} Esta propiedad reflectora es la que hace que las antenas parabólicas sean tan eficientes: todos los rayos paralelos (señales de satélite) se concentran en un único punto (el receptor en el foco).
+\end{solucion}
+
+\end{document}

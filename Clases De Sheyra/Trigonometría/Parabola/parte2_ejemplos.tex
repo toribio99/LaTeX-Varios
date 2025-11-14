@@ -1,0 +1,1448 @@
+\section{Ejemplos Resueltos}
+
+\begin{ejemplo}[title={Ecuación Canónica con Vértice en el Origen - Antena Parabólica}]
+Una antena parabólica para comunicaciones satelitales tiene su vértice en el origen y su eje de simetría sobre el eje $x$. Si el receptor (foco) está ubicado a 2.5 metros del vértice, encuentra la ecuación de la parábola y la posición de un punto sobre la antena que está a 4 metros de altura.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar los datos y el sistema de coordenadas.
+
+Como el vértice está en el origen $(0,0)$ y el eje de simetría es horizontal (eje $x$), la parábola tiene la forma:
+\[
+y^2 = 4px
+\]
+donde $p$ es la distancia del vértice al foco.
+
+\textbf{Paso 2:} Determinar el valor del parámetro $p$.
+
+Dado que el foco está a 2.5 metros del vértice:
+\[
+p = 2.5 \text{ metros}
+\]
+
+Como la antena "abre" hacia el foco (hacia la derecha), $p > 0$.
+
+\textbf{Paso 3:} Escribir la ecuación de la parábola.
+
+Sustituyendo $p = 2.5$ en la ecuación canónica:
+\begin{align*}
+y^2 &= 4px \\
+y^2 &= 4(2.5)x \\
+y^2 &= 10x
+\end{align*}
+
+\textbf{Paso 4:} Encontrar la posición del punto a 4 metros de altura.
+
+Si $y = 4$ metros, sustituimos en la ecuación:
+\begin{align*}
+(4)^2 &= 10x \\
+16 &= 10x \\
+x &= \frac{16}{10} \\
+x &= 1.6 \text{ metros}
+\end{align*}
+
+\textbf{Paso 5:} Verificación del resultado.
+
+Comprobamos que el punto $(1.6, 4)$ satisface la ecuación:
+\[
+y^2 = (4)^2 = 16 = 10(1.6) = 16 \quad \checkmark
+\]
+
+\textbf{Paso 6:} Análisis adicional - Directriz.
+
+La directriz está a una distancia $p$ del vértice, en el lado opuesto al foco:
+\[
+x = -p = -2.5
+\]
+
+\textbf{Paso 7:} Graficar la parábola.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.6\textwidth,
+    axis equal image,
+    xmin=-3, xmax=6,
+    ymin=-5, ymax=5,
+    xlabel={$x$ (metros)},
+    ylabel={$y$ (metros)},
+    grid=major,
+    axis lines=center,
+    xtick={-3,-2,-1,0,1,2,3,4,5,6},
+    ytick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+]
+
+% Parábola
+\addplot[maincolor, very thick, smooth, samples=100, domain=-5:5]
+    ({y^2/10}, {y});
+
+% Vértice
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(0,0)};
+\node[below right] at (axis cs:0,0) {$V(0,0)$};
+
+% Foco
+\addplot[only marks, mark=*, mark size=3pt, blue] coordinates {(2.5,0)};
+\node[below] at (axis cs:2.5,0) {$F(2.5,0)$};
+
+% Directriz
+\addplot[dashed, thick, red, domain=-5:5] coordinates {(-2.5,-5) (-2.5,5)};
+\node[above] at (axis cs:-2.5,5) {Directriz};
+
+% Punto a 4m de altura
+\addplot[only marks, mark=*, mark size=3pt, green!60!black] coordinates {(1.6,4)};
+\node[right] at (axis cs:1.6,4) {$(1.6, 4)$};
+
+% Eje de simetría
+\addplot[dashed, gray, domain=-3:6] coordinates {(-3,0) (6,0)};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 8:} Interpretación física.
+
+La antena parabólica refleja todas las ondas electromagnéticas paralelas al eje hacia el foco, donde se ubica el receptor. Esta propiedad hace que las parábolas sean ideales para antenas y telescopios.
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación de la parábola: } y^2 = 10x \\
+&\text{Punto a 4m de altura: } (1.6, 4)
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title={Ecuación Canónica con Vértice Trasladado - Puente Colgante}]
+Los cables principales de un puente colgante forman una parábola. El vértice del cable está 10 metros por encima del tablero del puente y a 50 metros del inicio del puente. Si el cable alcanza una altura de 40 metros a 100 metros del inicio del puente, encuentra la ecuación de la parábola y determina la altura del cable a 20 metros del inicio.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Establecer el sistema de coordenadas.
+
+Ubicamos el origen en el inicio del puente al nivel del tablero. Por lo tanto:
+\begin{itemize}
+    \item Vértice: $V(50, 10)$ (50m horizontal, 10m de altura)
+    \item Punto conocido: $P(100, 40)$
+    \item Eje de simetría: vertical, $x = 50$
+\end{itemize}
+
+\textbf{Paso 2:} Escribir la forma canónica con vértice trasladado.
+
+Para una parábola vertical con vértice en $(h, k)$:
+\[
+(x - h)^2 = 4p(y - k)
+\]
+
+Con vértice $V(50, 10)$:
+\[
+(x - 50)^2 = 4p(y - 10)
+\]
+
+\textbf{Paso 3:} Determinar el parámetro $p$ usando el punto conocido.
+
+El punto $(100, 40)$ debe satisfacer la ecuación:
+\begin{align*}
+(100 - 50)^2 &= 4p(40 - 10) \\
+(50)^2 &= 4p(30) \\
+2500 &= 120p \\
+p &= \frac{2500}{120} \\
+p &= \frac{125}{6} \approx 20.83 \text{ metros}
+\end{align*}
+
+\textbf{Paso 4:} Escribir la ecuación completa.
+
+Sustituyendo $p = \frac{125}{6}$:
+\begin{align*}
+(x - 50)^2 &= 4 \cdot \frac{125}{6}(y - 10) \\
+(x - 50)^2 &= \frac{500}{6}(y - 10) \\
+(x - 50)^2 &= \frac{250}{3}(y - 10)
+\end{align*}
+
+\textbf{Paso 5:} Encontrar la altura del cable a 20 metros del inicio.
+
+Para $x = 20$, sustituimos en la ecuación:
+\begin{align*}
+(20 - 50)^2 &= \frac{250}{3}(y - 10) \\
+(-30)^2 &= \frac{250}{3}(y - 10) \\
+900 &= \frac{250}{3}(y - 10) \\
+900 \cdot \frac{3}{250} &= y - 10 \\
+\frac{2700}{250} &= y - 10 \\
+10.8 &= y - 10 \\
+y &= 20.8 \text{ metros}
+\end{align*}
+
+\textbf{Paso 6:} Verificación con el punto conocido.
+
+Verificamos que $(100, 40)$ satisface la ecuación:
+\begin{align*}
+(100 - 50)^2 &= \frac{250}{3}(40 - 10) \\
+2500 &= \frac{250}{3}(30) \\
+2500 &= \frac{7500}{3} \\
+2500 &= 2500 \quad \checkmark
+\end{align*}
+
+\textbf{Paso 7:} Encontrar el foco de la parábola.
+
+El foco está a una distancia $p = \frac{125}{6}$ del vértice, en dirección del eje:
+\[
+F = (50, 10 + \frac{125}{6}) = (50, \frac{185}{6}) \approx (50, 30.83)
+\]
+
+\textbf{Paso 8:} Graficar el cable del puente.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\textwidth,
+    height=0.65\textwidth,
+    xmin=0, xmax=120,
+    ymin=0, ymax=50,
+    xlabel={Distancia horizontal (m)},
+    ylabel={Altura (m)},
+    grid=major,
+    axis lines=left,
+    xtick={0,20,40,50,60,80,100,120},
+    ytick={0,10,20,30,40,50},
+]
+
+% Parábola del cable
+\addplot[maincolor, very thick, smooth, samples=100, domain=0:120]
+    {10 + (3/250)*(x-50)^2};
+
+% Vértice
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(50,10)};
+\node[above right] at (axis cs:50,10) {$V(50,10)$};
+
+% Punto conocido
+\addplot[only marks, mark=*, mark size=3pt, blue] coordinates {(100,40)};
+\node[right] at (axis cs:100,40) {$(100,40)$};
+
+% Punto a x=20
+\addplot[only marks, mark=*, mark size=3pt, green!60!black] coordinates {(20,20.8)};
+\node[left] at (axis cs:20,20.8) {$(20, 20.8)$};
+
+% Foco
+\addplot[only marks, mark=*, mark size=3pt, orange] coordinates {(50,30.83)};
+\node[right] at (axis cs:50,30.83) {$F$};
+
+% Eje de simetría
+\addplot[dashed, gray, domain=0:50] coordinates {(50,0) (50,50)};
+
+% Tablero del puente
+\addplot[thick, brown, domain=0:120] coordinates {(0,0) (120,0)};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 9:} Forma general de la ecuación.
+
+Desarrollando la ecuación canónica:
+\begin{align*}
+(x - 50)^2 &= \frac{250}{3}(y - 10) \\
+x^2 - 100x + 2500 &= \frac{250}{3}y - \frac{2500}{3} \\
+3x^2 - 300x + 7500 &= 250y - 2500 \\
+3x^2 - 300x - 250y + 10000 &= 0
+\end{align*}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación canónica: } (x - 50)^2 = \frac{250}{3}(y - 10) \\
+&\text{Altura a 20m del inicio: } 20.8 \text{ metros}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title={De Ecuación General a Canónica - Faro de Automóvil}]
+El reflector parabólico de un faro de automóvil tiene la ecuación $x^2 - 8x - 12y + 28 = 0$, donde las unidades están en centímetros. Encuentra el vértice, el foco y la directriz del reflector. Determina también la profundidad del reflector si tiene un diámetro de 20 cm.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Reorganizar la ecuación general.
+
+Partimos de:
+\[
+x^2 - 8x - 12y + 28 = 0
+\]
+
+Agrupamos los términos en $x$ y despejamos los términos en $y$:
+\[
+x^2 - 8x = 12y - 28
+\]
+
+\textbf{Paso 2:} Completar el cuadrado en $x$.
+
+Para completar el cuadrado en $x^2 - 8x$:
+\begin{align*}
+x^2 - 8x &= x^2 - 8x + 16 - 16 \\
+&= (x - 4)^2 - 16
+\end{align*}
+
+\textbf{Paso 3:} Sustituir y simplificar.
+
+Reemplazando en la ecuación:
+\begin{align*}
+(x - 4)^2 - 16 &= 12y - 28 \\
+(x - 4)^2 &= 12y - 28 + 16 \\
+(x - 4)^2 &= 12y - 12 \\
+(x - 4)^2 &= 12(y - 1)
+\end{align*}
+
+\textbf{Paso 4:} Identificar los elementos de la parábola.
+
+La ecuación está en la forma $(x - h)^2 = 4p(y - k)$ donde:
+\begin{itemize}
+    \item Vértice: $V(h, k) = (4, 1)$
+    \item $4p = 12$, entonces $p = 3$ cm
+\end{itemize}
+
+\textbf{Paso 5:} Encontrar el foco.
+
+Como $p > 0$ y la parábola abre hacia arriba (forma $(x-h)^2 = 4p(y-k)$):
+\[
+F = (h, k + p) = (4, 1 + 3) = (4, 4)
+\]
+
+\textbf{Paso 6:} Encontrar la directriz.
+
+La directriz es una línea horizontal:
+\[
+y = k - p = 1 - 3 = -2
+\]
+
+\textbf{Paso 7:} Calcular la profundidad del reflector.
+
+Si el diámetro es 20 cm, los extremos del reflector están a 10 cm del eje de simetría.
+En $x = 4 + 10 = 14$ (o $x = 4 - 10 = -6$):
+
+\begin{align*}
+(14 - 4)^2 &= 12(y - 1) \\
+100 &= 12(y - 1) \\
+\frac{100}{12} &= y - 1 \\
+\frac{25}{3} &= y - 1 \\
+y &= 1 + \frac{25}{3} = \frac{28}{3} \approx 9.33 \text{ cm}
+\end{align*}
+
+Profundidad del reflector = altura en el borde - altura en el vértice:
+\[
+\text{Profundidad} = \frac{28}{3} - 1 = \frac{25}{3} \approx 8.33 \text{ cm}
+\]
+
+\textbf{Paso 8:} Verificación de la ecuación.
+
+Verificamos que el vértice $(4, 1)$ satisface la ecuación original:
+\begin{align*}
+(4)^2 - 8(4) - 12(1) + 28 &= 16 - 32 - 12 + 28 \\
+&= 0 \quad \checkmark
+\end{align*}
+
+\textbf{Paso 9:} Graficar el reflector.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.85\textwidth,
+    axis equal image,
+    xmin=-8, xmax=16,
+    ymin=-4, ymax=12,
+    xlabel={$x$ (cm)},
+    ylabel={$y$ (cm)},
+    grid=major,
+    axis lines=center,
+    xtick={-8,-6,-4,-2,0,2,4,6,8,10,12,14,16},
+    ytick={-4,-2,0,2,4,6,8,10,12},
+]
+
+% Parábola completa
+\addplot[maincolor!30, thin, smooth, samples=100, domain=-8:16]
+    {1 + (x-4)^2/12};
+
+% Reflector (parte usada)
+\addplot[maincolor, very thick, smooth, samples=100, domain=-6:14]
+    {1 + (x-4)^2/12};
+
+% Vértice
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(4,1)};
+\node[below right] at (axis cs:4,1) {$V(4,1)$};
+
+% Foco
+\addplot[only marks, mark=*, mark size=3pt, blue] coordinates {(4,4)};
+\node[right] at (axis cs:4,4) {$F(4,4)$};
+
+% Directriz
+\addplot[dashed, thick, red, domain=-8:16] coordinates {(-8,-2) (16,-2)};
+\node[right] at (axis cs:16,-2) {Directriz: $y=-2$};
+
+% Extremos del reflector
+\addplot[only marks, mark=*, mark size=3pt, green!60!black]
+    coordinates {(-6,9.33) (14,9.33)};
+\node[left] at (axis cs:-6,9.33) {$(-6, 9.33)$};
+\node[right] at (axis cs:14,9.33) {$(14, 9.33)$};
+
+% Eje de simetría
+\addplot[dashed, gray, domain=-4:12] coordinates {(4,-4) (4,12)};
+
+% Diámetro
+\draw[<->, thick, orange] (axis cs:-6,9.33) -- (axis cs:14,9.33)
+    node[midway,above] {20 cm};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 10:} Interpretación física.
+
+La bombilla se coloca en el foco $(4, 4)$. Los rayos de luz que emanan del foco se reflejan en la superficie parabólica y salen paralelos al eje, creando un haz de luz dirigido.
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Vértice: } V(4, 1) \text{ cm} \\
+&\text{Foco: } F(4, 4) \text{ cm} \\
+&\text{Directriz: } y = -2 \\
+&\text{Profundidad del reflector: } \frac{25}{3} \approx 8.33 \text{ cm}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title={Hallar Ecuación dados Vértice y Foco - Telescopio Reflector}]
+Un telescopio reflector tiene su espejo principal con forma parabólica. El vértice del espejo está en el punto $(0, 0)$ y el foco donde se concentran los rayos de luz está en el punto $(0, 15)$. Si el espejo tiene un diámetro de 60 cm, encuentra su ecuación y determina la profundidad del espejo.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar la orientación de la parábola.
+
+Datos:
+\begin{itemize}
+    \item Vértice: $V(0, 0)$
+    \item Foco: $F(0, 15)$
+    \item Diámetro: 60 cm (radio = 30 cm)
+\end{itemize}
+
+Como el foco está directamente arriba del vértice, el eje de simetría es vertical (eje $y$) y la parábola abre hacia arriba.
+
+\textbf{Paso 2:} Calcular el parámetro $p$.
+
+La distancia del vértice al foco es:
+\[
+p = |y_F - y_V| = |15 - 0| = 15 \text{ cm}
+\]
+
+Como la parábola abre hacia arriba, $p > 0$.
+
+\textbf{Paso 3:} Escribir la ecuación de la parábola.
+
+Para una parábola con vértice en el origen y eje vertical:
+\[
+x^2 = 4py
+\]
+
+Sustituyendo $p = 15$:
+\begin{align*}
+x^2 &= 4(15)y \\
+x^2 &= 60y
+\end{align*}
+
+\textbf{Paso 4:} Encontrar la directriz.
+
+La directriz está a una distancia $p$ del vértice, en el lado opuesto al foco:
+\[
+y = -p = -15
+\]
+
+\textbf{Paso 5:} Calcular la profundidad del espejo.
+
+El borde del espejo está a 30 cm del eje (radio del espejo). Para $x = 30$:
+\begin{align*}
+(30)^2 &= 60y \\
+900 &= 60y \\
+y &= \frac{900}{60} \\
+y &= 15 \text{ cm}
+\end{align*}
+
+La profundidad del espejo es la diferencia entre la altura en el borde y en el vértice:
+\[
+\text{Profundidad} = 15 - 0 = 15 \text{ cm}
+\]
+
+\textbf{Paso 6:} Verificación importante.
+
+Notamos que el punto del borde $(30, 15)$ está a la misma altura que el foco. Esto significa que el foco está al nivel del borde del espejo.
+
+\textbf{Paso 7:} Calcular el punto de Latera Recta.
+
+La longitud del latus rectum es $|4p| = 60$ cm. Los extremos del latus rectum (cuerda focal perpendicular al eje) están en:
+\[
+(\pm 30, 15)
+\]
+
+\textbf{Paso 8:} Análisis de la propiedad focal.
+
+Cualquier rayo de luz paralelo al eje $y$ que incida en el espejo se reflejará hacia el foco. La distancia de cualquier punto $(x, y)$ de la parábola al foco es:
+\[
+d = \sqrt{x^2 + (y - 15)^2}
+\]
+
+Y su distancia a la directriz es:
+\[
+d' = |y - (-15)| = y + 15
+\]
+
+Para verificar que son iguales en un punto, tomemos $(30, 15)$:
+\begin{align*}
+d &= \sqrt{30^2 + (15 - 15)^2} = \sqrt{900} = 30 \\
+d' &= 15 + 15 = 30 \quad \checkmark
+\end{align*}
+
+\textbf{Paso 9:} Graficar el telescopio reflector.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.9\textwidth,
+    axis equal image,
+    xmin=-40, xmax=40,
+    ymin=-20, ymax=30,
+    xlabel={$x$ (cm)},
+    ylabel={$y$ (cm)},
+    grid=major,
+    axis lines=center,
+    xtick={-40,-30,-20,-10,0,10,20,30,40},
+    ytick={-20,-15,-10,-5,0,5,10,15,20,25,30},
+]
+
+% Parábola completa (línea delgada)
+\addplot[maincolor!30, thin, smooth, samples=100, domain=-40:40]
+    {x^2/60};
+
+% Espejo (parte utilizada)
+\addplot[maincolor, very thick, smooth, samples=100, domain=-30:30]
+    {x^2/60};
+
+% Vértice
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(0,0)};
+\node[below right] at (axis cs:0,0) {$V(0,0)$};
+
+% Foco
+\addplot[only marks, mark=*, mark size=3pt, blue] coordinates {(0,15)};
+\node[right] at (axis cs:0,15) {$F(0,15)$};
+
+% Directriz
+\addplot[dashed, thick, red, domain=-40:40] coordinates {(-40,-15) (40,-15)};
+\node[right] at (axis cs:40,-15) {Directriz: $y=-15$};
+
+% Extremos del espejo
+\addplot[only marks, mark=*, mark size=3pt, green!60!black]
+    coordinates {(-30,15) (30,15)};
+\node[left] at (axis cs:-30,15) {$(-30, 15)$};
+\node[right] at (axis cs:30,15) {$(30, 15)$};
+
+% Eje de simetría
+\addplot[dashed, gray, domain=-20:30] coordinates {(0,-20) (0,30)};
+
+% Rayos de luz paralelos
+\foreach \x in {-25,-15,-5,5,15,25} {
+    \draw[->, yellow!80!orange, thick] (axis cs:\x,28) -- (axis cs:\x,{(\x)^2/60});
+    \draw[->, yellow!80!orange, thick] (axis cs:\x,{(\x)^2/60}) -- (axis cs:0,15);
+}
+
+% Diámetro del espejo
+\draw[<->, thick, orange] (axis cs:-30,15) -- (axis cs:30,15)
+    node[midway,above] {60 cm};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 10:} Aplicación práctica.
+
+Los rayos de luz de estrellas distantes llegan paralelos al eje del telescopio. Al reflejarse en el espejo parabólico, todos convergen en el foco donde se coloca el sensor o espejo secundario.
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación del espejo: } x^2 = 60y \\
+&\text{Profundidad del espejo: } 15 \text{ cm} \\
+&\text{Directriz: } y = -15
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title={Parábola por Tres Puntos - Trayectoria de Proyectil}]
+Un proyectil es lanzado desde el suelo y su trayectoria parabólica pasa por los puntos $A(20, 15)$, $B(40, 20)$ y $C(60, 15)$, donde las distancias están en metros. Encuentra la ecuación de la trayectoria, la altura máxima alcanzada y el alcance horizontal del proyectil.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Plantear la forma general de la parábola.
+
+Como la trayectoria es parabólica con eje vertical, usamos:
+\[
+y = ax^2 + bx + c
+\]
+
+\textbf{Paso 2:} Formar el sistema de ecuaciones.
+
+Sustituyendo los tres puntos:
+
+Para $A(20, 15)$:
+\[
+15 = a(20)^2 + b(20) + c = 400a + 20b + c
+\]
+
+Para $B(40, 20)$:
+\[
+20 = a(40)^2 + b(40) + c = 1600a + 40b + c
+\]
+
+Para $C(60, 15)$:
+\[
+15 = a(60)^2 + b(60) + c = 3600a + 60b + c
+\]
+
+\textbf{Paso 3:} Resolver el sistema de ecuaciones.
+
+Sistema:
+\begin{align}
+400a + 20b + c &= 15 \\
+1600a + 40b + c &= 20 \\
+3600a + 60b + c &= 15
+\end{align}
+
+Restando ecuación (1) de ecuación (2):
+\begin{align*}
+1200a + 20b &= 5 \\
+60a + b &= \frac{1}{4} \quad \text{...(4)}
+\end{align*}
+
+Restando ecuación (2) de ecuación (3):
+\begin{align*}
+2000a + 20b &= -5 \\
+100a + b &= -\frac{1}{4} \quad \text{...(5)}
+\end{align*}
+
+Restando ecuación (4) de ecuación (5):
+\begin{align*}
+40a &= -\frac{1}{2} \\
+a &= -\frac{1}{80}
+\end{align*}
+
+\textbf{Paso 4:} Encontrar $b$ y $c$.
+
+De ecuación (4):
+\begin{align*}
+60\left(-\frac{1}{80}\right) + b &= \frac{1}{4} \\
+-\frac{3}{4} + b &= \frac{1}{4} \\
+b &= 1
+\end{align*}
+
+De ecuación (1):
+\begin{align*}
+400\left(-\frac{1}{80}\right) + 20(1) + c &= 15 \\
+-5 + 20 + c &= 15 \\
+c &= 0
+\end{align*}
+
+\textbf{Paso 5:} Escribir la ecuación de la trayectoria.
+
+\[
+y = -\frac{1}{80}x^2 + x
+\]
+
+Factorizando:
+\[
+y = x\left(1 - \frac{x}{80}\right) = \frac{x(80 - x)}{80}
+\]
+
+\textbf{Paso 6:} Encontrar el vértice (altura máxima).
+
+El vértice ocurre en $x = -\frac{b}{2a} = -\frac{1}{2(-1/80)} = 40$
+
+Altura máxima:
+\begin{align*}
+y_{max} &= -\frac{1}{80}(40)^2 + 40 \\
+&= -\frac{1600}{80} + 40 \\
+&= -20 + 40 = 20 \text{ metros}
+\end{align*}
+
+\textbf{Paso 7:} Encontrar el alcance horizontal.
+
+El proyectil toca el suelo cuando $y = 0$:
+\begin{align*}
+0 &= -\frac{1}{80}x^2 + x \\
+0 &= x\left(-\frac{1}{80}x + 1\right) \\
+x &= 0 \quad \text{o} \quad x = 80
+\end{align*}
+
+Alcance horizontal = 80 metros
+
+\textbf{Paso 8:} Verificación con los puntos dados.
+
+Para $A(20, 15)$: $y = -\frac{1}{80}(400) + 20 = -5 + 20 = 15$ ✓
+
+Para $B(40, 20)$: $y = -\frac{1}{80}(1600) + 40 = -20 + 40 = 20$ ✓
+
+Para $C(60, 15)$: $y = -\frac{1}{80}(3600) + 60 = -45 + 60 = 15$ ✓
+
+\textbf{Paso 9:} Graficar la trayectoria.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\textwidth,
+    height=0.6\textwidth,
+    xmin=0, xmax=85,
+    ymin=0, ymax=25,
+    xlabel={Distancia horizontal (m)},
+    ylabel={Altura (m)},
+    grid=major,
+    axis lines=left,
+    xtick={0,10,20,30,40,50,60,70,80},
+    ytick={0,5,10,15,20,25},
+]
+
+% Trayectoria parabólica
+\addplot[maincolor, very thick, smooth, samples=100, domain=0:80]
+    {x*(1 - x/80)};
+
+% Puntos dados
+\addplot[only marks, mark=*, mark size=3pt, red]
+    coordinates {(20,15) (40,20) (60,15)};
+\node[above] at (axis cs:20,15) {$A$};
+\node[above] at (axis cs:40,20) {$B$};
+\node[above] at (axis cs:60,15) {$C$};
+
+% Vértice (altura máxima)
+\addplot[only marks, mark=*, mark size=3pt, blue] coordinates {(40,20)};
+\draw[dashed, blue] (axis cs:40,0) -- (axis cs:40,20);
+\node[right] at (axis cs:40,10) {Altura máxima};
+
+% Punto de lanzamiento y caída
+\addplot[only marks, mark=*, mark size=3pt, green!60!black]
+    coordinates {(0,0) (80,0)};
+\node[below] at (axis cs:0,0) {Lanzamiento};
+\node[below] at (axis cs:80,0) {Impacto};
+
+% Alcance
+\draw[<->, thick, orange] (axis cs:0,-2) -- (axis cs:80,-2)
+    node[midway,below] {Alcance = 80 m};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 10:} Análisis físico.
+
+La trayectoria simétrica indica que no hay resistencia del aire. El proyectil alcanza su altura máxima exactamente a la mitad del recorrido (40 m), característica de un tiro parabólico ideal.
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación de la trayectoria: } y = -\frac{1}{80}x^2 + x \\
+&\text{Altura máxima: } 20 \text{ metros (en } x = 40 \text{m)} \\
+&\text{Alcance horizontal: } 80 \text{ metros}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title={Aplicación Integral - Diseño de Espejo Parabólico Solar}]
+Una empresa de energía solar necesita diseñar un concentrador parabólico para calentar un tubo colector. El espejo debe tener 8 metros de ancho y una profundidad de 2 metros. El tubo colector se ubicará en el foco. Encuentra: la ecuación del espejo, la posición del foco, el área de la superficie reflectante y el ángulo de apertura del espejo.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Establecer el sistema de coordenadas.
+
+Colocamos el vértice en el origen con el eje de simetría vertical:
+\begin{itemize}
+    \item Vértice: $V(0, 0)$
+    \item Ancho: 8 m (de $x = -4$ a $x = 4$)
+    \item Profundidad: 2 m (altura en los extremos)
+\end{itemize}
+
+\textbf{Paso 2:} Determinar la ecuación usando un punto conocido.
+
+La parábola tiene la forma $x^2 = 4py$. En el extremo $(4, 2)$:
+\begin{align*}
+(4)^2 &= 4p(2) \\
+16 &= 8p \\
+p &= 2 \text{ metros}
+\end{align*}
+
+Por lo tanto, la ecuación es:
+\[
+x^2 = 8y \quad \text{o} \quad y = \frac{x^2}{8}
+\]
+
+\textbf{Paso 3:} Localizar el foco.
+
+El foco está a una distancia $p = 2$ del vértice:
+\[
+F(0, 2)
+\]
+
+El tubo colector se colocará horizontalmente pasando por este punto.
+
+\textbf{Paso 4:} Calcular el área de la superficie reflectante.
+
+El área bajo la curva desde $x = -4$ hasta $x = 4$ es:
+\begin{align*}
+A_{bajo} &= \int_{-4}^{4} \frac{x^2}{8} \, dx \\
+&= \frac{1}{8} \int_{-4}^{4} x^2 \, dx \\
+&= \frac{1}{8} \left[ \frac{x^3}{3} \right]_{-4}^{4} \\
+&= \frac{1}{8} \cdot \frac{1}{3} \left[ 64 - (-64) \right] \\
+&= \frac{1}{24} \cdot 128 = \frac{16}{3} \text{ m}^2
+\end{align*}
+
+\textbf{Paso 5:} Calcular la longitud del arco parabólico.
+
+La longitud del arco se calcula con:
+\[
+L = \int_{-4}^{4} \sqrt{1 + \left(\frac{dy}{dx}\right)^2} \, dx
+\]
+
+Donde $\frac{dy}{dx} = \frac{x}{4}$, entonces:
+\begin{align*}
+L &= \int_{-4}^{4} \sqrt{1 + \frac{x^2}{16}} \, dx \\
+&= \int_{-4}^{4} \sqrt{\frac{16 + x^2}{16}} \, dx \\
+&= \frac{1}{4} \int_{-4}^{4} \sqrt{16 + x^2} \, dx
+\end{align*}
+
+Usando la sustitución $x = 4\tan\theta$ y evaluando:
+\[
+L \approx 8.94 \text{ metros}
+\]
+
+\textbf{Paso 6:} Calcular el ángulo de apertura.
+
+El ángulo de apertura es el ángulo que forma la tangente en el extremo con la vertical.
+
+En el punto $(4, 2)$, la pendiente es:
+\[
+m = \frac{dy}{dx}\Big|_{x=4} = \frac{4}{4} = 1
+\]
+
+El ángulo con la horizontal es $\arctan(1) = 45°$.
+El ángulo con la vertical (ángulo de apertura) es:
+\[
+\alpha = 90° - 45° = 45°
+\]
+
+El ángulo de apertura total del espejo es $2\alpha = 90°$.
+
+\textbf{Paso 7:} Análisis de eficiencia.
+
+La distancia focal $f = p = 2$ metros.
+La razón focal-diámetro es:
+\[
+\frac{f}{D} = \frac{2}{8} = 0.25
+\]
+
+Esta razón indica un concentrador de alta concentración.
+
+\textbf{Paso 8:} Verificar la propiedad focal.
+
+Cualquier rayo paralelo al eje $y$ que incida en el punto $(x, y)$ del espejo se reflejará hacia el foco. Por ejemplo, un rayo que llega a $(3, 9/8)$:
+
+Distancia al foco:
+\[
+d_F = \sqrt{3^2 + (9/8 - 2)^2} = \sqrt{9 + 49/64} = \sqrt{625/64} = 25/8
+\]
+
+Distancia a la directriz ($y = -2$):
+\[
+d_D = 9/8 - (-2) = 9/8 + 2 = 25/8 \quad \checkmark
+\]
+
+\textbf{Paso 9:} Graficar el diseño del concentrador solar.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.75\textwidth,
+    axis equal image,
+    xmin=-5, xmax=5,
+    ymin=-1, ymax=4,
+    xlabel={$x$ (metros)},
+    ylabel={$y$ (metros)},
+    grid=major,
+    axis lines=center,
+    xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+    ytick={-1,0,1,2,3,4},
+]
+
+% Parábola (espejo)
+\addplot[maincolor, very thick, smooth, samples=100, domain=-4:4]
+    {x^2/8};
+
+% Vértice
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(0,0)};
+\node[below right] at (axis cs:0,0) {$V(0,0)$};
+
+% Foco (tubo colector)
+\addplot[only marks, mark=*, mark size=4pt, blue] coordinates {(0,2)};
+\draw[blue, very thick] (axis cs:-0.5,2) -- (axis cs:0.5,2);
+\node[right] at (axis cs:0.5,2) {Tubo colector};
+
+% Extremos del espejo
+\addplot[only marks, mark=*, mark size=3pt, green!60!black]
+    coordinates {(-4,2) (4,2)};
+
+% Rayos solares paralelos
+\foreach \x in {-3.5,-2.5,-1.5,-0.5,0.5,1.5,2.5,3.5} {
+    \draw[->, yellow!80!orange, thick]
+        (axis cs:\x,3.5) -- (axis cs:\x,{\x^2/8});
+    \draw[->, red!80!orange, thick]
+        (axis cs:\x,{\x^2/8}) -- (axis cs:0,2);
+}
+
+% Directriz
+\addplot[dashed, thick, red, domain=-5:5] coordinates {(-5,-2) (5,-2)};
+\node[right] at (axis cs:5,-2) {Directriz};
+
+% Dimensiones
+\draw[<->, thick, orange] (axis cs:-4,2.5) -- (axis cs:4,2.5)
+    node[midway,above] {8 m};
+\draw[<->, thick, orange] (axis cs:4.5,0) -- (axis cs:4.5,2)
+    node[midway,right] {2 m};
+
+% Ángulo de apertura
+\draw[dashed, gray] (axis cs:0,0) -- (axis cs:4,2);
+\draw[blue,->,thick] (axis cs:0,0.5) arc (90:45:0.5);
+\node[blue] at (axis cs:0.3,0.7) {$45°$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 10:} Cálculo de potencia concentrada.
+
+Si la irradiancia solar es 1000 W/m² y la eficiencia de reflexión es 90%, la potencia concentrada en el tubo es aproximadamente:
+\[
+P = 1000 \times \frac{16}{3} \times 0.9 \approx 4800 \text{ W}
+\]
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación del espejo: } x^2 = 8y \text{ o } y = \frac{x^2}{8} \\
+&\text{Posición del foco: } F(0, 2) \text{ metros} \\
+&\text{Área reflectante: } \frac{16}{3} \approx 5.33 \text{ m}^2 \\
+&\text{Ángulo de apertura total: } 90°
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\section{Ejercicios Inversos}
+
+\begin{ejercicio}[title={El Ingeniero de Telecomunicaciones y el Diseño de Antena Satelital}]
+Un ingeniero debe diseñar una antena parabólica para recepción satelital. La señal del satélite llega con un ángulo de elevación de $30°$ respecto a la horizontal. Si el diámetro de la antena debe ser 2.4 metros y se requiere que el receptor (LNB) esté a 90 cm del vértice del plato, determina:
+
+\begin{enumerate}[label=\alph*)]
+    \item La ecuación de la parábola que forma el plato
+    \item La profundidad del plato parabólico
+    \item El área de recepción efectiva
+    \item La ganancia teórica de la antena si opera a 12 GHz
+\end{enumerate}
+
+Pista: La antena debe orientarse de modo que su eje apunte al satélite. Considera que la eficiencia de iluminación es del 65\%.
+\end{ejercicio}
+
+\begin{ejercicio}[title={El Arquitecto y el Puente Parabólico}]
+Un arquitecto está diseñando un puente peatonal con arcos parabólicos. El puente debe salvar un río de 80 metros de ancho. Los puntos de apoyo en las orillas están al mismo nivel. El punto más alto del arco debe estar a 25 metros sobre el nivel de los apoyos. Además, por razones estructurales, se necesitan cables verticales de soporte cada 10 metros.
+
+El arquitecto necesita determinar:
+\begin{enumerate}[label=\alph*)]
+    \item La ecuación del arco parabólico
+    \item La longitud de cada cable de soporte
+    \item La pendiente del arco en los puntos de apoyo
+    \item El volumen de concreto necesario si el arco tiene un grosor uniforme de 0.5 metros
+\end{enumerate}
+
+Considera que el origen del sistema coordenado está en el punto medio entre los apoyos, al nivel del río.
+\end{ejercicio}
+
+\begin{ejercicio}[title={El Físico y la Trayectoria del Cohete}]
+Un cohete experimental es lanzado con una velocidad inicial de 100 m/s formando un ángulo de $60°$ con la horizontal. Despreciando la resistencia del aire y considerando $g = 10$ m/s²:
+
+\begin{enumerate}[label=\alph*)]
+    \item Deduce la ecuación de la trayectoria parabólica en términos de las coordenadas $(x, y)$
+    \item Encuentra las coordenadas del punto más alto de la trayectoria
+    \item Determina el alcance horizontal del cohete
+    \item Si se coloca un sensor a 300 metros del punto de lanzamiento y a 100 metros de altura, ¿detectará el paso del cohete?
+\end{enumerate}
+
+Nota: Usa las ecuaciones cinemáticas $x = v_0 \cos\theta \cdot t$ y $y = v_0 \sin\theta \cdot t - \frac{1}{2}gt^2$.
+\end{ejercicio}
+
+\section{Soluciones de Ejercicios Inversos}
+
+\begin{solucion}[title={Solución: El Ingeniero de Telecomunicaciones y el Diseño de Antena Satelital}]
+
+\textbf{Datos del problema:}
+\begin{itemize}
+    \item Diámetro: $D = 2.4$ m (radio $r = 1.2$ m)
+    \item Distancia focal: $f = 0.9$ m (distancia vértice-receptor)
+    \item Ángulo de elevación: $30°$
+\end{itemize}
+
+\textbf{Parte a) Ecuación de la parábola}
+
+\textbf{Paso 1:} Establecer el sistema de coordenadas.
+
+Colocamos el vértice en el origen con el eje de simetría en el eje $x$:
+\[
+y^2 = 4px
+\]
+
+\textbf{Paso 2:} Determinar el parámetro $p$.
+
+El foco está a 0.9 m del vértice, entonces $p = 0.9$ m.
+
+\textbf{Paso 3:} Escribir la ecuación.
+\[
+y^2 = 4(0.9)x = 3.6x
+\]
+
+\textbf{Parte b) Profundidad del plato}
+
+\textbf{Paso 4:} Calcular la profundidad.
+
+En el borde del plato, $y = 1.2$ m:
+\begin{align*}
+(1.2)^2 &= 3.6x \\
+1.44 &= 3.6x \\
+x &= \frac{1.44}{3.6} = 0.4 \text{ m}
+\end{align*}
+
+La profundidad del plato es 0.4 metros o 40 cm.
+
+\textbf{Parte c) Área de recepción efectiva}
+
+\textbf{Paso 5:} Calcular el área proyectada.
+
+El área del círculo de diámetro 2.4 m es:
+\[
+A_{total} = \pi r^2 = \pi(1.2)^2 = 1.44\pi \text{ m}^2
+\]
+
+\textbf{Paso 6:} Aplicar la eficiencia.
+
+Con 65\% de eficiencia de iluminación:
+\[
+A_{efectiva} = 0.65 \times 1.44\pi = 0.936\pi \approx 2.94 \text{ m}^2
+\]
+
+\textbf{Parte d) Ganancia teórica}
+
+\textbf{Paso 7:} Calcular la longitud de onda.
+
+A 12 GHz:
+\[
+\lambda = \frac{c}{f} = \frac{3 \times 10^8}{12 \times 10^9} = 0.025 \text{ m} = 2.5 \text{ cm}
+\]
+
+\textbf{Paso 8:} Calcular la ganancia.
+
+La ganancia de una antena parabólica es:
+\[
+G = \eta \left(\frac{\pi D}{\lambda}\right)^2
+\]
+
+Donde $\eta = 0.65$ es la eficiencia:
+\begin{align*}
+G &= 0.65 \times \left(\frac{\pi \times 2.4}{0.025}\right)^2 \\
+&= 0.65 \times (301.59)^2 \\
+&= 0.65 \times 90,957 \\
+&\approx 59,122
+\end{align*}
+
+En decibelios:
+\[
+G_{dB} = 10\log_{10}(59,122) \approx 47.7 \text{ dB}
+\]
+
+\textbf{Paso 9:} Graficar la antena.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth,
+    height=0.7\textwidth,
+    axis equal image,
+    xmin=-0.5, xmax=1.5,
+    ymin=-1.5, ymax=1.5,
+    xlabel={$x$ (metros)},
+    ylabel={$y$ (metros)},
+    grid=major,
+    axis lines=center,
+]
+
+% Parábola (antena)
+\addplot[maincolor, very thick, smooth, samples=100, domain=-1.2:1.2]
+    ({y^2/3.6}, {y});
+
+% Vértice
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(0,0)};
+\node[left] at (axis cs:0,0) {Vértice};
+
+% Foco (LNB)
+\addplot[only marks, mark=*, mark size=4pt, blue] coordinates {(0.9,0)};
+\node[below] at (axis cs:0.9,0) {LNB};
+
+% Extremos de la antena
+\addplot[only marks, mark=*, mark size=3pt, green!60!black]
+    coordinates {(0.4,1.2) (0.4,-1.2)};
+
+% Rayos del satélite (paralelos)
+\foreach \y in {-1.0,-0.5,0,0.5,1.0} {
+    \draw[->, yellow!80!orange, thick]
+        (axis cs:1.3,\y) -- (axis cs:{(\y)^2/3.6},\y);
+    \draw[->, red!80!orange, thick]
+        (axis cs:{(\y)^2/3.6},\y) -- (axis cs:0.9,0);
+}
+
+% Diámetro
+\draw[<->, thick, orange] (axis cs:0.4,-1.3) -- (axis cs:0.4,1.3)
+    node[midway,right] {2.4 m};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{a) Ecuación: } y^2 = 3.6x \\
+&\text{b) Profundidad: } 0.4 \text{ m} = 40 \text{ cm} \\
+&\text{c) Área efectiva: } 2.94 \text{ m}^2 \\
+&\text{d) Ganancia: } 47.7 \text{ dB}
+\end{aligned}
+}
+\]
+\end{solucion}
+
+\begin{solucion}[title={Solución: El Arquitecto y el Puente Parabólico}]
+
+\textbf{Datos:}
+\begin{itemize}
+    \item Ancho del río: 80 m
+    \item Altura máxima del arco: 25 m
+    \item Cables cada 10 m
+    \item Grosor del arco: 0.5 m
+\end{itemize}
+
+\textbf{Parte a) Ecuación del arco parabólico}
+
+\textbf{Paso 1:} Sistema de coordenadas.
+
+Origen en el centro del río, al nivel del agua. El arco es una parábola invertida con vértice en $(0, 25)$.
+
+\textbf{Paso 2:} Forma de la ecuación.
+
+Para una parábola con vértice en $(0, 25)$ y que abre hacia abajo:
+\[
+y - 25 = -a(x - 0)^2
+\]
+\[
+y = 25 - ax^2
+\]
+
+\textbf{Paso 3:} Determinar $a$ usando los puntos de apoyo.
+
+Los apoyos están en $(\pm 40, 0)$:
+\begin{align*}
+0 &= 25 - a(40)^2 \\
+a(1600) &= 25 \\
+a &= \frac{25}{1600} = \frac{1}{64}
+\end{align*}
+
+\textbf{Paso 4:} Ecuación final.
+\[
+y = 25 - \frac{x^2}{64}
+\]
+
+\textbf{Parte b) Longitud de los cables de soporte}
+
+\textbf{Paso 5:} Calcular alturas en cada posición.
+
+Cables en $x = 0, \pm 10, \pm 20, \pm 30, \pm 40$:
+
+\begin{align*}
+x = 0: \quad y &= 25 - 0 = 25 \text{ m} \\
+x = \pm 10: \quad y &= 25 - \frac{100}{64} = 25 - 1.5625 = 23.4375 \text{ m} \\
+x = \pm 20: \quad y &= 25 - \frac{400}{64} = 25 - 6.25 = 18.75 \text{ m} \\
+x = \pm 30: \quad y &= 25 - \frac{900}{64} = 25 - 14.0625 = 10.9375 \text{ m} \\
+x = \pm 40: \quad y &= 25 - \frac{1600}{64} = 0 \text{ m}
+\end{align*}
+
+\textbf{Parte c) Pendiente en los puntos de apoyo}
+
+\textbf{Paso 6:} Calcular la derivada.
+\[
+\frac{dy}{dx} = -\frac{2x}{64} = -\frac{x}{32}
+\]
+
+\textbf{Paso 7:} Evaluar en los apoyos.
+
+En $x = 40$: $m = -\frac{40}{32} = -1.25$
+
+En $x = -40$: $m = -\frac{-40}{32} = 1.25$
+
+El ángulo con la horizontal es $\arctan(1.25) \approx 51.34°$
+
+\textbf{Parte d) Volumen de concreto}
+
+\textbf{Paso 8:} Calcular la longitud del arco.
+
+\[
+L = \int_{-40}^{40} \sqrt{1 + \left(\frac{dy}{dx}\right)^2} \, dx = \int_{-40}^{40} \sqrt{1 + \frac{x^2}{1024}} \, dx
+\]
+
+Por simetría:
+\[
+L = 2\int_{0}^{40} \sqrt{1 + \frac{x^2}{1024}} \, dx \approx 85.77 \text{ m}
+\]
+
+\textbf{Paso 9:} Calcular el volumen.
+
+Con grosor uniforme de 0.5 m:
+\[
+V = L \times \text{área de sección} = 85.77 \times 0.5 \times 0.5 = 21.44 \text{ m}^3
+\]
+
+\textbf{Paso 10:} Graficar el puente.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\textwidth,
+    height=0.6\textwidth,
+    xmin=-45, xmax=45,
+    ymin=-2, ymax=28,
+    xlabel={Distancia desde el centro (m)},
+    ylabel={Altura (m)},
+    grid=major,
+    axis lines=center,
+    xtick={-40,-30,-20,-10,0,10,20,30,40},
+    ytick={0,5,10,15,20,25},
+]
+
+% Arco parabólico
+\addplot[maincolor, very thick, smooth, samples=100, domain=-40:40]
+    {25 - x^2/64};
+
+% Cables de soporte
+\foreach \x in {-40,-30,-20,-10,0,10,20,30,40} {
+    \addplot[thick, gray, domain=0:{25-(\x)^2/64}]
+        coordinates {(\x,0) (\x,{25-(\x)^2/64})};
+}
+
+% Puntos de apoyo
+\addplot[only marks, mark=*, mark size=3pt, red]
+    coordinates {(-40,0) (40,0)};
+
+% Vértice
+\addplot[only marks, mark=*, mark size=3pt, blue] coordinates {(0,25)};
+\node[above] at (axis cs:0,25) {Altura máxima};
+
+% Río
+\addplot[thick, cyan, domain=-45:45] coordinates {(-45,0) (45,0)};
+\node[below] at (axis cs:0,0) {Nivel del río};
+
+% Dimensiones
+\draw[<->, thick, orange] (axis cs:-40,-1) -- (axis cs:40,-1)
+    node[midway,below] {80 m};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{a) Ecuación: } y = 25 - \frac{x^2}{64} \\
+&\text{b) Cables: Centro: 25m, } \pm 10\text{m: 23.44m, } \pm 20\text{m: 18.75m,} \\
+&\quad\quad\quad\quad \pm 30\text{m: 10.94m, Apoyos: 0m} \\
+&\text{c) Pendiente en apoyos: } \pm 1.25 \text{ (ángulo } 51.34°) \\
+&\text{d) Volumen de concreto: } 21.44 \text{ m}^3
+\end{aligned}
+}
+\]
+\end{solucion}
+
+\begin{solucion}[title={Solución: El Físico y la Trayectoria del Cohete}]
+
+\textbf{Datos:}
+\begin{itemize}
+    \item Velocidad inicial: $v_0 = 100$ m/s
+    \item Ángulo de lanzamiento: $\theta = 60°$
+    \item Gravedad: $g = 10$ m/s²
+    \item Componentes de velocidad: $v_{0x} = 100\cos 60° = 50$ m/s, $v_{0y} = 100\sin 60° = 50\sqrt{3}$ m/s
+\end{itemize}
+
+\textbf{Parte a) Ecuación de la trayectoria}
+
+\textbf{Paso 1:} Ecuaciones paramétricas.
+\begin{align*}
+x &= v_{0x} t = 50t \\
+y &= v_{0y} t - \frac{1}{2}gt^2 = 50\sqrt{3}t - 5t^2
+\end{align*}
+
+\textbf{Paso 2:} Eliminar el parámetro $t$.
+
+De $x = 50t$: $t = \frac{x}{50}$
+
+Sustituyendo en $y$:
+\begin{align*}
+y &= 50\sqrt{3} \cdot \frac{x}{50} - 5\left(\frac{x}{50}\right)^2 \\
+y &= \sqrt{3}x - \frac{5x^2}{2500} \\
+y &= \sqrt{3}x - \frac{x^2}{500}
+\end{align*}
+
+\textbf{Parte b) Punto más alto de la trayectoria}
+
+\textbf{Paso 3:} Encontrar el tiempo en el punto más alto.
+
+En el punto más alto, $v_y = 0$:
+\begin{align*}
+v_y &= v_{0y} - gt = 0 \\
+50\sqrt{3} - 10t &= 0 \\
+t &= 5\sqrt{3} \text{ s}
+\end{align*}
+
+\textbf{Paso 4:} Coordenadas del punto más alto.
+\begin{align*}
+x_{max} &= 50(5\sqrt{3}) = 250\sqrt{3} \approx 433.01 \text{ m} \\
+y_{max} &= 50\sqrt{3}(5\sqrt{3}) - 5(5\sqrt{3})^2 \\
+&= 750 - 375 = 375 \text{ m}
+\end{align*}
+
+\textbf{Parte c) Alcance horizontal}
+
+\textbf{Paso 5:} Tiempo de vuelo total.
+
+El cohete toca el suelo cuando $y = 0$:
+\begin{align*}
+0 &= 50\sqrt{3}t - 5t^2 \\
+0 &= t(50\sqrt{3} - 5t) \\
+t &= 0 \text{ o } t = 10\sqrt{3} \text{ s}
+\end{align*}
+
+\textbf{Paso 6:} Alcance horizontal.
+\[
+R = v_{0x} \cdot t_{total} = 50 \cdot 10\sqrt{3} = 500\sqrt{3} \approx 866.03 \text{ m}
+\]
+
+\textbf{Parte d) Detección del sensor}
+
+\textbf{Paso 7:} Verificar si el punto $(300, 100)$ está en la trayectoria.
+
+Sustituyendo $x = 300$ en la ecuación:
+\begin{align*}
+y &= \sqrt{3}(300) - \frac{(300)^2}{500} \\
+&= 300\sqrt{3} - \frac{90000}{500} \\
+&= 300\sqrt{3} - 180 \\
+&\approx 519.62 - 180 = 339.62 \text{ m}
+\end{align*}
+
+\textbf{Paso 8:} Comparación.
+
+El cohete pasa a 339.62 m de altura cuando $x = 300$ m.
+Como el sensor está a solo 100 m de altura, SÍ detectará el cohete pasando por encima.
+
+\textbf{Paso 9:} Graficar la trayectoria completa.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\textwidth,
+    height=0.65\textwidth,
+    xmin=0, xmax=900,
+    ymin=0, ymax=400,
+    xlabel={Distancia horizontal (m)},
+    ylabel={Altura (m)},
+    grid=major,
+    axis lines=left,
+    xtick={0,100,200,300,400,500,600,700,800,900},
+    ytick={0,100,200,300,400},
+]
+
+% Trayectoria del cohete
+\addplot[maincolor, very thick, smooth, samples=100, domain=0:866.03]
+    {1.732*x - x^2/500};
+
+% Punto de lanzamiento
+\addplot[only marks, mark=*, mark size=3pt, green!60!black] coordinates {(0,0)};
+\node[above right] at (axis cs:0,0) {Lanzamiento};
+
+% Punto más alto
+\addplot[only marks, mark=*, mark size=3pt, blue] coordinates {(433.01,375)};
+\node[above] at (axis cs:433.01,375) {Altura máxima};
+\draw[dashed, blue] (axis cs:433.01,0) -- (axis cs:433.01,375);
+
+% Punto de impacto
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(866.03,0)};
+\node[below] at (axis cs:866.03,0) {Impacto};
+
+% Posición del sensor
+\addplot[only marks, mark=square*, mark size=4pt, orange] coordinates {(300,100)};
+\node[below] at (axis cs:300,100) {Sensor};
+
+% Altura del cohete en x=300
+\addplot[only marks, mark=*, mark size=3pt, purple] coordinates {(300,339.62)};
+\draw[dashed, purple] (axis cs:300,100) -- (axis cs:300,339.62);
+\node[right] at (axis cs:300,220) {239.62 m};
+
+% Vector velocidad inicial
+\draw[->, very thick, red] (axis cs:0,0) -- (axis cs:50,86.6)
+    node[midway,above,sloped] {$v_0$};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 10:} Verificación usando fórmulas de alcance.
+
+Alcance teórico:
+\[
+R = \frac{v_0^2 \sin(2\theta)}{g} = \frac{100^2 \sin(120°)}{10} = \frac{10000 \cdot \frac{\sqrt{3}}{2}}{10} = 500\sqrt{3} \quad \checkmark
+\]
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{a) Ecuación: } y = \sqrt{3}x - \frac{x^2}{500} \\
+&\text{b) Punto más alto: } (250\sqrt{3}, 375) \approx (433.01, 375) \text{ m} \\
+&\text{c) Alcance: } 500\sqrt{3} \approx 866.03 \text{ m} \\
+&\text{d) Sí, el sensor detectará el cohete (pasa 239.62 m por encima)}
+\end{aligned}
+}
+\]
+\end{solucion}
+
+\end{document}
