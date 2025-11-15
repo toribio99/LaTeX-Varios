@@ -12,486 +12,486 @@
 \usetikzlibrary{calc,arrows.meta}
 
 \title{\Large Taller de Geometría Analítica
-	
+
 \small{Elaborado para : \textsc{\bf{Sheyra Celedón}}}}
-	
+
 \author{\bf{\textsc{Toribio de J Arrieta F}}}
 \date{\today}
 
 \begin{document}
-	\maketitle
-	
+\maketitle
+
 \section{Comprobar que el triángulo es rectángulo}
-	
-	\textbf{Objetivo.} Comprobar que el triángulo planteado en el plano cartesiano con vértices
-	\[
-	A(3,-6),\quad B(8,-2),\quad C(-1,-1)
-	\]
-	es un triángulo rectángulo. 
-	
-	\vspace{5mm}
 
-	\textbf{Solución.} Para iniciar la solución de este ejercicio usaremos al teorema de Pitágoras
-	
-	
-	\bigskip
-	
-	\textbf{Teorema de Pitágoras.}
-	En \emph{todo triángulo rectángulo}, \textcolor{red}{\textbf{la suma de los cuadrados de las longitudes de los catetos}} \textbf{(\underline{o sea los dos lados más cortos del triángulo})} \textcolor{red}{\textbf{es igual al cuadrado de la longitud de la hipotenusa}}:
-	\[
-	a^2+b^2=c^2.
-	\]
-	\emph{¿Cuándo se aplica?}
-	\begin{itemize}
-		\item Cuando sabemos o sospechamos que hay un ángulo de \(90^\circ\).
-		\item Para calcular un lado conociendo los otros dos, \textcolor{red}{ \underline{\textbf{o para verificar si un triángulo es}}  \underline{\textbf{rectángulo}}}: si para tres lados \(a,b,c\) (con \(c\) el mayor) se cumple \(a^2+b^2=c^2\), entonces el triángulo es rectángulo y \(c\) es la hipotenusa.
-	\end{itemize}
-	
-	Entonces el plan es: calcular las distancias de cada lado del triángulo y comprobar si cuando elevo al cuadrado la distancia de dos de sus lados y al sumar los dos resultados me da un valor igual al cuadrado del tercer lado elevado al cuadrado
-	
-	\bigskip
-	
-	Recordemos que la \textbf{Fórmula de distancia en el plano.}
-	Para dos puntos dice que si tengo dos puntos  \(P(x_1,y_1)\) y \(Q(x_2,y_2)\), la distancia entre ellos se calcula mediante :
-	\[
-	d(P,Q)=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}.
-	\]
-	
-	\bigskip
-	
-	\textbf{Calculemos las longitudes de los diferentes lados.}
-	
-	\vspace{3mm}
-	
-	\underline{Lado \(AB\)} (entre \(A(3,-6)\) y \(B(8,-2)\)):
-	\[
-	\begin{aligned}
-		AB &= \sqrt{(8-3)^2+(-2-(-6))^2}
-		= \sqrt{5^2+4^2}
-		= \sqrt{25+16}
-		= \sqrt{41}\approx 6.40.
-	\end{aligned}
-	\]
-	
-	\underline{Lado \(AC\)} (entre \(A(3,-6)\) y \(C(-1,-1)\)):
-	\[
-	\begin{aligned}
-		AC &= \sqrt{(-1-3)^2+(-1-(-6))^2}
-		= \sqrt{(-4)^2+5^2}
-		= \sqrt{16+25}
-		= \sqrt{41}\approx 6.40.
-	\end{aligned}
-	\]
-	
-	\underline{Lado \(BC\)} (entre \(B(8,-2)\) y \(C(-1,-1)\)):
-	\[
-	\begin{aligned}
-		BC &= \sqrt{(8-(-1))^2+(-2-(-1))^2}
-		= \sqrt{9^2+(-1)^2}
-		= \sqrt{81+1}
-		= \sqrt{82}\approx 9.06.
-	\end{aligned}
-	\]
-	
-	\bigskip
-	
-	\textbf{Ahora apliquemos el Teorema de Pitágoras con los datos obtenidos.}
-	
-	Como \(BC\) es el lado más largo, lo comparamos con \(AB\) y \(AC\):
-	\[
-	AB^2+AC^2=(\sqrt{41})^2+(\sqrt{41})^2=41+41=82=(\sqrt{82})^2=BC^2.
-	\]
-	Entonces, como se cumple que: \(AB^2+AC^2=BC^2\). Por lo tanto, el triángulo es \textbf{rectángulo} y además el ángulo recto está en el vértice \(\mathbf{A}\); la hipotenusa es \(\overline{BC}\).
-	
-	\bigskip
-	
-	\textbf{Gráfica en el plano cartesiano.}
-	
-	\begin{center}
-		\begin{tikzpicture}[scale=0.65]
-			% límites
-			\def\xmin{-3}\def\xmax{10}
-			\def\ymin{-8}\def\ymax{4}
-			
-			% cuadrícula
-			\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
-			
-			% ejes (sin usar '->', usamos -{Latex})
-			\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-			\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
-			
-			% marcas numéricas en x
-			\foreach \x in {-3,-2,...,10}
-			\draw (\x,0) -- (\x,0.12) node[below=6pt,scale=0.8] {\x};
-			
-			% marcas numéricas en y
-			\foreach \y in {-8,-7,...,4}
-			\draw (0,\y) -- (0.12,\y) node[left=6pt,scale=0.8] {\y};
-			
-			% puntos
-			\coordinate (A) at (3,-6);
-			\coordinate (B) at (8,-2);
-			\coordinate (C) at (-1,-1);
-			
-			% triángulo
-			\draw[thick] (A)--(B)--(C)--cycle;
-			\filldraw[black] (A) circle (2pt) node[below right] {$A(3,-6)$};
-			\filldraw[black] (B) circle (2pt) node[above right] {$B(8,-2)$};
-			\filldraw[black] (C) circle (2pt) node[below left] {$C(-1,-1)$};
-			
-			% cuadradito del ángulo recto en A
-			\path (A) coordinate (Aa);
-			\path ($(A)+(0.47,0.375)$) coordinate (Pab);
-			\path ($(A)+(-0.375,0.47)$) coordinate (Pac);
-			\draw[thick] (Pab) -- ($(Pab)+(-0.375,0.47)$) -- (Pac);
-			
-			% etiquetas de lados
-			\node at ($(A)!0.55!(B)$) [below right,scale=0.9] {$AB=\sqrt{41}$};
-			\node at ($(A)!0.55!(C)$) [below left,scale=0.9] {$AC=\sqrt{41}$};
-			\node at ($(B)!0.55!(C)$) [below
-		,scale=0.9] {$BC=\sqrt{82}$};
-		\end{tikzpicture}
-	\end{center}
-	
+\textbf{Objetivo.} Comprobar que el triángulo planteado en el plano cartesiano con vértices
+\[
+A(3,-6),\quad B(8,-2),\quad C(-1,-1)
+\]
+es un triángulo rectángulo. 
 
-		
-		\section{¿Qué es el punto medio y cómo se calcula?}
-		Dado un segmento que une dos puntos \(P(x_1,y_1)\) y \(Q(x_2,y_2)\), el
-		\textbf{punto medio} \(M\) es el punto exactamente a la misma distancia de \(P\) y de \(Q\).
-		Su fórmula es:
-		\[
-		\boxed{\,M\left(\dfrac{x_1+x_2}{2},\ \dfrac{y_1+y_2}{2}\right)\,}
-		\]
-		
-		\textbf{¿Cuándo se aplica?}
-		\begin{itemize}
-			\item \textbf{Para encontrar el centro de un segmento} cuando se conocen sus extremos.
-			\item \textbf{Para verificar} si dos segmentos se \emph{bisen} (por ejemplo, diagonales de un paralelogramo).
-			\item \textbf{Para construir figuras simétricas} o ubicar centros en problemas de geometría analítica.
-		\end{itemize}
-		
-		\section*{Datos que obtenemos del problema}
-		Cuadrilátero con vértices:
-		\[
-		A(0,0),\quad B(0,4),\quad C(3,5),\quad D(3,-1).
-		\]
-		Buscamos los puntos medios de las diagonales \(\overline{AC}\) y \(\overline{BD}\).
-		
-		\section*{Calculemos el punto medio de \(\overline{AC}\) mediante la fórmula que haz recibido del profesor de matemáticas}
-		Aplicamos la fórmula del punto medio a \(A(0,0)\) y \(C(3,5)\):
-		\[
-		\begin{aligned}
-			M_{AC} \;=\;
-			\left(\frac{x_A+x_C}{2},\ \frac{y_A+y_C}{2}\right)
-			&=\left(\frac{0+3}{2},\ \frac{0+5}{2}\right) \\
-			&=\left(\frac{3}{2},\ \frac{5}{2}\right)
-			=(1.5,\ 2.5).
-		\end{aligned}
-		\]
-		
-		\section*{Calculemos ahora el punto medio de \(\overline{BD}\) usando nuevamente la fórmula del punto medio}
-		Aplicamos la fórmula del punto medio a \(B(0,4)\) y \(D(3,-1)\):
-		\[
-		\begin{aligned}
-			M_{BD} \;=\;
-			\left(\frac{x_B+x_D}{2},\ \frac{y_B+y_D}{2}\right)
-			&=\left(\frac{0+3}{2},\ \frac{4+(-1)}{2}\right) \\
-			&=\left(\frac{3}{2},\ \frac{3}{2}\right)
-			=(1.5,\ 1.5).
-		\end{aligned}
-		\]
-		\emph{Nota.} Sumar un número negativo: \(4+(-1)=3\).
-		
-		\section*{Ahora te presento en el plano cartesiano la figura}
-		\begin{center}
-			\begin{tikzpicture}[scale=0.8]
-				% límites del dibujo
-				\def\xmin{-1}\def\xmax{5}
-				\def\ymin{-2}\def\ymax{6}
-				
-				% cuadrícula
-				\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
-				
-				% ejes con puntas tipo LaTeX (evita usar -> para no chocar con babel)
-				\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-				\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
-				
-				% marcas numéricas en x
-				\foreach \x in {-1,0,1,2,3,4,5}
-				\draw (\x,0) -- (\x,0.12) node[below=6pt,scale=0.8] {\x};
-				
-				% marcas numéricas en y
-				\foreach \y in {-2,-1,0,1,2,3,4,5,6}
-				\draw (0,\y) -- (0.12,\y) node[left=6pt,scale=0.8] {\y};
-				
-				% puntos del cuadrilátero
-				\coordinate (A) at (0,0);
-				\coordinate (B) at (0,4);
-				\coordinate (C) at (3,5);
-				\coordinate (D) at (3,-1);
-				
-				% diagonales y contorno
-				\draw[thick] (A)--(B)--(C)--(D)--cycle;
-				\draw[dashed,thick] (A)--(C);
-				\draw[dashed,thick] (B)--(D);
-				
-				% puntos medios
-				\coordinate (MAC) at (1.5,2.5);
-				\coordinate (MBD) at (1.5,1.5);
-				
-				% dibujar puntos y etiquetas
-				\filldraw (A) circle (2pt) node[below left] {$A(0,0)$};
-				\filldraw (B) circle (2pt) node[above left] {$B(0,4)$};
-				\filldraw (C) circle (2pt) node[above right] {$C(3,5)$};
-				\filldraw (D) circle (2pt) node[below right] {$D(3,-1)$};
-				
-				\filldraw[black] (MAC) circle (2.2pt) node[above right] {$M_{AC}(1.5,\,2.5)$};
-				\filldraw[black] (MBD) circle (2.2pt) node[below right] {$M_{BD}(1.5,\,1.5)$};
-				
-			\end{tikzpicture}
-		\end{center}
-		
-		\bigskip
-		\noindent
-		\textbf{Conclusión.} Los puntos medios de las diagonales son
-		\[
-		\boxed{M_{AC}=(1.5,\,2.5)} \qquad \text{y} \qquad \boxed{M_{BD}=(1.5,\,1.5)}.
-		\]
-		En la gráfica se observa que \textbf{ambos quedan centrados sobre las diagonales} correspondientes.
-		
-			
-			\section{Definición de triángulo isósceles}
-			Un \textbf{triángulo isósceles} es un triángulo que tiene \textbf{dos lados de igual longitud}.
-			Los ángulos opuestos a esos lados también son iguales. El lado que \emph{no} es igual se
-			llama \emph{base} y el vértice común a los dos lados iguales se llama \emph{vértice del isósceles}.
-			
-			\subsection*{Ejemplos visuales}
-			\begin{center}
-				\begin{tikzpicture}[scale=0.9]
-					% Ejemplo 1
-					\begin{scope}[shift={(0,0)}]
-						\coordinate (A) at (0,0);
-						\coordinate (B) at (4,0);
-						\coordinate (C) at (2,3);
-						\draw[thick] (A)--(B)--(C)--cycle;
-						% marquitas de igualdad en AC y BC
-						\draw ($(A)!0.5!(C)$) +(-0.12,0.12) -- +(0.12,-0.12);
-						\draw ($(B)!0.5!(C)$) +(-0.12,0.12) -- +(0.12,-0.12);
-						\node at (2,-0.65) {Isósceles con base $\overline{AB}$};
-					\end{scope}
-					% Ejemplo 2
-					\begin{scope}[shift={(7,0)}]
-						\coordinate (D) at (0,0);
-						\coordinate (E) at (3,2.5);
-						\coordinate (F) at (6,0);
-						\draw[thick] (D)--(E)--(F)--cycle;
-						% marquitas de igualdad en DE y EF
-						\draw ($(D)!0.5!(E)$) +(-0.12,-0.12) -- +(0.12,0.12);
-						\draw ($(E)!0.5!(F)$) +(-0.12,-0.12) -- +(0.12,0.12);
-						\node at (3,-0.65) {Isósceles con base $\overline{DF}$};
-					\end{scope}
-				\end{tikzpicture}
-			\end{center}
-			
-			\section*{Datos que obtenemos del problema}
-			Puntos: \(X(-7,2),\ Y(3,-4),\ Z(1,4)\).\\
-			\textbf{Objetivo}: Se quiere determinar si el triángulo \(XYZ\) es isósceles comprobando las longitudes de sus lados.
-			
-			\section*{Fórmula de la distancia (recordatorio)}
-			Para dos puntos \(P(x_1,y_1)\) y \(Q(x_2,y_2)\),
-			\[
-			\boxed{\,d(P,Q)=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\,}
-			\]
-			
-			\section*{Cálculo de cada lado}
-			\subsection*{Lado \(\mathbf{XY}\)}
-			\textbf{Fórmula:}
-			\(d(X,Y)=\sqrt{(x_Y-x_X)^2+(y_Y-y_X)^2}\).
-			\[
-			\begin{aligned}
-				XY &= \sqrt{(3-(-7))^2+(-4-2)^2}
-				= \sqrt{10^2+(-6)^2}
-				= \sqrt{100+36}
-				= \sqrt{136}\approx 11.66.
-			\end{aligned}
-			\]
-			
-			\subsection*{Lado \(\mathbf{XZ}\)}
-			\textbf{Fórmula:}
-			\(d(X,Z)=\sqrt{(x_Z-x_X)^2+(y_Z-y_X)^2}\).
-			\[
-			\begin{aligned}
-				XZ &= \sqrt{(1-(-7))^2+(4-2)^2}
-				= \sqrt{8^2+2^2}
-				= \sqrt{64+4}
-				= \sqrt{68}\approx 8.25.
-			\end{aligned}
-			\]
-			
-			\subsection*{Lado \(\mathbf{YZ}\)}
-			\textbf{Fórmula:}
-			\(d(Y,Z)=\sqrt{(x_Z-x_Y)^2+(y_Z-y_Y)^2}\).
-			\[
-			\begin{aligned}
-				YZ &= \sqrt{(1-3)^2+(4-(-4))^2}
-				= \sqrt{(-2)^2+8^2}
-				= \sqrt{4+64}
-				= \sqrt{68}\approx 8.25.
-			\end{aligned}
-			\]
-			
-			\section*{Conclusión}
-			Observamos que \(XZ = YZ = \sqrt{68}\) y \(XY=\sqrt{136}\).
-			Como \(\,XZ=YZ\), el triángulo \(XYZ\) es \textbf{isósceles} con vértice en \(\mathbf{Z}\) y base \(\overline{XY}\).
-			
-			\section*{Gráfica en el plano cartesiano}
-			\begin{center}
-				\begin{tikzpicture}[scale=0.7]
-					% límites
-					\def\xmin{-8}\def\xmax{5}
-					\def\ymin{-5}\def\ymax{5}
-					
-					% cuadrícula
-					\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
-					
-					% ejes
-					\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-					\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
-					
-					% marcas numéricas
-					\foreach \x in {-8,-7,...,5}
-					\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.8]{\x};
-					\foreach \y in {-5,-4,...,5}
-					\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.8]{\y};
-					
-					% puntos
-					\coordinate (X) at (-7,2);
-					\coordinate (Y) at (3,-4);
-					\coordinate (Z) at (1,4);
-					
-					% triángulo y resaltado de lados iguales
-					\draw[thick] (X)--(Y)--(Z)--cycle;
-					\draw[very thick] (X)--(Z);
-					\draw[very thick] (Y)--(Z);
-					
-					% puntos visibles
-					\filldraw (X) circle (2pt) node[above left] {$X(-7,2)$};
-					\filldraw (Y) circle (2pt) node[below right] {$Y(3,-4)$};
-					\filldraw (Z) circle (2pt) node[above right] {$Z(1,4)$};
-					
-					% etiquetas de longitudes (opcional)
-					\node[scale=0.9] at ($(X)!0.5!(Z)$) [above] {$\sqrt{68}$};
-					\node[scale=0.9] at ($(Y)!0.5!(Z)$) [right] {$\sqrt{68}$};
-					\node[scale=0.9] at ($(X)!0.5!(Y)$) [below] {$\sqrt{136}$};
-				\end{tikzpicture}
-			\end{center}
-			
-			
-			\section{Cálculo de la distancia de un punto a una recta}
-			 \textbf{La distancia del punto} \(P(x_0,y_0)\)  \textbf{a una recta} dada en forma general
-			\[
-			Ax+By+C=0
-			\]
-			se calcula con
-			\[
-			\boxed{\,d(P,\ell)=\dfrac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}\,}
-			\]
-			El valor absoluto garantiza que la distancia sea \emph{positiva}.\\[2mm]
-			\textbf{¿Cuándo se aplica?} Siempre que conozcamos un punto y una recta (en forma \(Ax+By+C=0\)) y queramos la \textbf{\emph{distancia perpendicular desde el punto hasta la recta}}.
-			
-			\section*{Datos que obtenemos del ejercicio}
-			Punto \(P(-6,5)\) y recta \(\ell:\ 2x+y-1=0\).\\
-			Aquí \(A=2,\ B=1,\ C=-1,\ x_0=-6,\ y_0=5\).
-			
-			\section*{Cálculo de la distancia}
-			\textbf{Fórmula a usar:}
-			\[
-			d(P,\ell)=\dfrac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}.
-			\]
-			
-			\textbf{Reemplazo de datos:}  \textcolor{red}{Nota: Es importante aplicar el valor absoluto en el numerador para obtener siempre una distancia positiva.}
-			\[
-			\begin{aligned}
-				d(P,\ell)
-				&=\dfrac{|\,2(-6)+1(5)-1\,|}{\sqrt{2^2+1^2}}
-				=\dfrac{|\,{-12}+5-1\,|}{\sqrt{4+1}}
-				=\dfrac{|\,{-8}\,|}{\sqrt{5}}
-				=\dfrac{8}{\sqrt{5}}.
-			\end{aligned}
-			\]
-			
-			\textbf{(Opcional) Racionalización del denominador:}
-			\[
-			\dfrac{8}{\sqrt{5}}=\dfrac{8\sqrt{5}}{5}.
-			\]
-			
-			\section*{Interpretación geométrica o representación gráfica}
-			\subsection*{Interpretación gráfica}
-			La distancia que acabamos de encontrar corresponde al segmento perpendicular desde \(P\) hasta la recta.
-			Si llamamos \(Q\) al pie de la perpendicular (es decir, el punto de la recta más cercano a \(P\)), entonces \(PQ\perp \ell\) y \(PQ=d(P,\ell)\). En la gráfica siguiente, el segmento perpendicular aparece en rojo punteado.
-			
-			\section*{Gráfica en el plano cartesiano}
-			\begin{center}
-				\begin{tikzpicture}[scale=0.6, transform shape]
-					% Límites
-					\def\xmin{-8}\def\xmax{6}
-					\def\ymin{-6}\def\ymax{18}
-					
-					% Cuadrícula y ejes
-					\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
-					\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
-					\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
-					
-					% Marcas numéricas (opcional)
-					\foreach \x in {-8,-7,...,6} \draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.8]{\x};
-					\foreach \y in {-6,-4,...,18} \draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.8]{\y};
-					
-					% Punto P
-					\coordinate (P) at (-6,5);
-					\filldraw (P) circle (2pt) node[above left] {$P(-6,5)$};
-					
-					% Recta l: 2x + y - 1 = 0 (y = -2x + 1) recortada a la cuadrícula:
-					% Intersecciones con el borde: (-8,17) y (3.5,-6)
-					\draw[thick,blue] (-8,17) -- (3.5,-6);
-					\node[blue,fill=white,inner sep=1pt] at (-4,9) {$\ell:\ 2x+y-1=0$};
-					
-					% Pie de la perpendicular Q
-					\coordinate (Q) at (-14/5, 33/5);
-					
-					% Segmento perpendicular (distancia)
-					\draw[dashed,very thick,red] (P)--(Q);
-					
-					% Punto Q
-					\filldraw[red] (Q) circle (2pt) node[above right] {$Q$};
-					
-					% Etiqueta: a la derecha de la recta y alineada con la perpendicular (vector (2,1))
-					\pgfmathsetmacro{\ang}{atan2(0,9)} % ≈ 26.565°
-					\def\off{2.3}
-					\node[red!70!black,fill=white,inner sep=2pt,rotate=\ang]
-					at ($ (Q) + (-\off*2, -\off*1) $)
-					{$d=\dfrac{8}{\sqrt{5}}=\dfrac{8\sqrt{5}}{5}\approx 3.58$};
-					
-					% Cuadrito de ángulo recto en Q
-					\def\s{0.25}
-					\draw[red,thick]
-					($ (Q) + ({2*\s},{1*\s}) $) --
-					($ (Q) + ({3*\s},{-1*\s}) $) --
-					($ (Q) + ({\s},{-2*\s}) $);
-				\end{tikzpicture}
-			\end{center}
-			
-			\bigskip
-			\noindent
-			\textbf{Resultado final:}\quad
-			\[
-			\boxed{\,d\big(P(-6,5),\ 2x+y-1=0\big)=\dfrac{8}{\sqrt{5}}=\dfrac{8\sqrt{5}}{5}\,}.
-			\]
+\vspace{5mm}
 
-			\bigskip
-			\noindent
-			\textbf{Nota final:} Este taller cubre los conceptos fundamentales de geometría analítica: distancia entre puntos, teorema de Pitágoras, punto medio, triángulos isósceles y distancia de un punto a una recta. ¡Excelente trabajo, Sheyra!
+\textbf{Solución.} Para iniciar la solución de este ejercicio usaremos al teorema de Pitágoras
 
-			% Documento editado el 17 de octubre 2025 - Agregada nota final
+
+\bigskip
+
+\textbf{Teorema de Pitágoras.}
+En \emph{todo triángulo rectángulo}, \textcolor{red}{\textbf{la suma de los cuadrados de las longitudes de los catetos}} \textbf{(\underline{o sea los dos lados más cortos del triángulo})} \textcolor{red}{\textbf{es igual al cuadrado de la longitud de la hipotenusa}}:
+\[
+a^2+b^2=c^2.
+\]
+\emph{¿Cuándo se aplica?}
+\begin{itemize}
+\item Cuando sabemos o sospechamos que hay un ángulo de \(90^\circ\).
+\item Para calcular un lado conociendo los otros dos, \textcolor{red}{ \underline{\textbf{o para verificar si un triángulo es}}  \underline{\textbf{rectángulo}}}: si para tres lados \(a,b,c\) (con \(c\) el mayor) se cumple \(a^2+b^2=c^2\), entonces el triángulo es rectángulo y \(c\) es la hipotenusa.
+\end{itemize}
+
+Entonces el plan es: calcular las distancias de cada lado del triángulo y comprobar si cuando elevo al cuadrado la distancia de dos de sus lados y al sumar los dos resultados me da un valor igual al cuadrado del tercer lado elevado al cuadrado
+
+\bigskip
+
+Recordemos que la \textbf{Fórmula de distancia en el plano.}
+Para dos puntos dice que si tengo dos puntos  \(P(x_1,y_1)\) y \(Q(x_2,y_2)\), la distancia entre ellos se calcula mediante :
+\[
+d(P,Q)=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}.
+\]
+
+\bigskip
+
+\textbf{Calculemos las longitudes de los diferentes lados.}
+
+\vspace{3mm}
+
+\underline{Lado \(AB\)} (entre \(A(3,-6)\) y \(B(8,-2)\)):
+\[
+\begin{aligned}
+AB &= \sqrt{(8-3)^2+(-2-(-6))^2}
+= \sqrt{5^2+4^2}
+= \sqrt{25+16}
+= \sqrt{41}\approx 6.40.
+\end{aligned}
+\]
+
+\underline{Lado \(AC\)} (entre \(A(3,-6)\) y \(C(-1,-1)\)):
+\[
+\begin{aligned}
+AC &= \sqrt{(-1-3)^2+(-1-(-6))^2}
+= \sqrt{(-4)^2+5^2}
+= \sqrt{16+25}
+= \sqrt{41}\approx 6.40.
+\end{aligned}
+\]
+
+\underline{Lado \(BC\)} (entre \(B(8,-2)\) y \(C(-1,-1)\)):
+\[
+\begin{aligned}
+BC &= \sqrt{(8-(-1))^2+(-2-(-1))^2}
+= \sqrt{9^2+(-1)^2}
+= \sqrt{81+1}
+= \sqrt{82}\approx 9.06.
+\end{aligned}
+\]
+
+\bigskip
+
+\textbf{Ahora apliquemos el Teorema de Pitágoras con los datos obtenidos.}
+
+Como \(BC\) es el lado más largo, lo comparamos con \(AB\) y \(AC\):
+\[
+AB^2+AC^2=(\sqrt{41})^2+(\sqrt{41})^2=41+41=82=(\sqrt{82})^2=BC^2.
+\]
+Entonces, como se cumple que: \(AB^2+AC^2=BC^2\). Por lo tanto, el triángulo es \textbf{rectángulo} y además el ángulo recto está en el vértice \(\mathbf{A}\); la hipotenusa es \(\overline{BC}\).
+
+\bigskip
+
+\textbf{Gráfica en el plano cartesiano.}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.65]
+% límites
+\def\xmin{-3}\def\xmax{10}
+\def\ymin{-8}\def\ymax{4}
+
+% cuadrícula
+\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+% ejes (sin usar '->', usamos -{Latex})
+\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+% marcas numéricas en x
+\foreach \x in {-3,-2,...,10}
+\draw (\x,0) -- (\x,0.12) node[below=6pt,scale=0.8] {\x};
+
+% marcas numéricas en y
+\foreach \y in {-8,-7,...,4}
+\draw (0,\y) -- (0.12,\y) node[left=6pt,scale=0.8] {\y};
+
+% puntos
+\coordinate (A) at (3,-6);
+\coordinate (B) at (8,-2);
+\coordinate (C) at (-1,-1);
+
+% triángulo
+\draw[thick] (A)--(B)--(C)--cycle;
+\filldraw[black] (A) circle (2pt) node[below right] {$A(3,-6)$};
+\filldraw[black] (B) circle (2pt) node[above right] {$B(8,-2)$};
+\filldraw[black] (C) circle (2pt) node[below left] {$C(-1,-1)$};
+
+% cuadradito del ángulo recto en A
+\path (A) coordinate (Aa);
+\path ($(A)+(0.47,0.375)$) coordinate (Pab);
+\path ($(A)+(-0.375,0.47)$) coordinate (Pac);
+\draw[thick] (Pab) -- ($(Pab)+(-0.375,0.47)$) -- (Pac);
+
+% etiquetas de lados
+\node at ($(A)!0.55!(B)$) [below right,scale=0.9] {$AB=\sqrt{41}$};
+\node at ($(A)!0.55!(C)$) [below left,scale=0.9] {$AC=\sqrt{41}$};
+\node at ($(B)!0.55!(C)$) [below
+,scale=0.9] {$BC=\sqrt{82}$};
+\end{tikzpicture}
+\end{center}
+
+
+
+\section{¿Qué es el punto medio y cómo se calcula?}
+Dado un segmento que une dos puntos \(P(x_1,y_1)\) y \(Q(x_2,y_2)\), el
+\textbf{punto medio} \(M\) es el punto exactamente a la misma distancia de \(P\) y de \(Q\).
+Su fórmula es:
+\[
+\boxed{\,M\left(\dfrac{x_1+x_2}{2},\ \dfrac{y_1+y_2}{2}\right)\,}
+\]
+
+\textbf{¿Cuándo se aplica?}
+\begin{itemize}
+\item \textbf{Para encontrar el centro de un segmento} cuando se conocen sus extremos.
+\item \textbf{Para verificar} si dos segmentos se \emph{bisen} (por ejemplo, diagonales de un paralelogramo).
+\item \textbf{Para construir figuras simétricas} o ubicar centros en problemas de geometría analítica.
+\end{itemize}
+
+\section*{Datos que obtenemos del problema}
+Cuadrilátero con vértices:
+\[
+A(0,0),\quad B(0,4),\quad C(3,5),\quad D(3,-1).
+\]
+Buscamos los puntos medios de las diagonales \(\overline{AC}\) y \(\overline{BD}\).
+
+\section*{Calculemos el punto medio de \(\overline{AC}\) mediante la fórmula que haz recibido del profesor de matemáticas}
+Aplicamos la fórmula del punto medio a \(A(0,0)\) y \(C(3,5)\):
+\[
+\begin{aligned}
+M_{AC} \;=\;
+\left(\frac{x_A+x_C}{2},\ \frac{y_A+y_C}{2}\right)
+&=\left(\frac{0+3}{2},\ \frac{0+5}{2}\right) \\
+&=\left(\frac{3}{2},\ \frac{5}{2}\right)
+=(1.5,\ 2.5).
+\end{aligned}
+\]
+
+\section*{Calculemos ahora el punto medio de \(\overline{BD}\) usando nuevamente la fórmula del punto medio}
+Aplicamos la fórmula del punto medio a \(B(0,4)\) y \(D(3,-1)\):
+\[
+\begin{aligned}
+M_{BD} \;=\;
+\left(\frac{x_B+x_D}{2},\ \frac{y_B+y_D}{2}\right)
+&=\left(\frac{0+3}{2},\ \frac{4+(-1)}{2}\right) \\
+&=\left(\frac{3}{2},\ \frac{3}{2}\right)
+=(1.5,\ 1.5).
+\end{aligned}
+\]
+\emph{Nota.} Sumar un número negativo: \(4+(-1)=3\).
+
+\section*{Ahora te presento en el plano cartesiano la figura}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% límites del dibujo
+\def\xmin{-1}\def\xmax{5}
+\def\ymin{-2}\def\ymax{6}
+
+% cuadrícula
+\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+% ejes con puntas tipo LaTeX (evita usar -> para no chocar con babel)
+\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+% marcas numéricas en x
+\foreach \x in {-1,0,1,2,3,4,5}
+\draw (\x,0) -- (\x,0.12) node[below=6pt,scale=0.8] {\x};
+
+% marcas numéricas en y
+\foreach \y in {-2,-1,0,1,2,3,4,5,6}
+\draw (0,\y) -- (0.12,\y) node[left=6pt,scale=0.8] {\y};
+
+% puntos del cuadrilátero
+\coordinate (A) at (0,0);
+\coordinate (B) at (0,4);
+\coordinate (C) at (3,5);
+\coordinate (D) at (3,-1);
+
+% diagonales y contorno
+\draw[thick] (A)--(B)--(C)--(D)--cycle;
+\draw[dashed,thick] (A)--(C);
+\draw[dashed,thick] (B)--(D);
+
+% puntos medios
+\coordinate (MAC) at (1.5,2.5);
+\coordinate (MBD) at (1.5,1.5);
+
+% dibujar puntos y etiquetas
+\filldraw (A) circle (2pt) node[below left] {$A(0,0)$};
+\filldraw (B) circle (2pt) node[above left] {$B(0,4)$};
+\filldraw (C) circle (2pt) node[above right] {$C(3,5)$};
+\filldraw (D) circle (2pt) node[below right] {$D(3,-1)$};
+
+\filldraw[black] (MAC) circle (2.2pt) node[above right] {$M_{AC}(1.5,\,2.5)$};
+\filldraw[black] (MBD) circle (2.2pt) node[below right] {$M_{BD}(1.5,\,1.5)$};
+
+\end{tikzpicture}
+\end{center}
+
+\bigskip
+\noindent
+\textbf{Conclusión.} Los puntos medios de las diagonales son
+\[
+\boxed{M_{AC}=(1.5,\,2.5)} \qquad \text{y} \qquad \boxed{M_{BD}=(1.5,\,1.5)}.
+\]
+En la gráfica se observa que \textbf{ambos quedan centrados sobre las diagonales} correspondientes.
+
+
+\section{Definición de triángulo isósceles}
+Un \textbf{triángulo isósceles} es un triángulo que tiene \textbf{dos lados de igual longitud}.
+Los ángulos opuestos a esos lados también son iguales. El lado que \emph{no} es igual se
+llama \emph{base} y el vértice común a los dos lados iguales se llama \emph{vértice del isósceles}.
+
+\subsection*{Ejemplos visuales}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+% Ejemplo 1
+\begin{scope}[shift={(0,0)}]
+\coordinate (A) at (0,0);
+\coordinate (B) at (4,0);
+\coordinate (C) at (2,3);
+\draw[thick] (A)--(B)--(C)--cycle;
+% marquitas de igualdad en AC y BC
+\draw ($(A)!0.5!(C)$) +(-0.12,0.12) -- +(0.12,-0.12);
+\draw ($(B)!0.5!(C)$) +(-0.12,0.12) -- +(0.12,-0.12);
+\node at (2,-0.65) {Isósceles con base $\overline{AB}$};
+\end{scope}
+% Ejemplo 2
+\begin{scope}[shift={(7,0)}]
+\coordinate (D) at (0,0);
+\coordinate (E) at (3,2.5);
+\coordinate (F) at (6,0);
+\draw[thick] (D)--(E)--(F)--cycle;
+% marquitas de igualdad en DE y EF
+\draw ($(D)!0.5!(E)$) +(-0.12,-0.12) -- +(0.12,0.12);
+\draw ($(E)!0.5!(F)$) +(-0.12,-0.12) -- +(0.12,0.12);
+\node at (3,-0.65) {Isósceles con base $\overline{DF}$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\section*{Datos que obtenemos del problema}
+Puntos: \(X(-7,2),\ Y(3,-4),\ Z(1,4)\).\\
+\textbf{Objetivo}: Se quiere determinar si el triángulo \(XYZ\) es isósceles comprobando las longitudes de sus lados.
+
+\section*{Fórmula de la distancia (recordatorio)}
+Para dos puntos \(P(x_1,y_1)\) y \(Q(x_2,y_2)\),
+\[
+\boxed{\,d(P,Q)=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\,}
+\]
+
+\section*{Cálculo de cada lado}
+\subsection*{Lado \(\mathbf{XY}\)}
+\textbf{Fórmula:}
+\(d(X,Y)=\sqrt{(x_Y-x_X)^2+(y_Y-y_X)^2}\).
+\[
+\begin{aligned}
+XY &= \sqrt{(3-(-7))^2+(-4-2)^2}
+= \sqrt{10^2+(-6)^2}
+= \sqrt{100+36}
+= \sqrt{136}\approx 11.66.
+\end{aligned}
+\]
+
+\subsection*{Lado \(\mathbf{XZ}\)}
+\textbf{Fórmula:}
+\(d(X,Z)=\sqrt{(x_Z-x_X)^2+(y_Z-y_X)^2}\).
+\[
+\begin{aligned}
+XZ &= \sqrt{(1-(-7))^2+(4-2)^2}
+= \sqrt{8^2+2^2}
+= \sqrt{64+4}
+= \sqrt{68}\approx 8.25.
+\end{aligned}
+\]
+
+\subsection*{Lado \(\mathbf{YZ}\)}
+\textbf{Fórmula:}
+\(d(Y,Z)=\sqrt{(x_Z-x_Y)^2+(y_Z-y_Y)^2}\).
+\[
+\begin{aligned}
+YZ &= \sqrt{(1-3)^2+(4-(-4))^2}
+= \sqrt{(-2)^2+8^2}
+= \sqrt{4+64}
+= \sqrt{68}\approx 8.25.
+\end{aligned}
+\]
+
+\section*{Conclusión}
+Observamos que \(XZ = YZ = \sqrt{68}\) y \(XY=\sqrt{136}\).
+Como \(\,XZ=YZ\), el triángulo \(XYZ\) es \textbf{isósceles} con vértice en \(\mathbf{Z}\) y base \(\overline{XY}\).
+
+\section*{Gráfica en el plano cartesiano}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% límites
+\def\xmin{-8}\def\xmax{5}
+\def\ymin{-5}\def\ymax{5}
+
+% cuadrícula
+\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+
+% ejes
+\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+% marcas numéricas
+\foreach \x in {-8,-7,...,5}
+\draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.8]{\x};
+\foreach \y in {-5,-4,...,5}
+\draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.8]{\y};
+
+% puntos
+\coordinate (X) at (-7,2);
+\coordinate (Y) at (3,-4);
+\coordinate (Z) at (1,4);
+
+% triángulo y resaltado de lados iguales
+\draw[thick] (X)--(Y)--(Z)--cycle;
+\draw[very thick] (X)--(Z);
+\draw[very thick] (Y)--(Z);
+
+% puntos visibles
+\filldraw (X) circle (2pt) node[above left] {$X(-7,2)$};
+\filldraw (Y) circle (2pt) node[below right] {$Y(3,-4)$};
+\filldraw (Z) circle (2pt) node[above right] {$Z(1,4)$};
+
+% etiquetas de longitudes (opcional)
+\node[scale=0.9] at ($(X)!0.5!(Z)$) [above] {$\sqrt{68}$};
+\node[scale=0.9] at ($(Y)!0.5!(Z)$) [right] {$\sqrt{68}$};
+\node[scale=0.9] at ($(X)!0.5!(Y)$) [below] {$\sqrt{136}$};
+\end{tikzpicture}
+\end{center}
+
+
+\section{Cálculo de la distancia de un punto a una recta}
+\textbf{La distancia del punto} \(P(x_0,y_0)\)  \textbf{a una recta} dada en forma general
+\[
+Ax+By+C=0
+\]
+se calcula con
+\[
+\boxed{\,d(P,\ell)=\dfrac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}\,}
+\]
+El valor absoluto garantiza que la distancia sea \emph{positiva}.\\[2mm]
+\textbf{¿Cuándo se aplica?} Siempre que conozcamos un punto y una recta (en forma \(Ax+By+C=0\)) y queramos la \textbf{\emph{distancia perpendicular desde el punto hasta la recta}}.
+
+\section*{Datos que obtenemos del ejercicio}
+Punto \(P(-6,5)\) y recta \(\ell:\ 2x+y-1=0\).\\
+Aquí \(A=2,\ B=1,\ C=-1,\ x_0=-6,\ y_0=5\).
+
+\section*{Cálculo de la distancia}
+\textbf{Fórmula a usar:}
+\[
+d(P,\ell)=\dfrac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}.
+\]
+
+\textbf{Reemplazo de datos:}  \textcolor{red}{Nota: Es importante aplicar el valor absoluto en el numerador para obtener siempre una distancia positiva.}
+\[
+\begin{aligned}
+d(P,\ell)
+&=\dfrac{|\,2(-6)+1(5)-1\,|}{\sqrt{2^2+1^2}}
+=\dfrac{|\,{-12}+5-1\,|}{\sqrt{4+1}}
+=\dfrac{|\,{-8}\,|}{\sqrt{5}}
+=\dfrac{8}{\sqrt{5}}.
+\end{aligned}
+\]
+
+\textbf{(Opcional) Racionalización del denominador:}
+\[
+\dfrac{8}{\sqrt{5}}=\dfrac{8\sqrt{5}}{5}.
+\]
+
+\section*{Interpretación geométrica o representación gráfica}
+\subsection*{Interpretación gráfica}
+La distancia que acabamos de encontrar corresponde al segmento perpendicular desde \(P\) hasta la recta.
+Si llamamos \(Q\) al pie de la perpendicular (es decir, el punto de la recta más cercano a \(P\)), entonces \(PQ\perp \ell\) y \(PQ=d(P,\ell)\). En la gráfica siguiente, el segmento perpendicular aparece en rojo punteado.
+
+\section*{Gráfica en el plano cartesiano}
+\begin{center}
+\begin{tikzpicture}[scale=0.6, transform shape]
+% Límites
+\def\xmin{-8}\def\xmax{6}
+\def\ymin{-6}\def\ymax{18}
+
+% Cuadrícula y ejes
+\draw[very thin,gray!50] (\xmin,\ymin) grid (\xmax,\ymax);
+\draw[-{Latex},thick] (\xmin,0)--(\xmax,0) node[right] {$x$};
+\draw[-{Latex},thick] (0,\ymin)--(0,\ymax) node[above] {$y$};
+
+% Marcas numéricas (opcional)
+\foreach \x in {-8,-7,...,6} \draw (\x,0)--(\x,0.12) node[below=6pt,scale=0.8]{\x};
+\foreach \y in {-6,-4,...,18} \draw (0,\y)--(0.12,\y) node[left=6pt,scale=0.8]{\y};
+
+% Punto P
+\coordinate (P) at (-6,5);
+\filldraw (P) circle (2pt) node[above left] {$P(-6,5)$};
+
+% Recta l: 2x + y - 1 = 0 (y = -2x + 1) recortada a la cuadrícula:
+% Intersecciones con el borde: (-8,17) y (3.5,-6)
+\draw[thick,blue] (-8,17) -- (3.5,-6);
+\node[blue,fill=white,inner sep=1pt] at (-4,9) {$\ell:\ 2x+y-1=0$};
+
+% Pie de la perpendicular Q
+\coordinate (Q) at (-14/5, 33/5);
+
+% Segmento perpendicular (distancia)
+\draw[dashed,very thick,red] (P)--(Q);
+
+% Punto Q
+\filldraw[red] (Q) circle (2pt) node[above right] {$Q$};
+
+% Etiqueta: a la derecha de la recta y alineada con la perpendicular (vector (2,1))
+\pgfmathsetmacro{\ang}{atan2(0,9)} % ≈ 26.565°
+\def\off{2.3}
+\node[red!70!black,fill=white,inner sep=2pt,rotate=\ang]
+at ($ (Q) + (-\off*2, -\off*1) $)
+{$d=\dfrac{8}{\sqrt{5}}=\dfrac{8\sqrt{5}}{5}\approx 3.58$};
+
+% Cuadrito de ángulo recto en Q
+\def\s{0.25}
+\draw[red,thick]
+($ (Q) + ({2*\s},{1*\s}) $) --
+($ (Q) + ({3*\s},{-1*\s}) $) --
+($ (Q) + ({\s},{-2*\s}) $);
+\end{tikzpicture}
+\end{center}
+
+\bigskip
+\noindent
+\textbf{Resultado final:}\quad
+\[
+\boxed{\,d\big(P(-6,5),\ 2x+y-1=0\big)=\dfrac{8}{\sqrt{5}}=\dfrac{8\sqrt{5}}{5}\,}.
+\]
+
+\bigskip
+\noindent
+\textbf{Nota final:} Este taller cubre los conceptos fundamentales de geometría analítica: distancia entre puntos, teorema de Pitágoras, punto medio, triángulos isósceles y distancia de un punto a una recta. ¡Excelente trabajo, Sheyra!
+
+% Documento editado el 17 de octubre 2025 - Agregada nota final
 
 
 \end{document}

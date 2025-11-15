@@ -1,0 +1,1480 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper]{article}
+
+% Paquetes esenciales
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta,patterns,babel}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+% Configuración de colores
+\definecolor{medicina}{RGB}{220,20,60}
+\definecolor{economia}{RGB}{0,128,0}
+\definecolor{fisica}{RGB}{0,0,255}
+\definecolor{social}{RGB}{255,140,0}
+
+\title{\Huge\bfseries Aplicaciones de la Derivada\\[0.3cm]
+\Large En Medicina, Economía, Ciencias Sociales y Física}
+\author{\Large Guía para Bachillerato}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+%\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+La derivada es una de las herramientas matemáticas más poderosas y versátiles que existen. Más allá de ser solo un concepto abstracto del cálculo, la derivada tiene aplicaciones directas en casi todas las áreas del conocimiento humano.
+
+\subsection*{¿Qué nos dice la derivada?}
+
+La derivada nos indica \textbf{cómo cambia} algo con respecto a otra cosa. Es decir, si tenemos una función $y = f(x)$, su derivada $f'(x)$ nos dice qué tan rápido está creciendo o decreciendo $y$ cuando $x$ cambia.
+
+\textbf{Conceptos clave:}
+\begin{itemize}[leftmargin=2cm]
+    \item Si $f'(x) > 0$ en un punto, la función está \textbf{creciendo} en ese punto
+    \item Si $f'(x) < 0$ en un punto, la función está \textbf{decreciendo} en ese punto
+    \item Si $f'(x) = 0$ en un punto, ese punto podría ser un \textbf{máximo o mínimo}
+    \item La derivada también representa la \textbf{pendiente de la recta tangente} en cada punto
+\end{itemize}
+
+En esta guía veremos cómo la derivada nos ayuda a resolver problemas reales en diferentes disciplinas:
+
+\begin{itemize}[leftmargin=2cm]
+    \item \textcolor{medicina}{\textbf{Medicina:}} Propagación de enfermedades, farmacocinética, crecimiento tumoral
+    \item \textcolor{economia}{\textbf{Economía:}} Maximización de beneficios, costos marginales, producción óptima
+    \item \textcolor{social}{\textbf{Ciencias Sociales:}} Crecimiento poblacional, difusión de información
+    \item \textcolor{fisica}{\textbf{Física:}} Velocidad, aceleración, movimiento de proyectiles
+\end{itemize}
+
+%\newpage
+
+\section{Aplicaciones en Medicina}
+
+\subsection{Propagación de Enfermedades - Modelo SIR}
+
+En epidemiología, el modelo SIR describe cómo se propaga una enfermedad en una población. Las letras significan:
+\begin{itemize}
+    \item \textbf{S} (Susceptibles): personas que pueden contraer la enfermedad
+    \item \textbf{I} (Infectados): personas que tienen la enfermedad y pueden contagiar
+    \item \textbf{R} (Recuperados): personas que ya se recuperaron o están inmunizadas
+\end{itemize}
+
+La tasa de cambio de infectados está dada por:
+\[
+\frac{dI}{dt} = \beta SI - \gamma I
+\]
+
+donde:
+\begin{itemize}
+    \item $\beta$ = tasa de contacto (probabilidad de contagio)
+    \item $\gamma$ = tasa de recuperación
+    \item $\frac{dI}{dt}$ = derivada que indica cómo cambia el número de infectados con el tiempo
+\end{itemize}
+
+\subsection*{\color{medicina}Ejemplo 1: Pico de una Epidemia}
+
+\textbf{Enunciado:} En una ciudad de 10,000 habitantes, se modela una gripe con la función:
+\[
+I(t) = \frac{1000t}{1 + 0.5t^2}
+\]
+donde $I(t)$ es el número de infectados en el día $t$. ¿En qué día se alcanza el máximo número de infectados?
+
+\textbf{Solución:}
+
+Para encontrar el máximo, necesitamos encontrar dónde la derivada es cero (o sea, donde la función deja de crecer).
+
+\textbf{Paso 1:} Calcular la derivada usando la regla del cociente:
+\[
+I'(t) = \frac{(1 + 0.5t^2)(1000) - (1000t)(t)}{(1 + 0.5t^2)^2}
+\]
+
+\textbf{Paso 2:} Simplificar el numerador:
+\begin{align*}
+I'(t) &= \frac{1000 + 500t^2 - 1000t^2}{(1 + 0.5t^2)^2}\\
+&= \frac{1000 - 500t^2}{(1 + 0.5t^2)^2}\\
+&= \frac{500(2 - t^2)}{(1 + 0.5t^2)^2}
+\end{align*}
+
+\textbf{Paso 3:} Igualar a cero:
+\[
+500(2 - t^2) = 0 \quad \Rightarrow \quad 2 - t^2 = 0 \quad \Rightarrow \quad t = \sqrt{2} \approx 1.41 \text{ días}
+\]
+
+\textbf{Paso 4:} Calcular el número máximo de infectados:
+\[
+I(\sqrt{2}) = \frac{1000\sqrt{2}}{1 + 0.5(2)} = \frac{1414.2}{2} = \boxed{707 \text{ personas}}
+\]
+
+\textbf{Interpretación:} El pico de la epidemia ocurre aproximadamente al día y medio, con 707 personas infectadas simultáneamente.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+    \def\xmin{0}\def\xmax{6}
+    \def\ymin{0}\def\ymax{800}
+
+    % Grid
+    \draw[very thin,gray!30] (\xmin,0) grid[ystep=100] (\xmax,8);
+
+    % Ejes
+    \draw[-{Latex},thick] (\xmin,0)--(\xmax+0.3,0) node[above]{Días ($t$)};
+    \draw[-{Latex},thick] (0,\ymin)--(0,8.5) node[below right]{Infectados $I(t)$};
+
+    % Etiquetas del eje y
+    \foreach \y in {0,100,200,300,400,500,600,700,800}{
+        \draw (0,\y/100) -- (-0.1,\y/100) node[left,scale=0.7]{\y};
+    }
+
+    % Etiquetas del eje x
+    \foreach \x in {0,1,2,3,4,5,6}{
+        \draw (\x,0) -- (\x,-0.1) node[below,scale=0.7]{\x};
+    }
+
+    % Curva de infectados
+    \draw[medicina,very thick,domain=0.1:6,samples=200,smooth]
+        plot (\x,{1000*\x/(1 + 0.5*\x*\x)/100});
+
+    % Punto máximo
+    \fill[blue] (1.414,7.07) circle (0.08) node[right=2mm,scale=0.85]{Pico: $(1.41, 707)$};
+
+    % Línea vertical en el máximo
+    \draw[blue,dashed,thick] (1.414,0) -- (1.414,7.07);
+
+    % Título
+    \node[medicina,scale=1] at (3,9.5) {\textbf{Curva de Infectados en el Tiempo}};
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Concentración de Medicamentos - Farmacocinética}
+
+\subsection*{\color{medicina}Ejemplo 2: Nivel Óptimo de un Fármaco}
+
+\textbf{Enunciado:} La concentración de un antibiótico en la sangre (en mg/L) después de $t$ horas está dada por:
+\[
+C(t) = \frac{20t}{t^2 + 4}
+\]
+¿En qué momento se alcanza la concentración máxima? ¿Cuál es esa concentración?
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Derivar usando la regla del cociente:
+\[
+C'(t) = \frac{(t^2 + 4)(20) - (20t)(2t)}{(t^2 + 4)^2}
+\]
+
+\textbf{Paso 2:} Simplificar:
+\begin{align*}
+C'(t) &= \frac{20t^2 + 80 - 40t^2}{(t^2 + 4)^2}\\
+&= \frac{80 - 20t^2}{(t^2 + 4)^2}\\
+&= \frac{20(4 - t^2)}{(t^2 + 4)^2}
+\end{align*}
+
+\textbf{Paso 3:} Igualar a cero:
+\[
+20(4 - t^2) = 0 \quad \Rightarrow \quad t^2 = 4 \quad \Rightarrow \quad t = 2 \text{ horas}
+\]
+
+(tomamos $t = 2$ porque $t$ debe ser positivo)
+
+\textbf{Paso 4:} Calcular la concentración máxima:
+\[
+C(2) = \frac{20(2)}{2^2 + 4} = \frac{40}{8} = \boxed{5 \text{ mg/L}}
+\]
+
+\textbf{Interpretación:} El medicamento alcanza su concentración máxima de 5 mg/L a las 2 horas de su administración.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+    \def\xmin{0}\def\xmax{10}
+
+    % Grid
+    \draw[very thin,gray!30] (\xmin,0) grid[ystep=0.5] (\xmax,6);
+
+    % Ejes
+    \draw[-{Latex},thick] (\xmin,0)--(\xmax+0.3,0) node[above left=1mm]{Tiempo (horas)};
+    \draw[-{Latex},thick] (0,0)--(0,6.5) node[below right]{$C(t)$ (mg/L)};
+
+    % Etiquetas eje y
+    \foreach \y in {0,1,2,3,4,5,6}{
+        \draw (0,\y) -- (-0.1,\y) node[left,scale=0.7]{\y};
+    }
+
+    % Etiquetas eje x
+    \foreach \x in {0,2,4,6,8,10}{
+        \draw (\x,0) -- (\x,-0.1) node[below,scale=0.7]{\x};
+    }
+
+    % Curva de concentración
+    \draw[medicina,very thick,domain=0.1:10,samples=200,smooth]
+        plot (\x,{20*\x/(\x*\x + 4)});
+
+    % Punto máximo
+    \fill[blue] (2,5) circle (0.08) node[right=1mm,scale=0.85]{Máximo: $(2, 5)$};
+
+    % Líneas de referencia
+    \draw[blue,dashed] (2,0) -- (2,5);
+    \draw[blue,dashed] (0,5) -- (2,5);
+
+    % Nivel terapéutico
+    \draw[green!60!black,thick,dashed] (0,3) -- (10,3) node[above right,scale=0.8] at(6.5,3.1) {Nivel terapéutico};
+
+    % Título
+    \node[medicina,scale=1] at (5,7.8) {\textbf{Concentración del Fármaco vs Tiempo}};
+
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\section{Aplicaciones en Economía}
+
+\subsection{Maximización de Beneficios}
+
+En economía, las empresas buscan \textbf{maximizar sus beneficios}. El beneficio se define como:
+\[
+B(x) = I(x) - C(x)
+\]
+donde:
+\begin{itemize}
+    \item $B(x)$ = Beneficio al producir $x$ unidades
+    \item $I(x)$ = Ingreso por ventas
+    \item $C(x)$ = Costo de producción
+\end{itemize}
+
+Para maximizar el beneficio, necesitamos encontrar donde $B'(x) = 0$.
+
+\subsection*{\color{economia}Ejemplo 3: Producción Óptima de una Fábrica}
+
+\textbf{Enunciado:} Una fábrica produce sillas. El ingreso por vender $x$ sillas está dado por:
+\[
+I(x) = 100x - 0.5x^2
+\]
+y el costo de producirlas es:
+\[
+C(x) = 20x + 500
+\]
+¿Cuántas sillas debe producir para maximizar el beneficio? ¿Cuál es el beneficio máximo?
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Definir la función de beneficio:
+\begin{align*}
+B(x) &= I(x) - C(x)\\
+&= (100x - 0.5x^2) - (20x + 500)\\
+&= 100x - 0.5x^2 - 20x - 500\\
+&= -0.5x^2 + 80x - 500
+\end{align*}
+
+\textbf{Paso 2:} Derivar:
+\[
+B'(x) = -x + 80
+\]
+
+\textbf{Paso 3:} Igualar a cero y resolver:
+\[
+-x + 80 = 0 \quad \Rightarrow \quad x = 80 \text{ sillas}
+\]
+
+\textbf{Paso 4:} Verificar que es un máximo (la segunda derivada):
+\[
+B''(x) = -1 < 0 \quad \text{(es un máximo)}
+\]
+
+\textbf{Paso 5:} Calcular el beneficio máximo:
+\begin{align*}
+B(80) &= -0.5(80)^2 + 80(80) - 500\\
+&= -3200 + 6400 - 500\\
+&= \boxed{2700 \text{ pesos}}
+\end{align*}
+
+\textbf{Interpretación:} La fábrica debe producir 80 sillas para obtener el beneficio máximo de 2700 pesos.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={Sillas ($x$)}, ylabel={Cientos de pesos},
+        xmin=0, xmax=180,
+        ymin=-10, ymax=30,
+        xtick={0,20,40,60,80,100,120,140,160},
+        ytick={-10,-5,0,5,10,15,20,25,30},
+        grid=both,
+        grid style={line width=.1pt, draw=gray!30},
+        axis line style={-{Latex},thick},
+        tick label style={font=\small},
+        samples=100,
+        legend pos=north east,
+        legend style={font=\small},
+    ]
+
+    % Función de ingresos
+    \addplot[blue,thick,domain=0:180] {(100*x - 0.5*x*x)/500};
+    \addlegendentry{$I(x)$}
+
+    % Función de costos
+    \addplot[red,thick,domain=0:180] {(20*x + 500)/500};
+    \addlegendentry{$C(x)$}
+
+    % Función de beneficio
+    \addplot[economia,very thick,domain=0:170] {(-0.5*x*x + 80*x - 500)/500};
+    \addlegendentry{$B(x)$}
+
+    % Punto máximo
+    \node[circle, fill=black, inner sep=2pt] at (80,{(-0.5*80*80 + 80*80 - 500)/500}) {};
+    \node[black,above,scale=0.8] at (80,5.6) {Máx: $(80, 5.4)$};
+    \draw[black,dashed,thick] (80,-10)--(80,{(-0.5*80*80 + 80*80 - 500)/500});
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+%\newpage
+
+\subsection{Costo Marginal}
+
+El \textbf{costo marginal} es la derivada de la función de costo: $C'(x)$. Representa cuánto cuesta producir una unidad adicional.
+
+\subsection*{\color{economia}Ejemplo 4: Costo Marginal y Producción Eficiente}
+
+\textbf{Enunciado:} El costo total de producir $x$ unidades de un producto es:
+\[
+C(x) = 0.01x^3 - 0.6x^2 + 13x + 100
+\]
+a) ¿Cuál es el costo marginal cuando se producen 20 unidades?\\
+b) ¿Para qué nivel de producción el costo marginal es mínimo?
+
+\textbf{Solución:}
+
+\textbf{Parte a:}
+
+\textbf{Paso 1:} Calcular el costo marginal (derivada):
+\begin{align*}
+C'(x) &= \frac{d}{dx}(0.01x^3 - 0.6x^2 + 13x + 100)\\
+&= 0.03x^2 - 1.2x + 13
+\end{align*}
+
+\textbf{Paso 2:} Evaluar en $x = 20$:
+\begin{align*}
+C'(20) &= 0.03(20)^2 - 1.2(20) + 13\\
+&= 0.03(400) - 24 + 13\\
+&= 12 - 24 + 13\\
+&= \boxed{1 \text{ peso por unidad}}
+\end{align*}
+
+\textbf{Interpretación:} Cuando se están produciendo 20 unidades, producir una unidad adicional cuesta aproximadamente 1 peso.
+
+\textbf{Parte b:}
+
+Para encontrar el mínimo del costo marginal, derivamos nuevamente:
+
+\textbf{Paso 3:} Calcular la segunda derivada:
+\[
+C''(x) = 0.06x - 1.2
+\]
+
+\textbf{Paso 4:} Igualar a cero:
+\[
+0.06x - 1.2 = 0 \quad \Rightarrow \quad x = \frac{1.2}{0.06} = \boxed{20 \text{ unidades}}
+\]
+
+\textbf{Interpretación:} El costo marginal es mínimo cuando se producen 20 unidades, lo que significa que esta es la producción más eficiente.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.65]
+    \def\xmin{0}\def\xmax{40}
+
+    % Grid
+    \draw[very thin,gray!30] (\xmin,0) grid[xstep=1,ystep=1] (\xmax/5,15);
+
+    % Ejes
+    \draw[-{Latex},thick] (\xmin,0)--(\xmax/5+0.5,0) node[above left=-1mm]{Unidades ($x$)};
+    \draw[-{Latex},thick] (0,0)--(0,14) node[right=1mm]{Costo Marginal};
+
+    % Etiquetas eje x
+    \foreach \x in {0,5,10,15,20,25,30,35,40}{
+        \draw (\x/5,0) -- (\x/5,-0.2) node[below,scale=0.7]{\x};
+    }
+
+    % Etiquetas eje y
+    \foreach \y in {0,2,4,6,8,10,12,14}{
+        \draw (0,\y) -- (-0.1,\y) node[left,scale=0.7]{\y};
+    }
+
+    % Costo marginal
+    \draw[economia,very thick,domain=0:40,samples=150]
+        plot (\x/5,{0.03*\x*\x - 1.2*\x + 13});
+
+    % Punto mínimo
+    \fill[blue] (20/5,1) circle (0.08) node[below left,scale=0.85]{Mínimo: $(20, 1)$};
+    \draw[blue,dashed] (20/5,0) -- (20/5,1);
+
+    % Título
+    \node[economia,scale=1.1] at (5,16) {\textbf{Costo Marginal $C'(x)$}};
+
+\end{tikzpicture}
+\end{center}
+
+%\newpage
+
+\section{Aplicaciones en Ciencias Sociales}
+
+\subsection{Crecimiento Poblacional}
+
+El crecimiento de una población puede modelarse con funciones exponenciales o logísticas. La derivada nos indica la \textbf{tasa de crecimiento}.
+
+\subsection*{\color{social}Ejemplo 5: Crecimiento de una Ciudad}
+
+\textbf{Enunciado:} La población de una ciudad (en miles) está dada por:
+\[
+P(t) = \frac{100}{1 + 9e^{-0.3t}}
+\]
+donde $t$ es el tiempo en años desde el año 2000.\\
+a) ¿Cuál es la tasa de crecimiento en el año 2010?\\
+b) ¿Cuándo la población crece más rápidamente?
+
+\textbf{Solución:}
+
+\textbf{Parte a:}
+
+\textbf{Paso 1:} Derivar usando regla de la cadena y del cociente:
+\[
+P'(t) = \frac{100 \cdot 9e^{-0.3t} \cdot 0.3}{(1 + 9e^{-0.3t})^2} = \frac{270e^{-0.3t}}{(1 + 9e^{-0.3t})^2}
+\]
+
+\textbf{Paso 2:} Evaluar en $t = 10$ (año 2010):
+\begin{align*}
+P'(10) &= \frac{270e^{-3}}{(1 + 9e^{-3})^2}\\
+&= \frac{270(0.0498)}{(1 + 0.448)^2}\\
+&= \frac{13.44}{2.097}\\
+&= \boxed{6.41 \text{ mil personas/año}}
+\end{align*}
+
+\textbf{Interpretación:} En el año 2010, la ciudad estaba creciendo a una tasa de aproximadamente 6,410 personas por año.
+
+\textbf{Parte b:}
+
+La población crece más rápidamente cuando la derivada es máxima. Para funciones logísticas, esto ocurre cuando la población es la mitad de la capacidad de carga.
+
+Capacidad de carga: $\lim_{t \to \infty} P(t) = 100$ mil personas
+
+Máximo crecimiento cuando: $P(t) = 50$
+
+\[
+\frac{100}{1 + 9e^{-0.3t}} = 50 \quad \Rightarrow \quad 1 + 9e^{-0.3t} = 2 \quad \Rightarrow \quad e^{-0.3t} = \frac{1}{9}
+\]
+
+\[
+-0.3t = \ln\left(\frac{1}{9}\right) = -\ln(9) \quad \Rightarrow \quad t = \frac{\ln(9)}{0.3} \approx \boxed{7.32 \text{ años}}
+\]
+
+\textbf{Interpretación:} La población crece más rápidamente alrededor del año 2007.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.65]
+    \def\xmin{0}\def\xmax{40}
+
+    % Grid
+    \draw[very thin,gray!30] (\xmin,0) grid[xstep=5,ystep=1] (\xmax/2,12);
+
+    % Ejes
+    \draw[-{Latex},thick] (\xmin,0)--(\xmax/2+0.5,0) node[above left]{Años desde 2000};
+    \draw[-{Latex},thick] (0,0)--(0,12.5) node[below right]{Población (miles)};
+
+    % Etiquetas eje x
+    \foreach \x in {0,5,10,15,20,25,30,35,40}{
+        \draw (\x/2,0) -- (\x/2,-0.2) node[below,scale=0.7]{\x};
+    }
+
+    % Etiquetas eje y
+    \foreach \y in {0,20,40,60,80,100}{
+        \draw (0,\y/10) -- (-0.1,\y/10) node[left,scale=0.7]{\y};
+    }
+
+    % Curva de población
+    \draw[social,very thick,domain=0:40,samples=200]
+        plot (\x/2,{100/(1 + 9*exp(-0.3*\x))/10});
+
+    % Punto de inflexión (máximo crecimiento)
+    \fill[blue] (7.32/2,5) circle (0.08) node[right,scale=0.85]{$(7.32, 50)$};
+    \draw[blue,dashed] (7.32/2,0) -- (7.32/2,5);
+    \draw[blue,dashed] (0,5) -- (7.32/2,5);
+
+    % Asíntota
+    \draw[red,dashed,thick] (0,10) -- (20,10) node[above left,scale=0.8]{Capacidad: 100 mil};
+
+    % Título
+    \node[social,scale=1.1] at (10,13.8) {\textbf{Crecimiento Poblacional (Modelo Logístico)}};
+
+\end{tikzpicture}
+\end{center}
+
+%\newpage
+
+\subsection{Difusión de Información en Redes Sociales}
+
+\subsection*{\color{social}Ejemplo 6: Viralización de un Video}
+
+\textbf{Enunciado:} El número de visualizaciones (en millones) de un video viral está dado por:
+\[
+V(t) = 5(1 - e^{-0.5t})
+\]
+donde $t$ es el tiempo en días desde su publicación.\\
+a) ¿Cuál es la tasa de visualizaciones en el día 3?\\
+b) ¿Hacia qué valor tiende el número total de visualizaciones?
+
+\textbf{Solución:}
+
+\textbf{Parte a:}
+
+\textbf{Paso 1:} Derivar:
+\begin{align*}
+V'(t) &= 5 \cdot \frac{d}{dt}(1 - e^{-0.5t})\\
+&= 5 \cdot (0.5e^{-0.5t})\\
+&= 2.5e^{-0.5t}
+\end{align*}
+
+\textbf{Paso 2:} Evaluar en $t = 3$:
+\begin{align*}
+V'(3) &= 2.5e^{-1.5}\\
+&= 2.5(0.2231)\\
+&= \boxed{0.558 \text{ millones/día}}
+\end{align*}
+
+\textbf{Interpretación:} En el día 3, el video está recibiendo aproximadamente 558,000 visualizaciones por día.
+
+\textbf{Parte b:}
+
+El límite cuando $t \to \infty$:
+\[
+\lim_{t \to \infty} V(t) = \lim_{t \to \infty} 5(1 - e^{-0.5t}) = 5(1 - 0) = \boxed{5 \text{ millones}}
+\]
+
+\textbf{Interpretación:} El video alcanzará aproximadamente 5 millones de visualizaciones en total.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    \def\xmin{0}\def\xmax{12}
+
+    % Grid
+    \draw[very thin,gray!30] (\xmin,0) grid[xstep=1,ystep=0.5] (\xmax,6);
+
+    % Ejes
+    \draw[-{Latex},thick] (\xmin,0)--(\xmax+0.5,0) node[above left]{Días ($t$)};
+    \draw[-{Latex},thick] (0,0)--(0,6.5) node[below right=.2mm]{Millones de vistas};
+
+    % Etiquetas
+    \foreach \x in {0,2,4,6,8,10,12}{
+        \draw (\x,0) -- (\x,-0.1) node[below,scale=0.7]{\x};
+    }
+    \foreach \y in {0,1,2,3,4,5}{
+        \draw (0,\y) -- (-0.1,\y) node[left,scale=0.7]{\y};
+    }
+
+    % Curva de visualizaciones
+    \draw[social,very thick,domain=0:12,samples=150]
+        plot (\x,{5*(1 - exp(-0.5*\x))});
+
+    % Punto en t=3
+    \fill[blue] (3,{5*(1-exp(-1.5))}) circle (0.08) node[below right,scale=0.8]{Día 3};
+    \draw[blue,dashed] (3,0) -- (3,{5*(1-exp(-1.5))});
+
+    % Asíntota
+    \draw[red,dashed,thick] (0,5) -- (12,5) node[below left,scale=0.8]{Límite: 5M};
+
+    % Título
+    \node[social,scale=1.1] at (6,7.5) {\textbf{Visualizaciones del Video}};
+
+\end{tikzpicture}
+\end{center}
+
+%\newpage
+
+\section{Aplicaciones en Física}
+
+\subsection{Movimiento: Velocidad y Aceleración}
+
+En física, si $s(t)$ representa la posición de un objeto en el tiempo $t$, entonces:
+\begin{itemize}
+    \item \textbf{Velocidad:} $v(t) = s'(t)$ (primera derivada de la posición)
+    \item \textbf{Aceleración:} $a(t) = v'(t) = s''(t)$ (segunda derivada de la posición)
+\end{itemize}
+
+\subsection*{\color{fisica}Ejemplo 7: Movimiento de un Proyectil}
+
+\textbf{Enunciado:} Un proyectil es lanzado verticalmente hacia arriba. Su altura (en metros) en el tiempo $t$ (en segundos) está dada por:
+\[
+h(t) = -5t^2 + 30t + 2
+\]
+a) ¿Cuál es la velocidad inicial?\\
+b) ¿Cuándo alcanza la altura máxima?\\
+c) ¿Cuál es la altura máxima?\\
+d) ¿Cuál es la aceleración del proyectil?
+
+\textbf{Solución:}
+
+\textbf{Parte a:} La velocidad es la derivada de la posición:
+\[
+v(t) = h'(t) = -10t + 30
+\]
+
+La velocidad inicial es cuando $t = 0$:
+\[
+v(0) = -10(0) + 30 = \boxed{30 \text{ m/s}}
+\]
+
+\textbf{Parte b:} La altura máxima ocurre cuando $v(t) = 0$:
+\[
+-10t + 30 = 0 \quad \Rightarrow \quad t = \boxed{3 \text{ segundos}}
+\]
+
+\textbf{Parte c:} Sustituir $t = 3$ en $h(t)$:
+\begin{align*}
+h(3) &= -5(3)^2 + 30(3) + 2\\
+&= -45 + 90 + 2\\
+&= \boxed{47 \text{ metros}}
+\end{align*}
+
+\textbf{Parte d:} La aceleración es la derivada de la velocidad:
+\[
+a(t) = v'(t) = h''(t) = -10 \text{ m/s}^2
+\]
+
+\textbf{Interpretación:} La aceleración es constante y negativa (es la gravedad), lo que significa que el proyectil desacelera al subir.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+    \def\xmin{0}\def\xmax{7}
+
+    % Grid
+    \draw[very thin,gray!30] (\xmin,0) grid[xstep=1,ystep=0.5] (\xmax,5.5);
+
+    % Ejes
+    \draw[-{Latex},thick] (\xmin,0)--(\xmax+0.3,0) node[above left]{Tiempo (s)};
+    \draw[-{Latex},thick] (0,0)--(0,6) node[below right=-1mm]{Altura (m)};
+
+    % Etiquetas
+    \foreach \x in {0,1,2,3,4,5,6}{
+        \draw (\x,0) -- (\x,-0.15) node[below,scale=0.7]{\x};
+    }
+    \foreach \y in {0,10,20,30,40,50}{
+        \draw (0,\y/10) -- (-0.1,\y/10) node[left,scale=0.7]{\y};
+    }
+
+    % Trayectoria
+    \draw[fisica,very thick,domain=0:6.13,samples=100]
+        plot (\x,{(-5*\x*\x + 30*\x + 2)/10});
+
+    % Punto máximo
+    \fill[red] (3,4.7) circle (0.08) node[above right,scale=0.8]{Máx: $(3, 47)$};
+    \draw[red,dashed] (3,0) -- (3,4.7);
+    \draw[red,dashed] (0,4.7) -- (3,4.7);
+
+    % Punto inicial
+    \fill[green!60!black] (0,0.2) circle (0.06) node[right,scale=0.7]{$(0, 2)$};
+
+    % Título
+    \node[fisica,scale=1] at (3.5,7.5) {\textbf{Trayectoria del Proyectil}};
+
+\end{tikzpicture}
+\end{center}
+
+%\newpage
+
+\subsection{Velocidad y Aceleración en Gráficas}
+
+\subsection*{\color{fisica}Ejemplo 8: Análisis Completo de Movimiento}
+
+\textbf{Enunciado:} Un auto se mueve según la función de posición:
+\[
+s(t) = t^3 - 9t^2 + 24t
+\]
+donde $s$ está en metros y $t$ en segundos.\\
+a) ¿Cuándo el auto está en reposo?\\
+b) ¿Cuándo la velocidad es máxima?\\
+c) Graficar posición, velocidad y aceleración.
+
+\textbf{Solución:}
+
+\textbf{Parte a:} El auto está en reposo cuando $v(t) = 0$.
+
+\textbf{Paso 1:} Calcular la velocidad:
+\[
+v(t) = s'(t) = 3t^2 - 18t + 24
+\]
+
+\textbf{Paso 2:} Factorizar:
+\begin{align*}
+3t^2 - 18t + 24 &= 0\\
+3(t^2 - 6t + 8) &= 0\\
+3(t - 2)(t - 4) &= 0
+\end{align*}
+
+Por lo tanto: $t = 2$ s o $t = 4$ s
+
+\textbf{Respuesta:} El auto está en reposo en $\boxed{t = 2 \text{ s y } t = 4 \text{ s}}$
+
+\textbf{Parte b:} La velocidad es máxima o mínima cuando $a(t) = 0$.
+
+\textbf{Paso 3:} Calcular la aceleración:
+\[
+a(t) = v'(t) = s''(t) = 6t - 18
+\]
+
+\textbf{Paso 4:} Igualar a cero:
+\[
+6t - 18 = 0 \quad \Rightarrow \quad t = 3 \text{ s}
+\]
+
+\textbf{Paso 5:} Verificar si es máximo o mínimo evaluando $v(3)$:
+\[
+v(3) = 3(3)^2 - 18(3) + 24 = 27 - 54 + 24 = -3 \text{ m/s}
+\]
+
+Como $v(2) = 0$ y $v(3) = -3$, en $t = 3$ la velocidad es \textbf{mínima} (más negativa).
+
+\textbf{Interpretación:} El auto alcanza su velocidad hacia atrás más grande en $t = 3$ segundos.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.48]
+    % Gráfica de posición
+    \begin{scope}
+        \def\xmin{0}\def\xmax{6}
+
+        % Grid
+        \draw[very thin,gray!30] (\xmin,-0.5) grid[xstep=1,ystep=0.5] (\xmax,5);
+
+        % Ejes
+        \draw[-{Latex},thick] (\xmin,0)--(\xmax+0.3,0) node[right,scale=0.8]{$t$ (s)};
+        \draw[-{Latex},thick] (0,-0.5)--(0,5.3) node[below right=-.5mm,scale=0.8]{$s(t)$ (m)};
+
+        % Curva
+        \draw[fisica,very thick,domain=0:6,samples=100]
+            plot (\x,{(\x*\x*\x - 9*\x*\x + 24*\x)/20});
+
+        % Puntos de reposo
+        \fill[red] (2,{(8-36+48)/20}) circle (0.08) node[scale=0.65, rotate=90] at(2,1.8){$t=2$};
+        \fill[red] (4,{(64-144+96)/20}) circle (0.08) node[scale=0.65, rotate=90] at(4,1.6){$t=4$};
+
+        % Título
+        \node[fisica,scale=0.9] at (3,6.2) {\textbf{Posición}};
+
+        % Etiquetas
+        \foreach \x in {0,1,2,3,4,5,6}{
+            \node[below,scale=0.6] at (\x,-0.15) {\x};
+        }
+        \foreach \y in {0,20,40,60,80}{
+            \node[left,scale=0.6] at (-0.15,\y/20) {\y};
+        }
+    \end{scope}
+
+    % Gráfica de velocidad
+    \begin{scope}[xshift=9.5cm]
+        \def\xmin{0}\def\xmax{6}
+
+        % Grid
+        \draw[very thin,gray!30] (\xmin,-1.5) grid[xstep=1,ystep=0.5] (\xmax,4);
+
+        % Ejes
+        \draw[-{Latex},thick] (\xmin,0)--(\xmax+0.3,0) node[right,scale=0.8]{$t$ (s)};
+        \draw[-{Latex},thick] (0,-1.5)--(0,4.3) node[below right=-.5mm,scale=0.8]{$v(t)$ (m/s)};
+
+        % Curva
+        \draw[green!60!black,very thick,domain=0:6,samples=100]
+            plot (\x,{(3*\x*\x - 18*\x + 24)/10});
+
+        % Puntos donde v=0
+        \fill[red] (2,0) circle (0.08) node[scale=0.65, rotate=90] at(2,1){$t=2$};
+        \fill[red] (4,0) circle (0.08) node[scale=0.65, rotate=90] at(4,1){$t=4$};
+
+        % Punto de velocidad mínima
+        \fill[blue] (3,-0.3) circle (0.08) node[below,scale=0.65]{Mín};
+
+        % Título
+        \node[green!60!black,scale=0.9] at (3,6.2) {\textbf{Velocidad}};
+
+        % Etiquetas
+        \foreach \x in {0,1,2,3,4,5,6}{
+            \node[below,scale=0.6] at (\x,-0.15) {\x};
+        }
+    \end{scope}
+
+    % Gráfica de aceleración
+    \begin{scope}[xshift=19cm]
+        \def\xmin{0}\def\xmax{6}
+
+        % Grid
+        \draw[very thin,gray!30] (\xmin,-2) grid[xstep=1,ystep=0.5] (\xmax,2);
+
+        % Ejes
+        \draw[-{Latex},thick] (\xmin,0)--(\xmax+0.3,0) node[right,scale=0.8]{$t$ (s)};
+        \draw[-{Latex},thick] (0,-2)--(0,2.3) node[below right=-.5,scale=0.8]{$a(t)$ (m/s²)};
+
+        % Curva (línea recta)
+        \draw[red,very thick,domain=0:6,samples=50]
+            plot (\x,{(6*\x - 18)/10});
+
+        % Punto donde a=0
+        \fill[blue] (3,0) circle (0.08) node[above right,scale=0.65, rotate=30]{$t=3;a=0$};
+
+        % Título
+        \node[red,scale=0.9] at (3,6.2) {\textbf{Aceleración}};
+
+        % Etiquetas
+        \foreach \x in {0,1,2,3,4,5,6}{
+            \node[below,scale=0.6] at (\x,-0.15) {\x};
+        }
+        \foreach \y in {-20,-10,0,10,20}{
+            \node[left,scale=0.6] at (-0.15,\y/10) {\y};
+        }
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+%\newpage
+
+\section{Ejercicios Propuestos}
+
+\subsection{Medicina}
+
+\textbf{Ejercicio 1:} La cantidad de glucosa en la sangre después de una comida está modelada por:
+\[
+G(t) = 85 + \frac{40t}{1 + t^2}
+\]
+donde $G$ está en mg/dL y $t$ en horas.
+\begin{enumerate}[label=\alph*)]
+    \item ¿Cuándo alcanza el nivel máximo de glucosa?
+    \item ¿Cuál es ese nivel máximo?
+    \item ¿Cuál es la tasa de cambio de glucosa a las 2 horas?
+\end{enumerate}
+
+\textbf{Ejercicio 2:} El tamaño de un tumor (en cm³) está dado por:
+\[
+T(t) = 0.5e^{0.1t}
+\]
+donde $t$ está en semanas.
+\begin{enumerate}[label=\alph*)]
+    \item ¿Cuál es la tasa de crecimiento del tumor en la semana 10?
+    \item Si el tumor debe operarse cuando alcance 5 cm³, ¿en qué semana debe programarse la cirugía?
+\end{enumerate}
+
+\subsection{Economía}
+
+\textbf{Ejercicio 3:} Una compañía tiene ingresos y costos dados por:
+\[
+I(x) = 200x - 2x^2 \quad \text{y} \quad C(x) = 50x + 1000
+\]
+donde $x$ es el número de productos vendidos.
+\begin{enumerate}[label=\alph*)]
+    \item Encuentra la función de beneficio $B(x)$.
+    \item ¿Cuántos productos maximizan el beneficio?
+    \item ¿Cuál es el beneficio máximo?
+\end{enumerate}
+
+\textbf{Ejercicio 4:} El costo de producción está dado por:
+\[
+C(x) = 0.002x^3 - 0.3x^2 + 20x + 500
+\]
+\begin{enumerate}[label=\alph*)]
+    \item Encuentra el costo marginal $C'(x)$.
+    \item ¿Para qué nivel de producción el costo marginal es mínimo?
+\end{enumerate}
+
+\subsection{Ciencias Sociales}
+
+\textbf{Ejercicio 5:} Una noticia se difunde según:
+\[
+N(t) = \frac{5000}{1 + 99e^{-0.6t}}
+\]
+donde $N(t)$ es el número de personas que conocen la noticia en el día $t$.
+\begin{enumerate}[label=\alph*)]
+    \item ¿Cuándo la noticia se difunde más rápidamente?
+    \item ¿Cuál es la tasa máxima de difusión?
+\end{enumerate}
+
+\subsection{Física}
+
+\textbf{Ejercicio 6:} Una partícula se mueve según:
+\[
+s(t) = 2t^3 - 15t^2 + 24t + 5
+\]
+donde $s$ está en metros y $t$ en segundos.
+\begin{enumerate}[label=\alph*)]
+    \item Encuentra las funciones de velocidad y aceleración.
+    \item ¿Cuándo la partícula está en reposo?
+    \item ¿Cuándo la aceleración es cero?
+\end{enumerate}
+
+\textbf{Ejercicio 7:} Un cohete es lanzado con altura:
+\[
+h(t) = -4.9t^2 + 150t
+\]
+\begin{enumerate}[label=\alph*)]
+    \item ¿Cuál es la altura máxima alcanzada?
+    \item ¿Cuándo toca el suelo?
+    \item ¿Cuál es la velocidad al impactar?
+\end{enumerate}
+
+%\newpage
+
+\section{Soluciones de los Ejercicios}
+
+\subsection*{Solución Ejercicio 1 (Medicina - Glucosa)}
+
+\textbf{Parte a:} Encontrar el máximo nivel de glucosa.
+
+Derivamos:
+\[
+G'(t) = \frac{(1+t^2)(40) - (40t)(2t)}{(1+t^2)^2} = \frac{40 + 40t^2 - 80t^2}{(1+t^2)^2} = \frac{40(1-t^2)}{(1+t^2)^2}
+\]
+
+Igualamos a cero:
+\[
+40(1-t^2) = 0 \Rightarrow t^2 = 1 \Rightarrow t = 1 \text{ hora}
+\]
+
+\textbf{Parte b:} Nivel máximo:
+\[
+G(1) = 85 + \frac{40(1)}{1+1} = 85 + 20 = \boxed{105 \text{ mg/dL}}
+\]
+
+\textbf{Parte c:} Tasa de cambio a las 2 horas:
+\[
+G'(2) = \frac{40(1-4)}{(1+4)^2} = \frac{-120}{25} = \boxed{-4.8 \text{ mg/dL por hora}}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+    \draw[very thin,gray!30] (0,8) grid[xstep=0.5,ystep=0.5] (6,12);
+    \draw[-{Latex},thick] (0,8)--(6.3,8) node[above left]{Horas};
+    \draw[-{Latex},thick] (0,8)--(0,12.5) node[below right]{Glucosa (mg/dL)};
+
+    \draw[medicina,very thick,domain=0:6,samples=150]
+        plot (\x,{8.5 + 4*\x/(1+\x*\x)});
+
+    \fill[blue] (1,10.5) circle (0.08) node[above right]{Máx: $(1, 105)$};
+    \draw[blue,dashed] (1,8) -- (1,10.5);
+
+    \foreach \x in {0,1,2,3,4,5,6}{
+        \node[below,scale=0.7] at (\x,7.9) {\x};
+    }
+    \foreach \y in {85,90,95,100,105,110,115,120}{
+        \node[left,scale=0.6] at (-0.1,{(\y-5)/10}) {\y};
+    }
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Solución Ejercicio 2 (Medicina - Tumor)}
+
+\textbf{Función:} $T(t) = 0.5e^{0.1t}$
+
+\bigskip
+
+\textbf{Parte a:} Tasa de crecimiento del tumor (derivada):
+\begin{align*}
+T'(t) &= 0.5 \cdot 0.1 \cdot e^{0.1t} \\
+&= 0.05e^{0.1t}
+\end{align*}
+
+En la semana 10:
+\begin{align*}
+T'(10) &= 0.05e^{0.1(10)} \\
+&= 0.05e^1 \\
+&= 0.05(2.718) \\
+&\approx 0.136
+\end{align*}
+
+\textbf{Respuesta a:} $\boxed{T'(10) \approx 0.136 \text{ cm}^3\text{/semana}}$
+
+\bigskip
+
+\textbf{Parte b:} Encontrar cuándo $T(t) = 5$:
+\begin{align*}
+0.5e^{0.1t} &= 5 \\
+e^{0.1t} &= 10 \\
+0.1t &= \ln(10) \\
+t &= \frac{\ln(10)}{0.1} \\
+t &= 10\ln(10) \\
+t &\approx 10(2.303) \\
+t &\approx 23.03
+\end{align*}
+
+\textbf{Respuesta b:} $\boxed{t \approx 23 \text{ semanas}}$
+
+\bigskip
+
+\textbf{Interpretación:} El tumor crece exponencialmente. En la semana 10, crece a una tasa de aproximadamente 0.136 cm³ por semana. Debe programarse la cirugía alrededor de la semana 23.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=8cm,
+        axis lines=middle,
+        xlabel={Semanas ($t$)}, ylabel={Tamaño $T(t)$ (cm³)},
+        xmin=0, xmax=30,
+        ymin=0, ymax=12,
+        xtick={0,5,10,15,20,23,25,30},
+        ytick={0,2,4,5,6,8,10,12},
+        grid=both,
+        grid style={line width=.1pt, draw=gray!30},
+        axis line style={-{Latex},thick},
+        tick label style={font=\small},
+        samples=100,
+        legend pos=north east,
+        legend style={font=\small},
+    ]
+
+    % Función del tumor
+    \addplot[medicina,very thick,domain=0:30] {0.5*exp(0.1*x)};
+    \addlegendentry{$T(t) = 0.5e^{0.1t}$}
+
+    % Punto en semana 10
+    \node[circle, fill=blue, inner sep=2pt] at (10,{0.5*exp(1)}) {};
+    \node[blue, above right, scale=0.85] at (1,1.36) {Semana 10: 1.36 cm³};
+    \draw[blue, dashed, thick] (10,0)--(10,{0.5*exp(1)});
+
+    % Punto cuando T=5 (cirugía)
+    \node[circle, fill=red, inner sep=2.5pt] at (23.03,5) {};
+    \node[red, left, scale=0.85] at (23,5.5) {Cirugía: semana 23};
+    \draw[red, dashed, thick] (0,5)--(23.03,5);
+    \draw[red, dashed, thick] (23.03,0)--(23.03,5);
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Solución Ejercicio 3 (Economía - Beneficio)}
+
+\textbf{Parte a:} Función de beneficio:
+\[
+B(x) = I(x) - C(x) = (200x - 2x^2) - (50x + 1000) = -2x^2 + 150x - 1000
+\]
+
+\textbf{Parte b:} Maximizar beneficio:
+\[
+B'(x) = -4x + 150 = 0 \Rightarrow x = 37.5 \approx \boxed{38 \text{ productos}}
+\]
+
+\textbf{Parte c:} Beneficio máximo:
+\[
+B(37.5) = -2(37.5)^2 + 150(37.5) - 1000 = -2812.5 + 5625 - 1000 = \boxed{1812.5 \text{ pesos}}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \draw[very thin,gray!30] (0,-2) grid[xstep=1,ystep=1] (8,3.5);
+    \draw[-{Latex},thick] (0,0)--(8.3,0) node[above]{Productos ($x$)};
+    \draw[-{Latex},thick] (0,-2)--(0,3.5) node[below right]{Beneficio (cientos)};
+
+    \draw[economia,very thick,domain=0:75,samples=100]
+        plot (\x/10,{(-2*\x*\x + 150*\x - 1000)/1000});
+
+    \fill[blue] (3.75,1.8125) circle (0.08) node[above right,scale=0.8]{$(38, 1812)$};
+    \draw[blue,dashed] (3.75,0) -- (3.75,1.8125);
+
+    \foreach \x in {0,10,20,30,40,50,60,70}{
+        \node[below,scale=0.7] at (\x/10,-0.2) {\x};
+    }
+	\foreach \y in {0,20,40,60}{
+	\pgfmathparse{\y*(0.05)}
+	\node[left, scale=0.7] at (-0.2,{ \pgfmathresult }) {\y};
+	}
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Solución Ejercicio 4 (Economía - Costo Marginal)}
+
+\textbf{Función de costo:} $C(x) = 0.002x^3 - 0.3x^2 + 20x + 500$
+
+\bigskip
+
+\textbf{Parte a:} Costo marginal (derivada del costo):
+\begin{align*}
+C'(x) &= \frac{d}{dx}(0.002x^3 - 0.3x^2 + 20x + 500) \\
+&= 0.006x^2 - 0.6x + 20
+\end{align*}
+
+\textbf{Respuesta a:} $\boxed{C'(x) = 0.006x^2 - 0.6x + 20}$
+
+\bigskip
+
+\textbf{Parte b:} Para encontrar el mínimo del costo marginal, derivamos nuevamente:
+\begin{align*}
+C''(x) &= \frac{d}{dx}(0.006x^2 - 0.6x + 20) \\
+&= 0.012x - 0.6
+\end{align*}
+
+Igualamos a cero:
+\begin{align*}
+0.012x - 0.6 &= 0 \\
+0.012x &= 0.6 \\
+x &= \frac{0.6}{0.012} \\
+x &= 50
+\end{align*}
+
+Verificamos que es un mínimo con la tercera derivada:
+\[
+C'''(x) = 0.012 > 0 \quad \text{(es un mínimo)}
+\]
+
+Calculamos el costo marginal mínimo:
+\begin{align*}
+C'(50) &= 0.006(50)^2 - 0.6(50) + 20 \\
+&= 0.006(2500) - 30 + 20 \\
+&= 15 - 30 + 20 \\
+&= 5
+\end{align*}
+
+\textbf{Respuesta b:} $\boxed{x = 50 \text{ unidades, con } C'(50) = 5 \text{ pesos/unidad}}$
+
+\bigskip
+
+\textbf{Interpretación:} El costo marginal es mínimo cuando se producen 50 unidades, y en ese punto el costo de producir una unidad adicional es de 5 pesos.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm, height=6cm,
+        axis lines=middle,
+        xlabel={Unidades ($x$)}, ylabel={Costo marginal $C'(x)$ (pesos)},
+        xmin=0, xmax=100,
+        ymin=0, ymax=40,
+        xtick={0,10,20,30,40,50,60,70,80,90,100},
+        ytick={0,5,10,15,20,25,30,35,40},
+        grid=both,
+        grid style={line width=.1pt, draw=gray!30},
+        axis line style={-{Latex},thick},
+        tick label style={font=\small},
+        samples=100,
+     	legend style={
+     	at={(0.75,0.45)},    % ubica cerca de la esquina inferior derecha
+     	anchor=south east, % “pega” la esquina inferior derecha de la caja
+     	font=\small
+        },
+    ]
+
+    % Función de costo marginal
+    \addplot[economia,very thick,domain=0:100] {0.006*x^2 - 0.6*x + 20};
+    \addlegendentry{$C'(x) = 0.006x^2 - 0.6x + 20$}
+
+    % Punto mínimo
+    \node[circle, fill=blue, inner sep=2.5pt] at (50,5) {};
+    \node[blue, above] at (50,5) {Mínimo: $(50, 5)$};
+    \draw[blue, dashed, thick] (50,0)--(50,5);
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Solución Ejercicio 5 (Ciencias Sociales - Difusión de Noticia)}
+
+\textbf{Función:} $N(t) = \frac{5000}{1 + 99e^{-0.6t}}$ (Función logística)
+
+\bigskip
+
+\textbf{Parte a:} La noticia se difunde más rápidamente en el punto de inflexión. Para una función logística, esto ocurre cuando $N(t) = \frac{L}{2}$, donde $L$ es el límite (5000).
+
+\begin{align*}
+\frac{5000}{1 + 99e^{-0.6t}} &= 2500 \\
+5000 &= 2500(1 + 99e^{-0.6t}) \\
+2 &= 1 + 99e^{-0.6t} \\
+1 &= 99e^{-0.6t} \\
+e^{-0.6t} &= \frac{1}{99} \\
+-0.6t &= \ln\left(\frac{1}{99}\right) \\
+t &= \frac{-\ln(1/99)}{0.6} \\
+t &= \frac{\ln(99)}{0.6} \\
+t &\approx \frac{4.595}{0.6} \\
+t &\approx 7.66
+\end{align*}
+
+\textbf{Respuesta a:} $\boxed{t \approx 7.66 \text{ días (aproximadamente día 8)}}$
+
+\bigskip
+
+\textbf{Parte b:} Tasa máxima de difusión (derivada en el punto de inflexión):
+
+Primero calculamos $N'(t)$:
+\begin{align*}
+N'(t) &= \frac{d}{dt}\left[\frac{5000}{1 + 99e^{-0.6t}}\right] \\
+&= 5000 \cdot \frac{-1}{(1 + 99e^{-0.6t})^2} \cdot 99e^{-0.6t} \cdot (-0.6) \\
+&= \frac{5000 \cdot 99 \cdot 0.6 \cdot e^{-0.6t}}{(1 + 99e^{-0.6t})^2} \\
+&= \frac{297000 e^{-0.6t}}{(1 + 99e^{-0.6t})^2}
+\end{align*}
+
+En $t \approx 7.66$:
+\begin{align*}
+N'(7.66) &= \frac{297000 e^{-0.6(7.66)}}{(1 + 99e^{-0.6(7.66)})^2} \\
+&= \frac{297000 e^{-4.596}}{(1 + 99e^{-4.596})^2} \\
+&= \frac{297000 \cdot 0.0101}{(1 + 99 \cdot 0.0101)^2} \\
+&= \frac{3000}{(1 + 1)^2} \\
+&= \frac{3000}{4} \\
+&= 750
+\end{align*}
+
+\textbf{Respuesta b:} $\boxed{N'(7.66) = 750 \text{ personas/día}}$
+
+\bigskip
+
+\textbf{Interpretación:} La noticia se difunde más rápidamente alrededor del día 8, cuando alcanza a 2,500 personas (mitad de la población objetivo). En ese momento, la tasa de difusión es de 750 personas por día.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=13cm, height=8.5cm,
+        axis lines=middle,
+        xlabel={Días ($t$)}, ylabel={Personas $N(t)$},
+        xmin=0, xmax=20,
+        ymin=0, ymax=5500,
+        xtick={0,2,4,6,8,10,12,14,16,18,20},
+        ytick={0,1000,2000,2500,3000,4000,5000},
+        grid=both,
+        grid style={line width=.1pt, draw=gray!30},
+        axis line style={-{Latex},thick},
+        tick label style={font=\small},
+        samples=150,
+		legend style={
+		at={(0.99,0.75)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+		},
+    ]
+
+    % Función logística
+    \addplot[blue!60!black,very thick,domain=0:20] {5000/(1 + 99*exp(-0.6*x))};
+    \addlegendentry{$N(t) = \frac{5000}{1 + 99e^{-0.6t}}$}
+
+    % Punto de inflexión
+    \node[circle, fill=red, inner sep=2.5pt] at (7.66,2500) {};
+    \node[red, above left, scale=0.85] at (7.66,2500) {Máxima difusión};
+    \node[red, below, scale=0.85] at (11,2200) {Día 8: 2500 personas};
+    \draw[red, dashed, thick] (7.66,0)--(7.66,2500);
+    \draw[red, dashed, thick] (0,2500)--(7.66,2500);
+
+    % Asíntota horizontal
+    \draw[green!60!black, dashed, thin] (0,5000)--(20,5000);
+    \node[green!60!black, above, scale=0.8] at (15,5000) {Límite: 5000};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Solución Ejercicio 6 (Física - Movimiento)}
+
+\textbf{Parte a:} Velocidad y aceleración:
+\[
+v(t) = s'(t) = 6t^2 - 30t + 24
+\]
+\[
+a(t) = v'(t) = 12t - 30
+\]
+
+\textbf{Parte b:} Partícula en reposo cuando $v(t) = 0$:
+\[
+6t^2 - 30t + 24 = 0 \Rightarrow t^2 - 5t + 4 = 0 \Rightarrow (t-1)(t-4) = 0
+\]
+\[
+\boxed{t = 1 \text{ s o } t = 4 \text{ s}}
+\]
+
+\textbf{Parte c:} Aceleración cero:
+\[
+12t - 30 = 0 \Rightarrow \boxed{t = 2.5 \text{ s}}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+    \draw[very thin,gray!30] (0,-1.5) grid[xstep=1,ystep=.5] (6,2.5);
+    \draw[-{Latex},thick] (0,0)--(6.3,0) node[right]{$t$ (s)};
+    \draw[-{Latex},thick] (0,-1.5)--(0,2.5) node[right]{$s(t)$ (m)};
+
+    \draw[fisica,very thick,domain=0:5.5,samples=100]
+        plot (\x,{(2*\x*\x*\x - 15*\x*\x + 24*\x + 5)/10});
+
+    \fill[red] (1,{(2-15+24+5)/10}) circle (0.08) node[above,scale=1]{$v=0$};
+    \fill[red] (4,{(128-240+96+5)/10}) circle (0.08) node[below,scale=1]{$v=0$};
+
+    \foreach \x in {0,1, 2, 3, 4, 5}{
+        \node[below,scale=0.7] at (\x,-0.2) {\x};
+    }
+    
+        \foreach \y in {-15, -10, -5, 0, 5, 10, 15, 20}{
+        \pgfmathparse{\y/10}
+    	\node[left,scale=0.7] at (-0.1,{ \pgfmathresult }) {\y};
+    }
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Solución Ejercicio 7 (Física - Cohete)}
+
+\textbf{Función:} $h(t) = -4.9t^2 + 150t$
+
+\bigskip
+
+\textbf{Parte a:} Altura máxima. Primero encontramos cuándo la velocidad es cero:
+\begin{align*}
+v(t) = h'(t) &= -9.8t + 150 \\
+-9.8t + 150 &= 0 \\
+t &= \frac{150}{9.8} \\
+t &\approx 15.31 \text{ segundos}
+\end{align*}
+
+Calculamos la altura máxima:
+\begin{align*}
+h(15.31) &= -4.9(15.31)^2 + 150(15.31) \\
+&= -4.9(234.40) + 2296.5 \\
+&= -1148.56 + 2296.5 \\
+&\approx 1147.94
+\end{align*}
+
+\textbf{Respuesta a:} $\boxed{h_{\text{máx}} \approx 1148 \text{ metros}}$
+
+\bigskip
+
+\textbf{Parte b:} El cohete toca el suelo cuando $h(t) = 0$:
+\begin{align*}
+-4.9t^2 + 150t &= 0 \\
+t(-4.9t + 150) &= 0
+\end{align*}
+
+Soluciones: $t = 0$ (lanzamiento) o $-4.9t + 150 = 0$
+
+\begin{align*}
+t &= \frac{150}{4.9} \\
+t &\approx 30.61 \text{ segundos}
+\end{align*}
+
+\textbf{Respuesta b:} $\boxed{t \approx 30.61 \text{ segundos}}$
+
+\bigskip
+
+\textbf{Parte c:} Velocidad al impactar (en $t = 30.61$ s):
+\begin{align*}
+v(30.61) &= -9.8(30.61) + 150 \\
+&= -299.98 + 150 \\
+&= -149.98 \\
+&\approx -150
+\end{align*}
+
+El signo negativo indica dirección hacia abajo.
+
+\textbf{Respuesta c:} $\boxed{v \approx -150 \text{ m/s (hacia abajo)}}$
+
+\bigskip
+
+\textbf{Interpretación:} El cohete alcanza su altura máxima de aproximadamente 1,148 metros a los 15.31 segundos. Luego cae y toca el suelo a los 30.61 segundos con una velocidad de 150 m/s hacia abajo.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=13cm, height=9cm,
+        axis lines=middle,
+        xlabel={$t$ (s)}, ylabel={Altura $h(t)$ (m)},
+        xmin=0, xmax=35,
+        ymin=0, ymax=1300,
+        xtick={0,5,10,15,20,25,30},
+        ytick={0,200,400,600,800,1000,1148,1200},
+        grid=both,
+        grid style={line width=.1pt, draw=gray!30},
+        axis line style={-{Latex},thick},
+        tick label style={font=\small},
+		legend style={
+		at={(0.99,0.78)},    % ubica cerca de la esquina inferior derecha
+		anchor=south east, % “pega” la esquina inferior derecha de la caja
+		font=\small
+},
+    ]
+
+    % Función de altura
+    \addplot[fisica,very thick,domain=0:30.61] {-4.9*x^2 + 150*x};
+    \addlegendentry{$h(t) = -4.9t^2 + 150t$}
+
+    % Punto máximo
+    \node[circle, fill=red, inner sep=2.5pt] at (15.31,1148) {};
+    \node[red, above right, scale=0.85] at (15.31,1148) {Altura máxima};
+    \node[red, below, scale=0.85] at (15.31,1050) {$(15.31, 1148)$ m};
+    \draw[red, dashed, thick] (15.31,0)--(15.31,1148);
+
+    % Punto de impacto
+    \node[circle, fill=blue, inner sep=2.5pt] at (30.61,0) {};
+    \node[blue, scale=0.85, rotate=90] at (30.61,500) {Impacto: $t = 30.61$ s};
+    \draw[blue, dashed, thick] (30.61,0)--(30.61,200);
+
+    % Flecha de velocidad en el impacto
+    \draw[-{Latex}, very thick, orange!60!black] (30.61,200)--(30.61,25);
+    \node[orange!60!black, right, scale=0.8] at (31,125) {$v = -150$ m/s};
+
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+%\newpage
+
+\section{Conclusiones}
+
+Las derivadas son una herramienta fundamental en el análisis de fenómenos reales. A través de esta guía hemos visto cómo:
+
+\begin{itemize}
+    \item En \textcolor{medicina}{\textbf{medicina}}, las derivadas nos ayudan a entender:
+    \begin{itemize}
+        \item Cómo se propagan las enfermedades
+        \item Cuándo un medicamento alcanza su efecto máximo
+        \item La velocidad de crecimiento de tumores
+    \end{itemize}
+
+    \item En \textcolor{economia}{\textbf{economía}}, permiten:
+    \begin{itemize}
+        \item Maximizar beneficios y minimizar costos
+        \item Determinar la producción óptima
+        \item Calcular costos marginales
+    \end{itemize}
+
+    \item En \textcolor{social}{\textbf{ciencias sociales}}, ayudan a modelar:
+    \begin{itemize}
+        \item Crecimiento poblacional
+        \item Difusión de información
+        \item Dinámica de redes sociales
+    \end{itemize}
+
+    \item En \textcolor{fisica}{\textbf{física}}, son esenciales para:
+    \begin{itemize}
+        \item Describir movimiento (velocidad y aceleración)
+        \item Analizar trayectorias
+        \item Optimizar procesos físicos
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Conceptos clave para recordar:}
+
+\begin{enumerate}
+    \item La derivada mide la \textbf{tasa de cambio} de una cantidad
+    \item $f'(x) = 0$ indica posibles puntos \textbf{máximos o mínimos}
+    \item $f'(x) > 0$ significa que la función está \textbf{creciendo}
+    \item $f'(x) < 0$ significa que la función está \textbf{decreciendo}
+    \item La segunda derivada $f''(x)$ nos dice sobre la \textbf{concavidad}
+    \item Para verificar máximos: $f''(x) < 0$
+    \item Para verificar mínimos: $f''(x) > 0$
+\end{enumerate}
+
+\vspace{1cm}
+
+\begin{center}
+\Large\textbf{¡La derivada es el lenguaje del cambio!}
+\end{center}
+
+\end{document}

@@ -1,0 +1,371 @@
+\documentclass[12pt,letterpaper]{article}
+
+% ============================================
+% CODIFICACIÓN E IDIOMA
+% ============================================
+\usepackage[spanish]{babel}        % Soporte para idioma español
+
+% ============================================
+% PAQUETES MATEMÁTICOS
+% ============================================
+\usepackage{amsmath}               % Entornos y comandos matemáticos avanzados
+\usepackage{amssymb}               % Símbolos matemáticos adicionales (incluye amsfonts)
+\usepackage{amsthm}                % Entornos para teoremas y demostraciones
+
+% ============================================
+% DISEÑO DE PÁGINA Y MÁRGENES
+% ============================================
+\usepackage{geometry}              % Control de márgenes y dimensiones de página
+\usepackage{fancyhdr}              % Encabezados y pies de página personalizados
+
+% ============================================
+% TABLAS Y ENTORNOS TABULARES
+% ============================================
+\usepackage{array}                 % Mejoras para entornos de tablas
+\usepackage{tabularx}              % Tablas con ancho ajustable
+\usepackage{multirow}              % Celdas que abarcan múltiples filas
+\usepackage{colortbl}              % Colores en tablas
+
+% ============================================
+% LISTAS Y ENUMERACIONES
+% ============================================
+\usepackage{enumitem}              % Personalización de listas (enumerate, itemize)
+
+% ============================================
+% FORMATO DE TEXTO EN COLUMNAS
+% ============================================
+\usepackage{multicol}              % Soporte para texto en múltiples columnas
+
+% ============================================
+% COLORES
+% ============================================
+\usepackage{xcolor}                % Soporte para colores
+
+% ============================================
+% CAJAS Y ENTORNOS DESTACADOS
+% ============================================
+\usepackage{tcolorbox}             % Cajas coloreadas y destacadas
+\tcbuselibrary{skins,breakable}    % Bibliotecas adicionales para tcolorbox
+
+% ============================================
+% GRÁFICOS Y FIGURAS
+% ============================================
+\usepackage{graphicx}              % Inclusión de imágenes
+\usepackage{float}                 % Control de posición de flotantes
+\usepackage{caption}               % Personalización de leyendas
+\usepackage{wrapfig}               % Texto envolvente alrededor de figuras
+
+% ============================================
+% TIKZ Y PGFPLOTS (GRÁFICOS VECTORIALES)
+% ============================================
+\usepackage{tikz}                  % Sistema de dibujo vectorial
+\usepackage{tikz-3dplot}           % Dibujos 3D con TikZ
+\usepackage{pgfplots}              % Gráficos científicos
+\usepgfplotslibrary{colormaps}     % Mapas de colores para pgfplots
+\pgfplotsset{compat=1.18}          % Versión de compatibilidad
+\usetikzlibrary{shapes.geometric, calc, arrows.meta, 3d, babel}
+
+% ============================================
+% CÓDIGO VERBATIM
+% ============================================
+\usepackage{fancyvrb}              % Entornos verbatim mejorados
+
+% ============================================
+% FORMATO DE TÍTULOS Y SECCIONES
+% ============================================
+\usepackage{titlesec}              % Personalización de títulos de secciones
+
+% ============================================
+% HIPERVÍNCULOS
+% ============================================
+\usepackage[hidelinks]{hyperref}   % Enlaces internos y externos (sin bordes visibles)
+
+% ============================================
+% CONFIGURACIÓN DE GEOMETRÍA
+% ============================================
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headheight=14pt
+}
+
+% ============================================
+% CONFIGURACIÓN DE COLORES PERSONALIZADOS
+% ============================================
+\definecolor{azuloscuro}{RGB}{41,72,137}
+\definecolor{rojoclaro}{RGB}{220,80,80}
+\definecolor{verdeclaro}{RGB}{100,180,100}
+\definecolor{fondogris}{RGB}{240,240,240}
+\definecolor{fondorosa}{RGB}{255,230,240}
+\definecolor{fondoverde}{RGB}{230,255,240}
+\definecolor{fondoazul}{RGB}{230,240,255}
+
+% ============================================
+% CONFIGURACIÓN DE TCOLORBOX
+% ============================================
+\tcbset{
+    before skip=0.5em,
+    after skip=0.5em,
+    top=0.3cm,
+    bottom=0.3cm,
+    left=0.3cm,
+    right=0.3cm
+}
+
+% ============================================
+% CONFIGURACIÓN DE COLUMNAS
+% ============================================
+\setlength{\columnsep}{18pt}
+\setlength{\columnseprule}{0.4pt}
+
+% ============================================
+% CONFIGURACIÓN DE ESPACIADO
+% ============================================
+\setlength{\parskip}{0.3em}
+\setlength{\parindent}{0pt}
+
+% Espaciado para listas
+\setlist{nosep, topsep=0.3em, partopsep=0pt, itemsep=0pt}
+
+% Espaciado para ecuaciones
+\setlength{\abovedisplayskip}{6pt}
+\setlength{\belowdisplayskip}{6pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+
+% Espaciado para títulos de sección
+\titlespacing*{\section}{0pt}{0.5em}{0.3em}
+\titlespacing*{\subsection}{0pt}{0.4em}{0.2em}
+\titlespacing*{\subsubsection}{0pt}{0.3em}{0.2em}
+
+% ============================================
+% COMANDOS PERSONALIZADOS
+% ============================================
+\newcommand{\seccion}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+
+% ============================================
+% CONFIGURACIÓN DE ENCABEZADOS Y PIES
+% ============================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Institución Educativa Nuestra Señora del Carmen}
+\fancyhead[R]{\small Guía N° 6}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+\begin{tcolorbox}[colback=fondoazul, colframe=azuloscuro, title=\textbf{Guía 6} (Duración 5 h), breakable]
+\noindent
+\textbf{Institución Educativa Nuestra Señora del Carmen} \\
+\textbf{Plan de clase Virtual} \hfill \textbf{Año: 2021} \\
+\textbf{Docente: Edinson Gutierrez} \hfill \textbf{Área: Matemática.} \\
+\textbf{Grupo: 9-02} \hfill \textbf{Tiempo de Aplicación: 9 de Abril al 16 de Abril.} \\
+\textbf{Sede: Principal} \hfill \textbf{Jornada: P.M} \hfill \textbf{Guía N° 6}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=fondoverde, colframe=azuloscuro, title=\textbf{Tema: Factorización} (Duración 5 h), breakable]
+\section*{Tema: Factorización}
+
+\begin{enumerate}
+\item Concepto de máximo común divisor.
+\item Factorizar expresiones algebraicas.
+\end{enumerate}
+\end{tcolorbox}
+
+\subsection*{Conocimientos Previos}
+
+Para desarrollar esta guía:
+\begin{enumerate}
+\item Necesitamos conocer el concepto de máximo común divisor (\textit{m.c.d})
+\item Cómo se factoriza las expresiones algebraicas.
+\end{enumerate}
+
+\subsection*{Objetivo del Aprendizaje}
+
+Identificar la factorización de Monomios y Polinomios.
+
+\subsection*{Experiencia del Aprendizaje}
+
+Se recordará inicialmente como se halla el máximo común divisor. Para hallar el máximo común divisor (m.c.d) de varios números por descomposición en factores primos puede hallarse dividiendo al mismo tiempo todos los números dados por un factor común, los coeficientes por un factor común y así sucesivamente hasta que los excedentes sean primos entre sí.
+
+Luego el m.c.d es el producto de los factores comunes. \\
+
+\textbf{Ejemplo 1:} Hallar el m.c.d de: 78, 60 y 48.
+
+\[
+\begin{array}{ccc|c}
+78 & 60 & 48 & 2 \\
+39 & 30 & 24 & 3 \\
+13 & 10 & 8 &
+\end{array}
+\]
+
+Entonces el $m.c.d = 2 \cdot 3 = \underline{6}$. \\
+
+\textbf{Ejemplo 2:} Hallar el m.c.d de: 445, 800 y 950.
+
+\[
+\begin{array}{ccc|c}
+445 & 800 & 950 & 5 \\
+89 & 160 & 190 & 5 \\
+17 & 32 & 38 &
+\end{array}
+\]
+
+Luego el $m.c.d = 5 \cdot 5 = \underline{25}$
+
+\subsection*{Concepto de Factorización}
+
+Factorizar un número es expresarlo como el producto de dos o más factores. Para el caso de 60 se tiene: $60 = 2 \cdot 2 \cdot 3 \cdot 5$. A los números que se pueden expresar como producto de factores primos diferentes de él, se les llama números compuestos.
+
+Al igual que los números compuestos, existen polinomios compuestos, es decir polinomios que se pueden expresar como producto de polinomios más simple. Este proceso se denomina \textbf{Factorización de Polinomios}. \\
+
+
+
+\textbf{Factorizar un polinomio} significa descomponerlo en factores primos, que son polinomios ``diferentes a él''.
+
+Un polinomio compuesto se define como el polinomio que se puede expresar como el producto de dos o más factores. Así, todo polinomio compuesto es divisible entre cada uno de los factores. Por ejemplo, el polinomio $$m^2 + n - 20$$ se factoriza como $$m^2 + n - 20 = (m+5)(m-4)$$, por tanto el polinomio $$m^2 + n - 20$$ es divisible entre $$m+5$$ y entre $$m-4$$.
+
+\subsection*{Factorización de Monomios}
+
+Factorizar un monomio consiste en encontrar dos o más monomios cuyo producto sea ese monomio, es decir, expresarlo como el producto de otros monomios.
+
+Por ejemplo, $13z^5$ se puede factorizar así: $13z^5 = (13z)(z^4)$
+
+En algunas ocasiones, los monomios tienen más de una factorización. Por ejemplo el monomio $18m^3$ se puede factorizar entre otras formas, así:
+
+\begin{align*}
+18m^3 &= (9m^2)(2m) \\
+18m^3 &= (6m)(3m^2) \\
+18m^3 &= (9m)(2m)(m) \\
+18m^3 &= (3m)(3m)(2m)
+\end{align*}
+
+\subsection*{Actividad Práctica}
+
+\textbf{1. Completa la tabla a partir del ejemplo.}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Número} & \textbf{Factores Primos} \\
+\hline
+60 & 2, 3, 5 \\
+\hline
+120 & \\
+\hline
+50 & \\
+\hline
+34 & \\
+\hline
+1,400 & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Ejemplo 3:}
+\[
+\begin{array}{c|c}
+60 & 2 \\
+30 & 2 \\
+15 & 3 \\
+5 & 5 \\
+1 &
+\end{array}
+\]
+
+Los factores primos de 60 son: 2, 3 y 5. (No se pueden repetir los números)
+
+\vspace{1cm}
+
+\textbf{2. Asigna a cada grupo de números de la derecha el número de la izquierda que representa su m.c.d.}
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\alph*.]
+\item 98 y 36
+\item 120 y 50
+\item 120 y 108
+\item 75, 120 y 255
+\item 180, 450 y 240
+\item 1040, 720 y 800
+\end{enumerate}
+
+\columnbreak
+
+\textbf{Letra}
+\begin{enumerate}
+\item 15 \hspace{1cm} \_\_\_\_
+\item 30 \hspace{1cm} \_\_\_\_
+\item 40 \hspace{1cm} \_\_\_\_
+\item 80 \hspace{1cm} \_\_\_\_
+\item 12 \hspace{1cm} \_\_\_\_
+\item 4 \hspace{1cm} \underline{a}
+\end{enumerate}
+\end{multicols}
+
+\textbf{3. Escribe los factores que faltan en cada arreglo para que el producto de los factores sea el indicado.}
+
+\begin{enumerate}[label=\alph*.]
+\item 
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$40pm^3n^2$&=&$-5$ & $m^2$ & $n$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\item 
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$-8x^2y^4$&=&$y^2$ & $y$ & & $-2x$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\item 
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$24x^4y^5$&=&$-3x$ & & $4y^2$ & $y$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\item 
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$16z^3y^5$&=&$16$ & $z^2$ & & $y^3$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{enumerate}
+
+\textbf{4. Escribe tres factorizaciones diferentes para cada monomio.}
+
+\begin{enumerate}[label=\alph*.]
+\item $28x^6$ = \_\_\_\_\_\_\_\_\_\_\_\_\_ = \_\_\_\_\_\_\_\_\_\_\_\_\_ = \_\_\_\_\_\_\_\_\_\_\_\_\_
+\item $91x^3yz$ = \_\_\_\_\_\_\_\_\_\_\_\_ = \_\_\_\_\_\_\_\_\_\_\_\_\_ = \_\_\_\_\_\_\_\_\_\_\_\_\_
+\item $-30a^4b^2$ = \_\_\_\_\_\_\_\_\_\_\_\_ = \_\_\_\_\_\_\_\_\_\_\_\_\_ = \_\_\_\_\_\_\_\_\_\_\_\_\_
+\end{enumerate}
+
+\subsection*{Para Tener en Cuenta:}
+
+\begin{enumerate}
+\item ¿Qué es el m.c.d.?
+\item ¿Cómo se factorizan los monomios?
+\end{enumerate}
+
+\vspace{1cm}
+
+\begin{flushright}
+\textbf{Bendiciones.} \\
+\textit{Prof: Autor Edinson Gutierrez.}  \\
+\textit{Prof: Editor Toribio De J Arrieta.}
+\end{flushright}
+
+\end{document}

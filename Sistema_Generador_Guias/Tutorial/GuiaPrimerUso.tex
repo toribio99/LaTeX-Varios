@@ -1,0 +1,1043 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{listings}
+
+% Configuración de colores
+\definecolor{azuloscuro}{RGB}{0,51,102}
+\definecolor{azulclaro}{RGB}{51,153,255}
+\definecolor{verde}{RGB}{0,128,0}
+\definecolor{rojo}{RGB}{220,20,60}
+\definecolor{gris}{RGB}{100,100,100}
+\definecolor{fondogris}{RGB}{245,245,245}
+
+% Configuración de hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=azuloscuro,
+    urlcolor=azulclaro,
+    pdftitle={Guía de Primer Uso - Sistema Generador de Guías v3.0},
+    pdfauthor={Sistema Generador de Guías}
+}
+
+% Configuración de tcolorbox
+\tcbuselibrary{skins,breakable}
+
+% Cajas personalizadas
+\newtcolorbox{notaimportante}[1][]{
+    colback=rojo!5!white,
+    colframe=rojo!75!black,
+    fonttitle=\bfseries,
+    title=⚠️ IMPORTANTE,
+    #1
+}
+
+\newtcolorbox{consejo}[1][]{
+    colback=verde!5!white,
+    colframe=verde!75!black,
+    fonttitle=\bfseries,
+    title=💡 CONSEJO,
+    #1
+}
+
+\newtcolorbox{ejemplo}[1][]{
+    colback=azulclaro!5!white,
+    colframe=azulclaro!75!black,
+    fonttitle=\bfseries,
+    title=📝 EJEMPLO,
+    #1
+}
+
+\newtcolorbox{comando}[1][]{
+    colback=fondogris,
+    colframe=gris,
+    fonttitle=\bfseries\ttfamily,
+    title=Terminal/Comando,
+    #1
+}
+
+% Configuración de listings para código
+\lstset{
+    basicstyle=\ttfamily\small,
+    backgroundcolor=\color{fondogris},
+    frame=single,
+    breaklines=true,
+    columns=fullflexible
+}
+
+% Encabezados y pies de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Sistema Generador de Guías v3.0}
+\fancyhead[R]{\small Guía de Primer Uso}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\title{
+    \vspace{-2cm}
+    \Huge\textbf{\color{azuloscuro}Sistema Generador de Guías}\\
+    \Large\textbf{\color{azulclaro}Versión 3.0}\\
+    \vspace{1cm}
+    \large Guía Completa de Primer Uso\\
+    \normalsize Para Usuarios Nuevos
+}
+\author{Tutorial Paso a Paso con Ejemplos Detallados}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\vspace{2cm}
+
+\begin{center}
+\large\textit{«Crear guías profesionales de matemáticas\\nunca fue tan fácil»}
+\end{center}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Bienvenida}
+
+¡Bienvenido al Sistema Generador de Guías v3.0! Este tutorial está diseñado especialmente para usuarios que utilizan el sistema por primera vez.
+
+\subsection{¿Qué es este sistema?}
+
+Es un framework interactivo que te permite crear guías educativas profesionales de matemáticas en formato LaTeX, con:
+
+\begin{itemize}[leftmargin=2cm]
+    \item ✅ Contenido pedagógico estructurado
+    \item ✅ Gráficas matemáticas de alta calidad (TikZ)
+    \item ✅ Ejemplos resueltos paso a paso
+    \item ✅ Ejercicios propuestos con soluciones completas
+    \item ✅ Diseño profesional y consistente
+    \item ✅ Proceso guiado e interactivo
+\end{itemize}
+
+\subsection{¿Para quién es este sistema?}
+
+\begin{itemize}[leftmargin=2cm]
+    \item \textbf{Profesores} que crean material educativo
+    \item \textbf{Estudiantes de licenciatura} preparando recursos didácticos
+    \item \textbf{Tutores particulares} desarrollando guías personalizadas
+    \item \textbf{Cualquier persona} que necesite documentos matemáticos profesionales
+\end{itemize}
+
+\begin{notaimportante}
+\textbf{No necesitas ser experto en LaTeX.} El sistema te guía paso a paso y genera automáticamente el código LaTeX profesional.
+\end{notaimportante}
+
+\subsection{¿Qué temas puedo crear?}
+
+El sistema soporta múltiples áreas de matemáticas:
+
+\begin{multicols}{2}
+\textbf{Geometría Analítica:}
+\begin{itemize}
+    \item Parábola
+    \item Elipse
+    \item Hipérbola
+    \item Circunferencia
+    \item Recta
+\end{itemize}
+
+\textbf{Álgebra:}
+\begin{itemize}
+    \item Funciones cuadráticas
+    \item Funciones exponenciales
+    \item Funciones logarítmicas
+    \item Sistemas de ecuaciones
+\end{itemize}
+
+\textbf{Cálculo:}
+\begin{itemize}
+    \item Límites
+    \item Derivadas
+    \item Integrales
+    \item Aplicaciones
+\end{itemize}
+
+\textbf{Trigonometría:}
+\begin{itemize}
+    \item Razones trigonométricas
+    \item Identidades
+    \item Ley de senos y cosenos
+\end{itemize}
+\end{multicols}
+
+\newpage
+
+\section{Requisitos Previos}
+
+Antes de comenzar, asegúrate de tener instalado lo siguiente:
+
+\subsection{Software Necesario}
+
+\subsubsection{1. LaTeX (TeX Live)}
+
+\textbf{¿Lo tengo instalado?} Abre una terminal y ejecuta:
+
+\begin{comando}
+lualatex --version
+\end{comando}
+
+\textbf{Si ves una versión:} ✅ Ya lo tienes instalado
+
+\textbf{Si ves un error:} ❌ Debes instalarlo
+
+\textbf{Cómo instalarlo:}
+\begin{itemize}
+    \item \textbf{macOS:} Descarga MacTeX desde \texttt{https://www.tug.org/mactex/}
+    \item \textbf{Windows:} Descarga MiKTeX desde \texttt{https://miktex.org/}
+    \item \textbf{Linux:} \texttt{sudo apt-get install texlive-full}
+\end{itemize}
+
+\subsubsection{2. Git}
+
+\textbf{¿Lo tengo instalado?}
+
+\begin{comando}
+git --version
+\end{comando}
+
+\textbf{Si ves una versión:} ✅ Ya lo tienes instalado
+
+\textbf{Si ves un error:} ❌ Debes instalarlo desde \texttt{https://git-scm.com/}
+
+\subsubsection{3. Asistente de IA (Claude, ChatGPT, etc.)}
+
+Necesitas acceso a un asistente de IA que pueda:
+\begin{itemize}
+    \item Leer archivos locales
+    \item Crear y editar archivos
+    \item Ejecutar comandos en terminal
+    \item Generar código LaTeX
+\end{itemize}
+
+\begin{consejo}
+Este tutorial está optimizado para Claude Code, pero funciona con cualquier asistente compatible.
+\end{consejo}
+
+\subsection{Conocimientos Necesarios}
+
+\textbf{Nivel mínimo:}
+\begin{itemize}
+    \item Saber abrir una terminal
+    \item Entender rutas de archivos básicas
+    \item Conocer conceptos matemáticos del tema a desarrollar
+\end{itemize}
+
+\textbf{NO necesitas:}
+\begin{itemize}
+    \item Ser experto en LaTeX
+    \item Saber programar
+    \item Conocer TikZ o gráficas matemáticas
+\end{itemize}
+
+\newpage
+
+\section{Ubicación del Sistema}
+
+El Sistema Generador de Guías está en:
+
+\begin{comando}
+/Users/toribioarrieta/Documents/LaTeX-GitHub/LaTeX-Varios/Sistema\_Generador\_Guias/
+\end{comando}
+
+\subsection{Estructura de archivos}
+
+\begin{lstlisting}
+Sistema_Generador_Guias/
+├── README.md                   (Documentación general)
+├── PROMPT_v3.0.md              (Prompt principal)
+├── CHANGELOG.md                (Historial de versiones)
+├── Tutorial/
+│   └── GuiaPrimerUso.tex      (Este documento)
+└── Referencias/
+    └── GuiaAplicacionesDerivada.tex  (Ejemplo)
+\end{lstlisting}
+
+\begin{notaimportante}
+\textbf{Guarda esta ruta.} La necesitarás para iniciar el sistema con el asistente de IA.
+\end{notaimportante}
+
+\newpage
+
+\section{Tu Primer Uso: Paso a Paso}
+
+Vamos a crear tu primera guía. Usaremos como ejemplo una guía sobre \textbf{La Elipse}.
+
+\subsection{Paso 1: Iniciar el Asistente de IA}
+
+Abre tu asistente de IA (Claude Code, ChatGPT, etc.) y escribe:
+
+\begin{ejemplo}
+\textbf{Mensaje al asistente:}
+
+\begin{quote}
+\textit{``Usa el Sistema Generador de Guías v3.0 ubicado en:}
+
+\textit{/Users/toribioarrieta/Documents/LaTeX-GitHub/LaTeX-Varios/Sistema\_Generador\_Guias/}
+
+\textit{Para crear una nueva guía educativa.''}
+\end{quote}
+\end{ejemplo}
+
+\textbf{Alternativamente}, puedes ser más específico:
+
+\begin{ejemplo}
+\textbf{Mensaje alternativo:}
+
+\begin{quote}
+\textit{``Lee el archivo PROMPT\_v3.0.md del Sistema Generador de Guías y úsalo para crear una guía sobre Elipse para grado 11.''}
+\end{quote}
+\end{ejemplo}
+
+\begin{consejo}
+Si es tu primera vez, usa el primer mensaje (genérico). El asistente te guiará con preguntas.
+\end{consejo}
+
+\subsection{Paso 2: Responder las Preguntas del Asistente}
+
+El asistente te hará 14 preguntas. Aquí está el ejemplo completo:
+
+\subsubsection{Pregunta 1: Título de la guía}
+
+\textbf{Asistente pregunta:} \textit{``¿Cuál es el TÍTULO de la guía?''}
+
+\textbf{Tú respondes:} \textit{``La Elipse: Propiedades y Aplicaciones''}
+
+\begin{consejo}
+Usa títulos descriptivos pero no muy largos (máximo 8-10 palabras).
+\end{consejo}
+
+\subsubsection{Pregunta 2: Autor}
+
+\textbf{Asistente pregunta:} \textit{``¿Quién es el AUTOR?''}
+
+\textbf{Tú respondes:} \textit{``Prof. Juan Pérez''} (o tu nombre)
+
+\subsubsection{Pregunta 3: Institución}
+
+\textbf{Asistente pregunta:} \textit{``¿Cuál es la INSTITUCIÓN?''}
+
+\textbf{Tú respondes:} \textit{``Colegio San José''} (o deja en blanco si no aplica)
+
+\subsubsection{Pregunta 4: Fecha}
+
+\textbf{Asistente pregunta:} \textit{``¿Fecha de creación?''}
+
+\textbf{Tú respondes:} \textit{``Noviembre 2025''} (o deja que use la fecha actual)
+
+\subsubsection{Pregunta 5: Tema principal}
+
+\textbf{Asistente pregunta:} \textit{``¿Cuál es el TEMA principal?''}
+
+\textbf{Tú respondes:} \textit{``Elipse''}
+
+\begin{notaimportante}
+Sé específico. No digas solo ``cónicas'', di ``Elipse''.
+\end{notaimportante}
+
+\subsubsection{Pregunta 6: Grado}
+
+\textbf{Asistente pregunta:} \textit{``¿Para qué GRADO es la guía?''}
+
+\textbf{Tú respondes:} \textit{``11''}
+
+\begin{consejo}
+El grado determina el tono:
+\begin{itemize}
+    \item Grados 9-10: Lenguaje más coloquial
+    \item Grados 11+: Lenguaje más formal
+\end{itemize}
+\end{consejo}
+
+\subsubsection{Pregunta 7: Asignatura}
+
+\textbf{Asistente pregunta:} \textit{``¿Qué ASIGNATURA/ÁREA?''}
+
+\textbf{Tú respondes:} \textit{``Geometría Analítica''}
+
+Opciones comunes:
+\begin{itemize}
+    \item Geometría Analítica
+    \item Álgebra
+    \item Cálculo
+    \item Trigonometría
+    \item Aplicaciones (Medicina/Economía/Física)
+\end{itemize}
+
+\subsubsection{Pregunta 8: Elementos clave}
+
+\textbf{Asistente pregunta:} \textit{``¿Qué ELEMENTOS CLAVE debe incluir el concepto?''}
+
+\textbf{Tú respondes:}
+
+\begin{quote}
+\textit{``centro, focos, vértices, covertices, eje mayor, eje menor, distancia focal, excentricidad''}
+\end{quote}
+
+\begin{consejo}
+Lista TODOS los elementos importantes del concepto, separados por comas.
+\end{consejo}
+
+\subsubsection{Pregunta 9: Aplicaciones de la vida real}
+
+\textbf{Asistente pregunta:} \textit{``¿Qué APLICACIONES de la vida real mencionar? (mínimo 3)''}
+
+\textbf{Tú respondes:}
+
+\begin{quote}
+\textit{``Órbitas planetarias, arquitectura de cúpulas, diseño de puentes colgantes, lentes ópticas''}
+\end{quote}
+
+\subsubsection{Pregunta 10: Número de ejemplos resueltos}
+
+\textbf{Asistente pregunta:} \textit{``¿Cuántos EJEMPLOS RESUELTOS deseas?''}
+
+\textbf{Tú respondes:} \textit{``4''}
+
+\begin{consejo}
+Rango recomendado: 3-5 ejemplos. Más de 5 hace la guía muy larga.
+\end{consejo}
+
+\subsubsection{Pregunta 11: Número de ejercicios propuestos}
+
+\textbf{Asistente pregunta:} \textit{``¿Cuántos EJERCICIOS PROPUESTOS deseas?''}
+
+\textbf{Tú respondes:} \textit{``5''}
+
+\begin{consejo}
+Rango recomendado: 5-8 ejercicios.
+\end{consejo}
+
+\subsubsection{Pregunta 12: Ejercicios inversos}
+
+\textbf{Asistente pregunta:} \textit{``¿Necesitas dos tipos de ejercicios (directos e inversos)?''}
+
+\textbf{Tú respondes:} \textit{``Sí''}
+
+\textbf{Explicación:}
+\begin{itemize}
+    \item \textbf{Ejercicios directos:} Dada la ecuación → hallar elementos
+    \item \textbf{Ejercicios inversos:} Dados los elementos → hallar ecuación
+\end{itemize}
+
+Para geometría analítica, responde ``Sí''. Para otros temas, ``No''.
+
+\subsubsection{Pregunta 13: Carpeta destino}
+
+\textbf{Asistente pregunta:} \textit{``¿En qué CARPETA se guardará la guía?''}
+
+\textbf{Tú respondes:}
+
+\begin{quote}
+\textit{``Clases De Sheyra/Geometría analítica/Elipse''}
+\end{quote}
+
+\begin{notaimportante}
+Si la carpeta no existe, el asistente la creará automáticamente.
+\end{notaimportante}
+
+\subsubsection{Pregunta 14: Nombre del archivo}
+
+\textbf{Asistente pregunta:} \textit{``¿Nombre del archivo .tex?''}
+
+\textbf{Tú respondes:} \textit{``GuiaElipse.tex''}
+
+\begin{consejo}
+Formato recomendado: \texttt{Guia[Tema].tex}
+
+Ejemplos: \texttt{GuiaElipse.tex}, \texttt{GuiaDerivadas.tex}
+\end{consejo}
+
+\subsection{Paso 3: Confirmar el Resumen}
+
+El asistente mostrará un resumen completo:
+
+\begin{ejemplo}
+\textbf{Ejemplo de resumen:}
+
+\begin{quote}
+\texttt{=== RESUMEN DE CONFIGURACIÓN ===}
+
+\texttt{DOCUMENTO:}\\
+\texttt{  Título: La Elipse: Propiedades y Aplicaciones}\\
+\texttt{  Autor: Prof. Juan Pérez}\\
+\texttt{  Institución: Colegio San José}\\
+\texttt{  Fecha: Noviembre 2025}
+
+\texttt{ACADÉMICO:}\\
+\texttt{  Tema: Elipse}\\
+\texttt{  Grado: 11}\\
+\texttt{  Asignatura: Geometría Analítica}\\
+\texttt{  Tono: Formal}
+
+\texttt{CONTENIDO:}\\
+\texttt{  Elementos clave: centro, focos, vértices...}\\
+\texttt{  Aplicaciones: Órbitas planetarias...}\\
+\texttt{  Ejemplos resueltos: 4}\\
+\texttt{  Ejercicios propuestos: 5}\\
+\texttt{  Ejercicios inversos: Sí}
+
+\texttt{UBICACIÓN:}\\
+\texttt{  Carpeta: Clases De Sheyra/Geometría analítica/Elipse}\\
+\texttt{  Archivo: GuiaElipse.tex}
+
+\texttt{¿Es correcta esta información? (Sí/No)}
+\end{quote}
+\end{ejemplo}
+
+\textbf{Revisa cuidadosamente}. Si todo está bien, responde \textit{``Sí''}.
+
+Si necesitas cambiar algo, responde \textit{``No''} e indica qué modificar.
+
+\subsection{Paso 4: Esperar la Generación}
+
+El asistente ahora:
+
+\begin{enumerate}
+    \item Leerá el archivo de referencia
+    \item Generará el documento LaTeX completo
+    \item Creará todas las gráficas TikZ
+    \item Compilará el documento con \texttt{lualatex}
+    \item Verificará la calidad
+\end{enumerate}
+
+\begin{notaimportante}
+Este proceso puede tomar 2-5 minutos. \textbf{No interrumpas al asistente}.
+\end{notaimportante}
+
+\subsection{Paso 5: Revisar el Resultado}
+
+El asistente te mostrará:
+
+\begin{itemize}
+    \item ✅ Resultado de compilación (exitoso o errores)
+    \item ✅ Ruta del archivo \texttt{.tex} creado
+    \item ✅ Ruta del archivo \texttt{.pdf} generado
+    \item ✅ Número de páginas del documento
+\end{itemize}
+
+\begin{consejo}
+Abre el PDF generado y revísalo visualmente. Verifica:
+\begin{itemize}
+    \item Las gráficas se ven bien
+    \item No hay texto cortado
+    \item Los ejemplos están completos
+    \item Las soluciones tienen sentido
+\end{itemize}
+\end{consejo}
+
+\subsection{Paso 6: Versionamiento en Git}
+
+El asistente preguntará: \textit{``¿Deseas guardar en git?''}
+
+\textbf{Responde:} \textit{``Sí''}
+
+El asistente:
+\begin{enumerate}
+    \item Ejecutará \texttt{git add [archivo].tex}
+    \item Creará un commit descriptivo
+    \item Hará push al repositorio remoto
+\end{enumerate}
+
+\begin{notaimportante}
+Solo se versionará el archivo \texttt{.tex}. Los archivos auxiliares (\texttt{.aux}, \texttt{.log}, etc.) se ignoran automáticamente.
+\end{notaimportante}
+
+\newpage
+
+\section{Ejemplo Completo: Diálogo Real}
+
+Aquí tienes un ejemplo completo de cómo se ve una sesión real:
+
+\begin{ejemplo}[breakable]
+\small
+\textbf{Tú:} Usa el Sistema v3.0 para crear una guía sobre Funciones Cuadráticas
+
+\textbf{Asistente:} ¡Perfecto! Voy a usar el Sistema Generador de Guías v3.0. Necesito algunos datos. ¿Cuál es el título de la guía?
+
+\textbf{Tú:} Funciones Cuadráticas: De la Parábola a las Aplicaciones
+
+\textbf{Asistente:} Excelente. ¿Quién es el autor?
+
+\textbf{Tú:} Prof. María González
+
+\textbf{Asistente:} ¿Institución? (puedes dejarlo en blanco)
+
+\textbf{Tú:} Instituto Pedagógico Nacional
+
+\textbf{Asistente:} ¿Fecha de creación? (puedo usar la fecha actual)
+
+\textbf{Tú:} Usa la fecha actual
+
+\textbf{Asistente:} ¿Cuál es el TEMA principal?
+
+\textbf{Tú:} Funciones Cuadráticas
+
+\textbf{Asistente:} ¿Para qué GRADO es la guía?
+
+\textbf{Tú:} 9
+
+\textbf{Asistente:} ¿Qué ASIGNATURA/ÁREA?
+
+\textbf{Tú:} Álgebra
+
+\textbf{Asistente:} ¿Qué ELEMENTOS CLAVE debe incluir el concepto?
+
+\textbf{Tú:} vértice, eje de simetría, concavidad, raíces, discriminante, forma estándar, forma canónica
+
+\textbf{Asistente:} ¿Qué APLICACIONES de la vida real mencionar? (mínimo 3)
+
+\textbf{Tú:} Trayectoria de proyectiles, diseño de puentes, optimización de ganancias en negocios, trayectoria de pelotas en deportes
+
+\textbf{Asistente:} ¿Cuántos EJEMPLOS RESUELTOS deseas? (3-5 recomendado)
+
+\textbf{Tú:} 5
+
+\textbf{Asistente:} ¿Cuántos EJERCICIOS PROPUESTOS deseas? (5-8 recomendado)
+
+\textbf{Tú:} 6
+
+\textbf{Asistente:} ¿Necesitas dos tipos de ejercicios (directos e inversos)?
+
+\textbf{Tú:} No, solo ejercicios de práctica mixtos
+
+\textbf{Asistente:} ¿En qué CARPETA se guardará la guía?
+
+\textbf{Tú:} Grado 9/Algebra/Funciones\_Cuadraticas
+
+\textbf{Asistente:} ¿Nombre del archivo .tex?
+
+\textbf{Tú:} GuiaFuncionesCuadraticas.tex
+
+\textbf{Asistente:} [Muestra resumen completo...]
+
+¿Es correcta esta información? (Sí/No)
+
+\textbf{Tú:} Sí
+
+\textbf{Asistente:} [Genera la guía, compila, muestra resultados...]
+
+La guía se generó exitosamente. El PDF tiene 18 páginas. ¿Deseas guardar en git?
+
+\textbf{Tú:} Sí
+
+\textbf{Asistente:} [Ejecuta git add, commit, push...]
+
+✅ Guía versionada exitosamente. ¡Listo!
+\end{ejemplo}
+
+\newpage
+
+\section{Solución de Problemas Comunes}
+
+\subsection{Problema 1: El asistente no encuentra el archivo}
+
+\textbf{Síntoma:} El asistente dice ``No encuentro el archivo PROMPT\_v3.0.md''
+
+\textbf{Solución:}
+\begin{enumerate}
+    \item Verifica que la ruta sea correcta
+    \item Proporciona la ruta completa y absoluta
+    \item Usa comillas si la ruta tiene espacios
+\end{enumerate}
+
+\begin{comando}
+Ruta correcta:
+/Users/toribioarrieta/Documents/LaTeX-GitHub/LaTeX-Varios/Sistema\_Generador\_Guias/PROMPT\_v3.0.md
+\end{comando}
+
+\subsection{Problema 2: Error de compilación LaTeX}
+
+\textbf{Síntoma:} El asistente dice ``Error al compilar con lualatex''
+
+\textbf{Solución:}
+\begin{enumerate}
+    \item Verifica que lualatex esté instalado: \texttt{lualatex --version}
+    \item Revisa el mensaje de error específico
+    \item El asistente intentará corregir automáticamente
+\end{enumerate}
+
+\begin{consejo}
+Si el error persiste, pide al asistente: ``Compila con modo no interactivo''
+\end{consejo}
+
+\subsection{Problema 3: Gráficas fuera del margen}
+
+\textbf{Síntoma:} Las gráficas TikZ se salen de la página
+
+\textbf{Solución:}
+
+El asistente puede ajustar el parámetro \texttt{scale} en las gráficas.
+
+\textbf{Tú dices:} ``Reduce el tamaño de las gráficas TikZ al 80\%''
+
+\subsection{Problema 4: El asistente se saltó preguntas}
+
+\textbf{Síntoma:} El asistente no preguntó todos los datos
+
+\textbf{Solución:}
+
+\textbf{Tú dices:} ``Espera, necesito que me preguntes TODOS los datos uno por uno según el PROMPT\_v3.0''
+
+\subsection{Problema 5: Git no está configurado}
+
+\textbf{Síntoma:} Error al hacer \texttt{git commit} o \texttt{git push}
+
+\textbf{Solución:}
+
+Configura git con tus datos:
+
+\begin{comando}
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu@email.com"
+\end{comando}
+
+\newpage
+
+\section{Preguntas Frecuentes (FAQ)}
+
+\subsection{¿Puedo modificar la guía después de generarla?}
+
+\textbf{Sí.} El archivo \texttt{.tex} es editable. Puedes:
+\begin{itemize}
+    \item Cambiar texto
+    \item Agregar más ejemplos
+    \item Ajustar gráficas
+    \item Modificar colores
+\end{itemize}
+
+Después de editar, recompila con: \texttt{lualatex [archivo].tex}
+
+\subsection{¿Puedo crear guías de otros temas no listados?}
+
+\textbf{Sí.} El sistema es flexible. Puedes crear guías de cualquier tema matemático. Solo especifica bien los elementos clave y aplicaciones.
+
+\subsection{¿Cuánto tiempo tarda en generar una guía?}
+
+\textbf{Entre 2-5 minutos} dependiendo de:
+\begin{itemize}
+    \item Número de ejemplos
+    \item Complejidad de las gráficas
+    \item Velocidad del asistente de IA
+\end{itemize}
+
+\subsection{¿Puedo usar el sistema sin conexión a internet?}
+
+\textbf{No.} Necesitas conexión porque el asistente de IA funciona en línea. Sin embargo, una vez generada la guía, puedes compilarla offline.
+
+\subsection{¿Puedo compartir las guías generadas?}
+
+\textbf{Sí.} Las guías son tuyas. Puedes:
+\begin{itemize}
+    \item Distribuirlas a tus estudiantes
+    \item Publicarlas en tu sitio web
+    \item Incluirlas en libros
+    \item Compartirlas con colegas
+\end{itemize}
+
+\subsection{¿Qué hago si encuentro un error en la guía generada?}
+
+\textbf{Opciones:}
+\begin{enumerate}
+    \item Edita manualmente el archivo \texttt{.tex}
+    \item Pide al asistente: ``Corrige el error en [ubicación específica]''
+    \item Regenera esa sección específica
+\end{enumerate}
+
+\subsection{¿Puedo cambiar los colores de las gráficas?}
+
+\textbf{Sí.} El archivo usa colores definidos. Para cambiarlos, edita las líneas:
+
+\begin{lstlisting}
+\definecolor{medicina}{RGB}{220,20,60}
+\definecolor{economia}{RGB}{0,128,0}
+...
+\end{lstlisting}
+
+\subsection{¿Funciona en Windows?}
+
+\textbf{Sí.} El sistema funciona en:
+\begin{itemize}
+    \item macOS ✅
+    \item Windows ✅
+    \item Linux ✅
+\end{itemize}
+
+Solo asegúrate de tener LaTeX y git instalados.
+
+\newpage
+
+\section{Recursos Adicionales}
+
+\subsection{Archivos de Referencia}
+
+Dentro del sistema hay un archivo ejemplo que puedes estudiar:
+
+\begin{comando}
+Sistema\_Generador\_Guias/Referencias/GuiaAplicacionesDerivada.tex
+\end{comando}
+
+Ábrelo para ver:
+\begin{itemize}
+    \item Estructura completa de una guía profesional
+    \item Uso avanzado de TikZ y pgfplots
+    \item Estilo pedagógico con ejemplos detallados
+    \item Formato de ejercicios y soluciones
+\end{itemize}
+
+\subsection{Documentación Completa}
+
+Lee los siguientes archivos para más información:
+
+\begin{itemize}
+    \item \texttt{README.md} - Documentación general del sistema
+    \item \texttt{PROMPT\_v3.0.md} - Especificaciones técnicas completas
+    \item \texttt{CHANGELOG.md} - Historial de versiones y cambios
+\end{itemize}
+
+\subsection{Comandos Útiles de LaTeX}
+
+\subsubsection{Compilar el documento}
+
+\begin{comando}
+cd [directorio]
+lualatex [archivo].tex
+\end{comando}
+
+\subsubsection{Compilar dos veces (para índices)}
+
+\begin{comando}
+lualatex [archivo].tex
+lualatex [archivo].tex
+\end{comando}
+
+\subsubsection{Ver el PDF generado}
+
+\begin{comando}
+open [archivo].pdf     (macOS)
+start [archivo].pdf    (Windows)
+xdg-open [archivo].pdf (Linux)
+\end{comando}
+
+\subsection{Comandos Útiles de Git}
+
+\subsubsection{Ver estado}
+
+\begin{comando}
+git status
+\end{comando}
+
+\subsubsection{Agregar archivo específico}
+
+\begin{comando}
+git add "[ruta]/[archivo].tex"
+\end{comando}
+
+\subsubsection{Crear commit}
+
+\begin{comando}
+git commit -m "Descripción del cambio"
+\end{comando}
+
+\subsubsection{Subir al remoto}
+
+\begin{comando}
+git push origin main
+\end{comando}
+
+\newpage
+
+\section{Consejos para Guías de Calidad}
+
+\subsection{Al definir elementos clave}
+
+\begin{itemize}
+    \item ✅ Sé exhaustivo: lista TODOS los elementos importantes
+    \item ✅ Usa términos técnicos correctos
+    \item ✅ Separa con comas claramente
+\end{itemize}
+
+\textbf{Ejemplo bueno:}
+
+``centro, focos, vértices, covertices, eje mayor, eje menor, distancia focal, excentricidad, lado recto''
+
+\textbf{Ejemplo malo:}
+
+``las partes de la elipse''
+
+\subsection{Al elegir aplicaciones}
+
+\begin{itemize}
+    \item ✅ Sé específico y concreto
+    \item ✅ Menciona contextos variados
+    \item ✅ Relaciona con la vida cotidiana
+\end{itemize}
+
+\textbf{Ejemplo bueno:}
+
+``Órbitas de planetas alrededor del Sol, diseño de cúpulas arquitectónicas, lentes para telescopios, trayectoria de cometas''
+
+\textbf{Ejemplo malo:}
+
+``en astronomía, en ingeniería''
+
+\subsection{Al elegir cantidad de ejemplos}
+
+\begin{notaimportante}
+\textbf{Recomendaciones por grado:}
+
+\begin{itemize}
+    \item Grado 9: 3-4 ejemplos (conceptos más simples)
+    \item Grado 10-11: 4-5 ejemplos (mayor complejidad)
+\end{itemize}
+\end{notaimportante}
+
+\subsection{Al elegir cantidad de ejercicios}
+
+\begin{consejo}
+\textbf{Fórmula útil:}
+
+Ejercicios propuestos = Ejemplos resueltos + 1 o +2
+
+Ejemplo: Si tienes 4 ejemplos, incluye 5-6 ejercicios.
+\end{consejo}
+
+\newpage
+
+\section{Próximos Pasos}
+
+\subsection{¡Ya estás listo!}
+
+Ahora que has leído esta guía, estás preparado para:
+
+\begin{enumerate}
+    \item Crear tu primera guía educativa
+    \item Usar el sistema con confianza
+    \item Resolver problemas básicos
+    \item Aprovechar todas las características
+\end{enumerate}
+
+\subsection{Práctica Recomendada}
+
+\textbf{Para tu primera guía:}
+
+\begin{enumerate}
+    \item Elige un tema que conozcas bien
+    \item Empieza con 3 ejemplos y 5 ejercicios (simple)
+    \item Revisa cuidadosamente el PDF generado
+    \item Toma notas de lo que quieras mejorar
+    \item Crea una segunda guía aplicando lo aprendido
+\end{enumerate}
+
+\subsection{Mejora Continua}
+
+Después de crear 2-3 guías:
+
+\begin{itemize}
+    \item Revisa el archivo de referencia para ideas
+    \item Experimenta con diferentes estructuras
+    \item Personaliza colores y estilos
+    \item Comparte con colegas y recibe feedback
+\end{itemize}
+
+\newpage
+
+\section{Contacto y Soporte}
+
+\subsection{Si necesitas ayuda}
+
+\textbf{Opciones:}
+
+\begin{enumerate}
+    \item \textbf{Relee esta guía} - Muchas respuestas están aquí
+    \item \textbf{Consulta README.md} - Documentación técnica adicional
+    \item \textbf{Revisa CHANGELOG.md} - Cambios y mejoras recientes
+    \item \textbf{Pregunta al asistente de IA} - Él conoce el sistema completo
+\end{enumerate}
+
+\subsection{Mejoras al Sistema}
+
+Si tienes ideas para mejorar el sistema:
+
+\begin{enumerate}
+    \item Documenta tu sugerencia claramente
+    \item Incluye ejemplos específicos
+    \item Explica el beneficio de la mejora
+    \item Comparte con el mantenedor del sistema
+\end{enumerate}
+
+\subsection{Información del Sistema}
+
+\begin{itemize}
+    \item \textbf{Versión actual:} 3.0
+    \item \textbf{Fecha de lanzamiento:} 2025-11-05
+    \item \textbf{Ubicación:} \texttt{Sistema\_Generador\_Guias/}
+    \item \textbf{Repositorio:} LaTeX-Varios
+    \item \textbf{Mantenedor:} Toribio Arrieta
+\end{itemize}
+
+\newpage
+
+\section{Checklist de Inicio Rápido}
+
+Usa esta lista para verificar que tienes todo listo:
+
+\subsection{Antes de empezar}
+
+\begin{itemize}
+    \item[$\square$] Tengo LaTeX instalado (\texttt{lualatex --version} funciona)
+    \item[$\square$] Tengo Git instalado (\texttt{git --version} funciona)
+    \item[$\square$] Tengo acceso a un asistente de IA compatible
+    \item[$\square$] Conozco la ruta del Sistema Generador de Guías
+    \item[$\square$] He leído esta guía completa
+\end{itemize}
+
+\subsection{Al crear mi primera guía}
+
+\begin{itemize}
+    \item[$\square$] Elegí un tema que conozco bien
+    \item[$\square$] Tengo clara la lista de elementos clave
+    \item[$\square$] Tengo al menos 3 aplicaciones de la vida real
+    \item[$\square$] Decidí cuántos ejemplos y ejercicios quiero
+    \item[$\square$] Sé dónde guardar el archivo
+\end{itemize}
+
+\subsection{Después de generar la guía}
+
+\begin{itemize}
+    \item[$\square$] Revisé el PDF generado visualmente
+    \item[$\square$] Las gráficas se ven correctamente
+    \item[$\square$] Los ejemplos están completos
+    \item[$\square$] Las soluciones tienen sentido
+    \item[$\square$] Versioné el archivo en git
+\end{itemize}
+
+\vspace{2cm}
+
+\begin{center}
+\Large\textbf{¡Éxito en la creación de tus guías educativas!}
+
+\vspace{1cm}
+
+\large\textit{«La educación es el arma más poderosa\\que puedes usar para cambiar el mundo.»}
+
+\normalsize— Nelson Mandela
+\end{center}
+
+\end{document}
