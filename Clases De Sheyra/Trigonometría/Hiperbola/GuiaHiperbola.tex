@@ -1911,6 +1911,10 @@ e = \frac{c}{a} = \frac{150}{90} = \frac{5}{3} \approx 1.67
 \addplot[red, very thick, domain=-30:60] {120*sqrt((x-150)^2/8100 - 1)};
 \addplot[red, very thick, domain=-30:60] {-120*sqrt((x-150)^2/8100 - 1)};
 
+% Asíntotas: y = ± (b/a)(x - h) = ± (120/90)(x - 150) = ± (4/3)(x - 150)
+\addplot[blue, dashed, thick, domain=-50:350] {(4/3)*(x - 150)};
+\addplot[blue, dashed, thick, domain=-50:350] {-(4/3)*(x - 150)};
+
 % Estaciones
 \node[circle, fill=orange, inner sep=3pt] at (0,0) {};
 \node[below left] at (0,0) {$A(0,0)$};
