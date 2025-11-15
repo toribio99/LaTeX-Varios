@@ -1,0 +1,801 @@
+% PARTE 3: EJERCICIOS PROPUESTOS Y SOLUCIONES DETALLADAS
+% Guía sobre la Hipérbola - Geometría Analítica
+
+\section{Ejercicios Propuestos}
+
+Los siguientes ejercicios están diseñados para reforzar tu comprensión de las hipérbolas. Intenta resolverlos antes de consultar las soluciones detalladas que se presentan más adelante.
+
+\begin{ejercicio}[title={Ejercicio 1: Ecuación Canónica - Centro en el Origen (BÁSICO)}]
+Para cada hipérbola con centro en el origen, escribe su ecuación canónica y determina los focos, vértices y excentricidad:
+\begin{enumerate}[label=\alph*)]
+    \item Eje mayor horizontal de longitud 16, eje menor de longitud 12
+    \item Eje mayor vertical con $a = 7$, eje menor con $b = 5$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 2: Ecuación Canónica - Centro Trasladado (BÁSICO)}]
+Encuentra la ecuación canónica de cada hipérbola:
+\begin{enumerate}[label=\alph*)]
+    \item Centro en $(4, -3)$, eje mayor horizontal de longitud 10, eje menor de longitud 6
+    \item Centro en $(-2, 5)$, eje mayor vertical con $a = 8$, $b = 6$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 3: Identificación de Elementos (BÁSICO-INTERMEDIO)}]
+Para cada ecuación canónica, identifica el centro, vértices, focos, longitud de los ejes y excentricidad:
+\begin{enumerate}[label=\alph*)]
+    \item $\frac{x^2}{64} + \frac{y^2}{36} = 1$
+    \item $\frac{(x + 3)^2}{25} + \frac{(y - 2)^2}{49} = 1$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 4: De Forma General a Canónica (INTERMEDIO)}]
+Transforma cada ecuación general a su forma canónica mediante completación de cuadrados e identifica todos los elementos:
+\begin{enumerate}[label=\alph*)]
+    \item $4x^2 + 9y^2 - 16x + 18y - 11 = 0$
+    \item $16x^2 + 25y^2 + 32x - 150y - 159 = 0$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 5: Hipérbola Dados Focos y Vértice (INTERMEDIO)}]
+Encuentra la ecuación de la hipérbola que cumple las siguientes condiciones:
+\begin{enumerate}[label=\alph*)]
+    \item Focos en $F_1(-4, 0)$ y $F_2(4, 0)$; vértice mayor en $(6, 0)$
+    \item Focos en $F_1(2, 1)$ y $F_2(2, 7)$; vértice mayor en $(2, 9)$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 6: Hipérbola con Excentricidad Dada (INTERMEDIO-AVANZADO)}]
+Determina la ecuación de la hipérbola que satisface:
+\begin{enumerate}[label=\alph*)]
+    \item Centro en $(0, 0)$, vértice mayor en $(0, 10)$, excentricidad $e = 0.6$
+    \item Centro en $(3, -2)$, eje mayor horizontal de longitud 20, excentricidad $e = 0.8$
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 7: Aplicaciones Prácticas (AVANZADO)}]
+Resuelve los siguientes problemas de aplicación:
+\begin{enumerate}[label=\alph*)]
+    \item Un planeta orbita alrededor de una estrella. La órbita es elíptica con la estrella en uno de los focos. Si el semieje mayor mide 200 millones de km y la excentricidad es 0.05, encuentra la ecuación de la órbita y las distancias mínima y máxima del planeta a la estrella.
+    \item Se diseña un estadio elíptico de 120 metros de largo y 80 metros de ancho. Si se coloca el centro en el origen con el eje mayor horizontal, encuentra la ecuación y determina a qué distancia del centro deben ubicarse dos torres de iluminación para que estén en los focos.
+    \item En el diseño de un puente elíptico, el arco principal tiene 60 metros de ancho en su base y una altura máxima de 20 metros en el centro. Si se coloca el centro del arco en el origen con el eje mayor horizontal, encuentra la ecuación y calcula la altura del arco a 15 metros del centro.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[title={Ejercicio 8: Problema Integral - Sistema Complejo (AVANZADO)}]
+Resuelve los siguientes problemas desafiantes:
+\begin{enumerate}[label=\alph*)]
+    \item Una hipérbola tiene centro en $(1, 2)$, pasa por los puntos $(1, 8)$ y $(5, 2)$, y tiene eje mayor vertical. Encuentra su ecuación completa y todos sus elementos.
+    \item Demuestra que la suma de distancias de cualquier punto $P(x, y)$ en la hipérbola $\frac{x^2}{25} + \frac{y^2}{16} = 1$ a los focos es constante e igual a $2a = 10$. Verifica con el punto $P(3, \frac{16}{5})$.
+    \item Determina el área encerrada por la hipérbola $\frac{x^2}{36} + \frac{y^2}{16} = 1$ sabiendo que el área de una hipérbola es $A = \pi ab$. Compara con el área del círculo de radio $a = 6$.
+\end{enumerate}
+\end{ejercicio}
+
+\newpage
+
+% ============================================================
+% SOLUCIONES DETALLADAS
+% ============================================================
+\section{Soluciones Detalladas}
+
+\begin{solucion}[title={Solución Ejercicio 1}]
+\textbf{Parte a)} Eje mayor horizontal: longitud 16, eje menor: longitud 12
+
+\textbf{Paso 1:} Determinar $a$ y $b$.
+
+\begin{align*}
+2a &= 16 \Rightarrow a = 8 \\
+2b &= 12 \Rightarrow b = 6
+\end{align*}
+
+\textbf{Paso 2:} Verificar $a > b$: $8 > 6$ \checkmark
+
+\textbf{Paso 3:} Escribir la ecuación canónica (eje mayor horizontal).
+
+\[
+\boxed{\frac{x^2}{64} + \frac{y^2}{36} = 1}
+\]
+
+\textbf{Paso 4:} Calcular la distancia focal.
+
+\[
+c = \sqrt{a^2 - b^2} = \sqrt{64 - 36} = \sqrt{28} = 2\sqrt{7} \approx 5.29
+\]
+
+\textbf{Paso 5:} Determinar los focos (horizontal).
+
+\[
+F_1(-2\sqrt{7}, 0) \approx (-5.29, 0), \quad F_2(2\sqrt{7}, 0) \approx (5.29, 0)
+\]
+
+\textbf{Paso 6:} Determinar los vértices.
+
+Vértices mayores: $V_1(-8, 0)$, $V_2(8, 0)$
+
+Vértices menores: $B_1(0, -6)$, $B_2(0, 6)$
+
+\textbf{Paso 7:} Calcular la excentricidad.
+
+\[
+e = \frac{c}{a} = \frac{2\sqrt{7}}{8} = \frac{\sqrt{7}}{4} \approx 0.661
+\]
+
+\vspace{0.5cm}
+
+\textbf{Parte b)} Eje mayor vertical: $a = 7$, $b = 5$
+
+\textbf{Paso 1:} Verificar $a > b$: $7 > 5$ \checkmark
+
+\textbf{Paso 2:} Escribir la ecuación canónica (eje mayor vertical).
+
+\[
+\boxed{\frac{x^2}{25} + \frac{y^2}{49} = 1}
+\]
+
+\textbf{Paso 3:} Calcular la distancia focal.
+
+\[
+c = \sqrt{a^2 - b^2} = \sqrt{49 - 25} = \sqrt{24} = 2\sqrt{6} \approx 4.90
+\]
+
+\textbf{Paso 4:} Determinar los focos (vertical).
+
+\[
+F_1(0, -2\sqrt{6}) \approx (0, -4.90), \quad F_2(0, 2\sqrt{6}) \approx (0, 4.90)
+\]
+
+\textbf{Paso 5:} Determinar los vértices.
+
+Vértices mayores: $V_1(0, -7)$, $V_2(0, 7)$
+
+Vértices menores: $B_1(-5, 0)$, $B_2(5, 0)$
+
+\textbf{Paso 6:} Calcular la excentricidad.
+
+\[
+e = \frac{c}{a} = \frac{2\sqrt{6}}{7} \approx 0.70
+\]
+
+\textbf{Respuesta completa:}
+\begin{itemize}
+    \item \textbf{Parte a:} $\frac{x^2}{64} + \frac{y^2}{36} = 1$; Focos: $(\pm 2\sqrt{7}, 0)$; $e \approx 0.661$
+    \item \textbf{Parte b:} $\frac{x^2}{25} + \frac{y^2}{49} = 1$; Focos: $(0, \pm 2\sqrt{6})$; $e \approx 0.70$
+\end{itemize}
+\end{solucion}
+
+\newpage
+
+\begin{solucion}[title={Solución Ejercicio 2}]
+\textbf{Parte a)} Centro $(4, -3)$, eje mayor horizontal: longitud 10, eje menor: longitud 6
+
+\textbf{Paso 1:} Determinar $h, k, a, b$.
+
+\begin{align*}
+(h, k) &= (4, -3) \\
+2a &= 10 \Rightarrow a = 5 \\
+2b &= 6 \Rightarrow b = 3
+\end{align*}
+
+\textbf{Paso 2:} Verificar $a > b$: $5 > 3$ \checkmark
+
+\textbf{Paso 3:} Escribir la ecuación canónica (eje horizontal).
+
+\[
+\frac{(x - h)^2}{a^2} + \frac{(y - k)^2}{b^2} = 1
+\]
+\[
+\boxed{\frac{(x - 4)^2}{25} + \frac{(y + 3)^2}{9} = 1}
+\]
+
+\textbf{Paso 4:} Calcular $c$ y determinar focos.
+
+\[
+c = \sqrt{25 - 9} = \sqrt{16} = 4
+\]
+\[
+F_1(4 - 4, -3) = (0, -3), \quad F_2(4 + 4, -3) = (8, -3)
+\]
+
+\vspace{0.5cm}
+
+\textbf{Parte b)} Centro $(-2, 5)$, eje mayor vertical: $a = 8$, $b = 6$
+
+\textbf{Paso 1:} Identificar parámetros.
+
+\begin{align*}
+(h, k) &= (-2, 5) \\
+a &= 8, \quad b = 6
+\end{align*}
+
+\textbf{Paso 2:} Escribir la ecuación canónica (eje vertical).
+
+\[
+\frac{(x - h)^2}{b^2} + \frac{(y - k)^2}{a^2} = 1
+\]
+\[
+\boxed{\frac{(x + 2)^2}{36} + \frac{(y - 5)^2}{64} = 1}
+\]
+
+\textbf{Paso 3:} Calcular $c$ y focos.
+
+\[
+c = \sqrt{64 - 36} = \sqrt{28} = 2\sqrt{7} \approx 5.29
+\]
+\[
+F_1(-2, 5 - 2\sqrt{7}) \approx (-2, -0.29), \quad F_2(-2, 5 + 2\sqrt{7}) \approx (-2, 10.29)
+\]
+
+\textbf{Respuesta completa:}
+\begin{itemize}
+    \item \textbf{Parte a:} $\frac{(x - 4)^2}{25} + \frac{(y + 3)^2}{9} = 1$
+    \item \textbf{Parte b:} $\frac{(x + 2)^2}{36} + \frac{(y - 5)^2}{64} = 1$
+\end{itemize}
+\end{solucion}
+
+\newpage
+
+\begin{solucion}[title={Solución Ejercicio 3}]
+\textbf{Parte a)} $\frac{x^2}{64} + \frac{y^2}{36} = 1$
+
+\textbf{Paso 1:} Identificar parámetros.
+
+\begin{align*}
+\text{Centro: } &(0, 0) \\
+a^2 = 64 &\Rightarrow a = 8 \quad \text{(mayor, con } x^2\text{)} \\
+b^2 = 36 &\Rightarrow b = 6 \\
+\text{Eje mayor: } &\text{horizontal}
+\end{align*}
+
+\textbf{Paso 2:} Calcular $c$.
+
+\[
+c = \sqrt{64 - 36} = \sqrt{28} = 2\sqrt{7} \approx 5.29
+\]
+
+\textbf{Paso 3:} Determinar focos y vértices.
+
+\begin{itemize}
+    \item Focos: $F_1(-2\sqrt{7}, 0)$, $F_2(2\sqrt{7}, 0)$
+    \item Vértices mayores: $V_1(-8, 0)$, $V_2(8, 0)$
+    \item Vértices menores: $B_1(0, -6)$, $B_2(0, 6)$
+    \item Eje mayor: $2a = 16$
+    \item Eje menor: $2b = 12$
+\end{itemize}
+
+\textbf{Paso 4:} Calcular excentricidad.
+
+\[
+e = \frac{2\sqrt{7}}{8} = \frac{\sqrt{7}}{4} \approx 0.661
+\]
+
+\vspace{0.5cm}
+
+\textbf{Parte b)} $\frac{(x + 3)^2}{25} + \frac{(y - 2)^2}{49} = 1$
+
+\textbf{Paso 1:} Identificar parámetros.
+
+\begin{align*}
+\text{Centro: } &(-3, 2) \\
+a^2 = 49 &\Rightarrow a = 7 \quad \text{(mayor, con } y^2\text{)} \\
+b^2 = 25 &\Rightarrow b = 5 \\
+\text{Eje mayor: } &\text{vertical}
+\end{align*}
+
+\textbf{Paso 2:} Calcular $c$.
+
+\[
+c = \sqrt{49 - 25} = \sqrt{24} = 2\sqrt{6} \approx 4.90
+\]
+
+\textbf{Paso 3:} Determinar focos y vértices.
+
+\begin{itemize}
+    \item Focos: $F_1(-3, 2 - 2\sqrt{6})$, $F_2(-3, 2 + 2\sqrt{6})$
+    \item Vértices mayores: $V_1(-3, -5)$, $V_2(-3, 9)$
+    \item Vértices menores: $B_1(-8, 2)$, $B_2(2, 2)$
+    \item Eje mayor: $2a = 14$ (vertical)
+    \item Eje menor: $2b = 10$ (horizontal)
+\end{itemize}
+
+\textbf{Paso 4:} Calcular excentricidad.
+
+\[
+e = \frac{2\sqrt{6}}{7} \approx 0.70
+\]
+
+\textbf{Respuesta completa:}
+\begin{itemize}
+    \item \textbf{Parte a:} Centro: $(0,0)$; Focos: $(\pm 2\sqrt{7}, 0)$; Ejes: $16 \times 12$; $e \approx 0.661$
+    \item \textbf{Parte b:} Centro: $(-3,2)$; Focos: $(-3, 2 \pm 2\sqrt{6})$; Ejes: $10 \times 14$; $e \approx 0.70$
+\end{itemize}
+\end{solucion}
+
+\newpage
+
+\begin{solucion}[title={Solución Ejercicio 4}]
+\textbf{Parte a)} $4x^2 + 9y^2 - 16x + 18y - 11 = 0$
+
+\textbf{Paso 1:} Agrupar términos y factorizar.
+
+\begin{align*}
+(4x^2 - 16x) + (9y^2 + 18y) &= 11 \\
+4(x^2 - 4x) + 9(y^2 + 2y) &= 11
+\end{align*}
+
+\textbf{Paso 2:} Completar cuadrados.
+
+Para $x^2 - 4x$: $(x - 2)^2 - 4$
+
+Para $y^2 + 2y$: $(y + 1)^2 - 1$
+
+\textbf{Paso 3:} Sustituir.
+
+\begin{align*}
+4[(x - 2)^2 - 4] + 9[(y + 1)^2 - 1] &= 11 \\
+4(x - 2)^2 - 16 + 9(y + 1)^2 - 9 &= 11 \\
+4(x - 2)^2 + 9(y + 1)^2 &= 36
+\end{align*}
+
+\textbf{Paso 4:} Dividir por 36.
+
+\[
+\frac{(x - 2)^2}{9} + \frac{(y + 1)^2}{4} = 1
+\]
+\[
+\boxed{\frac{(x - 2)^2}{9} + \frac{(y + 1)^2}{4} = 1}
+\]
+
+\textbf{Paso 5:} Identificar elementos.
+
+\begin{itemize}
+    \item Centro: $(2, -1)$
+    \item $a^2 = 9 \Rightarrow a = 3$ (horizontal)
+    \item $b^2 = 4 \Rightarrow b = 2$
+    \item $c = \sqrt{9 - 4} = \sqrt{5} \approx 2.24$
+    \item Focos: $(2 \pm \sqrt{5}, -1)$
+    \item Vértices: $(2 \pm 3, -1)$ y $(2, -1 \pm 2)$
+    \item Excentricidad: $e = \frac{\sqrt{5}}{3} \approx 0.745$
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Parte b)} $16x^2 + 25y^2 + 32x - 150y - 159 = 0$
+
+\textbf{Paso 1:} Agrupar y factorizar.
+
+\begin{align*}
+16(x^2 + 2x) + 25(y^2 - 6y) &= 159
+\end{align*}
+
+\textbf{Paso 2:} Completar cuadrados.
+
+Para $x^2 + 2x$: $(x + 1)^2 - 1$
+
+Para $y^2 - 6y$: $(y - 3)^2 - 9$
+
+\textbf{Paso 3:} Sustituir.
+
+\begin{align*}
+16[(x + 1)^2 - 1] + 25[(y - 3)^2 - 9] &= 159 \\
+16(x + 1)^2 - 16 + 25(y - 3)^2 - 225 &= 159 \\
+16(x + 1)^2 + 25(y - 3)^2 &= 400
+\end{align*}
+
+\textbf{Paso 4:} Dividir por 400.
+
+\[
+\frac{(x + 1)^2}{25} + \frac{(y - 3)^2}{16} = 1
+\]
+\[
+\boxed{\frac{(x + 1)^2}{25} + \frac{(y - 3)^2}{16} = 1}
+\]
+
+\textbf{Paso 5:} Identificar elementos.
+
+\begin{itemize}
+    \item Centro: $(-1, 3)$
+    \item $a^2 = 25 \Rightarrow a = 5$ (horizontal)
+    \item $b^2 = 16 \Rightarrow b = 4$
+    \item $c = \sqrt{25 - 16} = 3$
+    \item Focos: $(-1 \pm 3, 3) = (-4, 3)$ y $(2, 3)$
+    \item Vértices: $(-6, 3)$, $(4, 3)$, $(-1, -1)$, $(-1, 7)$
+    \item Excentricidad: $e = \frac{3}{5} = 0.6$
+\end{itemize}
+
+\textbf{Respuesta completa:}
+\begin{itemize}
+    \item \textbf{Parte a:} $\frac{(x - 2)^2}{9} + \frac{(y + 1)^2}{4} = 1$; Centro: $(2, -1)$; $e \approx 0.745$
+    \item \textbf{Parte b:} $\frac{(x + 1)^2}{25} + \frac{(y - 3)^2}{16} = 1$; Centro: $(-1, 3)$; $e = 0.6$
+\end{itemize}
+\end{solucion}
+
+\newpage
+
+\begin{solucion}[title={Solución Ejercicio 5}]
+\textbf{Parte a)} Focos: $F_1(-4, 0)$, $F_2(4, 0)$; Vértice mayor: $(6, 0)$
+
+\textbf{Paso 1:} Determinar el centro.
+
+El centro es el punto medio entre los focos:
+\[
+C = \left( \frac{-4 + 4}{2}, 0 \right) = (0, 0)
+\]
+
+\textbf{Paso 2:} Determinar la orientación y $c$.
+
+Focos en eje $x \Rightarrow$ eje mayor horizontal
+
+\[
+c = 4
+\]
+
+\textbf{Paso 3:} Determinar $a$.
+
+El vértice mayor $(6, 0)$ está a distancia $a$ del centro:
+\[
+a = 6
+\]
+
+\textbf{Paso 4:} Calcular $b$.
+
+\begin{align*}
+a^2 &= b^2 + c^2 \\
+36 &= b^2 + 16 \\
+b^2 &= 20 \\
+b &= 2\sqrt{5}
+\end{align*}
+
+\textbf{Paso 5:} Escribir la ecuación.
+
+\[
+\boxed{\frac{x^2}{36} + \frac{y^2}{20} = 1}
+\]
+
+\vspace{0.5cm}
+
+\textbf{Parte b)} Focos: $F_1(2, 1)$, $F_2(2, 7)$; Vértice mayor: $(2, 9)$
+
+\textbf{Paso 1:} Determinar el centro.
+
+\[
+C = \left( 2, \frac{1 + 7}{2} \right) = (2, 4)
+\]
+
+\textbf{Paso 2:} Determinar la orientación y $c$.
+
+Focos en línea vertical $\Rightarrow$ eje mayor vertical
+
+\[
+c = \frac{|7 - 1|}{2} = 3
+\]
+
+\textbf{Paso 3:} Determinar $a$.
+
+Distancia del centro $(2, 4)$ al vértice $(2, 9)$:
+\[
+a = |9 - 4| = 5
+\]
+
+\textbf{Paso 4:} Calcular $b$.
+
+\begin{align*}
+25 &= b^2 + 9 \\
+b^2 &= 16 \\
+b &= 4
+\end{align*}
+
+\textbf{Paso 5:} Escribir la ecuación.
+
+\[
+\boxed{\frac{(x - 2)^2}{16} + \frac{(y - 4)^2}{25} = 1}
+\]
+
+\textbf{Respuesta completa:}
+\begin{itemize}
+    \item \textbf{Parte a:} $\frac{x^2}{36} + \frac{y^2}{20} = 1$
+    \item \textbf{Parte b:} $\frac{(x - 2)^2}{16} + \frac{(y - 4)^2}{25} = 1$
+\end{itemize}
+\end{solucion}
+
+\newpage
+
+\begin{solucion}[title={Solución Ejercicio 6}]
+\textbf{Parte a)} Centro $(0, 0)$, vértice mayor $(0, 10)$, $e = 0.6$
+
+\textbf{Paso 1:} Determinar la orientación y $a$.
+
+Vértice en $(0, 10) \Rightarrow$ eje mayor vertical
+
+\[
+a = 10
+\]
+
+\textbf{Paso 2:} Usar la excentricidad para encontrar $c$.
+
+\begin{align*}
+e &= \frac{c}{a} \\
+0.6 &= \frac{c}{10} \\
+c &= 6
+\end{align*}
+
+\textbf{Paso 3:} Calcular $b$.
+
+\begin{align*}
+a^2 &= b^2 + c^2 \\
+100 &= b^2 + 36 \\
+b^2 &= 64 \\
+b &= 8
+\end{align*}
+
+\textbf{Paso 4:} Escribir la ecuación (eje vertical).
+
+\[
+\boxed{\frac{x^2}{64} + \frac{y^2}{100} = 1}
+\]
+
+\vspace{0.5cm}
+
+\textbf{Parte b)} Centro $(3, -2)$, eje mayor horizontal de longitud 20, $e = 0.8$
+
+\textbf{Paso 1:} Determinar $a$.
+
+\[
+2a = 20 \Rightarrow a = 10
+\]
+
+\textbf{Paso 2:} Usar la excentricidad para encontrar $c$.
+
+\begin{align*}
+0.8 &= \frac{c}{10} \\
+c &= 8
+\end{align*}
+
+\textbf{Paso 3:} Calcular $b$.
+
+\begin{align*}
+100 &= b^2 + 64 \\
+b^2 &= 36 \\
+b &= 6
+\end{align*}
+
+\textbf{Paso 4:} Escribir la ecuación (eje horizontal, centro trasladado).
+
+\[
+\boxed{\frac{(x - 3)^2}{100} + \frac{(y + 2)^2}{36} = 1}
+\]
+
+\textbf{Respuesta completa:}
+\begin{itemize}
+    \item \textbf{Parte a:} $\frac{x^2}{64} + \frac{y^2}{100} = 1$
+    \item \textbf{Parte b:} $\frac{(x - 3)^2}{100} + \frac{(y + 2)^2}{36} = 1$
+\end{itemize}
+\end{solucion}
+
+\newpage
+
+\begin{solucion}[title={Solución Ejercicio 7 - Aplicaciones Prácticas}]
+\textbf{Parte a)} Órbita planetaria: $a = 200$ millones de km, $e = 0.05$
+
+\textbf{Paso 1:} Calcular $c$ usando la excentricidad.
+
+\begin{align*}
+e &= \frac{c}{a} \\
+0.05 &= \frac{c}{200} \\
+c &= 10 \text{ millones de km}
+\end{align*}
+
+\textbf{Paso 2:} Calcular $b$.
+
+\begin{align*}
+a^2 &= b^2 + c^2 \\
+40000 &= b^2 + 100 \\
+b^2 &= 39900 \\
+b &= \sqrt{39900} \approx 199.75 \text{ millones de km}
+\end{align*}
+
+\textbf{Paso 3:} Escribir la ecuación (centro en origen, eje horizontal).
+
+\[
+\boxed{\frac{x^2}{40000} + \frac{y^2}{39900} = 1}
+\]
+
+(Unidades: millones de km)
+
+\textbf{Paso 4:} Calcular distancias mínima y máxima a la estrella.
+
+La estrella está en un foco, por ejemplo $F_2(10, 0)$.
+
+\begin{itemize}
+    \item Distancia mínima (perihelio): $a - c = 200 - 10 = 190$ millones de km
+    \item Distancia máxima (afelio): $a + c = 200 + 10 = 210$ millones de km
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Parte b)} Estadio: 120 m de largo, 80 m de ancho
+
+\textbf{Paso 1:} Determinar $a$ y $b$.
+
+\begin{align*}
+2a &= 120 \Rightarrow a = 60 \text{ m} \\
+2b &= 80 \Rightarrow b = 40 \text{ m}
+\end{align*}
+
+\textbf{Paso 2:} Escribir la ecuación.
+
+\[
+\boxed{\frac{x^2}{3600} + \frac{y^2}{1600} = 1}
+\]
+
+\textbf{Paso 3:} Calcular la posición de los focos.
+
+\begin{align*}
+c &= \sqrt{3600 - 1600} = \sqrt{2000} = 20\sqrt{5} \approx 44.72 \text{ m}
+\end{align*}
+
+Las torres deben ubicarse a $\pm 44.72$ metros del centro sobre el eje mayor (horizontal).
+
+\vspace{0.5cm}
+
+\textbf{Parte c)} Puente: 60 m de ancho (base), 20 m de altura máxima
+
+\textbf{Paso 1:} Determinar parámetros.
+
+\begin{align*}
+2a &= 60 \Rightarrow a = 30 \text{ m (horizontal)} \\
+2b &= 20 \Rightarrow b = 10 \text{ m (vertical)}
+\end{align*}
+
+\textbf{Paso 2:} Escribir la ecuación (eje mayor horizontal).
+
+\[
+\boxed{\frac{x^2}{900} + \frac{y^2}{100} = 1}
+\]
+
+\textbf{Paso 3:} Calcular la altura a 15 m del centro.
+
+Cuando $x = 15$:
+\begin{align*}
+\frac{225}{900} + \frac{y^2}{100} &= 1 \\
+\frac{1}{4} + \frac{y^2}{100} &= 1 \\
+\frac{y^2}{100} &= \frac{3}{4} \\
+y^2 &= 75 \\
+y &= \sqrt{75} = 5\sqrt{3} \approx 8.66 \text{ m}
+\end{align*}
+
+La altura del arco a 15 m del centro es aproximadamente $8.66$ metros.
+
+\textbf{Respuesta completa:}
+\begin{itemize}
+    \item \textbf{Parte a:} Ecuación: $\frac{x^2}{40000} + \frac{y^2}{39900} = 1$; Distancias: 190-210 millones de km
+    \item \textbf{Parte b:} Ecuación: $\frac{x^2}{3600} + \frac{y^2}{1600} = 1$; Torres en $x = \pm 44.72$ m
+    \item \textbf{Parte c:} Ecuación: $\frac{x^2}{900} + \frac{y^2}{100} = 1$; Altura a 15m: $8.66$ m
+\end{itemize}
+\end{solucion}
+
+\newpage
+
+\begin{solucion}[title={Solución Ejercicio 8 - Problemas Avanzados}]
+\textbf{Parte a)} Centro $(1, 2)$, pasa por $(1, 8)$ y $(5, 2)$, eje mayor vertical
+
+\textbf{Paso 1:} Usar el punto $(1, 8)$.
+
+Como $x = 1$ (igual al centro), este punto está en el eje vertical. Es un vértice mayor:
+\[
+a = |8 - 2| = 6
+\]
+
+\textbf{Paso 2:} Usar el punto $(5, 2)$.
+
+Como $y = 2$ (igual al centro), este punto está en el eje horizontal. Es un vértice menor:
+\[
+b = |5 - 1| = 4
+\]
+
+\textbf{Paso 3:} Escribir la ecuación (eje vertical).
+
+\[
+\boxed{\frac{(x - 1)^2}{16} + \frac{(y - 2)^2}{36} = 1}
+\]
+
+\textbf{Paso 4:} Calcular $c$ y focos.
+
+\begin{align*}
+c &= \sqrt{36 - 16} = \sqrt{20} = 2\sqrt{5} \approx 4.47
+\end{align*}
+
+Focos: $(1, 2 \pm 2\sqrt{5})$
+
+\textbf{Paso 5:} Vértices.
+
+\begin{itemize}
+    \item Mayores: $(1, -4)$, $(1, 8)$
+    \item Menores: $(-3, 2)$, $(5, 2)$
+\end{itemize}
+
+\textbf{Paso 6:} Excentricidad.
+
+\[
+e = \frac{2\sqrt{5}}{6} = \frac{\sqrt{5}}{3} \approx 0.745
+\]
+
+\vspace{0.5cm}
+
+\textbf{Parte b)} Demostrar que para $\frac{x^2}{25} + \frac{y^2}{16} = 1$, la suma de distancias a los focos es $2a = 10$
+
+\textbf{Paso 1:} Identificar parámetros.
+
+\begin{align*}
+a^2 &= 25 \Rightarrow a = 5 \\
+b^2 &= 16 \Rightarrow b = 4 \\
+c &= \sqrt{25 - 16} = 3
+\end{align*}
+
+Focos: $F_1(-3, 0)$, $F_2(3, 0)$
+
+\textbf{Paso 2:} Verificar con $P(3, \frac{16}{5})$.
+
+Primero verificamos que $P$ está en la hipérbola:
+\[
+\frac{9}{25} + \frac{(\frac{16}{5})^2}{16} = \frac{9}{25} + \frac{256/25}{16} = \frac{9}{25} + \frac{16}{25} = 1 \quad \checkmark
+\]
+
+\textbf{Paso 3:} Calcular distancias.
+
+\begin{align*}
+d(P, F_1) &= \sqrt{(3 - (-3))^2 + (\frac{16}{5} - 0)^2} \\
+&= \sqrt{36 + \frac{256}{25}} \\
+&= \sqrt{\frac{900 + 256}{25}} \\
+&= \sqrt{\frac{1156}{25}} \\
+&= \frac{34}{5}
+\end{align*}
+
+\begin{align*}
+d(P, F_2) &= \sqrt{(3 - 3)^2 + (\frac{16}{5})^2} \\
+&= \frac{16}{5}
+\end{align*}
+
+\textbf{Paso 4:} Verificar la suma.
+
+\[
+d(P, F_1) + d(P, F_2) = \frac{34}{5} + \frac{16}{5} = \frac{50}{5} = 10 = 2a \quad \checkmark
+\]
+
+\vspace{0.5cm}
+
+\textbf{Parte c)} Área de la hipérbola $\frac{x^2}{36} + \frac{y^2}{16} = 1$
+
+\textbf{Paso 1:} Identificar $a$ y $b$.
+
+\[
+a = 6, \quad b = 4
+\]
+
+\textbf{Paso 2:} Calcular el área usando $A = \pi ab$.
+
+\[
+A = \pi \cdot 6 \cdot 4 = 24\pi \approx 75.4 \text{ unidades}^2
+\]
+
+\textbf{Paso 3:} Comparar con el círculo de radio $a = 6$.
+
+\[
+A_{\text{círculo}} = \pi r^2 = \pi \cdot 36 = 36\pi \approx 113.1 \text{ unidades}^2
+\]
+
+\textbf{Paso 4:} Análisis.
+
+\[
+\frac{A_{\text{hipérbola}}}{A_{\text{círculo}}} = \frac{24\pi}{36\pi} = \frac{2}{3} \approx 0.667
+\]
+
+La hipérbola tiene aproximadamente el $67\%$ del área del círculo de radio $a$.
+
+\textbf{Respuesta completa:}
+\begin{itemize}
+    \item \textbf{Parte a:} $\frac{(x - 1)^2}{16} + \frac{(y - 2)^2}{36} = 1$; Focos: $(1, 2 \pm 2\sqrt{5})$; $e \approx 0.745$
+    \item \textbf{Parte b:} Demostrado: $d(P, F_1) + d(P, F_2) = 10 = 2a$ ✓
+    \item \textbf{Parte c:} Área hipérbola: $24\pi \approx 75.4$; Área círculo: $36\pi \approx 113.1$ (67\%)
+\end{itemize}
+\end{solucion}
+

@@ -1,0 +1,429 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad La Hipérbola}}
+\fancyhead[RO]{\small\textcolor{maincolor}{La Hipérbola \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+% Título
+\title{\textbf{\Huge GEOMETRIA ANALITICA}\\[0.5cm]
+\Large La Hipérbola}
+\author{Prof: Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Bienvenidos al fascinante mundo de la hipérbola! Si alguna vez te has preguntado cómo funcionan los sistemas de GPS, cómo los astrónomos rastrean cometas, o cómo los radares detectan objetos, la respuesta está en las hipérbolas.
+
+La hipérbola es una de las curvas más interesantes en geometría analítica. Aunque su nombre puede sonar complicado, verás que es una curva con propiedades geométricas bellísimas y aplicaciones super prácticas en el mundo real.
+
+\subsection*{¿Por qué son importantes las hipérbolas?}
+
+Las hipérbolas aparecen en muchos lugares inesperados:
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Navegación GPS:} Los sistemas de posicionamiento global usan diferencias de tiempo en señales que forman hipérbolas para determinar tu ubicación exacta.
+    \item \textbf{Astronomía:} Las trayectorias de algunos cometas y objetos espaciales que pasan cerca del Sol describen hipérbolas.
+    \item \textbf{Sistemas de radar:} Los radares utilizan la diferencia de tiempos de llegada de señales, que geometricamente forman hipérbolas, para localizar objetos.
+    \item \textbf{Arquitectura:} Algunas torres de enfriamiento de plantas nucleares tienen forma hiperbólica por su resistencia estructural.
+\end{itemize}
+
+\subsection*{¿Qué aprenderás en esta guía?}
+
+En esta guía vas a descubrir:
+
+\begin{enumerate}[leftmargin=1.5cm]
+    \item Qué es una hipérbola y cómo se construye
+    \item Los elementos fundamentales: centro, focos, vértices, asíntotas
+    \item Las ecuaciones canónicas con centro en (0,0) y en (h,k)
+    \item Cómo trabajar con la ecuación general de segundo grado
+    \item Resolver problemas prácticos con hipérbolas
+\end{enumerate}
+
+Vamos a usar un lenguaje sencillo, muchos ejemplos resueltos paso a paso, y gráficas que te ayudarán a visualizar cada concepto. ¡Prepárate para dominar las hipérbolas!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Definición Geométrica de la Hipérbola}
+
+\begin{definicion}[title={La Hipérbola}]
+Una \textbf{hipérbola} es el lugar geométrico de todos los puntos P en el plano tales que la \textbf{diferencia} de las distancias desde P hasta dos puntos fijos llamados focos es constante.
+
+Matemáticamente: Si $F_1$ y $F_2$ son los focos, y P es cualquier punto de la hipérbola, entonces:
+\[
+|d(P,F_1) - d(P,F_2)| = 2a
+\]
+donde $2a$ es una constante positiva.
+\end{definicion}
+
+\begin{nota}
+La diferencia clave con la elipse: en la elipse es la \textbf{suma} de distancias, en la hipérbola es la \textbf{diferencia}.
+\end{nota}
+
+\subsection{Elementos de la Hipérbola}
+
+Toda hipérbola tiene los siguientes elementos fundamentales:
+
+\begin{itemize}[leftmargin=2cm]
+    \item \textbf{Centro (C):} Punto medio entre los dos focos.
+    \item \textbf{Focos ($F_1$ y $F_2$):} Los dos puntos fijos que definen la hipérbola.
+    \item \textbf{Vértices ($V_1$ y $V_2$):} Puntos donde la hipérbola interseca el eje transverso.
+    \item \textbf{Eje transverso:} Segmento de línea que une los vértices, con longitud $2a$.
+    \item \textbf{Eje conjugado:} Segmento perpendicular al eje transverso en el centro, con longitud $2b$.
+    \item \textbf{Asíntotas:} Dos rectas que la hipérbola se acerca infinitamente pero nunca toca.
+    \item \textbf{Distancia focal:} Distancia desde el centro hasta cada foco, denotada por $c$.
+\end{itemize}
+
+\subsection{Relación Fundamental}
+
+En toda hipérbola se cumple una relación pitagórica fundamental:
+
+\begin{nota}[title={Relación Fundamental de la Hipérbola}]
+\[
+c^2 = a^2 + b^2
+\]
+donde:
+\begin{itemize}
+    \item $a$ = semidistancia del eje transverso
+    \item $b$ = semidistancia del eje conjugado
+    \item $c$ = distancia del centro a cada foco
+\end{itemize}
+
+Nota: En la hipérbola $c > a$ (a diferencia de la elipse donde $c < a$).
+\end{nota}
+
+\subsection{Ecuación Canónica con Centro en el Origen}
+
+Cuando el centro de la hipérbola está en el origen $(0,0)$, existen dos formas canónicas:
+
+\subsubsection*{Hipérbola Horizontal (eje transverso sobre el eje x)}
+
+\[
+\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1
+\]
+
+Características:
+\begin{itemize}
+    \item Centro: $C(0,0)$
+    \item Vértices: $V_1(-a,0)$ y $V_2(a,0)$
+    \item Focos: $F_1(-c,0)$ y $F_2(c,0)$ donde $c^2 = a^2 + b^2$
+    \item Asíntotas: $y = \pm \frac{b}{a}x$
+\end{itemize}
+
+\subsubsection*{Hipérbola Vertical (eje transverso sobre el eje y)}
+
+\[
+\frac{y^2}{a^2} - \frac{x^2}{b^2} = 1
+\]
+
+Características:
+\begin{itemize}
+    \item Centro: $C(0,0)$
+    \item Vértices: $V_1(0,-a)$ y $V_2(0,a)$
+    \item Focos: $F_1(0,-c)$ y $F_2(0,c)$ donde $c^2 = a^2 + b^2$
+    \item Asíntotas: $y = \pm \frac{a}{b}x$
+\end{itemize}
+
+\begin{nota}
+Para identificar rápidamente:
+\begin{itemize}
+    \item Si el término positivo es $x^2$, la hipérbola es \textbf{horizontal}.
+    \item Si el término positivo es $y^2$, la hipérbola es \textbf{vertical}.
+\end{itemize}
+\end{nota}
+
+\newpage
+
+\subsection{Gráfica Ilustrativa}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.7\textwidth,
+    axis equal image,
+    axis lines=middle,
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-8, xmax=8,
+    ymin=-6, ymax=6,
+    xtick={-6,-4,-2,0,2,4,6},
+    ytick={-4,-2,0,2,4},
+    grid=major,
+    grid style={dashed,gray!30},
+    legend pos=north east,
+]
+
+% Hipérbola (a=3, b=2, horizontal)
+\addplot[maincolor, very thick, smooth, samples=200, domain=3:7]
+    ({x}, {2*sqrt((x^2/9)-1)});
+\addplot[maincolor, very thick, smooth, samples=200, domain=3:7]
+    ({x}, {-2*sqrt((x^2/9)-1)});
+\addplot[maincolor, very thick, smooth, samples=200, domain=-7:-3]
+    ({x}, {2*sqrt((x^2/9)-1)});
+\addplot[maincolor, very thick, smooth, samples=200, domain=-7:-3]
+    ({x}, {-2*sqrt((x^2/9)-1)});
+
+% Asíntotas
+\addplot[red, dashed, thick, domain=-7:7] {(2/3)*x};
+\addplot[red, dashed, thick, domain=-7:7] {-(2/3)*x};
+
+% Focos (c^2 = 9 + 4 = 13, c ≈ 3.6)
+\addplot[mark=*, mark size=3pt, accentcolor] coordinates {(-3.606,0) (3.606,0)};
+\node at (axis cs:-3.606,-0.7) {\small $F_1$};
+\node at (axis cs:3.606,-0.7) {\small $F_2$};
+
+% Vértices
+\addplot[mark=*, mark size=3pt, maincolor] coordinates {(-3,0) (3,0)};
+\node at (axis cs:-3,-0.7) {\small $V_1$};
+\node at (axis cs:3,-0.7) {\small $V_2$};
+
+% Centro
+\addplot[mark=*, mark size=2pt, black] coordinates {(0,0)};
+\node at (axis cs:0.3,-0.5) {\small $C$};
+
+\legend{Hipérbola, Asíntotas}
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Ecuación Canónica con Centro en (h,k)}
+
+Cuando el centro de la hipérbola está en un punto $(h,k)$ cualquiera:
+
+\subsubsection*{Hipérbola Horizontal}
+
+\[
+\frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1
+\]
+
+Características:
+\begin{itemize}
+    \item Centro: $C(h,k)$
+    \item Vértices: $V_1(h-a,k)$ y $V_2(h+a,k)$
+    \item Focos: $F_1(h-c,k)$ y $F_2(h+c,k)$
+    \item Asíntotas: $y - k = \pm \frac{b}{a}(x - h)$
+\end{itemize}
+
+\subsubsection*{Hipérbola Vertical}
+
+\[
+\frac{(y-k)^2}{a^2} - \frac{(x-h)^2}{b^2} = 1
+\]
+
+Características:
+\begin{itemize}
+    \item Centro: $C(h,k)$
+    \item Vértices: $V_1(h,k-a)$ y $V_2(h,k+a)$
+    \item Focos: $F_1(h,k-c)$ y $F_2(h,k+c)$
+    \item Asíntotas: $y - k = \pm \frac{a}{b}(x - h)$
+\end{itemize}
+
+\subsection{Excentricidad}
+
+La excentricidad mide qué tan "abierta" es la hipérbola:
+
+\[
+e = \frac{c}{a}
+\]
+
+En una hipérbola siempre: $e > 1$
+
+\begin{itemize}
+    \item Si $e$ está cerca de 1, la hipérbola es más "cerrada".
+    \item Si $e$ es muy grande, la hipérbola es muy "abierta".
+\end{itemize}
+
+\subsection{Ecuación General de Segundo Grado}
+
+La forma general de una hipérbola es:
+
+\[
+Ax^2 + Cy^2 + Dx + Ey + F = 0
+\]
+
+donde $A$ y $C$ tienen \textbf{signos opuestos} (esto distingue a la hipérbola de la elipse).
+
+Para convertir de forma general a canónica, se usa \textbf{completación de cuadrados}.
+
+\newpage
+
+\section{Tabla de Referencia Rápida}
+
+\begin{center}
+\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Elemento} & \textbf{Hipérbola Horizontal} & \textbf{Hipérbola Vertical} \\
+\hline
+Ecuación canónica & $\displaystyle\frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1$ & $\displaystyle\frac{(y-k)^2}{a^2} - \frac{(x-h)^2}{b^2} = 1$ \\
+\hline
+Centro & $(h,k)$ & $(h,k)$ \\
+\hline
+Vértices & $(h \pm a, k)$ & $(h, k \pm a)$ \\
+\hline
+Focos & $(h \pm c, k)$ & $(h, k \pm c)$ \\
+\hline
+Relación & $c^2 = a^2 + b^2$ & $c^2 = a^2 + b^2$ \\
+\hline
+Asíntotas & $y - k = \pm \frac{b}{a}(x-h)$ & $y - k = \pm \frac{a}{b}(x-h)$ \\
+\hline
+Excentricidad & $e = \frac{c}{a}$ donde $e > 1$ & $e = \frac{c}{a}$ donde $e > 1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+%INSERTAR_EJEMPLOS_AQUI%
+
+%INSERTAR_EJERCICIOS_AQUI%
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado el estudio de la hipérbola, una de las curvas más fascinantes de la geometría analítica.
+
+\subsection*{Resumen de Conceptos Clave}
+
+Recuerda siempre:
+
+\begin{enumerate}[leftmargin=2cm]
+    \item La hipérbola se define por la \textbf{diferencia constante} de distancias a dos focos.
+    \item La relación fundamental es: $c^2 = a^2 + b^2$ (donde $c > a$).
+    \item El término positivo en la ecuación indica la orientación (horizontal o vertical).
+    \item Las asíntotas son guías visuales que la hipérbola nunca toca.
+    \item La excentricidad $e = c/a$ siempre es mayor que 1.
+\end{enumerate}
+
+\subsection*{Fórmulas Importantes}
+
+\begin{tcolorbox}[colback=maincolor!10, colframe=maincolor, title=Fórmulas Clave]
+\begin{itemize}
+    \item Relación fundamental: $c^2 = a^2 + b^2$
+    \item Excentricidad: $e = \dfrac{c}{a}$ donde $e > 1$
+    \item Ecuación canónica horizontal: $\dfrac{(x-h)^2}{a^2} - \dfrac{(y-k)^2}{b^2} = 1$
+    \item Ecuación canónica vertical: $\dfrac{(y-k)^2}{a^2} - \dfrac{(x-h)^2}{b^2} = 1$
+    \item Asíntotas (horizontal): $y - k = \pm \dfrac{b}{a}(x - h)$
+    \item Asíntotas (vertical): $y - k = \pm \dfrac{a}{b}(x - h)$
+\end{itemize}
+\end{tcolorbox}
+
+\subsection*{Consejos para el Éxito}
+
+\begin{itemize}[leftmargin=2cm]
+    \item Siempre identifica primero qué término es positivo para saber la orientación.
+    \item Dibuja un rectángulo auxiliar de dimensiones $2a \times 2b$ para trazar las asíntotas.
+    \item Verifica que $c^2 = a^2 + b^2$ después de encontrar $a$, $b$ y $c$.
+    \item Practica la completación de cuadrados, es esencial para trabajar con la forma general.
+    \item Visualiza siempre con gráficas, te ayudará a entender mejor cada problema.
+\end{itemize}
+
+\subsection*{Aplicaciones en el Mundo Real}
+
+La hipérbola no es solo teoría matemática, es una herramienta práctica que:
+
+\begin{itemize}[leftmargin=2cm]
+    \item Permite a los sistemas GPS determinar posiciones con precisión
+    \item Ayuda a los astrónomos a predecir trayectorias de cometas
+    \item Se usa en sistemas de radar para localizar objetos
+    \item Aparece en estructuras arquitectónicas eficientes
+\end{itemize}
+
+\subsection*{Sigue Practicando}
+
+La matemática se aprende haciendo. Resuelve todos los ejercicios propuestos, verifica tus soluciones, y no temas cometer errores, ¡son parte del aprendizaje!
+
+¡Éxito en tu camino matemático!
+
+\end{document}

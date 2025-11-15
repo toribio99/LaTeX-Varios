@@ -1,0 +1,1258 @@
+% PARTE 2: EJEMPLOS RESUELTOS Y EJERCICIOS INVERSOS
+% Guía sobre la Hipérbola - Geometría Analítica
+
+\section{Ejemplos Resueltos}
+
+\begin{ejemplo}[title={Ecuación Canónica con Centro en el Origen - Órbita Planetaria}]
+Un planeta tiene una órbita elíptica alrededor del Sol con el centro de la hipérbola en el origen de coordenadas. El semieje mayor mide 150 millones de kilómetros y el semieje menor mide 149.9 millones de kilómetros. El eje mayor es horizontal. Encuentra la ecuación de la órbita, la distancia focal, la excentricidad y las coordenadas de los focos.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar los datos del problema.
+
+Tenemos:
+\begin{itemize}[leftmargin=*]
+    \item Centro en el origen: $C(0,0)$
+    \item Eje mayor horizontal
+    \item Semieje mayor: $a = 150$ millones de km
+    \item Semieje menor: $b = 149.9$ millones de km
+\end{itemize}
+
+\textbf{Paso 2:} Verificar que $a > b$ (condición necesaria).
+
+Efectivamente: $150 > 149.9$ \checkmark
+
+\textbf{Paso 3:} Escribir la ecuación canónica.
+
+Como el eje mayor es horizontal y el centro está en el origen:
+\[
+\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1
+\]
+
+Sustituyendo valores:
+\[
+\frac{x^2}{150^2} + \frac{y^2}{149.9^2} = 1
+\]
+\[
+\boxed{\frac{x^2}{22500} + \frac{y^2}{22470.01} = 1}
+\]
+
+\textbf{Paso 4:} Calcular la distancia focal $c$.
+
+Usando la relación fundamental:
+\begin{align*}
+c^2 &= a^2 - b^2 \\
+c^2 &= 150^2 - 149.9^2 \\
+c^2 &= 22500 - 22470.01 \\
+c^2 &= 29.99 \\
+c &= \sqrt{29.99} \approx 5.476 \text{ millones de km}
+\end{align*}
+
+\textbf{Paso 5:} Determinar las coordenadas de los focos.
+
+Como el eje mayor es horizontal, los focos están en:
+\[
+F_1(-c, 0) = F_1(-5.476, 0) \quad \text{y} \quad F_2(c, 0) = F_2(5.476, 0)
+\]
+
+(Coordenadas en millones de km)
+
+\textbf{Paso 6:} Calcular la excentricidad.
+
+La excentricidad mide qué tan alargada es la hipérbola:
+\[
+e = \frac{c}{a} = \frac{5.476}{150} \approx 0.0365
+\]
+
+Como $e \approx 0.037$ (muy cercano a 0), esta órbita es casi circular.
+
+\textbf{Paso 7:} Verificación usando un punto en la hipérbola.
+
+Tomemos el vértice mayor $V_2(150, 0)$:
+\[
+\frac{150^2}{22500} + \frac{0^2}{22470.01} = \frac{22500}{22500} + 0 = 1 \quad \checkmark
+\]
+
+\textbf{Paso 8:} Verificación de la definición de hipérbola.
+
+Para el vértice $V_2(150, 0)$:
+\begin{align*}
+d(V_2, F_1) + d(V_2, F_2) &= |150 - (-5.476)| + |150 - 5.476| \\
+&= 155.476 + 144.524 \\
+&= 300 = 2a \quad \checkmark
+\end{align*}
+
+\textbf{Paso 9:} Graficar la órbita (escala proporcional).
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.65\textwidth,
+    axis equal image,
+    xmin=-160, xmax=160,
+    ymin=-160, ymax=160,
+    xlabel={$x$ (millones de km)},
+    ylabel={$y$ (millones de km)},
+    grid=major,
+    axis lines=center,
+]
+
+% Hipérbola
+\addplot[maincolor, very thick, smooth, samples=100, domain=0:360]
+    ({150*cos(x)}, {149.9*sin(x)});
+
+% Centro
+\addplot[only marks, mark=*, mark size=2pt, black] coordinates {(0,0)};
+\node[below right] at (axis cs:0,0) {$C(0,0)$};
+
+% Focos
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(-5.476,0) (5.476,0)};
+\node[below] at (axis cs:-5.476,0) {$F_1$};
+\node[below] at (axis cs:5.476,0) {$F_2$ (Sol)};
+
+% Vértices mayores
+\addplot[only marks, mark=*, mark size=2pt, blue] coordinates {(-150,0) (150,0)};
+\node[below left] at (axis cs:-150,0) {$V_1(-150,0)$};
+\node[below right] at (axis cs:150,0) {$V_2(150,0)$};
+
+% Vértices menores
+\addplot[only marks, mark=*, mark size=2pt, green!60!black] coordinates {(0,149.9) (0,-149.9)};
+\node[right] at (axis cs:0,149.9) {$B_1$};
+\node[right] at (axis cs:0,-149.9) {$B_2$};
+
+% Ejes
+\draw[dashed, gray] (axis cs:-160,0) -- (axis cs:160,0);
+\draw[dashed, gray] (axis cs:0,-160) -- (axis cs:0,160);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 10:} Interpretación física.
+
+El Sol se encuentra en uno de los focos (por ejemplo, $F_2$). La órbita casi circular (baja excentricidad) implica que la distancia del planeta al Sol varía poco durante el año:
+\begin{itemize}[leftmargin=*]
+    \item Distancia mínima (perihelio): $a - c = 150 - 5.476 = 144.524$ millones de km
+    \item Distancia máxima (afelio): $a + c = 150 + 5.476 = 155.476$ millones de km
+\end{itemize}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación: } \frac{x^2}{22500} + \frac{y^2}{22470.01} = 1 \\
+&\text{Distancia focal: } 2c \approx 10.952 \text{ millones de km} \\
+&\text{Focos: } F_1(-5.476, 0), \; F_2(5.476, 0) \\
+&\text{Excentricidad: } e \approx 0.0365
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}[title={Ecuación Canónica con Centro Trasladado - Diseño de Estadio}]
+Se está diseñando un estadio elíptico con centro en el punto $(20, 30)$ metros. El eje mayor mide 80 metros y es horizontal, mientras que el eje menor mide 60 metros. Encuentra la ecuación de la hipérbola, las coordenadas de los focos y calcula la excentricidad del diseño.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Extraer la información del problema.
+
+\begin{itemize}[leftmargin=*]
+    \item Centro: $C(h, k) = (20, 30)$
+    \item Eje mayor: $2a = 80$ m $\Rightarrow$ $a = 40$ m
+    \item Eje menor: $2b = 60$ m $\Rightarrow$ $b = 30$ m
+    \item Eje mayor horizontal
+\end{itemize}
+
+\textbf{Paso 2:} Verificar la condición $a > b$.
+
+Verificamos: $40 > 30$ \checkmark
+
+\textbf{Paso 3:} Escribir la ecuación canónica trasladada.
+
+Para una hipérbola con centro en $(h, k)$ y eje mayor horizontal:
+\[
+\frac{(x - h)^2}{a^2} + \frac{(y - k)^2}{b^2} = 1
+\]
+
+Sustituyendo valores:
+\[
+\frac{(x - 20)^2}{40^2} + \frac{(y - 30)^2}{30^2} = 1
+\]
+\[
+\boxed{\frac{(x - 20)^2}{1600} + \frac{(y - 30)^2}{900} = 1}
+\]
+
+\textbf{Paso 4:} Calcular la distancia focal.
+
+Usando $c^2 = a^2 - b^2$:
+\begin{align*}
+c^2 &= 40^2 - 30^2 \\
+c^2 &= 1600 - 900 \\
+c^2 &= 700 \\
+c &= \sqrt{700} = \sqrt{100 \cdot 7} = 10\sqrt{7} \approx 26.46 \text{ m}
+\end{align*}
+
+\textbf{Paso 5:} Determinar las coordenadas de los focos.
+
+Como el eje mayor es horizontal, los focos están a la izquierda y derecha del centro:
+\begin{align*}
+F_1 &= (h - c, k) = (20 - 10\sqrt{7}, 30) \approx (-6.46, 30) \\
+F_2 &= (h + c, k) = (20 + 10\sqrt{7}, 30) \approx (46.46, 30)
+\end{align*}
+
+\textbf{Paso 6:} Calcular la excentricidad.
+
+\[
+e = \frac{c}{a} = \frac{10\sqrt{7}}{40} = \frac{\sqrt{7}}{4} \approx 0.661
+\]
+
+Esta excentricidad indica una hipérbola moderadamente alargada.
+
+\textbf{Paso 7:} Determinar los vértices.
+
+\textbf{Vértices mayores} (sobre el eje horizontal):
+\begin{align*}
+V_1 &= (h - a, k) = (20 - 40, 30) = (-20, 30) \\
+V_2 &= (h + a, k) = (20 + 40, 30) = (60, 30)
+\end{align*}
+
+\textbf{Vértices menores} (sobre el eje vertical):
+\begin{align*}
+B_1 &= (h, k - b) = (20, 30 - 30) = (20, 0) \\
+B_2 &= (h, k + b) = (20, 30 + 30) = (20, 60)
+\end{align*}
+
+\textbf{Paso 8:} Verificación con un vértice.
+
+Verificamos que $V_2(60, 30)$ está en la hipérbola:
+\[
+\frac{(60 - 20)^2}{1600} + \frac{(30 - 30)^2}{900} = \frac{40^2}{1600} + 0 = \frac{1600}{1600} = 1 \quad \checkmark
+\]
+
+\textbf{Paso 9:} Expandir a la forma general (opcional).
+
+\begin{align*}
+\frac{(x - 20)^2}{1600} + \frac{(y - 30)^2}{900} &= 1 \\
+\frac{900(x - 20)^2 + 1600(y - 30)^2}{1440000} &= 1 \\
+900(x^2 - 40x + 400) + 1600(y^2 - 60y + 900) &= 1440000 \\
+900x^2 - 36000x + 360000 + 1600y^2 - 96000y + 1440000 &= 1440000 \\
+900x^2 + 1600y^2 - 36000x - 96000y + 360000 &= 0
+\end{align*}
+
+Simplificando dividiendo por 100:
+\[
+9x^2 + 16y^2 - 360x - 960y + 3600 = 0
+\]
+
+\textbf{Paso 10:} Graficar el estadio elíptico.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.7\textwidth,
+    axis equal image,
+    xmin=-30, xmax=70,
+    ymin=-10, ymax=70,
+    xlabel={$x$ (metros)},
+    ylabel={$y$ (metros)},
+    grid=major,
+    axis lines=center,
+    xtick={-20,0,20,40,60},
+    ytick={0,20,30,40,60},
+]
+
+% Hipérbola del estadio
+\addplot[maincolor, very thick, smooth, samples=100, domain=0:360]
+    ({20 + 40*cos(x)}, {30 + 30*sin(x)});
+
+% Centro
+\addplot[only marks, mark=*, mark size=3pt, black] coordinates {(20,30)};
+\node[above right] at (axis cs:20,30) {$C(20,30)$};
+
+% Focos
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(-6.46,30) (46.46,30)};
+\node[below] at (axis cs:-6.46,30) {$F_1$};
+\node[below] at (axis cs:46.46,30) {$F_2$};
+
+% Vértices mayores
+\addplot[only marks, mark=*, mark size=2pt, blue] coordinates {(-20,30) (60,30)};
+\node[left] at (axis cs:-20,30) {$V_1$};
+\node[right] at (axis cs:60,30) {$V_2$};
+
+% Vértices menores
+\addplot[only marks, mark=*, mark size=2pt, green!60!black] coordinates {(20,0) (20,60)};
+\node[below] at (axis cs:20,0) {$B_1$};
+\node[above] at (axis cs:20,60) {$B_2$};
+
+% Ejes de simetría
+\draw[dashed, gray] (axis cs:-30,30) -- (axis cs:70,30);
+\draw[dashed, gray] (axis cs:20,-10) -- (axis cs:20,70);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación canónica: } \frac{(x - 20)^2}{1600} + \frac{(y - 30)^2}{900} = 1 \\
+&\text{Focos: } F_1(20 - 10\sqrt{7}, 30), \; F_2(20 + 10\sqrt{7}, 30) \\
+&\text{Excentricidad: } e = \frac{\sqrt{7}}{4} \approx 0.661
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}[title={De Ecuación General a Canónica - Análisis de Trayectoria}]
+Una trayectoria elíptica está descrita por la ecuación $9x^2 + 25y^2 - 18x + 100y - 116 = 0$. Encuentra el centro, los vértices, los focos y la excentricidad de la hipérbola. Grafica la hipérbola identificando todos sus elementos.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Reorganizar la ecuación agrupando términos.
+
+Partimos de:
+\[
+9x^2 + 25y^2 - 18x + 100y - 116 = 0
+\]
+
+Agrupamos términos en $x$ y en $y$:
+\[
+(9x^2 - 18x) + (25y^2 + 100y) = 116
+\]
+
+\textbf{Paso 2:} Factorizar los coeficientes de $x^2$ y $y^2$.
+
+\[
+9(x^2 - 2x) + 25(y^2 + 4y) = 116
+\]
+
+\textbf{Paso 3:} Completar el cuadrado para $x$.
+
+Para $x^2 - 2x$:
+\[
+x^2 - 2x = x^2 - 2x + 1 - 1 = (x - 1)^2 - 1
+\]
+
+Multiplicado por 9:
+\[
+9(x^2 - 2x) = 9[(x - 1)^2 - 1] = 9(x - 1)^2 - 9
+\]
+
+\textbf{Paso 4:} Completar el cuadrado para $y$.
+
+Para $y^2 + 4y$:
+\[
+y^2 + 4y = y^2 + 4y + 4 - 4 = (y + 2)^2 - 4
+\]
+
+Multiplicado por 25:
+\[
+25(y^2 + 4y) = 25[(y + 2)^2 - 4] = 25(y + 2)^2 - 100
+\]
+
+\textbf{Paso 5:} Sustituir en la ecuación y simplificar.
+
+\begin{align*}
+9(x - 1)^2 - 9 + 25(y + 2)^2 - 100 &= 116 \\
+9(x - 1)^2 + 25(y + 2)^2 &= 116 + 9 + 100 \\
+9(x - 1)^2 + 25(y + 2)^2 &= 225
+\end{align*}
+
+\textbf{Paso 6:} Dividir por 225 para obtener la forma canónica.
+
+\[
+\frac{9(x - 1)^2}{225} + \frac{25(y + 2)^2}{225} = 1
+\]
+\[
+\frac{(x - 1)^2}{25} + \frac{(y + 2)^2}{9} = 1
+\]
+\[
+\boxed{\frac{(x - 1)^2}{25} + \frac{(y + 2)^2}{9} = 1}
+\]
+
+\textbf{Paso 7:} Identificar los parámetros de la hipérbola.
+
+De la ecuación $\frac{(x - 1)^2}{25} + \frac{(y + 2)^2}{9} = 1$:
+\begin{itemize}[leftmargin=*]
+    \item Centro: $C(h, k) = (1, -2)$
+    \item $a^2 = 25 \Rightarrow a = 5$ (denominador mayor)
+    \item $b^2 = 9 \Rightarrow b = 3$ (denominador menor)
+    \item Eje mayor: \textbf{horizontal} (el mayor denominador está con $x$)
+\end{itemize}
+
+\textbf{Paso 8:} Calcular la distancia focal.
+
+\begin{align*}
+c^2 &= a^2 - b^2 \\
+c^2 &= 25 - 9 \\
+c^2 &= 16 \\
+c &= 4
+\end{align*}
+
+\textbf{Paso 9:} Determinar los focos.
+
+Como el eje mayor es horizontal:
+\begin{align*}
+F_1 &= (h - c, k) = (1 - 4, -2) = (-3, -2) \\
+F_2 &= (h + c, k) = (1 + 4, -2) = (5, -2)
+\end{align*}
+
+\textbf{Paso 10:} Determinar los vértices.
+
+\textbf{Vértices mayores:}
+\begin{align*}
+V_1 &= (h - a, k) = (1 - 5, -2) = (-4, -2) \\
+V_2 &= (h + a, k) = (1 + 5, -2) = (6, -2)
+\end{align*}
+
+\textbf{Vértices menores:}
+\begin{align*}
+B_1 &= (h, k - b) = (1, -2 - 3) = (1, -5) \\
+B_2 &= (h, k + b) = (1, -2 + 3) = (1, 1)
+\end{align*}
+
+\textbf{Paso 11:} Calcular la excentricidad.
+
+\[
+e = \frac{c}{a} = \frac{4}{5} = 0.8
+\]
+
+Excentricidad alta ($e = 0.8$) indica una hipérbola bastante alargada.
+
+\textbf{Paso 12:} Verificación con el centro.
+
+El centro $(1, -2)$ debe transformar la ecuación en $0 = 1$ (error), sino en la forma $\frac{0}{25} + \frac{0}{9} = 0 \neq 1$. Verificamos con un vértice:
+
+Para $V_2(6, -2)$:
+\[
+\frac{(6 - 1)^2}{25} + \frac{(-2 + 2)^2}{9} = \frac{25}{25} + 0 = 1 \quad \checkmark
+\]
+
+\textbf{Paso 13:} Graficar la hipérbola con todos sus elementos.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.7\textwidth,
+    axis equal image,
+    xmin=-6, xmax=8,
+    ymin=-7, ymax=3,
+    xlabel={$x$},
+    ylabel={$y$},
+    grid=major,
+    axis lines=center,
+    xtick={-6,-4,-2,0,1,2,4,6,8},
+    ytick={-7,-5,-2,0,1,3},
+]
+
+% Hipérbola
+\addplot[maincolor, very thick, smooth, samples=100, domain=0:360]
+    ({1 + 5*cos(x)}, {-2 + 3*sin(x)});
+
+% Centro
+\addplot[only marks, mark=*, mark size=3pt, black] coordinates {(1,-2)};
+\node[below right] at (axis cs:1,-2) {$C(1,-2)$};
+
+% Focos
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(-3,-2) (5,-2)};
+\node[above] at (axis cs:-3,-2) {$F_1(-3,-2)$};
+\node[above] at (axis cs:5,-2) {$F_2(5,-2)$};
+
+% Vértices mayores
+\addplot[only marks, mark=*, mark size=2pt, blue] coordinates {(-4,-2) (6,-2)};
+\node[below left] at (axis cs:-4,-2) {$V_1(-4,-2)$};
+\node[below right] at (axis cs:6,-2) {$V_2(6,-2)$};
+
+% Vértices menores
+\addplot[only marks, mark=*, mark size=2pt, green!60!black] coordinates {(1,-5) (1,1)};
+\node[right] at (axis cs:1,-5) {$B_1(1,-5)$};
+\node[right] at (axis cs:1,1) {$B_2(1,1)$};
+
+% Ejes de simetría
+\draw[dashed, gray] (axis cs:-6,-2) -- (axis cs:8,-2);
+\draw[dashed, gray] (axis cs:1,-7) -- (axis cs:1,3);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación canónica: } \frac{(x - 1)^2}{25} + \frac{(y + 2)^2}{9} = 1 \\
+&\text{Centro: } C(1, -2) \\
+&\text{Vértices mayores: } V_1(-4, -2), \; V_2(6, -2) \\
+&\text{Vértices menores: } B_1(1, -5), \; B_2(1, 1) \\
+&\text{Focos: } F_1(-3, -2), \; F_2(5, -2) \\
+&\text{Excentricidad: } e = 0.8
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}[title={Hipérbola con Eje Mayor Vertical - Diseño Arquitectónico}]
+Un arco elíptico en un edificio tiene su eje mayor vertical. La altura máxima del arco es de 12 metros y el ancho en su base es de 8 metros. Si se coloca el centro del arco en el origen, encuentra la ecuación de la hipérbola, los focos y determina la altura del arco a 2 metros del centro.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Interpretar los datos del problema.
+
+\begin{itemize}[leftmargin=*]
+    \item Centro: $C(0, 0)$
+    \item Altura máxima: $2a = 12$ m $\Rightarrow$ $a = 6$ m (eje vertical)
+    \item Ancho en la base: $2b = 8$ m $\Rightarrow$ $b = 4$ m (eje horizontal)
+    \item Eje mayor: \textbf{vertical}
+\end{itemize}
+
+\textbf{Paso 2:} Verificar que $a > b$.
+
+Verificamos: $6 > 4$ \checkmark
+
+\textbf{Paso 3:} Escribir la ecuación canónica para eje mayor vertical.
+
+Para una hipérbola con centro en el origen y eje mayor vertical:
+\[
+\frac{x^2}{b^2} + \frac{y^2}{a^2} = 1
+\]
+
+Sustituyendo valores:
+\[
+\frac{x^2}{4^2} + \frac{y^2}{6^2} = 1
+\]
+\[
+\boxed{\frac{x^2}{16} + \frac{y^2}{36} = 1}
+\]
+
+\textbf{Paso 4:} Calcular la distancia focal.
+
+\begin{align*}
+c^2 &= a^2 - b^2 \\
+c^2 &= 36 - 16 \\
+c^2 &= 20 \\
+c &= \sqrt{20} = 2\sqrt{5} \approx 4.47 \text{ m}
+\end{align*}
+
+\textbf{Paso 5:} Determinar las coordenadas de los focos.
+
+Como el eje mayor es vertical, los focos están arriba y abajo del centro:
+\begin{align*}
+F_1 &= (0, -c) = (0, -2\sqrt{5}) \approx (0, -4.47) \\
+F_2 &= (0, c) = (0, 2\sqrt{5}) \approx (0, 4.47)
+\end{align*}
+
+\textbf{Paso 6:} Determinar la altura del arco a 2 metros del centro.
+
+Cuando $x = 2$, sustituimos en la ecuación:
+\begin{align*}
+\frac{2^2}{16} + \frac{y^2}{36} &= 1 \\
+\frac{4}{16} + \frac{y^2}{36} &= 1 \\
+\frac{1}{4} + \frac{y^2}{36} &= 1 \\
+\frac{y^2}{36} &= 1 - \frac{1}{4} \\
+\frac{y^2}{36} &= \frac{3}{4} \\
+y^2 &= 36 \cdot \frac{3}{4} \\
+y^2 &= 27 \\
+y &= \pm\sqrt{27} = \pm 3\sqrt{3} \approx \pm 5.196 \text{ m}
+\end{align*}
+
+Tomamos el valor positivo: $y \approx 5.196$ m
+
+\textbf{Paso 7:} Calcular la excentricidad.
+
+\[
+e = \frac{c}{a} = \frac{2\sqrt{5}}{6} = \frac{\sqrt{5}}{3} \approx 0.745
+\]
+
+\textbf{Paso 8:} Verificación de la solución.
+
+Verificamos el punto $(2, 3\sqrt{3})$:
+\[
+\frac{4}{16} + \frac{27}{36} = \frac{1}{4} + \frac{3}{4} = 1 \quad \checkmark
+\]
+
+\textbf{Paso 9:} Determinar los vértices.
+
+\textbf{Vértices mayores} (vertical):
+\begin{align*}
+V_1 &= (0, -a) = (0, -6) \\
+V_2 &= (0, a) = (0, 6)
+\end{align*}
+
+\textbf{Vértices menores} (horizontal):
+\begin{align*}
+B_1 &= (-b, 0) = (-4, 0) \\
+B_2 &= (b, 0) = (4, 0)
+\end{align*}
+
+\textbf{Paso 10:} Graficar el arco elíptico.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.8\textwidth,
+    height=0.9\textwidth,
+    axis equal image,
+    xmin=-6, xmax=6,
+    ymin=-7, ymax=7,
+    xlabel={$x$ (metros)},
+    ylabel={$y$ (metros)},
+    grid=major,
+    axis lines=center,
+    xtick={-4,-2,0,2,4},
+    ytick={-6,-4,0,4,6},
+]
+
+% Hipérbola
+\addplot[maincolor, very thick, smooth, samples=100, domain=0:360]
+    ({4*cos(x)}, {6*sin(x)});
+
+% Centro
+\addplot[only marks, mark=*, mark size=3pt, black] coordinates {(0,0)};
+\node[right] at (axis cs:0,0) {$C(0,0)$};
+
+% Focos
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(0,-4.47) (0,4.47)};
+\node[right] at (axis cs:0,-4.47) {$F_1$};
+\node[right] at (axis cs:0,4.47) {$F_2$};
+
+% Vértices mayores
+\addplot[only marks, mark=*, mark size=2pt, blue] coordinates {(0,-6) (0,6)};
+\node[right] at (axis cs:0,-6) {$V_1(0,-6)$};
+\node[right] at (axis cs:0,6) {$V_2(0,6)$};
+
+% Vértices menores
+\addplot[only marks, mark=*, mark size=2pt, green!60!black] coordinates {(-4,0) (4,0)};
+\node[below] at (axis cs:-4,0) {$B_1(-4,0)$};
+\node[below] at (axis cs:4,0) {$B_2(4,0)$};
+
+% Punto a 2m del centro
+\addplot[only marks, mark=*, mark size=3pt, orange] coordinates {(2,5.196) (-2,5.196)};
+\node[right] at (axis cs:2,5.196) {$(2, 5.20)$};
+\node[left] at (axis cs:-2,5.196) {$(-2, 5.20)$};
+
+% Ejes
+\draw[dashed, gray] (axis cs:-6,0) -- (axis cs:6,0);
+\draw[dashed, gray] (axis cs:0,-7) -- (axis cs:0,7);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación: } \frac{x^2}{16} + \frac{y^2}{36} = 1 \\
+&\text{Focos: } F_1(0, -2\sqrt{5}), \; F_2(0, 2\sqrt{5}) \\
+&\text{Altura a 2m del centro: } y \approx 5.20 \text{ m}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}[title={Aplicación en Acústica - Sala de Conferencias}]
+En el diseño de una sala de conferencias elíptica, se desea que el sonido producido en un foco se refleje y llegue perfectamente al otro foco. La sala tiene 30 metros de largo y 20 metros de ancho. Si se coloca el centro de la hipérbola en el origen con el eje mayor horizontal, determina dónde se deben ubicar los dos focos (puntos óptimos para los oradores).
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar los datos del problema.
+
+\begin{itemize}[leftmargin=*]
+    \item Largo de la sala: $2a = 30$ m $\Rightarrow$ $a = 15$ m
+    \item Ancho de la sala: $2b = 20$ m $\Rightarrow$ $b = 10$ m
+    \item Centro: $C(0, 0)$
+    \item Eje mayor: horizontal
+\end{itemize}
+
+\textbf{Paso 2:} Verificar la condición $a > b$.
+
+Verificamos: $15 > 10$ \checkmark
+
+\textbf{Paso 3:} Escribir la ecuación de la hipérbola.
+
+\[
+\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1
+\]
+\[
+\boxed{\frac{x^2}{225} + \frac{y^2}{100} = 1}
+\]
+
+\textbf{Paso 4:} Calcular la distancia focal.
+
+\begin{align*}
+c^2 &= a^2 - b^2 \\
+c^2 &= 225 - 100 \\
+c^2 &= 125 \\
+c &= \sqrt{125} = 5\sqrt{5} \approx 11.18 \text{ m}
+\end{align*}
+
+\textbf{Paso 5:} Determinar las coordenadas de los focos.
+
+Como el eje mayor es horizontal:
+\begin{align*}
+F_1 &= (-c, 0) = (-5\sqrt{5}, 0) \approx (-11.18, 0) \\
+F_2 &= (c, 0) = (5\sqrt{5}, 0) \approx (11.18, 0)
+\end{align*}
+
+\textbf{Paso 6:} Calcular la excentricidad.
+
+\[
+e = \frac{c}{a} = \frac{5\sqrt{5}}{15} = \frac{\sqrt{5}}{3} \approx 0.745
+\]
+
+\textbf{Paso 7:} Verificar la propiedad reflexiva.
+
+Por la propiedad de la hipérbola, cualquier onda sonora que salga de $F_1$ se refleja en las paredes elípticas y converge exactamente en $F_2$. Esto permite que:
+\begin{itemize}[leftmargin=*]
+    \item Un orador en $F_1$ sea escuchado perfectamente en $F_2$ sin amplificación
+    \item El sonido viaje la misma distancia total desde cualquier punto de reflexión
+\end{itemize}
+
+\textbf{Paso 8:} Calcular la distancia total del sonido.
+
+Para cualquier punto $P$ en la hipérbola:
+\[
+d(F_1, P) + d(P, F_2) = 2a = 30 \text{ m}
+\]
+
+Esta es la distancia constante que recorre el sonido desde $F_1$ hasta $F_2$ vía cualquier punto de reflexión.
+
+\textbf{Paso 9:} Determinar las dimensiones prácticas.
+
+\begin{itemize}[leftmargin=*]
+    \item Distancia entre focos: $2c = 2 \cdot 5\sqrt{5} \approx 22.36$ m
+    \item Distancia de cada foco al centro: $c \approx 11.18$ m
+    \item Posición recomendada para púlpitos/micrófonos: en $F_1$ y $F_2$
+\end{itemize}
+
+\textbf{Paso 10:} Graficar la sala de conferencias.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.6\textwidth,
+    axis equal image,
+    xmin=-18, xmax=18,
+    ymin=-14, ymax=14,
+    xlabel={$x$ (metros)},
+    ylabel={$y$ (metros)},
+    grid=major,
+    axis lines=center,
+    xtick={-15,-10,0,10,15},
+    ytick={-10,0,10},
+]
+
+% Hipérbola
+\addplot[maincolor, very thick, smooth, samples=100, domain=0:360]
+    ({15*cos(x)}, {10*sin(x)});
+
+% Centro
+\addplot[only marks, mark=*, mark size=3pt, black] coordinates {(0,0)};
+\node[below] at (axis cs:0,0) {$C(0,0)$};
+
+% Focos (posiciones óptimas para oradores)
+\addplot[only marks, mark=*, mark size=4pt, red] coordinates {(-11.18,0) (11.18,0)};
+\node[above] at (axis cs:-11.18,0) {$F_1$ (Orador 1)};
+\node[above] at (axis cs:11.18,0) {$F_2$ (Orador 2)};
+
+% Vértices
+\addplot[only marks, mark=*, mark size=2pt, blue] coordinates {(-15,0) (15,0)};
+\addplot[only marks, mark=*, mark size=2pt, green!60!black] coordinates {(0,-10) (0,10)};
+
+% Ejemplo de rayo de sonido
+\addplot[dashed, accentcolor, thick] coordinates {(-11.18,0) (7.5,8.66)};
+\addplot[dashed, accentcolor, thick] coordinates {(7.5,8.66) (11.18,0)};
+\addplot[only marks, mark=*, mark size=2pt, accentcolor] coordinates {(7.5,8.66)};
+\node[above right] at (axis cs:7.5,8.66) {Punto de reflexión};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 11:} Interpretación física.
+
+La propiedad acústica de la hipérbola garantiza que:
+\begin{enumerate}[leftmargin=*]
+    \item El sonido emitido desde $F_1$ se refleja en las paredes y converge en $F_2$
+    \item No se necesita amplificación electrónica
+    \item Se crea un "punto de escucha privilegiado" en cada foco
+    \item Esta propiedad se usa en galerías de susurros y salas históricas
+\end{enumerate}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación de la sala: } \frac{x^2}{225} + \frac{y^2}{100} = 1 \\
+&\text{Posición de los focos: } F_1(-5\sqrt{5}, 0) \approx (-11.18, 0) \\
+&\phantom{\text{Posición de los focos: }} F_2(5\sqrt{5}, 0) \approx (11.18, 0)
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}[title={Problema Inverso - Construcción de Hipérbola Dados Condiciones}]
+Se requiere diseñar una hipérbola que cumpla las siguientes condiciones: tiene centro en $(3, -2)$, uno de sus focos está en $(7, -2)$ y uno de sus vértices mayores está en $(10, -2)$. Encuentra la ecuación completa de la hipérbola y todos sus elementos.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Analizar la información proporcionada.
+
+\begin{itemize}[leftmargin=*]
+    \item Centro: $C(3, -2)$
+    \item Un foco: $F_2(7, -2)$
+    \item Un vértice mayor: $V_2(10, -2)$
+\end{itemize}
+
+Observamos que los tres puntos tienen la misma coordenada $y = -2$, por lo tanto el eje mayor es \textbf{horizontal}.
+
+\textbf{Paso 2:} Calcular el semieje mayor $a$.
+
+La distancia del centro al vértice mayor es $a$:
+\[
+a = |x_{V_2} - x_C| = |10 - 3| = 7
+\]
+
+\textbf{Paso 3:} Calcular la distancia focal $c$.
+
+La distancia del centro al foco es $c$:
+\[
+c = |x_{F_2} - x_C| = |7 - 3| = 4
+\]
+
+\textbf{Paso 4:} Calcular el semieje menor $b$ usando $a^2 = b^2 + c^2$.
+
+\begin{align*}
+a^2 &= b^2 + c^2 \\
+49 &= b^2 + 16 \\
+b^2 &= 49 - 16 \\
+b^2 &= 33 \\
+b &= \sqrt{33} \approx 5.745
+\end{align*}
+
+\textbf{Paso 5:} Escribir la ecuación canónica.
+
+Para una hipérbola con eje mayor horizontal y centro en $(h, k) = (3, -2)$:
+\[
+\frac{(x - 3)^2}{49} + \frac{(y + 2)^2}{33} = 1
+\]
+\[
+\boxed{\frac{(x - 3)^2}{49} + \frac{(y + 2)^2}{33} = 1}
+\]
+
+\textbf{Paso 6:} Determinar todos los elementos.
+
+\textbf{Focos:}
+\begin{align*}
+F_1 &= (h - c, k) = (3 - 4, -2) = (-1, -2) \\
+F_2 &= (h + c, k) = (3 + 4, -2) = (7, -2) \quad \checkmark
+\end{align*}
+
+\textbf{Vértices mayores:}
+\begin{align*}
+V_1 &= (h - a, k) = (3 - 7, -2) = (-4, -2) \\
+V_2 &= (h + a, k) = (3 + 7, -2) = (10, -2) \quad \checkmark
+\end{align*}
+
+\textbf{Vértices menores:}
+\begin{align*}
+B_1 &= (h, k - b) = (3, -2 - \sqrt{33}) \approx (3, -7.745) \\
+B_2 &= (h, k + b) = (3, -2 + \sqrt{33}) \approx (3, 3.745)
+\end{align*}
+
+\textbf{Paso 7:} Calcular la excentricidad.
+
+\[
+e = \frac{c}{a} = \frac{4}{7} \approx 0.571
+\]
+
+\textbf{Paso 8:} Expandir a la forma general.
+
+\begin{align*}
+\frac{(x - 3)^2}{49} + \frac{(y + 2)^2}{33} &= 1 \\
+33(x - 3)^2 + 49(y + 2)^2 &= 1617 \\
+33(x^2 - 6x + 9) + 49(y^2 + 4y + 4) &= 1617 \\
+33x^2 - 198x + 297 + 49y^2 + 196y + 196 &= 1617 \\
+33x^2 + 49y^2 - 198x + 196y - 1124 &= 0
+\end{align*}
+
+\textbf{Paso 9:} Verificación con los datos iniciales.
+
+Verificamos que $V_2(10, -2)$ esté en la hipérbola:
+\[
+\frac{(10 - 3)^2}{49} + \frac{(-2 + 2)^2}{33} = \frac{49}{49} + 0 = 1 \quad \checkmark
+\]
+
+Verificamos que $F_2(7, -2)$ cumpla $d(C, F_2) = c$:
+\[
+\sqrt{(7-3)^2 + (-2+2)^2} = \sqrt{16} = 4 = c \quad \checkmark
+\]
+
+\textbf{Paso 10:} Graficar la hipérbola.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=0.7\textwidth,
+    axis equal image,
+    xmin=-6, xmax=12,
+    ymin=-10, ymax=6,
+    xlabel={$x$},
+    ylabel={$y$},
+    grid=major,
+    axis lines=center,
+    xtick={-4,0,3,7,10},
+    ytick={-7.745,-2,0,3.745},
+]
+
+% Hipérbola
+\addplot[maincolor, very thick, smooth, samples=100, domain=0:360]
+    ({3 + 7*cos(x)}, {-2 + sqrt(33)*sin(x)});
+
+% Centro
+\addplot[only marks, mark=*, mark size=3pt, black] coordinates {(3,-2)};
+\node[below right] at (axis cs:3,-2) {$C(3,-2)$};
+
+% Focos
+\addplot[only marks, mark=*, mark size=3pt, red] coordinates {(-1,-2) (7,-2)};
+\node[above] at (axis cs:-1,-2) {$F_1(-1,-2)$};
+\node[above] at (axis cs:7,-2) {$F_2(7,-2)$};
+
+% Vértices mayores
+\addplot[only marks, mark=*, mark size=3pt, blue] coordinates {(-4,-2) (10,-2)};
+\node[below] at (axis cs:-4,-2) {$V_1(-4,-2)$};
+\node[below] at (axis cs:10,-2) {$V_2(10,-2)$};
+
+% Vértices menores
+\addplot[only marks, mark=*, mark size=2pt, green!60!black] coordinates {(3,-7.745) (3,3.745)};
+\node[right] at (axis cs:3,-7.745) {$B_1$};
+\node[right] at (axis cs:3,3.745) {$B_2$};
+
+% Ejes
+\draw[dashed, gray] (axis cs:-6,-2) -- (axis cs:12,-2);
+\draw[dashed, gray] (axis cs:3,-10) -- (axis cs:3,6);
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación canónica: } \frac{(x - 3)^2}{49} + \frac{(y + 2)^2}{33} = 1 \\
+&\text{Ecuación general: } 33x^2 + 49y^2 - 198x + 196y - 1124 = 0 \\
+&\text{Centro: } (3, -2) \\
+&\text{Focos: } (-1, -2), \; (7, -2) \\
+&\text{Vértices: } (-4, -2), \; (10, -2), \; (3, -2 \pm \sqrt{33}) \\
+&\text{Excentricidad: } e = \frac{4}{7} \approx 0.571
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\newpage
+
+% ============================================================
+% EJERCICIOS INVERSOS
+% ============================================================
+\section{Ejercicios Inversos - Pensamiento Creativo}
+
+Los siguientes ejercicios requieren que trabajes "al revés": dadas ciertas condiciones o resultados, debes encontrar la hipérbola original. Estos problemas desarrollan tu razonamiento matemático y tu capacidad de análisis.
+
+\begin{ejemplo}[title={Ejercicio Inverso 1: Dados los Focos y un Punto}]
+Se sabe que una hipérbola tiene focos en $F_1(-3, 2)$ y $F_2(5, 2)$, y pasa por el punto $P(1, 6)$. Encuentra la ecuación de la hipérbola.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Determinar el centro y la orientación.
+
+El centro es el punto medio entre los focos:
+\[
+C = \left( \frac{-3 + 5}{2}, \frac{2 + 2}{2} \right) = (1, 2)
+\]
+
+Como los focos tienen la misma coordenada $y = 2$, el eje mayor es \textbf{horizontal}.
+
+\textbf{Paso 2:} Calcular la distancia focal $c$.
+
+\[
+c = \frac{|5 - (-3)|}{2} = \frac{8}{2} = 4
+\]
+
+\textbf{Paso 3:} Usar la definición de hipérbola para encontrar $2a$.
+
+Por definición:
+\begin{align*}
+d(P, F_1) + d(P, F_2) &= 2a \\
+\sqrt{(1-(-3))^2 + (6-2)^2} + \sqrt{(1-5)^2 + (6-2)^2} &= 2a \\
+\sqrt{16 + 16} + \sqrt{16 + 16} &= 2a \\
+\sqrt{32} + \sqrt{32} &= 2a \\
+2\sqrt{32} &= 2a \\
+\sqrt{32} &= a \\
+4\sqrt{2} &= a
+\end{align*}
+
+Por lo tanto: $a = 4\sqrt{2} \approx 5.657$
+
+\textbf{Paso 4:} Calcular $b$ usando $a^2 = b^2 + c^2$.
+
+\begin{align*}
+(4\sqrt{2})^2 &= b^2 + 4^2 \\
+32 &= b^2 + 16 \\
+b^2 &= 16 \\
+b &= 4
+\end{align*}
+
+\textbf{Paso 5:} Escribir la ecuación canónica.
+
+Con centro $(1, 2)$, $a^2 = 32$, $b^2 = 16$, eje horizontal:
+\[
+\boxed{\frac{(x - 1)^2}{32} + \frac{(y - 2)^2}{16} = 1}
+\]
+
+\textbf{Paso 6:} Verificación con el punto $P(1, 6)$.
+
+\[
+\frac{(1 - 1)^2}{32} + \frac{(6 - 2)^2}{16} = 0 + \frac{16}{16} = 1 \quad \checkmark
+\]
+
+\textbf{Respuesta:}
+\[
+\boxed{\frac{(x - 1)^2}{32} + \frac{(y - 2)^2}{16} = 1}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title={Ejercicio Inverso 2: Dada Excentricidad y Vértices}]
+Una hipérbola tiene excentricidad $e = \frac{3}{5}$, centro en el origen y sus vértices mayores en $(\pm 10, 0)$. Encuentra la ecuación de la hipérbola y las coordenadas de los focos.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Determinar $a$ de los vértices.
+
+Los vértices mayores están en $(\pm 10, 0)$, entonces:
+\[
+a = 10
+\]
+
+\textbf{Paso 2:} Usar la excentricidad para encontrar $c$.
+
+\begin{align*}
+e &= \frac{c}{a} \\
+\frac{3}{5} &= \frac{c}{10} \\
+c &= 10 \cdot \frac{3}{5} \\
+c &= 6
+\end{align*}
+
+\textbf{Paso 3:} Calcular $b$ usando la relación fundamental.
+
+\begin{align*}
+a^2 &= b^2 + c^2 \\
+100 &= b^2 + 36 \\
+b^2 &= 64 \\
+b &= 8
+\end{align*}
+
+\textbf{Paso 4:} Escribir la ecuación de la hipérbola.
+
+Con centro en el origen y eje mayor horizontal:
+\[
+\boxed{\frac{x^2}{100} + \frac{y^2}{64} = 1}
+\]
+
+\textbf{Paso 5:} Determinar los focos.
+
+\[
+F_1(-6, 0) \quad \text{y} \quad F_2(6, 0)
+\]
+
+\textbf{Paso 6:} Verificar la excentricidad.
+
+\[
+e = \frac{c}{a} = \frac{6}{10} = \frac{3}{5} \quad \checkmark
+\]
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación: } \frac{x^2}{100} + \frac{y^2}{64} = 1 \\
+&\text{Focos: } (\pm 6, 0)
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[title={Ejercicio Inverso 3: Hipérbola que Pasa por Tres Puntos}]
+Encuentra la ecuación de la hipérbola con centro en el origen, eje mayor horizontal, que pasa por los puntos $A(4, 0)$, $B(0, 3)$ y $C(2\sqrt{2}, \sqrt{6})$.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Usar el punto $A(4, 0)$ para encontrar $a$.
+
+El punto $(4, 0)$ está en el eje $x$, entonces es un vértice:
+\[
+a = 4
+\]
+
+\textbf{Paso 2:} Usar el punto $B(0, 3)$ para encontrar $b$.
+
+El punto $(0, 3)$ está en el eje $y$, entonces es un vértice menor:
+\[
+b = 3
+\]
+
+\textbf{Paso 3:} Escribir la ecuación propuesta.
+
+\[
+\frac{x^2}{16} + \frac{y^2}{9} = 1
+\]
+
+\textbf{Paso 4:} Verificar con el tercer punto $C(2\sqrt{2}, \sqrt{6})$.
+
+\begin{align*}
+\frac{(2\sqrt{2})^2}{16} + \frac{(\sqrt{6})^2}{9} &= \frac{8}{16} + \frac{6}{9} \\
+&= \frac{1}{2} + \frac{2}{3} \\
+&= \frac{3 + 4}{6} \\
+&= \frac{7}{6} \neq 1
+\end{align*}
+
+\textbf{¡Problema!} El tercer punto no está en la hipérbola propuesta. Esto significa que los tres puntos NO definen una hipérbola con esas características específicas.
+
+\textbf{Paso 5:} Replanteamiento del problema.
+
+Si los tres puntos DEBEN estar en la hipérbola, entonces $A(4,0)$ y $B(0,3)$ NO son necesariamente vértices. Debemos usar la forma general:
+\[
+\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1
+\]
+
+y resolver el sistema con los tres puntos.
+
+\textbf{De $A(4, 0)$:}
+\[
+\frac{16}{a^2} = 1 \Rightarrow a^2 = 16
+\]
+
+\textbf{De $B(0, 3)$:}
+\[
+\frac{9}{b^2} = 1 \Rightarrow b^2 = 9
+\]
+
+\textbf{Verificación con $C(2\sqrt{2}, \sqrt{6})$:}
+\[
+\frac{8}{16} + \frac{6}{9} = \frac{1}{2} + \frac{2}{3} = \frac{7}{6} \neq 1
+\]
+
+\textbf{Conclusión:} Los tres puntos dados NO pueden estar simultáneamente en una hipérbola con centro en el origen y eje mayor horizontal que pase exactamente por $A$ y $B$ como vértices.
+
+\textbf{Respuesta:}
+\[
+\boxed{\text{No existe tal hipérbola (puntos incompatibles con las condiciones dadas)}}
+\]
+
+\textit{Nota: Este ejercicio muestra la importancia de verificar la consistencia de los datos.}
+\end{ejemplo}
+
+\begin{ejemplo}[title={Ejercicio Inverso 4: Dada Suma de Distancias}]
+Se sabe que para todos los puntos de una hipérbola, la suma de distancias a dos focos fijos es 26. Si los focos están en $F_1(0, -5)$ y $F_2(0, 5)$, encuentra la ecuación de la hipérbola.
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Usar la definición de hipérbola.
+
+Por definición:
+\[
+d(P, F_1) + d(P, F_2) = 2a = 26
+\]
+
+Por lo tanto:
+\[
+a = 13
+\]
+
+\textbf{Paso 2:} Determinar el centro y la orientación.
+
+El centro es el punto medio entre los focos:
+\[
+C = \left( \frac{0 + 0}{2}, \frac{-5 + 5}{2} \right) = (0, 0)
+\]
+
+Como los focos tienen la misma coordenada $x = 0$, el eje mayor es \textbf{vertical}.
+
+\textbf{Paso 3:} Calcular la distancia focal.
+
+\[
+c = \frac{|5 - (-5)|}{2} = \frac{10}{2} = 5
+\]
+
+\textbf{Paso 4:} Calcular $b$ usando $a^2 = b^2 + c^2$.
+
+\begin{align*}
+13^2 &= b^2 + 5^2 \\
+169 &= b^2 + 25 \\
+b^2 &= 144 \\
+b &= 12
+\end{align*}
+
+\textbf{Paso 5:} Escribir la ecuación de la hipérbola.
+
+Como el eje mayor es vertical y el centro está en el origen:
+\[
+\frac{x^2}{b^2} + \frac{y^2}{a^2} = 1
+\]
+\[
+\boxed{\frac{x^2}{144} + \frac{y^2}{169} = 1}
+\]
+
+\textbf{Paso 6:} Verificar con un vértice mayor.
+
+El vértice mayor superior es $V_2(0, 13)$:
+\begin{align*}
+d(V_2, F_1) + d(V_2, F_2) &= |13 - (-5)| + |13 - 5| \\
+&= 18 + 8 \\
+&= 26 = 2a \quad \checkmark
+\end{align*}
+
+\textbf{Paso 7:} Calcular la excentricidad.
+
+\[
+e = \frac{c}{a} = \frac{5}{13} \approx 0.385
+\]
+
+\textbf{Respuesta:}
+\[
+\boxed{
+\begin{aligned}
+&\text{Ecuación: } \frac{x^2}{144} + \frac{y^2}{169} = 1 \\
+&\text{Excentricidad: } e = \frac{5}{13}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
