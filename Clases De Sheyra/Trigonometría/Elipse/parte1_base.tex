@@ -1,0 +1,632 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+
+% Paquetes básicos
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+
+% Colores
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de títulos
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración de cajas
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+\newtcolorbox{teorema}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Teorema,
+  #1
+}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=orange!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=orange!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio Propuesto,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  breakable,
+  colback=yellow!10,
+  colframe=yellow!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+% Encabezados
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad La Elipse}}
+\fancyhead[RO]{\small\textcolor{maincolor}{La Elipse \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+% Título
+\title{\textbf{\Huge\textcolor{maincolor}{GEOMETRIA ANALITICA}}\\[0.5cm]
+\LARGE\textcolor{accentcolor}{LA ELIPSE}}
+\author{\Large Prof: Toribio De J Arrieta F}
+\date{\Large La Pruebita\\[0.3cm] \large \today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vfill
+
+\begin{center}
+\large\textbf{Grado 10 - Trigonometría}
+\end{center}
+
+\newpage
+
+\tableofcontents
+\newpage
+
+% ============================================================
+% INTRODUCCIÓN
+% ============================================================
+\section{Introducción}
+
+¿Te has preguntado por qué los planetas no se mueven en círculos perfectos alrededor del Sol? ¿O cómo los arquitectos diseñan edificios y estadios con formas tan elegantes? La respuesta está en una de las curvas más fascinantes de la geometría: \textbf{la elipse}.
+
+La elipse es mucho más que una figura geométrica que estudiamos en el salón de clase. Es una forma que aparece constantemente en la naturaleza y en nuestras creaciones. Desde las órbitas de los planetas que describe Johannes Kepler en sus leyes del movimiento planetario, hasta el diseño acústico de auditorios donde el sonido viaja de manera perfecta, la elipse está presente en aplicaciones sorprendentes.
+
+En esta guía vamos a explorar la elipse desde una perspectiva analítica, es decir, usando álgebra y geometría coordinada. Aprenderás a:
+
+\begin{itemize}[leftmargin=*]
+    \item Construir una elipse usando su definición geométrica fundamental
+    \item Deducir y aplicar las ecuaciones de la elipse en diferentes posiciones
+    \item Identificar sus elementos característicos: centro, focos, vértices, ejes
+    \item Resolver problemas aplicados a situaciones reales de ingeniería, arquitectura y astronomía
+    \item Convertir entre las diferentes formas de la ecuación elíptica
+\end{itemize}
+
+La geometría analítica nos da un poder increíble: podemos describir formas complejas usando ecuaciones, y viceversa, podemos visualizar ecuaciones como curvas en el plano. La elipse es el ejemplo perfecto de esta conexión entre álgebra y geometría.
+
+\subsection*{¿Qué vamos a descubrir?}
+
+Comenzaremos con la construcción de la elipse usando su definición como lugar geométrico. Luego deduciremos su ecuación canónica cuando el centro está en el origen $(0,0)$, y veremos cómo se modifica cuando trasladamos el centro a cualquier punto $(h,k)$ del plano.
+
+También estudiaremos la forma general de la ecuación elíptica y aprenderemos técnicas algebraicas como la \textbf{completación de cuadrados}, que nos permitirá convertir ecuaciones complicadas en formas más simples y útiles.
+
+Pero esto no se queda solo en teoría. Veremos aplicaciones reales como:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Órbitas planetarias:} Cómo la Tierra y otros planetas se mueven en elipses con el Sol en uno de los focos
+    \item \textbf{Arquitectura:} El diseño de estadios y edificios elípticos
+    \item \textbf{Ingeniería civil:} Puentes y arcos con formas elípticas
+    \item \textbf{Acústica:} Salas de conciertos donde las propiedades reflectivas de la elipse crean efectos de sonido únicos
+\end{itemize}
+
+\subsection*{Tu actitud importa}
+
+La geometría analítica requiere paciencia y práctica. No te desanimes si algunos conceptos parecen complicados al principio. Cada ejemplo está diseñado para llevarte paso a paso desde lo básico hasta problemas más desafiantes.
+
+Recuerda: \textbf{el error es parte del aprendizaje}. Si te equivocas en un ejercicio, revisa tu procedimiento, identifica dónde estuvo el problema, y vuelve a intentarlo. Esa es la manera en que realmente se aprende matemáticas.
+
+¡Empecemos este viaje por el fascinante mundo de la elipse!
+
+\newpage
+
+% ============================================================
+% CONCEPTOS FUNDAMENTALES
+% ============================================================
+\section{Conceptos Fundamentales}
+
+\subsection{Definición Geométrica de la Elipse}
+
+\begin{definicion}
+Una \textbf{elipse} es el lugar geométrico de todos los puntos del plano cuya suma de distancias a dos puntos fijos llamados \textbf{focos} es constante.
+\end{definicion}
+
+Matemáticamente, si $F_1$ y $F_2$ son los dos focos, y $P$ es cualquier punto de la elipse, entonces:
+\[
+d(P,F_1) + d(P,F_2) = 2a = \text{constante}
+\]
+
+donde $2a$ es la longitud del eje mayor.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Elipse
+    \draw[maincolor, very thick] (0,0) ellipse (3 and 2);
+
+    % Focos
+    \coordinate (F1) at (-2.236,0);
+    \coordinate (F2) at (2.236,0);
+    \fill[red] (F1) circle (2pt) node[below left] {$F_1$};
+    \fill[red] (F2) circle (2pt) node[below right] {$F_2$};
+
+    % Punto P en la elipse
+    \coordinate (P) at (1.5,1.658);
+    \fill[blue] (P) circle (2pt) node[above right] {$P$};
+
+    % Distancias
+    \draw[accentcolor, thick, dashed] (F1) -- (P) node[midway, above left] {$d_1$};
+    \draw[accentcolor, thick, dashed] (F2) -- (P) node[midway, above right] {$d_2$};
+
+    % Centro
+    \fill[black] (0,0) circle (1.5pt) node[below] {$C$};
+\end{tikzpicture}
+
+\small Para cualquier punto $P$ en la elipse: $d_1 + d_2 = 2a$ (constante)
+\end{center}
+
+\subsection{Construcción de la Elipse}
+
+Para construir físicamente una elipse necesitamos:
+\begin{enumerate}[leftmargin=*]
+    \item Dos tachuelas (representan los focos $F_1$ y $F_2$)
+    \item Una cuerda de longitud $2a$ mayor que la distancia entre los focos
+    \item Un lápiz
+\end{enumerate}
+
+\textbf{Procedimiento:}
+\begin{enumerate}[leftmargin=*]
+    \item Fija las tachuelas en dos puntos del papel
+    \item Ata los extremos de la cuerda a las tachuelas
+    \item Con el lápiz, estira la cuerda manteniéndola tensa
+    \item Mueve el lápiz manteniendo siempre la cuerda tensa
+    \item La curva que traces es una elipse perfecta
+\end{enumerate}
+
+Este método garantiza que para cada punto trazado, la suma de distancias a los focos es constante (la longitud de la cuerda).
+
+\subsection{Elementos de la Elipse}
+
+\begin{definicion}[title=Elementos Principales]
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Centro $(C)$:} Punto medio entre los dos focos
+    \item \textbf{Focos $(F_1, F_2)$:} Los dos puntos fijos de la definición
+    \item \textbf{Eje mayor:} El segmento más largo que pasa por el centro y los dos focos. Su longitud es $2a$
+    \item \textbf{Eje menor:} El segmento perpendicular al eje mayor que pasa por el centro. Su longitud es $2b$
+    \item \textbf{Vértices mayores $(V_1, V_2)$:} Puntos donde la elipse interseca el eje mayor
+    \item \textbf{Vértices menores $(B_1, B_2)$:} Puntos donde la elipse interseca el eje menor
+    \item \textbf{Distancia focal $(2c)$:} Distancia entre los dos focos
+    \item \textbf{Excentricidad $(e)$:} Razón $e = \frac{c}{a}$ que mide qué tan "alargada" es la elipse ($0 < e < 1$)
+\end{itemize}
+\end{definicion}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+    % Elipse horizontal
+    \draw[maincolor, very thick] (0,0) ellipse (4 and 2.5);
+
+    % Centro
+    \fill[black] (0,0) circle (2pt) node[below right] {$C(0,0)$};
+
+    % Focos (c = sqrt(16-6.25) = sqrt(9.75) ≈ 3.122)
+    \fill[red] (-3.122,0) circle (2pt) node[below] {$F_1(-c,0)$};
+    \fill[red] (3.122,0) circle (2pt) node[below] {$F_2(c,0)$};
+
+    % Vértices mayores
+    \fill[blue] (-4,0) circle (2pt) node[below left] {$V_1(-a,0)$};
+    \fill[blue] (4,0) circle (2pt) node[below right] {$V_2(a,0)$};
+
+    % Vértices menores
+    \fill[green!60!black] (0,2.5) circle (2pt) node[above] {$B_1(0,b)$};
+    \fill[green!60!black] (0,-2.5) circle (2pt) node[below] {$B_2(0,-b)$};
+
+    % Ejes
+    \draw[<->, thick] (-4.5,0) -- (4.5,0) node[right] {Eje mayor};
+    \draw[<->, thick] (0,-3) -- (0,3) node[above] {Eje menor};
+
+    % Medidas
+    \draw[|<->|, accentcolor] (-4,-3.5) -- (4,-3.5) node[midway, below] {$2a$};
+    \draw[|<->|, accentcolor] (4.8,0) -- (4.8,2.5) node[midway, right] {$b$};
+\end{tikzpicture}
+
+\small Elipse con eje mayor horizontal
+\end{center}
+
+\subsection{Relación Fundamental}
+
+La relación más importante entre los parámetros de la elipse es:
+
+\begin{teorema}[title=Relación Pitagórica]
+Para toda elipse se cumple:
+\[
+\boxed{a^2 = b^2 + c^2}
+\]
+donde:
+\begin{itemize}[leftmargin=*]
+    \item $a$ = semieje mayor (siempre el mayor)
+    \item $b$ = semieje menor (siempre el menor)
+    \item $c$ = distancia del centro a cada foco
+\end{itemize}
+\end{teorema}
+
+Esta relación es análoga al teorema de Pitágoras y es fundamental para todos los cálculos con elipses.
+
+\subsection{Ecuación Canónica con Centro en el Origen}
+
+\subsubsection{Eje Mayor Horizontal}
+
+Cuando el centro está en $(0,0)$ y el eje mayor es horizontal (paralelo al eje $x$):
+
+\begin{teorema}[title=Ecuación Canónica - Eje Horizontal]
+\[
+\boxed{\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1} \quad \text{con } a > b
+\]
+
+Elementos:
+\begin{itemize}[leftmargin=*]
+    \item Centro: $C(0,0)$
+    \item Vértices mayores: $V_1(-a,0)$ y $V_2(a,0)$
+    \item Vértices menores: $B_1(0,-b)$ y $B_2(0,b)$
+    \item Focos: $F_1(-c,0)$ y $F_2(c,0)$ donde $c = \sqrt{a^2 - b^2}$
+    \item Eje mayor: $2a$ (horizontal)
+    \item Eje menor: $2b$ (vertical)
+\end{itemize}
+\end{teorema}
+
+\subsubsection{Eje Mayor Vertical}
+
+Cuando el centro está en $(0,0)$ y el eje mayor es vertical (paralelo al eje $y$):
+
+\begin{teorema}[title=Ecuación Canónica - Eje Vertical]
+\[
+\boxed{\frac{x^2}{b^2} + \frac{y^2}{a^2} = 1} \quad \text{con } a > b
+\]
+
+Elementos:
+\begin{itemize}[leftmargin=*]
+    \item Centro: $C(0,0)$
+    \item Vértices mayores: $V_1(0,-a)$ y $V_2(0,a)$
+    \item Vértices menores: $B_1(-b,0)$ y $B_2(b,0)$
+    \item Focos: $F_1(0,-c)$ y $F_2(0,c)$ donde $c = \sqrt{a^2 - b^2}$
+    \item Eje mayor: $2a$ (vertical)
+    \item Eje menor: $2b$ (horizontal)
+\end{itemize}
+\end{teorema}
+
+\begin{nota}
+\textbf{¿Cómo identificar la orientación?}
+
+En la ecuación $\frac{x^2}{A} + \frac{y^2}{B} = 1$:
+\begin{itemize}[leftmargin=*]
+    \item Si $A > B$: el eje mayor es \textbf{horizontal} ($a^2 = A$, $b^2 = B$)
+    \item Si $B > A$: el eje mayor es \textbf{vertical} ($a^2 = B$, $b^2 = A$)
+\end{itemize}
+
+\textbf{Recuerda:} $a$ siempre es el semieje mayor (el número más grande), independientemente de si está con $x^2$ o con $y^2$.
+\end{nota}
+
+\subsection{Ecuación Canónica con Centro en $(h,k)$}
+
+Cuando trasladamos la elipse a un centro $(h,k)$, la ecuación se modifica:
+
+\subsubsection{Eje Mayor Horizontal}
+
+\begin{teorema}[title=Ecuación Trasladada - Eje Horizontal]
+\[
+\boxed{\frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1} \quad \text{con } a > b
+\]
+
+Elementos:
+\begin{itemize}[leftmargin=*]
+    \item Centro: $C(h,k)$
+    \item Vértices mayores: $V_1(h-a,k)$ y $V_2(h+a,k)$
+    \item Vértices menores: $B_1(h,k-b)$ y $B_2(h,k+b)$
+    \item Focos: $F_1(h-c,k)$ y $F_2(h+c,k)$ donde $c = \sqrt{a^2 - b^2}$
+\end{itemize}
+\end{teorema}
+
+\subsubsection{Eje Mayor Vertical}
+
+\begin{teorema}[title=Ecuación Trasladada - Eje Vertical]
+\[
+\boxed{\frac{(x-h)^2}{b^2} + \frac{(y-k)^2}{a^2} = 1} \quad \text{con } a > b
+\]
+
+Elementos:
+\begin{itemize}[leftmargin=*]
+    \item Centro: $C(h,k)$
+    \item Vértices mayores: $V_1(h,k-a)$ y $V_2(h,k+a)$
+    \item Vértices menores: $B_1(h-b,k)$ y $B_2(h+b,k)$
+    \item Focos: $F_1(h,k-c)$ y $F_2(h,k+c)$ donde $c = \sqrt{a^2 - b^2}$
+\end{itemize}
+\end{teorema}
+
+\subsection{Ecuación General de la Elipse}
+
+Al expandir la ecuación canónica, obtenemos la forma general:
+
+\begin{teorema}[title=Ecuación General]
+\[
+\boxed{Ax^2 + Cy^2 + Dx + Ey + F = 0}
+\]
+
+donde $A$ y $C$ tienen el mismo signo (ambos positivos o ambos negativos) y $A \neq C$.
+
+\textbf{Condiciones:}
+\begin{itemize}[leftmargin=*]
+    \item $A \cdot C > 0$ (mismo signo)
+    \item $A \neq C$ (coeficientes diferentes)
+    \item Si $A = C$, la ecuación representa un círculo, no una elipse
+\end{itemize}
+\end{teorema}
+
+\subsection{Completación de Cuadrados}
+
+Para convertir de la forma general a la forma canónica, usamos la técnica de \textbf{completación de cuadrados}.
+
+\begin{nota}[title=Método de Completación de Cuadrados]
+\textbf{Pasos:}
+\begin{enumerate}[leftmargin=*]
+    \item Agrupar términos en $x$ y términos en $y$
+    \item Factorizar los coeficientes de $x^2$ y $y^2$
+    \item Completar el cuadrado para cada variable:
+    \[
+    x^2 + bx = \left(x + \frac{b}{2}\right)^2 - \left(\frac{b}{2}\right)^2
+    \]
+    \item Simplificar y llevar a la forma $\frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1$
+    \item Identificar $h, k, a, b$ y calcular $c = \sqrt{a^2-b^2}$
+\end{enumerate}
+\end{nota}
+
+\subsection{Tabla Resumen de Fórmulas}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|l|c|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Elemento} & \textbf{Eje Mayor Horizontal} & \textbf{Eje Mayor Vertical} \\
+\hline
+Ecuación (origen) & $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ & $\frac{x^2}{b^2} + \frac{y^2}{a^2} = 1$ \\
+\hline
+Ecuación (trasladada) & $\frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1$ & $\frac{(x-h)^2}{b^2} + \frac{(y-k)^2}{a^2} = 1$ \\
+\hline
+Centro & $(h,k)$ & $(h,k)$ \\
+\hline
+Vértices mayores & $(h \pm a, k)$ & $(h, k \pm a)$ \\
+\hline
+Vértices menores & $(h, k \pm b)$ & $(h \pm b, k)$ \\
+\hline
+Focos & $(h \pm c, k)$ & $(h, k \pm c)$ \\
+\hline
+Relación & \multicolumn{2}{c|}{$c^2 = a^2 - b^2$ con $a > b$} \\
+\hline
+Excentricidad & \multicolumn{2}{c|}{$e = \frac{c}{a}$ donde $0 < e < 1$} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Excentricidad}
+
+La excentricidad mide qué tan "alargada" o "achatada" es la elipse:
+
+\begin{definicion}[title=Excentricidad]
+\[
+e = \frac{c}{a} \quad \text{donde } 0 < e < 1
+\]
+
+\begin{itemize}[leftmargin=*]
+    \item Si $e \approx 0$: la elipse se parece más a un círculo (focos muy cercanos)
+    \item Si $e \approx 1$: la elipse es muy alargada (focos muy alejados)
+    \item Un círculo tiene $e = 0$ (los dos focos coinciden en el centro)
+\end{itemize}
+\end{definicion}
+
+\textbf{Ejemplos de excentricidad:}
+\begin{itemize}[leftmargin=*]
+    \item Órbita de la Tierra: $e \approx 0.0167$ (casi circular)
+    \item Órbita de Mercurio: $e \approx 0.2056$ (más elíptica)
+    \item Órbita del cometa Halley: $e \approx 0.967$ (muy alargada)
+\end{itemize}
+
+\newpage
+
+%INSERTAR_EJEMPLOS_AQUI%
+
+%INSERTAR_EJERCICIOS_AQUI%
+
+% ============================================================
+% CONCLUSIÓN
+% ============================================================
+\section{Conclusión}
+
+¡Felicitaciones! Has completado un recorrido profundo por el estudio de la elipse en geometría analítica. A lo largo de esta guía has desarrollado habilidades fundamentales que te servirán no solo en matemáticas, sino también en física, ingeniería y otras ciencias aplicadas.
+
+\subsection{Resumen de Conceptos Clave}
+
+Hemos explorado la elipse desde múltiples perspectivas:
+
+\textbf{1. Definición Geométrica:}
+\begin{itemize}[leftmargin=*]
+    \item Lugar geométrico donde la suma de distancias a dos focos es constante
+    \item Construcción física usando cuerda y tachuelas
+    \item Identificación de elementos: centro, focos, vértices, ejes
+\end{itemize}
+
+\textbf{2. Ecuaciones Fundamentales:}
+\begin{itemize}[leftmargin=*]
+    \item Forma canónica con centro en el origen: $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ (horizontal) o $\frac{x^2}{b^2} + \frac{y^2}{a^2} = 1$ (vertical)
+    \item Forma canónica trasladada: reemplazar $x$ por $(x-h)$ y $y$ por $(y-k)$
+    \item Forma general: $Ax^2 + Cy^2 + Dx + Ey + F = 0$ con $A \cdot C > 0$ y $A \neq C$
+    \item Relación fundamental: $c^2 = a^2 - b^2$ donde $a > b$
+\end{itemize}
+
+\textbf{3. Técnicas Algebraicas:}
+\begin{itemize}[leftmargin=*]
+    \item Completación de cuadrados para convertir de forma general a canónica
+    \item Identificación de orientación según denominadores
+    \item Cálculo de focos usando $c = \sqrt{a^2 - b^2}$
+    \item Determinación de excentricidad $e = \frac{c}{a}$
+\end{itemize}
+
+\textbf{4. Aplicaciones Reales:}
+\begin{itemize}[leftmargin=*]
+    \item Órbitas planetarias (Leyes de Kepler)
+    \item Diseño arquitectónico (estadios, puentes)
+    \item Acústica (salas de conciertos, galerías de susurros)
+    \item Ingeniería civil (arcos elípticos)
+    \item Óptica (telescopios reflectores)
+\end{itemize}
+
+\subsection{Caja de Herramientas}
+
+Al terminar esta guía, deberías tener en tu "caja de herramientas matemáticas":
+
+\textbf{Herramientas Conceptuales:}
+\begin{itemize}[leftmargin=*]
+    \item Comprensión de la elipse como lugar geométrico
+    \item Visualización de elementos (focos, vértices, ejes)
+    \item Interpretación de parámetros $a$, $b$, $c$, $e$
+    \item Conexión entre álgebra y geometría
+\end{itemize}
+
+\textbf{Herramientas Algebraicas:}
+\begin{itemize}[leftmargin=*]
+    \item Completación de cuadrados
+    \item Simplificación de ecuaciones
+    \item Identificación de formas canónicas
+    \item Cálculo de distancias y relaciones
+\end{itemize}
+
+\textbf{Herramientas Gráficas:}
+\begin{itemize}[leftmargin=*]
+    \item Bosquejo de elipses en el plano coordenado
+    \item Ubicación de elementos característicos
+    \item Interpretación de simetrías
+    \item Uso de proporciones correctas ($a > b$)
+\end{itemize}
+
+\subsection{Tabla de Referencia Rápida}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\small
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Concepto} & \textbf{Fórmula / Descripción} \\
+\hline
+Definición & Suma de distancias a focos constante: $d(P,F_1) + d(P,F_2) = 2a$ \\
+\hline
+Relación fundamental & $a^2 = b^2 + c^2$ donde $a > b$ siempre \\
+\hline
+Excentricidad & $e = \frac{c}{a}$ con $0 < e < 1$ \\
+\hline
+Eje horizontal (origen) & $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$, focos en $(\pm c, 0)$ \\
+\hline
+Eje vertical (origen) & $\frac{x^2}{b^2} + \frac{y^2}{a^2} = 1$, focos en $(0, \pm c)$ \\
+\hline
+Trasladada horizontal & $\frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1$, centro $(h,k)$ \\
+\hline
+Trasladada vertical & $\frac{(x-h)^2}{b^2} + \frac{(y-k)^2}{a^2} = 1$, centro $(h,k)$ \\
+\hline
+Forma general & $Ax^2 + Cy^2 + Dx + Ey + F = 0$ con $AC > 0$, $A \neq C$ \\
+\hline
+Completar cuadrado & $x^2 + bx = (x + \frac{b}{2})^2 - (\frac{b}{2})^2$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Reflexiones Finales}
+
+La geometría analítica es el puente perfecto entre el pensamiento visual y el razonamiento algebraico. La elipse nos muestra cómo una simple definición geométrica puede generar ecuaciones poderosas que describen fenómenos naturales y aplicaciones tecnológicas.
+
+\textbf{Algunos pensamientos para llevar contigo:}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{La práctica hace al maestro:} Cada ejercicio que resuelves fortalece tu comprensión. No te desanimes si un problema te toma tiempo; eso significa que estás aprendiendo de verdad.
+
+    \item \textbf{Visualiza siempre:} Antes de aplicar fórmulas, haz un bosquejo. La visualización te ayuda a entender qué estás calculando y por qué.
+
+    \item \textbf{Verifica tus resultados:} Usa la relación $a^2 = b^2 + c^2$ para verificar que tus cálculos sean consistentes. Si $c > a$, algo está mal.
+
+    \item \textbf{Conecta con el mundo real:} Cada vez que veas una elipse en la vida real (un estadio, una órbita planetaria, un arco), piensa en sus elementos y ecuaciones. Eso hace que las matemáticas cobren vida.
+
+    \item \textbf{Errores = aprendizaje:} Si te equivocas, analiza dónde estuvo el error. Ese análisis es más valioso que 10 ejercicios hechos correctamente de memoria.
+\end{enumerate}
+
+\subsection{¿Qué Sigue?}
+
+Ahora que dominas la elipse, estás preparado para:
+\begin{itemize}[leftmargin=*]
+    \item Estudiar otras secciones cónicas: parábola e hipérbola
+    \item Explorar sistemas de ecuaciones que involucran elipses
+    \item Aplicar estos conceptos en física (movimiento de satélites, ondas)
+    \item Resolver problemas de optimización usando geometría analítica
+    \item Profundizar en cálculo diferencial e integral de funciones elípticas
+\end{itemize}
+
+\subsection{Mensaje Final}
+
+Las matemáticas no son solo números y fórmulas; son herramientas para entender y transformar el mundo. La elipse, que comenzó como una curiosidad geométrica estudiada por los antiguos griegos, ahora es fundamental para la navegación satelital, las telecomunicaciones y la exploración espacial.
+
+Tú, al dominar estos conceptos, estás adquiriendo las herramientas que usan ingenieros, arquitectos, físicos y científicos todos los días. Eso es increíblemente poderoso.
+
+\textbf{Sigue practicando, sigue preguntando, sigue explorando.} Las matemáticas te esperan con infinitas sorpresas.
+
+\vspace{1cm}
+
+\begin{center}
+\Large\textcolor{maincolor}{\textbf{¡Éxito en tu camino matemático!}}
+
+\vspace{0.5cm}
+
+\textit{``La geometría es el arte de razonar bien sobre figuras mal hechas.''} \\
+--- Henri Poincaré
+\end{center}
+
