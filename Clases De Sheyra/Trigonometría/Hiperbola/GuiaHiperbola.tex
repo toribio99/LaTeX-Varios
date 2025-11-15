@@ -879,10 +879,9 @@ y = \pm \frac{a}{b}x = \pm \frac{6}{8}x = \pm \frac{3}{4}x
 ]
 
 % Hipérbola vertical: y²/36 - x²/64 = 1
-\addplot[red, very thick, domain=6:13] {sqrt(36*(1 + (x)^2/64))};
-\addplot[red, very thick, domain=6:13] {-sqrt(36*(1 + (x)^2/64))};
-\addplot[red, very thick, domain=-13:-6] {sqrt(36*(1 + (x)^2/64))};
-\addplot[red, very thick, domain=-13:-6] {-sqrt(36*(1 + (x)^2/64))};
+% Despejando y: y = ±√(36(1 + x²/64)) = ±6√(1 + x²/64)
+\addplot[red, very thick, domain=-11:11, samples=200] {6*sqrt(1 + x^2/64)};
+\addplot[red, very thick, domain=-11:11, samples=200] {-6*sqrt(1 + x^2/64)};
 
 % Asíntotas
 \addplot[blue, dashed, thick, domain=-12:12] {0.75*x};
