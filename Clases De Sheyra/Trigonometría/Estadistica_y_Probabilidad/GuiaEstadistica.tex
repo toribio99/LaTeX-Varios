@@ -1,0 +1,1337 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad ESTADISTICA}}
+\fancyhead[RO]{\small\textcolor{maincolor}{ESTADISTICA \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=blue!5,
+  colframe=blue!60!black,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+% Título
+\title{\textbf{\Huge ESTADISTICA Y PROBABILIDAD}\\[0.5cm]
+\Large Guía de Trigonometría}
+\author{Prof: Toribio De J Arieta F\\
+\textit{La Pruebita}\\
+Grado 10}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Bienvenidos al fascinante mundo de la Estadística! Si alguna vez te has preguntado cómo las empresas saben qué productos nos gustan, cómo los médicos analizan la efectividad de un tratamiento, o cómo los deportistas estudian su rendimiento, la respuesta está en la estadística.
+
+La estadística es la ciencia que nos permite recolectar, organizar, analizar e interpretar datos para tomar decisiones informadas. En un mundo donde cada día generamos millones de datos (desde las calificaciones en el colegio hasta los me gusta en redes sociales), saber estadística es como tener superpoderes para entender la realidad que nos rodea.
+
+\subsection*{¿Por qué es importante?}
+
+La estadística aparece en todas partes de nuestra vida cotidiana:
+
+\begin{itemize}
+    \item \textbf{Educación:} Análisis de calificaciones, promedi os de grupo, rendimiento académico
+    \item \textbf{Salud:} Estudios médicos, efectividad de medicamentos, control de epidemias
+    \item \textbf{Deportes:} Estadísticas de jugadores, análisis de rendimiento, predicciones
+    \item \textbf{Negocios:} Estudios de mercado, ventas, preferencias del consumidor
+    \item \textbf{Gobierno:} Censos, indicadores económicos, políticas públicas
+    \item \textbf{Redes Sociales:} Tendencias, análisis de comportamiento, algoritmos de recomendación
+\end{itemize}
+
+\subsection*{¿Qué vamos a aprender?}
+
+En esta guía vamos a explorar:
+\begin{enumerate}
+    \item \textbf{Variables estadísticas}: cualitativas y cuantitativas
+    \item \textbf{Organización de datos}: tablas de frecuencia
+    \item \textbf{Representaciones gráficas}: barras, circulares, histogramas, polígonos
+    \item \textbf{Medidas estadísticas}: media, mediana, moda, rango, varianza
+    \item \textbf{Aplicaciones prácticas}: casos reales que te ayudarán a entender el mundo
+\end{enumerate}
+
+Prepárate para ver los números de una forma completamente diferente. ¡Los datos cuentan historias increíbles si sabes cómo leerlos!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{¿Qué es la Estadística?}
+
+\begin{definicion}
+La \textbf{estadística} es la rama de las matemáticas que se encarga de recolectar, organizar, analizar e interpretar datos para obtener conclusiones y tomar decisiones.
+\end{definicion}
+
+Hay dos tipos principales de estadística:
+\begin{itemize}
+    \item \textbf{Estadística Descriptiva:} Organiza y resume datos (lo que hacemos en esta guía)
+    \item \textbf{Estadística Inferencial:} Hace predicciones basadas en muestras
+\end{itemize}
+
+\subsection{Población y Muestra}
+
+\begin{definicion}
+\begin{itemize}
+    \item \textbf{Población:} Conjunto completo de todos los elementos que queremos estudiar
+    \item \textbf{Muestra:} Subconjunto representativo de la población
+\end{itemize}
+\end{definicion}
+
+\textbf{Ejemplo:} Si queremos saber la estatura promedio de los estudiantes de un colegio:
+\begin{itemize}
+    \item \textbf{Población:} Todos los estudiantes del colegio (1200 estudiantes)
+    \item \textbf{Muestra:} 100 estudiantes seleccionados al azar
+\end{itemize}
+
+\subsection{Variables Estadísticas}
+
+\begin{definicion}
+Una \textbf{variable estadística} es una característica que puede tomar diferentes valores en los elementos de una población o muestra.
+\end{definicion}
+
+Las variables se clasifican en dos tipos:
+
+\subsubsection{Variables Cualitativas}
+
+Son las que expresan cualidades, atributos o categorías que NO se pueden medir numéricamente.
+
+\textbf{Ejemplos:}
+\begin{itemize}
+    \item Color de ojos: azul, verde, café, negro
+    \item Marca de celular: Samsung, iPhone, Xiaomi, Huawei
+    \item Deporte favorito: fútbol, baloncesto, voleibol
+    \item Estado civil: soltero, casado, divorciado
+\end{itemize}
+
+\subsubsection{Variables Cuantitativas}
+
+Son las que se expresan con números y se pueden medir.
+
+Se dividen en:
+\begin{itemize}
+    \item \textbf{Discretas:} Solo toman valores enteros (se cuentan)
+    \begin{itemize}
+        \item Número de hermanos: 0, 1, 2, 3, ...
+        \item Cantidad de goles: 0, 1, 2, 3, ...
+        \item Número de libros leídos: 1, 2, 3, ...
+    \end{itemize}
+
+    \item \textbf{Continuas:} Pueden tomar cualquier valor en un intervalo (se miden)
+    \begin{itemize}
+        \item Estatura: 1.65 m, 1.72 m, 1.83 m, ...
+        \item Peso: 45.5 kg, 62.3 kg, 78.9 kg, ...
+        \item Temperatura: 18.5°C, 25.3°C, 30.7°C, ...
+    \end{itemize}
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=5cm, level distance=2cm},
+    level 2/.style={sibling distance=2.5cm, level distance=2cm},
+    every node/.style={draw, rectangle, rounded corners, minimum width=3cm, minimum height=0.8cm, align=center, font=\small}
+]
+    \node[fill=maincolor!20] {Variables\\Estadísticas}
+        child {node[fill=accentcolor!20] {Cualitativas\\(categorías)}
+            child {node[fill=green!15] {Color\\Marca\\Deporte}}
+        }
+        child {node[fill=accentcolor!20] {Cuantitativas\\(números)}
+            child {node[fill=blue!15] {Discretas\\(se cuentan)}}
+            child {node[fill=blue!15] {Continuas\\(se miden)}}
+        };
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Tablas de Frecuencias}
+
+Una tabla de frecuencias es una forma organizada de presentar datos estadísticos.
+
+\subsubsection{Conceptos Básicos}
+
+\begin{itemize}
+    \item \textbf{Frecuencia absoluta ($f_i$):} Número de veces que se repite un dato
+    \item \textbf{Frecuencia relativa ($h_i$):} Proporción que representa cada dato. $h_i = \frac{f_i}{n}$
+    \item \textbf{Frecuencia porcentual:} Porcentaje que representa. $\%= h_i \times 100\%$
+    \item \textbf{Frecuencia acumulada ($F_i$):} Suma de frecuencias hasta ese valor
+\end{itemize}
+
+donde $n$ es el número total de datos.
+
+\subsubsection{Tabla de Frecuencias para Datos Discretos}
+
+\textbf{Ejemplo:} Número de hermanos de 20 estudiantes:
+\[2, 1, 0, 3, 1, 2, 1, 0, 2, 1, 3, 2, 1, 0, 1, 2, 4, 1, 2, 1\]
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{$x_i$} & \textbf{$f_i$} & \textbf{$F_i$} & \textbf{$h_i$} & \textbf{$\%$} \\
+\hline
+0 & 3 & 3 & 0.15 & 15\% \\
+\hline
+1 & 8 & 11 & 0.40 & 40\% \\
+\hline
+2 & 6 & 17 & 0.30 & 30\% \\
+\hline
+3 & 2 & 19 & 0.10 & 10\% \\
+\hline
+4 & 1 & 20 & 0.05 & 5\% \\
+\hline
+\rowcolor{maincolor!10}
+\textbf{Total} & \textbf{20} & - & \textbf{1.00} & \textbf{100\%} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Representaciones Gráficas}
+
+\subsubsection{Gráfico de Barras}
+
+Se usa para variables cualitativas o cuantitativas discretas.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth, height=0.55\textwidth,
+    ybar,
+    bar width=20pt,
+    ylabel={Frecuencia},
+    xlabel={Número de hermanos},
+    symbolic x coords={0,1,2,3,4},
+    xtick=data,
+    ytick={0,2,4,6,8},
+    ymin=0, ymax=9,
+    nodes near coords,
+    nodes near coords align={vertical},
+    grid=major,
+    grid style={line width=.1pt, draw=gray!30},
+    enlarge x limits=0.15,
+]
+\addplot[fill=maincolor] coordinates {(0,3) (1,8) (2,6) (3,2) (4,1)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Gráfico Circular (Pastel)}
+
+Muestra las proporciones de cada categoría respecto al total.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Definir colores
+    \def\colorA{maincolor!60}
+    \def\colorB{maincolor!80}
+    \def\colorC{accentcolor!60}
+    \def\colorD{accentcolor!80}
+    \def\colorE{green!60}
+
+    % Dibujar sectores (acumulando ángulos)
+    % 15% = 54°, 40% = 144°, 30% = 108°, 10% = 36°, 5% = 18°
+    \fill[\colorA] (0,0) -- (0:2) arc (0:54:2) -- cycle;
+    \fill[\colorB] (0,0) -- (54:2) arc (54:198:2) -- cycle;
+    \fill[\colorC] (0,0) -- (198:2) arc (198:306:2) -- cycle;
+    \fill[\colorD] (0,0) -- (306:2) arc (306:342:2) -- cycle;
+    \fill[\colorE] (0,0) -- (342:2) arc (342:360:2) -- cycle;
+
+    % Etiquetas de porcentajes
+    \node at (27:1.3) {\textbf{15\%}};
+    \node at (126:1.3) {\textbf{40\%}};
+    \node at (252:1.3) {\textbf{30\%}};
+    \node at (324:1.4) {\textbf{10\%}};
+    \node at (351:1.6) {\small\textbf{5\%}};
+
+    % Leyenda
+    \fill[\colorA] (3,1.5) rectangle (3.4,1.8);
+    \node[right] at (3.5,1.65) {0 hermanos};
+
+    \fill[\colorB] (3,0.9) rectangle (3.4,1.2);
+    \node[right] at (3.5,1.05) {1 hermano};
+
+    \fill[\colorC] (3,0.3) rectangle (3.4,0.6);
+    \node[right] at (3.5,0.45) {2 hermanos};
+
+    \fill[\colorD] (3,-0.3) rectangle (3.4,0);
+    \node[right] at (3.5,-0.15) {3 hermanos};
+
+    \fill[\colorE] (3,-0.9) rectangle (3.4,-0.6);
+    \node[right] at (3.5,-0.75) {4 hermanos};
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+\subsection{Medidas de Tendencia Central}
+
+Son valores que representan el centro o valor típico de un conjunto de datos.
+
+\subsubsection{Media Aritmética ($\bar{x}$)}
+
+Es el promedio de todos los datos.
+
+\[\boxed{\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n} = \frac{x_1 + x_2 + \cdots + x_n}{n}}\]
+
+\textbf{Para datos agrupados en tabla de frecuencias:}
+\[\boxed{\bar{x} = \frac{\sum_{i=1}^{k} f_i \cdot x_i}{n}}\]
+
+\subsubsection{Mediana ($Me$)}
+
+Es el valor que está en el centro cuando los datos están ordenados.
+
+\textbf{Procedimiento:}
+\begin{enumerate}
+    \item Ordenar los datos de menor a mayor
+    \item Si $n$ es impar: $Me = x_{\frac{n+1}{2}}$
+    \item Si $n$ es par: $Me = \frac{x_{\frac{n}{2}} + x_{\frac{n}{2}+1}}{2}$
+\end{enumerate}
+
+\subsubsection{Moda ($Mo$)}
+
+Es el dato que más se repite (mayor frecuencia).
+
+\begin{nota}
+\begin{itemize}
+    \item Si todos los datos tienen la misma frecuencia: NO hay moda
+    \item Si un dato se repite más: \textbf{unimodal}
+    \item Si dos datos se repiten igual (máximo): \textbf{bimodal}
+    \item Si más de dos: \textbf{multimodal}
+\end{itemize}
+\end{nota}
+
+\subsection{Medidas de Dispersión}
+
+Indican qué tan dispersos o agrupados están los datos respecto a la media.
+
+\subsubsection{Rango ($R$)}
+
+Es la diferencia entre el mayor y el menor valor.
+
+\[\boxed{R = x_{\text{máx}} - x_{\text{mín}}}\]
+
+\subsubsection{Varianza ($\sigma^2$)}
+
+Mide la dispersión promedio de los datos respecto a la media.
+
+\[\boxed{\sigma^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n}}\]
+
+\textbf{Para datos agrupados:}
+\[\boxed{\sigma^2 = \frac{\sum_{i=1}^{k} f_i \cdot (x_i - \bar{x})^2}{n}}\]
+
+\subsubsection{Desviación Estándar ($\sigma$)}
+
+Es la raíz cuadrada de la varianza. Se mide en las mismas unidades que los datos.
+
+\[\boxed{\sigma = \sqrt{\sigma^2}}\]
+
+\newpage
+
+\section{Ejemplos Resueltos}
+
+\begin{ejemplo}[title={Clasificacion de Variables}]
+Clasifica las siguientes variables como cualitativas o cuantitativas. Si son cuantitativas, indica si son discretas o continuas.
+
+\begin{enumerate}[label=\alph*)]
+    \item Número de materias aprobadas
+    \item Temperatura ambiente
+    \item Tipo de sangre
+    \item Cantidad de libros en una biblioteca
+    \item Color favorito
+    \item Peso de una persona
+\end{enumerate}
+
+\textbf{Solución paso a paso:}
+
+a) \textbf{Número de materias aprobadas}
+
+\begin{itemize}
+    \item Es una cantidad que se cuenta: 0, 1, 2, 3, ... materias
+    \item Solo toma valores enteros
+    \item \boxed{\text{Cuantitativa DISCRETA}}
+\end{itemize}
+
+b) \textbf{Temperatura ambiente}
+
+\begin{itemize}
+    \item Es una medida numérica
+    \item Puede tomar cualquier valor: 18.5°C, 25.3°C, etc.
+    \item \boxed{\text{Cuantitativa CONTINUA}}
+\end{itemize}
+
+c) \textbf{Tipo de sangre}
+
+\begin{itemize}
+    \item Representa una categoría: A, B, AB, O
+    \item No es numérica
+    \item \boxed{\text{CUALITATIVA}}
+\end{itemize}
+
+d) \textbf{Cantidad de libros en una biblioteca}
+
+\begin{itemize}
+    \item Se cuenta: 500, 1000, 1500 libros
+    \item Solo valores enteros
+    \item \boxed{\text{Cuantitativa DISCRETA}}
+\end{itemize}
+
+e) \textbf{Color favorito}
+
+\begin{itemize}
+    \item Es una categoría: azul, rojo, verde
+    \item No es numérica
+    \item \boxed{\text{CUALITATIVA}}
+\end{itemize}
+
+f) \textbf{Peso de una persona}
+
+\begin{itemize}
+    \item Es una medida numérica
+    \item Puede tomar cualquier valor: 65.5 kg, 72.3 kg
+    \item \boxed{\text{Cuantitativa CONTINUA}}
+\end{itemize}
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}[title={Tabla de Frecuencias - Datos Discretos}]
+Los siguientes datos representan el número de mascotas que tienen 25 estudiantes:
+
+\[1, 0, 2, 1, 3, 0, 1, 2, 1, 0, 2, 1, 1, 0, 2, 3, 1, 2, 0, 1, 1, 2, 0, 1, 2\]
+
+Construye una tabla de frecuencias completa.
+
+\textbf{Solución paso a paso:}
+
+\textbf{Paso 1:} Identificar los valores diferentes y contarlos
+
+\begin{itemize}
+    \item 0 mascotas: aparece 6 veces
+    \item 1 mascota: aparece 11 veces
+    \item 2 mascotas: aparece 7 veces
+    \item 3 mascotas: aparece 2 veces (pero 1+0+2+1+3+0+1+2+1+0+2+1+1+0+2+3+1+2+0+1+1+2+0+1+2 = 25 datos, verificando: 6+11+7+1=25, entonces 3 aparece 1 vez)
+\end{itemize}
+
+Recontando:
+\begin{itemize}
+    \item 0: aparece 6 veces
+    \item 1: aparece 11 veces
+    \item 2: aparece 7 veces
+    \item 3: aparece 1 vez
+\end{itemize}
+
+\textbf{Paso 2:} Calcular frecuencias relativas: $h_i = \frac{f_i}{25}$
+
+\textbf{Paso 3:} Calcular porcentajes: $\% = h_i \times 100$
+
+\textbf{Paso 4:} Calcular frecuencias acumuladas: $F_i$
+
+\textbf{Tabla de Frecuencias:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Mascotas ($x_i$)} & \textbf{$f_i$} & \textbf{$F_i$} & \textbf{$h_i$} & \textbf{Porcentaje} \\
+\hline
+0 & 6 & 6 & 0.24 & 24\% \\
+\hline
+1 & 11 & 17 & 0.44 & 44\% \\
+\hline
+2 & 7 & 24 & 0.28 & 28\% \\
+\hline
+3 & 1 & 25 & 0.04 & 4\% \\
+\hline
+\rowcolor{maincolor!10}
+\textbf{Total} & \textbf{25} & - & \textbf{1.00} & \textbf{100\%} \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Interpretación:}
+\begin{itemize}
+    \item El 44\% de los estudiantes tiene 1 mascota (la mayoría)
+    \item El 24\% no tiene mascotas
+    \item Solo el 4\% tiene 3 mascotas
+\end{itemize}
+
+\boxed{\text{Tabla completa construida correctamente}}
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}[title={Medidas de Tendencia Central}]
+Calcula la media, mediana y moda para los datos del ejemplo anterior (número de mascotas).
+
+Datos: 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3
+
+\textbf{Solución paso a paso:}
+
+\textbf{Paso 1: Calcular la Media ($\bar{x}$)}
+
+Usando la fórmula para datos agrupados:
+\[\bar{x} = \frac{\sum f_i \cdot x_i}{n}\]
+
+\begin{align*}
+\bar{x} &= \frac{6(0) + 11(1) + 7(2) + 1(3)}{25}\\
+&= \frac{0 + 11 + 14 + 3}{25}\\
+&= \frac{28}{25}\\
+&= 1.12
+\end{align*}
+
+\boxed{\bar{x} = 1.12 \text{ mascotas}}
+
+\textbf{Interpretación:} En promedio, cada estudiante tiene 1.12 mascotas.
+
+\textbf{Paso 2: Calcular la Mediana ($Me$)}
+
+Tenemos $n = 25$ datos (impar).
+
+Posición de la mediana: $\frac{n+1}{2} = \frac{25+1}{2} = 13$
+
+El dato que está en la posición 13 cuando ordenamos de menor a mayor es:
+
+Posiciones 1-6: valor 0\\
+Posiciones 7-17: valor 1\\
+Posiciones 18-24: valor 2\\
+Posición 25: valor 3
+
+El dato en la posición 13 es: \boxed{Me = 1}
+
+\textbf{Interpretación:} La mitad de los estudiantes tiene 1 o menos mascotas.
+
+\textbf{Paso 3: Calcular la Moda ($Mo$)}
+
+La moda es el valor con mayor frecuencia.
+
+Viendo la tabla:
+\begin{itemize}
+    \item $f_0 = 6$
+    \item $f_1 = 11$ $\leftarrow$ \textbf{Mayor frecuencia}
+    \item $f_2 = 7$
+    \item $f_3 = 1$
+\end{itemize}
+
+\boxed{Mo = 1 \text{ mascota}}
+
+\textbf{Interpretación:} El valor que más se repite es 1 mascota.
+
+\textbf{Resumen de resultados:}
+\begin{itemize}
+    \item Media: $\bar{x} = 1.12$ mascotas
+    \item Mediana: $Me = 1$ mascota
+    \item Moda: $Mo = 1$ mascota
+\end{itemize}
+
+Estas tres medidas están muy cercanas, lo que indica que los datos están relativamente centrados.
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}[title={Histograma para Datos Agrupados}]
+Las estaturas (en cm) de 30 estudiantes se agrupan en la siguiente tabla. Construye el histograma.
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Intervalo (cm)} & \textbf{Frecuencia} \\
+\hline
+150 - 155 & 4 \\
+\hline
+155 - 160 & 8 \\
+\hline
+160 - 165 & 12 \\
+\hline
+165 - 170 & 6 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Solución:}
+
+Para construir el histograma necesitamos:
+\begin{itemize}
+    \item Eje X: Intervalos de estatura
+    \item Eje Y: Frecuencia
+    \item Barras consecutivas (sin espacios entre ellas)
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth, height=0.6\textwidth,
+    ybar interval,
+    ylabel={Frecuencia},
+    xlabel={Estatura (cm)},
+    xmin=150, xmax=170,
+    ymin=0, ymax=14,
+    xtick={150,155,160,165,170},
+    ytick={0,2,4,6,8,10,12,14},
+    grid=major,
+    grid style={line width=.1pt, draw=gray!30},
+    bar width=1,
+    enlarge x limits=false,
+]
+\addplot[fill=maincolor, draw=black] coordinates {
+    (150,4) (155,8) (160,12) (165,6) (170,0)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación:}
+\begin{itemize}
+    \item La mayoría de estudiantes (12) tienen estaturas entre 160-165 cm
+    \item El intervalo menos frecuente es 150-155 cm (solo 4 estudiantes)
+    \item La distribución tiene forma aproximadamente simétrica con un pico en 160-165 cm
+\end{itemize}
+
+\boxed{\text{Histograma construido correctamente}}
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}[title={Grafico Circular con Interpretacion}]
+En una encuesta a 200 estudiantes sobre su deporte favorito se obtuvieron los siguientes resultados:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Deporte} & \textbf{Frecuencia} & \textbf{Porcentaje} \\
+\hline
+Fútbol & 80 & 40\% \\
+\hline
+Baloncesto & 50 & 25\% \\
+\hline
+Voleibol & 40 & 20\% \\
+\hline
+Natación & 30 & 15\% \\
+\hline
+\rowcolor{maincolor!10}
+\textbf{Total} & \textbf{200} & \textbf{100\%} \\
+\hline
+\end{tabular}
+\end{center}
+
+Construye el gráfico circular e interpreta los resultados.
+
+\textbf{Solución:}
+
+\textbf{Paso 1:} Verificar que los porcentajes suman 100\%
+
+$40\% + 25\% + 20\% + 15\% = 100\%$ \checkmark
+
+\textbf{Paso 2:} Calcular los ángulos para cada sector
+
+El círculo completo tiene $360°$, entonces:
+
+\begin{align*}
+\text{Fútbol:} & \quad 40\% \times 360° = 144°\\
+\text{Baloncesto:} & \quad 25\% \times 360° = 90°\\
+\text{Voleibol:} & \quad 20\% \times 360° = 72°\\
+\text{Natación:} & \quad 15\% \times 360° = 54°
+\end{align*}
+
+\textbf{Paso 3:} Construir el gráfico circular
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Definir colores para cada sector
+    \def\colorA{maincolor!70}
+    \def\colorB{accentcolor!70}
+    \def\colorC{green!60}
+    \def\colorD{blue!60}
+
+    % Dibujar sectores
+    \fill[\colorA] (0,0) -- (0:2) arc (0:144:2) -- cycle;
+    \fill[\colorB] (0,0) -- (144:2) arc (144:234:2) -- cycle;
+    \fill[\colorC] (0,0) -- (234:2) arc (234:306:2) -- cycle;
+    \fill[\colorD] (0,0) -- (306:2) arc (306:360:2) -- cycle;
+
+    % Etiquetas en el gráfico
+    \node at (72:1.3) {\textbf{40\%}};
+    \node at (189:1.3) {\textbf{25\%}};
+    \node at (270:1.3) {\textbf{20\%}};
+    \node at (333:1.3) {\textbf{15\%}};
+
+    % Leyenda
+    \fill[\colorA] (3,1.5) rectangle (3.4,1.8);
+    \node[right] at (3.5,1.65) {Fútbol};
+
+    \fill[\colorB] (3,0.9) rectangle (3.4,1.2);
+    \node[right] at (3.5,1.05) {Baloncesto};
+
+    \fill[\colorC] (3,0.3) rectangle (3.4,0.6);
+    \node[right] at (3.5,0.45) {Voleibol};
+
+    \fill[\colorD] (3,-0.3) rectangle (3.4,0);
+    \node[right] at (3.5,-0.15) {Natación};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Interpretación de resultados:}
+
+\begin{enumerate}
+    \item El fútbol es el deporte favorito de la mayoría (40\% = 80 estudiantes)
+    \item Entre fútbol y baloncesto agrupan el 65\% de las preferencias
+    \item Los deportes acuáticos (natación) son los menos populares con solo 15\%
+    \item Casi 1 de cada 4 estudiantes prefiere el baloncesto
+\end{enumerate}
+
+\boxed{\text{Gráfico circular interpretado correctamente}}
+\end{ejemplo}
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+\begin{ejercicio}[title={De Grafico a Tabla}]
+El siguiente gráfico de barras muestra las calificaciones obtenidas por un grupo de estudiantes en un examen. Construye la tabla de frecuencias completa.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.85\textwidth, height=0.5\textwidth,
+    ybar,
+    bar width=25pt,
+    ylabel={Frecuencia},
+    xlabel={Calificación},
+    symbolic x coords={1,2,3,4,5},
+    xtick=data,
+    ytick={0,2,4,6,8,10,12},
+    ymin=0, ymax=12,
+    nodes near coords,
+    grid=major,
+    enlarge x limits=0.15,
+]
+\addplot[fill=accentcolor] coordinates {(1,2) (2,5) (3,10) (4,8) (5,3)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Responde:
+\begin{enumerate}[label=\alph*)]
+    \item ¿Cuántos estudiantes presentaron el examen?
+    \item ¿Cuál es la calificación más frecuente?
+    \item ¿Qué porcentaje de estudiantes obtuvo calificación de 4 o 5?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{Lectura del gráfico:}
+
+Del gráfico de barras identificamos:
+\begin{itemize}
+    \item Calificación 1: frecuencia = 2
+    \item Calificación 2: frecuencia = 5
+    \item Calificación 3: frecuencia = 10
+    \item Calificación 4: frecuencia = 8
+    \item Calificación 5: frecuencia = 3
+\end{itemize}
+
+\textbf{Total de estudiantes:} $n = 2 + 5 + 10 + 8 + 3 = 28$
+
+\textbf{Tabla de frecuencias:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Calificación} & \textbf{$f_i$} & \textbf{$F_i$} & \textbf{$h_i$} & \textbf{\%} \\
+\hline
+1 & 2 & 2 & 0.071 & 7.1\% \\
+\hline
+2 & 5 & 7 & 0.179 & 17.9\% \\
+\hline
+3 & 10 & 17 & 0.357 & 35.7\% \\
+\hline
+4 & 8 & 25 & 0.286 & 28.6\% \\
+\hline
+5 & 3 & 28 & 0.107 & 10.7\% \\
+\hline
+\rowcolor{maincolor!10}
+\textbf{Total} & \textbf{28} & - & \textbf{1.000} & \textbf{100\%} \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Respuestas:}
+
+a) \boxed{\text{28 estudiantes presentaron el examen}}
+
+b) La calificación más frecuente es 3 (con frecuencia 10)
+
+\boxed{Mo = 3}
+
+c) Estudiantes con 4 o 5: $8 + 3 = 11$ estudiantes
+
+Porcentaje: $\frac{11}{28} \times 100\% = 39.3\%$
+
+\boxed{39.3\% \text{ obtuvo 4 o 5}}
+\end{solucion}
+
+\newpage
+
+\begin{ejercicio}[title={Interpretacion de Medidas Estadisticas}]
+Se sabe que un conjunto de datos tiene las siguientes características:
+\begin{itemize}
+    \item Media: $\bar{x} = 75$
+    \item Mediana: $Me = 80$
+    \item Moda: $Mo = 85$
+    \item Rango: $R = 40$
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+    \item ¿Qué puedes inferir sobre la distribución de los datos?
+    \item Si el dato mínimo es 60, ¿cuál es el dato máximo?
+    \item ¿Los datos están concentrados o dispersos? Justifica.
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{a) Inferencia sobre la distribución:}
+
+Observamos que:
+\begin{itemize}
+    \item Media = 75
+    \item Mediana = 80
+    \item Moda = 85
+\end{itemize}
+
+Como $\bar{x} < Me < Mo$, esto indica que:
+
+\begin{itemize}
+    \item La distribución está \textbf{sesgada a la izquierda} (o negativamente)
+    \item Hay valores pequeños que ``jalan'' el promedio hacia abajo
+    \item El valor más frecuente (85) es mayor que el promedio
+\end{itemize}
+
+\boxed{\text{Distribución sesgada a la izquierda}}
+
+\textbf{b) Cálculo del dato máximo:}
+
+Sabemos que:
+\[R = x_{\text{máx}} - x_{\text{mín}}\]
+
+Datos conocidos:
+\begin{itemize}
+    \item $R = 40$
+    \item $x_{\text{mín}} = 60$
+\end{itemize}
+
+Despejando:
+\begin{align*}
+40 &= x_{\text{máx}} - 60\\
+x_{\text{máx}} &= 40 + 60\\
+x_{\text{máx}} &= 100
+\end{align*}
+
+\boxed{x_{\text{máx}} = 100}
+
+\textbf{c) Concentración vs dispersión:}
+
+El rango es $R = 40$, que representa el 40\% del valor mínimo:
+\[\frac{40}{60} \times 100\% = 66.7\%\]
+
+Además, la diferencia entre la media y la mediana es:
+\[|Me - \bar{x}| = |80 - 75| = 5\]
+
+Esto representa solo el 6.7\% de la media:
+\[\frac{5}{75} \times 100\% = 6.7\%\]
+
+\textbf{Conclusión:} Los datos están \textbf{moderadamente dispersos}. El rango de 40 indica variabilidad considerable, pero las medidas de tendencia central están relativamente cercanas.
+
+\boxed{\text{Datos moderadamente dispersos}}
+\end{solucion}
+
+\newpage
+
+\section{Ejercicios Propuestos}
+
+\begin{ejercicio}[title={Identificacion de Variables}]
+Clasifica cada una de las siguientes variables:
+
+\begin{enumerate}[label=\alph*)]
+    \item Número de páginas de un libro
+    \item Sabor de helado preferido
+    \item Tiempo de viaje al colegio (en minutos)
+    \item Marca de zapatos
+    \item Cantidad de estudiantes en un salón
+    \item Nivel de satisfacción (alto, medio, bajo)
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{a) Número de páginas de un libro}
+
+Se cuenta: 150, 200, 350 páginas, etc.
+
+\boxed{\text{Cuantitativa DISCRETA}}
+
+\textbf{b) Sabor de helado preferido}
+
+Categoría: chocolate, vainilla, fresa
+
+\boxed{\text{CUALITATIVA}}
+
+\textbf{c) Tiempo de viaje al colegio}
+
+Se mide: 15.5 min, 22.3 min, puede tomar cualquier valor
+
+\boxed{\text{Cuantitativa CONTINUA}}
+
+\textbf{d) Marca de zapatos}
+
+Categoría: Nike, Adidas, Puma
+
+\boxed{\text{CUALITATIVA}}
+
+\textbf{e) Cantidad de estudiantes en un salón}
+
+Se cuenta: 25, 30, 35 estudiantes
+
+\boxed{\text{Cuantitativa DISCRETA}}
+
+\textbf{f) Nivel de satisfacción}
+
+Categoría: alto, medio, bajo
+
+\boxed{\text{CUALITATIVA}}
+\end{solucion}
+
+\newpage
+
+\begin{ejercicio}[title={Construccion de Tabla de Frecuencias}]
+Los siguientes datos representan las edades de 20 personas que asistieron a un evento:
+
+\[25, 30, 25, 35, 30, 25, 40, 30, 25, 35, 30, 25, 35, 30, 40, 25, 30, 35, 30, 25\]
+
+\begin{enumerate}[label=\alph*)]
+    \item Construye la tabla de frecuencias completa
+    \item ¿Cuál es la edad más frecuente?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{a) Construcción de la tabla:}
+
+\textbf{Paso 1:} Contar frecuencias
+\begin{itemize}
+    \item Edad 25: aparece 7 veces
+    \item Edad 30: aparece 8 veces
+    \item Edad 35: aparece 4 veces
+    \item Edad 40: aparece 2 veces (pero verificando da 1 vez: 7+8+4+1=20)
+\end{itemize}
+
+Recontando cuidadosamente: 25(7), 30(8), 35(4), 40(1)
+
+\textbf{Paso 2:} Calcular frecuencias relativas y porcentajes
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Edad} & \textbf{$f_i$} & \textbf{$F_i$} & \textbf{$h_i$} & \textbf{\%} \\
+\hline
+25 & 7 & 7 & 0.35 & 35\% \\
+\hline
+30 & 8 & 15 & 0.40 & 40\% \\
+\hline
+35 & 4 & 19 & 0.20 & 20\% \\
+\hline
+40 & 1 & 20 & 0.05 & 5\% \\
+\hline
+\rowcolor{maincolor!10}
+\textbf{Total} & \textbf{20} & - & \textbf{1.00} & \textbf{100\%} \\
+\hline
+\end{tabular}
+\end{center}
+
+\boxed{\text{Tabla completa}}
+
+\textbf{b) Edad más frecuente:}
+
+La mayor frecuencia es $f_2 = 8$
+
+\boxed{Mo = 30 \text{ años}}
+\end{solucion}
+
+\newpage
+
+\begin{ejercicio}[title={Medidas de Tendencia Central}]
+Calcula la media, mediana y moda para los datos del ejercicio anterior.
+
+Edades ordenadas: 25, 25, 25, 25, 25, 25, 25, 30, 30, 30, 30, 30, 30, 30, 30, 35, 35, 35, 35, 40
+
+\begin{enumerate}[label=\alph*)]
+    \item Media aritmética
+    \item Mediana
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{a) Media aritmética:}
+
+Usando la fórmula para datos agrupados:
+\[\bar{x} = \frac{\sum f_i \cdot x_i}{n}\]
+
+\begin{align*}
+\bar{x} &= \frac{7(25) + 8(30) + 4(35) + 1(40)}{20}\\
+&= \frac{175 + 240 + 140 + 40}{20}\\
+&= \frac{595}{20}\\
+&= 29.75
+\end{align*}
+
+\boxed{\bar{x} = 29.75 \text{ años}}
+
+\textbf{b) Mediana:}
+
+Tenemos $n = 20$ datos (par).
+
+Posiciones centrales: $\frac{20}{2} = 10$ y $\frac{20}{2} + 1 = 11$
+
+Datos en posiciones 10 y 11:
+\begin{itemize}
+    \item Posiciones 1-7: edad 25
+    \item Posiciones 8-15: edad 30
+\end{itemize}
+
+Los datos en posiciones 10 y 11 son ambos 30.
+
+\[Me = \frac{30 + 30}{2} = 30\]
+
+\boxed{Me = 30 \text{ años}}
+
+\textbf{c) Moda:}
+
+Ya calculada en ejercicio anterior:
+
+\boxed{Mo = 30 \text{ años}}
+
+\textbf{Interpretación:} Las tres medidas están muy cercanas (29.75, 30, 30), indicando una distribución bastante simétrica.
+\end{solucion}
+
+\newpage
+
+\begin{ejercicio}[title={Construccion de Histograma}]
+Los pesos (en kg) de 40 estudiantes se agruparon en la siguiente tabla:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Intervalo (kg)} & \textbf{Frecuencia} \\
+\hline
+40 - 50 & 5 \\
+\hline
+50 - 60 & 12 \\
+\hline
+60 - 70 & 18 \\
+\hline
+70 - 80 & 5 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+    \item Construye el histograma
+    \item ¿En qué intervalo se concentra la mayoría de los pesos?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{a) Histograma:}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth, height=0.6\textwidth,
+    ybar interval,
+    ylabel={Frecuencia},
+    xlabel={Peso (kg)},
+    xmin=40, xmax=80,
+    ymin=0, ymax=20,
+    xtick={40,50,60,70,80},
+    ytick={0,4,8,12,16,20},
+    grid=major,
+    grid style={line width=.1pt, draw=gray!30},
+    bar width=1,
+    enlarge x limits=false,
+]
+\addplot[fill=maincolor, draw=black] coordinates {
+    (40,5) (50,12) (60,18) (70,5) (80,0)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\boxed{\text{Histograma construido}}
+
+\textbf{b) Intervalo con mayor concentración:}
+
+La barra más alta corresponde al intervalo 60-70 kg con frecuencia 18.
+
+\boxed{\text{60-70 kg (45\% de los estudiantes)}}
+\end{solucion}
+
+\newpage
+
+\begin{ejercicio}[title={Grafico Circular}]
+En una escuela de 300 estudiantes se realizó una encuesta sobre el método de transporte al colegio:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Transporte} & \textbf{Estudiantes} \\
+\hline
+Bus escolar & 120 \\
+\hline
+Carro particular & 90 \\
+\hline
+Bicicleta & 60 \\
+\hline
+A pie & 30 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+    \item Calcula los porcentajes
+    \item Construye el gráfico circular
+\end{enumerate}
+\end{ejercicio}
+
+\begin{solucion}
+\textbf{a) Cálculo de porcentajes:}
+
+\begin{align*}
+\text{Bus escolar:} & \quad \frac{120}{300} \times 100\% = 40\%\\
+\text{Carro particular:} & \quad \frac{90}{300} \times 100\% = 30\%\\
+\text{Bicicleta:} & \quad \frac{60}{300} \times 100\% = 20\%\\
+\text{A pie:} & \quad \frac{30}{300} \times 100\% = 10\%
+\end{align*}
+
+\textbf{Verificación:} $40\% + 30\% + 20\% + 10\% = 100\%$ \checkmark
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Transporte} & \textbf{Estudiantes} & \textbf{Porcentaje} \\
+\hline
+Bus escolar & 120 & 40\% \\
+\hline
+Carro particular & 90 & 30\% \\
+\hline
+Bicicleta & 60 & 20\% \\
+\hline
+A pie & 30 & 10\% \\
+\hline
+\rowcolor{maincolor!10}
+\textbf{Total} & \textbf{300} & \textbf{100\%} \\
+\hline
+\end{tabular}
+\end{center}
+
+\boxed{\text{Porcentajes calculados}}
+
+\textbf{b) Gráfico circular:}
+
+\textbf{Ángulos:}
+\begin{itemize}
+    \item Bus: $40\% \times 360° = 144°$
+    \item Carro: $30\% \times 360° = 108°$
+    \item Bicicleta: $20\% \times 360° = 72°$
+    \item A pie: $10\% \times 360° = 36°$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \def\colorA{maincolor!70}
+    \def\colorB{accentcolor!70}
+    \def\colorC{green!60}
+    \def\colorD{yellow!70}
+
+    % Sectores
+    \fill[\colorA] (0,0) -- (0:2) arc (0:144:2) -- cycle;
+    \fill[\colorB] (0,0) -- (144:2) arc (144:252:2) -- cycle;
+    \fill[\colorC] (0,0) -- (252:2) arc (252:324:2) -- cycle;
+    \fill[\colorD] (0,0) -- (324:2) arc (324:360:2) -- cycle;
+
+    % Etiquetas
+    \node at (72:1.2) {\textbf{40\%}};
+    \node at (198:1.2) {\textbf{30\%}};
+    \node at (288:1.2) {\textbf{20\%}};
+    \node at (342:1.4) {\textbf{10\%}};
+
+    % Leyenda
+    \fill[\colorA] (3,1.5) rectangle (3.4,1.8);
+    \node[right] at (3.5,1.65) {Bus escolar};
+
+    \fill[\colorB] (3,0.9) rectangle (3.4,1.2);
+    \node[right] at (3.5,1.05) {Carro};
+
+    \fill[\colorC] (3,0.3) rectangle (3.4,0.6);
+    \node[right] at (3.5,0.45) {Bicicleta};
+
+    \fill[\colorD] (3,-0.3) rectangle (3.4,0);
+    \node[right] at (3.5,-0.15) {A pie};
+\end{tikzpicture}
+\end{center}
+
+\boxed{\text{Gráfico circular construido}}
+\end{solucion}
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicitaciones! Has completado esta guía de Estadística. Ahora tienes las herramientas fundamentales para recolectar, organizar, analizar e interpretar datos.
+
+\subsection*{Conceptos Clave Aprendidos}
+
+\begin{itemize}
+    \item \textbf{Variables estadísticas:} Cualitativas y cuantitativas (discretas y continuas)
+    \item \textbf{Tablas de frecuencias:} Organización sistemática de datos
+    \item \textbf{Gráficos:} Barras, circulares, histogramas, polígonos
+    \item \textbf{Medidas de tendencia central:} Media, mediana y moda
+    \item \textbf{Medidas de dispersión:} Rango, varianza y desviación estándar
+\end{itemize}
+
+\subsection*{Fórmulas Importantes}
+
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\rowcolor{maincolor!20}
+\textbf{Concepto} & \textbf{Fórmula} \\
+\hline
+Media & $\bar{x} = \frac{\sum f_i \cdot x_i}{n}$ \\
+\hline
+Frecuencia relativa & $h_i = \frac{f_i}{n}$ \\
+\hline
+Porcentaje & $\% = h_i \times 100$ \\
+\hline
+Rango & $R = x_{\text{máx}} - x_{\text{mín}}$ \\
+\hline
+Varianza & $\sigma^2 = \frac{\sum f_i(x_i - \bar{x})^2}{n}$ \\
+\hline
+Desviación estándar & $\sigma = \sqrt{\sigma^2}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Consejos para el Éxito}
+
+\begin{enumerate}
+    \item \textbf{Organiza siempre tus datos primero:} Una buena tabla de frecuencias es la base de todo análisis
+    \item \textbf{Verifica tus cálculos:} Las frecuencias deben sumar $n$, los porcentajes deben sumar 100\%
+    \item \textbf{Interpreta, no solo calcules:} Los números cuentan una historia, aprende a leerla
+    \item \textbf{Usa gráficos apropiados:} Barras para discretas, histogramas para continuas, circulares para proporciones
+    \item \textbf{Compara las medidas de tendencia central:} Te dan información valiosa sobre la distribución
+\end{enumerate}
+
+\subsection*{Próximos Pasos}
+
+La estadística que aprendiste aquí es solo el comienzo. Puedes continuar explorando:
+\begin{itemize}
+    \item Correlación y regresión lineal
+    \item Probabilidad y distribuciones
+    \item Estadística inferencial
+    \item Análisis de datos con herramientas computacionales
+\end{itemize}
+
+\begin{nota}
+Recuerda: En el mundo actual, \textbf{los datos son el nuevo petróleo}. Saber estadística te da el poder de extraer conocimiento valioso de esos datos. ¡Sigue practicando y nunca dejes de aprender!
+\end{nota}
+
+\vfill
+
+\begin{center}
+\textit{``Los números tienen una historia importante que contar. Solo necesitan un buen estadístico para que los traduzca.''}
+
+\textbf{--- Stephen Few}
+\end{center}
+
+\end{document}
