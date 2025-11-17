@@ -11,6 +11,7 @@
 \usepackage{enumitem}
 \usepackage{array}
 \usepackage{booktabs}
+\usepackage{graphicx}
 \pgfplotsset{compat=1.18}
 \definecolor{maincolor}{RGB}{26,35,126}
 \definecolor{accentcolor}{RGB}{255,87,34}
@@ -208,7 +209,7 @@ El \textbf{espacio muestral} es el conjunto de todos los posibles resultados de 
     \foreach \x/\y in {0.25/1.25, 0.75/1.25, 0.25/1.75, 0.75/1.75} {
         \filldraw (\x, \y) circle (0.05);
     }
-    \node at (0.5, 0.3) {Dado: $\Omega = \{1,2,3,4,5,6\}$};
+    \node at (1, 0.3) {Dado: $\Omega = \{1,2,3,4,5,6\}$};
 
     % Ruleta
     \draw[thick, fill=green!20] (4, 1.5) circle (0.8);
@@ -220,7 +221,7 @@ El \textbf{espacio muestral} es el conjunto de todos los posibles resultados de 
     \node[font=\tiny] at (4.3, 1.2) {2};
     \node[font=\tiny] at (3.7, 1.2) {3};
     \node[font=\tiny] at (3.7, 1.8) {4};
-    \node at (4, 0.3) {Ruleta: $\Omega = \{1,2,3,4\}$};
+    \node at (5, 0.3) {Ruleta: $\Omega = \{1,2,3,4\}$};
 \end{tikzpicture}
 \end{center}
 
@@ -244,25 +245,27 @@ Un \textbf{evento} es un subconjunto del espacio muestral $\Omega$. Decimos que 
 \subsubsection{Tipos de Eventos}
 
 \begin{center}
-\begin{tabular}{|l|p{7cm}|p{5cm}|}
-\hline
-\textbf{Tipo de Evento} & \textbf{Descripción} & \textbf{Ejemplo (dado)} \\
-\hline
-\hline
-Evento simple & Contiene un solo resultado & $A = \{3\}$ (sale el 3) \\
-\hline
-Evento compuesto & Contiene varios resultados & $B = \{2,4,6\}$ (sale par) \\
-\hline
-Evento seguro & Siempre ocurre (es $\Omega$) & $\Omega = \{1,2,3,4,5,6\}$ \\
-\hline
-Evento imposible & Nunca ocurre (es $\emptyset$) & $\emptyset$ (sale el 7) \\
-\hline
-Eventos mutuamente excluyentes & No pueden ocurrir al mismo tiempo & $A = \{1,2\}$, $B = \{5,6\}$ \\
-\hline
-Eventos complementarios & Uno es todo lo que no es el otro & $A = \{1,2,3\}$, $A^c = \{4,5,6\}$ \\
-\hline
-\end{tabular}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|p{7cm}|p{5cm}|}
+			\hline
+			\textbf{Tipo de Evento} & \textbf{Descripción} & \textbf{Ejemplo (dado)} \\
+			\hline\hline
+			Evento simple & Contiene un solo resultado & $A = \{3\}$ (sale el 3) \\
+			\hline
+			Evento compuesto & Contiene varios resultados & $B = \{2,4,6\}$ (sale par) \\
+			\hline
+			Evento seguro & Siempre ocurre (es $\Omega$) & $\Omega = \{1,2,3,4,5,6\}$ \\
+			\hline
+			Evento imposible & Nunca ocurre (es $\emptyset$) & $\emptyset$ (sale el 7) \\
+			\hline
+			Eventos mutuamente excluyentes & No pueden ocurrir al mismo tiempo & $A = \{1,2\}$, $B = \{5,6\}$ \\
+			\hline
+			Eventos complementarios & Uno es todo lo que no es el otro & $A = \{1,2,3\}$, $A^c = \{4,5,6\}$ \\
+			\hline
+		\end{tabular}%
+	}
 \end{center}
+
 
 \subsubsection{Operaciones con Eventos}
 
@@ -293,20 +296,20 @@ Si una tarea se puede realizar en $n_1$ formas diferentes, y después de realiza
     \node[font=\large\bfseries, maincolor] at (2, 5) {Principio Multiplicativo};
 
     % Camisas
-    \node[draw, rectangle, fill=blue!20] at (0, 3) {Camisa 1};
-    \node[draw, rectangle, fill=blue!20] at (0, 2) {Camisa 2};
-    \node[draw, rectangle, fill=blue!20] at (0, 1) {Camisa 3};
+    \node[draw, rectangle, fill=blue!20] at (-0.45, 3) {Camisa 1};
+    \node[draw, rectangle, fill=blue!20] at (-0.45, 2) {Camisa 2};
+    \node[draw, rectangle, fill=blue!20] at (-0.45, 1) {Camisa 3};
 
     % Pantalones
-    \node[draw, rectangle, fill=green!20] at (4, 3.5) {Pantalón 1};
-    \node[draw, rectangle, fill=green!20] at (4, 2.5) {Pantalón 2};
-    \node[draw, rectangle, fill=green!20] at (4, 1.5) {Pantalón 3};
-    \node[draw, rectangle, fill=green!20] at (4, 0.5) {Pantalón 4};
+    \node[draw, rectangle, fill=green!20] at (4.65, 3.5) {Pantalón 1};
+    \node[draw, rectangle, fill=green!20] at (4.65, 2.5) {Pantalón 2};
+    \node[draw, rectangle, fill=green!20] at (4.65, 1.5) {Pantalón 3};
+    \node[draw, rectangle, fill=green!20] at (4.65, 0.5) {Pantalón 4};
 
     % Flechas
     \foreach \y in {3, 2, 1} {
         \foreach \yp in {3.5, 2.5, 1.5, 0.5} {
-            \draw[->] (0.5, \y) -- (3.5, \yp);
+            \draw[-{Latex}] (0.5, \y) -- (3.5, \yp);
         }
     }
 
@@ -428,6 +431,10 @@ P(A \cap B) = P(A|B) \times P(B) = P(B|A) \times P(A)
 
 Los diagramas de árbol son una herramienta visual poderosa para calcular probabilidades, especialmente cuando hay eventos secuenciales.
 
+\begin{definicion}
+\textbf{Problema:} En una urna hay \textbf{3 bolas rojas} y \textbf{2 bolas azules} (total: 5 bolas). Se extraen 2 bolas \emph{sin reemplazo} (es decir, no se devuelve la primera bola antes de sacar la segunda). ¿Cuáles son las probabilidades de cada resultado posible?
+\end{definicion}
+
 \begin{center}
 \begin{tikzpicture}[
     level 1/.style={sibling distance=6cm, level distance=2cm},
@@ -437,6 +444,7 @@ Los diagramas de árbol son una herramienta visual poderosa para calcular probab
 ]
     % Título
     \node[font=\large\bfseries, maincolor] at (0, 1) {Diagrama de Árbol: Sacar 2 bolas sin reemplazo};
+    \node[font=\small, maincolor] at (0, 0.4) {Urna: 3 rojas + 2 azules = 5 bolas};
 
     % Nodo raíz
     \node[circle, draw, fill=gray!20] {Inicio}
@@ -445,7 +453,7 @@ Los diagramas de árbol son una herramienta visual poderosa para calcular probab
             edge from parent node[left] {$\frac{3}{5}$}
             child {
                 node[circle, draw, fill=red!20] {Roja}
-                edge from parent node[left] {$\frac{2}{4}$}
+                edge from parent node[above left=5mm] {$\frac{2}{4}$}
             }
             child {
                 node[circle, draw, fill=blue!20] {Azul}
@@ -461,15 +469,15 @@ Los diagramas de árbol son una herramienta visual poderosa para calcular probab
             }
             child {
                 node[circle, draw, fill=blue!20] {Azul}
-                edge from parent node[right] {$\frac{1}{4}$}
+                edge from parent node[above right=4mm] {$\frac{1}{4}$}
             }
         };
 
     % Probabilidades finales
     \node at (-4.5, -4.5) {$P(RR) = \frac{3}{5} \times \frac{2}{4} = \frac{6}{20}$};
-    \node at (-1.5, -4.5) {$P(RA) = \frac{3}{5} \times \frac{2}{4} = \frac{6}{20}$};
-    \node at (1.5, -4.5) {$P(AR) = \frac{2}{5} \times \frac{3}{4} = \frac{6}{20}$};
-    \node at (4.5, -4.5) {$P(AA) = \frac{2}{5} \times \frac{1}{4} = \frac{2}{20}$};
+    \node at (-0.5, -4.5) {$P(RA) = \frac{3}{5} \times \frac{2}{4} = \frac{6}{20}$};
+    \node at (3.4, -4.5) {$P(AR) = \frac{2}{5} \times \frac{3}{4} = \frac{6}{20}$};
+    \node at (7, -4.5) {$P(AA) = \frac{2}{5} \times \frac{1}{4} = \frac{2}{20}$};
 \end{tikzpicture}
 \end{center}
 
@@ -776,7 +784,7 @@ María debe tomar 3 decisiones independientes:
     level 2/.style={sibling distance=1.5cm},
     level 3/.style={sibling distance=0.8cm},
     every node/.style={circle, draw=maincolor, fill=maincolor!10, minimum size=8mm},
-    edge from parent/.style={draw=maincolor!70, ->, thick}]
+    edge from parent/.style={draw=maincolor!70, -{Latex}, thick}]
 
 \node[rectangle, minimum width=1.5cm] {Inicio}
     child {node[fill=red!20] {Roja}
