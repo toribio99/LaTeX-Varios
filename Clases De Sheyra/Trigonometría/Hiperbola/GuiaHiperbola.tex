@@ -170,7 +170,7 @@ donde $2a$ es una constante positiva y $a$ es la distancia del centro a cada vé
     axis equal image,
     axis lines=middle,
     xlabel={$x$}, ylabel={$y$},
-    xmin=-8, xmax=8,
+    xmin=-10, xmax=8,
     ymin=-6, ymax=6,
     xtick={-8,-6,...,8},
     ytick={-6,-4,...,6},
@@ -193,19 +193,19 @@ donde $2a$ es una constante positiva y $a$ es la distancia del centro a cada vé
 
 % Centro
 \node[circle, fill=black, inner sep=2pt] at (0,0) {};
-\node[below left] at (0,0) {$C(0,0)$};
+\node[above] at (0,0) {$C(0,0)$};
 
 % Focos (±c, 0) = (±5, 0)
 \node[circle, fill=blue, inner sep=2.5pt] at (5,0) {};
-\node[below right] at (5,0) {$F_1(5,0)$};
+\node[above right] at (5,0) {$F_1(5,0)$};
 \node[circle, fill=blue, inner sep=2.5pt] at (-5,0) {};
-\node[below left] at (-5,0) {$F_2(-5,0)$};
+\node[above left] at (-5,0) {$F_2(-5,0)$};
 
 % Vértices (±a, 0) = (±4, 0)
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (4,0) {};
-\node[above right] at (4,0) {$V_1(4,0)$};
+\node[above left] at (4,0) {$V_1(4,0)$};
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (-4,0) {};
-\node[above left] at (-4,0) {$V_2(-4,0)$};
+\node[above right] at (-4,0) {$V_2(-4,0)$};
 
 % Puntos auxiliares para b
 \node[circle, fill=orange, inner sep=2pt] at (0,3) {};
@@ -214,9 +214,9 @@ donde $2a$ es una constante positiva y $a$ es la distancia del centro a cada vé
 \node[below right] at (0,-3) {$(0,-3)$};
 
 % Distancias
-\draw[<->, green!60!black, very thick] (-4,-5) -- (4,-5) node[midway, below] {$2a=8$};
-\draw[<->, orange, thick] (-6.5,3) -- (-6.5,-3) node[midway, left] {$2b=6$};
-\draw[<->, blue, thick] (-5,-5.5) -- (5,-5.5) node[midway, below] {$2c=10$};
+\draw[{Latex}-{Latex}, green!60!black, very thick] (-4,-1) -- (4,-1) node[midway, below] {$2a=8$};
+\draw[{Latex}-{Latex}, orange, thick] (-6.5,3) -- (-6.5,-3) node[midway, left] {$2b=6$};
+\draw[{Latex}-{Latex}, blue, thick] (-5,-5) -- (5,-5) node[midway, below] {$2c=10$};
 
 \end{axis}
 \end{tikzpicture}
@@ -488,19 +488,19 @@ y = \pm \frac{b}{a}x = \pm \frac{3}{4}x
 
 % Centro
 \node[circle, fill=black, inner sep=2pt] at (0,0) {};
-\node[below left] at (0,0) {$C$};
+\node[above left] at (0,0) {$C$};
 
 % Focos
 \node[circle, fill=blue, inner sep=2.5pt] at (5,0) {};
-\node[below] at (5,-0.3) {$F_1(5,0)$};
+\node[above right] at (5,-0.3) {$F_1(5,0)$};
 \node[circle, fill=blue, inner sep=2.5pt] at (-5,0) {};
-\node[below] at (-5,-0.3) {$F_2(-5,0)$};
+\node[above left] at (-5,-0.3) {$F_2(-5,0)$};
 
 % Vértices
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (4,0) {};
-\node[above] at (4,0.3) {$V_1(4,0)$};
+\node[above left] at (4,0.3) {$V_1(4,0)$};
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (-4,0) {};
-\node[above] at (-4,0.3) {$V_2(-4,0)$};
+\node[above right] at (-4,0.3) {$V_2(-4,0)$};
 
 \end{axis}
 \end{tikzpicture}
@@ -636,13 +636,13 @@ y + 2 = \pm \frac{4}{5}(x - 3)
 
 % Centro
 \node[circle, fill=black, inner sep=2.5pt] at (3,-2) {};
-\node[below left] at (3,-2) {$C(3,-2)$};
+\node[below] at (3,-2) {$C(3,-2)$};
 
 % Vértices
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (8,-2) {};
-\node[above right] at (8,-2) {$V_1(8,-2)$};
+\node[above left] at (8,-2) {$V_1(8,-2)$};
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (-2,-2) {};
-\node[above left] at (-2,-2) {$V_2(-2,-2)$};
+\node[above right] at (-2,-2) {$V_2(-2,-2)$};
 
 % Focos
 \node[circle, fill=blue, inner sep=2.5pt] at (9.4,-2) {};
@@ -782,9 +782,9 @@ y + 2 = \pm \frac{3}{4}(x - 3)
 
 % Vértices
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (7,-2) {};
-\node[above] at (7,-2) {$V_1(7,-2)$};
+\node[above left] at (7,-2) {$V_1(7,-2)$};
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (-1,-2) {};
-\node[above] at (-1,-2) {$V_2(-1,-2)$};
+\node[above right] at (-1,-2) {$V_2(-1,-2)$};
 
 % Focos
 \node[circle, fill=blue, inner sep=2.5pt] at (8,-2) {};
@@ -893,9 +893,9 @@ y = \pm \frac{a}{b}x = \pm \frac{6}{8}x = \pm \frac{3}{4}x
 
 % Vértices
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (0,6) {};
-\node[right] at (0.3,6) {$V_1(0,6)$};
+\node[below right] at (0.3,6) {$V_1(0,6)$};
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (0,-6) {};
-\node[right] at (0.3,-6) {$V_2(0,-6)$};
+\node[above right] at (0.3,-6) {$V_2(0,-6)$};
 
 % Focos
 \node[circle, fill=blue, inner sep=2.5pt] at (0,10) {};
@@ -1033,9 +1033,9 @@ y + 1 = \pm \frac{5}{12}(x - 2)
 
 % Vértices
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (2,4) {};
-\node[right] at (2.3,4) {$V_1(2,4)$};
+\node[above right] at (2.3,4) {$V_1(2,4)$};
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (2,-6) {};
-\node[right] at (2.3,-6) {$V_2(2,-6)$};
+\node[below right] at (2.3,-6) {$V_2(2,-6)$};
 
 % Focos
 \node[circle, fill=blue, inner sep=2.5pt] at (2,12) {};
@@ -1209,15 +1209,15 @@ y = \pm \frac{b}{a}x = \pm \frac{5}{7}x
 
 % Vértices
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (7,0) {};
-\node[above] at (7,0) {$V_1(7,0)$};
+\node[above left] at (7,0) {$V_1(7,0)$};
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (-7,0) {};
-\node[above] at (-7,0) {$V_2(-7,0)$};
+\node[above right] at (-7,0) {$V_2(-7,0)$};
 
 % Focos
 \node[circle, fill=blue, inner sep=2.5pt] at (8.6,0) {};
-\node[below] at (8.6,0) {$F_1$};
+\node[above] at (8.6,0) {$F_1$};
 \node[circle, fill=blue, inner sep=2.5pt] at (-8.6,0) {};
-\node[below] at (-8.6,0) {$F_2$};
+\node[above] at (-8.6,0) {$F_2$};
 
 \end{axis}
 \end{tikzpicture}
@@ -1306,9 +1306,9 @@ y = \pm \frac{a}{b}x = \pm \frac{10}{8}x = \pm \frac{5}{4}x
 
 % Vértices
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (0,10) {};
-\node[right] at (0.3,10) {$V_1(0,10)$};
+\node[below right] at (0.3,10) {$V_1(0,10)$};
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (0,-10) {};
-\node[right] at (0.3,-10) {$V_2(0,-10)$};
+\node[above right] at (0.3,-10) {$V_2(0,-10)$};
 
 % Focos
 \node[circle, fill=blue, inner sep=2.5pt] at (0,12.81) {};
@@ -1419,9 +1419,9 @@ y - 5 = \pm \frac{2\sqrt{5}}{6}(x + 4) = \pm \frac{\sqrt{5}}{3}(x + 4)
 
 % Vértices
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (2,5) {};
-\node[above] at (2,5.3) {$V_1(2,5)$};
+\node[above left] at (2,5.3) {$V_1(2,5)$};
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (-10,5) {};
-\node[above] at (-10,5.3) {$V_2(-10,5)$};
+\node[above right] at (-10,5.3) {$V_2(-10,5)$};
 
 % Focos
 \node[circle, fill=blue, inner sep=2.5pt] at (3.48,5) {};
@@ -1557,9 +1557,9 @@ y - 1 = \pm \frac{2}{3}(x - 2)
 
 % Vértices
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (5,1) {};
-\node[above] at (5,1.3) {$V_1(5,1)$};
+\node[left] at (5,1.3) {$V_1(5,1)$};
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (-1,1) {};
-\node[above] at (-1,1.3) {$V_2(-1,1)$};
+\node[below right=1mm] at (-1,1.3) {$V_2(-1,1)$};
 
 % Focos
 \node[circle, fill=blue, inner sep=2.5pt] at (5.61,1) {};
@@ -1744,7 +1744,7 @@ y = \pm \frac{b}{a}x = \pm \frac{8}{6}x = \pm \frac{4}{3}x
     axis equal image,
     axis lines=middle,
     xlabel={$x$}, ylabel={$y$},
-    xmin=-14, xmax=14,
+    xmin=-18, xmax=16,
     ymin=-12, ymax=12,
     xtick={-14,-12,...,14},
     ytick={-12,-10,...,12},
@@ -1777,9 +1777,9 @@ y = \pm \frac{b}{a}x = \pm \frac{8}{6}x = \pm \frac{4}{3}x
 
 % Focos
 \node[circle, fill=blue, inner sep=2.5pt] at (10,0) {};
-\node[below] at (10,-0.5) {$F_1(10,0)$};
+\node[above right=2mm] at (10,-0.5) {$F_1(10,0)$};
 \node[circle, fill=blue, inner sep=2.5pt] at (-10,0) {};
-\node[below] at (-10,-0.5) {$F_2(-10,0)$};
+\node[above left=2mm] at (-10,-0.5) {$F_2(-10,0)$};
 
 \end{axis}
 \end{tikzpicture}
@@ -1894,9 +1894,9 @@ e = \frac{c}{a} = \frac{150}{90} = \frac{5}{3} \approx 1.67
     axis equal image,
     axis lines=middle,
     xlabel={$x$ (km)}, ylabel={$y$ (km)},
-    xmin=-50, xmax=350,
+    xmin=-100, xmax=350,
     ymin=-180, ymax=180,
-    xtick={0,50,...,350},
+    xtick={-100,-50,0,50,...,350},
     ytick={-180,-120,...,180},
     grid=both,
     grid style={line width=.1pt, draw=gray!30},
@@ -1917,13 +1917,13 @@ e = \frac{c}{a} = \frac{150}{90} = \frac{5}{3} \approx 1.67
 
 % Estaciones
 \node[circle, fill=orange, inner sep=3pt] at (0,0) {};
-\node[below left] at (0,0) {$A(0,0)$};
+\node[above left] at (0,0) {$A(0,0)$};
 \node[circle, fill=orange, inner sep=3pt] at (300,0) {};
-\node[below right] at (300,0) {$B(300,0)$};
+\node[below=4mm] at (300,0) {$B(300,0)$};
 
 % Centro
 \node[circle, fill=black, inner sep=2.5pt] at (150,0) {};
-\node[below] at (150,-10) {$C(150,0)$};
+\node[above=2mm] at (150,-10) {$C(150,0)$};
 
 % Vértices
 \node[circle, fill=green!60!black, inner sep=2.5pt] at (240,0) {};
