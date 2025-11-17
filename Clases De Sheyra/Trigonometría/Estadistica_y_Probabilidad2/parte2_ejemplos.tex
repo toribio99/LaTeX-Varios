@@ -1,0 +1,838 @@
+% PARTE 2 DE 3 - GUÍA DE PROBABILIDAD
+% Sección: Ejemplos Resueltos, Ejercicios Inversos y Soluciones
+
+\section{Ejemplos Resueltos}
+
+Ahora vamos a poner en práctica todos los conceptos de probabilidad que hemos aprendido. Cada ejemplo está completamente desarrollado paso a paso para que entiendas el proceso completo.
+
+\begin{ejemplo}{Técnicas de conteo - Principio fundamental del conteo}
+María está preparándose para salir y debe elegir su atuendo. En su armario tiene:
+\begin{itemize}
+    \item 4 blusas (roja, azul, blanca, negra)
+    \item 3 pantalones (jeans, negro, beige)
+    \item 2 pares de zapatos (deportivos, formales)
+\end{itemize}
+¿De cuántas maneras diferentes puede María combinar su ropa?
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar qué tipo de problema es.
+Este es un problema de conteo donde debemos aplicar el principio fundamental del conteo (también conocido como principio multiplicativo).
+
+\textbf{Paso 2:} Entender el principio fundamental.
+Si una tarea se puede realizar de $n_1$ formas, y para cada una de estas, una segunda tarea se puede realizar de $n_2$ formas, entonces ambas tareas se pueden realizar de $n_1 \times n_2$ formas.
+
+\textbf{Paso 3:} Identificar las decisiones independientes.
+María debe tomar 3 decisiones independientes:
+\begin{itemize}
+    \item Decisión 1: Elegir una blusa (4 opciones)
+    \item Decisión 2: Elegir un pantalón (3 opciones)
+    \item Decisión 3: Elegir zapatos (2 opciones)
+\end{itemize}
+
+\textbf{Paso 4:} Visualizar con un diagrama de árbol parcial.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9,
+    level 1/.style={sibling distance=3.5cm},
+    level 2/.style={sibling distance=1.5cm},
+    level 3/.style={sibling distance=0.8cm},
+    every node/.style={circle, draw=maincolor, fill=maincolor!10, minimum size=8mm},
+    edge from parent/.style={draw=maincolor!70, ->, thick}]
+
+\node[rectangle, minimum width=1.5cm] {Inicio}
+    child {node[fill=red!20] {Roja}
+        child {node[fill=blue!20, scale=0.7] {Jeans}
+            child {node[fill=gray!20, scale=0.6] {Dep}}
+            child {node[fill=gray!20, scale=0.6] {For}}
+        }
+        child {node[fill=blue!20, scale=0.7] {Negro}
+            child {node[fill=gray!20, scale=0.6] {Dep}}
+            child {node[fill=gray!20, scale=0.6] {For}}
+        }
+        child {node[fill=blue!20, scale=0.7] {Beige}
+            child {node[fill=gray!20, scale=0.6] {Dep}}
+            child {node[fill=gray!20, scale=0.6] {For}}
+        }
+    }
+    child {node[fill=blue!30] {Azul}
+        child[dashed] {node[fill=blue!20, scale=0.7] {...}}
+    }
+    child {node[fill=white] {Blanca}
+        child[dashed] {node[fill=blue!20, scale=0.7] {...}}
+    }
+    child {node[fill=black!30] {Negra}
+        child[dashed] {node[fill=blue!20, scale=0.7] {...}}
+    };
+
+\node[text width=4cm, draw=none, fill=none, right] at (5,-2) {\small\textit{El árbol completo tendría 24 ramas finales}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 5:} Aplicar el principio multiplicativo.
+\[
+\text{Total de combinaciones} = 4 \times 3 \times 2 = 24
+\]
+
+\textbf{Paso 6:} Verificación alternativa - Enumerar algunas combinaciones.
+\begin{align*}
+&\text{(Roja, Jeans, Deportivos), (Roja, Jeans, Formales),} \\
+&\text{(Roja, Negro, Deportivos), ..., (Negra, Beige, Formales)}
+\end{align*}
+
+\textbf{Paso 7:} Interpretación del resultado.
+María tiene 24 maneras diferentes de combinar su ropa. Esto significa que podría usar un atuendo diferente durante 24 días sin repetir ninguna combinación.
+
+\textbf{Paso 8:} Generalización del principio.
+Si María comprara una blusa más, tendría: $5 \times 3 \times 2 = 30$ combinaciones.
+Si comprara un pantalón más, tendría: $4 \times 4 \times 2 = 32$ combinaciones.
+
+\textbf{Respuesta final:} $\boxed{\text{María puede combinar su ropa de 24 maneras diferentes}}$
+\end{ejemplo}
+
+\begin{ejemplo}{Permutaciones - Ordenamiento de objetos}
+En una carrera escolar participan 8 estudiantes. ¿De cuántas maneras diferentes pueden quedar los primeros 3 lugares (oro, plata, bronce)?
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Identificar el tipo de problema.
+Este es un problema de permutaciones porque:
+\begin{itemize}
+    \item El orden importa (oro $\neq$ plata $\neq$ bronce)
+    \item No hay repetición (un estudiante no puede ocupar dos lugares)
+\end{itemize}
+
+\textbf{Paso 2:} Analizar las decisiones.
+\begin{itemize}
+    \item Para el oro: 8 opciones (cualquier estudiante)
+    \item Para la plata: 7 opciones (todos menos el que ganó oro)
+    \item Para el bronce: 6 opciones (todos menos los dos anteriores)
+\end{itemize}
+
+\textbf{Paso 3:} Calcular usando el principio multiplicativo.
+\[
+\text{Maneras} = 8 \times 7 \times 6 = 336
+\]
+
+\textbf{Paso 4:} Verificar usando la fórmula de permutaciones.
+La fórmula para permutaciones de $n$ elementos tomados de $r$ en $r$ es:
+\[
+P(n,r) = \frac{n!}{(n-r)!}
+\]
+
+En nuestro caso: $n = 8$ estudiantes, $r = 3$ lugares.
+\[
+P(8,3) = \frac{8!}{(8-3)!} = \frac{8!}{5!} = \frac{8 \times 7 \times 6 \times 5!}{5!} = 8 \times 7 \times 6 = 336
+\]
+
+\textbf{Paso 5:} Interpretación práctica.
+Si llamamos a los estudiantes A, B, C, D, E, F, G, H, algunas posibles configuraciones son:
+\begin{itemize}
+    \item Oro: A, Plata: B, Bronce: C
+    \item Oro: A, Plata: C, Bronce: B (diferente a la anterior)
+    \item Oro: B, Plata: A, Bronce: C (también diferente)
+\end{itemize}
+
+\textbf{Paso 6:} Comparación con combinaciones.
+Si solo nos interesara quiénes son los 3 primeros sin importar el orden, sería:
+\[
+C(8,3) = \frac{8!}{3!(8-3)!} = \frac{8!}{3! \cdot 5!} = \frac{336}{6} = 56
+\]
+
+\textbf{Verificación:} Las 336 permutaciones = 56 grupos × 6 ordenamientos por grupo.
+
+\textbf{Respuesta final:} $\boxed{\text{Los primeros 3 lugares pueden quedar de 336 maneras diferentes}}$
+\end{ejemplo}
+
+\begin{ejemplo}{Combinaciones - Selección de comité}
+De un grupo de 12 personas (7 mujeres y 5 hombres), se debe formar un comité de 4 personas.
+a) ¿De cuántas maneras se puede formar el comité?
+b) ¿De cuántas maneras si debe haber exactamente 2 mujeres y 2 hombres?
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Parte a) Comité sin restricciones}
+
+\textbf{Paso 1:} Identificar que es un problema de combinaciones.
+El orden no importa: el comité \{Ana, Luis, María, Pedro\} es el mismo que \{Pedro, Ana, María, Luis\}.
+
+\textbf{Paso 2:} Aplicar la fórmula de combinaciones.
+\[
+C(n,r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}
+\]
+
+Donde $n = 12$ personas totales, $r = 4$ personas a elegir.
+
+\textbf{Paso 3:} Calcular.
+\[
+C(12,4) = \frac{12!}{4!(12-4)!} = \frac{12!}{4! \cdot 8!}
+\]
+
+\textbf{Paso 4:} Simplificar.
+\[
+C(12,4) = \frac{12 \times 11 \times 10 \times 9 \times 8!}{4! \cdot 8!} = \frac{12 \times 11 \times 10 \times 9}{4 \times 3 \times 2 \times 1}
+\]
+
+\textbf{Paso 5:} Calcular el resultado.
+\[
+C(12,4) = \frac{11880}{24} = 495
+\]
+
+\textbf{Parte b) Comité con 2 mujeres y 2 hombres}
+
+\textbf{Paso 1:} Descomponer el problema.
+Debemos elegir:
+\begin{itemize}
+    \item 2 mujeres de 7 disponibles
+    \item 2 hombres de 5 disponibles
+\end{itemize}
+
+\textbf{Paso 2:} Calcular las combinaciones por separado.
+\[
+C(7,2) = \frac{7!}{2! \cdot 5!} = \frac{7 \times 6}{2 \times 1} = 21
+\]
+\[
+C(5,2) = \frac{5!}{2! \cdot 3!} = \frac{5 \times 4}{2 \times 1} = 10
+\]
+
+\textbf{Paso 3:} Aplicar el principio multiplicativo.
+\[
+\text{Total} = C(7,2) \times C(5,2) = 21 \times 10 = 210
+\]
+
+\textbf{Paso 4:} Comparación con permutaciones.
+Si el orden importara (presidente, vicepresidente, secretario, tesorero):
+\[
+P(12,4) = \frac{12!}{8!} = 12 \times 11 \times 10 \times 9 = 11,880
+\]
+Que es exactamente $495 \times 24 = 11,880$ (24 formas de ordenar 4 personas).
+
+\textbf{Respuestas finales:}
+\[
+\boxed{
+\begin{aligned}
+\text{a) } &\text{495 maneras de formar el comité} \\
+\text{b) } &\text{210 maneras con 2 mujeres y 2 hombres}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}{Probabilidad clásica - Regla de Laplace con dados}
+Se lanzan dos dados justos. Calcula:
+a) La probabilidad de obtener suma 7
+b) La probabilidad de obtener al menos un 6
+c) La probabilidad de obtener suma par
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Determinar el espacio muestral.
+Al lanzar dos dados, cada uno puede mostrar 1, 2, 3, 4, 5 o 6.
+Total de resultados posibles = $6 \times 6 = 36$
+
+\textbf{Paso 2:} Visualizar el espacio muestral.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+    % Cuadrícula
+    \draw[gray!30] (0,0) grid (6,6);
+
+    % Ejes
+    \draw[-{Latex}, thick] (-0.5,0) -- (6.5,0) node[right] {Dado 1};
+    \draw[-{Latex}, thick] (0,-0.5) -- (0,6.5) node[above] {Dado 2};
+
+    % Etiquetas
+    \foreach \x in {1,...,6}
+        \node at (\x-0.5,-0.3) {\x};
+    \foreach \y in {1,...,6}
+        \node at (-0.3,\y-0.5) {\y};
+
+    % Puntos que suman 7 (diagonal)
+    \foreach \x/\y in {1/6,2/5,3/4,4/3,5/2,6/1}
+        \filldraw[red] (\x-0.5,\y-0.5) circle (0.15);
+
+    % Leyenda
+    \node[red] at (3,-1.5) {Puntos rojos: suma = 7};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Parte a) Probabilidad de suma 7}
+
+\textbf{Paso 3:} Identificar casos favorables.
+Los pares que suman 7 son: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1)
+Casos favorables = 6
+
+\textbf{Paso 4:} Aplicar la regla de Laplace.
+\[
+P(\text{suma} = 7) = \frac{\text{casos favorables}}{\text{casos totales}} = \frac{6}{36} = \frac{1}{6}
+\]
+
+\textbf{Parte b) Probabilidad de al menos un 6}
+
+\textbf{Paso 5:} Usar el complemento (más fácil).
+Es más fácil calcular P(ningún 6) y restar de 1.
+
+Casos sin ningún 6: cada dado muestra 1, 2, 3, 4 o 5.
+Total sin ningún 6 = $5 \times 5 = 25$
+
+\[
+P(\text{ningún 6}) = \frac{25}{36}
+\]
+\[
+P(\text{al menos un 6}) = 1 - P(\text{ningún 6}) = 1 - \frac{25}{36} = \frac{11}{36}
+\]
+
+\textbf{Parte c) Probabilidad de suma par}
+
+\textbf{Paso 6:} Analizar cuándo la suma es par.
+La suma es par cuando:
+\begin{itemize}
+    \item Ambos dados muestran par (par + par = par)
+    \item Ambos dados muestran impar (impar + impar = par)
+\end{itemize}
+
+Dados pares: 2, 4, 6 (3 opciones)
+Dados impares: 1, 3, 5 (3 opciones)
+
+Casos favorables = $(3 \times 3) + (3 \times 3) = 9 + 9 = 18$
+
+\[
+P(\text{suma par}) = \frac{18}{36} = \frac{1}{2}
+\]
+
+\textbf{Paso 7:} Crear gráfica de probabilidades de todas las sumas.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    \begin{axis}[
+        ybar,
+        bar width=0.5cm,
+        xlabel={Suma de los dados},
+        ylabel={Probabilidad},
+        ymin=0, ymax=0.2,
+        xtick={2,3,4,5,6,7,8,9,10,11,12},
+        ytick={0, 0.05, 0.1, 0.15, 0.2},
+        yticklabel={\pgfmathprintnumber{\tick}},
+        grid=major,
+        grid style={dashed, gray!30},
+        axis lines=left,
+        width=0.95\textwidth,
+        height=6cm,
+        nodes near coords,
+        nodes near coords align={vertical},
+        every node near coord/.append style={font=\scriptsize}
+    ]
+    \addplot[fill=maincolor!70] coordinates {
+        (2, 0.0278) (3, 0.0556) (4, 0.0833) (5, 0.1111)
+        (6, 0.1389) (7, 0.1667) (8, 0.1389) (9, 0.1111)
+        (10, 0.0833) (11, 0.0556) (12, 0.0278)
+    };
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuestas finales:}
+\[
+\boxed{
+\begin{aligned}
+\text{a) } P(\text{suma} = 7) &= \frac{1}{6} \approx 0.167 \\
+\text{b) } P(\text{al menos un 6}) &= \frac{11}{36} \approx 0.306 \\
+\text{c) } P(\text{suma par}) &= \frac{1}{2} = 0.5
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}{Probabilidad condicional - Problema de urnas}
+Una urna contiene 5 bolas rojas y 3 bolas azules. Se extraen dos bolas sin reemplazo.
+a) ¿Cuál es la probabilidad de que ambas sean rojas?
+b) Si la primera bola extraída fue roja, ¿cuál es la probabilidad de que la segunda también sea roja?
+c) Verifica que $P(A \cap B) = P(A) \cdot P(B|A)$
+
+\vspace{0.3cm}
+\textbf{Solución:}
+
+\textbf{Paso 1:} Definir los eventos.
+\begin{itemize}
+    \item $A$: La primera bola es roja
+    \item $B$: La segunda bola es roja
+    \item $A \cap B$: Ambas bolas son rojas
+\end{itemize}
+
+\textbf{Paso 2:} Construir el diagrama de árbol completo.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95,
+    grow=right,
+    level 1/.style={sibling distance=4cm, level distance=4cm},
+    level 2/.style={sibling distance=2cm, level distance=4cm},
+    every node/.style={circle, draw, minimum size=8mm},
+    edge from parent/.style={draw, -{Latex}, thick}]
+
+\node[rectangle, fill=gray!20] {Inicio}
+    child {node[fill=red!30] {R}
+        child {node[fill=red!30] {R}
+            edge from parent node[above, draw=none] {$\frac{4}{7}$}
+        }
+        child {node[fill=blue!30] {A}
+            edge from parent node[below, draw=none] {$\frac{3}{7}$}
+        }
+        edge from parent node[above, draw=none] {$\frac{5}{8}$}
+    }
+    child {node[fill=blue!30] {A}
+        child {node[fill=red!30] {R}
+            edge from parent node[above, draw=none] {$\frac{5}{7}$}
+        }
+        child {node[fill=blue!30] {A}
+            edge from parent node[below, draw=none] {$\frac{2}{7}$}
+        }
+        edge from parent node[below, draw=none] {$\frac{3}{8}$}
+    };
+
+% Etiquetas de resultados
+\node[draw=none] at (9.5, 2) {$P(RR) = \frac{5}{8} \times \frac{4}{7} = \frac{20}{56} = \frac{5}{14}$};
+\node[draw=none] at (9.5, 0.7) {$P(RA) = \frac{5}{8} \times \frac{3}{7} = \frac{15}{56}$};
+\node[draw=none] at (9.5, -0.7) {$P(AR) = \frac{3}{8} \times \frac{5}{7} = \frac{15}{56}$};
+\node[draw=none] at (9.5, -2) {$P(AA) = \frac{3}{8} \times \frac{2}{7} = \frac{6}{56} = \frac{3}{28}$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Parte a) Probabilidad de que ambas sean rojas}
+
+\textbf{Paso 3:} Calcular $P(A \cap B)$ usando el diagrama.
+Del diagrama de árbol:
+\[
+P(\text{ambas rojas}) = P(A \cap B) = \frac{5}{8} \times \frac{4}{7} = \frac{20}{56} = \frac{5}{14}
+\]
+
+\textbf{Parte b) Probabilidad condicional}
+
+\textbf{Paso 4:} Aplicar la definición de probabilidad condicional.
+\[
+P(B|A) = P(\text{segunda roja | primera roja})
+\]
+
+Si la primera fue roja, quedan:
+\begin{itemize}
+    \item 4 bolas rojas
+    \item 3 bolas azules
+    \item Total: 7 bolas
+\end{itemize}
+
+Por lo tanto:
+\[
+P(B|A) = \frac{4}{7}
+\]
+
+\textbf{Parte c) Verificación de la fórmula}
+
+\textbf{Paso 5:} Verificar que $P(A \cap B) = P(A) \cdot P(B|A)$
+
+Ya calculamos:
+\begin{itemize}
+    \item $P(A) = \frac{5}{8}$ (probabilidad de que la primera sea roja)
+    \item $P(B|A) = \frac{4}{7}$ (probabilidad de que la segunda sea roja dado que la primera fue roja)
+    \item $P(A \cap B) = \frac{5}{14}$ (probabilidad de que ambas sean rojas)
+\end{itemize}
+
+Verificación:
+\[
+P(A) \cdot P(B|A) = \frac{5}{8} \times \frac{4}{7} = \frac{20}{56} = \frac{5}{14} = P(A \cap B) \quad \checkmark
+\]
+
+\textbf{Paso 6:} Calcular también la probabilidad marginal de B.
+\[
+P(B) = P(B|A) \cdot P(A) + P(B|A^c) \cdot P(A^c)
+\]
+\[
+P(B) = \frac{4}{7} \cdot \frac{5}{8} + \frac{5}{7} \cdot \frac{3}{8} = \frac{20}{56} + \frac{15}{56} = \frac{35}{56} = \frac{5}{8}
+\]
+
+Interesante: $P(B) = P(A) = \frac{5}{8}$ (simétrico porque hay 5 rojas de 8 totales).
+
+\textbf{Paso 7:} Tabla de probabilidad conjunta.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+& \textbf{Segunda R} & \textbf{Segunda A} & \textbf{Total} \\
+\hline
+\textbf{Primera R} & $\frac{5}{14}$ & $\frac{15}{56}$ & $\frac{5}{8}$ \\
+\hline
+\textbf{Primera A} & $\frac{15}{56}$ & $\frac{3}{28}$ & $\frac{3}{8}$ \\
+\hline
+\textbf{Total} & $\frac{5}{8}$ & $\frac{3}{8}$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Respuestas finales:}
+\[
+\boxed{
+\begin{aligned}
+\text{a) } P(\text{ambas rojas}) &= \frac{5}{14} \approx 0.357 \\
+\text{b) } P(\text{segunda roja | primera roja}) &= \frac{4}{7} \approx 0.571 \\
+\text{c) } \text{Verificado: } P(A \cap B) &= P(A) \cdot P(B|A) = \frac{5}{14}
+\end{aligned}
+}
+\]
+\end{ejemplo}
+
+\newpage
+
+\section{Ejercicios Inversos}
+
+Los ejercicios inversos te desafían a aplicar los conceptos de probabilidad de manera creativa y en contextos más complejos. Intenta resolverlos antes de ver las soluciones.
+
+\begin{ejercicio}{Probabilidad en el dominó}
+En el juego de dominó tradicional hay 28 fichas diferentes (desde el doble blanco [0|0] hasta el doble seis [6|6]). Si se seleccionan al azar 3 fichas del conjunto completo:
+
+a) ¿Cuál es la probabilidad de que las 3 fichas sean dobles (como [1|1], [3|3], etc.)?
+
+b) ¿Cuál es la probabilidad de que al menos una ficha contenga el número 6?
+
+c) Si ya sacaste una ficha doble, ¿cuál es la probabilidad de que la siguiente ficha también sea doble?
+\end{ejercicio}
+
+\begin{ejercicio}{Pronóstico meteorológico y eventos dependientes}
+El servicio meteorológico ha observado los siguientes patrones en una ciudad tropical:
+\begin{itemize}
+    \item Si llueve un día, la probabilidad de que llueva al día siguiente es 0.7
+    \item Si no llueve un día, la probabilidad de que llueva al día siguiente es 0.3
+    \item En general, llueve el 40\% de los días del año
+\end{itemize}
+
+Si hoy está lloviendo:
+a) ¿Cuál es la probabilidad de que llueva los próximos 2 días consecutivos?
+b) ¿Cuál es la probabilidad de que no llueva ninguno de los próximos 2 días?
+c) Construye un diagrama de árbol para visualizar todos los escenarios posibles de los próximos 2 días.
+\end{ejercicio}
+
+\begin{ejercicio}{Diagnóstico médico y teorema de Bayes}
+Una prueba médica para detectar una enfermedad rara tiene las siguientes características:
+\begin{itemize}
+    \item La enfermedad afecta al 1\% de la población
+    \item Si una persona tiene la enfermedad, la prueba da positivo en el 95\% de los casos (sensibilidad)
+    \item Si una persona no tiene la enfermedad, la prueba da negativo en el 90\% de los casos (especificidad)
+\end{itemize}
+
+Si una persona seleccionada al azar da positivo en la prueba:
+a) ¿Cuál es la probabilidad de que realmente tenga la enfermedad?
+b) ¿Cuál es la probabilidad de que sea un falso positivo?
+c) Explica por qué el resultado puede parecer contraintuitivo.
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones de Ejercicios Inversos}
+
+\begin{solucion}
+\textbf{Ejercicio Inverso 1: Probabilidad en el dominó}
+
+\textbf{Información inicial:}
+\begin{itemize}
+    \item Total de fichas de dominó: 28
+    \item Fichas dobles: [0|0], [1|1], [2|2], [3|3], [4|4], [5|5], [6|6] = 7 fichas
+    \item Fichas con el número 6: [6|0], [6|1], [6|2], [6|3], [6|4], [6|5], [6|6] = 7 fichas
+\end{itemize}
+
+\textbf{Parte a) Probabilidad de que las 3 fichas sean dobles}
+
+\textbf{Paso 1:} Calcular el número total de formas de elegir 3 fichas de 28.
+\[
+C(28, 3) = \frac{28!}{3!(28-3)!} = \frac{28 \times 27 \times 26}{3 \times 2 \times 1} = \frac{19656}{6} = 3276
+\]
+
+\textbf{Paso 2:} Calcular el número de formas de elegir 3 fichas dobles de las 7 disponibles.
+\[
+C(7, 3) = \frac{7!}{3!(7-3)!} = \frac{7 \times 6 \times 5}{3 \times 2 \times 1} = \frac{210}{6} = 35
+\]
+
+\textbf{Paso 3:} Calcular la probabilidad.
+\[
+P(\text{3 dobles}) = \frac{C(7,3)}{C(28,3)} = \frac{35}{3276} = \frac{35}{3276} \approx 0.0107
+\]
+
+\textbf{Parte b) Probabilidad de al menos una ficha con el número 6}
+
+\textbf{Paso 1:} Usar el complemento (más eficiente).
+\[
+P(\text{al menos un 6}) = 1 - P(\text{ningún 6})
+\]
+
+\textbf{Paso 2:} Calcular fichas sin el número 6.
+Total de fichas sin 6: $28 - 7 = 21$ fichas
+
+\textbf{Paso 3:} Calcular formas de elegir 3 fichas sin ningún 6.
+\[
+C(21, 3) = \frac{21 \times 20 \times 19}{3 \times 2 \times 1} = \frac{7980}{6} = 1330
+\]
+
+\textbf{Paso 4:} Calcular la probabilidad.
+\[
+P(\text{ningún 6}) = \frac{1330}{3276} = \frac{665}{1638}
+\]
+\[
+P(\text{al menos un 6}) = 1 - \frac{665}{1638} = \frac{973}{1638} \approx 0.594
+\]
+
+\textbf{Parte c) Probabilidad condicional de sacar otro doble}
+
+\textbf{Paso 1:} Establecer la situación después de sacar un doble.
+\begin{itemize}
+    \item Fichas restantes: 27
+    \item Dobles restantes: 6
+\end{itemize}
+
+\textbf{Paso 2:} Calcular la probabilidad condicional.
+\[
+P(\text{segunda es doble | primera es doble}) = \frac{6}{27} = \frac{2}{9} \approx 0.222
+\]
+
+\textbf{Respuestas finales:}
+\[
+\boxed{
+\begin{aligned}
+\text{a) } P(\text{3 dobles}) &= \frac{35}{3276} \approx 0.0107 \text{ o } 1.07\% \\
+\text{b) } P(\text{al menos un 6}) &= \frac{973}{1638} \approx 0.594 \text{ o } 59.4\% \\
+\text{c) } P(\text{2ª doble | 1ª doble}) &= \frac{2}{9} \approx 0.222 \text{ o } 22.2\%
+\end{aligned}
+}
+\]
+\end{solucion}
+
+\begin{solucion}
+\textbf{Ejercicio Inverso 2: Pronóstico meteorológico}
+
+\textbf{Datos dados:}
+\begin{itemize}
+    \item $P(\text{lluvia mañana | llueve hoy}) = 0.7$
+    \item $P(\text{lluvia mañana | no llueve hoy}) = 0.3$
+    \item Condición inicial: Hoy está lloviendo
+\end{itemize}
+
+\textbf{Parte c) Diagrama de árbol (lo hacemos primero para visualizar)}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9,
+    grow=right,
+    level 1/.style={sibling distance=3.5cm, level distance=4.5cm},
+    level 2/.style={sibling distance=1.8cm, level distance=4.5cm},
+    every node/.style={rectangle, draw, minimum height=8mm, minimum width=15mm},
+    edge from parent/.style={draw, -{Latex}, thick}]
+
+\node[fill=blue!30] {Hoy: Llueve}
+    child {node[fill=blue!20] {Día 1: Llueve}
+        child {node[fill=blue!10] {Día 2: Llueve}
+            edge from parent node[above, draw=none, font=\small] {0.7}
+        }
+        child {node[fill=yellow!20] {Día 2: No llueve}
+            edge from parent node[below, draw=none, font=\small] {0.3}
+        }
+        edge from parent node[above, draw=none, font=\small] {0.7}
+    }
+    child {node[fill=yellow!30] {Día 1: No llueve}
+        child {node[fill=blue!10] {Día 2: Llueve}
+            edge from parent node[above, draw=none, font=\small] {0.3}
+        }
+        child {node[fill=yellow!20] {Día 2: No llueve}
+            edge from parent node[below, draw=none, font=\small] {0.7}
+        }
+        edge from parent node[below, draw=none, font=\small] {0.3}
+    };
+
+% Probabilidades finales
+\node[draw=none, font=\small] at (11, 2.5) {$P = 0.7 \times 0.7 = 0.49$};
+\node[draw=none, font=\small] at (11, 0.85) {$P = 0.7 \times 0.3 = 0.21$};
+\node[draw=none, font=\small] at (11, -0.85) {$P = 0.3 \times 0.3 = 0.09$};
+\node[draw=none, font=\small] at (11, -2.5) {$P = 0.3 \times 0.7 = 0.21$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Parte a) Probabilidad de lluvia los próximos 2 días consecutivos}
+
+\textbf{Paso 1:} Identificar la ruta en el diagrama.
+La ruta es: Hoy (Llueve) → Día 1 (Llueve) → Día 2 (Llueve)
+
+\textbf{Paso 2:} Calcular la probabilidad multiplicando las probabilidades en la ruta.
+\[
+P(\text{lluvia día 1 y día 2}) = P(\text{LL}) = 0.7 \times 0.7 = 0.49
+\]
+
+\textbf{Parte b) Probabilidad de que no llueva ninguno de los próximos 2 días}
+
+\textbf{Paso 1:} Identificar la ruta en el diagrama.
+La ruta es: Hoy (Llueve) → Día 1 (No llueve) → Día 2 (No llueve)
+
+\textbf{Paso 2:} Calcular la probabilidad.
+\[
+P(\text{no lluvia día 1 ni día 2}) = P(\text{NN}) = 0.3 \times 0.7 = 0.21
+\]
+
+\textbf{Verificación:} Todas las probabilidades deben sumar 1.
+\[
+0.49 + 0.21 + 0.09 + 0.21 = 1.00 \quad \checkmark
+\]
+
+\textbf{Análisis adicional:}
+\begin{itemize}
+    \item Probabilidad de exactamente 1 día de lluvia: $0.21 + 0.09 = 0.30$
+    \item Probabilidad de al menos 1 día de lluvia: $1 - 0.21 = 0.79$
+    \item El patrón más probable es que llueva ambos días (49\%)
+\end{itemize}
+
+\textbf{Respuestas finales:}
+\[
+\boxed{
+\begin{aligned}
+\text{a) } P(\text{lluvia 2 días consecutivos}) &= 0.49 \text{ o } 49\% \\
+\text{b) } P(\text{no lluvia ningún día}) &= 0.21 \text{ o } 21\% \\
+\text{c) } &\text{Diagrama de árbol mostrado arriba}
+\end{aligned}
+}
+\]
+\end{solucion}
+
+\begin{solucion}
+\textbf{Ejercicio Inverso 3: Diagnóstico médico y teorema de Bayes}
+
+\textbf{Datos dados:}
+\begin{itemize}
+    \item $P(\text{Enfermo}) = 0.01$ (prevalencia)
+    \item $P(\text{Positivo | Enfermo}) = 0.95$ (sensibilidad)
+    \item $P(\text{Negativo | Sano}) = 0.90$ (especificidad)
+    \item Por lo tanto: $P(\text{Positivo | Sano}) = 0.10$ (falso positivo)
+\end{itemize}
+
+\textbf{Paso 1:} Construir un diagrama de árbol completo.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95,
+    grow=right,
+    level 1/.style={sibling distance=4cm, level distance=4cm},
+    level 2/.style={sibling distance=2cm, level distance=4.5cm},
+    every node/.style={rectangle, draw, minimum height=8mm},
+    edge from parent/.style={draw, -{Latex}, thick}]
+
+\node[fill=gray!20] {Población}
+    child {node[fill=red!30] {Enfermo}
+        child {node[fill=red!20] {Test +}
+            edge from parent node[above, draw=none, font=\small] {0.95}
+        }
+        child {node[fill=green!20] {Test -}
+            edge from parent node[below, draw=none, font=\small] {0.05}
+        }
+        edge from parent node[above, draw=none] {0.01}
+    }
+    child {node[fill=green!30] {Sano}
+        child {node[fill=red!20] {Test +}
+            edge from parent node[above, draw=none, font=\small] {0.10}
+        }
+        child {node[fill=green!20] {Test -}
+            edge from parent node[below, draw=none, font=\small] {0.90}
+        }
+        edge from parent node[below, draw=none] {0.99}
+    };
+
+% Probabilidades conjuntas
+\node[draw=none, font=\small] at (10.5, 2.5) {$P = 0.01 \times 0.95 = 0.0095$};
+\node[draw=none, font=\small] at (10.5, 0.8) {$P = 0.01 \times 0.05 = 0.0005$};
+\node[draw=none, font=\small] at (10.5, -0.8) {$P = 0.99 \times 0.10 = 0.099$};
+\node[draw=none, font=\small] at (10.5, -2.5) {$P = 0.99 \times 0.90 = 0.891$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Parte a) Probabilidad de tener la enfermedad dado test positivo}
+
+\textbf{Paso 2:} Aplicar el teorema de Bayes.
+\[
+P(\text{Enfermo | Test+}) = \frac{P(\text{Test+ | Enfermo}) \cdot P(\text{Enfermo})}{P(\text{Test+})}
+\]
+
+\textbf{Paso 3:} Calcular $P(\text{Test+})$ (probabilidad total).
+\begin{align*}
+P(\text{Test+}) &= P(\text{Test+ | Enfermo}) \cdot P(\text{Enfermo}) + P(\text{Test+ | Sano}) \cdot P(\text{Sano}) \\
+&= 0.95 \times 0.01 + 0.10 \times 0.99 \\
+&= 0.0095 + 0.099 \\
+&= 0.1085
+\end{align*}
+
+\textbf{Paso 4:} Calcular la probabilidad condicional.
+\[
+P(\text{Enfermo | Test+}) = \frac{0.0095}{0.1085} = \frac{95}{1085} = \frac{19}{217} \approx 0.0876
+\]
+
+\textbf{Parte b) Probabilidad de falso positivo}
+
+\textbf{Paso 5:} Un falso positivo es estar sano pero dar positivo.
+\[
+P(\text{Sano | Test+}) = 1 - P(\text{Enfermo | Test+}) = 1 - 0.0876 = 0.9124
+\]
+
+\textbf{Parte c) Explicación del resultado contraintuitivo}
+
+\textbf{Paso 6:} Análisis del resultado.
+
+El resultado parece contraintuitivo porque aunque la prueba tiene 95\% de sensibilidad, cuando alguien da positivo, solo hay un 8.76\% de probabilidad de que realmente esté enfermo.
+
+\textbf{Explicación:}
+\begin{itemize}
+    \item La enfermedad es muy rara (1\% de la población)
+    \item De 1000 personas: 10 enfermas, 990 sanas
+    \item De los 10 enfermos: 9.5 darán positivo (verdaderos positivos)
+    \item De los 990 sanos: 99 darán positivo (falsos positivos)
+    \item Total de positivos: 108.5
+    \item Proporción de enfermos entre los positivos: $\frac{9.5}{108.5} \approx 8.76\%$
+\end{itemize}
+
+\textbf{Visualización con números absolutos (de 10,000 personas):}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Rectángulo principal
+    \draw[thick] (0,0) rectangle (10,6);
+
+    % División enfermo/sano
+    \draw[thick] (1,0) -- (1,6);
+
+    % División test +/-
+    \draw[thick] (0,0.6) -- (1,0.6);
+    \draw[thick] (1,5.4) -- (10,5.4);
+
+    % Etiquetas y valores
+    \node at (0.5,3) [rotate=90] {Enfermos};
+    \node at (5.5,3) {Sanos};
+
+    \node[fill=red!30] at (0.5,0.3) {95};
+    \node[fill=green!30] at (0.5,3.3) {5};
+    \node[fill=red!30] at (5.5,5.7) {990};
+    \node[fill=green!30] at (5.5,2.7) {8910};
+
+    \node at (-1,0.3) {Test+};
+    \node at (-1,3.3) {Test-};
+
+    % Flecha y resultado
+    \draw[-{Latex}, very thick, red] (2,-0.5) -- (4,-0.5);
+    \node at (6,-0.5) {Total Test+: 1085};
+    \node at (6,-1) {Enfermos: 95 (8.76\%)};
+\end{tikzpicture}
+\end{center}
+
+Este es un ejemplo clásico de por qué las pruebas de detección masiva para enfermedades raras pueden generar muchos falsos positivos, causando ansiedad innecesaria. Por eso, estas pruebas generalmente se reservan para poblaciones de alto riesgo donde la prevalencia es mayor.
+
+\textbf{Respuestas finales:}
+\[
+\boxed{
+\begin{aligned}
+\text{a) } P(\text{Enfermo | Test+}) &= \frac{19}{217} \approx 0.0876 \text{ o } 8.76\% \\
+\text{b) } P(\text{Falso positivo | Test+}) &= \frac{198}{217} \approx 0.9124 \text{ o } 91.24\% \\
+\text{c) } &\text{La baja prevalencia hace que los falsos positivos} \\
+&\text{superen ampliamente a los verdaderos positivos}
+\end{aligned}
+}
+\]
+\end{solucion}

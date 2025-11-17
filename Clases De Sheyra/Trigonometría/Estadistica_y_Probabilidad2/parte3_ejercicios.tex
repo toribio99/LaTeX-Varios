@@ -1,0 +1,508 @@
+% !TEX program = lualatex
+% PARTE 3 de 3: Ejercicios Propuestos y Soluciones - Probabilidad
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel,trees,shapes}
+\usepackage{multicol}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad Probabilidad y Técnicas de Conteo}}
+\fancyhead[RO]{\small\textcolor{maincolor}{Probabilidad y Técnicas de Conteo \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Estadística}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof. Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=#1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=#1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+\begin{document}
+
+\section{Ejercicios Propuestos}
+
+Ahora es tu turno de poner en práctica todo lo que has aprendido sobre probabilidad y técnicas de conteo. Los ejercicios están organizados por nivel de dificultad. ¡Intenta resolverlos antes de ver las soluciones!
+
+\begin{ejercicio}{Principio Fundamental de Conteo}
+En una cafetería escolar, el menú del día ofrece:
+\begin{itemize}
+    \item 3 opciones de entrada (ensalada, sopa, empanada)
+    \item 4 opciones de plato principal (pollo, pescado, pasta, hamburguesa)
+    \item 2 opciones de bebida (jugo, gaseosa)
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+    \item ¿De cuántas maneras diferentes puede un estudiante armar su almuerzo completo?
+    \item Si además se agregan 3 opciones de postre, ¿cuántas combinaciones posibles hay ahora?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Permutaciones Simples}
+El comité estudiantil necesita organizar sus directivos.
+
+\begin{enumerate}[label=\alph*)]
+    \item Si hay 5 candidatos para presidente, vicepresidente y secretario, ¿de cuántas maneras diferentes se pueden asignar estos tres cargos?
+    \item En un torneo de ajedrez con 8 participantes, ¿de cuántas formas pueden quedar los primeros 3 lugares (oro, plata, bronce)?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Combinaciones}
+En tu clase de matemáticas hay 25 estudiantes.
+
+\begin{enumerate}[label=\alph*)]
+    \item El profesor quiere formar un grupo de estudio de 4 estudiantes. ¿Cuántos grupos diferentes puede formar?
+    \item Para un proyecto especial, se necesitan elegir 3 estudiantes que representen al salón en una feria de ciencias. ¿De cuántas formas se puede hacer esta selección?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Probabilidad con Dados y Monedas}
+Vamos a experimentar con objetos clásicos de la probabilidad.
+
+\begin{enumerate}[label=\alph*)]
+    \item Se lanzan dos dados justos simultáneamente. ¿Cuál es la probabilidad de que la suma de los puntos sea exactamente 7?
+    \item Se lanzan tres monedas al aire. ¿Cuál es la probabilidad de obtener exactamente dos caras?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Probabilidad con Cartas}
+De una baraja española de 40 cartas (4 palos: oros, copas, espadas y bastos, cada uno con cartas del 1 al 7, sota, caballo y rey).
+
+\begin{enumerate}[label=\alph*)]
+    \item Se extrae una carta al azar. ¿Cuál es la probabilidad de que sea una figura (sota, caballo o rey)?
+    \item Se extraen dos cartas sin reposición. ¿Cuál es la probabilidad de que ambas sean del mismo palo?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Probabilidad Condicional}
+En un colegio, el 60\% de los estudiantes practica algún deporte, el 40\% participa en actividades artísticas, y el 25\% participa en ambas actividades.
+
+\begin{enumerate}[label=\alph*)]
+    \item Si se elige un estudiante al azar y sabemos que practica deporte, ¿cuál es la probabilidad de que también participe en actividades artísticas?
+    \item Si un estudiante participa en actividades artísticas, ¿cuál es la probabilidad de que también practique algún deporte?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Combinatoria en Dominó}
+Un juego de dominó tradicional tiene 28 fichas, cada una con dos números del 0 al 6 (las mulas o dobles tienen el mismo número en ambos lados).
+
+\begin{enumerate}[label=\alph*)]
+    \item Si sacas una ficha al azar, ¿cuál es la probabilidad de que sea una mula (doble)?
+    \item Si sacas dos fichas al azar sin reposición, ¿cuál es la probabilidad de que ambas tengan al menos un 6?
+\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}{Control de Calidad}
+Una fábrica produce bombillos LED. De cada lote de 100 bombillos, en promedio 3 salen defectuosos. Un inspector toma una muestra aleatoria de 5 bombillos de un lote.
+
+\begin{enumerate}[label=\alph*)]
+    \item ¿Cuál es la probabilidad de que todos los bombillos de la muestra estén buenos (sin defectos)?
+    \item ¿Cuál es la probabilidad de encontrar exactamente 1 bombillo defectuoso en la muestra?
+\end{enumerate}
+\end{ejercicio}
+
+\newpage
+
+\section{Soluciones Detalladas}
+
+\begin{solucion}{Solución Ejercicio 1 - Principio Fundamental de Conteo}
+\textbf{Parte a):} Almuerzo con entrada, plato principal y bebida
+
+Aplicamos el principio fundamental de conteo. Para cada elección de entrada, tenemos todas las opciones de plato principal, y para cada combinación de estos, todas las opciones de bebida.
+
+\begin{align*}
+\text{Total de maneras} &= \text{(Entradas)} \times \text{(Platos principales)} \times \text{(Bebidas)} \\
+&= 3 \times 4 \times 2 \\
+&= 24
+\end{align*}
+
+\textbf{Verificación con diagrama de árbol (parcial):}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9,
+    level 1/.style={sibling distance=4cm},
+    level 2/.style={sibling distance=1.5cm},
+    level 3/.style={sibling distance=0.8cm}]
+  \node {Inicio}
+    child {node {Ensalada}
+      child {node {Pollo}
+        child {node {Jugo}}
+        child {node {Gaseosa}}
+      }
+      child {node {Pescado}
+        child {node {J}}
+        child {node {G}}
+      }
+      child {node {...}}
+    }
+    child {node {Sopa}
+      child {node {...}}
+    }
+    child {node {Empanada}
+      child {node {...}}
+    };
+\end{tikzpicture}
+\end{center}
+
+\textbf{Respuesta:} \boxed{24 \text{ maneras diferentes}}
+
+\textbf{Parte b):} Agregando postres al menú
+
+Ahora tenemos 4 decisiones que tomar:
+
+\begin{align*}
+\text{Total} &= \text{(Entradas)} \times \text{(Platos)} \times \text{(Bebidas)} \times \text{(Postres)} \\
+&= 3 \times 4 \times 2 \times 3 \\
+&= 72
+\end{align*}
+
+\textbf{Respuesta:} \boxed{72 \text{ combinaciones posibles}}
+
+\textbf{Explicación:} El principio fundamental dice que si tenemos $n$ decisiones independientes con $a_1, a_2, ..., a_n$ opciones respectivamente, el total de formas es el producto $a_1 \times a_2 \times ... \times a_n$.
+\end{solucion}
+
+\begin{solucion}{Solución Ejercicio 2 - Permutaciones Simples}
+\textbf{Parte a):} Asignar presidente, vicepresidente y secretario
+
+Necesitamos elegir 3 personas de 5 candidatos, donde el orden importa (cada cargo es diferente).
+
+Usamos la fórmula de permutación: $P(n,r) = \frac{n!}{(n-r)!}$
+
+\begin{align*}
+P(5,3) &= \frac{5!}{(5-3)!} = \frac{5!}{2!} \\
+&= \frac{5 \times 4 \times 3 \times 2 \times 1}{2 \times 1} \\
+&= \frac{120}{2} = 60
+\end{align*}
+
+\textbf{Forma alternativa de pensar:}
+\begin{itemize}
+    \item Para presidente: 5 opciones
+    \item Para vicepresidente: 4 opciones (ya elegimos uno)
+    \item Para secretario: 3 opciones (ya elegimos dos)
+    \item Total: $5 \times 4 \times 3 = 60$
+\end{itemize}
+
+\textbf{Respuesta:} \boxed{60 \text{ maneras diferentes}}
+
+\textbf{Parte b):} Primeros 3 lugares en torneo de ajedrez
+
+De 8 participantes, elegimos 3 para oro, plata y bronce. El orden importa.
+
+\begin{align*}
+P(8,3) &= \frac{8!}{(8-3)!} = \frac{8!}{5!} \\
+&= 8 \times 7 \times 6 \\
+&= 336
+\end{align*}
+
+\textbf{Respuesta:} \boxed{336 \text{ formas diferentes}}
+\end{solucion}
+
+\begin{solucion}{Solución Ejercicio 3 - Combinaciones}
+\textbf{Parte a):} Formar grupo de 4 estudiantes de 25
+
+Aquí el orden NO importa (un grupo es el mismo sin importar el orden).
+
+Usamos la fórmula de combinación: $C(n,r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}$
+
+\begin{align*}
+C(25,4) &= \binom{25}{4} = \frac{25!}{4!(25-4)!} \\
+&= \frac{25!}{4! \times 21!} \\
+&= \frac{25 \times 24 \times 23 \times 22}{4 \times 3 \times 2 \times 1} \\
+&= \frac{303,600}{24} = 12,650
+\end{align*}
+
+\textbf{Respuesta:} \boxed{12,650 \text{ grupos diferentes}}
+
+\textbf{Parte b):} Elegir 3 representantes de 25 estudiantes
+
+\begin{align*}
+C(25,3) &= \binom{25}{3} = \frac{25!}{3!(25-3)!} \\
+&= \frac{25 \times 24 \times 23}{3 \times 2 \times 1} \\
+&= \frac{13,800}{6} = 2,300
+\end{align*}
+
+\textbf{Respuesta:} \boxed{2,300 \text{ formas de selección}}
+\end{solucion}
+
+\begin{solucion}{Solución Ejercicio 4 - Probabilidad con Dados y Monedas}
+\textbf{Parte a):} Suma de dos dados igual a 7
+
+Espacio muestral: Al lanzar dos dados, hay $6 \times 6 = 36$ resultados posibles.
+
+Casos favorables donde la suma es 7:
+\begin{itemize}
+    \item $(1,6)$: $1 + 6 = 7$
+    \item $(2,5)$: $2 + 5 = 7$
+    \item $(3,4)$: $3 + 4 = 7$
+    \item $(4,3)$: $4 + 3 = 7$
+    \item $(5,2)$: $5 + 2 = 7$
+    \item $(6,1)$: $6 + 1 = 7$
+\end{itemize}
+
+Total de casos favorables: 6
+
+\[P(\text{suma} = 7) = \frac{\text{casos favorables}}{\text{casos totales}} = \frac{6}{36} = \frac{1}{6}\]
+
+\textbf{Respuesta:} \boxed{P = \frac{1}{6} \approx 0.167 \text{ o } 16.7\%}
+
+\textbf{Parte b):} Exactamente dos caras en tres monedas
+
+Espacio muestral: $2^3 = 8$ resultados posibles
+
+Listemos todos los resultados (C = cara, S = sello):
+\begin{itemize}
+    \item CCC
+    \item CCS ← exactamente 2 caras
+    \item CSC ← exactamente 2 caras
+    \item CSS
+    \item SCC ← exactamente 2 caras
+    \item SCS
+    \item SSC
+    \item SSS
+\end{itemize}
+
+Casos favorables: 3 (CCS, CSC, SCC)
+
+\[P(\text{exactamente 2 caras}) = \frac{3}{8}\]
+
+\textbf{Forma alternativa usando combinaciones:}
+Elegir 2 posiciones de 3 para las caras: $\binom{3}{2} = 3$
+
+\[P = \frac{\binom{3}{2}}{2^3} = \frac{3}{8}\]
+
+\textbf{Respuesta:} \boxed{P = \frac{3}{8} = 0.375 \text{ o } 37.5\%}
+\end{solucion}
+
+\begin{solucion}{Solución Ejercicio 5 - Probabilidad con Cartas}
+\textbf{Parte a):} Probabilidad de sacar una figura
+
+En una baraja española de 40 cartas:
+\begin{itemize}
+    \item Figuras por palo: sota, caballo, rey (3 figuras)
+    \item Número de palos: 4
+    \item Total de figuras: $3 \times 4 = 12$
+\end{itemize}
+
+\[P(\text{figura}) = \frac{12}{40} = \frac{3}{10}\]
+
+\textbf{Respuesta:} \boxed{P = \frac{3}{10} = 0.3 \text{ o } 30\%}
+
+\textbf{Parte b):} Dos cartas del mismo palo (sin reposición)
+
+\textbf{Método 1 - Casos favorables sobre casos totales:}
+
+Casos totales al sacar 2 cartas de 40: $\binom{40}{2} = \frac{40 \times 39}{2} = 780$
+
+Casos favorables (mismo palo):
+\begin{itemize}
+    \item Por cada palo: $\binom{10}{2} = \frac{10 \times 9}{2} = 45$ formas
+    \item Total (4 palos): $4 \times 45 = 180$
+\end{itemize}
+
+\[P(\text{mismo palo}) = \frac{180}{780} = \frac{3}{13}\]
+
+\textbf{Método 2 - Probabilidad condicional:}
+\begin{itemize}
+    \item Primera carta: cualquier carta (probabilidad = 1)
+    \item Segunda carta: debe ser del mismo palo
+    \item Quedan 9 cartas del mismo palo de 39 totales
+\end{itemize}
+
+\[P = 1 \times \frac{9}{39} = \frac{9}{39} = \frac{3}{13}\]
+
+\textbf{Respuesta:} \boxed{P = \frac{3}{13} \approx 0.231 \text{ o } 23.1\%}
+\end{solucion}
+
+\begin{solucion}{Solución Ejercicio 6 - Probabilidad Condicional}
+Datos:
+\begin{itemize}
+    \item $P(D) = 0.60$ (practica deporte)
+    \item $P(A) = 0.40$ (actividades artísticas)
+    \item $P(D \cap A) = 0.25$ (ambas)
+\end{itemize}
+
+\textbf{Diagrama de Venn:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+    % Rectángulo universal
+    \draw[thick] (-3,-2) rectangle (3,2);
+    \node at (2.5,1.5) {$U$};
+
+    % Círculos
+    \draw[thick,fill=blue!20] (-0.8,0) circle (1.5cm);
+    \draw[thick,fill=red!20] (0.8,0) circle (1.5cm);
+
+    % Etiquetas
+    \node at (-1.5,0) {$0.35$};
+    \node at (0,0) {$0.25$};
+    \node at (1.5,0) {$0.15$};
+    \node at (-1.5,1.8) {Deporte};
+    \node at (1.5,1.8) {Arte};
+    \node at (0,-2.5) {Ninguna: $0.25$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Parte a):} $P(A|D)$ = Probabilidad de arte dado que practica deporte
+
+Fórmula de probabilidad condicional:
+\[P(A|D) = \frac{P(A \cap D)}{P(D)} = \frac{0.25}{0.60} = \frac{25}{60} = \frac{5}{12}\]
+
+\textbf{Respuesta:} \boxed{P(A|D) = \frac{5}{12} \approx 0.417 \text{ o } 41.7\%}
+
+\textbf{Parte b):} $P(D|A)$ = Probabilidad de deporte dado que hace arte
+
+\[P(D|A) = \frac{P(D \cap A)}{P(A)} = \frac{0.25}{0.40} = \frac{25}{40} = \frac{5}{8}\]
+
+\textbf{Respuesta:} \boxed{P(D|A) = \frac{5}{8} = 0.625 \text{ o } 62.5\%}
+
+\textbf{Interpretación:} Es más probable que un estudiante artístico practique deporte (62.5\%) que un deportista haga arte (41.7\%).
+\end{solucion}
+
+\begin{solucion}{Solución Ejercicio 7 - Combinatoria en Dominó}
+\textbf{Información sobre el dominó:}
+\begin{itemize}
+    \item Total de fichas: 28
+    \item Números en cada ficha: del 0 al 6 (7 números)
+    \item Mulas (dobles): 0-0, 1-1, 2-2, 3-3, 4-4, 5-5, 6-6 (7 fichas)
+    \item Fichas con al menos un 6: todas las que tienen 6
+\end{itemize}
+
+\textbf{Parte a):} Probabilidad de sacar una mula
+
+Casos favorables: 7 mulas
+Casos totales: 28 fichas
+
+\[P(\text{mula}) = \frac{7}{28} = \frac{1}{4}\]
+
+\textbf{Respuesta:} \boxed{P = \frac{1}{4} = 0.25 \text{ o } 25\%}
+
+\textbf{Parte b):} Dos fichas con al menos un 6
+
+Primero, contemos las fichas con al menos un 6:
+\begin{itemize}
+    \item Mula 6-6: 1 ficha
+    \item Fichas 6-x (donde x ≠ 6): 6 fichas (6-0, 6-1, 6-2, 6-3, 6-4, 6-5)
+    \item Total con al menos un 6: 7 fichas
+\end{itemize}
+
+Casos totales al sacar 2 fichas: $\binom{28}{2} = \frac{28 \times 27}{2} = 378$
+
+Casos favorables (ambas con al menos un 6): $\binom{7}{2} = \frac{7 \times 6}{2} = 21$
+
+\[P(\text{ambas con 6}) = \frac{21}{378} = \frac{1}{18}\]
+
+\textbf{Respuesta:} \boxed{P = \frac{1}{18} \approx 0.056 \text{ o } 5.6\%}
+
+\textbf{Verificación con árbol de probabilidad:}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    \node {Inicio}
+    child {node {1ra con 6} edge from parent node[left] {$\frac{7}{28}$}
+        child {node {2da con 6} edge from parent node[left] {$\frac{6}{27}$}}
+    };
+    \node at (2,-2.5) {$P = \frac{7}{28} \times \frac{6}{27} = \frac{42}{756} = \frac{1}{18}$};
+\end{tikzpicture}
+\end{center}
+\end{solucion}
+
+\begin{solucion}{Solución Ejercicio 8 - Control de Calidad}
+Datos:
+\begin{itemize}
+    \item Lote: 100 bombillos
+    \item Defectuosos: 3 bombillos
+    \item Buenos: 97 bombillos
+    \item Muestra: 5 bombillos
+\end{itemize}
+
+\textbf{Parte a):} Todos los bombillos buenos en la muestra
+
+Usamos combinaciones sin reposición:
+
+Casos totales: $\binom{100}{5} = \frac{100!}{5! \times 95!} = 75,287,520$
+
+Casos favorables (5 buenos de 97): $\binom{97}{5} = \frac{97!}{5! \times 92!} = 64,446,024$
+
+\[P(\text{todos buenos}) = \frac{\binom{97}{5}}{\binom{100}{5}} = \frac{64,446,024}{75,287,520} \approx 0.8560\]
+
+\textbf{Método alternativo (más simple):}
+\begin{align*}
+P &= \frac{97}{100} \times \frac{96}{99} \times \frac{95}{98} \times \frac{94}{97} \times \frac{93}{96} \\
+&= \frac{97 \times 96 \times 95 \times 94 \times 93}{100 \times 99 \times 98 \times 97 \times 96} \\
+&= \frac{95 \times 94 \times 93}{100 \times 99 \times 98} \\
+&\approx 0.8560
+\end{align*}
+
+\textbf{Respuesta:} \boxed{P \approx 0.856 \text{ o } 85.6\%}
+
+\textbf{Parte b):} Exactamente 1 defectuoso en la muestra
+
+Necesitamos elegir:
+\begin{itemize}
+    \item 1 defectuoso de 3: $\binom{3}{1} = 3$
+    \item 4 buenos de 97: $\binom{97}{4} = 3,764,376$
+\end{itemize}
+
+Casos favorables: $\binom{3}{1} \times \binom{97}{4} = 3 \times 3,764,376 = 11,293,128$
+
+\[P(\text{exactamente 1 defectuoso}) = \frac{11,293,128}{75,287,520} \approx 0.1500\]
+
+\textbf{Respuesta:} \boxed{P \approx 0.150 \text{ o } 15.0\%}
+
+\textbf{Interpretación práctica:}
+\begin{itemize}
+    \item Hay un 85.6\% de probabilidad de no encontrar defectos en la muestra
+    \item Hay un 15\% de probabilidad de encontrar exactamente 1 defecto
+    \item La probabilidad de 2 o más defectos es muy baja (menos del 0.5\%)
+\end{itemize}
+
+Esto sugiere que el proceso de producción está funcionando bien, con una tasa de defectos del 3\% que es aceptable para muchas industrias.
+\end{solucion}
+
+\end{document}

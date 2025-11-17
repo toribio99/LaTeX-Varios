@@ -1,0 +1,750 @@
+% !TEX program = lualatex
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{calc,arrows.meta,babel,trees}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{booktabs}
+\pgfplotsset{compat=1.18}
+\definecolor{maincolor}{RGB}{26,35,126}
+\definecolor{accentcolor}{RGB}{255,87,34}
+
+% Configuración de títulos y formato
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{maincolor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{accentcolor}}{\thesubsection}{1em}{}
+
+% Configuración de cajas para ejemplos
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textcolor{maincolor}{\thepage \quad PROBABILIDAD}}
+\fancyhead[RO]{\small\textcolor{maincolor}{PROBABILIDAD \quad \thepage}}
+\fancyhead[LO]{\small\textcolor{maincolor}{Grado 10 - Trigonometría}}
+\fancyhead[RE]{\small\textcolor{maincolor}{Prof: Toribio De J Arrieta F}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{ejemplo}[1][]{
+  enhanced,
+  breakable,
+  colback=maincolor!5,
+  colframe=maincolor,
+  fonttitle=\bfseries,
+  title=Ejemplo Resuelto,
+  #1
+}
+
+\newtcolorbox{ejercicio}[1][]{
+  enhanced,
+  breakable,
+  colback=accentcolor!5,
+  colframe=accentcolor,
+  fonttitle=\bfseries,
+  title=Ejercicio,
+  #1
+}
+
+\newtcolorbox{solucion}[1][]{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!60!black,
+  fonttitle=\bfseries,
+  title=Solución,
+  #1
+}
+
+\newtcolorbox{nota}[1][]{
+  enhanced,
+  colback=yellow!10,
+  colframe=orange!80!black,
+  fonttitle=\bfseries,
+  title=Nota Importante,
+  #1
+}
+
+\newtcolorbox{definicion}[1][]{
+  enhanced,
+  breakable,
+  colback=blue!5,
+  colframe=blue!60!black,
+  fonttitle=\bfseries,
+  title=Definición,
+  #1
+}
+
+% Título
+\title{\textbf{\Huge ESTADÍSTICA Y PROBABILIDAD}\\[0.5cm]
+\Large Guía de Trigonometría}
+\author{Prof: Toribio De J Arrieta F\\
+\textit{La Pruebita}\\
+Grado 10}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+¡Bienvenidos al fascinante mundo de la probabilidad! ¿Te has preguntado alguna vez por qué los meteorólogos dicen que hay un 70\% de probabilidad de lluvia? ¿O cómo las compañías de seguros calculan el riesgo de un accidente? ¿Por qué algunos números salen más que otros en los juegos de azar? La respuesta a todas estas preguntas está en la teoría de probabilidad.
+
+La probabilidad es como el lenguaje matemático de la incertidumbre. Vivimos en un mundo donde no todo es seguro: no sabemos si mañana lloverá, si nuestro equipo favorito ganará el partido, o qué carta saldrá después en un juego de naipes. Pero aunque no podemos predecir el futuro con certeza, ¡sí podemos medir qué tan probable es que algo ocurra!
+
+\subsection*{¿Dónde aparece la probabilidad en tu vida diaria?}
+
+La probabilidad está en todas partes, aunque no siempre nos demos cuenta:
+
+\begin{itemize}
+    \item \textbf{Juegos de azar:} Dados, cartas, lotería, dominó - todos tienen probabilidades calculables
+    \item \textbf{Pronósticos del tiempo:} Los meteorólogos usan modelos probabilísticos complejos
+    \item \textbf{Medicina:} Los doctores evalúan la probabilidad de que un tratamiento funcione
+    \item \textbf{Deportes:} Las estadísticas de jugadores ayudan a predecir resultados
+    \item \textbf{Tecnología:} Tu celular usa probabilidad para corregir errores en las señales
+    \item \textbf{Redes sociales:} Los algoritmos calculan la probabilidad de que te guste cierto contenido
+    \item \textbf{Finanzas:} Los bancos evalúan el riesgo de prestar dinero
+    \item \textbf{Control de calidad:} Las fábricas usan probabilidad para detectar productos defectuosos
+\end{itemize}
+
+\subsection*{Una historia para comenzar}
+
+Imagina que estás jugando dominó con tus amigos. Te toca sacar una ficha del montón que está boca abajo. ¿Cuál es la probabilidad de que saques un doble? ¿Y de que saques una ficha que tenga al menos un 6? Estas preguntas parecen simples, pero esconden conceptos matemáticos profundos que han fascinado a la humanidad durante siglos.
+
+La teoría de probabilidad nació en el siglo XVII cuando dos matemáticos franceses, Blaise Pascal y Pierre de Fermat, comenzaron a intercambiar cartas sobre problemas de juegos de azar. Un jugador llamado Chevalier de Méré les había planteado preguntas sobre las apuestas en los dados. ¡Imagínate! Los fundamentos matemáticos que hoy usamos para predecir el clima, diseñar medicamentos y hasta explorar el espacio, comenzaron con preguntas sobre juegos de apuestas.
+
+\newpage
+
+\subsection*{¿Por qué es importante aprender probabilidad?}
+
+Aprender probabilidad te da superpoderes mentales:
+
+\begin{enumerate}
+    \item \textbf{Tomas mejores decisiones:} Evalúas riesgos y beneficios de forma más inteligente
+    \item \textbf{No te dejas engañar:} Reconoces cuando alguien usa estadísticas de forma incorrecta
+    \item \textbf{Entiendes mejor el mundo:} Desde la genética hasta la economía, todo tiene probabilidad
+    \item \textbf{Desarrollas pensamiento crítico:} Aprendes a distinguir entre coincidencia y causalidad
+    \item \textbf{Te preparas para el futuro:} La inteligencia artificial y el big data se basan en probabilidad
+\end{enumerate}
+
+\subsection*{¿Qué vamos a aprender en esta guía?}
+
+En esta aventura matemática vamos a explorar:
+
+\begin{itemize}
+    \item Los \textbf{experimentos aleatorios} y cómo describirlos matemáticamente
+    \item Las \textbf{técnicas de conteo}: el arte de contar sin contar uno por uno
+    \item Las \textbf{permutaciones y combinaciones}: formas ordenadas y desordenadas de organizar cosas
+    \item El \textbf{cálculo de probabilidades}: la fórmula mágica de Laplace y más allá
+    \item La \textbf{probabilidad condicional}: cómo cambian las probabilidades con nueva información
+    \item Aplicación especial: \textbf{La combinatoria en el dominó} - ¡vas a ser invencible en el juego!
+\end{itemize}
+
+\subsection*{Un consejo antes de empezar}
+
+La probabilidad puede parecer contra-intuitiva al principio. Por ejemplo, en un salón con solo 23 personas, ¡hay más del 50\% de probabilidad de que dos cumplan años el mismo día! Esto suena increíble, pero las matemáticas lo demuestran. Así que mantén la mente abierta, cuestiona tu intuición, y prepárate para sorprenderte.
+
+Recuerda: la probabilidad no te dice qué va a pasar, sino qué tan probable es que pase. Es como tener un mapa del territorio de la incertidumbre. ¡Vamos a explorarlo juntos!
+
+\newpage
+
+\section{Conceptos Fundamentales}
+
+\subsection{Experimentos Aleatorios y Espacio Muestral}
+
+Empecemos con lo básico. Un \textbf{experimento aleatorio} es cualquier proceso que produce un resultado incierto. Es como lanzar una moneda al aire: sabes que caerá cara o cruz, pero no sabes cuál será hasta que caiga.
+
+\begin{definicion}
+Un \textbf{experimento aleatorio} es un proceso que cumple tres condiciones:
+\begin{enumerate}
+    \item Puede repetirse indefinidamente bajo las mismas condiciones
+    \item El resultado no se puede predecir con certeza antes de realizarlo
+    \item Se conocen todos los posibles resultados
+\end{enumerate}
+\end{definicion}
+
+\subsubsection{Ejemplos de experimentos aleatorios}
+
+\begin{itemize}
+    \item Lanzar un dado
+    \item Sacar una carta de una baraja
+    \item Elegir una ficha de dominó
+    \item Girar una ruleta
+    \item El tiempo que tarda en llegar el bus
+    \item El número de llamadas que recibe un call center en una hora
+\end{itemize}
+
+\subsubsection{El Espacio Muestral}
+
+El \textbf{espacio muestral} es el conjunto de todos los posibles resultados de un experimento aleatorio. Lo denotamos con la letra griega omega mayúscula: $\Omega$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    % Título
+    \node[font=\large\bfseries, maincolor] at (0, 3.5) {Espacios Muestrales Comunes};
+
+    % Moneda
+    \node[draw, circle, minimum size=1.5cm, fill=yellow!20] at (-4, 1.5) {Cara};
+    \node[draw, circle, minimum size=1.5cm, fill=yellow!20] at (-2, 1.5) {Cruz};
+    \node at (-3, 0.3) {Moneda: $\Omega = \{C, X\}$};
+
+    % Dado
+    \draw[thick, fill=red!20] (0, 1) rectangle (1, 2);
+    \foreach \x/\y in {0.25/1.25, 0.75/1.25, 0.25/1.75, 0.75/1.75} {
+        \filldraw (\x, \y) circle (0.05);
+    }
+    \node at (0.5, 0.3) {Dado: $\Omega = \{1,2,3,4,5,6\}$};
+
+    % Ruleta
+    \draw[thick, fill=green!20] (4, 1.5) circle (0.8);
+    \draw[thick] (4, 1.5) -- (4.57, 2.07);
+    \draw[thick] (4, 1.5) -- (4.57, 0.93);
+    \draw[thick] (4, 1.5) -- (3.43, 0.93);
+    \draw[thick] (4, 1.5) -- (3.43, 2.07);
+    \node[font=\tiny] at (4.3, 1.8) {1};
+    \node[font=\tiny] at (4.3, 1.2) {2};
+    \node[font=\tiny] at (3.7, 1.2) {3};
+    \node[font=\tiny] at (3.7, 1.8) {4};
+    \node at (4, 0.3) {Ruleta: $\Omega = \{1,2,3,4\}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+El espacio muestral puede ser:
+\begin{itemize}
+    \item \textbf{Finito:} Como en el lanzamiento de un dado ($\Omega = \{1,2,3,4,5,6\}$)
+    \item \textbf{Infinito numerable:} Como el número de intentos hasta obtener cara
+    \item \textbf{Infinito no numerable:} Como el tiempo exacto de espera del bus
+\end{itemize}
+\end{nota}
+
+\subsection{Eventos y Tipos de Eventos}
+
+Un \textbf{evento} es cualquier subconjunto del espacio muestral. Es como una pregunta que le hacemos al experimento: "¿Salió un número par?" o "¿La carta es roja?"
+
+\begin{definicion}
+Un \textbf{evento} es un subconjunto del espacio muestral $\Omega$. Decimos que un evento $A$ ocurre si el resultado del experimento está en $A$.
+\end{definicion}
+
+\subsubsection{Tipos de Eventos}
+
+\begin{center}
+\begin{tabular}{|l|p{7cm}|p{5cm}|}
+\hline
+\textbf{Tipo de Evento} & \textbf{Descripción} & \textbf{Ejemplo (dado)} \\
+\hline
+\hline
+Evento simple & Contiene un solo resultado & $A = \{3\}$ (sale el 3) \\
+\hline
+Evento compuesto & Contiene varios resultados & $B = \{2,4,6\}$ (sale par) \\
+\hline
+Evento seguro & Siempre ocurre (es $\Omega$) & $\Omega = \{1,2,3,4,5,6\}$ \\
+\hline
+Evento imposible & Nunca ocurre (es $\emptyset$) & $\emptyset$ (sale el 7) \\
+\hline
+Eventos mutuamente excluyentes & No pueden ocurrir al mismo tiempo & $A = \{1,2\}$, $B = \{5,6\}$ \\
+\hline
+Eventos complementarios & Uno es todo lo que no es el otro & $A = \{1,2,3\}$, $A^c = \{4,5,6\}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Operaciones con Eventos}
+
+Los eventos se pueden combinar usando operaciones de conjuntos:
+
+\begin{itemize}
+    \item \textbf{Unión} $(A \cup B)$: Ocurre $A$ o $B$ (o ambos)
+    \item \textbf{Intersección} $(A \cap B)$: Ocurren $A$ y $B$ simultáneamente
+    \item \textbf{Complemento} $(A^c)$: No ocurre $A$
+    \item \textbf{Diferencia} $(A - B)$: Ocurre $A$ pero no $B$
+\end{itemize}
+
+\subsection{Técnicas de Conteo}
+
+Contar es fundamental en probabilidad. Necesitamos saber cuántos resultados favorables hay y cuántos resultados posibles hay en total. Pero contar uno por uno es tedioso y propenso a errores. Por eso usamos técnicas especiales.
+
+\subsubsection{Principio Fundamental del Conteo}
+
+\begin{definicion}[title=Principio Multiplicativo]
+Si una tarea se puede realizar en $n_1$ formas diferentes, y después de realizarla, una segunda tarea se puede realizar en $n_2$ formas diferentes, entonces ambas tareas se pueden realizar en $n_1 \times n_2$ formas diferentes.
+\end{definicion}
+
+\textbf{Ejemplo:} Si tienes 3 camisas y 4 pantalones, puedes formar $3 \times 4 = 12$ conjuntos diferentes.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Título
+    \node[font=\large\bfseries, maincolor] at (2, 5) {Principio Multiplicativo};
+
+    % Camisas
+    \node[draw, rectangle, fill=blue!20] at (0, 3) {Camisa 1};
+    \node[draw, rectangle, fill=blue!20] at (0, 2) {Camisa 2};
+    \node[draw, rectangle, fill=blue!20] at (0, 1) {Camisa 3};
+
+    % Pantalones
+    \node[draw, rectangle, fill=green!20] at (4, 3.5) {Pantalón 1};
+    \node[draw, rectangle, fill=green!20] at (4, 2.5) {Pantalón 2};
+    \node[draw, rectangle, fill=green!20] at (4, 1.5) {Pantalón 3};
+    \node[draw, rectangle, fill=green!20] at (4, 0.5) {Pantalón 4};
+
+    % Flechas
+    \foreach \y in {3, 2, 1} {
+        \foreach \yp in {3.5, 2.5, 1.5, 0.5} {
+            \draw[->] (0.5, \y) -- (3.5, \yp);
+        }
+    }
+
+    % Resultado
+    \node[font=\large] at (2, -0.5) {$3 \times 4 = 12$ combinaciones};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Permutaciones}
+
+Las \textbf{permutaciones} son arreglos ordenados. El orden importa: ABC es diferente de BAC.
+
+\begin{definicion}[title=Permutaciones sin repetición]
+El número de formas de ordenar $n$ objetos distintos tomados de $r$ en $r$ es:
+\[
+P(n,r) = \frac{n!}{(n-r)!}
+\]
+donde $n! = n \times (n-1) \times (n-2) \times \cdots \times 2 \times 1$
+\end{definicion}
+
+\textbf{Casos especiales:}
+\begin{itemize}
+    \item Permutar todos los $n$ objetos: $P(n,n) = n!$
+    \item Con repetición: Si hay $n_1$ objetos del tipo 1, $n_2$ del tipo 2, etc.:
+    \[
+    P_{\text{rep}} = \frac{n!}{n_1! \times n_2! \times \cdots \times n_k!}
+    \]
+\end{itemize}
+
+\subsubsection{Combinaciones}
+
+Las \textbf{combinaciones} son selecciones donde el orden NO importa. Elegir ABC es lo mismo que elegir BAC.
+
+\begin{definicion}[title=Combinaciones]
+El número de formas de elegir $r$ objetos de un conjunto de $n$ objetos (sin importar el orden) es:
+\[
+C(n,r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}
+\]
+\end{definicion}
+
+\subsubsection{Tabla Comparativa: Permutaciones vs Combinaciones}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{3.5cm}|p{5.5cm}|p{5.5cm}|}
+\hline
+\textbf{Característica} & \textbf{Permutaciones} & \textbf{Combinaciones} \\
+\hline
+\hline
+¿El orden importa? & Sí & No \\
+\hline
+Ejemplo & Formar palabras con letras & Elegir un comité \\
+\hline
+Fórmula sin repetición & $P(n,r) = \frac{n!}{(n-r)!}$ & $C(n,r) = \frac{n!}{r!(n-r)!}$ \\
+\hline
+Con 3 letras A,B,C tomadas de 2 en 2 & AB, BA, AC, CA, BC, CB (6 formas) & AB, AC, BC (3 formas) \\
+\hline
+Pregunta tipo & ¿De cuántas formas puedo ordenar...? & ¿De cuántas formas puedo elegir...? \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Probabilidad Clásica (Regla de Laplace)}
+
+Llegamos al corazón del asunto: calcular probabilidades. La forma más básica es la regla de Laplace.
+
+\begin{definicion}[title=Regla de Laplace]
+Si todos los resultados de un experimento son igualmente probables, la probabilidad de un evento $A$ es:
+\[
+P(A) = \frac{\text{Número de casos favorables}}{\text{Número de casos posibles}} = \frac{|A|}{|\Omega|}
+\]
+\end{definicion}
+
+\textbf{Propiedades básicas de la probabilidad:}
+\begin{enumerate}
+    \item $0 \leq P(A) \leq 1$ para cualquier evento $A$
+    \item $P(\Omega) = 1$ (el evento seguro tiene probabilidad 1)
+    \item $P(\emptyset) = 0$ (el evento imposible tiene probabilidad 0)
+    \item $P(A^c) = 1 - P(A)$ (regla del complemento)
+    \item Si $A$ y $B$ son mutuamente excluyentes: $P(A \cup B) = P(A) + P(B)$
+\end{enumerate}
+
+\subsection{Probabilidad Conjunta, Marginal y Condicional}
+
+Ahora vamos a ver qué pasa cuando tenemos eventos relacionados. Esta es la parte más interesante y útil de la probabilidad.
+
+\subsubsection{Probabilidad Conjunta}
+
+La \textbf{probabilidad conjunta} es la probabilidad de que ocurran dos eventos al mismo tiempo.
+
+\[
+P(A \cap B) = P(\text{A y B ocurren})
+\]
+
+\subsubsection{Probabilidad Marginal}
+
+La \textbf{probabilidad marginal} es simplemente la probabilidad de un evento sin considerar otros eventos. Es la probabilidad "normal" que hemos estado usando.
+
+\subsubsection{Probabilidad Condicional}
+
+La \textbf{probabilidad condicional} es la probabilidad de que ocurra un evento dado que ya ocurrió otro.
+
+\begin{definicion}[title=Probabilidad Condicional]
+La probabilidad de $A$ dado que ocurrió $B$ (con $P(B) > 0$) es:
+\[
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+\]
+\end{definicion}
+
+Esta fórmula dice: "De todos los casos donde ocurre $B$, ¿en qué fracción también ocurre $A$?"
+
+\textbf{Regla del producto:}
+De la definición anterior, podemos despejar:
+\[
+P(A \cap B) = P(A|B) \times P(B) = P(B|A) \times P(A)
+\]
+
+\subsection{Diagrama de Árbol para Probabilidad}
+
+Los diagramas de árbol son una herramienta visual poderosa para calcular probabilidades, especialmente cuando hay eventos secuenciales.
+
+\begin{center}
+\begin{tikzpicture}[
+    level 1/.style={sibling distance=6cm, level distance=2cm},
+    level 2/.style={sibling distance=3cm, level distance=2cm},
+    edge from parent/.style={draw, -{Latex}},
+    every node/.style={font=\footnotesize}
+]
+    % Título
+    \node[font=\large\bfseries, maincolor] at (0, 1) {Diagrama de Árbol: Sacar 2 bolas sin reemplazo};
+
+    % Nodo raíz
+    \node[circle, draw, fill=gray!20] {Inicio}
+        child {
+            node[circle, draw, fill=red!20] {Roja}
+            edge from parent node[left] {$\frac{3}{5}$}
+            child {
+                node[circle, draw, fill=red!20] {Roja}
+                edge from parent node[left] {$\frac{2}{4}$}
+            }
+            child {
+                node[circle, draw, fill=blue!20] {Azul}
+                edge from parent node[right] {$\frac{2}{4}$}
+            }
+        }
+        child {
+            node[circle, draw, fill=blue!20] {Azul}
+            edge from parent node[right] {$\frac{2}{5}$}
+            child {
+                node[circle, draw, fill=red!20] {Roja}
+                edge from parent node[left] {$\frac{3}{4}$}
+            }
+            child {
+                node[circle, draw, fill=blue!20] {Azul}
+                edge from parent node[right] {$\frac{1}{4}$}
+            }
+        };
+
+    % Probabilidades finales
+    \node at (-4.5, -4.5) {$P(RR) = \frac{3}{5} \times \frac{2}{4} = \frac{6}{20}$};
+    \node at (-1.5, -4.5) {$P(RA) = \frac{3}{5} \times \frac{2}{4} = \frac{6}{20}$};
+    \node at (1.5, -4.5) {$P(AR) = \frac{2}{5} \times \frac{3}{4} = \frac{6}{20}$};
+    \node at (4.5, -4.5) {$P(AA) = \frac{2}{5} \times \frac{1}{4} = \frac{2}{20}$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Reglas para construir un diagrama de árbol:}
+\begin{enumerate}
+    \item Cada nivel representa una etapa del experimento
+    \item Las ramas muestran todos los posibles resultados en cada etapa
+    \item En cada rama se escribe la probabilidad condicional correspondiente
+    \item La probabilidad de un camino completo es el producto de las probabilidades de sus ramas
+    \item La suma de todas las probabilidades finales debe ser 1
+\end{enumerate}
+
+\subsection{Aplicación: Combinatoria en el Juego de Dominó}
+
+El dominó es un excelente ejemplo para aplicar todo lo que hemos aprendido. Un juego estándar de dominó tiene 28 fichas, desde el doble blanco (0-0) hasta el doble seis (6-6).
+
+\subsubsection{Estructura del Dominó}
+
+Las fichas de dominó se pueden organizar así:
+
+\begin{center}
+\begin{tabular}{|c|c|l|}
+\hline
+\textbf{Tipo} & \textbf{Cantidad} & \textbf{Fichas} \\
+\hline
+\hline
+Dobles & 7 & 0-0, 1-1, 2-2, 3-3, 4-4, 5-5, 6-6 \\
+\hline
+Con 0 (sin doble) & 6 & 0-1, 0-2, 0-3, 0-4, 0-5, 0-6 \\
+\hline
+Con 1 (sin doble) & 5 & 1-2, 1-3, 1-4, 1-5, 1-6 \\
+\hline
+Con 2 (sin doble) & 4 & 2-3, 2-4, 2-5, 2-6 \\
+\hline
+Con 3 (sin doble) & 3 & 3-4, 3-5, 3-6 \\
+\hline
+Con 4 (sin doble) & 2 & 4-5, 4-6 \\
+\hline
+Con 5 (sin doble) & 1 & 5-6 \\
+\hline
+\textbf{Total} & \textbf{28} & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{¿Por qué hay 28 fichas?}
+
+Podemos calcularlo usando combinaciones. Tenemos 7 números (0 al 6), y queremos formar parejas permitiendo repetición:
+
+\begin{itemize}
+    \item Parejas sin repetir: $C(7,2) = \frac{7!}{2!(7-2)!} = \frac{7 \times 6}{2} = 21$
+    \item Dobles (parejas con repetición): 7
+    \item Total: $21 + 7 = 28$
+\end{itemize}
+
+O también: $C(7+1, 2) = C(8,2) = 28$ (combinaciones con repetición)
+
+\subsubsection{Probabilidades en el Dominó}
+
+Veamos algunas probabilidades interesantes:
+
+\begin{enumerate}
+    \item \textbf{Probabilidad de sacar un doble:}
+    \[
+    P(\text{doble}) = \frac{7}{28} = \frac{1}{4} = 0.25
+    \]
+
+    \item \textbf{Probabilidad de sacar una ficha con al menos un 6:}
+
+    Fichas con 6: 6-6, 0-6, 1-6, 2-6, 3-6, 4-6, 5-6 (7 fichas)
+    \[
+    P(\text{al menos un 6}) = \frac{7}{28} = \frac{1}{4} = 0.25
+    \]
+
+    \item \textbf{Probabilidad de sacar una ficha cuya suma sea 6:}
+
+    Fichas que suman 6: 0-6, 1-5, 2-4, 3-3 (4 fichas)
+    \[
+    P(\text{suma = 6}) = \frac{4}{28} = \frac{1}{7} \approx 0.143
+    \]
+\end{enumerate}
+
+\subsubsection{Estrategias Probabilísticas en el Dominó}
+
+Conocer las probabilidades te puede ayudar a jugar mejor:
+
+\begin{itemize}
+    \item \textbf{Contar fichas:} Si sabes qué fichas se han jugado, puedes calcular la probabilidad de que tu oponente tenga cierta ficha
+    \item \textbf{Bloquear números:} Los números que aparecen en más fichas (como el 6) son más difíciles de bloquear
+    \item \textbf{Guardar dobles:} Los dobles son más difíciles de colocar, así que úsalos estratégicamente
+\end{itemize}
+
+\subsection{Fórmulas y Conceptos Clave - Resumen}
+
+\begin{tcolorbox}[enhanced,colback=maincolor!10,colframe=maincolor,title=Tabla de Fórmulas Esenciales]
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Concepto} & \textbf{Fórmula} \\
+\hline
+\hline
+Regla de Laplace & $P(A) = \frac{|A|}{|\Omega|}$ \\
+\hline
+Probabilidad del complemento & $P(A^c) = 1 - P(A)$ \\
+\hline
+Unión (mutuamente excluyentes) & $P(A \cup B) = P(A) + P(B)$ \\
+\hline
+Unión (general) & $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ \\
+\hline
+Probabilidad condicional & $P(A|B) = \frac{P(A \cap B)}{P(B)}$ \\
+\hline
+Regla del producto & $P(A \cap B) = P(A|B) \times P(B)$ \\
+\hline
+Permutaciones & $P(n,r) = \frac{n!}{(n-r)!}$ \\
+\hline
+Combinaciones & $C(n,r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}$ \\
+\hline
+Principio multiplicativo & $n_1 \times n_2 \times \cdots \times n_k$ \\
+\hline
+\end{tabular}
+\end{tcolorbox}
+
+\newpage
+
+\section{Conclusión}
+
+¡Felicitaciones! Has dado tus primeros pasos en el fascinante mundo de la probabilidad. Ya no eres la misma persona que comenzó a leer esta guía. Ahora tienes herramientas matemáticas poderosas para entender y medir la incertidumbre.
+
+\subsection*{Lo que has aprendido}
+
+Has desarrollado una comprensión sólida de:
+
+\begin{itemize}
+    \item Los \textbf{experimentos aleatorios} y cómo modelarlos matemáticamente con espacios muestrales
+    \item Los diferentes \textbf{tipos de eventos} y cómo operar con ellos
+    \item Las \textbf{técnicas de conteo} que te permiten calcular posibilidades sin enumerar todo
+    \item La diferencia crucial entre \textbf{permutaciones y combinaciones}
+    \item La \textbf{regla de Laplace} para calcular probabilidades básicas
+    \item Las \textbf{probabilidades condicionales} que modelan cómo la información cambia las probabilidades
+    \item El uso de \textbf{diagramas de árbol} para visualizar problemas complejos
+    \item Aplicaciones prácticas, como el análisis probabilístico del \textbf{dominó}
+\end{itemize}
+
+\subsection*{Tabla de Conceptos Clave para Recordar}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Concepto} & \textbf{Punto Clave para Recordar} \\
+\hline
+\hline
+Experimento aleatorio & No puedes predecir el resultado, pero conoces todas las posibilidades \\
+\hline
+Espacio muestral ($\Omega$) & Es el conjunto de TODOS los posibles resultados \\
+\hline
+Evento & Es un subconjunto del espacio muestral (una pregunta sobre el resultado) \\
+\hline
+Principio multiplicativo & Si hay $m$ formas de hacer algo Y $n$ formas de hacer otra cosa, hay $m \times n$ formas de hacer ambas \\
+\hline
+Permutaciones & Úsalas cuando el ORDEN IMPORTA (formar palabras, asignar puestos) \\
+\hline
+Combinaciones & Úsalas cuando el orden NO importa (formar equipos, elegir elementos) \\
+\hline
+Probabilidad & Siempre está entre 0 y 1. 0 = imposible, 1 = seguro \\
+\hline
+Probabilidad condicional & La probabilidad cambia cuando tienes información adicional \\
+\hline
+Diagrama de árbol & Multiplica a lo largo de las ramas, suma los caminos diferentes \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\subsection*{Consejos para Resolver Problemas de Probabilidad}
+
+\begin{enumerate}
+    \item \textbf{Lee con cuidado:} Identifica qué te piden exactamente
+
+    \item \textbf{Define el experimento:} ¿Cuál es el proceso aleatorio?
+
+    \item \textbf{Identifica el espacio muestral:} ¿Cuáles son todos los posibles resultados?
+
+    \item \textbf{Define los eventos:} ¿Qué subconjuntos necesitas considerar?
+
+    \item \textbf{Decide la técnica de conteo:}
+    \begin{itemize}
+        \item ¿El orden importa? → Permutaciones
+        \item ¿El orden no importa? → Combinaciones
+        \item ¿Hay etapas sucesivas? → Principio multiplicativo
+    \end{itemize}
+
+    \item \textbf{Aplica la fórmula apropiada:} Laplace, condicional, etc.
+
+    \item \textbf{Verifica tu respuesta:} ¿Está entre 0 y 1? ¿Tiene sentido?
+\end{enumerate}
+
+\subsection*{Errores Comunes a Evitar}
+
+\begin{nota}[title=Cuidado con estos errores típicos]
+\begin{itemize}
+    \item Confundir permutaciones con combinaciones
+    \item Olvidar que las probabilidades deben sumar 1
+    \item No considerar si hay reemplazo o no
+    \item Contar el mismo resultado varias veces
+    \item Confundir $P(A|B)$ con $P(B|A)$ - ¡no son lo mismo!
+    \item Asumir independencia cuando no la hay
+\end{itemize}
+\end{nota}
+
+\subsection*{Aplicaciones en la Vida Real}
+
+La probabilidad que has aprendido aparece en:
+
+\begin{itemize}
+    \item \textbf{Medicina:} Calcular la efectividad de tratamientos y la probabilidad de efectos secundarios
+    \item \textbf{Seguros:} Determinar primas basadas en riesgos calculados
+    \item \textbf{Tecnología:} Algoritmos de recomendación, corrección de errores en transmisiones
+    \item \textbf{Deportes:} Estrategias basadas en estadísticas de jugadores
+    \item \textbf{Finanzas:} Evaluación de riesgos en inversiones
+    \item \textbf{Videojuegos:} Sistemas de loot, matchmaking, balanceo de personajes
+    \item \textbf{Redes sociales:} Predicción de qué contenido te gustará
+\end{itemize}
+
+\subsection*{Próximos Pasos}
+
+Si quieres profundizar en probabilidad, los siguientes temas serían:
+
+\begin{enumerate}
+    \item \textbf{Distribuciones de probabilidad:} Binomial, normal, Poisson
+    \item \textbf{Variables aleatorias:} Discretas y continuas
+    \item \textbf{Esperanza matemática y varianza}
+    \item \textbf{Teorema de Bayes:} La joya de la probabilidad condicional
+    \item \textbf{Cadenas de Markov:} Procesos que dependen del estado anterior
+    \item \textbf{Simulación Monte Carlo:} Usar computadoras para estimar probabilidades
+\end{enumerate}
+
+\subsection*{Reflexión Final}
+
+La probabilidad es más que matemáticas; es una forma de pensar sobre el mundo. Te enseña que:
+
+\begin{itemize}
+    \item La incertidumbre no significa ignorancia total - podemos medirla y trabajar con ella
+    \item Las coincidencias sorprendentes a menudo no son tan improbables como parecen
+    \item La intuición puede engañarnos - los cálculos nos dan la respuesta correcta
+    \item Con suficiente información, podemos tomar mejores decisiones
+\end{itemize}
+
+Como dijo el matemático Pierre-Simon Laplace: "La probabilidad es sentido común reducido a cálculo". Ahora tienes las herramientas para convertir tu sentido común en matemáticas precisas.
+
+\vspace{1cm}
+
+\begin{center}
+\textit{``El azar favorece a la mente preparada.''} \\
+--- Louis Pasteur
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+\Large
+\textbf{¡Sigue explorando, sigue aprendiendo, y que la probabilidad esté siempre a tu favor!}
+\end{center}
+
+% MARCADORES PARA LAS SIGUIENTES PARTES
+\newpage
+\section*{Marcadores para Contenido Adicional}
+
+%INSERTAR_EJEMPLOS_AQUI%
+% Aquí se insertarán los ejemplos resueltos en la PARTE 2
+
+\newpage
+
+%INSERTAR_EJERCICIOS_AQUI%
+% Aquí se insertarán los ejercicios propuestos y sus soluciones en la PARTE 3
+
+\end{document}
