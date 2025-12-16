@@ -89,7 +89,7 @@
 
 % Título
 \title{\textbf{\Huge ESTADÍSTICA Y PROBABILIDAD}\\[0.5cm]
-\Large Guía de Trigonometría}
+\Large Guía de Probabilidad}
 \author{Prof: Toribio De J Arrieta F\\
 \textit{La Pruebita}\\
 Grado 10}
@@ -444,7 +444,7 @@ Los diagramas de árbol son una herramienta visual poderosa para calcular probab
 ]
     % Título
     \node[font=\large\bfseries, maincolor] at (0, 1) {Diagrama de Árbol: Sacar 2 bolas sin reemplazo};
-    \node[font=\small, maincolor] at (0, 0.4) {Urna: 3 rojas + 2 azules = 5 bolas};
+    \node[font=\small, maincolor] at (3.5, 0.4) {Urna: 3 rojas + 2 azules = 5 bolas};
 
     % Nodo raíz
     \node[circle, draw, fill=gray!20] {Inicio}
@@ -811,7 +811,7 @@ María debe tomar 3 decisiones independientes:
         child[dashed] {node[fill=blue!20, scale=0.7] {...}}
     };
 
-\node[text width=4cm, draw=none, fill=none, right] at (5,-2) {\small\textit{El árbol completo tendría 24 ramas finales}};
+\node[text width=4cm, draw=none, fill=none, right] at (4.5,.5) {\small\textit{El árbol completo tendría 24 ramas finales}};
 \end{tikzpicture}
 \end{center}
 
@@ -1140,9 +1140,9 @@ c) Verifica que $P(A \cap B) = P(A) \cdot P(B|A)$
 
 % Etiquetas de resultados
 \node[draw=none] at (9.5, 2) {$P(RR) = \frac{5}{8} \times \frac{4}{7} = \frac{20}{56} = \frac{5}{14}$};
-\node[draw=none] at (9.5, 0.7) {$P(RA) = \frac{5}{8} \times \frac{3}{7} = \frac{15}{56}$};
-\node[draw=none] at (9.5, -0.7) {$P(AR) = \frac{3}{8} \times \frac{5}{7} = \frac{15}{56}$};
-\node[draw=none] at (9.5, -2) {$P(AA) = \frac{3}{8} \times \frac{2}{7} = \frac{6}{56} = \frac{3}{28}$};
+\node[draw=none] at (9.5, 0) {$P(RA) = \frac{5}{8} \times \frac{3}{7} = \frac{15}{56}$};
+\node[draw=none] at (9.5, -2) {$P(AR) = \frac{3}{8} \times \frac{5}{7} = \frac{15}{56}$};
+\node[draw=none] at (9.5, -4) {$P(AA) = \frac{3}{8} \times \frac{2}{7} = \frac{6}{56} = \frac{3}{28}$};
 \end{tikzpicture}
 \end{center}
 
@@ -1373,28 +1373,28 @@ P(\text{segunda es doble | primera es doble}) = \frac{6}{27} = \frac{2}{9} \appr
 \node[fill=blue!30] {Hoy: Llueve}
     child {node[fill=blue!20] {Día 1: Llueve}
         child {node[fill=blue!10] {Día 2: Llueve}
-            edge from parent node[above, draw=none, font=\small] {0.7}
+            edge from parent node[below, draw=none, font=\small] {0.7}
         }
         child {node[fill=yellow!20] {Día 2: No llueve}
-            edge from parent node[below, draw=none, font=\small] {0.3}
+            edge from parent node[above, draw=none, font=\small] {0.3}
         }
         edge from parent node[above, draw=none, font=\small] {0.7}
     }
     child {node[fill=yellow!30] {Día 1: No llueve}
         child {node[fill=blue!10] {Día 2: Llueve}
-            edge from parent node[above, draw=none, font=\small] {0.3}
+            edge from parent node[below, draw=none, font=\small] {0.3}
         }
         child {node[fill=yellow!20] {Día 2: No llueve}
-            edge from parent node[below, draw=none, font=\small] {0.7}
+            edge from parent node[above, draw=none, font=\small] {0.7}
         }
         edge from parent node[below, draw=none, font=\small] {0.3}
     };
 
 % Probabilidades finales
-\node[draw=none, font=\small] at (11, 2.5) {$P = 0.7 \times 0.7 = 0.49$};
-\node[draw=none, font=\small] at (11, 0.85) {$P = 0.7 \times 0.3 = 0.21$};
-\node[draw=none, font=\small] at (11, -0.85) {$P = 0.3 \times 0.3 = 0.09$};
-\node[draw=none, font=\small] at (11, -2.5) {$P = 0.3 \times 0.7 = 0.21$};
+\node[draw=none, font=\small] at (13, 2.5) {$P = 0.7 \times 0.7 = 0.49$};
+\node[draw=none, font=\small] at (13, 0.85) {$P = 0.7 \times 0.3 = 0.21$};
+\node[draw=none, font=\small] at (13, -0.85) {$P = 0.3 \times 0.3 = 0.09$};
+\node[draw=none, font=\small] at (13, -2.5) {$P = 0.3 \times 0.7 = 0.21$};
 \end{tikzpicture}
 \end{center}
 
@@ -1466,28 +1466,28 @@ P(\text{no lluvia día 1 ni día 2}) = P(\text{NN}) = 0.3 \times 0.7 = 0.21
 \node[fill=gray!20] {Población}
     child {node[fill=red!30] {Enfermo}
         child {node[fill=red!20] {Test +}
-            edge from parent node[above, draw=none, font=\small] {0.95}
+            edge from parent node[below, draw=none, font=\small] {0.95}
         }
         child {node[fill=green!20] {Test -}
-            edge from parent node[below, draw=none, font=\small] {0.05}
+            edge from parent node[above, draw=none, font=\small] {0.05}
         }
         edge from parent node[above, draw=none] {0.01}
     }
     child {node[fill=green!30] {Sano}
         child {node[fill=red!20] {Test +}
-            edge from parent node[above, draw=none, font=\small] {0.10}
+            edge from parent node[below, draw=none, font=\small] {0.10}
         }
         child {node[fill=green!20] {Test -}
-            edge from parent node[below, draw=none, font=\small] {0.90}
+            edge from parent node[above, draw=none, font=\small] {0.90}
         }
         edge from parent node[below, draw=none] {0.99}
     };
 
 % Probabilidades conjuntas
-\node[draw=none, font=\small] at (10.5, 2.5) {$P = 0.01 \times 0.95 = 0.0095$};
-\node[draw=none, font=\small] at (10.5, 0.8) {$P = 0.01 \times 0.05 = 0.0005$};
-\node[draw=none, font=\small] at (10.5, -0.8) {$P = 0.99 \times 0.10 = 0.099$};
-\node[draw=none, font=\small] at (10.5, -2.5) {$P = 0.99 \times 0.90 = 0.891$};
+\node[draw=none, font=\small] at (11.5, 3) {$P = 0.01 \times 0.95 = 0.0095$};
+\node[draw=none, font=\small] at (11.66, 1) {$P = 0.01 \times 0.05 = 0.0005$};
+\node[draw=none, font=\small] at (11.5, -1) {$P = 0.99 \times 0.10 = 0.099$};
+\node[draw=none, font=\small] at (11.5, -3) {$P = 0.99 \times 0.90 = 0.891$};
 \end{tikzpicture}
 \end{center}
 
